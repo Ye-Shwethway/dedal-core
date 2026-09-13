@@ -11,14 +11,17 @@ Use GitHub as authoritative state for repository facts.
 
 1. **Read** — identify the exact repository and branch/ref, inspect live state, and read repository-local `AGENTS.md`, continuity docs, architecture rules, and relevant file history when present.
 2. **Plan** — distinguish inspection from mutation authority, choose the smallest coherent write set, identify concurrency/rollback risks, and lock the mutation mode for the work unit before the first write.
-3. **Write** — make focused changes using the locked mutation mode. Refetch first when the target may have changed; never overwrite a conflict blindly.
+3. **Write** — run the mutation preflight, then make focused changes using only the tools allowed by the locked mutation mode. Refetch first when the target may have changed; never overwrite a conflict blindly.
 4. **Verify** — inspect the exact diff/changed files, final branch/commit state, and any requested CI/Actions result.
 5. **Report** — state the final observed repository state and unresolved review/CI risk.
+
+Read `references/mutation-preflight.md` before substantial repository mutations.
 
 ## Mutation discipline
 
 - Prefer small coherent commits and attributable changes.
 - Before the first mutation, classify the work unit as either **direct single-file write** or **atomic multi-file transaction**. Keep that mode fixed unless an observed external state change makes reconciliation necessary.
+- Lock the write-tool allowlist with the mode. In atomic multi-file mode, the mutation path is `create_blob(s) -> create_tree -> create_commit -> update_ref`; direct contents create/update/delete actions are forbidden for that work unit.
 - For coherent multi-file changes, prefer refresh HEAD -> prepare complete tree -> create one commit -> fast-forward ref -> verify.
 - While atomic multi-file mode is active, do not call direct contents writes for files in the same work unit. If an unrelated urgent write becomes necessary, finish or abandon/rebase the current transaction first.
 - Before any direct file update, compare intended content with the current content. If identical, skip the write; do not create a no-op commit merely to record activity.

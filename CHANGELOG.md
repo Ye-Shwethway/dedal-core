@@ -2,6 +2,33 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.10.0 — 2026-09-14
+
+### Added
+- `skills/agent-engineering/` as an independently routable generic skill for prompt/context engineering, model-facing tool design, harness control, agentic loops, orchestration, evals/observability, and long-horizon continuity.
+- Focused Agent Engineering references for prompt/context, harness/tools, loops, orchestration, and evaluation/observability.
+- `skills/agent-engineering/ADAPTATION_NOTES.md` with public-research and repository provenance plus explicit rejected patterns.
+- `skills/skill-acquisition/references/agent-engineering-corpus-audit-2026-09-14.md` covering official engineering guidance, ReAct/Self-Refine/Reflexion/AgentBench, 12-Factor Agents, DSPy, and SWE-agent/ACI patterns.
+- `evals/agent-engineering/contract-v1.md` with routing, behavioral, and regression assertions.
+
+### Changed
+- Master routing now treats Agent Engineering as the domain for improving AI-agent systems themselves rather than overloading Software Development or Skill Acquisition.
+- Agent design now starts from a capable-model baseline and adds retrieval, tools, loops, memory, orchestration, or multiple agents only when a concrete failure mode or measured benefit justifies them.
+- Context is treated as a finite curated resource; JIT/progressive retrieval is preferred over broad context dumping.
+- Model-facing tool names, schemas, results, errors, token footprint, and authority semantics are treated as part of agent performance.
+- Agent loops require explicit completion, retry, non-progress, budget, authority, and escalation behavior appropriate to the workflow.
+- Reflection/refinement is bounded and requires an evaluator, rubric, environment/tool feedback, source contradiction, test, or Creator feedback capable of changing the next attempt.
+- Multi-agent systems are topology choices for independent breadth, specialization, or context separation—not default upgrades.
+- Long-horizon agent state should be externalized into inspectable artifacts rather than hidden conversational memory.
+
+### Source snapshots and conceptual corpus
+- `humanlayer/12-factor-agents` @ `d20c728368bf9c189d6d7aab704744decb6ec0cc` — Apache-2.0.
+- `stanfordnlp/dspy` @ `ecba33763316d2a4c6c756046a1118ecbff033e7` — conceptual use only.
+- `SWE-agent/SWE-agent` @ `3ea751c087f32b16e039a2233dd6eefecef325d5` — conceptual use only.
+- Anthropic and OpenAI official agent-engineering guidance plus ReAct, Self-Refine, Reflexion, and AgentBench informed the DEDAL-native synthesis.
+
+No third-party agent framework, package, or executable was installed or executed.
+
 ## 0.9.0 — 2026-09-14
 
 ### Added

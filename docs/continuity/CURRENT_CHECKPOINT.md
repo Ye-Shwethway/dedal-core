@@ -7,72 +7,72 @@ _Date: 2026-09-14_
 - Repository: `Ye-Shwethway/dedal-core`
 - Visibility: public
 - Default branch: `main`
-- Current version: `0.9.0`
+- Current version: `0.10.0`
 - Purpose: durable public operational core for DEDAL
 
 ## Active Skills
 
 Domain: `$msa`, `$pra`, `$ika`.
-Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design, Interface Design, Automations, Skill Acquisition.
+Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design, Interface Design, **Agent Engineering**, Automations, Skill Acquisition.
 
 ## Skill Ecosystem Campaign
 
-DEDAL uses a repeatable external-skill acquisition pipeline:
+Pipeline:
 
 `capability gap -> discover -> pin -> audit -> extract patterns -> DEDAL adaptation -> baseline evaluation -> promote/reject -> regression capture`
 
-Key policy: **reuse ideas; do not inherit trust blindly.** Popularity/install counts are discovery signals only.
+Policy: **reuse ideas; do not inherit trust blindly.** Popularity is discovery evidence, not authority.
 
-### Completed corpora
+Completed corpora now include Matt Pocock, Anthropic, Vercel Labs, Microsoft, Superpowers, taste-skill, RigorPilot, Impeccable, UI/UX Pro Max, plus the Agent Engineering corpus covering official agent-engineering guidance, research papers, `humanlayer/12-factor-agents`, `stanfordnlp/dspy`, and `SWE-agent/SWE-agent`.
 
-1. `mattpocock/skills` @ `3cca18b368ae95cdbdebbff572ccafa662551015`
-2. `anthropics/skills` @ `34040c9c568585f6929bedeaad110ad08f079624`
-3. `vercel-labs/agent-skills` @ `063bee94c3f4df8453406c830b0a7df0f2860278`
-4. `microsoft/skills` @ `903dc62b1e4c833235b54db918a9a51cb6d3cc8f`
-5. `obra/superpowers` @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`
-6. `Leonxlnx/taste-skill` @ `ccbc15639c97057cbfcf32ecebc38ef716e4bb37`
-7. `lllllllama/RigorPilot-Skills` @ `bd91195ad73199b95e24532b581ff12c07dcce09`
-8. `pbakaus/impeccable` @ `cb56ed6c19a07329a9fa0cd4e657bee040156593`
-9. `nextlevelbuilder/ui-ux-pro-max-skill` @ `7f69fed6a2717900085f1bc3b263721f8ba025e2`
+## Agent Engineering v0.10
 
-Audit records live under `skills/skill-acquisition/references/`.
+`skills/agent-engineering/` is active and independently routable for designing or improving AI-agent systems themselves.
 
-## Interface Design v0.9 Refinement
+Core model:
 
-Interface Design now combines two layers:
+`agent outcome = model capability × instruction quality × context quality × tool/interface quality × loop/control quality × state/continuity × evaluation/feedback`
 
-1. **reasoning/workflow layer** — brief inference, surface mode, incumbent truth, refinement-vs-redesign, quality floor, bounded visual verification;
-2. **design-intelligence layer** — scoped knowledge retrieval, semantic-domain vs stack separation, explicit match/fallback semantics, freshness checks, and durable design-system persistence.
+### Durable rules
 
-The UI/UX Pro Max deep audit contributed the second layer. DEDAL did **not** vendor the upstream catalog, install its CLI, inherit provider-specific paths, or treat upstream rankings/current stack versions as permanent truth.
+- Establish a capable-model baseline before adding orchestration complexity.
+- Keep deterministic constraints/execution in software where practical; use the model for semantic judgment and adaptive choice.
+- Treat context as a finite resource; prefer high-signal progressive/JIT retrieval over context dumping.
+- Treat tool descriptions, schemas, result shapes, errors, and output size as part of the model-facing interface.
+- Give every loop explicit success, failure, retry, non-progress, budget, authority, and escalation semantics appropriate to the task.
+- Use reflection/refinement only when a verifier, rubric, environment/tool feedback, source contradiction, or Creator feedback can materially change the next attempt.
+- Prefer a single capable agent until independent parallelism, specialization, or context separation justifies multi-agent coordination.
+- Trace and evaluate the complete harness, not only prompt text or the final answer.
+- For long-horizon work, externalize goal, decisions, evidence, failures, remaining work, and next step into inspectable artifacts.
+- Revisit harness assumptions as models improve; temporary workarounds must not silently become permanent Kernel rules.
 
-Design-intelligence authority order:
-- Creator + accepted project decisions;
-- incumbent project design truth;
-- authoritative current platform/design-system/accessibility sources;
-- curated catalogs with provenance/freshness;
-- generic heuristics.
+Focused references cover prompt/context engineering, harness/tool design, agentic loops, orchestration, and evals/observability. `evals/agent-engineering/contract-v1.md` records initial routing and regression assertions.
 
-Durable project design state may use a `MASTER + surface overrides` pattern. Existing master state must be read before regeneration and must not be silently overwritten.
+## Agent Engineering provenance
 
-## Decision / Research Refinements
+Pinned public repository snapshots:
+- `humanlayer/12-factor-agents` @ `d20c728368bf9c189d6d7aab704744decb6ec0cc` — Apache-2.0.
+- `stanfordnlp/dspy` @ `ecba33763316d2a4c6c756046a1118ecbff033e7` — conceptual use only.
+- `SWE-agent/SWE-agent` @ `3ea751c087f32b16e039a2233dd6eefecef325d5` — conceptual use only.
 
-Decision Design sizes substantial work as spike, bounded, or architectural. Hidden complexity can upgrade the path, but routine reversible work does not inherit a universal approval ceremony.
+Primary conceptual influences also include Anthropic/OpenAI official agent engineering guidance and ReAct, Self-Refine, Reflexion, and AgentBench research. No third-party agent framework/package was installed or executed.
 
-Research separates exploratory evidence from trusted/established evidence. For experiment/comparison campaigns, preserve comparison anchors and do not turn exploratory gains into novelty/SOTA/trusted-reproduction claims without the required evidence.
+## Interface Design
+
+Interface Design remains active with both a reasoning/workflow layer and a scoped design-intelligence layer. Curated design catalogs remain below Creator/project truth and current authoritative platform/accessibility guidance. Durable design state may use master + surface overrides and must not silently overwrite accepted direction.
 
 ## Verification
 
-`repo-integrity.yml` validates foundational/kernel files, registries, all active skill entrypoints, imported/adapted provenance, Software Development references, Skill Acquisition audits, Interface Design provenance/reference structure including the UI/UX Pro Max audit, and semantic version format.
+`repo-integrity.yml` validates foundational/kernel files, registries, all active skill entrypoints, imported/adapted provenance, Interface Design, Agent Engineering references/provenance/eval contract, Skill Acquisition audits, and semantic version format.
 
 Fresh-chat bootstrap E2E remains **PASS** (`evals/boot/minimal-bootstrap-v1.md`). Re-run after boot/kernel/router/layout changes.
 
 ## Next Phase
 
-1. Use Interface Design on real project UI work and compare whether scoped retrieval/persistence improves outcomes without adding ceremony.
-2. Continue gap-driven scans; likely candidate areas remain durable writing/editorial workflow, visual/image-generation direction, project bootstrap/context adapters, and specialized security/release engineering.
-3. Prefer refinement of proven skills over multiplying top-level skills when new sources mostly improve an existing domain.
-4. For large knowledge catalogs, prefer adapters/retrieval contracts plus freshness metadata over copying fast-drifting datasets into Core.
+1. Exercise Agent Engineering on a real DEDAL/project agent workflow and compare against the pre-skill baseline or current harness behavior.
+2. Capture observed routing/tool/context/loop failures as concrete eval regressions before adding more agent theory.
+3. Review DEDAL's own tool/harness ergonomics using the new skill: tool overlap, response size, JIT context, retry/exit semantics, and durable handoff artifacts.
+4. Continue gap-driven ecosystem scans only where they can improve a real DEDAL capability.
 5. Keep private/personal/project operational state outside the public core.
 
-Do not expand the Stable Kernel merely to capture ecosystem fashions or project-specific rules.
+Do not expand the Stable Kernel merely to encode temporary model limitations, framework fashion, or project-specific agent topology.

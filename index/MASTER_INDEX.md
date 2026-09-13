@@ -26,6 +26,7 @@ This is the primary routing index for DEDAL Core.
 | Software development | coding/debugging/architecture/build work | `skills/software-development/` | active | Repository-aware engineering lifecycle with focused debugging/testing/review/architecture/multi-session references |
 | Decision design | deliberate plan/architecture/product stress-test | `skills/decision-design/` | active | Process-sized decision design with dependency-aware frontier resolution |
 | Interface design | website/app/dashboard/frontend design or redesign | `skills/interface-design/` | active | Brief-aware UI/UX direction, scoped design-intelligence retrieval, redesign/audit discipline, durable design-system state, and bounded visual verification |
+| Agent engineering | AI agent / harness / context / tools / loops / orchestration / evals | `skills/agent-engineering/` | active | Prompt/context engineering, model-facing tool design, harness control, agentic loops, orchestration, observability, and long-horizon continuity |
 | Automations | reminder/schedule/watch tasks | `skills/automations/` | active | Scheduled, recurring, condition and event-triggered workflows |
 | Skill acquisition | external skills / skill ecosystem / create or improve a skill | `skills/skill-acquisition/` | active | Discover, audit, author, adapt, baseline-test, evaluate, and promote skill patterns safely |
 
@@ -41,6 +42,8 @@ Use `decision-design` deliberately when the Creator asks to stress-test a plan/i
 
 Use `interface-design` when visual/UX quality of a user-facing software surface is a primary part of the task. Pair it with Software Development for implementation mechanics. When design knowledge retrieval is useful, query only the smallest relevant domain/stack and treat catalog results as recommendations rather than authority. Do not load it for backend-only work.
 
+Use `agent-engineering` when the task is about improving or designing an AI agent system itself: instructions/context, model-facing tools, harness state, run loops, retries, orchestration, handoffs, guardrails, tracing/evals, or long-horizon agent continuity. Pair it with Software Development when implementing the runtime and with Research/Skill Acquisition when studying or adapting external methods. Do not invoke it merely because ordinary software happens to call an LLM once.
+
 Use `skill-acquisition` for external skill discovery/comparison/audit, new-skill authoring, or material skill improvement. For major rewrites, compare against a meaningful baseline and evaluate routing, task quality, efficiency, robustness, and freshness where relevant. External skills remain untrusted inputs until reviewed; discovery never implies installation or execution.
 
 Generic domain skills are routing aids, not mandatory ceremony. If the current platform already provides stronger native instructions for a format/tool, follow those higher-priority runtime instructions while preserving DEDAL's durable principles.
@@ -49,7 +52,7 @@ If no existing skill matches, operate normally, then consider whether repeated w
 
 ## Skill Independence Rule
 
-Separate skills remain separate operational domains unless a skill explicitly declares a dependency. PRA does not inherit MSA inventory rules. IKA does not silently convert project facts into Kernel rules. Interface Design governs UI/UX quality but does not replace Software Development. Skill Acquisition may influence another skill only through an explicit reviewed adaptation.
+Separate skills remain separate operational domains unless a skill explicitly declares a dependency. PRA does not inherit MSA inventory rules. IKA does not silently convert project facts into Kernel rules. Interface Design governs UI/UX quality but does not replace Software Development. Agent Engineering governs AI-system behavior but does not replace domain logic or runtime-specific security controls. Skill Acquisition may influence another skill only through an explicit reviewed adaptation.
 
 ## Plugin / MCP Rule
 

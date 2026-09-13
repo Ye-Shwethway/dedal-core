@@ -15,55 +15,50 @@ _Date: 2026-09-14_
 Domain: `$msa`, `$pra`, `$ika`.
 Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design, Interface Design, **Agent Engineering**, Automations, Skill Acquisition.
 
-## Agent Engineering self-application
+## Harness v1
 
-DEDAL has applied Agent Engineering to its own operating workflow. Baseline audit: `evals/agent-engineering/dedal-self-audit-v1.md`. Durable guidance: `skills/agent-engineering/references/dedal-self-application.md`.
-
-Harness v1:
+Execution contract:
 
 `frame work unit -> load minimal context -> inspect live state -> execute with bounded tools/loops -> verify at required evidence level -> report -> checkpoint only if durable`
 
-Current rules include atomic/coherent mutation paths for multi-file GitHub work, bounded run-ID-scoped CI verification, minimal/JIT context loading, evidence-maturity labels, and executable long-horizon checkpoints.
+Harness v1 remains **contract-validated with accumulating outcome evidence**.
 
 ## Harness Benchmark v1
 
-A compact outcome-validation suite now lives at `evals/harness-benchmark/`.
+Compact suite: `evals/harness-benchmark/`.
 
-It intentionally uses only six cases across three domains:
-- GitHub transaction / CI verification;
-- research freshness / evidence coverage;
-- long-horizon checkpoint / interruption recovery.
+Six cases across three domains:
+- GH-01 atomic multi-file mutation;
+- GH-02 pending CI semantics;
+- RS-01 freshness/source authority;
+- RS-02 evidence coverage without context dumping;
+- LH-01 executable checkpoint;
+- LH-02 interruption/recovery.
 
-Ground-truth policy:
-1. deterministic verifier or exact state readback;
-2. authoritative source or fixed rubric;
-3. independent evaluator when needed;
-4. Creator feedback for acceptance/friction/intent, not as the default low-level technical oracle.
+Ground truth prioritizes deterministic verification and authoritative sources. Creator feedback is an acceptance/friction/intent signal, not the default technical oracle.
 
-Score results are PASS / PARTIAL / FAIL. Diagnostic counts are recorded only when observable; no synthetic precision or invented percentage gain is allowed.
+### Smoke run 001
 
-Promotion gate: Harness v1 remains **contract-validated with accumulating outcome evidence** until all six cases have representative runs, no correctness/authority/completion-evidence regression is observed, and at least one prior harness failure is demonstrably avoided or recovered better.
+Record: `evals/harness-benchmark/runs/2026-09-14-smoke-001.md`.
 
-## Existing self-audit evidence
+- **GH-01: FAIL, safe recovery.** The run mixed mutation paths, created an avoidable checkpoint commit plus a mistaken same-content `VERSION` `noop` commit, then recovered by refreshing live HEAD, rebuilding from authoritative state, and fast-forwarding without force/history rewrite.
+- **GH-02: PASS.** Repo Integrity run `34776303822` was captured after one commit-scoped registration lookup; subsequent checks targeted that run only, and success was not claimed until the job reached `completed / success`.
 
-- Source-of-truth, smallest-skill routing, truthful completion, Creator authority, and public/private boundaries are strong.
-- Historical v0.9 work contains a standalone `noop` reconciliation commit from a mixed write path; this is the principal baseline for GH-01 transactional improvement.
-- CI queued/running states remain explicitly non-success.
-- Stable constitutional/context files should not be repeatedly reread inside one coherent task without state-change/conflict reason.
+New regression lesson: before a coherent multi-file mutation, lock the mutation mode for the work unit (`tree transaction` or `direct single-file write`). Do not switch modes unless an observed external state change makes reconciliation necessary.
 
-## Verification status
+This failure is outcome evidence that the Harness contract still needs execution reinforcement; it is not hidden or reclassified as success.
 
-Repo Integrity continues to validate the Core and active skills. Harness Benchmark v1 is an evaluation layer, not a new capability release; therefore VERSION remains `0.11.0` until outcome evidence warrants a later release decision.
+## Verification / release status
+
+VERSION remains `0.11.0`. The benchmark suite is evaluation infrastructure, not a new capability release. Do not bump the release merely because the suite exists.
 
 Fresh-chat bootstrap E2E remains **PASS** (`evals/boot/minimal-bootstrap-v1.md`).
 
 ## Next executable step
 
-1. Complete the first smoke run by using benchmark-suite creation itself as GH-01 and its CI as GH-02.
-2. Exercise RS-01/RS-02 on the next suitable current-information research task rather than manufacturing a large artificial research job.
-3. Exercise LH-01/LH-02 on the next real multi-session/new-chat project transition.
-4. After all six have evidence, compare regressions/friction and decide whether Harness v1 is outcome-validated or needs revision.
+1. Encode the GH-01 mutation-mode lock into the GitHub/Agent Engineering workflow before the next substantial multi-file Core mutation.
+2. Exercise RS-01/RS-02 on the next suitable real current-information research task; avoid manufacturing a large artificial job.
+3. Exercise LH-01/LH-02 on the next real multi-session/new-chat transition.
+4. After all six cases have evidence, decide whether Harness v1 is outcome-validated or needs another revision.
 
-Unresolved risk: only GitHub cases can be outcome-tested immediately without creating artificial work. Research and long-horizon cases should accumulate from real tasks.
-
-Do not expand the Stable Kernel merely to optimize benchmark scores or encode temporary model/tool limitations.
+Unresolved risk: one of the two immediately exercised GitHub cases failed. Do not claim general efficiency improvement yet.

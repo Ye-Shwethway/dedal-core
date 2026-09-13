@@ -14,21 +14,28 @@ This is the primary routing index for DEDAL Core.
 
 ## Skill Registry
 
-| Skill | Path | Status | Purpose |
-|---|---|---|---|
-| GitHub operations | `skills/github/` | scaffold | Repository inspection, commits, branches, PRs, Actions, artifacts |
-| Files & artifacts | `skills/files/` | scaffold | Library, document, spreadsheet, PDF, artifact workflows |
-| Research | `skills/research/` | scaffold | Current web research, source synthesis, evidence handling |
-| Software development | `skills/software-development/` | scaffold | Architecture, coding, testing, build orchestration |
-| Automations | `skills/automations/` | scaffold | Scheduled and condition-triggered workflows |
-| Knowledge archive | `skills/ika/` | planned | Integration patterns derived from IKA experience |
-| Medicine store | `skills/msa/` | planned | Integration patterns derived from Medicine Store Assistant experience |
+| Skill | Invocation / aliases | Path | Status | Purpose |
+|---|---|---|---|---|
+| Medicine Store Assistant | `medicine-store-assistant`, `$msa` | `skills/medicine-store-assistant/` | active | Medical-store inventory intake, reconciliation, usage, expiry lifecycle, reorder review, and workbook-safe operations |
+| Patient Report Assistant | `patient-report-assistant`, `$pra` | `skills/patient-report-assistant/` | active | Monthly OPD/IPD transcription, workbook protection, report validation, and month preparation |
+| GitHub operations | — | `skills/github/` | scaffold | Repository inspection, commits, branches, PRs, Actions, artifacts |
+| Files & artifacts | — | `skills/files/` | scaffold | Library, document, spreadsheet, PDF, artifact workflows |
+| Research | — | `skills/research/` | scaffold | Current web research, source synthesis, evidence handling |
+| Software development | — | `skills/software-development/` | scaffold | Architecture, coding, testing, build orchestration |
+| Automations | — | `skills/automations/` | scaffold | Scheduled and condition-triggered workflows |
+| Knowledge archive | `$ika` | `skills/ika/` | planned | Integration patterns and reusable knowledge-archive workflows derived from IKA experience |
 
 ## Routing Rule
 
 Do not load every skill by default. Select the smallest set that covers the current task.
 
+Explicit aliases such as `$msa`, `$pra`, or future `$ika` are direct routing signals. When an alias is used, load that skill's `SKILL.md` first and then only the task-specific references it requires.
+
 If no existing skill matches, operate normally, then consider whether the repeated task deserves a new skill package.
+
+## Skill Independence Rule
+
+Separate skills remain separate operational domains unless a skill explicitly declares a dependency. In particular, Patient Report Assistant does not inherit Medicine Store Assistant inventory rules merely because both originated in the same source repository.
 
 ## Plugin / MCP Rule
 

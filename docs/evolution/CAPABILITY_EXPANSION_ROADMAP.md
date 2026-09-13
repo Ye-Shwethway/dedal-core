@@ -2,7 +2,7 @@
 
 _Date established: 2026-09-14_
 
-This roadmap records the next eight high-value generic capability areas for DEDAL Core. Order reflects expected cross-project value, risk reduction, and current gaps. It is a plan, not a promise that every area must become a separate top-level skill; later evidence may justify merge/adapt/reject decisions.
+This roadmap records eight high-value generic capability areas for DEDAL Core. Order reflects expected cross-project value, risk reduction, and observed gaps. The initial eight-area campaign is now implemented; future work should consolidate, evaluate, merge, or revise rather than automatically create more skills.
 
 ## Wave 1 — active
 
@@ -33,16 +33,16 @@ This roadmap records the next eight high-value generic capability areas for DEDA
    - runtime verification;
    - rollback and migration safety.
 
-## Wave 2
+## Wave 2 — active
 
-4. **Data / Spreadsheet / Operational Workflow Engineering — active**
+4. **Data / Spreadsheet / Operational Workflow Engineering**
    - schema inference and data contracts;
    - reconciliation, duplicate/anomaly handling;
    - staging -> review -> production promotion;
    - formulas, deterministic transforms, audit trails;
    - spreadsheet/database interoperability and provenance.
 
-5. **Writing / Editorial Engineering — active**
+5. **Writing / Editorial Engineering**
    - audience/intent fidelity;
    - fact/expression separation;
    - structural editing and compression/expansion;
@@ -50,7 +50,7 @@ This roadmap records the next eight high-value generic capability areas for DEDA
    - multilingual fidelity/localization;
    - publication QA and optional editorial lint.
 
-6. **Visual Direction / Image Production — active**
+6. **Visual Direction / Image Production**
    - canonical identity/trait locks;
    - per-dimension reference hierarchy;
    - shot/set planning and composition;
@@ -58,7 +58,7 @@ This roadmap records the next eight high-value generic capability areas for DEDA
    - targeted edits;
    - drift detection and rendered visual QA.
 
-7. **Decision / Planning Intelligence v2 — active (merged into Decision Design)**
+7. **Decision / Planning Intelligence v2 — merged into Decision Design**
    - uncertainty and option value;
    - reversible vs irreversible decisions;
    - dependency/critical-path thinking;
@@ -66,17 +66,29 @@ This roadmap records the next eight high-value generic capability areas for DEDA
    - bounded premortems;
    - decision records and post-decision learning.
 
-8. **Knowledge / Memory Architecture — planned next**
-   - episodic vs durable state;
-   - provenance and contradiction resolution;
-   - freshness/staleness;
-   - project-local vs global knowledge;
-   - retrieval/compaction;
-   - poisoning resistance and memory governance.
+8. **Knowledge / Memory Architecture**
+   - memory vs active context separation;
+   - episodic vs durable project vs user-global state;
+   - canonical ownership and scope isolation;
+   - provenance, freshness, contradiction resolution;
+   - retrieval and compaction;
+   - poisoning resistance, retention, deletion, and governance.
+
+## Campaign status
+
+All eight planned areas are active as of DEDAL Core v0.17.0. This closes the initial capability-expansion build campaign.
+
+The next phase is **consolidation and outcome validation**:
+- exercise skills naturally on real work;
+- capture regressions and overlap;
+- merge/remove rules that add ceremony without measured value;
+- strengthen runtime enforcement where prose contracts are insufficient;
+- evaluate context/memory quality across real multi-session workflows;
+- avoid expanding skill count merely because another public pattern exists.
 
 ## Promotion rule
 
-For every area:
+For any future capability area:
 `gap -> current evidence/corpus -> boundary with existing skills -> DEDAL-native synthesis -> contract/eval -> real-task outcome evidence -> promote/merge/revise/reject`
 
 Prefer improving an existing skill when the domain is not independently routable. Avoid skill multiplication for prestige or ecosystem fashion.

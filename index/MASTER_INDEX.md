@@ -24,7 +24,7 @@ This is the primary routing index for DEDAL Core.
 | Files & artifacts | file/Library/document/artifact tasks | `skills/files/` | active | Retrieval, version identity, document/artifact creation and persistence |
 | Research | current research / verification / governed exploration | `skills/research/` | active | Live-source research, provenance, synthesis, freshness, comparability, and exploratory-evidence discipline |
 | Software development | coding/debugging/architecture/build work | `skills/software-development/` | active | Repository-aware engineering lifecycle with focused debugging/testing/review/architecture/multi-session references |
-| Decision design | deliberate plan/architecture/product stress-test | `skills/decision-design/` | active | Process-sized decision design with dependency-aware frontier resolution |
+| Decision design | deliberate plan/architecture/product stress-test | `skills/decision-design/` | active | Uncertainty/reversibility-aware decision design with dependency frontier, experiments, thresholds, premortems, and durable learning |
 | Interface design | website/app/dashboard/frontend design or redesign | `skills/interface-design/` | active | Brief-aware UI/UX direction, scoped design-intelligence retrieval, redesign/audit discipline, durable design-system state, and bounded visual verification |
 | Agent engineering | AI agent / harness / context / tools / loops / orchestration / evals | `skills/agent-engineering/` | active | Prompt/context engineering, model-facing tool design, harness control, agentic loops, orchestration, observability, and long-horizon continuity |
 | Security engineering | security/threat/injection/privilege/secrets/supply-chain work | `skills/security-engineering/` | active | Trust boundaries, authority, containment, persistent-context risk, supply-chain security, and adversarial verification |
@@ -33,6 +33,7 @@ This is the primary routing index for DEDAL Core.
 | Data operations | spreadsheet/data reconciliation/validation/staging/promotion work | `skills/data-operations/` | active | Record identity, reconciliation, data contracts, formula integrity, deterministic transforms, staged promotion, read-back verification, and auditability |
 | Writing / editorial | draft/rewrite/translate/edit/publish prose | `skills/writing-editorial/` | active | Intent/audience fidelity, fact-expression separation, structure, voice, terminology, multilingual fidelity, revision, and publication QA |
 | Visual direction | image generation/editing/character/reference/series visual work | `skills/visual-direction/` | active | Reference authority, canonical trait locks, shot/set planning, targeted edits, drift detection, visual QA, and accepted-anchor continuity |
+| Knowledge / memory | memory/state/scope/freshness/contradiction/compaction/governance work | `skills/knowledge-memory/` | active | Memory-layer architecture, state ownership, provenance/freshness, contradiction handling, retrieval/compaction, scope isolation, and poisoning-resistant governance |
 | Automations | reminder/schedule/watch tasks | `skills/automations/` | active | Scheduled, recurring, condition and event-triggered workflows |
 | Skill acquisition | external skills / skill ecosystem / create or improve a skill | `skills/skill-acquisition/` | active | Discover, audit, author, adapt, baseline-test, evaluate, and promote skill patterns safely |
 
@@ -56,7 +57,9 @@ Use `writing-editorial` when the main deliverable is prose and quality depends o
 
 Use `visual-direction` when image generation/editing depends on subject identity, canonical traits, reference hierarchy, composition/shot planning, series continuity, targeted edits, or rendered visual QA. Pair it with the current image tool for execution. Do not promote a generated image into canonical state merely because it is newer or visually attractive.
 
-Use `decision-design` deliberately when the Creator asks to stress-test a plan/idea or when high-impact unresolved decisions materially block a safe design. Scale process to spike/bounded/architectural work rather than imposing one ceremony level.
+Use `knowledge-memory` when the primary problem is what DEDAL should remember, where state belongs, project-vs-global scope, provenance/freshness, contradiction resolution, memory poisoning, retrieval/compaction, or forgetting/governance. Pair with `$ika` for concrete project archives, Project Bootstrap for resumed context, Agent Engineering for harness continuity, and Security Engineering for memory attack surfaces. Do not treat model memory as a source of truth.
+
+Use `decision-design` deliberately when the Creator asks to stress-test a plan/idea or when high-impact unresolved decisions materially block a safe design. Scale process according to irreversibility, downside, uncertainty, and blast radius rather than imposing one ceremony level.
 
 Use `interface-design` when visual/UX quality of a user-facing software surface is a primary part of the task. Pair it with Software Development for implementation mechanics. Do not load it for backend-only work.
 
@@ -70,7 +73,7 @@ If no existing skill matches, operate normally, then consider whether repeated w
 
 ## Skill Independence Rule
 
-Separate skills remain separate operational domains unless a skill explicitly declares a dependency. PRA does not inherit MSA inventory rules. IKA does not silently convert project facts into Kernel rules. Interface Design does not replace Software Development. Agent Engineering does not replace domain logic or security controls. Security Engineering owns threat/authority reasoning but does not replace project-specific policy. Project Bootstrap maps project context but does not become permanent hidden memory. Release Engineering governs shipping evidence but does not replace implementation/testing. Data Operations supplies generic data-integrity mechanics but does not override specialized domain rules. Writing/Editorial owns expression and fidelity mechanics but does not become the source of domain facts. Visual Direction owns visual production/continuity reasoning but does not replace image execution tools, Interface Design, or Creator acceptance. Skill Acquisition may influence another skill only through explicit reviewed adaptation.
+Separate skills remain separate operational domains unless a skill explicitly declares a dependency. PRA does not inherit MSA inventory rules. IKA owns concrete evidence-linked project archive operations; Knowledge/Memory Architecture owns generic state-layer/scope/governance mechanics and does not duplicate IKA's archive store. Interface Design does not replace Software Development. Agent Engineering does not replace domain logic or security controls. Security Engineering owns threat/authority reasoning but does not replace project-specific policy. Project Bootstrap maps project context but does not become permanent hidden memory. Release Engineering governs shipping evidence but does not replace implementation/testing. Data Operations supplies generic data-integrity mechanics but does not override specialized domain rules. Writing/Editorial owns expression and fidelity mechanics but does not become the source of domain facts. Visual Direction owns visual production/continuity reasoning but does not replace image execution tools, Interface Design, or Creator acceptance. Skill Acquisition may influence another skill only through explicit reviewed adaptation.
 
 ## Plugin / MCP Rule
 
@@ -78,4 +81,4 @@ Skills describe **how** to use capabilities; plugins/MCP/apps provide **executio
 
 ## Growth Rule
 
-New skills may be added when modular, testable, useful, independently routable, and justified by real work. Follow `docs/evolution/CAPABILITY_EXPANSION_ROADMAP.md` for the current planned capability campaign. Prefer adapting proven public patterns while preserving provenance, licensing, security, routing quality, context efficiency, and freshness. Kernel-level changes require a higher standard.
+New skills may be added when modular, testable, useful, independently routable, and justified by real work. Follow `docs/evolution/CAPABILITY_EXPANSION_ROADMAP.md` for the current capability campaign. Prefer adapting proven public patterns while preserving provenance, licensing, security, routing quality, context efficiency, and freshness. Kernel-level changes require a higher standard.

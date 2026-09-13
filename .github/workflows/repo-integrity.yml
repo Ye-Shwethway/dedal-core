@@ -25,6 +25,7 @@ jobs:
             README.md AGENTS.md SECURITY.md VERSION
             kernel/KERNEL.md kernel/BOOT_CONTRACT.md kernel/STATE_BOUNDARY.md
             docs/IDENTITY.md docs/architecture/FOUNDATION.md docs/architecture/BIOS_AND_LAYER_MODEL.md
+            docs/architecture/MEMORY_ARCHITECTURE.md
             docs/capabilities/CURRENT_CAPABILITIES.md docs/continuity/CURRENT_CHECKPOINT.md docs/evolution/IMPROVEMENT_PROTOCOL.md
             docs/evolution/CAPABILITY_EXPANSION_ROADMAP.md
             state/capability-registry.yaml index/MASTER_INDEX.md index/SKILL_REGISTRY.yaml
@@ -48,7 +49,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          required_skills=(medicine-store-assistant patient-report-assistant ika github files research software-development decision-design interface-design agent-engineering security-engineering project-bootstrap release-engineering data-operations writing-editorial visual-direction automations skill-acquisition)
+          required_skills=(medicine-store-assistant patient-report-assistant ika github files research software-development decision-design interface-design agent-engineering security-engineering project-bootstrap release-engineering data-operations writing-editorial visual-direction knowledge-memory automations skill-acquisition)
           for skill in "${required_skills[@]}"; do test -s "skills/$skill/SKILL.md" || { echo "Missing skill entrypoint: skills/$skill/SKILL.md"; exit 1; }; done
 
           test -s skills/medicine-store-assistant/IMPORT_SOURCE.md
@@ -112,6 +113,12 @@ jobs:
           grep -q '62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2' skills/visual-direction/ADAPTATION_NOTES.md
           test -s evals/visual-direction/contract-v1.md
 
+          test -s skills/knowledge-memory/ADAPTATION_NOTES.md
+          test "$(find skills/knowledge-memory/references -type f | wc -l)" -ge 3
+          grep -q '5bcdd177d70fa2b31a754cfcd801e77b2e1ab16a' skills/knowledge-memory/ADAPTATION_NOTES.md
+          test -s evals/knowledge-memory/contract-v1.md
+          test -s docs/architecture/MEMORY_ARCHITECTURE.md
+
           test -s skills/skill-acquisition/references/matt-pocock-deep-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
@@ -122,10 +129,12 @@ jobs:
           test -s skills/skill-acquisition/references/writing-editorial-capability-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/visual-direction-capability-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/decision-planning-v2-capability-audit-2026-09-14.md
+          test -s skills/skill-acquisition/references/knowledge-memory-capability-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/authoring-and-evals.md
           test -s skills/skill-acquisition/references/knowledge-packaging-and-freshness.md
-          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 16
+          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 17
           grep -q 'Reuse ideas' skills/skill-acquisition/SKILL.md
+          grep -q '5bcdd177d70fa2b31a754cfcd801e77b2e1ab16a' skills/skill-acquisition/references/knowledge-memory-capability-audit-2026-09-14.md
 
       - name: Validate version format
         shell: bash

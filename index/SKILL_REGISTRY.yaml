@@ -1,4 +1,4 @@
-version: 13
+version: 14
 last_reviewed: "2026-09-14"
 
 routing:
@@ -231,6 +231,25 @@ skills:
           commit: "62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2"
           license: "Apache-2.0"
 
+  knowledge-memory:
+    aliases: []
+    path: "skills/knowledge-memory"
+    entrypoint: "skills/knowledge-memory/SKILL.md"
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      sources:
+        - source: "OpenAI Dreaming memory synthesis guidance"
+          reviewed_on: "2026-09-14"
+        - source: "Anthropic context engineering and long-running harness guidance"
+          reviewed_on: "2026-09-14"
+        - source: "MemGPT arXiv:2310.08560"
+          use: "conceptual"
+        - repo: "letta-ai/letta"
+          commit: "5bcdd177d70fa2b31a754cfcd801e77b2e1ab16a"
+          license: "Apache-2.0"
+
   automations:
     aliases: []
     path: "skills/automations"
@@ -285,3 +304,5 @@ skills:
           commit: "cf649e6e7089804dd1bad745fdcd12aeee7f7aae"
         - repo: "tencent-ailab/IP-Adapter"
           commit: "62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2"
+        - repo: "letta-ai/letta"
+          commit: "5bcdd177d70fa2b31a754cfcd801e77b2e1ab16a"

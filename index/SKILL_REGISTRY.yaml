@@ -1,4 +1,4 @@
-version: 9
+version: 10
 last_reviewed: "2026-09-14"
 
 routing:
@@ -128,6 +128,52 @@ skills:
           use: "conceptual"
       adapted_on: "2026-09-14"
 
+  security-engineering:
+    aliases: []
+    path: "skills/security-engineering"
+    entrypoint: "skills/security-engineering/SKILL.md"
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      sources:
+        - repo: "OWASP/www-project-top-10-for-large-language-model-applications"
+          commit: "99f4395589bdbd120ae961f9cd179e79d7f9b27f"
+        - source: "OpenAI prompt-injection and agent guardrail guidance"
+          reviewed_on: "2026-09-14"
+        - source: "Anthropic trustworthy-agents guidance"
+          reviewed_on: "2026-09-14"
+
+  project-bootstrap:
+    aliases: []
+    path: "skills/project-bootstrap"
+    entrypoint: "skills/project-bootstrap/SKILL.md"
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      sources:
+        - repo: "agentsmd/agents.md"
+          commit: "d001185d792eb6402a58e4cbef1c228b309ec25d"
+        - source: "GitHub repository/path-specific agent instruction guidance"
+          reviewed_on: "2026-09-14"
+
+  release-engineering:
+    aliases: []
+    path: "skills/release-engineering"
+    entrypoint: "skills/release-engineering/SKILL.md"
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      sources:
+        - repo: "slsa-framework/slsa"
+          commit: "54b88b009fd45acb331c7e6578a526e0f36e0430"
+        - source: "GitHub artifact attestation and Actions security guidance"
+          reviewed_on: "2026-09-14"
+        - source: "Sigstore/Cosign signing and verification guidance"
+          reviewed_on: "2026-09-14"
+
   automations:
     aliases: []
     path: "skills/automations"
@@ -168,3 +214,9 @@ skills:
           commit: "ecba33763316d2a4c6c756046a1118ecbff033e7"
         - repo: "SWE-agent/SWE-agent"
           commit: "3ea751c087f32b16e039a2233dd6eefecef325d5"
+        - repo: "OWASP/www-project-top-10-for-large-language-model-applications"
+          commit: "99f4395589bdbd120ae961f9cd179e79d7f9b27f"
+        - repo: "agentsmd/agents.md"
+          commit: "d001185d792eb6402a58e4cbef1c228b309ec25d"
+        - repo: "slsa-framework/slsa"
+          commit: "54b88b009fd45acb331c7e6578a526e0f36e0430"

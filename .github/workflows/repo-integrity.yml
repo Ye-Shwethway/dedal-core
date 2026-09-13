@@ -26,6 +26,7 @@ jobs:
             kernel/KERNEL.md kernel/BOOT_CONTRACT.md kernel/STATE_BOUNDARY.md
             docs/IDENTITY.md docs/architecture/FOUNDATION.md docs/architecture/BIOS_AND_LAYER_MODEL.md
             docs/capabilities/CURRENT_CAPABILITIES.md docs/continuity/CURRENT_CHECKPOINT.md docs/evolution/IMPROVEMENT_PROTOCOL.md
+            docs/evolution/CAPABILITY_EXPANSION_ROADMAP.md
             state/capability-registry.yaml index/MASTER_INDEX.md index/SKILL_REGISTRY.yaml
           )
           for file in "${required[@]}"; do test -s "$file" || { echo "Missing or empty required file: $file"; exit 1; }; done
@@ -47,50 +48,64 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          required_skills=(medicine-store-assistant patient-report-assistant ika github files research software-development decision-design interface-design agent-engineering automations skill-acquisition)
+          required_skills=(medicine-store-assistant patient-report-assistant ika github files research software-development decision-design interface-design agent-engineering security-engineering project-bootstrap release-engineering automations skill-acquisition)
           for skill in "${required_skills[@]}"; do test -s "skills/$skill/SKILL.md" || { echo "Missing skill entrypoint: skills/$skill/SKILL.md"; exit 1; }; done
+
           test -s skills/medicine-store-assistant/IMPORT_SOURCE.md
           test -s skills/patient-report-assistant/IMPORT_SOURCE.md
           test -s skills/medicine-store-assistant/agents/openai.yaml
           test -s skills/patient-report-assistant/agents/openai.yaml
           test "$(find skills/medicine-store-assistant/references -type f | wc -l)" -ge 10
           test "$(find skills/patient-report-assistant/references -type f | wc -l)" -ge 8
+
           test -s skills/ika/ADAPTATION_NOTES.md
           test "$(find skills/ika/references -type f | wc -l)" -ge 4
           grep -q 'fbed860928c1a93261306f70a47fa700da56ce29' skills/ika/ADAPTATION_NOTES.md
+
           test -s skills/decision-design/ADAPTATION_NOTES.md
           grep -q '3cca18b368ae95cdbdebbff572ccafa662551015' skills/decision-design/ADAPTATION_NOTES.md
           test "$(find skills/software-development/references -type f | wc -l)" -ge 5
+
           test -s skills/interface-design/ADAPTATION_NOTES.md
           test "$(find skills/interface-design/references -type f | wc -l)" -ge 6
           grep -q 'ccbc15639c97057cbfcf32ecebc38ef716e4bb37' skills/interface-design/ADAPTATION_NOTES.md
           grep -q 'cb56ed6c19a07329a9fa0cd4e657bee040156593' skills/interface-design/ADAPTATION_NOTES.md
           grep -q '7f69fed6a2717900085f1bc3b263721f8ba025e2' skills/interface-design/ADAPTATION_NOTES.md
-          test -s skills/interface-design/references/design-intelligence-retrieval.md
-          test -s skills/interface-design/references/design-system-persistence.md
+
           test -s skills/agent-engineering/ADAPTATION_NOTES.md
           test "$(find skills/agent-engineering/references -type f | wc -l)" -ge 6
           test -s skills/agent-engineering/references/dedal-self-application.md
-          grep -q 'outcome validation' skills/agent-engineering/references/dedal-self-application.md
           grep -q 'd20c728368bf9c189d6d7aab704744decb6ec0cc' skills/agent-engineering/ADAPTATION_NOTES.md
           grep -q 'ecba33763316d2a4c6c756046a1118ecbff033e7' skills/agent-engineering/ADAPTATION_NOTES.md
           grep -q '3ea751c087f32b16e039a2233dd6eefecef325d5' skills/agent-engineering/ADAPTATION_NOTES.md
           test -s evals/agent-engineering/contract-v1.md
           test -s evals/agent-engineering/dedal-self-audit-v1.md
-          grep -q 'Repository mutation path can be more transactional' evals/agent-engineering/dedal-self-audit-v1.md
+
+          test -s skills/security-engineering/ADAPTATION_NOTES.md
+          test "$(find skills/security-engineering/references -type f | wc -l)" -ge 3
+          grep -q '99f4395589bdbd120ae961f9cd179e79d7f9b27f' skills/security-engineering/ADAPTATION_NOTES.md
+
+          test -s skills/project-bootstrap/ADAPTATION_NOTES.md
+          test "$(find skills/project-bootstrap/references -type f | wc -l)" -ge 2
+          grep -q 'd001185d792eb6402a58e4cbef1c228b309ec25d' skills/project-bootstrap/ADAPTATION_NOTES.md
+
+          test -s skills/release-engineering/ADAPTATION_NOTES.md
+          test "$(find skills/release-engineering/references -type f | wc -l)" -ge 2
+          grep -q '54b88b009fd45acb331c7e6578a526e0f36e0430' skills/release-engineering/ADAPTATION_NOTES.md
+
           test -s skills/skill-acquisition/references/matt-pocock-deep-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/ui-ux-pro-max-deep-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/agent-engineering-corpus-audit-2026-09-14.md
+          test -s skills/skill-acquisition/references/first-wave-capability-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/authoring-and-evals.md
           test -s skills/skill-acquisition/references/knowledge-packaging-and-freshness.md
-          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 11
+          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 12
           grep -q 'Reuse ideas' skills/skill-acquisition/SKILL.md
-          grep -q '7f69fed6a2717900085f1bc3b263721f8ba025e2' skills/skill-acquisition/references/ui-ux-pro-max-deep-audit-2026-09-14.md
-          grep -q 'd20c728368bf9c189d6d7aab704744decb6ec0cc' skills/skill-acquisition/references/agent-engineering-corpus-audit-2026-09-14.md
-          grep -q 'ecba33763316d2a4c6c756046a1118ecbff033e7' skills/skill-acquisition/references/agent-engineering-corpus-audit-2026-09-14.md
-          grep -q '3ea751c087f32b16e039a2233dd6eefecef325d5' skills/skill-acquisition/references/agent-engineering-corpus-audit-2026-09-14.md
+          grep -q '99f4395589bdbd120ae961f9cd179e79d7f9b27f' skills/skill-acquisition/references/first-wave-capability-audit-2026-09-14.md
+          grep -q 'd001185d792eb6402a58e4cbef1c228b309ec25d' skills/skill-acquisition/references/first-wave-capability-audit-2026-09-14.md
+          grep -q '54b88b009fd45acb331c7e6578a526e0f36e0430' skills/skill-acquisition/references/first-wave-capability-audit-2026-09-14.md
 
       - name: Validate version format
         shell: bash

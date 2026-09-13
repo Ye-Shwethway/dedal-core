@@ -27,6 +27,9 @@ This is the primary routing index for DEDAL Core.
 | Decision design | deliberate plan/architecture/product stress-test | `skills/decision-design/` | active | Process-sized decision design with dependency-aware frontier resolution |
 | Interface design | website/app/dashboard/frontend design or redesign | `skills/interface-design/` | active | Brief-aware UI/UX direction, scoped design-intelligence retrieval, redesign/audit discipline, durable design-system state, and bounded visual verification |
 | Agent engineering | AI agent / harness / context / tools / loops / orchestration / evals | `skills/agent-engineering/` | active | Prompt/context engineering, model-facing tool design, harness control, agentic loops, orchestration, observability, and long-horizon continuity |
+| Security engineering | security/threat/injection/privilege/secrets/supply-chain work | `skills/security-engineering/` | active | Trust boundaries, authority, containment, persistent-context risk, supply-chain security, and adversarial verification |
+| Project bootstrap | new/resumed repo/project onboarding and context mapping | `skills/project-bootstrap/` | active | Compact executable project context, instruction hierarchy, drift control, source-of-truth mapping, and next-step continuity |
+| Release engineering | release/build artifact/deploy/rollback tasks | `skills/release-engineering/` | active | Source-to-artifact attribution, provenance, staged promotion, runtime verification, release evidence, and rollback |
 | Automations | reminder/schedule/watch tasks | `skills/automations/` | active | Scheduled, recurring, condition and event-triggered workflows |
 | Skill acquisition | external skills / skill ecosystem / create or improve a skill | `skills/skill-acquisition/` | active | Discover, audit, author, adapt, baseline-test, evaluate, and promote skill patterns safely |
 
@@ -38,13 +41,19 @@ Do not load every skill by default. Select the smallest set that covers the curr
 
 Explicit aliases such as `$msa`, `$pra`, and `$ika` are direct routing signals. When an alias is used, load that skill's `SKILL.md` first and then only task-specific references it requires.
 
+Use `project-bootstrap` when entering an unfamiliar repository/project, resuming after significant context loss, or creating/refining agent-facing project context. Pair it with GitHub/Files for evidence and with Software Development only when implementation begins.
+
+Use `security-engineering` when security risk, trust/authority boundaries, untrusted content, secrets, privilege, prompt/goal hijacking, persistent-context poisoning, supply-chain risk, or destructive capability is a primary concern. Pair it with Agent Engineering for AI-system security and Release Engineering for supply-chain/deployment controls.
+
+Use `release-engineering` when producing or shipping APK/AAB/binaries/packages/images, changing CI/CD/release pipelines, attributing artifacts to source, staging rollout, verifying deployment, or planning rollback. Do not use CI success as a substitute for runtime/deployment evidence.
+
 Use `decision-design` deliberately when the Creator asks to stress-test a plan/idea or when high-impact unresolved decisions materially block a safe design. Scale process to spike/bounded/architectural work rather than imposing one ceremony level.
 
-Use `interface-design` when visual/UX quality of a user-facing software surface is a primary part of the task. Pair it with Software Development for implementation mechanics. When design knowledge retrieval is useful, query only the smallest relevant domain/stack and treat catalog results as recommendations rather than authority. Do not load it for backend-only work.
+Use `interface-design` when visual/UX quality of a user-facing software surface is a primary part of the task. Pair it with Software Development for implementation mechanics. Do not load it for backend-only work.
 
-Use `agent-engineering` when the task is about improving or designing an AI agent system itself: instructions/context, model-facing tools, harness state, run loops, retries, orchestration, handoffs, guardrails, tracing/evals, or long-horizon agent continuity. Pair it with Software Development when implementing the runtime and with Research/Skill Acquisition when studying or adapting external methods. Do not invoke it merely because ordinary software happens to call an LLM once.
+Use `agent-engineering` when the task is about improving or designing an AI agent system itself: instructions/context, model-facing tools, harness state, run loops, retries, orchestration, handoffs, guardrails, tracing/evals, or long-horizon agent continuity. Do not invoke it merely because ordinary software happens to call an LLM once.
 
-Use `skill-acquisition` for external skill discovery/comparison/audit, new-skill authoring, or material skill improvement. For major rewrites, compare against a meaningful baseline and evaluate routing, task quality, efficiency, robustness, and freshness where relevant. External skills remain untrusted inputs until reviewed; discovery never implies installation or execution.
+Use `skill-acquisition` for external skill discovery/comparison/audit, new-skill authoring, or material skill improvement. External skills remain untrusted inputs until reviewed; discovery never implies installation or execution.
 
 Generic domain skills are routing aids, not mandatory ceremony. If the current platform already provides stronger native instructions for a format/tool, follow those higher-priority runtime instructions while preserving DEDAL's durable principles.
 
@@ -52,7 +61,7 @@ If no existing skill matches, operate normally, then consider whether repeated w
 
 ## Skill Independence Rule
 
-Separate skills remain separate operational domains unless a skill explicitly declares a dependency. PRA does not inherit MSA inventory rules. IKA does not silently convert project facts into Kernel rules. Interface Design governs UI/UX quality but does not replace Software Development. Agent Engineering governs AI-system behavior but does not replace domain logic or runtime-specific security controls. Skill Acquisition may influence another skill only through an explicit reviewed adaptation.
+Separate skills remain separate operational domains unless a skill explicitly declares a dependency. PRA does not inherit MSA inventory rules. IKA does not silently convert project facts into Kernel rules. Interface Design does not replace Software Development. Agent Engineering does not replace domain logic or security controls. Security Engineering owns threat/authority reasoning but does not replace project-specific policy. Project Bootstrap maps project context but does not become permanent hidden memory. Release Engineering governs shipping evidence but does not replace implementation/testing. Skill Acquisition may influence another skill only through explicit reviewed adaptation.
 
 ## Plugin / MCP Rule
 
@@ -60,4 +69,4 @@ Skills describe **how** to use capabilities; plugins/MCP/apps provide **executio
 
 ## Growth Rule
 
-New skills may be added when modular, testable, useful, independently routable, and justified by real work. Prefer discovering and adapting proven public patterns over reinventing common workflows, while preserving provenance, licensing, security, routing quality, context efficiency, and freshness. Kernel-level changes require a higher standard.
+New skills may be added when modular, testable, useful, independently routable, and justified by real work. Follow `docs/evolution/CAPABILITY_EXPANSION_ROADMAP.md` for the current planned capability campaign. Prefer adapting proven public patterns while preserving provenance, licensing, security, routing quality, context efficiency, and freshness. Kernel-level changes require a higher standard.

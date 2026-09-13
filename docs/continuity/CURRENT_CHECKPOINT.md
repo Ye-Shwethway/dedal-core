@@ -7,58 +7,78 @@ _Date: 2026-09-14_
 - Repository: `Ye-Shwethway/dedal-core`
 - Visibility: public
 - Default branch: `main`
-- Current version: `0.11.0`
+- Current version: `0.12.0`
 - Purpose: durable public operational core for DEDAL
 
-## Active Skills
+## Active skills
 
 Domain: `$msa`, `$pra`, `$ika`.
-Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design, Interface Design, **Agent Engineering**, Automations, Skill Acquisition.
 
-## Harness v1
+Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design, Interface Design, Agent Engineering, **Security Engineering**, **Project Bootstrap**, **Release Engineering**, Automations, Skill Acquisition.
 
-Execution contract:
+## Capability expansion roadmap
 
-`frame work unit -> load minimal context -> inspect live state -> execute with bounded tools/loops -> verify at required evidence level -> report -> checkpoint only if durable`
+Roadmap: `docs/evolution/CAPABILITY_EXPANSION_ROADMAP.md`.
 
-Harness v1 remains **contract-validated with accumulating outcome evidence**.
+Eight planned areas are locked into the campaign:
+1. Security Engineering — active;
+2. Project Bootstrap / Context Adapter — active;
+3. Release / Deployment Engineering — active;
+4. Data / Spreadsheet / Operational Workflow Engineering — planned;
+5. Writing / Editorial Engineering — planned;
+6. Visual Direction / Image Production — planned;
+7. Decision / Planning Intelligence v2 — planned;
+8. Knowledge / Memory Architecture — planned.
 
-## Harness Benchmark v1
+Promotion remains gap-driven: an area may become a new skill, merge into an existing skill, or be rejected if evidence does not justify independent routing.
 
-Compact suite: `evals/harness-benchmark/`.
+## First-wave corpus and boundaries
 
-Six cases across three domains:
-- GH-01 atomic multi-file mutation;
-- GH-02 pending CI semantics;
-- RS-01 freshness/source authority;
-- RS-02 evidence coverage without context dumping;
-- LH-01 executable checkpoint;
-- LH-02 interruption/recovery.
+Audit: `skills/skill-acquisition/references/first-wave-capability-audit-2026-09-14.md`.
 
-Ground truth prioritizes deterministic verification and authoritative sources. Creator feedback is an acceptance/friction/intent signal, not the default technical oracle.
+### Security Engineering
 
-### Smoke run 001
+Primary corpus includes OWASP Agentic/GenAI security material, OpenAI prompt-injection/agent guardrail guidance, Anthropic trustworthy-agent guidance, and the pinned OWASP project repository `99f4395589bdbd120ae961f9cd179e79d7f9b27f`.
 
-Record: `evals/harness-benchmark/runs/2026-09-14-smoke-001.md`.
+Core contract: map assets/trust/authority -> enumerate abuse paths -> constrain capability/blast radius -> verify controls -> report residual risk. Prompt injection is treated as an authority/capability-containment problem, not merely a string-classification problem. Persistent memory/context is treated as an attack surface.
 
-- **GH-01: FAIL, safe recovery.** The run mixed mutation paths, created an avoidable checkpoint commit plus a mistaken same-content `VERSION` `noop` commit, then recovered by refreshing live HEAD, rebuilding from authoritative state, and fast-forwarding without force/history rewrite.
-- **GH-02: PASS.** Repo Integrity run `34776303822` was captured after one commit-scoped registration lookup; subsequent checks targeted that run only, and success was not claimed until the job reached `completed / success`.
+### Project Bootstrap
 
-New regression lesson: before a coherent multi-file mutation, lock the mutation mode for the work unit (`tree transaction` or `direct single-file write`). Do not switch modes unless an observed external state change makes reconciliation necessary.
+Primary corpus includes AGENTS.md (`agentsmd/agents.md` @ `d001185d792eb6402a58e4cbef1c228b309ec25d`), current GitHub repository/path-specific instruction guidance, and DEDAL's own bootstrap/continuity evidence.
 
-This failure is outcome evidence that the Harness contract still needs execution reinforcement; it is not hidden or reclassified as success.
+Core contract: build a minimal executable project model from authoritative state, separate stable rules from volatile checkpoint state, use scoped/progressive instructions, and avoid asking the Creator to reconstruct retrievable context.
 
-## Verification / release status
+### Release Engineering
 
-VERSION remains `0.11.0`. The benchmark suite is evaluation infrastructure, not a new capability release. Do not bump the release merely because the suite exists.
+Primary corpus includes SLSA (`slsa-framework/slsa` @ `54b88b009fd45acb331c7e6578a526e0f36e0430`), GitHub artifact-attestation/Actions security guidance, Sigstore/Cosign verification patterns, and SemVer as one compatibility model.
 
-Fresh-chat bootstrap E2E remains **PASS** (`evals/boot/minimal-bootstrap-v1.md`).
+Core contract: verified source -> attributable build/artifact -> deliberate promotion -> deployment/runtime verification -> rollback/release evidence. Build success, artifact existence, deployment and runtime health remain separate evidence levels.
 
-## Next executable step
+No third-party package, script, signing tool, or security scanner was installed or executed for this research/adaptation.
 
-1. Encode the GH-01 mutation-mode lock into the GitHub/Agent Engineering workflow before the next substantial multi-file Core mutation.
-2. Exercise RS-01/RS-02 on the next suitable real current-information research task; avoid manufacturing a large artificial job.
-3. Exercise LH-01/LH-02 on the next real multi-session/new-chat transition.
-4. After all six cases have evidence, decide whether Harness v1 is outcome-validated or needs another revision.
+## Harness benchmark
 
-Unresolved risk: one of the two immediately exercised GitHub cases failed. Do not claim general efficiency improvement yet.
+Harness v1 remains active. Current compact benchmark evidence:
+- GH-01: latest clean rerun PASS after mutation-mode/tool-allowlist hardening;
+- GH-02: PASS;
+- RS-01 / RS-02: await suitable real research work;
+- LH-01 / LH-02: await suitable real multi-session/new-chat work.
+
+Do not manufacture large artificial tasks merely to complete the scorecard.
+
+## Verification target for v0.12.0
+
+Repo Integrity must validate:
+- the three new skill entrypoints and adaptation notes;
+- minimum focused-reference counts;
+- first-wave corpus audit and eight-area roadmap;
+- pinned OWASP / AGENTS.md / SLSA provenance identifiers;
+- existing foundational/kernel/skill checks;
+- semantic VERSION format.
+
+## Next executable phase
+
+1. Exercise the new skills on real DEDAL/project work and capture regressions only when meaningful.
+2. Continue Wave 2 with **Data / Operational Workflow Engineering** unless a higher-priority real gap emerges.
+3. Then evaluate Writing/Editorial, Visual Direction, Decision Intelligence v2, and Knowledge/Memory Architecture in roadmap order, merging rather than multiplying skills where independence is weak.
+4. Keep security/release facts that drift tied to current authoritative sources rather than freezing temporary platform syntax into Core.

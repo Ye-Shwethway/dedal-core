@@ -1,4 +1,4 @@
-version: 10
+version: 11
 last_reviewed: "2026-09-14"
 
 routing:
@@ -174,6 +174,24 @@ skills:
         - source: "Sigstore/Cosign signing and verification guidance"
           reviewed_on: "2026-09-14"
 
+  data-operations:
+    aliases: []
+    path: "skills/data-operations"
+    entrypoint: "skills/data-operations/SKILL.md"
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      sources:
+        - repo: "fivetran/great_expectations"
+          commit: "3798c021bbfb0b13ff384b2238f643d04bdea5f2"
+          license: "Apache-2.0"
+        - repo: "OpenRefine/OpenRefine"
+          commit: "6d5d0579ee84c787eb31d04fa1676582f6e7b65e"
+          license: "BSD-3-Clause-style"
+        - source: "Microsoft Excel formula and error-auditing guidance"
+          reviewed_on: "2026-09-14"
+
   automations:
     aliases: []
     path: "skills/automations"
@@ -220,3 +238,7 @@ skills:
           commit: "d001185d792eb6402a58e4cbef1c228b309ec25d"
         - repo: "slsa-framework/slsa"
           commit: "54b88b009fd45acb331c7e6578a526e0f36e0430"
+        - repo: "fivetran/great_expectations"
+          commit: "3798c021bbfb0b13ff384b2238f643d04bdea5f2"
+        - repo: "OpenRefine/OpenRefine"
+          commit: "6d5d0579ee84c787eb31d04fa1676582f6e7b65e"

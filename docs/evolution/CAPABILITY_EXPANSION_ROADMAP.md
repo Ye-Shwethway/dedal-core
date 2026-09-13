@@ -4,7 +4,7 @@ _Date established: 2026-09-14_
 
 This roadmap records the next eight high-value generic capability areas for DEDAL Core. Order reflects expected cross-project value, risk reduction, and current gaps. It is a plan, not a promise that every area must become a separate top-level skill; later evidence may justify merge/adapt/reject decisions.
 
-## Wave 1 — active build
+## Wave 1 — active
 
 1. **Security Engineering**
    - trust/authority boundaries;
@@ -33,37 +33,37 @@ This roadmap records the next eight high-value generic capability areas for DEDA
    - runtime verification;
    - rollback and migration safety.
 
-## Wave 2 — planned
+## Wave 2
 
-4. **Data / Spreadsheet / Operational Workflow Engineering**
+4. **Data / Spreadsheet / Operational Workflow Engineering — active**
    - schema inference and data contracts;
    - reconciliation, duplicate/anomaly handling;
    - staging -> review -> production promotion;
    - formulas, deterministic transforms, audit trails;
    - spreadsheet/database interoperability and provenance.
 
-5. **Writing / Editorial Engineering**
+5. **Writing / Editorial Engineering — planned next**
    - audience/intent fidelity;
    - structural editing and compression/expansion;
    - tone and terminology consistency;
    - multilingual fidelity;
    - fact/style separation and publication QA.
 
-6. **Visual Direction / Image Production**
+6. **Visual Direction / Image Production — planned**
    - canonical identity/trait locks;
    - reference hierarchy;
    - shot/set planning and composition;
    - style/character continuity;
    - drift detection and iterative visual QA.
 
-7. **Decision / Planning Intelligence v2**
+7. **Decision / Planning Intelligence v2 — planned**
    - uncertainty and option value;
    - reversible vs irreversible decisions;
    - dependency/critical-path thinking;
    - stop/commit thresholds;
    - post-decision review and learning.
 
-8. **Knowledge / Memory Architecture**
+8. **Knowledge / Memory Architecture — planned**
    - episodic vs durable state;
    - provenance and contradiction resolution;
    - freshness/staleness;

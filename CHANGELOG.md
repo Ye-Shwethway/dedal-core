@@ -2,6 +2,28 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.7.0 — 2026-09-14
+
+### Added
+- Structured first-party/vendor corpus audit covering `anthropics/skills`, `vercel-labs/agent-skills`, and `microsoft/skills` with pinned source commits.
+- `skills/skill-acquisition/references/authoring-and-evals.md` for routing contracts, degrees of freedom, meaningful baselines, and skill evaluation.
+- `skills/skill-acquisition/references/knowledge-packaging-and-freshness.md` for hero-path discipline, impact-ranked rule catalogs, generated knowledge validation, and freshness metadata.
+- `skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md` with Adopt / Adapt / Merge / Reject decisions and license/provenance notes.
+
+### Changed
+- Skill Acquisition now treats skill quality as four separate concerns: routing accuracy, task quality, context/operational efficiency, and robustness/freshness.
+- Major skill rewrites should compare against a meaningful baseline: no/current generic behavior for new skills and the previous proven version for existing skills.
+- Skill authoring now matches instruction precision to risk, preserves co-equal hero workflows, and pushes uncommon detail behind progressive disclosure.
+- Large knowledge/rule skills may rank guidance by expected impact and should carry source/version/freshness metadata when correctness can drift.
+- Registry benchmark provenance now records the pinned Matt Pocock, Anthropic, Vercel Labs, and Microsoft source commits.
+
+### Source snapshots
+- `anthropics/skills` @ `34040c9c568585f6929bedeaad110ad08f079624`
+- `vercel-labs/agent-skills` @ `063bee94c3f4df8453406c830b0a7df0f2860278`
+- `microsoft/skills` @ `903dc62b1e4c833235b54db918a9a51cb6d3cc8f`
+
+Anthropic and Vercel material was used as pattern-level inspiration where a repository-wide license was not verified at the pinned snapshot. Microsoft root license was verified as MIT. No third-party package was installed or executed.
+
 ## 0.6.0 — 2026-09-14
 
 ### Added

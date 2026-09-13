@@ -62,9 +62,14 @@ jobs:
           grep -q '3cca18b368ae95cdbdebbff572ccafa662551015' skills/decision-design/ADAPTATION_NOTES.md
           test "$(find skills/software-development/references -type f | wc -l)" -ge 5
           test -s skills/skill-acquisition/references/matt-pocock-deep-audit-2026-09-14.md
-          grep -q '3cca18b368ae95cdbdebbff572ccafa662551015' skills/skill-acquisition/references/matt-pocock-deep-audit-2026-09-14.md
-          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 5
+          test -s skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
+          test -s skills/skill-acquisition/references/authoring-and-evals.md
+          test -s skills/skill-acquisition/references/knowledge-packaging-and-freshness.md
+          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 8
           grep -q 'Reuse ideas' skills/skill-acquisition/SKILL.md
+          grep -q '34040c9c568585f6929bedeaad110ad08f079624' skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
+          grep -q '063bee94c3f4df8453406c830b0a7df0f2860278' skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
+          grep -q '903dc62b1e4c833235b54db918a9a51cb6d3cc8f' skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
 
       - name: Validate version format
         shell: bash

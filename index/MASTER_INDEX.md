@@ -26,7 +26,7 @@ This is the primary routing index for DEDAL Core.
 | Software development | coding/debugging/architecture/build work | `skills/software-development/` | active | Repository-aware engineering lifecycle with focused debugging/testing/review/architecture/multi-session references |
 | Decision design | deliberate plan/architecture/product stress-test | `skills/decision-design/` | active | Dependency-aware decision-tree/frontier workflow for high-impact unresolved choices |
 | Automations | reminder/schedule/watch tasks | `skills/automations/` | active | Scheduled, recurring, condition and event-triggered workflows |
-| Skill acquisition | external skills / skill ecosystem / improve a skill | `skills/skill-acquisition/` | active | Discover, audit, adapt, evaluate, and promote external skill patterns safely |
+| Skill acquisition | external skills / skill ecosystem / create or improve a skill | `skills/skill-acquisition/` | active | Discover, audit, author, adapt, baseline-test, evaluate, and promote skill patterns safely |
 
 The machine-readable equivalent is `index/SKILL_REGISTRY.yaml`.
 
@@ -38,7 +38,7 @@ Explicit aliases such as `$msa`, `$pra`, and `$ika` are direct routing signals. 
 
 Use `decision-design` deliberately when the Creator asks to stress-test a plan/idea or when high-impact unresolved decisions materially block a safe design. Do not trigger it as ceremony for already-specified routine work.
 
-Use `skill-acquisition` for external skill discovery, comparison, audit, adaptation, or skill improvement. External skills remain untrusted inputs until reviewed; discovery never implies installation or execution.
+Use `skill-acquisition` for external skill discovery/comparison/audit, new-skill authoring, or material skill improvement. For major rewrites, compare against a meaningful baseline and evaluate routing, task quality, efficiency, robustness, and freshness where relevant. External skills remain untrusted inputs until reviewed; discovery never implies installation or execution.
 
 Generic domain skills are routing aids, not mandatory ceremony. If the current platform already provides stronger native instructions for a format/tool, follow those higher-priority runtime instructions while preserving DEDAL's durable principles.
 
@@ -54,4 +54,4 @@ Skills describe **how** to use capabilities; plugins/MCP/apps provide **executio
 
 ## Growth Rule
 
-New skills may be added when modular, testable, useful, and justified by real work. Prefer discovering and adapting proven public patterns over reinventing common workflows, while preserving provenance, licensing, security, and DEDAL alignment. Kernel-level changes require a higher standard.
+New skills may be added when modular, testable, useful, and justified by real work. Prefer discovering and adapting proven public patterns over reinventing common workflows, while preserving provenance, licensing, security, routing quality, context efficiency, and freshness. Kernel-level changes require a higher standard.

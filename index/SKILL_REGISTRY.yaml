@@ -1,4 +1,4 @@
-version: 5
+version: 6
 last_reviewed: "2026-09-14"
 
 routing:
@@ -101,3 +101,14 @@ skills:
     entrypoint: "skills/skill-acquisition/SKILL.md"
     status: active
     independence: meta_domain
+    benchmark_provenance:
+      reviewed_on: "2026-09-14"
+      sources:
+        - repo: "mattpocock/skills"
+          commit: "3cca18b368ae95cdbdebbff572ccafa662551015"
+        - repo: "anthropics/skills"
+          commit: "34040c9c568585f6929bedeaad110ad08f079624"
+        - repo: "vercel-labs/agent-skills"
+          commit: "063bee94c3f4df8453406c830b0a7df0f2860278"
+        - repo: "microsoft/skills"
+          commit: "903dc62b1e4c833235b54db918a9a51cb6d3cc8f"

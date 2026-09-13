@@ -7,7 +7,7 @@ _Date: 2026-09-14_
 - Repository: `Ye-Shwethway/dedal-core`
 - Visibility: public
 - Default branch: `main`
-- Current version: `0.6.0`
+- Current version: `0.7.0`
 - Purpose: durable public operational core for DEDAL
 
 ## Active Skills
@@ -15,55 +15,67 @@ _Date: 2026-09-14_
 Domain: `$msa`, `$pra`, `$ika`.
 Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design, Automations, Skill Acquisition.
 
-## Matt Pocock Deep Audit
+## Skill Ecosystem Campaign
 
-DEDAL performed a structured audit of `mattpocock/skills` at pinned source commit/tree `3cca18b368ae95cdbdebbff572ccafa662551015` under the MIT license. Evidence and classifications live at `skills/skill-acquisition/references/matt-pocock-deep-audit-2026-09-14.md`.
+DEDAL now uses a repeatable external-skill acquisition pipeline rather than isolated from-scratch authoring:
 
-Key conclusion: the strongest transferable value is methodology and composition, not verbatim prompt text.
-
-Promoted adaptations:
-- `decision-design` from the dependency-aware grilling/frontier idea;
-- Software Development references for debugging, testing/seams, two-axis review, architecture/domain design, and multi-session delivery.
-
-Deliberately not inherited:
-- provider-specific Skill/Claude plugin syntax;
-- mandatory native subagents/parallelism;
-- issue-tracker assumptions;
-- ceremony for trivial changes;
-- popularity as trust.
-
-## Software Development Routing
-
-Load specialized references only when needed:
-- hard bug/regression/perf -> `debugging-loop.md`;
-- tests/TDD/seam choice -> `testing-and-seams.md`;
-- code review -> `review-two-axis.md`;
-- architecture/domain/interface work -> `architecture-and-domain.md`;
-- work spanning contexts -> `multi-session-delivery.md`.
-
-## Decision Design
-
-Use `skills/decision-design/` for deliberate stress-testing of high-impact plans/architectures/product decisions. Resolve retrievable facts with tools; reserve owner-level choices for the Creator. Work outward through only the currently-unblocked decision frontier. Do not use it as routine questioning ceremony.
-
-## Skill Acquisition Policy
-
-`capability gap -> discover -> shortlist -> security/license/provenance audit -> extract patterns -> DEDAL adaptation -> evaluation -> promote/reject -> regression capture`
+`capability gap -> discover -> pin -> audit -> extract patterns -> DEDAL adaptation -> baseline evaluation -> promote/reject -> regression capture`
 
 Key policy: **reuse ideas; do not inherit trust blindly.**
 
+### Completed corpora
+
+1. `mattpocock/skills` @ `3cca18b368ae95cdbdebbff572ccafa662551015`
+   - produced Decision Design plus focused Software Development references.
+2. `anthropics/skills` @ `34040c9c568585f6929bedeaad110ad08f079624`
+3. `vercel-labs/agent-skills` @ `063bee94c3f4df8453406c830b0a7df0f2860278`
+4. `microsoft/skills` @ `903dc62b1e4c833235b54db918a9a51cb6d3cc8f`
+
+The second corpus campaign improved Skill Acquisition itself rather than adding more top-level skills.
+
+## Skill Authoring Standard
+
+For new or materially revised skills:
+- define trigger/non-trigger contexts, expected outcome, authority/tool dependencies, and success criteria before writing prose;
+- match instruction precision to risk: high freedom for heuristics, low freedom for exact/dangerous workflows;
+- keep dominant/co-equal hero workflows in the entrypoint and push uncommon detail to references;
+- treat always-loaded context as a cost that must justify itself;
+- evaluate routing, task quality, efficiency, and robustness separately;
+- compare new skills against current/no-skill behavior and revisions against the previous proven version when feasible;
+- use objective assertions only for independently verifiable outcomes and qualitative Creator review for subjective work.
+
+See `skills/skill-acquisition/references/authoring-and-evals.md`.
+
+## Knowledge Packaging and Freshness
+
+For large rule/domain/API skills:
+- rank rules/categories by impact or risk when that helps prioritization;
+- keep granular rules in references with stable names/IDs when useful;
+- prefer reproducible source -> generation -> validation pipelines for generated knowledge;
+- record source/version/reviewed-or-generated dates when correctness can drift;
+- verify current runtime/API/package state before irreversible actions even when the skill is recent.
+
+See `skills/skill-acquisition/references/knowledge-packaging-and-freshness.md`.
+
+## License / Provenance Boundary
+
+- Matt Pocock audit: MIT verified.
+- Microsoft skills: root MIT verified.
+- Anthropic and Vercel pinned snapshots did not expose one verified repository-wide root license during this audit; DEDAL used conceptual synthesis only and did not copy/install their packages.
+- Every future verbatim import still requires source-specific license verification.
+
 ## Verification
 
-`repo-integrity.yml` validates foundational/kernel files, registries, all active skill entrypoints, imported/adapted provenance, the Matt audit, Software Development reference set, and semantic version format.
+`repo-integrity.yml` validates foundational/kernel files, registries, active skill entrypoints, imported/adapted provenance, Matt audit, official corpus audit, Skill Acquisition reference set, and semantic version format.
 
 Fresh-chat bootstrap E2E test remains **PASS** (`evals/boot/minimal-bootstrap-v1.md`). Re-run it after boot/kernel/router/layout changes.
 
 ## Next Phase
 
-1. Continue high-signal corpus scans rather than broad catalog scraping: first-party/vendor collections and respected public skill authors.
-2. For each corpus, keep a pinned audit with Adopt / Adapt / Merge / Reject decisions.
-3. Prefer improving existing DEDAL skills over multiplying top-level skills.
-4. Create a new top-level skill only when the workflow is genuinely cross-domain or independently routable.
-5. Add evaluation fixtures when a future adaptation materially changes proven behavior.
-6. Keep private/personal/project operational state outside the public core.
+1. Continue high-signal scans with strong public evidence, prioritizing respected authors/organizations and skills.sh/ClawHub candidates that cover genuine DEDAL gaps.
+2. Use the new baseline-eval discipline before materially replacing already-proven DEDAL behavior.
+3. Prefer improving existing skills over multiplying top-level skills.
+4. Consider new top-level skills only when independently routable and repeatedly useful across projects.
+5. Keep private/personal/project operational state outside the public core.
 
 Do not expand the Stable Kernel merely to capture ecosystem fashions or project-specific rules.

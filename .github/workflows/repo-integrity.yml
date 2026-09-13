@@ -1,0 +1,58 @@
+name: Repo Integrity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate foundational files
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            README.md
+            AGENTS.md
+            SECURITY.md
+            docs/IDENTITY.md
+            docs/architecture/FOUNDATION.md
+            docs/capabilities/CURRENT_CAPABILITIES.md
+            docs/continuity/CURRENT_CHECKPOINT.md
+            docs/evolution/IMPROVEMENT_PROTOCOL.md
+            state/capability-registry.yaml
+          )
+
+          for file in "${required[@]}"; do
+            test -s "$file" || {
+              echo "Missing or empty required file: $file"
+              exit 1
+            }
+          done
+
+      - name: Reject obvious committed secret files
+        shell: bash
+        run: |
+          set -euo pipefail
+          bad_files=$(git ls-files | grep -E '(^|/)(\.env($|\.)|id_rsa$|id_ed25519$|.*\.(pem|p12|pfx|key)$)' || true)
+          if [ -n "$bad_files" ]; then
+            echo "Potential secret-bearing files are committed:"
+            echo "$bad_files"
+            exit 1
+          fi
+
+      - name: Validate capability registry YAML
+        shell: bash
+        run: |
+          set -euo pipefail
+          ruby -e 'require "yaml"; YAML.load_file("state/capability-registry.yaml"); puts "capability-registry.yaml: valid YAML"'

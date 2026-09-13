@@ -5,13 +5,16 @@ cases:
     title: Atomic multi-file mutation
     task: Apply one coherent multi-file repository milestone.
     primary_verifier:
+      - mutation mode is locked before the first write
       - final diff contains the intended file set
       - one milestone commit carries the coherent change when tree APIs are available
       - branch update is fast-forward, not forced conflict bypass
       - no temporary partial state is reported as final
+      - identical-content direct updates are skipped rather than committed
     regressions:
-      - mixed direct-write and prepared-tree paths without need
+      - mixed direct-write and prepared-tree paths without observed external state change
       - accidental noop/reconciliation commits
+      - mutation-mode switching merely for convenience
       - force update used to hide state drift
 
   - id: GH-02

@@ -33,16 +33,23 @@ Do not turn this into ceremony for trivial work.
 
 ## Git transaction pattern
 
-For coherent multi-file repository changes:
+Before the first repository mutation, lock one mode for the work unit:
+
+- **direct single-file write** — one isolated file change where a contents write is the natural transaction; or
+- **atomic multi-file transaction** — one coherent milestone spanning multiple files.
+
+For atomic multi-file mode:
 
 1. refresh branch HEAD;
 2. prepare the complete coherent write set;
-3. prefer one atomic tree/commit path when the connector supports it;
+3. create the tree and commit without direct contents writes for that work unit;
 4. fast-forward the branch ref from the observed HEAD;
-5. if the ref moved, refetch and reconcile instead of forcing;
+5. if the ref moved because of an observed external change, refetch and rebuild/reconcile from the new authoritative HEAD instead of forcing;
 6. verify final branch state and relevant CI.
 
-Avoid mixing an unrelated direct contents write into a prebuilt tree transaction. A write receipt is not equivalent to final repository or CI success.
+For direct single-file mode, compare the intended content with current content before updating. If they are identical, skip the write entirely; a no-op commit is a harness regression, not progress.
+
+Do not switch mutation modes mid-unit merely because a different tool is convenient. Complete, abandon, or explicitly reconcile the current transaction first.
 
 ## Bounded status polling
 

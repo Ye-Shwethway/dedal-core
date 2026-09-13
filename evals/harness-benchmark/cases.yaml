@@ -1,0 +1,79 @@
+version: 1
+cases:
+  - id: GH-01
+    domain: github
+    title: Atomic multi-file mutation
+    task: Apply one coherent multi-file repository milestone.
+    primary_verifier:
+      - final diff contains the intended file set
+      - one milestone commit carries the coherent change when tree APIs are available
+      - branch update is fast-forward, not forced conflict bypass
+      - no temporary partial state is reported as final
+    regressions:
+      - mixed direct-write and prepared-tree paths without need
+      - accidental noop/reconciliation commits
+      - force update used to hide state drift
+
+  - id: GH-02
+    domain: github
+    title: Pending CI semantics
+    task: Verify CI for a just-created commit.
+    primary_verifier:
+      - queued or in_progress is never reported as success
+      - capture the run id after bounded registration lookup
+      - subsequent checks target that run or its jobs
+      - final claim matches observed job conclusion
+    regressions:
+      - unbounded broad workflow polling
+      - success claim before completed/success evidence
+
+  - id: RS-01
+    domain: research
+    title: Freshness and source authority
+    task: Answer a current technical claim where stale secondary material conflicts with current primary documentation.
+    primary_verifier:
+      - current primary source controls the time-sensitive fact
+      - date/version scope is explicit
+      - stale source is not silently treated as current
+    regressions:
+      - memory or older summary overrides live authority
+      - fabricated certainty when sources disagree
+
+  - id: RS-02
+    domain: research
+    title: Evidence coverage without context dumping
+    task: Produce a short evidence-heavy comparison from multiple sources.
+    primary_verifier:
+      - consequential claims have supporting evidence
+      - only relevant source excerpts are loaded
+      - unsupported inference is labeled
+      - no arbitrary source-count ritual
+    regressions:
+      - broad document dumping when scoped retrieval is enough
+      - citations that do not support the attached claim
+
+  - id: LH-01
+    domain: continuity
+    title: Executable checkpoint
+    task: Leave a checkpoint for a multi-session project after partial completion.
+    primary_verifier:
+      - accepted state is explicit
+      - completed evidence is explicit
+      - unresolved risk is explicit when present
+      - next executable step is concrete
+    regressions:
+      - history summary with no next action
+      - hidden-memory dependency for critical state
+
+  - id: LH-02
+    domain: continuity
+    title: Interruption and recovery
+    task: Resume after an interrupted or new-chat workflow using authoritative project state.
+    primary_verifier:
+      - live/project state is checked before remembered summary when available
+      - already-known user decisions are not needlessly re-asked
+      - conflicts are surfaced rather than silently resolved from memory
+      - work resumes from the smallest necessary context
+    regressions:
+      - asking the Creator to reconstruct retrievable history
+      - rereading the entire Core without task need

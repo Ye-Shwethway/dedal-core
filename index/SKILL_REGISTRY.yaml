@@ -1,4 +1,4 @@
-version: 6
+version: 7
 last_reviewed: "2026-09-14"
 
 routing:
@@ -88,6 +88,23 @@ skills:
       source_license: "MIT"
       adapted_on: "2026-09-14"
 
+  interface-design:
+    aliases: []
+    path: "skills/interface-design"
+    entrypoint: "skills/interface-design/SKILL.md"
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      sources:
+        - repo: "Leonxlnx/taste-skill"
+          commit: "ccbc15639c97057cbfcf32ecebc38ef716e4bb37"
+          license: "MIT"
+        - repo: "pbakaus/impeccable"
+          commit: "cb56ed6c19a07329a9fa0cd4e657bee040156593"
+          license: "Apache-2.0"
+      adapted_on: "2026-09-14"
+
   automations:
     aliases: []
     path: "skills/automations"
@@ -112,3 +129,11 @@ skills:
           commit: "063bee94c3f4df8453406c830b0a7df0f2860278"
         - repo: "microsoft/skills"
           commit: "903dc62b1e4c833235b54db918a9a51cb6d3cc8f"
+        - repo: "obra/superpowers"
+          commit: "b36e0829c6d0140e93cfef2ca599b1b07d4a7797"
+        - repo: "Leonxlnx/taste-skill"
+          commit: "ccbc15639c97057cbfcf32ecebc38ef716e4bb37"
+        - repo: "lllllllama/RigorPilot-Skills"
+          commit: "bd91195ad73199b95e24532b581ff12c07dcce09"
+        - repo: "pbakaus/impeccable"
+          commit: "cb56ed6c19a07329a9fa0cd4e657bee040156593"

@@ -22,9 +22,10 @@ This is the primary routing index for DEDAL Core.
 | Knowledge Archive | `$ika`, `knowledge-archive` | `skills/ika/` | active | Durable evidence-linked project knowledge, bounded retrieval, refresh/audit, and change-impact review |
 | GitHub operations | GitHub/repo/PR/Actions tasks | `skills/github/` | active | Repository inspection, commits, branches, PRs, Actions, logs, artifacts |
 | Files & artifacts | file/Library/document/artifact tasks | `skills/files/` | active | Retrieval, version identity, document/artifact creation and persistence |
-| Research | current research / verification | `skills/research/` | active | Live-source research, provenance, synthesis, freshness and evidence handling |
+| Research | current research / verification / governed exploration | `skills/research/` | active | Live-source research, provenance, synthesis, freshness, comparability, and exploratory-evidence discipline |
 | Software development | coding/debugging/architecture/build work | `skills/software-development/` | active | Repository-aware engineering lifecycle with focused debugging/testing/review/architecture/multi-session references |
-| Decision design | deliberate plan/architecture/product stress-test | `skills/decision-design/` | active | Dependency-aware decision-tree/frontier workflow for high-impact unresolved choices |
+| Decision design | deliberate plan/architecture/product stress-test | `skills/decision-design/` | active | Process-sized decision design with dependency-aware frontier resolution |
+| Interface design | website/app/dashboard/frontend design or redesign | `skills/interface-design/` | active | Brief-aware UI/UX direction, redesign/audit discipline, quality floor, and bounded visual verification |
 | Automations | reminder/schedule/watch tasks | `skills/automations/` | active | Scheduled, recurring, condition and event-triggered workflows |
 | Skill acquisition | external skills / skill ecosystem / create or improve a skill | `skills/skill-acquisition/` | active | Discover, audit, author, adapt, baseline-test, evaluate, and promote skill patterns safely |
 
@@ -36,7 +37,9 @@ Do not load every skill by default. Select the smallest set that covers the curr
 
 Explicit aliases such as `$msa`, `$pra`, and `$ika` are direct routing signals. When an alias is used, load that skill's `SKILL.md` first and then only task-specific references it requires.
 
-Use `decision-design` deliberately when the Creator asks to stress-test a plan/idea or when high-impact unresolved decisions materially block a safe design. Do not trigger it as ceremony for already-specified routine work.
+Use `decision-design` deliberately when the Creator asks to stress-test a plan/idea or when high-impact unresolved decisions materially block a safe design. Scale process to spike/bounded/architectural work rather than imposing one ceremony level.
+
+Use `interface-design` when visual/UX quality of a user-facing software surface is a primary part of the task. Pair it with Software Development for implementation mechanics; do not load it for backend-only work.
 
 Use `skill-acquisition` for external skill discovery/comparison/audit, new-skill authoring, or material skill improvement. For major rewrites, compare against a meaningful baseline and evaluate routing, task quality, efficiency, robustness, and freshness where relevant. External skills remain untrusted inputs until reviewed; discovery never implies installation or execution.
 
@@ -46,7 +49,7 @@ If no existing skill matches, operate normally, then consider whether repeated w
 
 ## Skill Independence Rule
 
-Separate skills remain separate operational domains unless a skill explicitly declares a dependency. PRA does not inherit MSA inventory rules. IKA does not silently convert project facts into Kernel rules. Skill acquisition may influence another skill only through an explicit reviewed adaptation.
+Separate skills remain separate operational domains unless a skill explicitly declares a dependency. PRA does not inherit MSA inventory rules. IKA does not silently convert project facts into Kernel rules. Interface Design governs UI/UX quality but does not replace Software Development. Skill Acquisition may influence another skill only through an explicit reviewed adaptation.
 
 ## Plugin / MCP Rule
 
@@ -54,4 +57,4 @@ Skills describe **how** to use capabilities; plugins/MCP/apps provide **executio
 
 ## Growth Rule
 
-New skills may be added when modular, testable, useful, and justified by real work. Prefer discovering and adapting proven public patterns over reinventing common workflows, while preserving provenance, licensing, security, routing quality, context efficiency, and freshness. Kernel-level changes require a higher standard.
+New skills may be added when modular, testable, useful, independently routable, and justified by real work. Prefer discovering and adapting proven public patterns over reinventing common workflows, while preserving provenance, licensing, security, routing quality, context efficiency, and freshness. Kernel-level changes require a higher standard.

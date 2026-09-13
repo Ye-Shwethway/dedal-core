@@ -2,6 +2,31 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.8.0 — 2026-09-14
+
+### Added
+- Independent/high-signal ecosystem audit covering `obra/superpowers`, `Leonxlnx/taste-skill`, `lllllllama/RigorPilot-Skills`, and `pbakaus/impeccable` at pinned source commits with verified MIT/Apache-2.0 licenses.
+- `skills/interface-design/` as a DEDAL-native cross-project UI/UX skill for brief inference, surface-mode framing, refinement-vs-redesign discipline, quality checks, and bounded visual verification.
+- Interface Design adaptation notes plus focused references for brief/direction, redesign/audit, quality floor, and visual verification.
+
+### Changed
+- Decision Design now sizes work as spike / bounded / architectural and can escalate when hidden complexity appears, without inheriting a universal approval ceremony.
+- Research now distinguishes exploratory candidate evidence from trusted/established evidence and adds frozen comparison anchors, bounded experiment loops, and anti-overclaim rules for scientific/benchmark work.
+- Skill Acquisition records the independent-corpus audit and expands benchmark provenance to the four new sources.
+- Master routing now treats Interface Design as independently routable and pairs it with Software Development only when implementation is part of the task.
+
+### Adaptation policy
+- `obra/superpowers` mandatory global invocation and universal approval gates were not adopted.
+- `taste-skill` hardcoded aesthetic dials, font/icon preferences, and one-stack defaults were not adopted.
+- RigorPilot deep-learning-specific orchestration remains outside Core; only general research-governance patterns were merged.
+- Impeccable provider-specific launchers/hooks/agents and universal maximalist framing were not adopted.
+
+### Source snapshots
+- `obra/superpowers` @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` — MIT.
+- `Leonxlnx/taste-skill` @ `ccbc15639c97057cbfcf32ecebc38ef716e4bb37` — MIT.
+- `lllllllama/RigorPilot-Skills` @ `bd91195ad73199b95e24532b581ff12c07dcce09` — MIT.
+- `pbakaus/impeccable` @ `cb56ed6c19a07329a9fa0cd4e657bee040156593` — Apache-2.0.
+
 ## 0.7.0 — 2026-09-14
 
 ### Added

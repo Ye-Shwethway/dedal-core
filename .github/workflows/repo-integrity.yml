@@ -47,7 +47,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          required_skills=(medicine-store-assistant patient-report-assistant ika github files research software-development decision-design automations skill-acquisition)
+          required_skills=(medicine-store-assistant patient-report-assistant ika github files research software-development decision-design interface-design automations skill-acquisition)
           for skill in "${required_skills[@]}"; do test -s "skills/$skill/SKILL.md" || { echo "Missing skill entrypoint: skills/$skill/SKILL.md"; exit 1; }; done
           test -s skills/medicine-store-assistant/IMPORT_SOURCE.md
           test -s skills/patient-report-assistant/IMPORT_SOURCE.md
@@ -61,15 +61,21 @@ jobs:
           test -s skills/decision-design/ADAPTATION_NOTES.md
           grep -q '3cca18b368ae95cdbdebbff572ccafa662551015' skills/decision-design/ADAPTATION_NOTES.md
           test "$(find skills/software-development/references -type f | wc -l)" -ge 5
+          test -s skills/interface-design/ADAPTATION_NOTES.md
+          test "$(find skills/interface-design/references -type f | wc -l)" -ge 4
+          grep -q 'ccbc15639c97057cbfcf32ecebc38ef716e4bb37' skills/interface-design/ADAPTATION_NOTES.md
+          grep -q 'cb56ed6c19a07329a9fa0cd4e657bee040156593' skills/interface-design/ADAPTATION_NOTES.md
           test -s skills/skill-acquisition/references/matt-pocock-deep-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
+          test -s skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/authoring-and-evals.md
           test -s skills/skill-acquisition/references/knowledge-packaging-and-freshness.md
-          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 8
+          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 9
           grep -q 'Reuse ideas' skills/skill-acquisition/SKILL.md
-          grep -q '34040c9c568585f6929bedeaad110ad08f079624' skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
-          grep -q '063bee94c3f4df8453406c830b0a7df0f2860278' skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
-          grep -q '903dc62b1e4c833235b54db918a9a51cb6d3cc8f' skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
+          grep -q 'b36e0829c6d0140e93cfef2ca599b1b07d4a7797' skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
+          grep -q 'ccbc15639c97057cbfcf32ecebc38ef716e4bb37' skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
+          grep -q 'bd91195ad73199b95e24532b581ff12c07dcce09' skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
+          grep -q 'cb56ed6c19a07329a9fa0cd4e657bee040156593' skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
 
       - name: Validate version format
         shell: bash

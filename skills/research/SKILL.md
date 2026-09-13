@@ -1,6 +1,6 @@
 ---
 name: research
-description: Perform current, source-grounded research using live public sources when freshness, niche facts, comparison, verification, or evidence synthesis matters.
+description: Perform current, source-grounded research using live public sources when freshness, niche facts, comparison, verification, evidence synthesis, or governed exploration matters.
 ---
 
 # Research
@@ -26,6 +26,20 @@ Use live research when the question depends on current, niche, contested, rapidl
 - Surface meaningful disagreement instead of silently choosing the convenient source.
 - For evidence-heavy deliverables, review citation coverage and make sure the important claims have locatable support.
 
+## Governed exploration
+
+When research includes experiments, candidate methods, benchmarks, or claims of improvement, distinguish exploratory evidence from trusted/established evidence.
+
+Before a comparison campaign, freeze the anchors that make results interpretable when relevant: task, dataset or population, benchmark, metric/evaluation source, baseline/reference, and resource budget. Do not move the goalposts silently after seeing results.
+
+Use a bounded rhythm:
+1. **Outer loop** — understand the problem, evidence base, constraints, comparison anchor, and candidate rationale.
+2. **Inner loop** — change/test one auditable candidate or small variant set, gather evidence, compare fairly, and decide whether another experiment is justified.
+
+Before execution, prioritize candidates by expected value, cost, success likelihood, comparison risk, patch/operational surface, and rollback ease. After execution, rank by observed evidence first.
+
+Exploratory gains are not novelty, SOTA, causality, or trusted reproduction proof. Those claims require the appropriate literature contrast, ablations/controls, reproducibility, and fair-comparison evidence.
+
 ## Special handling
 
 - Recent news: prioritize fresh sources and distinguish new events from recycled coverage.
@@ -37,4 +51,4 @@ Use live research when the question depends on current, niche, contested, rapidl
 
 ## Completion
 
-Return the useful answer first, grounded by evidence. Preserve source links/citations for important claims, name unresolved conflicts or evidence gaps, and distinguish what was observed from what remains inferred or unverified.
+Return the useful answer first, grounded by evidence. Preserve source links/citations for important claims, name unresolved conflicts or evidence gaps, and distinguish what was observed from what remains inferred, exploratory, or unverified.

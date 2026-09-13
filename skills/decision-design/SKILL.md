@@ -1,11 +1,23 @@
 ---
 name: decision-design
-description: Stress-test a plan, architecture, product decision, or idea by mapping dependent decisions and resolving only the currently-unblocked frontier. Use for deliberate design/grilling sessions, not routine tasks.
+description: Stress-test a plan, architecture, product decision, or idea by scaling process to the task, mapping dependent decisions, and resolving only the currently-unblocked frontier. Use for deliberate design/grilling sessions, not routine tasks.
 ---
 
 # Decision Design
 
 Use when the Creator wants a plan or idea challenged before action, or when a high-impact decision has material unresolved branches.
+
+## Size the process first
+
+Use the lightest process that safely fits the work:
+
+- **Spike** — answer a feasibility/unknown cheaply; output is evidence/recommendation, not production code by default.
+- **Bounded** — a well-scoped change to an existing flow; inspect context, resolve material uncertainty, then proceed without unnecessary design artifacts.
+- **Architectural** — a new subsystem/project or change to shared interfaces/structure; map dependencies, compare approaches, and record durable decisions when useful.
+
+If hidden complexity appears, upgrade the process path. Do not silently keep treating architectural work as a bounded tweak. Do not downgrade merely to avoid necessary reasoning.
+
+This sizing is guidance, not a universal approval ritual. Existing Creator authority rules determine which decisions require explicit approval.
 
 ## Model the decision tree
 

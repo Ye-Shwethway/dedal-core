@@ -7,75 +7,68 @@ _Date: 2026-09-14_
 - Repository: `Ye-Shwethway/dedal-core`
 - Visibility: public
 - Default branch: `main`
-- Current version: `0.7.0`
+- Current version: `0.8.0`
 - Purpose: durable public operational core for DEDAL
 
 ## Active Skills
 
 Domain: `$msa`, `$pra`, `$ika`.
-Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design, Automations, Skill Acquisition.
+Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design, Interface Design, Automations, Skill Acquisition.
 
 ## Skill Ecosystem Campaign
 
-DEDAL now uses a repeatable external-skill acquisition pipeline rather than isolated from-scratch authoring:
+DEDAL uses a repeatable external-skill acquisition pipeline:
 
 `capability gap -> discover -> pin -> audit -> extract patterns -> DEDAL adaptation -> baseline evaluation -> promote/reject -> regression capture`
 
-Key policy: **reuse ideas; do not inherit trust blindly.**
+Key policy: **reuse ideas; do not inherit trust blindly.** Popularity/install counts are discovery signals only.
 
 ### Completed corpora
 
 1. `mattpocock/skills` @ `3cca18b368ae95cdbdebbff572ccafa662551015`
-   - produced Decision Design plus focused Software Development references.
 2. `anthropics/skills` @ `34040c9c568585f6929bedeaad110ad08f079624`
 3. `vercel-labs/agent-skills` @ `063bee94c3f4df8453406c830b0a7df0f2860278`
 4. `microsoft/skills` @ `903dc62b1e4c833235b54db918a9a51cb6d3cc8f`
+5. `obra/superpowers` @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`
+6. `Leonxlnx/taste-skill` @ `ccbc15639c97057cbfcf32ecebc38ef716e4bb37`
+7. `lllllllama/RigorPilot-Skills` @ `bd91195ad73199b95e24532b581ff12c07dcce09`
+8. `pbakaus/impeccable` @ `cb56ed6c19a07329a9fa0cd4e657bee040156593`
 
-The second corpus campaign improved Skill Acquisition itself rather than adding more top-level skills.
+Audit records live under `skills/skill-acquisition/references/`.
 
-## Skill Authoring Standard
+## Interface Design
 
-For new or materially revised skills:
-- define trigger/non-trigger contexts, expected outcome, authority/tool dependencies, and success criteria before writing prose;
-- match instruction precision to risk: high freedom for heuristics, low freedom for exact/dangerous workflows;
-- keep dominant/co-equal hero workflows in the entrypoint and push uncommon detail to references;
-- treat always-loaded context as a cost that must justify itself;
-- evaluate routing, task quality, efficiency, and robustness separately;
-- compare new skills against current/no-skill behavior and revisions against the previous proven version when feasible;
-- use objective assertions only for independently verifiable outcomes and qualitative Creator review for subjective work.
+`skills/interface-design/` is now active and independently routable for user-facing software surfaces.
 
-See `skills/skill-acquisition/references/authoring-and-evals.md`.
+Core rules:
+- inspect incumbent visual/product truth before redesigning;
+- infer surface mode and design direction from brief, audience, task, references, brand, and constraints;
+- let explicit brief/product/platform/accessibility requirements outrank generic taste;
+- distinguish refinement from redesign;
+- use actual design systems honestly and avoid template autopilot;
+- verify rendered results when practical, in bounded passes rather than open-ended self-polish;
+- persist durable design direction in the owning project when worthy.
 
-## Knowledge Packaging and Freshness
+Primary adaptation sources are `Leonxlnx/taste-skill` (MIT) and `pbakaus/impeccable` (Apache-2.0). DEDAL did not import their runtime-specific packages.
 
-For large rule/domain/API skills:
-- rank rules/categories by impact or risk when that helps prioritization;
-- keep granular rules in references with stable names/IDs when useful;
-- prefer reproducible source -> generation -> validation pipelines for generated knowledge;
-- record source/version/reviewed-or-generated dates when correctness can drift;
-- verify current runtime/API/package state before irreversible actions even when the skill is recent.
+## Decision / Research Refinements
 
-See `skills/skill-acquisition/references/knowledge-packaging-and-freshness.md`.
+Decision Design now sizes substantial work as spike, bounded, or architectural. Hidden complexity can upgrade the path, but routine reversible work does not inherit a universal approval ceremony.
 
-## License / Provenance Boundary
-
-- Matt Pocock audit: MIT verified.
-- Microsoft skills: root MIT verified.
-- Anthropic and Vercel pinned snapshots did not expose one verified repository-wide root license during this audit; DEDAL used conceptual synthesis only and did not copy/install their packages.
-- Every future verbatim import still requires source-specific license verification.
+Research now separates exploratory evidence from trusted/established evidence. For experiment/comparison campaigns, preserve comparison anchors and do not turn exploratory gains into novelty/SOTA/trusted-reproduction claims without the required evidence.
 
 ## Verification
 
-`repo-integrity.yml` validates foundational/kernel files, registries, active skill entrypoints, imported/adapted provenance, Matt audit, official corpus audit, Skill Acquisition reference set, and semantic version format.
+`repo-integrity.yml` validates foundational/kernel files, registries, all active skill entrypoints, imported/adapted provenance, Software Development references, Skill Acquisition audits, Interface Design provenance/reference structure, and semantic version format.
 
-Fresh-chat bootstrap E2E test remains **PASS** (`evals/boot/minimal-bootstrap-v1.md`). Re-run it after boot/kernel/router/layout changes.
+Fresh-chat bootstrap E2E remains **PASS** (`evals/boot/minimal-bootstrap-v1.md`). Re-run after boot/kernel/router/layout changes.
 
 ## Next Phase
 
-1. Continue high-signal scans with strong public evidence, prioritizing respected authors/organizations and skills.sh/ClawHub candidates that cover genuine DEDAL gaps.
-2. Use the new baseline-eval discipline before materially replacing already-proven DEDAL behavior.
-3. Prefer improving existing skills over multiplying top-level skills.
-4. Consider new top-level skills only when independently routable and repeatedly useful across projects.
+1. Evaluate Interface Design on real project/UI tasks against baseline behavior and capture Creator feedback.
+2. Continue gap-driven high-signal scans rather than leaderboard harvesting for its own sake.
+3. Likely next candidate areas: durable writing/editorial workflow, visual/image-generation direction, project bootstrap/context adapters, and specialized security/release engineering — only if repeated work justifies them.
+4. Keep improving existing skills when new sources mostly refine methodology rather than creating independent routing domains.
 5. Keep private/personal/project operational state outside the public core.
 
 Do not expand the Stable Kernel merely to capture ecosystem fashions or project-specific rules.

@@ -53,3 +53,4 @@ For instruction-heavy skills, default to synthesis: keep the useful idea, rewrit
 - `references/initial-benchmark-2026-09-14.md` — first ecosystem survey.
 - `references/matt-pocock-deep-audit-2026-09-14.md` — public-author deep audit.
 - `references/official-corpora-audit-2026-09-14.md` — Anthropic, Vercel Labs, and Microsoft audit.
+- `references/independent-high-signal-audit-2026-09-14.md` — Superpowers, taste-skill, RigorPilot, and Impeccable audit.

@@ -1,0 +1,50 @@
+version: 1
+last_reviewed: "2026-09-13"
+
+routing:
+  default_policy: smallest_matching_skill_set
+  explicit_aliases_take_priority: true
+  load_entrypoint_first: true
+  load_references_on_demand: true
+
+skills:
+  medicine-store-assistant:
+    aliases:
+      - "$msa"
+      - "medicine-store-assistant"
+    path: "skills/medicine-store-assistant"
+    entrypoint: "skills/medicine-store-assistant/SKILL.md"
+    status: active
+    independence: standalone_domain
+    provenance:
+      source_repo: "Ye-Shwethway/medicine-store-assistant"
+      source_commit: "6b8f35e4056f030a1ace2dac137cde1071a00051"
+      source_path: "skills/medicine-store-assistant"
+      imported_on: "2026-09-13"
+
+  patient-report-assistant:
+    aliases:
+      - "$pra"
+      - "patient-report-assistant"
+    path: "skills/patient-report-assistant"
+    entrypoint: "skills/patient-report-assistant/SKILL.md"
+    status: active
+    independence: standalone_domain
+    provenance:
+      source_repo: "Ye-Shwethway/medicine-store-assistant"
+      source_commit: "6b8f35e4056f030a1ace2dac137cde1071a00051"
+      source_path: "skills/patient-report-assistant"
+      imported_on: "2026-09-13"
+
+  knowledge-archive:
+    aliases:
+      - "$ika"
+    path: "skills/ika"
+    status: planned
+
+scaffolds:
+  - github
+  - files
+  - research
+  - software-development
+  - automations

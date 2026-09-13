@@ -1,15 +1,15 @@
 # DEDAL Master Index
 
-This is the primary human-readable routing index for DEDAL Core. The machine-readable companion is [`SKILL_REGISTRY.yaml`](SKILL_REGISTRY.yaml).
+This is the primary routing index for DEDAL Core.
 
 ## Boot Sequence
 
 1. Read `AGENTS.md`.
 2. Read `docs/IDENTITY.md`.
-3. Read `docs/architecture/BIOS_AND_LAYER_MODEL.md` when architectural context is needed.
-4. Read this master index and consult `index/SKILL_REGISTRY.yaml` for exact aliases, paths, status, and provenance.
-5. Identify the task domain.
-6. Load only the relevant skill package(s).
+3. Read `kernel/KERNEL.md` and follow `kernel/BOOT_CONTRACT.md`.
+4. Identify the task domain below.
+5. Load only the relevant skill package(s).
+6. Load task-specific references only when needed.
 7. Verify current tools/capabilities before execution.
 8. Consult project-specific authoritative state before relying on memory.
 
@@ -17,14 +17,16 @@ This is the primary human-readable routing index for DEDAL Core. The machine-rea
 
 | Skill | Invocation / aliases | Path | Status | Purpose |
 |---|---|---|---|---|
-| Medicine Store Assistant | `medicine-store-assistant`, `$msa` | `skills/medicine-store-assistant/` | active / imported | Medical-store inventory intake, reconciliation, usage, expiry lifecycle, reorder review, and workbook-safe operations |
-| Patient Report Assistant | `patient-report-assistant`, `$pra` | `skills/patient-report-assistant/` | active / imported | Monthly OPD/IPD transcription, workbook protection, report validation, and month preparation |
-| GitHub operations | — | `skills/github/` | scaffold | Repository inspection, commits, branches, PRs, Actions, artifacts |
-| Files & artifacts | — | `skills/files/` | scaffold | Library, document, spreadsheet, PDF, artifact workflows |
-| Research | — | `skills/research/` | scaffold | Current web research, source synthesis, evidence handling |
-| Software development | — | `skills/software-development/` | scaffold | Architecture, coding, testing, build orchestration |
-| Automations | — | `skills/automations/` | scaffold | Scheduled and condition-triggered workflows |
+| Medicine Store Assistant | `medicine-store-assistant`, `$msa` | `skills/medicine-store-assistant/` | active | Medical-store inventory intake, reconciliation, usage, expiry lifecycle, reorder review, and workbook-safe operations |
+| Patient Report Assistant | `patient-report-assistant`, `$pra` | `skills/patient-report-assistant/` | active | Monthly OPD/IPD transcription, workbook protection, report validation, and month preparation |
+| GitHub operations | GitHub/repo/PR/Actions tasks | `skills/github/` | active | Repository inspection, commits, branches, PRs, Actions, logs, artifacts |
+| Files & artifacts | file/Library/document/artifact tasks | `skills/files/` | active | Retrieval, version identity, document/artifact creation and persistence |
+| Research | current research / verification | `skills/research/` | active | Live-source research, source synthesis, freshness and evidence handling |
+| Software development | coding/debugging/architecture/build work | `skills/software-development/` | active | Repository-aware architecture, coding, testing, build orchestration |
+| Automations | reminder/schedule/watch tasks | `skills/automations/` | active | Scheduled, recurring, condition and event-triggered workflows |
 | Knowledge archive | `$ika` | `skills/ika/` | planned | Integration patterns and reusable knowledge-archive workflows derived from IKA experience |
+
+The machine-readable equivalent is `index/SKILL_REGISTRY.yaml`.
 
 ## Routing Rule
 
@@ -32,11 +34,9 @@ Do not load every skill by default. Select the smallest set that covers the curr
 
 Explicit aliases such as `$msa`, `$pra`, or future `$ika` are direct routing signals. When an alias is used, load that skill's `SKILL.md` first and then only the task-specific references it requires.
 
+Generic domain skills are routing aids, not mandatory ceremony. If the current platform already provides stronger native instructions for a format/tool, follow those higher-priority runtime instructions while preserving the DEDAL skill's durable principles.
+
 If no existing skill matches, operate normally, then consider whether the repeated task deserves a new skill package.
-
-## Imported Skill Rule
-
-Imported skill packages are snapshots, not live mirrors. Their `IMPORT_SOURCE.md` records the source repository and pinned source commit. Before replacing an imported package, compare against that provenance so local DEDAL-specific evolution is not overwritten accidentally.
 
 ## Skill Independence Rule
 

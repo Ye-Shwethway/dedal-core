@@ -1,5 +1,5 @@
-version: 1
-last_reviewed: "2026-09-13"
+version: 2
+last_reviewed: "2026-09-14"
 
 routing:
   default_policy: smallest_matching_skill_set
@@ -9,9 +9,7 @@ routing:
 
 skills:
   medicine-store-assistant:
-    aliases:
-      - "$msa"
-      - "medicine-store-assistant"
+    aliases: ["$msa", "medicine-store-assistant"]
     path: "skills/medicine-store-assistant"
     entrypoint: "skills/medicine-store-assistant/SKILL.md"
     status: active
@@ -23,9 +21,7 @@ skills:
       imported_on: "2026-09-13"
 
   patient-report-assistant:
-    aliases:
-      - "$pra"
-      - "patient-report-assistant"
+    aliases: ["$pra", "patient-report-assistant"]
     path: "skills/patient-report-assistant"
     entrypoint: "skills/patient-report-assistant/SKILL.md"
     status: active
@@ -36,15 +32,42 @@ skills:
       source_path: "skills/patient-report-assistant"
       imported_on: "2026-09-13"
 
+  github:
+    aliases: []
+    path: "skills/github"
+    entrypoint: "skills/github/SKILL.md"
+    status: active
+    independence: generic_domain
+
+  files:
+    aliases: []
+    path: "skills/files"
+    entrypoint: "skills/files/SKILL.md"
+    status: active
+    independence: generic_domain
+
+  research:
+    aliases: []
+    path: "skills/research"
+    entrypoint: "skills/research/SKILL.md"
+    status: active
+    independence: generic_domain
+
+  software-development:
+    aliases: []
+    path: "skills/software-development"
+    entrypoint: "skills/software-development/SKILL.md"
+    status: active
+    independence: generic_domain
+
+  automations:
+    aliases: []
+    path: "skills/automations"
+    entrypoint: "skills/automations/SKILL.md"
+    status: active
+    independence: generic_domain
+
   knowledge-archive:
-    aliases:
-      - "$ika"
+    aliases: ["$ika"]
     path: "skills/ika"
     status: planned
-
-scaffolds:
-  - github
-  - files
-  - research
-  - software-development
-  - automations

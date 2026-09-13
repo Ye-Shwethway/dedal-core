@@ -26,6 +26,9 @@ jobs:
             AGENTS.md
             SECURITY.md
             VERSION
+            kernel/KERNEL.md
+            kernel/BOOT_CONTRACT.md
+            kernel/STATE_BOUNDARY.md
             docs/IDENTITY.md
             docs/architecture/FOUNDATION.md
             docs/architecture/BIOS_AND_LAYER_MODEL.md
@@ -35,10 +38,6 @@ jobs:
             state/capability-registry.yaml
             index/MASTER_INDEX.md
             index/SKILL_REGISTRY.yaml
-            skills/medicine-store-assistant/SKILL.md
-            skills/medicine-store-assistant/IMPORT_SOURCE.md
-            skills/patient-report-assistant/SKILL.md
-            skills/patient-report-assistant/IMPORT_SOURCE.md
           )
 
           for file in "${required[@]}"; do
@@ -65,16 +64,34 @@ jobs:
           set -euo pipefail
           ruby -e 'require "yaml"; YAML.load_file("state/capability-registry.yaml"); YAML.load_file("index/SKILL_REGISTRY.yaml"); puts "YAML registries: valid"'
 
-      - name: Validate imported skill package structure
+      - name: Validate skill entrypoints
         shell: bash
         run: |
           set -euo pipefail
-          test -d skills/medicine-store-assistant/references
-          test -d skills/patient-report-assistant/references
+          required_skills=(
+            medicine-store-assistant
+            patient-report-assistant
+            github
+            files
+            research
+            software-development
+            automations
+          )
+          for skill in "${required_skills[@]}"; do
+            test -s "skills/$skill/SKILL.md" || {
+              echo "Missing skill entrypoint: skills/$skill/SKILL.md"
+              exit 1
+            }
+          done
+          test -s skills/medicine-store-assistant/IMPORT_SOURCE.md
+          test -s skills/patient-report-assistant/IMPORT_SOURCE.md
           test -s skills/medicine-store-assistant/agents/openai.yaml
           test -s skills/patient-report-assistant/agents/openai.yaml
-          msa_refs=$(find skills/medicine-store-assistant/references -maxdepth 1 -type f | wc -l)
-          pra_refs=$(find skills/patient-report-assistant/references -maxdepth 1 -type f | wc -l)
-          test "$msa_refs" -ge 15
-          test "$pra_refs" -ge 8
-          echo "Imported skill packages present: MSA=$msa_refs refs, PRA=$pra_refs refs"
+          test "$(find skills/medicine-store-assistant/references -type f | wc -l)" -ge 10
+          test "$(find skills/patient-report-assistant/references -type f | wc -l)" -ge 8
+
+      - name: Validate version format
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' VERSION

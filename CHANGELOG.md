@@ -2,6 +2,18 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.3.0 — 2026-09-14
+
+### Added
+- Formal Stable Kernel directory with `KERNEL.md`, `BOOT_CONTRACT.md`, and `STATE_BOUNDARY.md`.
+- First native generic DEDAL skill entrypoints for GitHub, Files & Artifacts, Research, Software Development, and Automations.
+- Integrity validation for kernel files, active generic skill entrypoints, and semantic version format.
+
+### Changed
+- `MASTER_INDEX.md` now boots through the formal kernel before routing to skills.
+- `SKILL_REGISTRY.yaml` version 2 registers the five generic skills as active instead of scaffolds.
+- Generic skills are intentionally provider-agnostic and verify current execution surfaces before acting.
+
 ## 0.2.0 — 2026-09-13
 
 ### Added

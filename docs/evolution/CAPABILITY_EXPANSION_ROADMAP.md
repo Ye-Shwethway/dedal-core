@@ -50,14 +50,15 @@ This roadmap records the next eight high-value generic capability areas for DEDA
    - multilingual fidelity/localization;
    - publication QA and optional editorial lint.
 
-6. **Visual Direction / Image Production — planned next**
+6. **Visual Direction / Image Production — active**
    - canonical identity/trait locks;
-   - reference hierarchy;
+   - per-dimension reference hierarchy;
    - shot/set planning and composition;
    - style/character continuity;
-   - drift detection and iterative visual QA.
+   - targeted edits;
+   - drift detection and rendered visual QA.
 
-7. **Decision / Planning Intelligence v2 — planned**
+7. **Decision / Planning Intelligence v2 — planned next**
    - uncertainty and option value;
    - reversible vs irreversible decisions;
    - dependency/critical-path thinking;

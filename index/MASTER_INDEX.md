@@ -32,6 +32,7 @@ This is the primary routing index for DEDAL Core.
 | Release engineering | release/build artifact/deploy/rollback tasks | `skills/release-engineering/` | active | Source-to-artifact attribution, provenance, staged promotion, runtime verification, release evidence, and rollback |
 | Data operations | spreadsheet/data reconciliation/validation/staging/promotion work | `skills/data-operations/` | active | Record identity, reconciliation, data contracts, formula integrity, deterministic transforms, staged promotion, read-back verification, and auditability |
 | Writing / editorial | draft/rewrite/translate/edit/publish prose | `skills/writing-editorial/` | active | Intent/audience fidelity, fact-expression separation, structure, voice, terminology, multilingual fidelity, revision, and publication QA |
+| Visual direction | image generation/editing/character/reference/series visual work | `skills/visual-direction/` | active | Reference authority, canonical trait locks, shot/set planning, targeted edits, drift detection, visual QA, and accepted-anchor continuity |
 | Automations | reminder/schedule/watch tasks | `skills/automations/` | active | Scheduled, recurring, condition and event-triggered workflows |
 | Skill acquisition | external skills / skill ecosystem / create or improve a skill | `skills/skill-acquisition/` | active | Discover, audit, author, adapt, baseline-test, evaluate, and promote skill patterns safely |
 
@@ -53,6 +54,8 @@ Use `data-operations` when spreadsheet/table/CSV work depends on source authorit
 
 Use `writing-editorial` when the main deliverable is prose and quality depends on intent/audience fit, semantic fidelity, structure, voice, terminology, translation/localization, or publication QA. Pair with Research for externally verifiable/current claims and with domain skills for specialized truth. Do not let editorial polish silently change factual content.
 
+Use `visual-direction` when image generation/editing depends on subject identity, canonical traits, reference hierarchy, composition/shot planning, series continuity, targeted edits, or rendered visual QA. Pair it with the current image tool for execution. Do not promote a generated image into canonical state merely because it is newer or visually attractive.
+
 Use `decision-design` deliberately when the Creator asks to stress-test a plan/idea or when high-impact unresolved decisions materially block a safe design. Scale process to spike/bounded/architectural work rather than imposing one ceremony level.
 
 Use `interface-design` when visual/UX quality of a user-facing software surface is a primary part of the task. Pair it with Software Development for implementation mechanics. Do not load it for backend-only work.
@@ -67,7 +70,7 @@ If no existing skill matches, operate normally, then consider whether repeated w
 
 ## Skill Independence Rule
 
-Separate skills remain separate operational domains unless a skill explicitly declares a dependency. PRA does not inherit MSA inventory rules. IKA does not silently convert project facts into Kernel rules. Interface Design does not replace Software Development. Agent Engineering does not replace domain logic or security controls. Security Engineering owns threat/authority reasoning but does not replace project-specific policy. Project Bootstrap maps project context but does not become permanent hidden memory. Release Engineering governs shipping evidence but does not replace implementation/testing. Data Operations supplies generic data-integrity mechanics but does not override specialized domain rules. Writing/Editorial owns expression and fidelity mechanics but does not become the source of domain facts. Skill Acquisition may influence another skill only through explicit reviewed adaptation.
+Separate skills remain separate operational domains unless a skill explicitly declares a dependency. PRA does not inherit MSA inventory rules. IKA does not silently convert project facts into Kernel rules. Interface Design does not replace Software Development. Agent Engineering does not replace domain logic or security controls. Security Engineering owns threat/authority reasoning but does not replace project-specific policy. Project Bootstrap maps project context but does not become permanent hidden memory. Release Engineering governs shipping evidence but does not replace implementation/testing. Data Operations supplies generic data-integrity mechanics but does not override specialized domain rules. Writing/Editorial owns expression and fidelity mechanics but does not become the source of domain facts. Visual Direction owns visual production/continuity reasoning but does not replace image execution tools, Interface Design, or Creator acceptance. Skill Acquisition may influence another skill only through explicit reviewed adaptation.
 
 ## Plugin / MCP Rule
 

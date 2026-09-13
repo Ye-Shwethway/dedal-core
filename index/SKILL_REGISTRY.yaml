@@ -1,4 +1,4 @@
-version: 12
+version: 13
 last_reviewed: "2026-09-14"
 
 routing:
@@ -212,6 +212,25 @@ skills:
           commit: "cf649e6e7089804dd1bad745fdcd12aeee7f7aae"
           license: "MIT"
 
+  visual-direction:
+    aliases: []
+    path: "skills/visual-direction"
+    entrypoint: "skills/visual-direction/SKILL.md"
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      sources:
+        - source: "OpenAI Academy image-generation guidance"
+          reviewed_on: "2026-09-14"
+        - source: "Google AI image-generation/reference guidance"
+          reviewed_on: "2026-09-14"
+        - source: "DreamBooth CVPR 2023 / arXiv:2208.12242"
+          use: "conceptual"
+        - repo: "tencent-ailab/IP-Adapter"
+          commit: "62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2"
+          license: "Apache-2.0"
+
   automations:
     aliases: []
     path: "skills/automations"
@@ -264,3 +283,5 @@ skills:
           commit: "6d5d0579ee84c787eb31d04fa1676582f6e7b65e"
         - repo: "vale-cli/vale"
           commit: "cf649e6e7089804dd1bad745fdcd12aeee7f7aae"
+        - repo: "tencent-ailab/IP-Adapter"
+          commit: "62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2"

@@ -7,45 +7,75 @@ _Date: 2026-09-13_
 - Repository: `Ye-Shwethway/dedal-core`
 - Visibility: public
 - Default branch: `main`
+- Current version: `0.2.0`
 - Purpose: durable public operational core for DEDAL
 
 ## Foundation Established
 
-The initial foundation consists of:
+The core foundation now includes:
 
 - `README.md` — purpose and repository map;
 - `AGENTS.md` — operating contract and source-of-truth hierarchy;
 - `SECURITY.md` — public-repository security boundary;
 - `docs/IDENTITY.md` — stable DEDAL identity definition;
 - `docs/architecture/FOUNDATION.md` — layered system architecture;
+- `docs/architecture/BIOS_AND_LAYER_MODEL.md` — Custom Instructions BIOS pointer, Stable Kernel, Growable Skills, and Operations layer model;
 - `docs/capabilities/CURRENT_CAPABILITIES.md` — current capability snapshot;
 - `docs/evolution/IMPROVEMENT_PROTOCOL.md` — externalized self-improvement loop;
-- `state/capability-registry.yaml` — machine-readable sanitized capability registry;
-- `.github/workflows/repo-integrity.yml` — baseline structural validation;
-- `.gitignore` — local/private artifact exclusions.
+- `state/capability-registry.yaml` — sanitized machine-readable capability registry;
+- `index/MASTER_INDEX.md` — human-readable boot and skill router;
+- `index/SKILL_REGISTRY.yaml` — machine-readable skill routing registry;
+- `.github/workflows/repo-integrity.yml` — structural, YAML, secret-file, and imported-skill validation;
+- `.github/workflows/import-legacy-skills.yml` — pinned, reproducible MSA/PRA skill import workflow.
+
+## Active Imported Skills
+
+### Medicine Store Assistant
+
+- Invocation: `medicine-store-assistant` or `$msa`
+- Path: `skills/medicine-store-assistant/`
+- Imported from: `Ye-Shwethway/medicine-store-assistant`
+- Pinned source commit: `6b8f35e4056f030a1ace2dac137cde1071a00051`
+- Package includes `SKILL.md`, `agents/openai.yaml`, and the complete task-specific reference set.
+
+### Patient Report Assistant
+
+- Invocation: `patient-report-assistant` or `$pra`
+- Path: `skills/patient-report-assistant/`
+- Imported from: `Ye-Shwethway/medicine-store-assistant`
+- Pinned source commit: `6b8f35e4056f030a1ace2dac137cde1071a00051`
+- Package includes `SKILL.md`, `agents/openai.yaml`, and the complete task-specific reference set.
+- PRA remains operationally independent from MSA despite sharing the historical source repository.
+
+Both imported directories contain `IMPORT_SOURCE.md` provenance records. The import workflow verifies the copied trees against the pinned source before committing them.
 
 ## Locked Principles
 
 1. DEDAL Core is public architecture, not a private-memory dump.
 2. Live authoritative state outranks remembered summaries.
-3. Model weights are not treated as self-modifiable by DEDAL.
-4. Improvement occurs through context, tools, persistent state, evaluations, workflows, and feedback loops.
-5. Sensitive state remains external and explicitly authorized.
-6. Work/cloud-computer capability is valuable but quota-expensive and is not a foundational always-on dependency.
-7. Changes should remain inspectable, attributable, and reversible where practical.
+3. Custom Instructions act as a small BIOS/bootstrap pointer rather than containing the whole DEDAL system.
+4. Stable kernel material stays small; growable skills stay modular; operational execution surfaces stay replaceable.
+5. Load the smallest relevant skill set instead of loading all skills into every task.
+6. Explicit skill aliases such as `$msa` and `$pra` are direct routing signals.
+7. Model weights are not treated as self-modifiable by DEDAL; improvement occurs through context, tools, skills, persistent state, evaluations, workflows, automation, and feedback loops.
+8. Sensitive/private state remains external and explicitly authorized.
+9. Work/cloud-computer capability is useful but quota-expensive and is not an always-on dependency.
+10. Changes should remain inspectable, attributable, versioned, and reversible where practical.
+
+## Verification State
+
+- Pinned MSA/PRA migration workflow: PASS.
+- Exact imported-tree comparison performed by GitHub Actions: PASS.
+- MSA reference package contains the complete pinned reference tree.
+- PRA reference package contains the complete pinned reference tree.
+- Human and machine-readable skill registries route `$msa` and `$pra` to their canonical DEDAL Core packages.
 
 ## Immediate Next Phase
 
-Do not rush into a large agent framework.
+1. Finalize the Stable Kernel files and boot contract.
+2. Create the smallest useful native DEDAL sub-skills for GitHub, Files/Artifacts, Research, Software Development, and Automations rather than leaving them as scaffolds.
+3. Bring IKA into the same canonical skill architecture when its current source package has been inspected.
+4. Draft the concise Custom Instructions BIOS pointer only after reviewing the Creator's current Custom Instructions text.
+5. Add regression/evaluation checks as repeated real-world failures reveal durable lessons.
 
-Next design work should identify the Creator's intended DEDAL evolution idea and then decide which of these layers are actually needed:
-
-- persistent private state service;
-- MCP/tool gateway;
-- evaluation harness;
-- workflow/skill registry;
-- GitHub Actions execution runners;
-- event/condition automation;
-- cross-project continuity index.
-
-Architecture should follow the actual use case rather than precede it.
+Do not build a large agent swarm or private-state backend merely because the architecture permits it. Add infrastructure only when a concrete workflow benefits from it.

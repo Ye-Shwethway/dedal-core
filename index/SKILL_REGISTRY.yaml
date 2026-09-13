@@ -1,4 +1,4 @@
-version: 3
+version: 4
 last_reviewed: "2026-09-14"
 
 routing:
@@ -80,3 +80,10 @@ skills:
     entrypoint: "skills/automations/SKILL.md"
     status: active
     independence: generic_domain
+
+  skill-acquisition:
+    aliases: []
+    path: "skills/skill-acquisition"
+    entrypoint: "skills/skill-acquisition/SKILL.md"
+    status: active
+    independence: meta_domain

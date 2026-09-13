@@ -1,0 +1,34 @@
+version: 1
+review_mode: shadow_real_work
+families:
+  - id: CE-01
+    name: repo-mutation-and-ci
+    primary_metrics: [milestone_commits, unintended_writes, reconciliation_commits, scoped_ci_checks, correctness]
+    current_status: positive_observed_with_regression_risk
+  - id: CE-02
+    name: research-and-evidence
+    primary_metrics: [relevant_sources_loaded, unsupported_claims, stale_source_conflicts, redundant_retrieval, correctness]
+    current_status: partial_positive_evidence
+  - id: CE-03
+    name: data-and-spreadsheet-operations
+    primary_metrics: [manual_rework, duplicate_or_identity_errors, staging_violations, readback_verification, clarification_rounds]
+    current_status: needs_evidence
+  - id: CE-04
+    name: software-and-interface-work
+    primary_metrics: [routed_skill_count, unnecessary_context_reads, build_test_loops, rework_from_missed_constraints, verification]
+    current_status: needs_evidence
+  - id: CE-05
+    name: visual-production
+    primary_metrics: [reference_reloads, identity_drift_retries, broad_regenerations_vs_targeted_edits, accepted_output_rate]
+    current_status: needs_evidence
+  - id: CE-06
+    name: continuity-and-resume
+    primary_metrics: [reasked_known_decisions, core_rereads, checkpoint_sufficiency, time_to_next_executable_step, stale_state_errors]
+    current_status: needs_evidence
+rules:
+  - correctness_and_authority_gate_before_efficiency
+  - record_numeric_counts_only_when_directly_observable
+  - label_structural_proxies_as_proxies
+  - prefer_real_work_shadow_scoring_over_synthetic_load
+  - keep_creator_as_acceptance_signal_not_technical_oracle
+  - consolidate_or_remove_skills_when_measured_overhead_exceeds_value

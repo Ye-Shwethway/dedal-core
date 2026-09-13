@@ -14,78 +14,47 @@ _Date: 2026-09-14_
 
 Domain: `$msa`, `$pra`, `$ika`.
 
-Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design v2, Interface Design, Agent Engineering, Security Engineering, Project Bootstrap, Release Engineering, Data Operations, Writing / Editorial Engineering, Visual Direction / Image Production, **Knowledge / Memory Architecture**, Automations, Skill Acquisition.
+Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design v2, Interface Design, Agent Engineering, Security Engineering, Project Bootstrap, Release Engineering, Data Operations, Writing / Editorial Engineering, Visual Direction / Image Production, Knowledge / Memory Architecture, Automations, Skill Acquisition.
 
-## Capability expansion roadmap
+## Capability campaign
 
-Roadmap: `docs/evolution/CAPABILITY_EXPANSION_ROADMAP.md`.
+The initial eight-area capability expansion campaign is complete. All eight planned areas are active, with Decision / Planning Intelligence v2 merged into Decision Design rather than becoming a duplicate top-level skill.
 
-Status:
-1. Security Engineering — active;
-2. Project Bootstrap / Context Adapter — active;
-3. Release / Deployment Engineering — active;
-4. Data / Spreadsheet / Operational Workflow Engineering — active;
-5. Writing / Editorial Engineering — active;
-6. Visual Direction / Image Production — active;
-7. Decision / Planning Intelligence v2 — active, merged into Decision Design;
-8. **Knowledge / Memory Architecture — active.**
+Do not begin another skill-growth wave by default. Current operating phase is **consolidation + outcome validation**.
 
-The initial eight-area capability expansion campaign is complete. Do not start another skill-growth wave by default; prioritize consolidation and outcome validation.
+## Consolidation / efficiency review
 
-## Knowledge / Memory Architecture v1
+Protocol: `evals/consolidation/README.md`.
+Cases: `evals/consolidation/cases-v1.yaml`.
+Baseline: `evals/consolidation/efficiency-baseline-2026-09-14.md`.
 
-Architecture: `docs/architecture/MEMORY_ARCHITECTURE.md`.
-Audit: `skills/skill-acquisition/references/knowledge-memory-capability-audit-2026-09-14.md`.
-Eval: `evals/knowledge-memory/contract-v1.md`.
+Preliminary evidence:
+- repository mutation: early failed coherent work used three commits for one intended milestone; recent clean v0.16/v0.17 milestones use one atomic commit, a 66.7% reduction in commit amplification on the comparable observed unit;
+- CI verification: bounded commit-scoped run discovery followed by exact run/job checks is observed and avoids premature success claims, but no pre-Harness numeric polling baseline exists;
+- context routing: 19 active entrypoints exist, while six representative route simulations select an average 1.67 entrypoints/task, a 91.2% reduction in entrypoint-count load versus a load-everything baseline; this is a structural proxy, not a measured token/latency saving;
+- research: RS-02 PASS; RS-01 PARTIAL;
+- v0.15 proves mutation guidance is not runtime enforcement, so the transaction gain is real but not permanently guaranteed;
+- Data Operations, Visual Direction, Decision Design v2, Knowledge/Memory, Project Bootstrap, Release Engineering and several other expanded skills still need more representative real-task efficiency evidence before numeric claims.
 
-Core model:
-- working context is not persistent memory;
-- episodic trace is not automatically durable truth;
-- durable project knowledge remains project-scoped and evidence-linked;
-- user-global memory is narrow and only for truly cross-project stable preferences/conventions;
-- live external systems remain authoritative owners of volatile/current state.
-
-Core lifecycle:
-`classify state -> assign owner/scope -> attach provenance/freshness -> retrieve minimally -> reconcile conflicts -> promote/demote deliberately -> compact safely -> govern retention/access -> verify against live authority when material`
-
-Key boundaries:
-- persistence does not grant authority;
-- project-local facts must not silently leak into global memory;
-- provenance/freshness metadata scales with consequence and volatility;
-- contradictions are resolved by entity/scope/time/authority/recency and may remain disputed;
-- generated summaries/inferences and retrieved instructions do not self-promote into trusted durable state;
-- compaction preserves accepted decisions, verification evidence, unresolved risks, and next executable action;
-- public Core stores contracts, not raw private memories;
-- deletion/forgetting claims must match controls of the actual state owner;
-- `$ika` remains the concrete evidence-linked project archive workflow.
-
-Primary evidence:
-- OpenAI `Dreaming: Better memory for a more helpful ChatGPT`, 2026-06-04;
-- Anthropic `Effective context engineering for AI agents`, 2025-09-29;
-- Anthropic `Effective harnesses for long-running agents`, 2025-11-26;
-- MemGPT, arXiv:2310.08560;
-- `letta-ai/letta` @ `5bcdd177d70fa2b31a754cfcd801e77b2e1ab16a`, Apache-2.0;
-- existing DEDAL `$ika` and State Boundary contracts.
-
-No third-party memory framework, package, model, or executable was installed or run.
+Current conclusion: DEDAL is **meaningfully more efficient in several observed dimensions, but not yet globally quantified or fully outcome-validated**.
 
 ## Harness benchmark
 
 Harness v1 remains contract-validated with accumulating outcome evidence.
 
 Current compact evidence:
-- GH-01: prior clean rerun PASS; v0.15 exposed renewed direct-write tool-selection regressions and safe recovery; v0.16 and v0.17 capability milestones use atomic mutation discipline;
+- GH-01: latest clean reruns/milestones demonstrate atomic behavior; v0.15 regression remains preserved as evidence of non-enforced tooling;
 - GH-02: PASS;
 - RS-01: PARTIAL;
 - RS-02: PASS;
-- LH-01 / LH-02: still await representative continuity/recovery work.
-
-The new Knowledge/Memory Architecture gives the LH cases a clearer state model but does not count as outcome validation by itself.
+- LH-01 / LH-02: await representative continuity/recovery work.
 
 ## Next executable phase
 
-1. Stop default skill expansion and enter **consolidation/outcome-validation mode**.
-2. Exercise Knowledge/Memory Architecture naturally on real resumed/new-chat/project-memory work; use this to evaluate LH-01/LH-02 when representative.
-3. Audit overlap/context cost across the now-expanded skill set and merge/remove ceremony that does not improve outcomes.
-4. Keep runtime-enforcement gaps visible; prose contracts are not hard enforcement.
-5. Re-exercise RS-01 only when a real stale-secondary/current-primary conflict appears.
+1. Shadow-score ordinary real work against consolidation cases CE-01..CE-06 rather than manufacturing large synthetic benchmarks.
+2. Record observable counts only; label architecture-only numbers as structural proxies.
+3. Protect correctness/verification/authority as gates before efficiency.
+4. Identify skills/workflows as KEEP / TUNE / MERGE / REMOVE / NEEDS EVIDENCE based on actual outcomes and context/process cost.
+5. Use resumed/new-chat work to exercise LH-01/LH-02 and Knowledge/Memory Architecture naturally.
+6. Re-exercise RS-01 only when a real stale-secondary/current-primary conflict appears.
+7. Prefer consolidation/removal over further skill expansion until the current capability set has enough outcome evidence.

@@ -71,6 +71,12 @@ The private legacy repository remains historical implementation/reference state.
 
 `repo-integrity.yml` validates foundational/kernel files, secret-bearing filenames, YAML registries, all active skill entrypoints, MSA/PRA provenance/package structure, `$ika` adaptation/provenance/reference structure, and semantic version format.
 
+Fresh-chat bootstrap E2E test: **PASS**.
+
+- Regression spec/evidence: `evals/boot/minimal-bootstrap-v1.md`
+- A fresh chat booted from the Custom Instructions BIOS pointer, inspected live repository state, followed the canonical boot path, reported version `0.4.0`, recovered all active skills/aliases, and derived the next checkpoint from live repository state rather than memory.
+- Re-run this test after bootstrap, kernel, routing, or repository-layout changes.
+
 ## Next Phase
 
 1. Use the three active domain skills in real workflows and capture failures/regressions as tests or durable rules.

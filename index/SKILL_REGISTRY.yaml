@@ -1,4 +1,4 @@
-version: 11
+version: 12
 last_reviewed: "2026-09-14"
 
 routing:
@@ -192,6 +192,26 @@ skills:
         - source: "Microsoft Excel formula and error-auditing guidance"
           reviewed_on: "2026-09-14"
 
+  writing-editorial:
+    aliases: []
+    path: "skills/writing-editorial"
+    entrypoint: "skills/writing-editorial/SKILL.md"
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      sources:
+        - source: "Google Developer Documentation Style Guide"
+          reviewed_on: "2026-09-14"
+        - source: "NIST technical publication/plain-language guidance"
+          reviewed_on: "2026-09-14"
+        - source: "Anthropic prompting guidance"
+          use: "conceptual"
+          reviewed_on: "2026-09-14"
+        - repo: "vale-cli/vale"
+          commit: "cf649e6e7089804dd1bad745fdcd12aeee7f7aae"
+          license: "MIT"
+
   automations:
     aliases: []
     path: "skills/automations"
@@ -242,3 +262,5 @@ skills:
           commit: "3798c021bbfb0b13ff384b2238f643d04bdea5f2"
         - repo: "OpenRefine/OpenRefine"
           commit: "6d5d0579ee84c787eb31d04fa1676582f6e7b65e"
+        - repo: "vale-cli/vale"
+          commit: "cf649e6e7089804dd1bad745fdcd12aeee7f7aae"

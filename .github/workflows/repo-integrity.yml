@@ -48,7 +48,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          required_skills=(medicine-store-assistant patient-report-assistant ika github files research software-development decision-design interface-design agent-engineering security-engineering project-bootstrap release-engineering data-operations automations skill-acquisition)
+          required_skills=(medicine-store-assistant patient-report-assistant ika github files research software-development decision-design interface-design agent-engineering security-engineering project-bootstrap release-engineering data-operations writing-editorial automations skill-acquisition)
           for skill in "${required_skills[@]}"; do test -s "skills/$skill/SKILL.md" || { echo "Missing skill entrypoint: skills/$skill/SKILL.md"; exit 1; }; done
 
           test -s skills/medicine-store-assistant/IMPORT_SOURCE.md
@@ -99,6 +99,11 @@ jobs:
           grep -q '6d5d0579ee84c787eb31d04fa1676582f6e7b65e' skills/data-operations/ADAPTATION_NOTES.md
           test -s evals/data-operations/contract-v1.md
 
+          test -s skills/writing-editorial/ADAPTATION_NOTES.md
+          test "$(find skills/writing-editorial/references -type f | wc -l)" -ge 3
+          grep -q 'cf649e6e7089804dd1bad745fdcd12aeee7f7aae' skills/writing-editorial/ADAPTATION_NOTES.md
+          test -s evals/writing-editorial/contract-v1.md
+
           test -s skills/skill-acquisition/references/matt-pocock-deep-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
@@ -106,12 +111,14 @@ jobs:
           test -s skills/skill-acquisition/references/agent-engineering-corpus-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/first-wave-capability-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/data-operations-capability-audit-2026-09-14.md
+          test -s skills/skill-acquisition/references/writing-editorial-capability-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/authoring-and-evals.md
           test -s skills/skill-acquisition/references/knowledge-packaging-and-freshness.md
-          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 13
+          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 14
           grep -q 'Reuse ideas' skills/skill-acquisition/SKILL.md
           grep -q '3798c021bbfb0b13ff384b2238f643d04bdea5f2' skills/skill-acquisition/references/data-operations-capability-audit-2026-09-14.md
           grep -q '6d5d0579ee84c787eb31d04fa1676582f6e7b65e' skills/skill-acquisition/references/data-operations-capability-audit-2026-09-14.md
+          grep -q 'cf649e6e7089804dd1bad745fdcd12aeee7f7aae' skills/skill-acquisition/references/writing-editorial-capability-audit-2026-09-14.md
 
       - name: Validate version format
         shell: bash

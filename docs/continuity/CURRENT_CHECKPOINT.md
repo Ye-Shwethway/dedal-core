@@ -7,14 +7,14 @@ _Date: 2026-09-14_
 - Repository: `Ye-Shwethway/dedal-core`
 - Visibility: public
 - Default branch: `main`
-- Current version: `0.13.0`
+- Current version: `0.14.0`
 - Purpose: durable public operational core for DEDAL
 
 ## Active skills
 
 Domain: `$msa`, `$pra`, `$ika`.
 
-Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design, Interface Design, Agent Engineering, Security Engineering, Project Bootstrap, Release Engineering, **Data Operations**, Automations, Skill Acquisition.
+Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design, Interface Design, Agent Engineering, Security Engineering, Project Bootstrap, Release Engineering, Data Operations, **Writing / Editorial Engineering**, Automations, Skill Acquisition.
 
 ## Capability expansion roadmap
 
@@ -24,36 +24,38 @@ Status:
 1. Security Engineering — active;
 2. Project Bootstrap / Context Adapter — active;
 3. Release / Deployment Engineering — active;
-4. **Data / Spreadsheet / Operational Workflow Engineering — active;**
-5. Writing / Editorial Engineering — planned next;
-6. Visual Direction / Image Production — planned;
+4. Data / Spreadsheet / Operational Workflow Engineering — active;
+5. **Writing / Editorial Engineering — active;**
+6. Visual Direction / Image Production — planned next;
 7. Decision / Planning Intelligence v2 — planned;
 8. Knowledge / Memory Architecture — planned.
 
-## Data Operations v1
+## Writing / Editorial Engineering v1
 
-Audit: `skills/skill-acquisition/references/data-operations-capability-audit-2026-09-14.md`.
-Eval: `evals/data-operations/contract-v1.md`.
+Audit: `skills/skill-acquisition/references/writing-editorial-capability-audit-2026-09-14.md`.
+Eval: `evals/writing-editorial/contract-v1.md`.
 
 Core lifecycle:
-`authority -> record contract -> normalize -> reconcile -> validate -> stage -> review -> promote -> verify -> audit`
+`intent/audience -> fact/expression separation -> structure -> draft/transform -> terminology/voice -> fidelity/grounding -> polish -> publication QA`
 
 Key boundaries:
-- source/field authority is established before overwrite;
-- record identity/equivalence is defined before deduplication;
-- raw, normalized comparison, and canonical accepted values remain distinct;
-- ambiguous reconciliation remains explicit rather than forced;
-- formulas are treated as logic/code when spreadsheet correctness depends on them;
-- risky changes use staging/review/promotion when rollback or human review matters;
-- successful writes/imports are not sufficient evidence of production correctness;
-- specialized domain skills retain their business rules.
+- explicit Creator/project/domain style outranks generic style guidance;
+- factual claims and expression/style are separate layers;
+- rewrites/translations protect material semantic invariants such as negation, modality, scope, numbers, names, dates, uncertainty, and order where meaningful;
+- terminology is treated as reusable state rather than casual synonym variation;
+- voice is controlled through explicit dimensions instead of one vague tone label;
+- multilingual work prioritizes meaning/function and target-language naturalness over literal word order;
+- material ambiguity remains explicit rather than being silently resolved;
+- revision passes require a defect/rubric/request signal; endless paraphrase is a regression;
+- editorial polish must not increase confidence beyond the evidence supporting factual claims.
 
 Primary corpus:
-- `fivetran/great_expectations` @ `3798c021bbfb0b13ff384b2238f643d04bdea5f2`, Apache-2.0;
-- `OpenRefine/OpenRefine` @ `6d5d0579ee84c787eb31d04fa1676582f6e7b65e`, BSD 3-Clause-style license;
-- current Microsoft Excel formula/error-auditing guidance.
+- current Google Developer Documentation Style Guide;
+- current NIST technical publication/plain-language guidance;
+- current Anthropic prompting guidance for conceptual steerability patterns only;
+- `vale-cli/vale` @ `cf649e6e7089804dd1bad745fdcd12aeee7f7aae`, MIT.
 
-No third-party package or executable was installed or run for this adaptation.
+No third-party writing package, style bundle, linter, or executable was installed or run for this adaptation.
 
 ## Harness benchmark
 
@@ -67,7 +69,7 @@ Do not manufacture large artificial tasks merely to complete the scorecard.
 
 ## Next executable phase
 
-1. Exercise Data Operations naturally on future spreadsheet/data work and capture regressions when meaningful.
-2. Continue capability roadmap with **Writing / Editorial Engineering**.
-3. Then evaluate Visual Direction, Decision Intelligence v2, and Knowledge/Memory Architecture, merging rather than multiplying skills where independence is weak.
-4. Keep external tool/framework syntax out of Core unless current authoritative verification makes it necessary.
+1. Exercise Writing / Editorial Engineering naturally on future drafting, rewriting, translation, and publication tasks and capture meaningful regressions.
+2. Continue capability roadmap with **Visual Direction / Image Production**.
+3. Then evaluate Decision Intelligence v2 and Knowledge/Memory Architecture, merging rather than multiplying skills where independence is weak.
+4. Keep current platform/model-specific writing syntax out of Core unless current authoritative verification makes it necessary.

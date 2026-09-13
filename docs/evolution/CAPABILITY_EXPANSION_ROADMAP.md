@@ -42,14 +42,15 @@ This roadmap records the next eight high-value generic capability areas for DEDA
    - formulas, deterministic transforms, audit trails;
    - spreadsheet/database interoperability and provenance.
 
-5. **Writing / Editorial Engineering — planned next**
+5. **Writing / Editorial Engineering — active**
    - audience/intent fidelity;
+   - fact/expression separation;
    - structural editing and compression/expansion;
-   - tone and terminology consistency;
-   - multilingual fidelity;
-   - fact/style separation and publication QA.
+   - voice and terminology consistency;
+   - multilingual fidelity/localization;
+   - publication QA and optional editorial lint.
 
-6. **Visual Direction / Image Production — planned**
+6. **Visual Direction / Image Production — planned next**
    - canonical identity/trait locks;
    - reference hierarchy;
    - shot/set planning and composition;

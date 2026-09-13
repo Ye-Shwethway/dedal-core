@@ -58,14 +58,15 @@ This roadmap records the next eight high-value generic capability areas for DEDA
    - targeted edits;
    - drift detection and rendered visual QA.
 
-7. **Decision / Planning Intelligence v2 — planned next**
+7. **Decision / Planning Intelligence v2 — active (merged into Decision Design)**
    - uncertainty and option value;
    - reversible vs irreversible decisions;
    - dependency/critical-path thinking;
-   - stop/commit thresholds;
-   - post-decision review and learning.
+   - commit/continue/stop/revisit thresholds;
+   - bounded premortems;
+   - decision records and post-decision learning.
 
-8. **Knowledge / Memory Architecture — planned**
+8. **Knowledge / Memory Architecture — planned next**
    - episodic vs durable state;
    - provenance and contradiction resolution;
    - freshness/staleness;

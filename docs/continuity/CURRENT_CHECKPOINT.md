@@ -17,6 +17,7 @@ The core foundation now includes:
 - `README.md` — purpose and repository map;
 - `AGENTS.md` — operating contract and source-of-truth hierarchy;
 - `SECURITY.md` — public-repository security boundary;
+- `CHANGELOG.md` — versioned architectural history;
 - `docs/IDENTITY.md` — stable DEDAL identity definition;
 - `docs/architecture/FOUNDATION.md` — layered system architecture;
 - `docs/architecture/BIOS_AND_LAYER_MODEL.md` — Custom Instructions BIOS pointer, Stable Kernel, Growable Skills, and Operations layer model;
@@ -24,9 +25,10 @@ The core foundation now includes:
 - `docs/evolution/IMPROVEMENT_PROTOCOL.md` — externalized self-improvement loop;
 - `state/capability-registry.yaml` — sanitized machine-readable capability registry;
 - `index/MASTER_INDEX.md` — human-readable boot and skill router;
-- `index/SKILL_REGISTRY.yaml` — machine-readable skill routing registry;
-- `.github/workflows/repo-integrity.yml` — structural, YAML, secret-file, and imported-skill validation;
-- `.github/workflows/import-legacy-skills.yml` — pinned, reproducible MSA/PRA skill import workflow.
+- `index/SKILL_REGISTRY.yaml` — machine-readable skill routing and provenance registry;
+- `.github/workflows/repo-integrity.yml` — structural, YAML, secret-file, and imported-skill validation.
+
+The temporary write-capable migration workflow used to import legacy skills was removed after successful verification. It is not part of the permanent runtime surface.
 
 ## Active Imported Skills
 
@@ -36,7 +38,7 @@ The core foundation now includes:
 - Path: `skills/medicine-store-assistant/`
 - Imported from: `Ye-Shwethway/medicine-store-assistant`
 - Pinned source commit: `6b8f35e4056f030a1ace2dac137cde1071a00051`
-- Package includes `SKILL.md`, `agents/openai.yaml`, and the complete task-specific reference set.
+- Package includes `SKILL.md`, `agents/openai.yaml`, provenance, and the complete pinned task-specific reference set.
 
 ### Patient Report Assistant
 
@@ -44,10 +46,10 @@ The core foundation now includes:
 - Path: `skills/patient-report-assistant/`
 - Imported from: `Ye-Shwethway/medicine-store-assistant`
 - Pinned source commit: `6b8f35e4056f030a1ace2dac137cde1071a00051`
-- Package includes `SKILL.md`, `agents/openai.yaml`, and the complete task-specific reference set.
+- Package includes `SKILL.md`, `agents/openai.yaml`, provenance, and the complete pinned task-specific reference set.
 - PRA remains operationally independent from MSA despite sharing the historical source repository.
 
-Both imported directories contain `IMPORT_SOURCE.md` provenance records. The import workflow verifies the copied trees against the pinned source before committing them.
+Both imported directories contain `IMPORT_SOURCE.md` provenance records. Future updates must compare against the recorded source commit before replacing local files.
 
 ## Locked Principles
 
@@ -61,20 +63,22 @@ Both imported directories contain `IMPORT_SOURCE.md` provenance records. The imp
 8. Sensitive/private state remains external and explicitly authorized.
 9. Work/cloud-computer capability is useful but quota-expensive and is not an always-on dependency.
 10. Changes should remain inspectable, attributable, versioned, and reversible where practical.
+11. Imported skills are pinned snapshots, not silently auto-synced mirrors.
 
 ## Verification State
 
-- Pinned MSA/PRA migration workflow: PASS.
-- Exact imported-tree comparison performed by GitHub Actions: PASS.
-- MSA reference package contains the complete pinned reference tree.
-- PRA reference package contains the complete pinned reference tree.
+- Pinned MSA/PRA migration workflow run: PASS.
+- Exact imported-tree comparison against pinned source: PASS.
+- MSA reference package: complete pinned reference tree.
+- PRA reference package: complete pinned reference tree.
 - Human and machine-readable skill registries route `$msa` and `$pra` to their canonical DEDAL Core packages.
+- Permanent repo-integrity workflow now validates both core and imported-skill structure.
 
 ## Immediate Next Phase
 
 1. Finalize the Stable Kernel files and boot contract.
 2. Create the smallest useful native DEDAL sub-skills for GitHub, Files/Artifacts, Research, Software Development, and Automations rather than leaving them as scaffolds.
-3. Bring IKA into the same canonical skill architecture when its current source package has been inspected.
+3. Bring IKA into the same canonical skill architecture after inspecting its current source package.
 4. Draft the concise Custom Instructions BIOS pointer only after reviewing the Creator's current Custom Instructions text.
 5. Add regression/evaluation checks as repeated real-world failures reveal durable lessons.
 

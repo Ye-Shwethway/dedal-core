@@ -14,9 +14,10 @@ jobs:
   import:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout DEDAL Core
+      - name: Checkout latest DEDAL Core main
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Fetch pinned source skill snapshot

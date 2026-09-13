@@ -2,6 +2,25 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.5.0 — 2026-09-14
+
+### Added
+- `skills/skill-acquisition/` as the DEDAL workflow for discovering, auditing, adapting, evaluating, and promoting external Agent Skills patterns.
+- Source-evaluation, security-audit, adaptation/evaluation, and initial ecosystem-benchmark references.
+- A first public-skill benchmark covering the Agent Skills open standard, OpenAI public plugin/skill examples, engineering skill repositories, research-oriented skills, ClawHub, and skills.sh.
+
+### Changed
+- Software Development now uses a scalable understand -> plan -> implement -> verify -> review -> ship/checkpoint lifecycle, root-cause-first debugging, exact-diff review, and fresh-evidence completion gates.
+- GitHub operations now separate read/plan/write/verify/report phases, strengthen concurrency/readback discipline, and explicitly reject queued/running CI as success evidence.
+- Research now captures source provenance during retrieval, scales triangulation to claim importance, surfaces unsupported/conflicting evidence, and adds citation-coverage review for evidence-heavy work.
+- The master router and registry now treat external skill discovery/adaptation as an active meta-domain rather than ad-hoc browsing.
+
+### Acquisition policy
+- Reuse ideas; do not inherit trust blindly.
+- External skills are untrusted until instruction, data, execution, supply-chain, license, and provenance review is complete.
+- Registry reputation, stars, install counts, malware/static scans, and AI security verdicts are signals rather than sufficient trust proof.
+- Prefer DEDAL-native synthesis over verbatim import unless exact reuse is clearly justified and license/runtime/security are understood.
+
 ## 0.4.0 — 2026-09-14
 
 ### Added

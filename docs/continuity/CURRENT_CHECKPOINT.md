@@ -59,17 +59,23 @@ No third-party writing package, style bundle, linter, or executable was installe
 
 ## Harness benchmark
 
-Harness v1 remains active. Current compact benchmark evidence:
-- GH-01: latest clean rerun PASS after mutation-mode/tool-allowlist hardening;
-- GH-02: PASS;
-- RS-01 / RS-02: await suitable real research work;
-- LH-01 / LH-02: await suitable real multi-session/new-chat work.
+Harness v1 remains active.
 
-Do not manufacture large artificial tasks merely to complete the scorecard.
+Latest research shadow record: `evals/harness-benchmark/runs/2026-09-14-writing-editorial-research.md`.
+
+Current compact benchmark evidence:
+- GH-01: PASS on latest clean rerun after mutation-mode/tool-allowlist hardening;
+- GH-02: PASS;
+- RS-01: **PARTIAL** — current primary sources/version scope were used, but no real stale-secondary-vs-current-primary conflict occurred, so that branch remains unexercised;
+- RS-02: **PASS** — consequential claims were supported with scoped multi-source evidence without broad context dumping;
+- LH-01 / LH-02: await suitable representative continuity/recovery work.
+
+Harness v1 remains **contract-validated with accumulating outcome evidence**. Do not call the full smoke suite outcome-validated yet.
 
 ## Next executable phase
 
 1. Exercise Writing / Editorial Engineering naturally on future drafting, rewriting, translation, and publication tasks and capture meaningful regressions.
 2. Continue capability roadmap with **Visual Direction / Image Production**.
-3. Then evaluate Decision Intelligence v2 and Knowledge/Memory Architecture, merging rather than multiplying skills where independence is weak.
-4. Keep current platform/model-specific writing syntax out of Core unless current authoritative verification makes it necessary.
+3. Re-exercise RS-01 when a real current-primary/stale-secondary conflict appears; do not manufacture one solely for the benchmark.
+4. Exercise LH-01/LH-02 on suitable real continuity/recovery work.
+5. Then evaluate Decision Intelligence v2 and Knowledge/Memory Architecture, merging rather than multiplying skills where independence is weak.

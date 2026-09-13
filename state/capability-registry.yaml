@@ -1,0 +1,71 @@
+version: 1
+last_reviewed: 2026-09-13
+scope: public-sanitized
+
+principles:
+  authoritative_state_over_memory: true
+  public_core_private_state_separation: true
+  verify_dynamic_capabilities_before_reliance: true
+
+reasoning:
+  advanced_reasoning: available
+  coding_and_architecture: available
+  multimodal_image_understanding: available
+  live_web_research: available
+
+connected_systems:
+  github: available
+  gmail: available
+  google_drive: available
+  figma: available
+  chatgpt_files_library: available
+  plugin_directory: available
+  automations: available
+
+sandbox:
+  os_family: linux
+  observed_distribution: debian-13
+  architecture: x86_64
+  python: "3.13.x"
+  node: "22.x"
+  java: "21"
+  gcc: "14.x"
+  clang: "17"
+  ffmpeg: "7.1.x"
+  pandoc: "3.1.x"
+  libreoffice: "25.2"
+  flutter: unavailable
+  dart: unavailable
+  gpu: not_guaranteed
+  persistence: ephemeral
+
+artifacts:
+  markdown: true
+  docx: true
+  pdf: true
+  pptx: true
+  xlsx: true
+  csv: true
+  zip: true
+  images: true
+
+automation:
+  one_time: true
+  recurring: true
+  condition_watch: true
+  event_triggered_integrations: verify_per_service
+
+execution_preference:
+  - native_tools
+  - sandbox
+  - connected_app_or_api
+  - github_actions_or_external_runner
+  - work_cloud_computer_when_justified
+
+private_state:
+  allowed_in_repo: false
+  preferred_locations:
+    - authorized_memory
+    - chatgpt_library
+    - secured_external_database
+    - connected_private_service

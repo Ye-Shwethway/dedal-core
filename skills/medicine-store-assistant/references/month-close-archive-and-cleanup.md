@@ -1,0 +1,395 @@
+# Month-Close Archive and Paired Cleanup Workflow
+
+Use this reference whenever `$msa` closes a month, prepares a new month, archives Daily Usage, or performs cleanup around the month transition.
+
+For the **family-level decision about whether a zero-stock row is redundant**, read [zero-stock-sibling-cleanup.md](zero-stock-sibling-cleanup.md). That reference is canonical for the rule that a zero-stock row may be deleted when at least one valid same operational item/family representative remains after deletion. This month-close reference controls archive/history timing and new-month preparation.
+
+This workflow preserves the legacy Excel operating intent (`archive to Master Data` then `Prepare Data`) while replacing macro-only assumptions with explicit, checkpointed Google Sheets operations.
+
+## Core rule
+
+**Do not physically delete a Main Stock row during an active month merely because it reached zero stock.**
+
+`Main Stock` and `Daily Usage` are row-aligned operational surfaces. If a row has current-month usage or receipt evidence, deleting the row before that evidence is preserved can destroy or misalign the month's operational history.
+
+Default behavior during an active month is to defer redundant zero-stock cleanup until history is durably protected. However, when the Owner explicitly authorizes immediate cleanup and `zero-stock-sibling-cleanup.md` safety checks prove the row redundant while relevant history/evidence is preserved, paired deletion may occur before month close.
+
+## Main Stock / Daily Usage paired-row invariant
+
+`Main Stock` and `Daily Usage` must remain aligned by operational row identity.
+
+When a physical row is removed:
+
+- delete the corresponding row from `Main Stock`,
+- delete the corresponding row from `Daily Usage`,
+- perform both as one controlled mutation slice,
+- delete rows bottom-to-top so earlier row indexes do not shift before later deletions,
+- verify item alignment, formulas, numbering, received totals, and used-range integrity afterward.
+
+Never delete only the Main Stock row while leaving the mirrored Daily Usage row behind.
+
+## Active-month lifecycle state
+
+A zero-stock row that is otherwise redundant may be classified as:
+
+`PENDING_MONTH_CLOSE_CLEANUP`
+
+Meaning:
+
+- zero current stock,
+- another valid same-family operational representative exists,
+- the row is eligible for cleanup under `zero-stock-sibling-cleanup.md`,
+- but current-month history has not yet been safely archived/preserved or immediate Owner-authorized cleanup has not been established.
+
+This classification is a timing/history gate, not a different family-level keeper rule.
+
+### Rows that must not enter pending cleanup automatically
+
+Do not mark a row for cleanup if it is:
+
+- `DORMANT_ITEM_KEEP`,
+- the sole remaining representative of its item/family,
+- required to preserve unresolved identity/mapping/receipt/audit evidence,
+- a positive-stock row requiring expiry/return/disposition review,
+- otherwise needed to preserve meaningful current-month history that has not yet been protected.
+
+Expiry recency alone is not a keeper requirement for a zero-stock row. If another valid same-family representative remains, the newest-expiry zero-stock row may still be redundant.
+
+## Current-month usage protection
+
+Before any row deletion, inspect the corresponding `Daily Usage` row.
+
+Current-month evidence includes, as applicable:
+
+- opening / remaining stock context,
+- received stock,
+- day columns 1-31,
+- `This Month Usage`,
+- `This Month Remaining`,
+- remarks,
+- expiry metadata.
+
+If meaningful current-month evidence exists, do not delete the row in a way that loses that evidence. Default to month-close archival first. Immediate Owner-authorized cleanup is allowed only when the evidence is already preserved or the Owner explicitly accepts the cleanup path and paired-row integrity is proven safe.
+
+Even when a row has no current-month usage, prefer one consistent month-close cleanup cycle unless the Owner explicitly requests immediate cleanup.
+
+## Month-close trigger
+
+Run this workflow when the Owner asks to close the current month, prepare the next month, or equivalent wording such as:
+
+- `prepare new month`,
+- `close August`,
+- `archive this month and prepare September`,
+- `month-end cleanup`.
+
+Do not infer that month close has happened merely because the calendar date changed. Use the user's explicit operational instruction or a clearly established workflow trigger.
+
+## Staged transition when the authoritative desktop Excel data is not yet available
+
+Sometimes the Owner cannot immediately access the computer-side Excel workbook or historical dataset that still needs to be pulled/synchronized before the production Google Sheet can be considered fully reconciled.
+
+In that situation, **do not perform an immediate production cutover on the live `Main Stock` / `Daily Usage` pair**.
+
+Use this staged workflow instead:
+
+1. Keep the current live production tabs unchanged as the last intact operational month state.
+2. Wait until the Owner has pulled/saved the required closed-month Excel dataset or equivalent authoritative external archive evidence.
+3. Reconcile and verify that external archive against the Google Sheet closed-month state.
+4. After archive verification, create **staging copies of both row-aligned operational tabs**, not only one side of the pair.
+5. Prepare the next month inside the staging pair.
+6. Perform cleanup/reset/formula repair only inside staging while production remains untouched.
+7. Let the Owner synchronize/reconcile the computer workbook as needed.
+8. Only after the Owner confirms the desktop side is synchronized and the staging state is verified should `$msa` perform the final production cutover/update of the canonical `Main Stock` / `Daily Usage` tabs.
+
+Recommended staging names may include the target month, for example:
+
+- `Main Stock STAGING 2026-09`
+- `Daily Usage STAGING 2026-09`
+
+Names may vary, but both staging tabs must remain paired and clearly noncanonical until cutover.
+
+### Staging hard boundaries
+
+While staging is active:
+
+- canonical `Main Stock` and `Daily Usage` remain unchanged,
+- `This Month Received` and other production-derived surfaces must not be silently repointed to staging unless explicitly authorized,
+- new-month receipts must not be applied to canonical production before cutover,
+- staging rows may be cleaned/reset/repaired only after the closed-month archive is durably verified when that archive is required,
+- a staging result is a proposal/prepared operational state, not live stock truth,
+- cutover requires a fresh checkpoint and its own readback/audit slice.
+
+If the Owner says the desktop workbook still needs to be synchronized first, treat that as a hard gate: **prepare staging, but do not replace production yet**.
+
+## Full month-close workflow
+
+### 1. Inspect live state
+
+Before mutation:
+
+- inspect current `Main Stock` and `Daily Usage`,
+- verify their row alignment,
+- inspect relevant formulas and used ranges,
+- identify current month/year,
+- identify all `PENDING_MONTH_CLOSE_CLEANUP` / safe redundant zero-stock rows,
+- apply `zero-stock-sibling-cleanup.md` to recompute family-level redundancy and sole-representative keepers,
+- re-check history/audit exceptions against the latest live state.
+
+Do not rely on stale row numbers from an earlier review because rows may have been inserted or moved during the month.
+
+### 2. Create and verify a full-workbook checkpoint
+
+Create a new full copy in the configured Medicine Store Assistant checkpoint folder.
+
+Record:
+
+- checkpoint title,
+- Drive file ID,
+- URL,
+- intended month-close operation.
+
+Verify the checkpoint exists before continuing.
+
+Never reuse an older checkpoint for a new month-close mutation slice.
+
+### 3. Archive the closed month before cleanup
+
+Create or append durable closed-month evidence before deleting operational rows whose monthly history requires preservation.
+
+The archive should preserve enough information to reconstruct what happened during the month. At minimum preserve, where available:
+
+- closed month and year,
+- stable local item identity,
+- lot/expiry identity,
+- opening / remaining stock context,
+- received stock,
+- day-by-day usage or an equivalent faithfully preserved monthly usage record,
+- total monthly usage,
+- closing stock,
+- unit,
+- reorder level / relevant reorder state,
+- shortage/early-depletion evidence,
+- CMS identity fields when useful for historical reconciliation,
+- Final Reorder / Owner-order evidence when part of the closed-month workflow.
+
+The archive is evidence. Do not rewrite the historical month to make FIFO/FEFO or another ideal workflow appear cleaner than the actual recorded usage.
+
+If a durable historical archive structure already exists, append to it rather than inventing a second incompatible history system.
+
+When an authoritative computer-side Excel dataset is still pending, do not claim the month archive is complete until that dataset is pulled/saved and reconciled to the extent required by the Owner's established workflow.
+
+### 4. Verify archive completeness
+
+Before cleanup, read the archived month back and confirm:
+
+- the intended month is present,
+- item/lot identities are preserved,
+- monthly usage values match the closing operational sheet,
+- zero-stock rows with usage were captured,
+- important receipt/reorder/expiry context was not lost,
+- archive row count / coverage is plausible relative to the live month-close state,
+- any required external/desktop Excel archive evidence has been reconciled when applicable.
+
+If verification fails, stop. Preserve the checkpoint and do not delete rows whose evidence is not protected.
+
+### 5. Recompute cleanup eligibility from the live workbook
+
+After archive verification, re-evaluate the cleanup queue from current live rows or from the verified staging copy when using staged transition.
+
+A row can proceed to paired deletion only when all are true:
+
+1. current stock is zero,
+2. another valid same operational item/family representative will remain after deletion,
+3. relevant usage/receipt history is safely preserved,
+4. no unresolved mapping, receipt, or audit dependency requires the physical row,
+5. deletion has been authorized by the Owner or falls within an explicitly authorized cleanup batch.
+
+Do **not** require the zero-stock row to be kept merely because it has the newest expiry. Family existence, not expiry recency, is the primary keeper invariant.
+
+### 6. Preserve required keeper rows
+
+For every family being cleaned:
+
+- preserve at least one valid operational representative,
+- never delete every row in a family merely because every row currently has zero stock,
+- keep a sole zero-stock item row as `DORMANT_ITEM_KEEP` unless the Owner explicitly retires the item,
+- preserve rows needed for unresolved identity/audit/history evidence.
+
+If multiple representatives remain, expiry recency alone does not determine which zero-stock row must survive.
+
+### 7. Delete paired rows bottom-to-top
+
+Build the final deletion list using the **current** row numbers immediately before deletion in the surface being prepared (staging or production).
+
+Sort descending by row number.
+
+For each approved row index, delete the matching row from both:
+
+- `Main Stock`,
+- `Daily Usage`,
+
+or from their clearly named staging copies when staged transition is active.
+
+Use a single controlled batch when practical. The descending order is mandatory to prevent row-shift corruption.
+
+Do not delete rows from archived evidence/history tabs as part of operational cleanup.
+
+### 8. Re-establish new-month operational state
+
+After paired cleanup, prepare the next month while preserving the four compatibility-locked table interfaces.
+
+For `Daily Usage` or its staging copy:
+
+- preserve headers and column order,
+- preserve the item row alignment with Main Stock,
+- clear/reset prior-month manual day entries only after archive verification,
+- establish the new month's opening/received/remaining behavior according to the live workbook formulas/contracts,
+- do not erase stable item identity or expiry context needed for the new month.
+
+For `Main Stock` or its staging copy:
+
+- preserve item/lot identity and current stock state,
+- retain valid reorder-level configuration unless a separate authorized reorder mutation changes it,
+- preserve `DORMANT_ITEM_KEEP` and other sole family identities.
+
+Do not redesign the operational tables as part of month preparation.
+
+### 9. Repair / verify derived formulas and numbering
+
+After structural deletion/reset:
+
+- verify sequential `No.` values where required,
+- verify Main Stock and Daily Usage item alignment in the prepared pair,
+- verify Main Stock derived columns,
+- verify Daily Usage derived columns (`C`, `D`, `AJ`, `AK`, and other approved formula regions),
+- scan for `#REF!`, `#N/A`, `#VALUE!`, `#ERROR!`, or formula displacement,
+- verify received totals and row counts where applicable,
+- verify downstream helper/review surfaces still bind to the intended data,
+- when working in staging, ensure production-derived surfaces have not been accidentally redirected.
+
+Do not silently patch unrelated formulas outside the month-close impact area unless a clearly broken dependency requires repair and the repair is auditable.
+
+### 10. Read back the new-month state
+
+Read back representative beginning, middle, and end rows plus every affected family when practical.
+
+Confirm:
+
+- deleted rows are gone from both members of the prepared pair,
+- required family representatives remain,
+- Daily Usage is ready for the new month,
+- archived closed-month data remains intact,
+- current stock values were not accidentally changed by structural cleanup,
+- Final Reorder is not rewritten merely because a month was closed,
+- production tabs remain untouched when staging mode is still active.
+
+### 11. Production cutover when staging mode is used
+
+Do not cut over merely because staging preparation is complete.
+
+Wait until:
+
+- the closed-month archive is verified when required,
+- required desktop Excel synchronization/reconciliation is complete,
+- the Owner confirms production can advance,
+- staging pair integrity and formulas are verified,
+- new-month receipts have not already been inconsistently applied elsewhere.
+
+Then create a **new checkpoint specifically for production cutover**, update the canonical production pair in a controlled slice, verify downstream summaries, and audit the cutover separately.
+
+### 12. Audit the operation
+
+Write an `Audit_Log` entry containing:
+
+- closed month,
+- archive destination/range or archive identifier,
+- number of archived rows/items,
+- number of paired rows deleted,
+- important keeper/history exceptions,
+- whether preparation occurred in staging or production,
+- new-month preparation summary,
+- checkpoint ID,
+- verification result.
+
+For staged transitions, record staging preparation and final production cutover as separate audited slices.
+
+Read the audit row back before reporting success.
+
+## Failure / rollback behavior
+
+If any stage fails after the checkpoint:
+
+- stop further mutation,
+- preserve the checkpoint,
+- report exactly which stage failed,
+- do not continue deleting rows after an archive or alignment verification failure,
+- restore only when authorized or clearly required by the established recovery contract.
+
+Never claim month close succeeded until archive/history protection, paired-row integrity, new-month state, and audit readback have all been verified. In staged mode, never claim production is on the new month until cutover is complete.
+
+## Relationship to Final Reorder
+
+Month close and Final Reorder are related evidence streams but different operations.
+
+- A Final Reorder already submitted for the closed month is historical Owner-order evidence.
+- Closing the month does not authorize changing that submitted Final Reorder.
+- Preserve the archived Final Reorder decision when available.
+- The next month's reorder analysis happens later from the new live state and accumulated history.
+
+## Relationship to reorder reasoning
+
+Current-month zero-stock rows may contain valuable usage evidence. Their usage remains part of family demand history even after the physical operational row is later deleted.
+
+Therefore:
+
+- row deletion is operational cleanup,
+- historical usage preservation is permanent evidence,
+- deleting a row must never erase the family demand history that justified past or future reorder reasoning.
+
+## Human-facing cleanup UI
+
+During the active month, a concise cleanup queue may show:
+
+- Main Row,
+- Item,
+- Expiry,
+- Stock,
+- Cleanup state,
+- concise reason,
+- Owner decision/note when needed.
+
+Once a row is approved but deferred until month close, prefer wording such as:
+
+`PENDING MONTH-CLOSE CLEANUP`
+
+When Owner-authorized immediate cleanup is safe under `zero-stock-sibling-cleanup.md`, do not mislabel it as permanently deferred.
+
+Do not expose full Daily Usage history in the Owner inbox merely to justify the timing rule. The agent should inspect that evidence behind the scenes.
+
+## Hard boundaries
+
+Never:
+
+- delete a Main Stock row without handling the corresponding Daily Usage row,
+- delete a current-month row in a way that loses meaningful usage/receipt evidence,
+- assume zero stock means historical evidence is disposable,
+- delete the sole remaining same-family operational representative merely because stock is zero,
+- require the newest-expiry zero-stock row to survive solely because its expiry is latest,
+- use stale row numbers for a structural deletion batch,
+- delete rows top-to-bottom when multiple row deletions would shift later indexes,
+- clear the new month's Daily Usage until the closed month archive is verified when that archive is required,
+- rewrite actual historical usage to make an idealized workflow appear true,
+- alter an already-submitted Final Reorder merely as part of month close,
+- skip checkpoint, readback, or audit for paired operational row deletion,
+- replace canonical production tabs while required computer-side Excel archive/synchronization is still pending,
+- treat a staging tab as current live inventory truth before cutover.
+
+## Canonical shorthand
+
+When the Owner says **`prepare new month`** and no external synchronization gate exists, interpret the operational workflow as:
+
+**inspect -> checkpoint -> archive closed month -> verify archive -> recompute cleanup queue using zero-stock family-existence rule -> paired Main Stock + Daily Usage deletion bottom-to-top -> prepare new-month Daily Usage -> verify formulas/alignment/totals -> audit -> readback**.
+
+When the Owner says the computer-side Excel data still needs to be pulled/synchronized first, interpret it as:
+
+**freeze production -> obtain/reconcile closed-month external archive -> verify archive -> create paired staging copies -> prepare/clean next month in staging -> verify staging -> Owner completes/validates computer sync -> fresh cutover checkpoint -> update canonical production pair -> verify downstream state -> audit cutover -> only then process new-month intake**.

@@ -1,4 +1,4 @@
-version: 4
+version: 5
 last_reviewed: "2026-09-14"
 
 routing:
@@ -73,6 +73,20 @@ skills:
     entrypoint: "skills/software-development/SKILL.md"
     status: active
     independence: generic_domain
+
+  decision-design:
+    aliases: []
+    path: "skills/decision-design"
+    entrypoint: "skills/decision-design/SKILL.md"
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      source_repo: "mattpocock/skills"
+      source_commit: "3cca18b368ae95cdbdebbff572ccafa662551015"
+      source_skills: ["grilling", "grill-me"]
+      source_license: "MIT"
+      adapted_on: "2026-09-14"
 
   automations:
     aliases: []

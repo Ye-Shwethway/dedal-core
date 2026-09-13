@@ -2,6 +2,24 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.6.0 — 2026-09-14
+
+### Added
+- Deep audit of `mattpocock/skills` pinned to source commit/tree `3cca18b368ae95cdbdebbff572ccafa662551015` (MIT).
+- `decision-design` as a DEDAL-native adaptation of the dependency-aware `grilling`/`grill-me` decision-frontier pattern.
+- Focused Software Development references for debugging loops, testing/seams, two-axis review, architecture/domain design, and multi-session delivery.
+
+### Changed
+- Software Development now uses progressive disclosure for specialized engineering workflows rather than expanding one monolithic skill prompt.
+- Hard debugging prioritizes a tight red-capable feedback loop, minimization, falsifiable hypotheses, targeted probes, regression locking, and cleanup.
+- Testing guidance distinguishes stable behavior seams from implementation-coupled tests and treats TDD as a deliberate mode rather than universal ceremony.
+- Code review separates Standards from Intent/Spec so one axis cannot hide failure on the other.
+- Multi-session engineering separates decide -> record -> slice -> implement -> review -> checkpoint and favors vertical slices plus compact reference-based handoffs.
+
+### Adaptation policy
+- Upstream provider-specific Skill/subagent/plugin mechanics were not copied into durable DEDAL contracts.
+- The source's MIT license and pinned provenance are recorded; the DEDAL text is a rewritten adaptation, not a verbatim import.
+
 ## 0.5.0 — 2026-09-14
 
 ### Added

@@ -22,41 +22,20 @@ jobs:
         run: |
           set -euo pipefail
           required=(
-            README.md
-            AGENTS.md
-            SECURITY.md
-            VERSION
-            kernel/KERNEL.md
-            kernel/BOOT_CONTRACT.md
-            kernel/STATE_BOUNDARY.md
-            docs/IDENTITY.md
-            docs/architecture/FOUNDATION.md
-            docs/architecture/BIOS_AND_LAYER_MODEL.md
-            docs/capabilities/CURRENT_CAPABILITIES.md
-            docs/continuity/CURRENT_CHECKPOINT.md
-            docs/evolution/IMPROVEMENT_PROTOCOL.md
-            state/capability-registry.yaml
-            index/MASTER_INDEX.md
-            index/SKILL_REGISTRY.yaml
+            README.md AGENTS.md SECURITY.md VERSION
+            kernel/KERNEL.md kernel/BOOT_CONTRACT.md kernel/STATE_BOUNDARY.md
+            docs/IDENTITY.md docs/architecture/FOUNDATION.md docs/architecture/BIOS_AND_LAYER_MODEL.md
+            docs/capabilities/CURRENT_CAPABILITIES.md docs/continuity/CURRENT_CHECKPOINT.md docs/evolution/IMPROVEMENT_PROTOCOL.md
+            state/capability-registry.yaml index/MASTER_INDEX.md index/SKILL_REGISTRY.yaml
           )
-
-          for file in "${required[@]}"; do
-            test -s "$file" || {
-              echo "Missing or empty required file: $file"
-              exit 1
-            }
-          done
+          for file in "${required[@]}"; do test -s "$file" || { echo "Missing or empty required file: $file"; exit 1; }; done
 
       - name: Reject obvious committed secret files
         shell: bash
         run: |
           set -euo pipefail
           bad_files=$(git ls-files | grep -E '(^|/)(\.env($|\.)|id_rsa$|id_ed25519$|.*\.(pem|p12|pfx|key)$)' || true)
-          if [ -n "$bad_files" ]; then
-            echo "Potential secret-bearing files are committed:"
-            echo "$bad_files"
-            exit 1
-          fi
+          if [ -n "$bad_files" ]; then echo "Potential secret-bearing files are committed:"; echo "$bad_files"; exit 1; fi
 
       - name: Validate YAML registries
         shell: bash
@@ -64,27 +43,12 @@ jobs:
           set -euo pipefail
           ruby -e 'require "yaml"; YAML.load_file("state/capability-registry.yaml"); YAML.load_file("index/SKILL_REGISTRY.yaml"); puts "YAML registries: valid"'
 
-      - name: Validate skill entrypoints
+      - name: Validate skill entrypoints and provenance
         shell: bash
         run: |
           set -euo pipefail
-          required_skills=(
-            medicine-store-assistant
-            patient-report-assistant
-            ika
-            github
-            files
-            research
-            software-development
-            automations
-            skill-acquisition
-          )
-          for skill in "${required_skills[@]}"; do
-            test -s "skills/$skill/SKILL.md" || {
-              echo "Missing skill entrypoint: skills/$skill/SKILL.md"
-              exit 1
-            }
-          done
+          required_skills=(medicine-store-assistant patient-report-assistant ika github files research software-development decision-design automations skill-acquisition)
+          for skill in "${required_skills[@]}"; do test -s "skills/$skill/SKILL.md" || { echo "Missing skill entrypoint: skills/$skill/SKILL.md"; exit 1; }; done
           test -s skills/medicine-store-assistant/IMPORT_SOURCE.md
           test -s skills/patient-report-assistant/IMPORT_SOURCE.md
           test -s skills/medicine-store-assistant/agents/openai.yaml
@@ -94,7 +58,12 @@ jobs:
           test -s skills/ika/ADAPTATION_NOTES.md
           test "$(find skills/ika/references -type f | wc -l)" -ge 4
           grep -q 'fbed860928c1a93261306f70a47fa700da56ce29' skills/ika/ADAPTATION_NOTES.md
-          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 4
+          test -s skills/decision-design/ADAPTATION_NOTES.md
+          grep -q '3cca18b368ae95cdbdebbff572ccafa662551015' skills/decision-design/ADAPTATION_NOTES.md
+          test "$(find skills/software-development/references -type f | wc -l)" -ge 5
+          test -s skills/skill-acquisition/references/matt-pocock-deep-audit-2026-09-14.md
+          grep -q '3cca18b368ae95cdbdebbff572ccafa662551015' skills/skill-acquisition/references/matt-pocock-deep-audit-2026-09-14.md
+          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 5
           grep -q 'Reuse ideas' skills/skill-acquisition/SKILL.md
 
       - name: Validate version format

@@ -71,6 +71,7 @@ jobs:
           required_skills=(
             medicine-store-assistant
             patient-report-assistant
+            ika
             github
             files
             research
@@ -89,6 +90,9 @@ jobs:
           test -s skills/patient-report-assistant/agents/openai.yaml
           test "$(find skills/medicine-store-assistant/references -type f | wc -l)" -ge 10
           test "$(find skills/patient-report-assistant/references -type f | wc -l)" -ge 8
+          test -s skills/ika/ADAPTATION_NOTES.md
+          test "$(find skills/ika/references -type f | wc -l)" -ge 4
+          grep -q 'fbed860928c1a93261306f70a47fa700da56ce29' skills/ika/ADAPTATION_NOTES.md
 
       - name: Validate version format
         shell: bash

@@ -1,4 +1,4 @@
-version: 2
+version: 3
 last_reviewed: "2026-09-14"
 
 routing:
@@ -31,6 +31,20 @@ skills:
       source_commit: "6b8f35e4056f030a1ace2dac137cde1071a00051"
       source_path: "skills/patient-report-assistant"
       imported_on: "2026-09-13"
+
+  knowledge-archive:
+    aliases: ["$ika", "knowledge-archive"]
+    path: "skills/ika"
+    entrypoint: "skills/ika/SKILL.md"
+    status: active
+    independence: standalone_domain
+    provenance:
+      adaptation: true
+      source_repo: "Ye-Shwethway/ianeo-knowledge-vault"
+      source_commit: "fbed860928c1a93261306f70a47fa700da56ce29"
+      source_path: "skills/ianeo-knowledge-archive"
+      adapted_on: "2026-09-14"
+      source_visibility: private
 
   github:
     aliases: []
@@ -66,8 +80,3 @@ skills:
     entrypoint: "skills/automations/SKILL.md"
     status: active
     independence: generic_domain
-
-  knowledge-archive:
-    aliases: ["$ika"]
-    path: "skills/ika"
-    status: planned

@@ -2,6 +2,24 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.4.0 — 2026-09-14
+
+### Added
+- DEDAL-native Knowledge Archive skill at `skills/ika/` with `$ika` routing.
+- Public archive, retrieval, relationship/change-impact, and orchestration contracts derived from the earlier IANEO Knowledge Archive experience.
+- `ADAPTATION_NOTES.md` documenting provenance and deliberate differences from the private legacy source.
+
+### Changed
+- `$ika` is now active instead of planned.
+- The legacy IANEO archive design was refined rather than copied verbatim: fixed IANEO destinations, IANEO-only identity wording, and assumed orchestration behavior were removed/generalized.
+- Writing Chamber and Image Visualization Chamber are no longer treated as default knowledge-archive responsibilities; they remain historical/private experiments unless later promoted as separate DEDAL skills.
+- Private archives, registry contents, scripts, fixtures, and project data remain outside the public DEDAL Core repository.
+
+### Adaptation provenance
+- Source repository: private `Ye-Shwethway/ianeo-knowledge-vault`
+- Source commit: `fbed860928c1a93261306f70a47fa700da56ce29`
+- Legacy source path: `skills/ianeo-knowledge-archive/`
+
 ## 0.3.0 — 2026-09-14
 
 ### Added

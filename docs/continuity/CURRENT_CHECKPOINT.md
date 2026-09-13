@@ -7,7 +7,7 @@ _Date: 2026-09-14_
 - Repository: `Ye-Shwethway/dedal-core`
 - Visibility: public
 - Default branch: `main`
-- Current version: `0.8.0`
+- Current version: `0.9.0`
 - Purpose: durable public operational core for DEDAL
 
 ## Active Skills
@@ -33,42 +33,46 @@ Key policy: **reuse ideas; do not inherit trust blindly.** Popularity/install co
 6. `Leonxlnx/taste-skill` @ `ccbc15639c97057cbfcf32ecebc38ef716e4bb37`
 7. `lllllllama/RigorPilot-Skills` @ `bd91195ad73199b95e24532b581ff12c07dcce09`
 8. `pbakaus/impeccable` @ `cb56ed6c19a07329a9fa0cd4e657bee040156593`
+9. `nextlevelbuilder/ui-ux-pro-max-skill` @ `7f69fed6a2717900085f1bc3b263721f8ba025e2`
 
 Audit records live under `skills/skill-acquisition/references/`.
 
-## Interface Design
+## Interface Design v0.9 Refinement
 
-`skills/interface-design/` is now active and independently routable for user-facing software surfaces.
+Interface Design now combines two layers:
 
-Core rules:
-- inspect incumbent visual/product truth before redesigning;
-- infer surface mode and design direction from brief, audience, task, references, brand, and constraints;
-- let explicit brief/product/platform/accessibility requirements outrank generic taste;
-- distinguish refinement from redesign;
-- use actual design systems honestly and avoid template autopilot;
-- verify rendered results when practical, in bounded passes rather than open-ended self-polish;
-- persist durable design direction in the owning project when worthy.
+1. **reasoning/workflow layer** — brief inference, surface mode, incumbent truth, refinement-vs-redesign, quality floor, bounded visual verification;
+2. **design-intelligence layer** — scoped knowledge retrieval, semantic-domain vs stack separation, explicit match/fallback semantics, freshness checks, and durable design-system persistence.
 
-Primary adaptation sources are `Leonxlnx/taste-skill` (MIT) and `pbakaus/impeccable` (Apache-2.0). DEDAL did not import their runtime-specific packages.
+The UI/UX Pro Max deep audit contributed the second layer. DEDAL did **not** vendor the upstream catalog, install its CLI, inherit provider-specific paths, or treat upstream rankings/current stack versions as permanent truth.
+
+Design-intelligence authority order:
+- Creator + accepted project decisions;
+- incumbent project design truth;
+- authoritative current platform/design-system/accessibility sources;
+- curated catalogs with provenance/freshness;
+- generic heuristics.
+
+Durable project design state may use a `MASTER + surface overrides` pattern. Existing master state must be read before regeneration and must not be silently overwritten.
 
 ## Decision / Research Refinements
 
-Decision Design now sizes substantial work as spike, bounded, or architectural. Hidden complexity can upgrade the path, but routine reversible work does not inherit a universal approval ceremony.
+Decision Design sizes substantial work as spike, bounded, or architectural. Hidden complexity can upgrade the path, but routine reversible work does not inherit a universal approval ceremony.
 
-Research now separates exploratory evidence from trusted/established evidence. For experiment/comparison campaigns, preserve comparison anchors and do not turn exploratory gains into novelty/SOTA/trusted-reproduction claims without the required evidence.
+Research separates exploratory evidence from trusted/established evidence. For experiment/comparison campaigns, preserve comparison anchors and do not turn exploratory gains into novelty/SOTA/trusted-reproduction claims without the required evidence.
 
 ## Verification
 
-`repo-integrity.yml` validates foundational/kernel files, registries, all active skill entrypoints, imported/adapted provenance, Software Development references, Skill Acquisition audits, Interface Design provenance/reference structure, and semantic version format.
+`repo-integrity.yml` validates foundational/kernel files, registries, all active skill entrypoints, imported/adapted provenance, Software Development references, Skill Acquisition audits, Interface Design provenance/reference structure including the UI/UX Pro Max audit, and semantic version format.
 
 Fresh-chat bootstrap E2E remains **PASS** (`evals/boot/minimal-bootstrap-v1.md`). Re-run after boot/kernel/router/layout changes.
 
 ## Next Phase
 
-1. Evaluate Interface Design on real project/UI tasks against baseline behavior and capture Creator feedback.
-2. Continue gap-driven high-signal scans rather than leaderboard harvesting for its own sake.
-3. Likely next candidate areas: durable writing/editorial workflow, visual/image-generation direction, project bootstrap/context adapters, and specialized security/release engineering — only if repeated work justifies them.
-4. Keep improving existing skills when new sources mostly refine methodology rather than creating independent routing domains.
+1. Use Interface Design on real project UI work and compare whether scoped retrieval/persistence improves outcomes without adding ceremony.
+2. Continue gap-driven scans; likely candidate areas remain durable writing/editorial workflow, visual/image-generation direction, project bootstrap/context adapters, and specialized security/release engineering.
+3. Prefer refinement of proven skills over multiplying top-level skills when new sources mostly improve an existing domain.
+4. For large knowledge catalogs, prefer adapters/retrieval contracts plus freshness metadata over copying fast-drifting datasets into Core.
 5. Keep private/personal/project operational state outside the public core.
 
 Do not expand the Stable Kernel merely to capture ecosystem fashions or project-specific rules.

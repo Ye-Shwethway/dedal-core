@@ -62,20 +62,25 @@ jobs:
           grep -q '3cca18b368ae95cdbdebbff572ccafa662551015' skills/decision-design/ADAPTATION_NOTES.md
           test "$(find skills/software-development/references -type f | wc -l)" -ge 5
           test -s skills/interface-design/ADAPTATION_NOTES.md
-          test "$(find skills/interface-design/references -type f | wc -l)" -ge 4
+          test "$(find skills/interface-design/references -type f | wc -l)" -ge 6
           grep -q 'ccbc15639c97057cbfcf32ecebc38ef716e4bb37' skills/interface-design/ADAPTATION_NOTES.md
           grep -q 'cb56ed6c19a07329a9fa0cd4e657bee040156593' skills/interface-design/ADAPTATION_NOTES.md
+          grep -q '7f69fed6a2717900085f1bc3b263721f8ba025e2' skills/interface-design/ADAPTATION_NOTES.md
+          test -s skills/interface-design/references/design-intelligence-retrieval.md
+          test -s skills/interface-design/references/design-system-persistence.md
           test -s skills/skill-acquisition/references/matt-pocock-deep-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
+          test -s skills/skill-acquisition/references/ui-ux-pro-max-deep-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/authoring-and-evals.md
           test -s skills/skill-acquisition/references/knowledge-packaging-and-freshness.md
-          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 9
+          test "$(find skills/skill-acquisition/references -type f | wc -l)" -ge 10
           grep -q 'Reuse ideas' skills/skill-acquisition/SKILL.md
           grep -q 'b36e0829c6d0140e93cfef2ca599b1b07d4a7797' skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
           grep -q 'ccbc15639c97057cbfcf32ecebc38ef716e4bb37' skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
           grep -q 'bd91195ad73199b95e24532b581ff12c07dcce09' skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
           grep -q 'cb56ed6c19a07329a9fa0cd4e657bee040156593' skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md
+          grep -q '7f69fed6a2717900085f1bc3b263721f8ba025e2' skills/skill-acquisition/references/ui-ux-pro-max-deep-audit-2026-09-14.md
 
       - name: Validate version format
         shell: bash

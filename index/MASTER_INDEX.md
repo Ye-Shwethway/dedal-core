@@ -25,7 +25,7 @@ This is the primary routing index for DEDAL Core.
 | Research | current research / verification / governed exploration | `skills/research/` | active | Live-source research, provenance, synthesis, freshness, comparability, and exploratory-evidence discipline |
 | Software development | coding/debugging/architecture/build work | `skills/software-development/` | active | Repository-aware engineering lifecycle with focused debugging/testing/review/architecture/multi-session references |
 | Decision design | deliberate plan/architecture/product stress-test | `skills/decision-design/` | active | Process-sized decision design with dependency-aware frontier resolution |
-| Interface design | website/app/dashboard/frontend design or redesign | `skills/interface-design/` | active | Brief-aware UI/UX direction, redesign/audit discipline, quality floor, and bounded visual verification |
+| Interface design | website/app/dashboard/frontend design or redesign | `skills/interface-design/` | active | Brief-aware UI/UX direction, scoped design-intelligence retrieval, redesign/audit discipline, durable design-system state, and bounded visual verification |
 | Automations | reminder/schedule/watch tasks | `skills/automations/` | active | Scheduled, recurring, condition and event-triggered workflows |
 | Skill acquisition | external skills / skill ecosystem / create or improve a skill | `skills/skill-acquisition/` | active | Discover, audit, author, adapt, baseline-test, evaluate, and promote skill patterns safely |
 
@@ -39,7 +39,7 @@ Explicit aliases such as `$msa`, `$pra`, and `$ika` are direct routing signals. 
 
 Use `decision-design` deliberately when the Creator asks to stress-test a plan/idea or when high-impact unresolved decisions materially block a safe design. Scale process to spike/bounded/architectural work rather than imposing one ceremony level.
 
-Use `interface-design` when visual/UX quality of a user-facing software surface is a primary part of the task. Pair it with Software Development for implementation mechanics; do not load it for backend-only work.
+Use `interface-design` when visual/UX quality of a user-facing software surface is a primary part of the task. Pair it with Software Development for implementation mechanics. When design knowledge retrieval is useful, query only the smallest relevant domain/stack and treat catalog results as recommendations rather than authority. Do not load it for backend-only work.
 
 Use `skill-acquisition` for external skill discovery/comparison/audit, new-skill authoring, or material skill improvement. For major rewrites, compare against a meaningful baseline and evaluate routing, task quality, efficiency, robustness, and freshness where relevant. External skills remain untrusted inputs until reviewed; discovery never implies installation or execution.
 

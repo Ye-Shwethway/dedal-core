@@ -2,6 +2,30 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.9.0 — 2026-09-14
+
+### Added
+- Deep audit of `nextlevelbuilder/ui-ux-pro-max-skill` pinned to `7f69fed6a2717900085f1bc3b263721f8ba025e2` with verified MIT license.
+- `skills/interface-design/references/design-intelligence-retrieval.md` for scoped design knowledge retrieval, domain/stack separation, explicit miss semantics, and freshness handling.
+- `skills/interface-design/references/design-system-persistence.md` for safe master + surface override persistence.
+- `skills/skill-acquisition/references/ui-ux-pro-max-deep-audit-2026-09-14.md` with Adopt / Adapt / Merge / Reject decisions.
+
+### Changed
+- Interface Design now has a distinct design-intelligence layer in addition to its existing brief/direction and visual-verification workflow.
+- Curated design catalogs are recommendation evidence, not authority over Creator intent, project-local design truth, accessibility standards, or current official platform guidance.
+- Targeted UI issues retrieve the semantic UX concern first and implementation stack/platform guidance separately when needed.
+- Retrieval misses remain explicit; one scoped retry is allowed before clearly labeled general fallback guidance.
+- Durable design state may use a master + surface override hierarchy and must not be silently regenerated over accepted project direction.
+- Registry benchmark provenance now includes UI/UX Pro Max.
+
+### Adaptation policy
+- The upstream CSV/design catalog was not vendored into DEDAL Core.
+- Provider-specific plugin paths, CLI installation/update behavior, external logo-generation services, hardcoded current framework versions, and fixed design dials were not adopted as durable Core behavior.
+- Upstream executables/scripts were inspected but not installed or executed.
+
+### Source snapshot
+- `nextlevelbuilder/ui-ux-pro-max-skill` @ `7f69fed6a2717900085f1bc3b263721f8ba025e2` — MIT.
+
 ## 0.8.0 — 2026-09-14
 
 ### Added

@@ -1,15 +1,15 @@
 ---
 name: interface-design
-description: Design, redesign, audit, and refine user-facing software interfaces with brief-aware visual direction, incumbent-state respect, accessibility, responsiveness, and bounded visual verification. Use for websites, app UI, dashboards, product surfaces, and frontend UX; not backend-only work.
+description: Design, redesign, audit, and refine user-facing software interfaces with brief-aware visual direction, incumbent-state respect, evidence-backed design intelligence, accessibility, responsiveness, and bounded visual verification. Use for websites, app UI, dashboards, product surfaces, and frontend UX; not backend-only work.
 ---
 
 # Interface Design
 
-Treat interface work as both product design and engineering. The goal is not a fashionable default; it is a coherent surface that fits the user, product, task, and existing system.
+Treat interface work as both product design and engineering. The goal is not a fashionable default; it is a coherent surface that fits the user, product, task, existing system, and verified platform constraints.
 
 ## Start from evidence
 
-Before changing a UI, inspect the brief and the incumbent visual truth: current screens, components, tokens, assets, copy, platform conventions, and constraints. Do not infer greenfield merely because a formal design document is missing.
+Before changing a UI, inspect the brief and incumbent visual truth: current screens, components, tokens, assets, copy, platform conventions, project design docs, and constraints. Do not infer greenfield merely because a formal design document is missing.
 
 State a concise **design read** when direction is materially ambiguous or useful: surface type, audience, task, intended character, and major constraints. Ask only when unresolved design direction would materially change the result.
 
@@ -24,6 +24,18 @@ Use the dominant user job to calibrate design decisions:
 
 A product can contain several modes. Classify the surface, not the company.
 
+## Use design intelligence selectively
+
+When a curated design catalog, project design system, authoritative platform guidance, or live source is available, retrieve only the smallest relevant slice.
+
+- New product/page direction: synthesize product pattern, style family, semantic color, typography, interaction, and platform constraints into one coherent recommendation.
+- Targeted issue: query the specific concern first (for example accessibility, forms, navigation, typography, motion, charts), then stack/platform guidance separately when implementation details matter.
+- Existing project: project-local design truth outranks generic catalog recommendations unless the task explicitly redesigns it.
+- A retrieval miss is a miss. Retry once with a narrower or better-scoped query, then label general guidance as fallback rather than pretending a match existed.
+- Drift-sensitive guidance such as framework versions, platform APIs, WCAG/spec details, package behavior, or official design-system requirements must be verified against current authoritative sources when material.
+
+See `references/design-intelligence-retrieval.md`.
+
 ## Direction rules
 
 - **The brief wins.** Explicit brand, audience, accessibility, platform, and product constraints outrank generic taste.
@@ -36,12 +48,13 @@ A product can contain several modes. Classify the surface, not the company.
 
 1. **Inspect** — current UI, product context, technical stack, constraints, reference assets, and user goal.
 2. **Frame** — identify the surface mode and design direction; preserve explicit user choices.
-3. **Shape** — establish hierarchy, layout, content flow, states, responsiveness, accessibility, and interaction behavior before decorative polish.
-4. **Implement** — follow the existing stack and design system unless the task explicitly changes them. Verify dependencies before assuming a library exists.
-5. **Review visually** — inspect the rendered result on the relevant device classes when tools permit; include error/empty/loading/focus/hover states when material.
-6. **Fix materially** — batch the important defects instead of entering an open-ended polish loop.
-7. **Confirm** — one focused re-check is normally enough unless new defects or explicit Creator feedback justify another pass.
-8. **Persist** — when a durable design system or product direction emerged, propose recording it in the owning project rather than relying on memory.
+3. **Retrieve** — when useful, gather the smallest relevant design-intelligence and stack/platform guidance; verify freshness-sensitive claims.
+4. **Shape** — establish hierarchy, layout, content flow, states, responsiveness, accessibility, and interaction behavior before decorative polish.
+5. **Implement** — follow the existing stack and design system unless the task explicitly changes them. Verify dependencies before assuming a library exists.
+6. **Review visually** — inspect the rendered result on relevant device classes when tools permit; include error/empty/loading/focus/hover states when material.
+7. **Fix materially** — batch important defects instead of entering an open-ended polish loop.
+8. **Confirm** — one focused re-check is normally enough unless new defects or explicit Creator feedback justify another pass.
+9. **Persist** — when a durable design system or direction emerged, record it in the owning project with explicit master/surface precedence and provenance rather than relying on memory.
 
 ## Progressive references
 
@@ -49,7 +62,9 @@ A product can contain several modes. Classify the surface, not the company.
 - `references/redesign-and-audit.md` — preservation vs redesign, incumbent truth, audit-first workflow.
 - `references/quality-floor.md` — hierarchy, typography, layout, states, accessibility, responsiveness, and anti-template checks.
 - `references/visual-verification.md` — bounded visual QA and evidence-backed completion.
+- `references/design-intelligence-retrieval.md` — scoped knowledge retrieval, domain/stack separation, confidence/fallback, and freshness.
+- `references/design-system-persistence.md` — durable master + surface override model with safe regeneration rules.
 
 ## Boundary
 
-This skill governs interface design quality. Use Software Development for implementation lifecycle/debugging/testing and Files/Slides/Image tools for artifact-specific mechanics. Do not override higher-priority platform instructions or invent visual verification that was not actually performed.
+This skill governs interface design quality. Use Software Development for implementation lifecycle/debugging/testing and Files/Slides/Image tools for artifact-specific mechanics. Curated catalogs are recommendation sources, not authority over the Creator, project-local design truth, accessibility standards, or live platform documentation. Do not override higher-priority platform instructions or invent visual verification that was not actually performed.

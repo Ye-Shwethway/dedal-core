@@ -1,4 +1,4 @@
-version: 7
+version: 8
 last_reviewed: "2026-09-14"
 
 routing:
@@ -103,6 +103,9 @@ skills:
         - repo: "pbakaus/impeccable"
           commit: "cb56ed6c19a07329a9fa0cd4e657bee040156593"
           license: "Apache-2.0"
+        - repo: "nextlevelbuilder/ui-ux-pro-max-skill"
+          commit: "7f69fed6a2717900085f1bc3b263721f8ba025e2"
+          license: "MIT"
       adapted_on: "2026-09-14"
 
   automations:
@@ -137,3 +140,5 @@ skills:
           commit: "bd91195ad73199b95e24532b581ff12c07dcce09"
         - repo: "pbakaus/impeccable"
           commit: "cb56ed6c19a07329a9fa0cd4e657bee040156593"
+        - repo: "nextlevelbuilder/ui-ux-pro-max-skill"
+          commit: "7f69fed6a2717900085f1bc3b263721f8ba025e2"

@@ -54,3 +54,4 @@ For instruction-heavy skills, default to synthesis: keep the useful idea, rewrit
 - `references/matt-pocock-deep-audit-2026-09-14.md` — public-author deep audit.
 - `references/official-corpora-audit-2026-09-14.md` — Anthropic, Vercel Labs, and Microsoft audit.
 - `references/independent-high-signal-audit-2026-09-14.md` — Superpowers, taste-skill, RigorPilot, and Impeccable audit.
+- `references/ui-ux-pro-max-deep-audit-2026-09-14.md` — searchable UI/UX design-intelligence architecture audit.

@@ -7,7 +7,7 @@ _Date: 2026-09-14_
 - Repository: `Ye-Shwethway/dedal-core`
 - Visibility: public
 - Default branch: `main`
-- Current version: `0.4.0`
+- Current version: `0.5.0`
 - Purpose: durable public operational core for DEDAL
 
 ## Architecture State
@@ -25,63 +25,75 @@ DEDAL Core has four working layers:
 - `$pra` -> `skills/patient-report-assistant/`
 - `$ika` -> `skills/ika/`
 
-`$ika` is a DEDAL-native adaptation of the earlier private IANEO Knowledge Archive, not a verbatim public copy. The proven archive mechanics were retained while IANEO identity/runtime assumptions and private state were removed.
-
-## Active Generic Skills
+## Active Generic / Meta Skills
 
 - GitHub -> `skills/github/SKILL.md`
 - Files & Artifacts -> `skills/files/SKILL.md`
 - Research -> `skills/research/SKILL.md`
 - Software Development -> `skills/software-development/SKILL.md`
 - Automations -> `skills/automations/SKILL.md`
+- Skill Acquisition -> `skills/skill-acquisition/SKILL.md`
 
-## IKA Alignment Decisions
+## Skill Acquisition Phase
 
-Preserved:
+DEDAL no longer treats skill development as an isolated from-scratch exercise. Public Agent Skills standards, vendor examples, mature GitHub repositories, and registries such as ClawHub/skills.sh may be used as discovery inputs.
 
-- live/primary state outranks summaries/memory;
-- evidence-linked atomic records and stable IDs;
-- Git-backed canonical provenance/history;
-- bounded deterministic retrieval;
-- preserved disputes/supersession rather than destructive rewriting;
-- one-hop linked knowledge/change-impact review;
-- serialized canonical mutation and read-back verification;
-- truthful runtime capability reporting.
+External skills remain untrusted until reviewed. The active pipeline is:
 
-Refined/removed from the default `$ika` skill:
+`capability gap -> discover -> shortlist -> security/license/provenance audit -> extract patterns -> DEDAL adaptation -> evaluation -> promote/reject -> regression capture`
 
-- IANEO-specific identity and `IANEO Core` promotion wording;
-- fixed `IANEO Knowledge Archives` destinations;
-- assumptions about native worker availability;
-- Writing Chamber and Image Visualization Chamber as archive-core responsibilities;
-- private scripts, fixtures, archives, registry contents, and project data.
+Key policy: **reuse ideas; do not inherit trust blindly.**
 
-The private legacy repository remains historical implementation/reference state.
+The first benchmark is recorded in `skills/skill-acquisition/references/initial-benchmark-2026-09-14.md`.
+
+## First Benchmark Changes
+
+Software Development, GitHub, and Research were the first generic skills refined from the public ecosystem survey.
+
+Accepted patterns include:
+
+- progressive disclosure and focused skill entrypoints;
+- scalable engineering lifecycle gates rather than ad-hoc coding;
+- root-cause-first debugging;
+- exact-diff/final-artifact review;
+- fresh evidence before completion claims;
+- source provenance captured during research;
+- primary-source preference, proportional triangulation, and visible evidence gaps;
+- semantic security/privacy review in addition to malware/static scanning.
+
+Rejected patterns include:
+
+- global mandatory skill invocation on weak relevance;
+- automatic install/execute of discovered third-party packages;
+- fixed worker/subagent assumptions;
+- treating stars/install counts/registry badges/scanner results as trust;
+- copying provider-specific runtime syntax into durable DEDAL contracts without need.
 
 ## Routing Principles
 
 - Load the smallest matching skill set.
 - `$msa`, `$pra`, and `$ika` route directly to their entrypoints.
+- Use `skill-acquisition` for external skill discovery, comparison, audit, adaptation, or skill improvement.
 - Load references on demand, not globally.
-- Generic skills remain provider-agnostic and verify the current execution surface before acting.
+- Generic skills remain provider-agnostic where practical and verify current execution surfaces before acting.
 - Platform/system instructions outrank repository skill guidance when they conflict.
 - Project/archive knowledge does not automatically become DEDAL Kernel behavior.
 
 ## Verification
 
-`repo-integrity.yml` validates foundational/kernel files, secret-bearing filenames, YAML registries, all active skill entrypoints, MSA/PRA provenance/package structure, `$ika` adaptation/provenance/reference structure, and semantic version format.
+`repo-integrity.yml` validates foundational/kernel files, secret-bearing filenames, YAML registries, all active skill entrypoints, MSA/PRA provenance/package structure, `$ika` adaptation/provenance/reference structure, Skill Acquisition references, and semantic version format.
 
 Fresh-chat bootstrap E2E test: **PASS**.
 
 - Regression spec/evidence: `evals/boot/minimal-bootstrap-v1.md`
-- A fresh chat booted from the Custom Instructions BIOS pointer, inspected live repository state, followed the canonical boot path, reported version `0.4.0`, recovered all active skills/aliases, and derived the next checkpoint from live repository state rather than memory.
-- Re-run this test after bootstrap, kernel, routing, or repository-layout changes.
+- Re-run after bootstrap, kernel, routing, or repository-layout changes.
 
 ## Next Phase
 
-1. Use the three active domain skills in real workflows and capture failures/regressions as tests or durable rules.
-2. Decide whether legacy Writing/Image Chambers deserve separate DEDAL skills only when a concrete workflow needs them.
-3. Add further skills only when repeated real work justifies them.
-4. Keep private/personal/project operational state outside the public core.
+1. Use `skill-acquisition` against concrete repeated DEDAL capability gaps rather than catalog-browsing for its own sake.
+2. Continue benchmarking generic skills when a better public pattern is found, with accepted/rejected decisions recorded.
+3. Build evaluation fixtures for major skill rewrites before replacing proven behavior.
+4. Consider new skills such as separate Writing/Visual evolution only when repeated workflows justify them.
+5. Keep private/personal/project operational state outside the public core.
 
-Do not expand the Stable Kernel merely to capture preferences or project-specific rules; route them into the correct skill/project/state layer.
+Do not expand the Stable Kernel merely to capture preferences, ecosystem fashions, or project-specific rules; route them into the correct skill/project/state layer.

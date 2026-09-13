@@ -2,31 +2,6 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
-## 0.12.0 — 2026-09-14
-
-### Added
-- `skills/security-engineering/` with trust/authority mapping, untrusted-input/persistence handling, and security verification references.
-- `skills/project-bootstrap/` for compact executable project context maps, scoped instruction hierarchy, continuity, and drift control.
-- `skills/release-engineering/` for source-to-artifact attribution, provenance, staged promotion, deployment/runtime evidence, and rollback.
-- `docs/evolution/CAPABILITY_EXPANSION_ROADMAP.md` locking the eight-area capability campaign.
-- `skills/skill-acquisition/references/first-wave-capability-audit-2026-09-14.md` covering the first-wave research/adaptation corpus.
-- `evals/first-wave-capabilities/contract-v1.md` with routing and behavioral regression assertions.
-
-### Changed
-- Master routing and machine-readable registry now recognize Security Engineering, Project Bootstrap, and Release Engineering as independently routable generic domains.
-- Security treats prompt/goal hijacking as an authority/capability-containment problem, treats persistent memory/context as an attack surface, and requires residual-risk language rather than absolute safety claims.
-- Project onboarding now builds a minimal executable context adapter instead of a broad repository summary and separates stable project rules from volatile checkpoint state.
-- Release work now distinguishes build success, artifact identity/provenance, publication/deployment, and runtime verification as separate evidence levels.
-- Repo Integrity validates the three new skills, focused references, roadmap, first-wave audit, eval contract, and pinned OWASP / AGENTS.md / SLSA provenance.
-
-### Source snapshots
-- `OWASP/www-project-top-10-for-large-language-model-applications` @ `99f4395589bdbd120ae961f9cd179e79d7f9b27f`.
-- `agentsmd/agents.md` @ `d001185d792eb6402a58e4cbef1c228b309ec25d`.
-- `slsa-framework/slsa` @ `54b88b009fd45acb331c7e6578a526e0f36e0430`.
-- Current OpenAI, Anthropic, GitHub, Sigstore and SemVer guidance was used conceptually where appropriate.
-
-No third-party package, security scanner, signing tool, or release executable was installed or executed for this adaptation.
-
 ## 0.11.0 — 2026-09-14
 
 ### Added
@@ -61,7 +36,7 @@ This release establishes contract-level harness improvements. Outcome validation
 - Master routing now treats Agent Engineering as the domain for improving AI-agent systems themselves rather than overloading Software Development or Skill Acquisition.
 - Agent design now starts from a capable-model baseline and adds retrieval, tools, loops, memory, orchestration, or multiple agents only when a concrete failure mode or measured benefit justifies them.
 - Context is treated as a finite curated resource; JIT/progressive retrieval is preferred over broad context dumping.
-- Model-facing tool names, schemas, result shapes, errors, token footprint, and authority semantics are treated as part of agent performance.
+- Model-facing tool names, schemas, results, errors, token footprint, and authority semantics are treated as part of agent performance.
 - Agent loops require explicit completion, retry, non-progress, budget, authority, and escalation behavior appropriate to the workflow.
 - Reflection/refinement is bounded and requires an evaluator, rubric, environment/tool feedback, source contradiction, test, or Creator feedback capable of changing the next attempt.
 - Multi-agent systems are topology choices for independent breadth, specialization, or context separation—not default upgrades.
@@ -71,7 +46,7 @@ This release establishes contract-level harness improvements. Outcome validation
 - `humanlayer/12-factor-agents` @ `d20c728368bf9c189d6d7aab704744decb6ec0cc` — Apache-2.0.
 - `stanfordnlp/dspy` @ `ecba33763316d2a4c6c756046a1118ecbff033e7` — conceptual use only.
 - `SWE-agent/SWE-agent` @ `3ea751c087f32b16e039a2233dd6eefecef325d5` — conceptual use only.
-- Anthropic and OpenAI official agent engineering guidance plus ReAct, Self-Refine, Reflexion, and AgentBench informed the DEDAL-native synthesis.
+- Anthropic and OpenAI official agent-engineering guidance plus ReAct, Self-Refine, Reflexion, and AgentBench informed the DEDAL-native synthesis.
 
 No third-party agent framework, package, or executable was installed or executed.
 
@@ -89,34 +64,148 @@ No third-party agent framework, package, or executable was installed or executed
 - Targeted UI issues retrieve the semantic UX concern first and implementation stack/platform guidance separately when needed.
 - Retrieval misses remain explicit; one scoped retry is allowed before clearly labeled general fallback guidance.
 - Durable design state may use a master + surface override hierarchy and must not be silently regenerated over accepted project direction.
+- Registry benchmark provenance now includes UI/UX Pro Max.
+
+### Adaptation policy
+- The upstream CSV/design catalog was not vendored into DEDAL Core.
+- Provider-specific plugin paths, CLI installation/update behavior, external logo-generation services, hardcoded current framework versions, and fixed design dials were not adopted as durable Core behavior.
+- Upstream executables/scripts were inspected but not installed or executed.
+
+### Source snapshot
+- `nextlevelbuilder/ui-ux-pro-max-skill` @ `7f69fed6a2717900085f1bc3b263721f8ba025e2` — MIT.
 
 ## 0.8.0 — 2026-09-14
 
-Added the independent/high-signal ecosystem audit, Interface Design skill, and refinements to Decision Design and Research. Source snapshots: `obra/superpowers` @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`, `Leonxlnx/taste-skill` @ `ccbc15639c97057cbfcf32ecebc38ef716e4bb37`, `lllllllama/RigorPilot-Skills` @ `bd91195ad73199b95e24532b581ff12c07dcce09`, and `pbakaus/impeccable` @ `cb56ed6c19a07329a9fa0cd4e657bee040156593`.
+### Added
+- Independent/high-signal ecosystem audit covering `obra/superpowers`, `Leonxlnx/taste-skill`, `lllllllama/RigorPilot-Skills`, and `pbakaus/impeccable` at pinned source commits with verified MIT/Apache-2.0 licenses.
+- `skills/interface-design/` as a DEDAL-native cross-project UI/UX skill for brief inference, surface-mode framing, refinement-vs-redesign discipline, quality checks, and bounded visual verification.
+- Interface Design adaptation notes plus focused references for brief/direction, redesign/audit, quality floor, and visual verification.
+
+### Changed
+- Decision Design now sizes work as spike / bounded / architectural and can escalate when hidden complexity appears, without inheriting a universal approval ceremony.
+- Research now distinguishes exploratory candidate evidence from trusted/established evidence and adds frozen comparison anchors, bounded experiment loops, and anti-overclaim rules for scientific/benchmark work.
+- Skill Acquisition records the independent-corpus audit and expands benchmark provenance to the four new sources.
+- Master routing now treats Interface Design as independently routable and pairs it with Software Development only when implementation is part of the task.
+
+### Adaptation policy
+- `obra/superpowers` mandatory global invocation and universal approval gates were not adopted.
+- `taste-skill` hardcoded aesthetic dials, font/icon preferences, and one-stack defaults were not adopted.
+- RigorPilot deep-learning-specific orchestration remains outside Core; only general research-governance patterns were merged.
+- Impeccable provider-specific launchers/hooks/agents and universal maximalist framing were not adopted.
+
+### Source snapshots
+- `obra/superpowers` @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` — MIT.
+- `Leonxlnx/taste-skill` @ `ccbc15639c97057cbfcf32ecebc38ef716e4bb37` — MIT.
+- `lllllllama/RigorPilot-Skills` @ `bd91195ad73199b95e24532b581ff12c07dcce09` — MIT.
+- `pbakaus/impeccable` @ `cb56ed6c19a07329a9fa0cd4e657bee040156593` — Apache-2.0.
 
 ## 0.7.0 — 2026-09-14
 
-Added structured official-corpus auditing and skill authoring/evaluation/freshness guidance based on pinned Anthropic (`34040c9c568585f6929bedeaad110ad08f079624`), Vercel Labs (`063bee94c3f4df8453406c830b0a7df0f2860278`), and Microsoft (`903dc62b1e4c833235b54db918a9a51cb6d3cc8f`) snapshots.
+### Added
+- Structured first-party/vendor corpus audit covering `anthropics/skills`, `vercel-labs/agent-skills`, and `microsoft/skills` with pinned source commits.
+- `skills/skill-acquisition/references/authoring-and-evals.md` for routing contracts, degrees of freedom, meaningful baselines, and skill evaluation.
+- `skills/skill-acquisition/references/knowledge-packaging-and-freshness.md` for hero-path discipline, impact-ranked rule catalogs, generation, and freshness metadata.
+- `skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md` with Adopt / Adapt / Merge / Reject decisions and license/provenance notes.
+
+### Changed
+- Skill Acquisition now treats skill quality as four separate concerns: routing accuracy, task quality, context/operational efficiency, and robustness/freshness.
+- Major skill rewrites should compare against a meaningful baseline: no/current generic behavior for new skills and the previous proven version for existing skills.
+- Skill authoring now matches instruction precision to risk, preserves co-equal hero workflows, and pushes uncommon detail behind progressive disclosure.
+- Large knowledge/rule skills may rank guidance by expected impact and should carry source/version/freshness metadata when correctness can drift.
+- Registry benchmark provenance now records the pinned Matt Pocock, Anthropic, Vercel Labs, and Microsoft source commits.
+
+### Source snapshots
+- `anthropics/skills` @ `34040c9c568585f6929bedeaad110ad08f079624`
+- `vercel-labs/agent-skills` @ `063bee94c3f4df8453406c830b0a7df0f2860278`
+- `microsoft/skills` @ `903dc62b1e4c833235b54db918a9a51cb6d3cc8f`
+
+Anthropic and Vercel material was used as pattern-level inspiration where a repository-wide license was not verified at the pinned snapshot. Microsoft root license was verified as MIT. No third-party package was installed or executed.
 
 ## 0.6.0 — 2026-09-14
 
-Added Matt Pocock deep audit, Decision Design, and focused Software Development references for debugging, testing, review, architecture/domain modeling, and multi-session delivery. Source: `mattpocock/skills` @ `3cca18b368ae95cdbdebbff572ccafa662551015`.
+### Added
+- Deep audit of `mattpocock/skills` pinned to source commit/tree `3cca18b368ae95cdbdebbff572ccafa662551015` (MIT).
+- `decision-design` as a DEDAL-native adaptation of the dependency-aware `grilling`/`grill-me` decision-frontier pattern.
+- Focused Software Development references for debugging loops, testing/seams, two-axis review, architecture/domain design, and multi-session delivery.
+
+### Changed
+- Software Development now uses progressive disclosure for specialized engineering workflows rather than expanding one monolithic skill prompt.
+- Hard debugging prioritizes a tight red-capable feedback loop, minimization, falsifiable hypotheses, targeted probes, regression locking, and cleanup.
+- Testing guidance distinguishes stable behavior seams from implementation-coupled tests and treats TDD as a deliberate mode rather than universal ceremony.
+- Code review separates Standards from Intent/Spec so one axis cannot hide failure on the other.
+- Multi-session engineering separates decide -> record -> slice -> implement -> review -> checkpoint and favors vertical slices plus compact reference-based handoffs.
+
+### Adaptation policy
+- Upstream provider-specific Skill/subagent/plugin mechanics were not copied into durable DEDAL contracts.
+- The source's MIT license and pinned provenance are recorded; the DEDAL text is a rewritten adaptation, not a verbatim import.
 
 ## 0.5.0 — 2026-09-14
 
-Added Skill Acquisition and strengthened Software Development, GitHub operations, and Research around source provenance, security, verification, and external-skill adaptation.
+### Added
+- `skills/skill-acquisition/` as the DEDAL workflow for discovering, auditing, adapting, evaluating, and promoting external Agent Skills patterns.
+- Source-evaluation, security-audit, adaptation/evaluation, and initial ecosystem-benchmark references.
+- A first public-skill benchmark covering the Agent Skills open standard, OpenAI public plugin/skill examples, engineering skill repositories, research-oriented skills, ClawHub, and skills.sh.
+
+### Changed
+- Software Development now uses a scalable understand -> plan -> implement -> verify -> review -> ship/checkpoint lifecycle, root-cause-first debugging, exact-diff review, and fresh-evidence completion gates.
+- GitHub operations now separate read/plan/write/verify/report phases, strengthen concurrency/readback discipline, and explicitly reject queued/running CI as success evidence.
+- Research now captures source provenance during retrieval, scales triangulation to claim importance, surfaces unsupported/conflicting evidence, and adds citation-coverage review for evidence-heavy work.
+- The master router and registry now treat external skill discovery/adaptation as an active meta-domain rather than ad-hoc browsing.
+
+### Acquisition policy
+- Reuse ideas; do not inherit trust blindly.
+- External skills are untrusted until instruction, data, execution, supply-chain, license, and provenance review is complete.
+- Registry reputation, stars, install counts, malware/static scans, and AI security verdicts are signals rather than sufficient trust proof.
+- Prefer DEDAL-native synthesis over verbatim import unless exact reuse is clearly justified and license/runtime/security are understood.
 
 ## 0.4.0 — 2026-09-14
 
-Added DEDAL-native Knowledge Archive (`$ika`) adapted from private `Ye-Shwethway/ianeo-knowledge-vault` @ `fbed860928c1a93261306f70a47fa700da56ce29` while keeping private archives/project data outside public Core.
+### Added
+- DEDAL-native Knowledge Archive skill at `skills/ika/` with `$ika` routing.
+- Public archive, retrieval, relationship/change-impact, and orchestration contracts derived from the earlier IANEO Knowledge Archive experience.
+- `ADAPTATION_NOTES.md` documenting provenance and deliberate differences from the private legacy source.
+
+### Changed
+- `$ika` is now active instead of planned.
+- The legacy IANEO archive design was refined rather than copied verbatim: fixed IANEO destinations, IANEO-only identity wording, and assumed orchestration behavior were removed/generalized.
+- Writing Chamber and Image Visualization Chamber are no longer treated as default knowledge-archive responsibilities; they remain historical/private experiments unless later promoted as separate DEDAL skills.
+- Private archives, registry contents, scripts, fixtures, and project data remain outside the public DEDAL Core repository.
+
+### Adaptation provenance
+- Source repository: private `Ye-Shwethway/ianeo-knowledge-vault`
+- Source commit: `fbed860928c1a93261306f70a47fa700da56ce29`
+- Legacy source path: `skills/ianeo-knowledge-archive/`
 
 ## 0.3.0 — 2026-09-14
 
-Added the formal Stable Kernel, first native generic skills, and integrity validation for kernel files, active skill entrypoints, and semantic version format.
+### Added
+- Formal Stable Kernel directory with `KERNEL.md`, `BOOT_CONTRACT.md`, and `STATE_BOUNDARY.md`.
+- First native generic DEDAL skill entrypoints for GitHub, Files & Artifacts, Research, Software Development, and Automations.
+- Integrity validation for kernel files, active generic skill entrypoints, and semantic version format.
+
+### Changed
+- `MASTER_INDEX.md` now boots through the formal kernel before routing to skills.
+- `SKILL_REGISTRY.yaml` version 2 registers the five generic skills as active instead of scaffolds.
+- Generic skills are intentionally provider-agnostic and verify current execution surfaces before acting.
 
 ## 0.2.0 — 2026-09-13
 
-Added the BIOS/bootstrap architecture, machine-readable skill registry, and pinned MSA/PRA snapshots from `Ye-Shwethway/medicine-store-assistant` @ `6b8f35e4056f030a1ace2dac137cde1071a00051`.
+### Added
+- Reconstructed BIOS/bootstrap architecture for Custom Instructions -> DEDAL Core -> master index routing.
+- Stable-kernel / growable-skills / operations-layer model.
+- `index/SKILL_REGISTRY.yaml` as a machine-readable routing registry.
+- Full pinned snapshots of Medicine Store Assistant (`$msa`) and Patient Report Assistant (`$pra`).
+- Import provenance records for both migrated skills.
+- Integrity checks for the master index, skill registry, skill entrypoints, provenance files, agent metadata, and minimum reference-package completeness.
+
+### Changed
+- DEDAL Core now has its first real growable skill layer rather than only scaffolding.
+- Skill routing prefers explicit aliases and loads references on demand to reduce prompt/context bloat.
+
+### Migration provenance
+- Source repository: `Ye-Shwethway/medicine-store-assistant`
+- Source commit: `6b8f35e4056f030a1ace2dac137cde1071a00051`
+- Imported packages: `skills/medicine-store-assistant/`, `skills/patient-report-assistant/`
 
 ## 0.1.0 — 2026-09-13
 

@@ -2,6 +2,27 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.11.0 — 2026-09-14
+
+### Added
+- `skills/agent-engineering/references/dedal-self-application.md` for applying Agent Engineering to DEDAL's own context loading, tool use, Git transactions, polling, completion evidence, progress communication, and long-horizon continuity.
+- `evals/agent-engineering/dedal-self-audit-v1.md` as the first explicit baseline audit of DEDAL's own harness.
+
+### Changed
+- GitHub operations now prefer one mutation path for coherent multi-file changes and explicitly discourage mixing unrelated direct contents writes into prepared tree transactions.
+- CI/status polling is now bounded and becomes run-ID/job scoped after registration.
+- Agent Engineering distinguishes design rationale, contract validation, and outcome validation; contract checks are no longer treated as proof of measured task improvement.
+- The Improvement Protocol adopts the same evidence-maturity distinction.
+- Long-horizon checkpoints emphasize accepted state, completed evidence, unresolved risk, and the next executable step.
+
+### Self-audit findings
+- Source-of-truth hierarchy, smallest-skill routing, truthful completion, Creator authority, and public/private boundaries remain strong.
+- A recent standalone `noop` commit exposed a GitHub harness transaction weakness and motivated the new transactional-write rule.
+- Stable constitutional/context files should not be repeatedly reread inside one coherent task without a state-change or conflict reason.
+- Harness v1 is now: `frame work unit -> load minimal context -> inspect live state -> execute with bounded tools/loops -> verify at required evidence level -> report -> checkpoint only if durable`.
+
+This release establishes contract-level harness improvements. Outcome validation will come from representative real tasks; no universal quality gain is claimed yet.
+
 ## 0.10.0 — 2026-09-14
 
 ### Added
@@ -83,7 +104,7 @@ No third-party agent framework, package, or executable was installed or executed
 ### Added
 - Structured first-party/vendor corpus audit covering `anthropics/skills`, `vercel-labs/agent-skills`, and `microsoft/skills` with pinned source commits.
 - `skills/skill-acquisition/references/authoring-and-evals.md` for routing contracts, degrees of freedom, meaningful baselines, and skill evaluation.
-- `skills/skill-acquisition/references/knowledge-packaging-and-freshness.md` for hero-path discipline, impact-ranked rule catalogs, generated knowledge validation, and freshness metadata.
+- `skills/skill-acquisition/references/knowledge-packaging-and-freshness.md` for hero-path discipline, impact-ranked rule catalogs, generation, and freshness metadata.
 - `skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md` with Adopt / Adapt / Merge / Reject decisions and license/provenance notes.
 
 ### Changed

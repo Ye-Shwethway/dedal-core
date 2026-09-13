@@ -42,6 +42,14 @@ A claimed improvement should ideally answer:
 - How was it verified?
 - What is the rollback path?
 
+Separate evidence maturity:
+
+1. **Design rationale** — the change has a reasoned mechanism and addresses an observed failure/opportunity.
+2. **Contract validation** — rules, tests, or structural checks show the change is internally coherent and regression-safe.
+3. **Outcome validation** — representative real tasks show improvement against a meaningful baseline.
+
+Do not present design rationale or contract validation as measured outcome improvement.
+
 ## Failure Taxonomy
 
 When useful, classify failures as:

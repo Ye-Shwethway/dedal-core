@@ -57,11 +57,22 @@ Trace enough of the run to explain failures: model calls, tool selection, tool i
 
 Compare changes against a meaningful baseline. Separate task success, tool-use quality, reliability, context/token cost, latency, safety/authority adherence, and recovery behavior.
 
+Distinguish evidence maturity explicitly:
+- **design rationale** — why a change should help;
+- **contract validation** — whether rules/tests are internally coherent;
+- **outcome validation** — whether representative real tasks actually improved versus baseline.
+
+Do not report contract validation as measured outcome improvement.
+
 Read `references/evals-and-observability.md`.
 
 ## Long-horizon work
 
 For work spanning context windows or sessions, externalize state into inspectable artifacts: current goal, accepted decisions, remaining work, completed evidence, known failures, and next executable step. Each session should make bounded progress and leave the next session a truthful handoff rather than relying on hidden conversational memory.
+
+## Apply to DEDAL itself
+
+When optimizing DEDAL's own operating workflow, read `references/dedal-self-application.md`. Use a lightweight work-unit envelope, minimal context loading, bounded tool loops, transactional repository writes, evidence-level completion claims, and executable checkpoints. Do not turn self-optimization into constant ceremony.
 
 ## Boundary
 

@@ -69,11 +69,15 @@ jobs:
           test -s skills/interface-design/references/design-intelligence-retrieval.md
           test -s skills/interface-design/references/design-system-persistence.md
           test -s skills/agent-engineering/ADAPTATION_NOTES.md
-          test "$(find skills/agent-engineering/references -type f | wc -l)" -ge 5
+          test "$(find skills/agent-engineering/references -type f | wc -l)" -ge 6
+          test -s skills/agent-engineering/references/dedal-self-application.md
+          grep -q 'outcome validation' skills/agent-engineering/references/dedal-self-application.md
           grep -q 'd20c728368bf9c189d6d7aab704744decb6ec0cc' skills/agent-engineering/ADAPTATION_NOTES.md
           grep -q 'ecba33763316d2a4c6c756046a1118ecbff033e7' skills/agent-engineering/ADAPTATION_NOTES.md
           grep -q '3ea751c087f32b16e039a2233dd6eefecef325d5' skills/agent-engineering/ADAPTATION_NOTES.md
           test -s evals/agent-engineering/contract-v1.md
+          test -s evals/agent-engineering/dedal-self-audit-v1.md
+          grep -q 'Repository mutation path can be more transactional' evals/agent-engineering/dedal-self-audit-v1.md
           test -s skills/skill-acquisition/references/matt-pocock-deep-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/official-corpora-audit-2026-09-14.md
           test -s skills/skill-acquisition/references/independent-high-signal-audit-2026-09-14.md

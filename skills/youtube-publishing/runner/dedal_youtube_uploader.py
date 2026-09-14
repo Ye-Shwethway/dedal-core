@@ -158,7 +158,7 @@ def main():
     total=source.stat().st_size
     mime=mimetypes.guess_type(source.name)[0] or "application/octet-stream"
     claim=api(args.gateway,token,"POST",f"/v1/upload-jobs/{args.job_id}/claim",
-        {"content_length":total,"content_type":mime})
+        {"content_length":total,"content_type":mime,"source_fingerprint":actual})
     video_id=upload(source,claim["upload"]["session_url"],mime,total,
         args.gateway,token,args.job_id)
     verified=api(args.gateway,token,"POST",

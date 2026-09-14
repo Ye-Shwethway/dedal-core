@@ -16,14 +16,23 @@
   browser-bound, ten-minute, and atomically single-use.
 - Existing unrelated Workers, DNS, Access, Pages, D1, and Tunnels were preserved.
 
+## Newly verified OAuth evidence
+
+- Real Creator-owned Google OAuth completed at 2026-09-14T20:02:42Z.
+- Callback resolved display name `CHILIVIDS` and exact channel ID
+  `UCO3uj0h4UcRh3X5BXXrc_iw`.
+- Profile `chilivids` is enabled with credential reference `yt:chilivids`.
+- The credential vault contains AES-GCM ciphertext + IV only; no plaintext token was
+  read or exposed during verification.
+- OAuth mutation audit records `channel_profile.bind` with outcome `success`.
+
 ## Not yet verified
 
-OAuth callback with the real channel, deliberate channel-ID mismatch rejection,
+Deliberate channel-ID mismatch rejection,
 private resumable upload, interruption resume, and remote YouTube read-back. The
 skill remains candidate.
 
 ## Next step
 
-Complete OAuth for `chilivids`, read back the encrypted credential/profile binding,
-then exercise mismatch rejection and one private resumable upload. Promotion still
+Exercise deliberate mismatch rejection and one private resumable upload through the VPS runner. Promotion still
 requires a relevant thumbnail/playlist secondary operation.

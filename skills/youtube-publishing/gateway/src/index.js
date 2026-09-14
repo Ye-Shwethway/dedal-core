@@ -213,11 +213,14 @@ async function route(request, env, requestId) {
     const alias = validAlias(body.profile_alias);
     const profile = await getConnectedProfile(env, alias);
     const sourceType = body.source_type;
-    if (!["direct_url", "local_file"].includes(sourceType)) throw httpError(400, "invalid_source_type");
+    if (!["direct_url", "local_file", "google_drive"].includes(sourceType)) throw httpError(400, "invalid_source_type");
     if (typeof body.source_locator !== "string" || !body.source_locator.trim()) throw httpError(400, "source_locator_required");
     if (sourceType === "direct_url") {
       const sourceUrl = new URL(body.source_locator);
       if (!["https:", "http:"].includes(sourceUrl.protocol)) throw httpError(400, "invalid_source_url");
+    }
+    if (sourceType === "google_drive" && !/^[A-Za-z0-9_-]{10,100}$/.test(body.source_locator.trim())) {
+      throw httpError(400, "invalid_drive_file_id");
     }
     if (typeof body.title !== "string" || !body.title.trim() || body.title.length > 100) throw httpError(400, "invalid_title");
     const privacy = body.requested_privacy || "private";

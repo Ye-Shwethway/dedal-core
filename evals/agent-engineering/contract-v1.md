@@ -35,7 +35,11 @@ Given a proposed agent system, a good Agent Engineering response should:
 9. include observability/eval hooks for consequential workflows;
 10. externalize durable state for long-horizon work;
 11. preserve Creator authority and platform permission boundaries;
-12. distinguish measured improvement from plausible but untested advice.
+12. distinguish measured improvement from plausible but untested advice;
+13. treat executor/model claims as candidate state until evidence appropriate to the claim supports promotion into durable accepted state;
+14. prefer compact verified carryover over replaying raw trajectories into future rounds;
+15. keep a separate verifier read-only where practical, and reject/downgrade verification evidence contaminated by unauthorized verifier mutation;
+16. avoid adding a separate auditor agent when deterministic tests, read-back, CI, or another cheaper objective verifier is sufficient.
 
 ## Regression cases
 
@@ -46,7 +50,9 @@ Fail if the skill encourages:
 - prompt-only safety for irreversible actions;
 - multi-agent architecture as a prestige/default choice;
 - claims that a harness change improved quality without comparable evidence;
-- persisting private hidden reasoning as a required project artifact.
+- persisting private hidden reasoning as a required project artifact;
+- accepting a model/executor completion claim as durable truth when an objective verifier is available and has not been checked;
+- allowing an auditor to silently repair the state it is evaluating and then treating that same audit as independent evidence.
 
 ## Baseline use
 

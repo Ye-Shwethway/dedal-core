@@ -1,35 +1,39 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.18.1",
+  "version": "0.18.2",
   "accepted_state": [
     "Initial eight-area capability expansion is complete.",
-    "Default operating phase is hardening, consolidation, and outcome validation rather than skill expansion.",
+    "Default operating phase is hardening, consolidation, outcome validation, and gap-oriented learning rather than default skill expansion.",
     "GitHub mutation guard contracts exist and remain CI-validated; native provider interception is deferred unless a controllable dispatcher surface becomes available.",
-    "Every live skill entrypoint has a consolidation classification.",
-    "Routing overlap clusters now have machine-readable primary ownership rules.",
+    "Every live skill entrypoint has a consolidation classification and routing overlap clusters have machine-readable primary ownership rules.",
     "Skill Acquisition is phase-gated and must not trigger a new expansion wave without explicit request or demonstrated gap.",
+    "Agent Engineering now treats executor/model claims as candidate state and requires evidence-appropriate promotion into durable accepted state.",
+    "Independent verifier/auditor roles should be read-only where practical; unauthorized verifier mutation contaminates verification evidence.",
+    "Long-horizon carryover should prefer compact verified facts and references over replaying raw trajectories.",
     "Executable continuity checkpoint state remains CI-validated."
   ],
   "evidence": [
     {"id": "CE-01", "kind": "observed", "status": "positive_with_regression_risk"},
     {"id": "GMG-v1", "kind": "contract_validation", "status": "covered_by_negative_and_positive_cases"},
     {"id": "skill-consolidation-v1", "kind": "structural_classification", "status": "complete_coverage_no_merge_or_remove_without_outcome_evidence"},
-    {"id": "routing-boundaries-v1", "kind": "contract_validation", "status": "primary_ownership_clusters_defined_and_ci_checked"}
+    {"id": "routing-boundaries-v1", "kind": "contract_validation", "status": "primary_ownership_clusters_defined_and_ci_checked"},
+    {"id": "longhorizon-harness-audit-2026-09-14", "kind": "external_pattern_audit", "status": "adapted_verified_state_promotion_read_only_verification_and_compact_carryover"}
   ],
   "unresolved_risks": [
     "The public Core guard cannot intercept native provider GitHub tools unless the host routes mutation calls through it.",
     "Eight skills remain NEEDS_EVIDENCE and should not be promoted to stronger consolidation decisions without representative outcomes.",
-    "Routing boundaries are contract-level consolidation and still need representative real-task outcome evidence."
+    "Routing boundaries and verified-state promotion are contract-level refinements and still need representative real-task outcome evidence.",
+    "A separate auditor agent is not assumed to improve every task; topology must remain evidence-driven and smallest-sufficient."
   ],
   "next_executable_step": {
-    "id": "ROUTING-OUTCOME-01",
-    "action": "Shadow-score ordinary real tasks against the routing boundary clusters and consolidation cases; record only observable misroutes, unnecessary pairings, context reads, rework, and correctness outcomes, then promote individual skill decisions only when evidence justifies it."
+    "id": "VERIFIED-STATE-OUTCOME-01",
+    "action": "Exercise verified-state promotion naturally on ordinary real work: distinguish candidate model claims from accepted externally verified state, record observable verification/rework outcomes, and only strengthen the pattern if representative tasks show net value. Continue gap-oriented learning without creating new skills unless a demonstrated capability gap remains after adaptation."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "164a576b31972ef7542aabfe34476746c0be5f83",
-    "relation": "verified v0.18.0 baseline before the 0.18.1 routing-consolidation transaction"
+    "sha": "b86637d5bf37bd1e43154894da6f5159961ad7db",
+    "relation": "verified v0.18.1 baseline before the 0.18.2 long-horizon harness learning transaction"
   }
 }

@@ -23,6 +23,18 @@ Do not turn this into ceremony for trivial work.
 4. Prefer live project/repository/service state over remembered summaries.
 5. Keep transient tool output out of durable context unless it changes a decision or proves completion.
 
+## Verified-state promotion
+
+Treat model/executor claims as **candidate state**, not accepted state.
+
+Promote a claim into durable accepted state only when the evidence level matches the claim: read-back for mutations, tests for behavior, artifact attribution for builds, deployment/runtime checks for deployed behavior, or another independent authoritative verifier when appropriate.
+
+For long-horizon work, carry forward compact verified facts, accepted decisions, unresolved gaps, and references. Keep raw trajectories/logs available for diagnosis rather than replaying them into every future context.
+
+When a separate verifier/auditor role is useful, prefer read-only authority where the execution surface supports it. A verifier that changes the state it is judging creates contaminated evidence; reject or downgrade that audit unless mutation was explicitly part of the verifier contract and independently accounted for.
+
+Do not require a separate verifier agent when deterministic tests, service read-back, CI, or another cheaper objective check provides equivalent evidence.
+
 ## Tool-call discipline
 
 - Batch independent reads/searches when possible.
@@ -71,6 +83,8 @@ Use only as much evidence as the task requires:
 5. deployment/runtime verification.
 
 Do not climb higher when the task does not require it, and do not claim a higher level from lower-level evidence.
+
+A model or manager saying a task is complete is never a substitute for an available objective completion check. When objective verification exists, completion becomes accepted state only after that check passes.
 
 ## Progress communication
 

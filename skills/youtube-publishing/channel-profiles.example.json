@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "profiles": {
+    "archive": {
+      "channel_id": "UC_REPLACE_WITH_VERIFIED_CHANNEL_ID",
+      "client_secrets_file": "~/.config/dedal/youtube/client_secret.json",
+      "token_file": "~/.config/dedal/youtube/tokens/archive.json",
+      "features": ["upload"],
+      "defaults": {
+        "privacy": "private",
+        "category_id": "22",
+        "made_for_kids": false
+      }
+    },
+    "creative": {
+      "channel_id": "UC_REPLACE_WITH_OTHER_VERIFIED_CHANNEL_ID",
+      "client_secrets_file": "~/.config/dedal/youtube/client_secret.json",
+      "token_file": "~/.config/dedal/youtube/tokens/creative.json",
+      "features": ["upload", "playlist"],
+      "defaults": {
+        "privacy": "private",
+        "category_id": "24",
+        "made_for_kids": false
+      }
+    }
+  }
+}

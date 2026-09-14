@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """VPS runner: source bytes go directly to YouTube; no Google token is stored here."""
 from __future__ import annotations
-import argparse, hashlib, json, mimetypes, os, re, sys
+import argparse, hashlib, json, mimetypes, os, re, subprocess, sys
 import urllib.error, urllib.request
 from pathlib import Path
 
@@ -47,6 +47,28 @@ def download(url, target):
 
 def resolve(job,state_dir):
     source=job["source"]
+    if source["type"]=="google_drive":
+        file_id=source["locator"]
+        if not re.fullmatch(r"[A-Za-z0-9_-]{10,100}",file_id):
+            raise RunnerError("Invalid Google Drive file ID")
+        bridge_repo=os.getenv("DEDAL_YOUTUBE_DRIVE_BRIDGE_REPO")
+        if not bridge_repo:
+            raise RunnerError("DEDAL_YOUTUBE_DRIVE_BRIDGE_REPO is not set")
+        target=Path(bridge_repo).resolve()/"downloads"/"dedal-youtube"/job["id"]
+        target.mkdir(parents=True,exist_ok=True)
+        files=[p for p in target.iterdir() if p.is_file()]
+        if not files:
+            container_target=f"/app/downloads/dedal-youtube/{job['id']}/"
+            result=subprocess.run(
+                ["docker","exec","mirror-bot","rclone","backend","copyid",
+                 "gdrive:",file_id,container_target],
+                stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=1800)
+            if result.returncode:
+                raise RunnerError(f"Drive source fetch failed (exit {result.returncode})")
+            files=[p for p in target.iterdir() if p.is_file()]
+        if len(files)!=1:
+            raise RunnerError(f"Drive source resolution expected one file, found {len(files)}")
+        return files[0].resolve()
     if source["type"]=="local_file":
         path=Path(source["locator"]).expanduser().resolve()
         if not path.is_file(): raise RunnerError(f"Local source not found: {path}")

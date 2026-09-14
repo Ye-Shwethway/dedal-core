@@ -118,8 +118,12 @@ python3 runner/dedal_youtube_uploader.py --job-id JOB_UUID
 ```
 
 Direct URLs download resumably to the runner state directory. Local paths are read
-in place. The runner verifies optional SHA-256, queries YouTube's confirmed offset,
-uploads 8 MiB chunks, reports progress, and asks the gateway for remote verification.
+in place. A `google_drive` source uses the Drive file ID as its locator and resolves
+through the existing VPS media gateway's authenticated `rclone backend copyid`
+route; no YouTube credential is placed on that host. The runner computes SHA-256
+before claiming the job, and the gateway atomically locks that fingerprint before
+creating a resumable session. It then queries YouTube's confirmed offset, uploads
+8 MiB chunks, reports progress, and asks the gateway for remote verification.
 It never auto-restarts an expired/ambiguous session because a lost final response
 could otherwise silently duplicate a video.
 

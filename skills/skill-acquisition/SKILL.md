@@ -65,6 +65,7 @@ Core acquisition references include source evaluation, security audit, adaptatio
 
 Latest creative-production audits:
 - `references/video-production-deep-audit-2026-09-14.md` — generative-video direction, Remotion/FFmpeg, temporal ownership, tool boundary, and promotion decision.
+- `references/video-post-production-hardening-audit-2026-09-14.md` — professional editing/effects, transitions, audio, captions, color, automation patterns, and TUNE/MERGE decision.
 - `references/presentation-engineering-deep-audit-2026-09-14.md` — source-first PPTX, narrative/evidence architecture, editability/render QA, licensing boundary, and promotion decision.
 
 Previous wave close:

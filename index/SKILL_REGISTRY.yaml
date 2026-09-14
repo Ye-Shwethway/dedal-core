@@ -1,4 +1,4 @@
-version: 14
+version: 15
 last_reviewed: "2026-09-14"
 
 routing:
@@ -73,6 +73,25 @@ skills:
     entrypoint: "skills/software-development/SKILL.md"
     status: active
     independence: generic_domain
+
+  quality-engineering:
+    aliases: []
+    path: "skills/quality-engineering"
+    entrypoint: "skills/quality-engineering/SKILL.md"
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      sources:
+        - source: "Playwright current documentation: best practices, locators, auto-waiting, accessibility testing"
+          reviewed_on: "2026-09-14"
+        - repo: "DwonnG/qa-agent-skills"
+          commit: "c5dcf11d22bd40a55d4f7c30baa2f272b4dcf576"
+          license: "MIT"
+        - repo: "petrkindlmann/qa-skills"
+          commit: "b3bb61bd268b147476252c6ed5a0440c87b97441"
+          license: "MIT"
+      adapted_on: "2026-09-14"
 
   decision-design:
     aliases: []
@@ -306,3 +325,7 @@ skills:
           commit: "62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2"
         - repo: "letta-ai/letta"
           commit: "5bcdd177d70fa2b31a754cfcd801e77b2e1ab16a"
+        - repo: "DwonnG/qa-agent-skills"
+          commit: "c5dcf11d22bd40a55d4f7c30baa2f272b4dcf576"
+        - repo: "petrkindlmann/qa-skills"
+          commit: "b3bb61bd268b147476252c6ed5a0440c87b97441"

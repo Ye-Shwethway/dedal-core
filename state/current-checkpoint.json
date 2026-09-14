@@ -1,45 +1,44 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.19.1",
+  "version": "0.20.0",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with an always-active Cognitive Runtime and progressively disclosed specialist faculties.",
-    "The ecosystem capability-gap audit is complete enough to establish a ranked next expansion campaign without adding a new active skill yet.",
-    "Quality Engineering is the first top-level promotion candidate because independent product-quality strategy, exploratory testing, E2E/regression, visual/accessibility verification, and readiness evidence are not fully owned by Software Development or Release Engineering.",
-    "Cloudflare Platform is the second top-level promotion candidate because repeated Creator workflows span Workers, Pages, D1, R2, Access, Tunnel, networking, Wrangler, observability, and agent infrastructure across multiple projects.",
-    "Database Engineering is a third candidate, but schema/index/query/migration/concurrency knowledge should begin as reference packs and earn promotion through recurring outcome evidence.",
-    "Flutter, Android, Postgres/Supabase/Neon, Terraform/IaC, observability/SRE, and browser/computer automation are reference-pack-first areas rather than immediate new top-level faculties.",
-    "Browser and computer control are execution surfaces; QA, Research, Automations, or another domain owner should own the task intent.",
-    "Healthcare and clinical-informatics acquisition remains a later high-bar area: prefer bounded interoperability, evidence retrieval, terminology, documentation, and de-identified data workflows over a generic doctor or autonomous clinical-reasoning skill.",
-    "Bulk marketplace imports, popularity-driven promotion, weakly grounded generic medical/persona skills, and thin vendor wrappers that duplicate existing ownership are rejected as top-level expansion strategies.",
-    "Existing Cognitive Runtime, authority, delegation, recovery, context, trajectory, self-improvement, and GitHub mutation contracts remain in force."
+    "Quality Engineering is now an active top-level faculty with independent ownership of acceptance truth, risk-based verification, exploratory/E2E/regression evidence, defect characterization, and readiness recommendations.",
+    "Software Development remains the implementation owner; Quality Engineering does not automatically activate for every developer test or trivial code change.",
+    "Interface Design owns UX/UI direction; Quality Engineering may independently verify agreed user-visible behavior, accessibility, and visual acceptance.",
+    "Release Engineering owns artifact promotion, deployment, rollback, and release evidence; Quality Engineering supplies readiness evidence but does not own promotion authority.",
+    "Security Engineering owns threat models and security policy; Quality Engineering may execute agreed checks but does not redefine security boundaries.",
+    "Playwright, browser/computer use, mobile tools, API clients, accessibility scanners, and visual-diff tooling are execution surfaces or references rather than the Quality Engineering faculty identity.",
+    "Quality verification is claim- and risk-driven: use the cheapest evidence layer that proves the behavior, prefer user-visible/public-contract oracles, and avoid raw test-count or coverage-percentage optimization.",
+    "Blind reruns do not convert flakes into passing evidence; unresolved nondeterminism remains a quality risk.",
+    "Automated accessibility scans and pixel diffs are partial evidence and must not be overstated as universal accessibility or semantic correctness proof.",
+    "Cloudflare Platform is now the next top-level capability candidate for deep audit; Database Engineering remains reference-pack-first pending recurring outcome evidence.",
+    "Existing Cognitive Runtime, authority, delegation, recovery, context, trajectory, self-improvement, GitHub mutation, and capability-composition contracts remain in force."
   ],
   "evidence": [
-    {"id": "ecosystem-capability-gap-audit-2026-09-14", "kind": "external_pattern_audit", "status": "classified_top_level_reference_pack_later_and_reject_candidates"},
-    {"id": "capability-gap-map-v1", "kind": "architecture_state", "status": "quality_engineering_priority_1_cloudflare_priority_2_database_priority_3"},
-    {"id": "cloudflare-skills", "kind": "first_party_skill_corpus", "status": "pinned_b052c32bab7dd493513260228a36c88294f343f1"},
-    {"id": "flutter-agent-plugins", "kind": "first_party_skill_corpus", "status": "pinned_7cdb7d3c33679ef14a7a7584cec1d5ecb8752586"},
-    {"id": "android-skills", "kind": "first_party_skill_corpus", "status": "pinned_bac232fd02b0855df9275281a2a7a47643768719"},
-    {"id": "hashicorp-agent-skills", "kind": "first_party_skill_corpus", "status": "pinned_c2d65dfe492f74d360d35b859b88932222470bd8"},
-    {"id": "neon-postgres-skills", "kind": "specialist_skill_corpus", "status": "pinned_27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26"},
-    {"id": "cognitive-runtime-capability-composition-audit-2026-09-14", "kind": "external_pattern_audit", "status": "active_foundation_unchanged"}
+    {"id": "quality-engineering-deep-audit-2026-09-14", "kind": "external_pattern_audit", "status": "promotion_approved_with_independent_verification_boundary"},
+    {"id": "quality-engineering-routing-contract-v1", "kind": "contract_validation", "status": "implementation_quality_design_release_security_and_execution_surface_boundaries_ci_enforced"},
+    {"id": "playwright-current-docs", "kind": "first_party_documentation", "status": "reviewed_best_practices_locators_auto_waiting_accessibility_2026_09_14"},
+    {"id": "qa-agent-skills", "kind": "community_skill_corpus", "status": "pinned_c5dcf11d22bd40a55d4f7c30baa2f272b4dcf576"},
+    {"id": "petrkindlmann-qa-skills", "kind": "community_skill_corpus", "status": "pinned_b3bb61bd268b147476252c6ed5a0440c87b97441"},
+    {"id": "capability-gap-map-v2", "kind": "architecture_state", "status": "quality_engineering_promoted_cloudflare_next_database_later"}
   ],
   "unresolved_risks": [
-    "The public skill ecosystem is large and uneven; first-party provenance improves confidence but does not prove DEDAL-specific outcome gains.",
-    "Quality Engineering currently lacks one canonical first-party cross-framework skill corpus, so methodology synthesis must separate durable QA principles from tool-specific community conventions.",
-    "Cloudflare product facts and APIs can drift quickly; any specialist skill must bias toward live official documentation rather than freezing a large product manual into Core.",
-    "Database Engineering may overlap Software Development and Data Operations unless its ownership boundary is kept to database semantics and operational behavior.",
-    "Healthcare skill ecosystems contain useful domain workflows but carry higher factual and safety stakes; generic clinical automation must not be promoted from popularity or vendor claims alone.",
-    "Capability candidates remain discovery-level until representative real-task baselines and regression evidence justify promotion."
+    "Quality Engineering promotion is supported by architecture and contract evidence, but DEDAL-specific outcome gains still need representative ordinary project use.",
+    "Independent QA can become duplicate ceremony if routed onto trivial low-risk changes; smallest-sufficient composition remains mandatory.",
+    "Agentic/exploratory testing can be nondeterministic and must use bounded goals and explicit oracles rather than subjective success claims.",
+    "Framework-specific QA knowledge drifts; tool references should be refreshed from authoritative documentation when versions materially affect correctness.",
+    "Cloudflare product facts and APIs can drift quickly; the next specialist audit must prefer live official documentation rather than freezing a product manual into Core."
   ],
   "next_executable_step": {
-    "id": "QUALITY-ENGINEERING-DEEP-AUDIT-01",
-    "action": "Deep-audit quality-engineering methodology and representative QA skill/tool corpora. Define the exact ownership boundary against Software Development, Interface Design, Release Engineering, and Automations; extract durable patterns; design baseline/evaluation cases from real DEDAL project workflows; then decide whether Quality Engineering merits top-level activation."
+    "id": "CLOUDFLARE-PLATFORM-DEEP-AUDIT-01",
+    "action": "Deep-audit the official cloudflare/skills corpus at the pinned baseline and current authoritative Cloudflare documentation. Decide whether Cloudflare Platform merits an active top-level faculty, define its ownership boundary against Software Development, Release Engineering, Security Engineering, Data Operations, and Quality Engineering, and keep drift-sensitive product facts reference-first/live-verified."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "ac04e56de408073900148d1c8495ce5d5c98adb2",
-    "relation": "verified v0.19.0 baseline before the 0.19.1 capability-gap audit transaction"
+    "sha": "ccd1f905fdcad879cb5af0255d97c96b621554bb",
+    "relation": "verified v0.19.1 capability-gap baseline before the 0.20.0 Quality Engineering promotion transaction"
   }
 }

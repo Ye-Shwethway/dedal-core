@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "faculty": "quality-engineering",
+  "cases": [
+    {
+      "id": "QE-01",
+      "intent": "implement-feature-and-targeted-tests",
+      "expected_primary": "software-development",
+      "expected_supporting": [],
+      "rule": "Implementation remains Software Development unless independent quality assessment is separately requested or materially needed."
+    },
+    {
+      "id": "QE-02",
+      "intent": "independent-release-readiness-assessment",
+      "expected_primary": "quality-engineering",
+      "expected_supporting": ["release-engineering"],
+      "rule": "QA owns readiness evidence; Release Engineering owns promotion/deploy mechanics."
+    },
+    {
+      "id": "QE-03",
+      "intent": "ux-redesign",
+      "expected_primary": "interface-design",
+      "expected_supporting": [],
+      "rule": "Quality Engineering is not the design owner."
+    },
+    {
+      "id": "QE-04",
+      "intent": "verify-redesigned-screen-on-device",
+      "expected_primary": "quality-engineering",
+      "expected_supporting": ["interface-design"],
+      "rule": "Independent verification may pair with the design owner for acceptance truth."
+    },
+    {
+      "id": "QE-05",
+      "intent": "playwright-e2e-critical-flow",
+      "expected_primary": "quality-engineering",
+      "execution_surface": "playwright-or-browser-tool",
+      "rule": "Playwright is an execution surface/reference, not the primary faculty identity."
+    },
+    {
+      "id": "QE-06",
+      "intent": "security-threat-model",
+      "expected_primary": "security-engineering",
+      "rule": "Quality Engineering does not replace Security Engineering."
+    },
+    {
+      "id": "QE-07",
+      "intent": "rerun-flaky-test-until-green",
+      "expected_outcome": "reject",
+      "rule": "Blind reruns cannot be used as readiness evidence."
+    },
+    {
+      "id": "QE-08",
+      "intent": "accessibility-scan-passed-therefore-fully-accessible",
+      "expected_outcome": "reject",
+      "rule": "Automated accessibility evidence is partial and cannot support a universal accessibility claim."
+    }
+  ]
+}

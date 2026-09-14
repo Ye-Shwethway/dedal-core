@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "phase": "hardening-consolidation-outcome-validation",
   "composition_model": {
     "architecture": "persistent-cognitive-runtime",
@@ -15,10 +15,20 @@
       "primary_owner_by_intent": {
         "repository-mechanics": "github",
         "implementation-debug-test": "software-development",
+        "independent-product-quality-verification": "quality-engineering",
         "artifact-promotion-rollback": "release-engineering",
         "agent-tool-harness-design": "agent-engineering"
       },
-      "rule": "Route by the requested outcome, then pair only when another owner contributes a distinct necessary layer."
+      "rule": "Implementation, independent quality assessment, and release promotion are distinct ownership layers; pair only when another owner contributes a necessary layer."
+    },
+    {
+      "id": "quality-interface-security",
+      "primary_owner_by_intent": {
+        "ux-ui-direction-audit": "interface-design",
+        "verify-user-visible-behavior-accessibility-regression": "quality-engineering",
+        "security-threat-policy-adversarial-reasoning": "security-engineering"
+      },
+      "rule": "Quality Engineering verifies agreed behavior and quality evidence but does not own design direction or security policy."
     },
     {
       "id": "state-continuity",
@@ -71,6 +81,7 @@
     "explicit-alias-outranks-generic-overlap",
     "primary-owner-first",
     "pair-only-for-distinct-necessary-layer",
+    "implementation-verification-release-are-distinct-layers",
     "execution-surface-selection-is-separate-from-skill-selection",
     "recompose-on-material-subgoal-change",
     "no-new-skill-for-already-owned-intent",

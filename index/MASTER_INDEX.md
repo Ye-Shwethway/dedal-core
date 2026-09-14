@@ -29,6 +29,8 @@ This is the primary routing index for DEDAL Core.
 | Database engineering | schema/index/query-plan/transaction/migration/database performance work | `skills/database-engineering/` | active | Engine-aware schema invariants, indexes/access paths, query plans, transaction/isolation/locking semantics, migration safety, connection behavior, and database recovery reasoning |
 | Reliability engineering | SRE/observability/SLO/alerting/production incidents/service health | `skills/reliability-engineering/` | active | Live-service health, observability strategy, actionable alerting, incident response, recovery verification, and post-incident reliability learning |
 | Infrastructure engineering | `iac`, Terraform/OpenTofu/Packer/infrastructure lifecycle | `skills/infrastructure-engineering/` | active | Declarative configuration/state/live-resource reconciliation, plan/apply, drift, imports/moves/refactors, module/provider lifecycle, destructive-change review, and infrastructure recovery |
+| Video production | `video-production`, `video-editing` | `skills/video-production/` | active | Temporal storytelling, generative-video shot direction, take selection, editing, subtitles, audio, motion graphics, FFmpeg/Remotion orchestration, and media delivery |
+| Presentation engineering | `presentation-engineering`, `pptx`, `slides` | `skills/presentation-engineering/` | active | Audience/argument framing, slide architecture, evidence mapping, visual hierarchy, editable PPTX strategy, speaker notes, template fidelity, and rendered deck QA |
 | Decision design | deliberate plan/architecture/product stress-test | `skills/decision-design/` | active | Uncertainty/reversibility-aware decision design with dependency frontier, experiments, thresholds, premortems, and durable learning |
 | Interface design | website/app/dashboard/frontend design or redesign | `skills/interface-design/` | active | Brief-aware UI/UX direction, scoped design-intelligence retrieval, redesign/audit discipline, durable design-system state, and bounded visual verification |
 | Agent engineering | AI agent / harness / context / tools / loops / orchestration / evals | `skills/agent-engineering/` | active | Prompt/context engineering, model-facing tool design, harness control, agentic loops, orchestration, observability, and long-horizon continuity |
@@ -46,52 +48,40 @@ The machine-readable equivalent is `index/SKILL_REGISTRY.yaml`.
 
 ## Routing Rule
 
-Do not load every skill by default. Select the smallest set that covers the current task.
+Do not load every skill by default. Select the smallest set that covers the current task. A named skill selects a primary faculty without disabling the Cognitive Runtime or genuinely necessary support.
 
-Explicit aliases such as `$msa`, `$pra`, `$ika`, and `iac` are direct routing signals. A named skill selects a primary faculty without disabling the Cognitive Runtime or genuinely necessary support.
+Use `video-production` when the primary problem is temporal media creation: generative-video direction, shot/scene coverage, take selection, continuity through time, editing, captions/subtitles, audio finishing, motion graphics, reframing/retiming/transcoding, or final media delivery. Pair with Visual Direction for canonical still/reference identity, Writing/Editorial for scripts/captions, Research for factual content, and Quality Engineering for independent acceptance when needed. FFmpeg, Remotion, Veo/Flow, Runway, Seedance and successor tools are execution/reference surfaces, not separate faculties.
 
-Use `infrastructure-engineering` when the primary problem is declarative infrastructure lifecycle: configuration/state/live-resource reconciliation, plan/apply review, drift, imports/moves/refactors, module/provider lifecycle, destructive resource changes, state/backend safety, or infrastructure recovery. Pair with Cloudflare Platform or another provider owner for provider-native architecture, Security Engineering for authority/credential/trust policy, Release Engineering for application promotion, Reliability Engineering for post-change service health, Database Engineering for database-engine semantics, and Software Development for application code. A plan is not an apply; apply success is not service-health proof.
+Use `presentation-engineering` when the main deliverable is a slide deck/PPTX or when quality depends on audience/objective framing, narrative spine, slide roles, evidence mapping, chart/diagram choice, visual hierarchy, speaker notes, template fidelity, editability, or rendered slide QA. Pair with Research/domain owners for truth, Writing/Editorial for prose, Data Operations for source tables, Visual Direction for custom visual assets, and Quality Engineering for independent readiness. Prefer the runtime's native slide tooling when available and follow higher-priority platform instructions.
 
-Use `reliability-engineering` when the primary problem is live service health: SLI/SLO/error-budget reasoning, observability strategy, actionable alerting, production incident triage/mitigation, recovery verification, or post-incident learning. Infrastructure changes that trigger an incident may make Infrastructure Engineering supporting, but live-service impact remains Reliability Engineering's layer.
+Use `infrastructure-engineering` for declarative infrastructure lifecycle: configuration/state/live-resource reconciliation, plan/apply review, drift, imports/moves/refactors, module/provider lifecycle, destructive resource changes, state/backend safety, or infrastructure recovery.
 
-Use `release-engineering` when producing or shipping APK/AAB/binaries/packages/images, changing CI/CD/release pipelines, attributing artifacts to source, staging rollout, verifying deployment, or planning application/artifact rollback. Infrastructure resource lifecycle belongs to Infrastructure Engineering even when changes are executed by the same pipeline.
+Use `reliability-engineering` for live service health: SLI/SLO/error-budget reasoning, observability strategy, actionable alerting, production incident triage/mitigation, recovery verification, or post-incident learning.
 
-Use `quality-engineering` when the task is primarily to decide what evidence is needed to trust product behavior, design/risk-weight a verification plan, perform independent exploratory/E2E/regression/visual/accessibility checks, characterize defects/flakes, or issue a readiness verdict.
+Use `release-engineering` for source-to-artifact attribution, application/package promotion, rollout, deployment evidence, and rollback.
 
-Use `cloudflare-platform` when the primary problem is Cloudflare product selection/composition, Workers/Pages/storage/coordination bindings, DNS/Access/Tunnel/edge topology, Wrangler/platform configuration, Cloudflare-native observability, or platform-specific troubleshooting. If Terraform/OpenTofu manages those resources, Cloudflare Platform supplies provider semantics while Infrastructure Engineering owns IaC lifecycle/reconciliation.
+Use `quality-engineering` when the task is primarily to decide what evidence is needed to trust behavior/output, perform independent verification, characterize defects, or issue a readiness verdict.
 
-Use `database-engineering` when correctness/performance depends on schema invariants, keys/constraints, indexes/access paths, query plans, transaction/isolation/locking behavior, migrations/backfills, connection/session/pooling semantics, or engine-specific concurrency/recovery. Infrastructure provisioning of a database resource does not transfer database-engine semantics to Infrastructure Engineering.
+Use `cloudflare-platform` for Cloudflare product/platform semantics; `database-engineering` for database-engine semantics; `security-engineering` for trust/authority/security policy; `software-development` for application implementation.
 
-Use `security-engineering` when security risk, trust/authority boundaries, untrusted content, secrets, privilege, prompt/goal hijacking, persistent-context poisoning, supply-chain risk, or destructive capability is a primary concern. Infrastructure automation never creates mutation authority by itself.
+Use `data-operations` for record/data integrity, reconciliation, staging, deterministic transforms, formulas/tables, and audit trails.
 
-Use `project-bootstrap` when entering an unfamiliar repository/project, resuming after significant context loss, or creating/refining agent-facing project context. Pair it with GitHub/Files for evidence and with Software Development only when implementation begins.
+Use `writing-editorial` when the main deliverable is prose and quality depends on semantic fidelity, structure, voice, terminology, translation/localization, or publication QA.
 
-Use `data-operations` when spreadsheet/table/CSV work depends on source authority, record identity, reconciliation/deduplication, schema/invariant validation, formula integrity, staging/review/promotion, deterministic transforms, or audit trails.
+Use `visual-direction` for still-image generation/editing where subject identity, canonical traits, reference hierarchy, composition, series continuity, targeted edits, or rendered visual QA matter. When the task becomes temporal assembly or motion direction, Video Production owns that layer.
 
-Use `writing-editorial` when the main deliverable is prose and quality depends on intent/audience fit, semantic fidelity, structure, voice, terminology, translation/localization, or publication QA. Pair with Research for externally verifiable/current claims and with domain skills for specialized truth.
+Use `skill-acquisition` for explicit external skill discovery/comparison/audit, new-skill authoring, or material skill improvement. Expansion is evidence-gated; do not add skills merely because public repositories exist.
 
-Use `visual-direction` when image generation/editing depends on subject identity, canonical traits, reference hierarchy, composition/shot planning, series continuity, targeted edits, or rendered visual QA. Pair it with the current image tool for execution.
-
-Use `knowledge-memory` when the primary problem is what DEDAL should remember, where state belongs, project-vs-global scope, provenance/freshness, contradiction resolution, memory poisoning, retrieval/compaction, or forgetting/governance.
-
-Use `decision-design` deliberately when the Creator asks to stress-test a plan/idea or when high-impact unresolved decisions materially block a safe design.
-
-Use `interface-design` when visual/UX quality of a user-facing software surface is a primary part of the task. Pair it with Software Development for implementation mechanics and Quality Engineering for independent acceptance verification.
-
-Use `agent-engineering` when the task is about improving or designing an AI agent system itself: instructions/context, model-facing tools, harness state, run loops, retries, orchestration, handoffs, guardrails, tracing/evals, or long-horizon agent continuity.
-
-Use `skill-acquisition` for explicit external skill discovery/comparison/audit, new-skill authoring, or material skill improvement. The current proactive expansion wave is closed: do not reopen expansion merely because more public skills exist. Reopen when ordinary work exposes a concrete uncovered gap, a current faculty materially underperforms, or the Creator explicitly asks.
-
-Generic domain skills are routing aids, not mandatory ceremony. If the current platform already provides stronger native instructions for a format/tool, follow those higher-priority runtime instructions while preserving DEDAL's durable principles.
+Generic domain skills are routing aids, not mandatory ceremony. If the current platform provides stronger native instructions for a format/tool, follow those higher-priority runtime instructions while preserving DEDAL's durable principles.
 
 ## Skill Independence Rule
 
-Separate skills remain separate operational domains unless a skill explicitly declares a dependency. Infrastructure Engineering owns IaC/resource lifecycle but not application implementation, release promotion, service health, provider product architecture, database semantics, security policy, or QA. Reliability Engineering owns live-service reliability but not infrastructure plan/apply authority. Cloudflare Platform owns Cloudflare provider/product semantics; Database Engineering owns database semantics; Release Engineering owns shipping evidence; Software Development owns application implementation; Security Engineering owns trust/authority reasoning. Skill Acquisition may influence another skill only through explicit reviewed adaptation.
+Video Production owns temporal media direction/assembly, not canonical still-image authority or tool execution. Presentation Engineering owns deck architecture/production, not factual authority or prose truth. Infrastructure Engineering owns IaC/resource lifecycle; Reliability Engineering owns live-service reliability; Cloudflare Platform owns Cloudflare provider/product semantics; Database Engineering owns database semantics; Release Engineering owns shipping evidence; Software Development owns application implementation; Security Engineering owns trust/authority reasoning. Skill Acquisition influences another skill only through explicit reviewed adaptation.
 
 ## Plugin / MCP Rule
 
-Skills describe **how** to use capabilities; plugins/MCP/apps provide **execution surfaces**. Prefer the currently available native or connected tool when equivalent and verify live capabilities before relying on them.
+Skills describe **how** to use capabilities; plugins/MCP/apps/native artifact tools provide **execution surfaces**. Prefer the currently available native or connected capability and verify live capabilities before relying on them.
 
 ## Growth Rule
 
-New skills may be added when modular, testable, useful, independently routable, and justified by real work. The v0.24.0 capability wave is closed; ordinary-work outcome validation is now preferred over proactive expansion. Future additions require a concrete uncovered capability gap or explicit Creator request. Kernel-level changes require a higher standard.
+New skills may be added when modular, testable, useful, independently routable, and justified by real work. The Creator's demonstrated video-production and presentation-production workflows reopened capability expansion for this bounded creative-production wave. Future additions remain evidence-gated.

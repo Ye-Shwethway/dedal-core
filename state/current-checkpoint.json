@@ -1,44 +1,43 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.24.0",
+  "version": "0.25.0",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with an always-active Cognitive Runtime and progressively disclosed specialist faculties.",
-    "Quality Engineering, Cloudflare Platform, Database Engineering, Reliability Engineering, and Infrastructure Engineering are active with distinct ownership boundaries.",
-    "Infrastructure Engineering owns declarative infrastructure lifecycle semantics: configuration/state/live-resource reconciliation, plan/apply review, drift, imports/moves/refactors, module/provider lifecycle, destructive-change review, state/backend safety, and infrastructure recovery reasoning.",
-    "Infrastructure Engineering does not absorb application implementation, application artifact promotion, live-service reliability, Cloudflare/provider product architecture, database-engine semantics, security authority/policy, or independent QA.",
-    "Desired configuration, IaC state, and live provider reality are separate evidence views. A speculative plan is not an applied change; apply success is not proof of user-visible service health.",
-    "Drift must be classified before reconciliation; supported import/move/refactor mechanisms are preferred over direct state surgery; direct state mutation is elevated recovery work.",
-    "Terraform, OpenTofu, Packer, cloud CLIs, provider APIs and MCP/tools are execution/reference surfaces and do not create mutation authority.",
-    "Provider/tool/version/backend-specific behavior remains live-doc-sensitive when material.",
-    "The proactive capability-expansion wave that began with ecosystem capability-gap scanning is now closed. Immediate high-value candidates have either been promoted, mapped to reference packs, or rejected as standalone faculties.",
-    "Mobile Flutter/Android remains a progressive reference pack; observability tooling is owned by Reliability Engineering; Postgres practices are owned by Database Engineering; Terraform/OpenTofu/Packer knowledge is owned progressively by Infrastructure Engineering; browser/computer control remains an execution surface.",
-    "Healthcare/clinical informatics remains a later/high-bar bounded area rather than an immediate generic medical skill because of its high-stakes evidence requirements.",
-    "Further skill expansion should restart only when representative ordinary work exposes a concrete uncovered capability gap or a current faculty materially underperforms."
+    "The Creator explicitly reopened a bounded creative-production capability wave after ordinary work exposed two concrete gaps: professional video production and professional presentation production.",
+    "Video Production is active and owns temporal storytelling, generative-video shot direction, take selection, continuity through time, editing, subtitles/captions, audio finishing, motion-graphics composition and media delivery.",
+    "Visual Direction remains the owner of canonical still-image/reference continuity; video generators, FFmpeg, Remotion and other editing/generation tools remain execution/reference surfaces.",
+    "Presentation Engineering is active and owns audience/objective framing, narrative spine, slide-role architecture, evidence mapping, visual hierarchy, chart/diagram choice, speaker notes, template fidelity, editable-deck strategy and rendered slide QA.",
+    "Research/domain owners remain factual authorities for deck content; Writing/Editorial owns prose; Data Operations owns source-table integrity; Visual Direction owns custom image assets; native slide/PPTX tooling remains execution.",
+    "Anthropic PPTX material was reviewed only as comparative workflow evidence because its license is proprietary; DEDAL does not copy or derive its protected content.",
+    "Source-first/rebuildable presentation workflows and probe-edit-verify video workflows are preferred when iteration or auditability matters.",
+    "A generated clip is a take, not an approved edit; a successful encode is not playback/sync/editorial proof; a valid PPTX package is not rendered visual-quality proof.",
+    "Provider/model/library details such as Veo/Flow/Runway/Seedance capabilities, video duration/reference/audio support, codec/tool behavior, PPTX library limitations and font/render behavior require current verification when material."
   ],
   "evidence": [
-    {"id":"infrastructure-engineering-deep-audit-2026-09-14","kind":"first-party-multi-source-methodology-audit","status":"promotion_approved_with_cross-owner_boundaries"},
-    {"id":"hashicorp-agent-skills","kind":"first_party_skill_corpus","status":"pinned_c2d65dfe492f74d360d35b859b88932222470bd8"},
-    {"id":"terraform-current-docs","kind":"first_party_documentation","status":"reviewed_2026_09_14_for_plan_apply_state_drift_and_refresh_semantics"},
-    {"id":"opentofu-current-docs","kind":"open_source_first_party_documentation","status":"reviewed_2026_09_14_for_plan_apply_semantics"},
-    {"id":"infrastructure-engineering-routing-v1","kind":"contract_validation","status":"infrastructure_implementation_release_reliability_provider_database_security_and_negative_claim_boundaries_ci_enforced"},
-    {"id":"capability-gap-map-v7","kind":"architecture_state","status":"current_proactive_skill_wave_closed"}
+    {"id":"video-production-deep-audit-2026-09-14","kind":"demonstrated-workflow-plus-multi-source-audit","status":"promotion_approved"},
+    {"id":"presentation-engineering-deep-audit-2026-09-14","kind":"demonstrated-workflow-plus-multi-source-audit","status":"promotion_approved"},
+    {"id":"ffmpeg-skill","kind":"mature-open-source-skill","status":"pinned_a6232b95f595aa35fa8cea0d055f0163baa908e9_mit"},
+    {"id":"remotion-agent-skills","kind":"first-party-skill-corpus","status":"pinned_bd566b65d521b40fe92e1f26766e82de9e291693_methodology_only"},
+    {"id":"presentation-skill","kind":"open-source-source-first-pptx-corpus","status":"pinned_311e29920c7c7ab37a93c12676bab7baecc0f4a6_mit"},
+    {"id":"anthropic-pptx","kind":"comparative-proprietary-corpus","status":"reviewed_not_copied_or_derived"},
+    {"id":"creative-production-routing-v1","kind":"contract_validation","status":"video_visual_writing_research_quality_presentation_and_execution_boundaries_ci_enforced"}
   ],
   "unresolved_risks": [
-    "Infrastructure Engineering promotion is architecture- and contract-supported, but measurable DEDAL-specific outcome gains still require representative ordinary infrastructure work.",
-    "Infrastructure tooling/provider behavior changes quickly; live official documentation remains necessary for material syntax, backend, provider, compatibility and migration details.",
-    "State and partial-apply recovery can be destructive; task-scoped authority and explicit recovery semantics remain mandatory.",
-    "Small single-host workflows can be over-engineered if Infrastructure Engineering is invoked for trivial shell configuration; smallest-sufficient composition remains mandatory.",
-    "Healthcare/clinical informatics may later justify bounded specialist capabilities, but generic clinical-skill promotion remains intentionally deferred."
+    "Video and Presentation Engineering promotions are architecture- and contract-supported; measurable DEDAL-specific outcome gains still require ordinary Creator projects.",
+    "Generative-video providers change rapidly and can produce stochastic identity/physics/continuity failures even with strong direction.",
+    "Sandbox or host media capabilities can vary by session; FFmpeg/Remotion/native slide availability must be verified before promising execution.",
+    "PPTX rendering can differ across LibreOffice, PowerPoint, Keynote and installed fonts; visual QA evidence remains environment-scoped.",
+    "Creative-production skills can over-activate on simple image or prose tasks; smallest-sufficient routing remains mandatory."
   ],
   "next_executable_step": {
-    "id": "CAPABILITY-WAVE-OUTCOME-01",
-    "action": "Pause proactive skill expansion. Apply the current Cognitive Runtime and 24 active faculties naturally during ordinary Creator work. Record genuine routing wins, missed support, context waste, ownership collisions, regressions, or uncovered capability gaps. Reopen Skill Acquisition only when such evidence or an explicit Creator request justifies it."
+    "id": "CREATIVE-PRODUCTION-OUTCOME-01",
+    "action": "Use Video Production and Presentation Engineering naturally in representative Creator work. For video, exercise at least one real generation-to-edit workflow and one uploaded-footage/subtitle or cut workflow when requested. For presentations, exercise a real meeting/CME/annual deck through native slide tooling when requested. Record genuine routing wins, quality misses, tool limitations, context waste or ownership collisions; do not manufacture benchmarks solely to justify the promotion."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "7e9da331feb7e44c0ea7f34d2429a5f46e5d767b",
-    "relation": "verified v0.23.0 Reliability Engineering baseline before the 0.24.0 Infrastructure Engineering promotion and wave-close transaction"
+    "sha": "c03bb96fabb629026b122783a29b715af0a779cb",
+    "relation": "verified v0.24.0 baseline before the v0.25.0 creative-production promotion transaction"
   }
 }

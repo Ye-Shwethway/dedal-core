@@ -1,35 +1,40 @@
 {
-  "schema_version": 7,
+  "schema_version": 8,
   "reviewed_on": "2026-09-14",
   "principle": "capability gaps before skill count",
   "promoted": [
-    {"id":"quality-engineering","version":"0.20.0","status":"active","reason":"Independent acceptance, risk-based verification, exploratory/E2E/regression evidence, defect characterization, and readiness verdicts form a recurring ownership layer distinct from implementation, design, security, and release promotion."},
-    {"id":"cloudflare-platform","version":"0.21.0","status":"active","reason":"Repeated cross-project work needs an independent owner for Cloudflare product selection/composition, bindings/configuration, edge/network topology, and provider-native operational semantics."},
-    {"id":"database-engineering","version":"0.22.0","status":"active","reason":"Schema invariants, indexes/access paths, query plans, transaction/isolation/locking behavior, migration safety, connection semantics, and engine-specific concurrency form a distinct recurring ownership layer."},
-    {"id":"reliability-engineering","version":"0.23.0","status":"active","reason":"Service-health objectives, observability strategy, actionable alerting, production incident response, recovery verification, and post-incident learning form a distinct live-operations ownership layer."},
-    {"id":"infrastructure-engineering","version":"0.24.0","status":"active","reason":"Declarative configuration/state/live-resource reconciliation, plan/apply semantics, drift, imports/moves/refactors, module/provider lifecycle, destructive-change review, and infrastructure recovery form a distinct recurring ownership layer."}
+    {"id":"quality-engineering","version":"0.20.0","status":"active"},
+    {"id":"cloudflare-platform","version":"0.21.0","status":"active"},
+    {"id":"database-engineering","version":"0.22.0","status":"active"},
+    {"id":"reliability-engineering","version":"0.23.0","status":"active"},
+    {"id":"infrastructure-engineering","version":"0.24.0","status":"active"},
+    {"id":"video-production","version":"0.25.0","status":"active","reason":"Creator workflows expose a recurring gap across generative-video direction, temporal continuity, editing, subtitles/audio, programmatic motion and delivery that is not owned by still Visual Direction or generic Software Development."},
+    {"id":"presentation-engineering","version":"0.25.0","status":"active","reason":"Creator workflows expose a recurring gap across audience/argument framing, slide-role architecture, evidence mapping, editable PPTX production and rendered deck QA that is not owned by Writing, Interface Design, Research or Files."}
   ],
   "top_level_candidates": [],
   "reference_pack_first": [
-    {"id":"mobile-flutter-android","status":"reference-pack-approved","owners":["software-development","interface-design","quality-engineering","release-engineering","database-engineering"],"sources":["flutter/agent-plugins@7cdb7d3c33679ef14a7a7584cec1d5ecb8752586","android/skills@bac232fd02b0855df9275281a2a7a47643768719"],"reason":"Official Flutter and Android corpora map cleanly onto existing owners."},
-    {"id":"postgres-database-practices","status":"owned-by-database-engineering","owners":["database-engineering"],"sources":["neondatabase/postgres-skills@27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26","supabase/agent-skills@8331f910845103c08d51f6ca1d86ebb7d1f745e3"]},
-    {"id":"observability-tooling","status":"owned-by-reliability-engineering","owners":["reliability-engineering","software-development","cloudflare-platform","database-engineering","agent-engineering"],"sources":["OpenTelemetry current official docs reviewed 2026-09-14","getsentry/sentry-for-ai@2dc3b5d1232b38f88c881a07c1cddf825f1d4ffd"]},
-    {"id":"infra-iac-tools","status":"owned-by-infrastructure-engineering","owners":["infrastructure-engineering","cloudflare-platform","security-engineering","release-engineering","reliability-engineering"],"sources":["hashicorp/agent-skills@c2d65dfe492f74d360d35b859b88932222470bd8","Terraform current official docs reviewed 2026-09-14","OpenTofu current official docs reviewed 2026-09-14"],"reason":"Terraform/OpenTofu/Packer knowledge is progressive reference/execution knowledge under Infrastructure Engineering; provider-specific semantics remain with platform owners."},
+    {"id":"mobile-flutter-android","status":"reference-pack-approved","owners":["software-development","interface-design","quality-engineering","release-engineering","database-engineering"]},
+    {"id":"postgres-database-practices","status":"owned-by-database-engineering","owners":["database-engineering"]},
+    {"id":"observability-tooling","status":"owned-by-reliability-engineering","owners":["reliability-engineering","software-development","cloudflare-platform","database-engineering","agent-engineering"]},
+    {"id":"infra-iac-tools","status":"owned-by-infrastructure-engineering","owners":["infrastructure-engineering","cloudflare-platform","security-engineering","release-engineering","reliability-engineering"]},
+    {"id":"generative-video-providers","status":"owned-by-video-production","owners":["video-production","visual-direction"],"sources":["Google DeepMind Veo current docs","Runway current docs","ByteDance Seedance current first-party material"],"reason":"Provider/model-specific prompting and capability facts are progressive references under Video Production."},
+    {"id":"ffmpeg-remotion-video-tooling","status":"owned-by-video-production","owners":["video-production"],"sources":["kajisho5/ffmpeg-skill@a6232b95f595aa35fa8cea0d055f0163baa908e9","remotion-dev/skills@bd566b65d521b40fe92e1f26766e82de9e291693"]},
+    {"id":"pptx-rendering-tooling","status":"owned-by-presentation-engineering","owners":["presentation-engineering","files"],"sources":["siril9/presentation-skill@311e29920c7c7ab37a93c12676bab7baecc0f4a6","anthropics/skills PPTX comparative audit only"],"reason":"PPTX libraries/native slide tools remain execution surfaces; proprietary Anthropic material is not copied or derived."},
     {"id":"browser-computer-automation","owners":["automations","research","quality-engineering"],"reason":"Browser/computer control is an execution surface; the domain owner keeps task intent."}
   ],
   "later_high_bar": [
-    {"id":"healthcare-clinical-informatics","sources":["awslabs/hcls-agent-skills","NVIDIA/digital-health-skills"],"reason":"High-stakes. Prefer bounded informatics/data/documentation workflows and current evidence over a generic clinical-reasoning skill."}
+    {"id":"healthcare-clinical-informatics","reason":"High-stakes. Prefer bounded informatics/data/documentation workflows and current evidence over a generic clinical-reasoning skill."}
   ],
   "reject_as_top_level": [
+    "FFmpeg, Remotion, Veo, Flow, Runway, Seedance or another provider/tool as standalone faculties when Video Production owns the intent",
+    "PptxGenJS, python-pptx or a host slide tool as standalone faculties when Presentation Engineering owns the intent",
     "Mobile Engineering solely because a project uses Flutter or Android",
     "monitoring vendor wrappers as standalone faculties",
-    "Terraform/OpenTofu/Packer wrappers as separate faculties now that Infrastructure Engineering owns lifecycle semantics",
     "large marketplace imports selected by popularity alone",
     "site-specific browser action packs as standalone faculties",
-    "thin vendor wrappers when an existing owner plus reference pack is sufficient",
     "generic doctor/medical skills with weak provenance or unclear evidence boundaries",
     "skills that duplicate Cognitive Runtime invariants or existing routing ownership"
   ],
-  "wave_status": "current proactive capability-expansion wave closed after v0.24.0; validate outcomes in ordinary work before reopening",
+  "wave_status": "bounded creative-production wave reopened by explicit Creator request and demonstrated workflows; Video Production and Presentation Engineering promoted in v0.25.0",
   "next_deep_audit": null
 }

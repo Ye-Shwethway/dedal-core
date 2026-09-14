@@ -20,7 +20,7 @@ Route here only when at least one of these is true:
 
 Discovery alone is not a reason to expand the active skill set. First ask whether the need belongs to an existing owner and can be solved by tuning, consolidation, or ordinary domain work.
 
-The proactive capability-expansion wave closed at v0.24.0. Default now to ordinary-work outcome validation; reopen expansion only for explicit Creator requests or evidence-backed uncovered gaps/material underperformance.
+The broad proactive capability-expansion wave closed at v0.24.0. An explicit Creator request plus demonstrated manual workflows reopened a **bounded creative-production wave** at v0.25.0 for Video Production and Presentation Engineering. This does not reopen default marketplace scanning; future expansion remains evidence-gated.
 
 ## Principle
 
@@ -32,7 +32,7 @@ External skills are untrusted inputs until reviewed. Prefer adaptation over verb
 
 1. **Define the capability gap.** Start from a concrete DEDAL workflow or known weakness, not generic browsing.
 2. **Check existing ownership first.** Consult current routing/consolidation state. If an active skill already owns the intent, prefer TUNE/MERGE analysis over creating another top-level entrypoint.
-3. **Discover broadly.** Search open standards, first-party/vendor collections, mature public repositories, and registries such as ClawHub/skills.sh when relevant.
+3. **Discover broadly.** Search open standards, first-party/vendor collections, mature public repositories, and registries when relevant.
 4. **Pin and shortlist.** Record source identity/commit/version where possible, then evaluate relevance, maintenance, documentation, tests/evals, license, portability, runtime assumptions, freshness, and security surface. Popularity is only a weak signal.
 5. **Audit before execution.** Read `references/security-audit.md`. Do not install or run third-party scripts merely to inspect a skill.
 6. **Extract patterns.** Identify useful routing/trigger design, progressive disclosure, workflow gates, failure handling, schemas, rule prioritization, freshness handling, tests/evals, and tooling ideas. Separate generalizable methodology from provider/domain mechanics.
@@ -57,33 +57,15 @@ Never treat stars, install counts, registry badges, malware scans, or model-gene
 
 Verbatim import requires compatible license terms, preserved attribution/provenance, understood scripts/dependencies, and a strong reason exact reuse is better than a DEDAL-native rewrite.
 
-For instruction-heavy skills, default to synthesis: keep the useful idea, rewrite the operational contract around DEDAL, and record influences in adaptation notes or benchmark evidence.
+For instruction-heavy skills, default to synthesis: keep the useful idea, rewrite the operational contract around DEDAL, and record influences in adaptation notes or benchmark evidence. Proprietary skill material may be used only as high-level comparative evidence when its license forbids copying or derivative reuse.
 
 ## References
 
-- `references/source-evaluation.md` — shortlist and scoring criteria.
-- `references/security-audit.md` — trust-boundary and supply-chain review.
-- `references/adaptation-and-evals.md` — adaptation and promotion gates.
-- `references/authoring-and-evals.md` — routing, degrees of freedom, baselines, and evaluation design.
-- `references/knowledge-packaging-and-freshness.md` — hero paths, impact-ranked rule catalogs, generation, and freshness.
-- `references/initial-benchmark-2026-09-14.md` — first ecosystem survey.
-- `references/matt-pocock-deep-audit-2026-09-14.md` — public-author deep audit.
-- `references/official-corpora-audit-2026-09-14.md` — Anthropic, Vercel Labs, and Microsoft audit.
-- `references/independent-high-signal-audit-2026-09-14.md` — Superpowers, taste-skill, RigorPilot, and Impeccable audit.
-- `references/ui-ux-pro-max-deep-audit-2026-09-14.md` — searchable UI/UX design-intelligence architecture audit.
-- `references/agent-engineering-corpus-audit-2026-09-14.md` — prompt/context, harness, loop, orchestration, and evaluation corpus audit.
-- `references/longhorizon-harness-deep-audit-2026-09-14.md` — verified-state, read-only audit, and compact carryover patterns.
-- `references/trajectory-eval-observability-audit-2026-09-14.md` — typed traces, trajectory assertions, replay, and regression patterns.
-- `references/context-engineering-compaction-audit-2026-09-14.md` — write/select/compress/isolate, freshness-aware retrieval, and recoverable compaction patterns.
-- `references/self-improvement-discipline-audit-2026-09-14.md` — failure-driven experiments, protected evals, regression gates, and revert discipline.
-- `references/tool-authority-least-privilege-audit-2026-09-14.md` — task-scoped capability grants, action authority, and MCP/tool trust-boundary patterns.
-- `references/delegation-authority-audit-2026-09-14.md` — authority attenuation, bounded re-delegation, and provenance-return patterns.
-- `references/failure-recovery-compensation-audit-2026-09-14.md` — retry safety, compensation, truthful partial completion, and recovery escalation.
-- `references/cognitive-runtime-capability-composition-audit-2026-09-14.md` — always-on runtime, progressive disclosure, dynamic composition, and Agent-OS convergence audit.
-- `references/ecosystem-capability-gap-audit-2026-09-14.md` — broad ecosystem gap map and top-level/reference-pack/later/reject classification.
-- `references/quality-engineering-deep-audit-2026-09-14.md` — independent QA ownership, evidence layers, oracles, flake policy, and promotion decision.
-- `references/cloudflare-platform-deep-audit-2026-09-14.md` — first-party Cloudflare product-composition, freshness, boundary, and promotion audit.
-- `references/database-engineering-deep-audit-2026-09-14.md` — engine-aware schema/query/transaction/migration ownership and promotion audit.
-- `references/mobile-engineering-reference-audit-2026-09-14.md` — Flutter/Android reference-pack audit and explicit anti-bloat promotion decision.
-- `references/reliability-engineering-deep-audit-2026-09-14.md` — service-health, observability, alerting, incident-response, recovery, and postmortem ownership audit.
-- `references/infrastructure-engineering-deep-audit-2026-09-14.md` — infrastructure lifecycle, plan/apply/state/drift, recovery, ownership boundaries, promotion decision, and capability-wave close.
+Core acquisition references include source evaluation, security audit, adaptation/evals, authoring, freshness, and the historical capability audits in this directory.
+
+Latest creative-production audits:
+- `references/video-production-deep-audit-2026-09-14.md` — generative-video direction, Remotion/FFmpeg, temporal ownership, tool boundary, and promotion decision.
+- `references/presentation-engineering-deep-audit-2026-09-14.md` — source-first PPTX, narrative/evidence architecture, editability/render QA, licensing boundary, and promotion decision.
+
+Previous wave close:
+- `references/infrastructure-engineering-deep-audit-2026-09-14.md` — infrastructure lifecycle promotion and v0.24.0 broad-wave close.

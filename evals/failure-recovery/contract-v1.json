@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "workflow_states": ["running", "failed", "compensating", "partial", "manual_required", "completed"],
+    "step_states": ["pending", "succeeded", "failed", "compensated", "compensation_failed"],
+    "recovery_decisions": ["retry", "compensate", "preserve_partial", "escalate"]
+  },
+  "cases": [
+    {
+      "id": "FR-01",
+      "expect": "accept",
+      "description": "Retry is allowed only when the failed step is explicitly safe to retry or idempotent.",
+      "failed_step": {"id": "s2", "status": "failed", "idempotent": true, "safe_retry": true},
+      "decision": "retry"
+    },
+    {
+      "id": "FR-02",
+      "expect": "reject",
+      "description": "Blind retry of an external side effect without idempotency or safe-retry evidence is invalid.",
+      "failed_step": {"id": "s2", "status": "failed", "idempotent": false, "safe_retry": false},
+      "decision": "retry"
+    },
+    {
+      "id": "FR-03",
+      "expect": "accept",
+      "description": "Compensation unwinds previously succeeded reversible steps in reverse completion order.",
+      "steps": [
+        {"id": "s1", "status": "succeeded", "reversible": true, "compensation_status": "succeeded"},
+        {"id": "s2", "status": "succeeded", "reversible": true, "compensation_status": "succeeded"},
+        {"id": "s3", "status": "failed", "reversible": false}
+      ],
+      "decision": "compensate",
+      "compensation_order": ["s2", "s1"],
+      "final_state": "failed"
+    },
+    {
+      "id": "FR-04",
+      "expect": "reject",
+      "description": "A workflow with an irreversible committed effect cannot claim full rollback.",
+      "steps": [
+        {"id": "s1", "status": "succeeded", "reversible": false},
+        {"id": "s2", "status": "failed", "reversible": false}
+      ],
+      "decision": "compensate",
+      "claims_full_rollback": true
+    },
+    {
+      "id": "FR-05",
+      "expect": "accept",
+      "description": "Partial completion is valid when residual effects and blocked work are explicitly recorded.",
+      "decision": "preserve_partial",
+      "final_state": "partial",
+      "residual_effects": ["issue-created"],
+      "blocked_actions": ["deployment-not-run"]
+    },
+    {
+      "id": "FR-06",
+      "expect": "reject",
+      "description": "Partial completion without residual-state disclosure is invalid.",
+      "decision": "preserve_partial",
+      "final_state": "partial",
+      "residual_effects": [],
+      "blocked_actions": []
+    },
+    {
+      "id": "FR-07",
+      "expect": "reject",
+      "description": "Failed compensation cannot be reported as recovered/completed.",
+      "decision": "compensate",
+      "steps": [
+        {"id": "s1", "status": "succeeded", "reversible": true, "compensation_status": "failed"}
+      ],
+      "final_state": "completed"
+    },
+    {
+      "id": "FR-08",
+      "expect": "accept",
+      "description": "Compensation failure escalates to manual_required with residual effects preserved.",
+      "decision": "escalate",
+      "final_state": "manual_required",
+      "residual_effects": ["s1-still-applied"],
+      "blocked_actions": ["automatic-recovery-stopped"]
+    }
+  ]
+}

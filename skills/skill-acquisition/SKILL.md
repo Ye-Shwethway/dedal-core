@@ -75,3 +75,5 @@ For instruction-heavy skills, default to synthesis: keep the useful idea, rewrit
 - `references/context-engineering-compaction-audit-2026-09-14.md` — write/select/compress/isolate, freshness-aware retrieval, and recoverable compaction patterns.
 - `references/self-improvement-discipline-audit-2026-09-14.md` — failure-driven experiments, protected evals, regression gates, and revert discipline.
 - `references/tool-authority-least-privilege-audit-2026-09-14.md` — task-scoped capability grants, action authority, and MCP/tool trust-boundary patterns.
+- `references/delegation-authority-audit-2026-09-14.md` — authority attenuation, bounded re-delegation, and provenance-return patterns.
+- `references/failure-recovery-compensation-audit-2026-09-14.md` — retry safety, compensation, truthful partial completion, and recovery escalation.

@@ -43,7 +43,9 @@ Every agent run needs explicit state and termination semantics. Define:
 
 Self-critique or reflection is not automatically useful. Iterate when there is a rubric, tool/environment feedback, verifier, test, or other signal capable of changing the answer. Avoid endless self-review without new evidence.
 
-Read `references/agentic-loops.md`.
+For multi-step side-effecting workflows, distinguish retry, compensation, accepted partial completion, and escalation. Do not describe semantic compensation across external systems as an atomic rollback, and do not retry non-idempotent actions without evidence that repetition is safe.
+
+Read `references/agentic-loops.md` and `references/failure-recovery-and-compensation.md`.
 
 ## Orchestrate deliberately
 

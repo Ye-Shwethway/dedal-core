@@ -263,8 +263,18 @@ async function route(request, env, requestId) {
     }
     const contentLength = Number(body.content_length);
     const contentType = String(body.content_type || "application/octet-stream");
+    const sourceFingerprint = String(body.source_fingerprint || "").toLowerCase();
     if (!Number.isSafeInteger(contentLength) || contentLength <= 0) throw httpError(400, "invalid_content_length");
     if (!/^(video\/[-+.\w]+|application\/octet-stream)$/.test(contentType)) throw httpError(400, "invalid_content_type");
+    if (!/^sha256:[a-f0-9]{64}$/.test(sourceFingerprint)) throw httpError(400, "invalid_source_fingerprint");
+    if (job.source_fingerprint && job.source_fingerprint.toLowerCase() !== sourceFingerprint) {
+      throw httpError(409, "source_fingerprint_mismatch");
+    }
+    if (!job.source_fingerprint) {
+      await env.DB.prepare("UPDATE upload_jobs SET source_fingerprint=?,updated_at=? WHERE id=? AND source_fingerprint IS NULL")
+        .bind(sourceFingerprint,isoNow(),job.id).run();
+      job.source_fingerprint = sourceFingerprint;
+    }
     if (["verified","failed","cancelled"].includes(job.status)) throw httpError(409, "job_not_claimable");
     const profile = await getConnectedProfile(env, job.profile_alias);
     if (profile.channel_id !== job.channel_id) throw httpError(409, "profile_job_channel_mismatch");

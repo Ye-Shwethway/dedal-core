@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "reviewed_on": "2026-09-14",
   "principle": "capability gaps before skill count",
   "promoted": [
@@ -14,18 +14,23 @@
         "petrkindlmann/qa-skills@b3bb61bd268b147476252c6ed5a0440c87b97441",
         "quality-engineering-routing-contract-v1"
       ]
+    },
+    {
+      "id": "cloudflare-platform",
+      "version": "0.21.0",
+      "status": "active",
+      "reason": "Repeated cross-project work needs an independent owner for Cloudflare product selection/composition, bindings/configuration, edge/network topology, and provider-native operational semantics while cross-cutting implementation/security/release/data/QA ownership remains separate.",
+      "evidence": [
+        "cloudflare/skills@b052c32bab7dd493513260228a36c88294f343f1",
+        "Cloudflare current developer documentation reviewed 2026-09-14",
+        "cloudflare-platform-routing-contract-v1"
+      ]
     }
   ],
   "top_level_candidates": [
     {
-      "id": "cloudflare-platform",
-      "priority": 1,
-      "reason": "Repeated multi-project use spans Workers, Pages, D1, R2, Access, Tunnel, networking, observability, Wrangler, and Agents SDK; the domain is broad enough to justify a specialist owner if evidence supports it.",
-      "promotion_gate": "Deep-audit the official Cloudflare skill corpus and adapt without importing runtime dependencies or freezing stale product facts."
-    },
-    {
       "id": "database-engineering",
-      "priority": 2,
+      "priority": 1,
       "reason": "Schema design, indexing, migrations, query plans, transactions, concurrency, and SQL performance are distinct from Data Operations reconciliation mechanics.",
       "promotion_gate": "Start with reference packs and promote only if recurring work shows routing value beyond Software Development plus Data Operations."
     }
@@ -51,14 +56,14 @@
     },
     {
       "id": "infra-iac",
-      "owners": ["release-engineering", "security-engineering", "software-development"],
+      "owners": ["release-engineering", "security-engineering", "software-development", "cloudflare-platform"],
       "sources": ["hashicorp/agent-skills@c2d65dfe492f74d360d35b859b88932222470bd8"],
-      "reason": "Terraform/Packer knowledge is tool-specific and should remain reference-level until recurring infrastructure-as-code work justifies a broader owner."
+      "reason": "Terraform/Packer knowledge remains reference-level; Cloudflare-specific IaC concerns route through Cloudflare Platform plus the cross-cutting owner."
     },
     {
       "id": "observability-sre",
-      "owners": ["release-engineering", "software-development", "security-engineering", "quality-engineering"],
-      "reason": "Logs, traces, metrics, production diagnosis, and incident evidence are valuable, but current ownership overlap is high; gather outcomes first."
+      "owners": ["release-engineering", "software-development", "security-engineering", "quality-engineering", "cloudflare-platform"],
+      "reason": "Logs, traces, metrics, production diagnosis, and incident evidence remain cross-cutting; Cloudflare Platform owns only provider-native observability semantics."
     },
     {
       "id": "browser-computer-automation",
@@ -80,5 +85,5 @@
     "generic doctor/medical skills with weak provenance or unclear evidence boundaries",
     "skills that duplicate Cognitive Runtime invariants or existing routing ownership"
   ],
-  "next_deep_audit": "cloudflare-platform"
+  "next_deep_audit": "database-engineering"
 }

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "CF-01",
+      "intent": "Implement application logic in an existing Worker",
+      "primary": "software-development",
+      "supporting": ["cloudflare-platform"],
+      "accept": true
+    },
+    {
+      "id": "CF-02",
+      "intent": "Choose between D1, KV, R2, Queues, Durable Objects, or Workflows for a Cloudflare architecture",
+      "primary": "cloudflare-platform",
+      "supporting": [],
+      "accept": true
+    },
+    {
+      "id": "CF-03",
+      "intent": "Deploy a verified Worker artifact to production and plan rollback",
+      "primary": "release-engineering",
+      "supporting": ["cloudflare-platform"],
+      "accept": true
+    },
+    {
+      "id": "CF-04",
+      "intent": "Define least-privilege Access policy and threat model",
+      "primary": "security-engineering",
+      "supporting": ["cloudflare-platform"],
+      "accept": true
+    },
+    {
+      "id": "CF-05",
+      "intent": "Independently verify deployed Cloudflare app readiness",
+      "primary": "quality-engineering",
+      "supporting": ["cloudflare-platform"],
+      "accept": true
+    },
+    {
+      "id": "CF-06",
+      "intent": "Assume current Cloudflare pricing, limits, beta status, or CLI syntax from frozen Core text",
+      "primary": "cloudflare-platform",
+      "supporting": [],
+      "requires_live_docs": true,
+      "accept": false
+    },
+    {
+      "id": "CF-07",
+      "intent": "Migrate an existing working Pages project to Workers during unrelated maintenance",
+      "primary": "cloudflare-platform",
+      "supporting": [],
+      "accept": false
+    },
+    {
+      "id": "CF-08",
+      "intent": "Treat successful Wrangler deploy as proof DNS, Access, Tunnel, storage, and runtime behavior are all correct",
+      "primary": "cloudflare-platform",
+      "supporting": [],
+      "accept": false
+    },
+    {
+      "id": "CF-09",
+      "intent": "Use Cloudflare MCP/API/CLI because it is available, without task-scoped mutation authority",
+      "primary": "cloudflare-platform",
+      "supporting": [],
+      "accept": false
+    }
+  ]
+}

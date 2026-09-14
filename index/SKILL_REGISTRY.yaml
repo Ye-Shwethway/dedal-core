@@ -1,4 +1,4 @@
-version: 15
+version: 16
 last_reviewed: "2026-09-14"
 
 routing:
@@ -91,6 +91,22 @@ skills:
         - repo: "petrkindlmann/qa-skills"
           commit: "b3bb61bd268b147476252c6ed5a0440c87b97441"
           license: "MIT"
+      adapted_on: "2026-09-14"
+
+  cloudflare-platform:
+    aliases: []
+    path: "skills/cloudflare-platform"
+    entrypoint: "skills/cloudflare-platform/SKILL.md"
+    status: active
+    independence: specialist_platform_domain
+    provenance:
+      adaptation: true
+      sources:
+        - repo: "cloudflare/skills"
+          commit: "b052c32bab7dd493513260228a36c88294f343f1"
+          license: "Apache-2.0"
+        - source: "Cloudflare current developer documentation"
+          reviewed_on: "2026-09-14"
       adapted_on: "2026-09-14"
 
   decision-design:
@@ -329,3 +345,5 @@ skills:
           commit: "c5dcf11d22bd40a55d4f7c30baa2f272b4dcf576"
         - repo: "petrkindlmann/qa-skills"
           commit: "b3bb61bd268b147476252c6ed5a0440c87b97441"
+        - repo: "cloudflare/skills"
+          commit: "b052c32bab7dd493513260228a36c88294f343f1"

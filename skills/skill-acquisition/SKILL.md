@@ -80,3 +80,4 @@ For instruction-heavy skills, default to synthesis: keep the useful idea, rewrit
 - `references/cognitive-runtime-capability-composition-audit-2026-09-14.md` — always-on runtime, progressive disclosure, dynamic composition, and Agent-OS convergence audit.
 - `references/ecosystem-capability-gap-audit-2026-09-14.md` — broad ecosystem gap map and top-level/reference-pack/later/reject classification.
 - `references/quality-engineering-deep-audit-2026-09-14.md` — independent QA ownership, evidence layers, oracles, flake policy, and promotion decision.
+- `references/cloudflare-platform-deep-audit-2026-09-14.md` — first-party Cloudflare product-composition, freshness, boundary, and promotion audit.

@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "phase": "hardening-consolidation-outcome-validation",
   "composition_model": {
     "architecture": "persistent-cognitive-runtime",
@@ -20,6 +20,17 @@
         "agent-tool-harness-design": "agent-engineering"
       },
       "rule": "Implementation, independent quality assessment, and release promotion are distinct ownership layers; pair only when another owner contributes a necessary layer."
+    },
+    {
+      "id": "cloudflare-platform-boundary",
+      "primary_owner_by_intent": {
+        "cloudflare-product-selection-composition": "cloudflare-platform",
+        "cloudflare-application-implementation": "software-development",
+        "cloudflare-release-promotion-rollback": "release-engineering",
+        "cloudflare-trust-access-security-policy": "security-engineering",
+        "cloudflare-independent-readiness": "quality-engineering"
+      },
+      "rule": "Cloudflare Platform owns Cloudflare-specific product/platform semantics; implementation, promotion authority, security policy, and independent readiness keep their existing owners. Drift-sensitive Cloudflare facts require current official documentation when material."
     },
     {
       "id": "quality-interface-security",
@@ -82,6 +93,8 @@
     "primary-owner-first",
     "pair-only-for-distinct-necessary-layer",
     "implementation-verification-release-are-distinct-layers",
+    "platform-domain-does-not-absorb-cross-cutting-owners",
+    "drift-sensitive-platform-facts-live-verified",
     "execution-surface-selection-is-separate-from-skill-selection",
     "recompose-on-material-subgoal-change",
     "no-new-skill-for-already-owned-intent",

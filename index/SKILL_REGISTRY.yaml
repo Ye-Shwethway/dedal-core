@@ -1,4 +1,4 @@
-version: 18
+version: 19
 last_reviewed: "2026-09-14"
 
 routing:
@@ -10,383 +10,200 @@ routing:
 skills:
   medicine-store-assistant:
     aliases: ["$msa", "medicine-store-assistant"]
-    path: "skills/medicine-store-assistant"
-    entrypoint: "skills/medicine-store-assistant/SKILL.md"
+    path: skills/medicine-store-assistant
+    entrypoint: skills/medicine-store-assistant/SKILL.md
     status: active
     independence: standalone_domain
-    provenance:
-      source_repo: "Ye-Shwethway/medicine-store-assistant"
-      source_commit: "6b8f35e4056f030a1ace2dac137cde1071a00051"
-      source_path: "skills/medicine-store-assistant"
-      imported_on: "2026-09-13"
-
+    provenance: {source_repo: Ye-Shwethway/medicine-store-assistant, source_commit: 6b8f35e4056f030a1ace2dac137cde1071a00051, source_path: skills/medicine-store-assistant, imported_on: "2026-09-13"}
   patient-report-assistant:
     aliases: ["$pra", "patient-report-assistant"]
-    path: "skills/patient-report-assistant"
-    entrypoint: "skills/patient-report-assistant/SKILL.md"
+    path: skills/patient-report-assistant
+    entrypoint: skills/patient-report-assistant/SKILL.md
     status: active
     independence: standalone_domain
-    provenance:
-      source_repo: "Ye-Shwethway/medicine-store-assistant"
-      source_commit: "6b8f35e4056f030a1ace2dac137cde1071a00051"
-      source_path: "skills/patient-report-assistant"
-      imported_on: "2026-09-13"
-
+    provenance: {source_repo: Ye-Shwethway/medicine-store-assistant, source_commit: 6b8f35e4056f030a1ace2dac137cde1071a00051, source_path: skills/patient-report-assistant, imported_on: "2026-09-13"}
   knowledge-archive:
     aliases: ["$ika", "knowledge-archive"]
-    path: "skills/ika"
-    entrypoint: "skills/ika/SKILL.md"
+    path: skills/ika
+    entrypoint: skills/ika/SKILL.md
     status: active
     independence: standalone_domain
-    provenance:
-      adaptation: true
-      source_repo: "Ye-Shwethway/ianeo-knowledge-vault"
-      source_commit: "fbed860928c1a93261306f70a47fa700da56ce29"
-      source_path: "skills/ianeo-knowledge-archive"
-      adapted_on: "2026-09-14"
-      source_visibility: private
-
-  github:
-    aliases: []
-    path: "skills/github"
-    entrypoint: "skills/github/SKILL.md"
-    status: active
-    independence: generic_domain
-
-  files:
-    aliases: []
-    path: "skills/files"
-    entrypoint: "skills/files/SKILL.md"
-    status: active
-    independence: generic_domain
-
-  research:
-    aliases: []
-    path: "skills/research"
-    entrypoint: "skills/research/SKILL.md"
-    status: active
-    independence: generic_domain
-
-  software-development:
-    aliases: []
-    path: "skills/software-development"
-    entrypoint: "skills/software-development/SKILL.md"
-    status: active
-    independence: generic_domain
-
+    provenance: {adaptation: true, source_repo: Ye-Shwethway/ianeo-knowledge-vault, source_commit: fbed860928c1a93261306f70a47fa700da56ce29, source_path: skills/ianeo-knowledge-archive, adapted_on: "2026-09-14", source_visibility: private}
+  github: {aliases: [], path: skills/github, entrypoint: skills/github/SKILL.md, status: active, independence: generic_domain}
+  files: {aliases: [], path: skills/files, entrypoint: skills/files/SKILL.md, status: active, independence: generic_domain}
+  research: {aliases: [], path: skills/research, entrypoint: skills/research/SKILL.md, status: active, independence: generic_domain}
+  software-development: {aliases: [], path: skills/software-development, entrypoint: skills/software-development/SKILL.md, status: active, independence: generic_domain}
   quality-engineering:
     aliases: []
-    path: "skills/quality-engineering"
-    entrypoint: "skills/quality-engineering/SKILL.md"
+    path: skills/quality-engineering
+    entrypoint: skills/quality-engineering/SKILL.md
     status: active
     independence: generic_domain
     provenance:
       adaptation: true
       sources:
-        - source: "Playwright current documentation: best practices, locators, auto-waiting, accessibility testing"
-          reviewed_on: "2026-09-14"
-        - repo: "DwonnG/qa-agent-skills"
-          commit: "c5dcf11d22bd40a55d4f7c30baa2f272b4dcf576"
-          license: "MIT"
-        - repo: "petrkindlmann/qa-skills"
-          commit: "b3bb61bd268b147476252c6ed5a0440c87b97441"
-          license: "MIT"
+        - {source: "Playwright current documentation: best practices, locators, auto-waiting, accessibility testing", reviewed_on: "2026-09-14"}
+        - {repo: DwonnG/qa-agent-skills, commit: c5dcf11d22bd40a55d4f7c30baa2f272b4dcf576, license: MIT}
+        - {repo: petrkindlmann/qa-skills, commit: b3bb61bd268b147476252c6ed5a0440c87b97441, license: MIT}
       adapted_on: "2026-09-14"
-
   cloudflare-platform:
     aliases: []
-    path: "skills/cloudflare-platform"
-    entrypoint: "skills/cloudflare-platform/SKILL.md"
+    path: skills/cloudflare-platform
+    entrypoint: skills/cloudflare-platform/SKILL.md
     status: active
     independence: specialist_platform_domain
     provenance:
       adaptation: true
       sources:
-        - repo: "cloudflare/skills"
-          commit: "b052c32bab7dd493513260228a36c88294f343f1"
-          license: "Apache-2.0"
-        - source: "Cloudflare current developer documentation"
-          reviewed_on: "2026-09-14"
+        - {repo: cloudflare/skills, commit: b052c32bab7dd493513260228a36c88294f343f1, license: Apache-2.0}
+        - {source: "Cloudflare current developer documentation", reviewed_on: "2026-09-14"}
       adapted_on: "2026-09-14"
-
   database-engineering:
     aliases: []
-    path: "skills/database-engineering"
-    entrypoint: "skills/database-engineering/SKILL.md"
+    path: skills/database-engineering
+    entrypoint: skills/database-engineering/SKILL.md
     status: active
     independence: specialist_domain
     provenance:
       adaptation: true
       sources:
-        - source: "PostgreSQL current official documentation: concurrency, isolation, locking, query planning"
-          reviewed_on: "2026-09-14"
-        - source: "SQLite current official documentation: transactions, isolation, locking, WAL"
-          reviewed_on: "2026-09-14"
-        - repo: "neondatabase/postgres-skills"
-          commit: "27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26"
-        - repo: "supabase/agent-skills"
-          commit: "8331f910845103c08d51f6ca1d86ebb7d1f745e3"
+        - {source: "PostgreSQL current official documentation: concurrency, isolation, locking, query planning", reviewed_on: "2026-09-14"}
+        - {source: "SQLite current official documentation: transactions, isolation, locking, WAL", reviewed_on: "2026-09-14"}
+        - {repo: neondatabase/postgres-skills, commit: 27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26}
+        - {repo: supabase/agent-skills, commit: 8331f910845103c08d51f6ca1d86ebb7d1f745e3}
       adapted_on: "2026-09-14"
-
   reliability-engineering:
     aliases: ["sre", "reliability-engineering"]
-    path: "skills/reliability-engineering"
-    entrypoint: "skills/reliability-engineering/SKILL.md"
+    path: skills/reliability-engineering
+    entrypoint: skills/reliability-engineering/SKILL.md
     status: active
     independence: generic_domain
     provenance:
       adaptation: true
       sources:
-        - source: "Google SRE current monitoring, SLO/alerting, incident-management and postmortem guidance"
-          reviewed_on: "2026-09-14"
-        - source: "OpenTelemetry current official observability/signals documentation"
-          reviewed_on: "2026-09-14"
-        - repo: "getsentry/sentry-for-ai"
-          commit: "2dc3b5d1232b38f88c881a07c1cddf825f1d4ffd"
-          license: "MIT"
+        - {source: "Google SRE current monitoring, SLO/alerting, incident-management and postmortem guidance", reviewed_on: "2026-09-14"}
+        - {source: "OpenTelemetry current official observability/signals documentation", reviewed_on: "2026-09-14"}
+        - {repo: getsentry/sentry-for-ai, commit: 2dc3b5d1232b38f88c881a07c1cddf825f1d4ffd, license: MIT}
       adapted_on: "2026-09-14"
-
+  infrastructure-engineering:
+    aliases: ["iac", "infrastructure-engineering"]
+    path: skills/infrastructure-engineering
+    entrypoint: skills/infrastructure-engineering/SKILL.md
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      sources:
+        - {repo: hashicorp/agent-skills, commit: c2d65dfe492f74d360d35b859b88932222470bd8}
+        - {source: "Terraform current official plan/apply/state/drift documentation", reviewed_on: "2026-09-14"}
+        - {source: "OpenTofu current official plan/apply documentation", reviewed_on: "2026-09-14"}
+      adapted_on: "2026-09-14"
   decision-design:
     aliases: []
-    path: "skills/decision-design"
-    entrypoint: "skills/decision-design/SKILL.md"
+    path: skills/decision-design
+    entrypoint: skills/decision-design/SKILL.md
     status: active
     independence: generic_domain
-    provenance:
-      adaptation: true
-      source_repo: "mattpocock/skills"
-      source_commit: "3cca18b368ae95cdbdebbff572ccafa662551015"
-      source_skills: ["grilling", "grill-me"]
-      source_license: "MIT"
-      adapted_on: "2026-09-14"
-
+    provenance: {adaptation: true, source_repo: mattpocock/skills, source_commit: 3cca18b368ae95cdbdebbff572ccafa662551015, source_skills: [grilling, grill-me], source_license: MIT, adapted_on: "2026-09-14"}
   interface-design:
     aliases: []
-    path: "skills/interface-design"
-    entrypoint: "skills/interface-design/SKILL.md"
+    path: skills/interface-design
+    entrypoint: skills/interface-design/SKILL.md
     status: active
     independence: generic_domain
     provenance:
       adaptation: true
       sources:
-        - repo: "Leonxlnx/taste-skill"
-          commit: "ccbc15639c97057cbfcf32ecebc38ef716e4bb37"
-          license: "MIT"
-        - repo: "pbakaus/impeccable"
-          commit: "cb56ed6c19a07329a9fa0cd4e657bee040156593"
-          license: "Apache-2.0"
-        - repo: "nextlevelbuilder/ui-ux-pro-max-skill"
-          commit: "7f69fed6a2717900085f1bc3b263721f8ba025e2"
-          license: "MIT"
+        - {repo: Leonxlnx/taste-skill, commit: ccbc15639c97057cbfcf32ecebc38ef716e4bb37, license: MIT}
+        - {repo: pbakaus/impeccable, commit: cb56ed6c19a07329a9fa0cd4e657bee040156593, license: Apache-2.0}
+        - {repo: nextlevelbuilder/ui-ux-pro-max-skill, commit: 7f69fed6a2717900085f1bc3b263721f8ba025e2, license: MIT}
       adapted_on: "2026-09-14"
-
   agent-engineering:
     aliases: []
-    path: "skills/agent-engineering"
-    entrypoint: "skills/agent-engineering/SKILL.md"
+    path: skills/agent-engineering
+    entrypoint: skills/agent-engineering/SKILL.md
     status: active
     independence: generic_domain
     provenance:
       adaptation: true
       sources:
-        - repo: "humanlayer/12-factor-agents"
-          commit: "d20c728368bf9c189d6d7aab704744decb6ec0cc"
-          license: "Apache-2.0"
-        - repo: "stanfordnlp/dspy"
-          commit: "ecba33763316d2a4c6c756046a1118ecbff033e7"
-          use: "conceptual"
-        - repo: "SWE-agent/SWE-agent"
-          commit: "3ea751c087f32b16e039a2233dd6eefecef325d5"
-          use: "conceptual"
+        - {repo: humanlayer/12-factor-agents, commit: d20c728368bf9c189d6d7aab704744decb6ec0cc, license: Apache-2.0}
+        - {repo: stanfordnlp/dspy, commit: ecba33763316d2a4c6c756046a1118ecbff033e7, use: conceptual}
+        - {repo: SWE-agent/SWE-agent, commit: 3ea751c087f32b16e039a2233dd6eefecef325d5, use: conceptual}
       adapted_on: "2026-09-14"
-
   security-engineering:
     aliases: []
-    path: "skills/security-engineering"
-    entrypoint: "skills/security-engineering/SKILL.md"
+    path: skills/security-engineering
+    entrypoint: skills/security-engineering/SKILL.md
     status: active
     independence: generic_domain
     provenance:
       adaptation: true
       sources:
-        - repo: "OWASP/www-project-top-10-for-large-language-model-applications"
-          commit: "99f4395589bdbd120ae961f9cd179e79d7f9b27f"
-        - source: "OpenAI prompt-injection and agent guardrail guidance"
-          reviewed_on: "2026-09-14"
-        - source: "Anthropic trustworthy-agents guidance"
-          reviewed_on: "2026-09-14"
-
+        - {repo: OWASP/www-project-top-10-for-large-language-model-applications, commit: 99f4395589bdbd120ae961f9cd179e79d7f9b27f}
+        - {source: "OpenAI prompt-injection and agent guardrail guidance", reviewed_on: "2026-09-14"}
+        - {source: "Anthropic trustworthy-agents guidance", reviewed_on: "2026-09-14"}
   project-bootstrap:
     aliases: []
-    path: "skills/project-bootstrap"
-    entrypoint: "skills/project-bootstrap/SKILL.md"
+    path: skills/project-bootstrap
+    entrypoint: skills/project-bootstrap/SKILL.md
     status: active
     independence: generic_domain
-    provenance:
-      adaptation: true
-      sources:
-        - repo: "agentsmd/agents.md"
-          commit: "d001185d792eb6402a58e4cbef1c228b309ec25d"
-        - source: "GitHub repository/path-specific agent instruction guidance"
-          reviewed_on: "2026-09-14"
-
+    provenance: {adaptation: true, sources: [{repo: agentsmd/agents.md, commit: d001185d792eb6402a58e4cbef1c228b309ec25d}, {source: "GitHub repository/path-specific agent instruction guidance", reviewed_on: "2026-09-14"}]}
   release-engineering:
     aliases: []
-    path: "skills/release-engineering"
-    entrypoint: "skills/release-engineering/SKILL.md"
+    path: skills/release-engineering
+    entrypoint: skills/release-engineering/SKILL.md
     status: active
     independence: generic_domain
-    provenance:
-      adaptation: true
-      sources:
-        - repo: "slsa-framework/slsa"
-          commit: "54b88b009fd45acb331c7e6578a526e0f36e0430"
-        - source: "GitHub artifact attestation and Actions security guidance"
-          reviewed_on: "2026-09-14"
-        - source: "Sigstore/Cosign signing and verification guidance"
-          reviewed_on: "2026-09-14"
-
+    provenance: {adaptation: true, sources: [{repo: slsa-framework/slsa, commit: 54b88b009fd45acb331c7e6578a526e0f36e0430}, {source: "GitHub artifact attestation and Actions security guidance", reviewed_on: "2026-09-14"}, {source: "Sigstore/Cosign signing and verification guidance", reviewed_on: "2026-09-14"}]}
   data-operations:
     aliases: []
-    path: "skills/data-operations"
-    entrypoint: "skills/data-operations/SKILL.md"
+    path: skills/data-operations
+    entrypoint: skills/data-operations/SKILL.md
     status: active
     independence: generic_domain
-    provenance:
-      adaptation: true
-      sources:
-        - repo: "fivetran/great_expectations"
-          commit: "3798c021bbfb0b13ff384b2238f643d04bdea5f2"
-          license: "Apache-2.0"
-        - repo: "OpenRefine/OpenRefine"
-          commit: "6d5d0579ee84c787eb31d04fa1676582f6e7b65e"
-          license: "BSD-3-Clause-style"
-        - source: "Microsoft Excel formula and error-auditing guidance"
-          reviewed_on: "2026-09-14"
-
+    provenance: {adaptation: true, sources: [{repo: fivetran/great_expectations, commit: 3798c021bbfb0b13ff384b2238f643d04bdea5f2, license: Apache-2.0}, {repo: OpenRefine/OpenRefine, commit: 6d5d0579ee84c787eb31d04fa1676582f6e7b65e}, {source: "Microsoft Excel formula and error-auditing guidance", reviewed_on: "2026-09-14"}]}
   writing-editorial:
     aliases: []
-    path: "skills/writing-editorial"
-    entrypoint: "skills/writing-editorial/SKILL.md"
+    path: skills/writing-editorial
+    entrypoint: skills/writing-editorial/SKILL.md
     status: active
     independence: generic_domain
-    provenance:
-      adaptation: true
-      sources:
-        - source: "Google Developer Documentation Style Guide"
-          reviewed_on: "2026-09-14"
-        - source: "NIST technical publication/plain-language guidance"
-          reviewed_on: "2026-09-14"
-        - source: "Anthropic prompting guidance"
-          use: "conceptual"
-          reviewed_on: "2026-09-14"
-        - repo: "vale-cli/vale"
-          commit: "cf649e6e7089804dd1bad745fdcd12aeee7f7aae"
-          license: "MIT"
-
+    provenance: {adaptation: true, sources: [{source: "Google Developer Documentation Style Guide", reviewed_on: "2026-09-14"}, {source: "NIST technical publication/plain-language guidance", reviewed_on: "2026-09-14"}, {repo: vale-cli/vale, commit: cf649e6e7089804dd1bad745fdcd12aeee7f7aae, license: MIT}]}
   visual-direction:
     aliases: []
-    path: "skills/visual-direction"
-    entrypoint: "skills/visual-direction/SKILL.md"
+    path: skills/visual-direction
+    entrypoint: skills/visual-direction/SKILL.md
     status: active
     independence: generic_domain
-    provenance:
-      adaptation: true
-      sources:
-        - source: "OpenAI Academy image-generation guidance"
-          reviewed_on: "2026-09-14"
-        - source: "Google AI image-generation/reference guidance"
-          reviewed_on: "2026-09-14"
-        - source: "DreamBooth CVPR 2023 / arXiv:2208.12242"
-          use: "conceptual"
-        - repo: "tencent-ailab/IP-Adapter"
-          commit: "62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2"
-          license: "Apache-2.0"
-
+    provenance: {adaptation: true, sources: [{source: "OpenAI Academy image-generation guidance", reviewed_on: "2026-09-14"}, {source: "Google AI image-generation/reference guidance", reviewed_on: "2026-09-14"}, {repo: tencent-ailab/IP-Adapter, commit: 62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2, license: Apache-2.0}]}
   knowledge-memory:
     aliases: []
-    path: "skills/knowledge-memory"
-    entrypoint: "skills/knowledge-memory/SKILL.md"
+    path: skills/knowledge-memory
+    entrypoint: skills/knowledge-memory/SKILL.md
     status: active
     independence: generic_domain
-    provenance:
-      adaptation: true
-      sources:
-        - source: "OpenAI Dreaming memory synthesis guidance"
-          reviewed_on: "2026-09-14"
-        - source: "Anthropic context engineering and long-running harness guidance"
-          reviewed_on: "2026-09-14"
-        - source: "MemGPT arXiv:2310.08560"
-          use: "conceptual"
-        - repo: "letta-ai/letta"
-          commit: "5bcdd177d70fa2b31a754cfcd801e77b2e1ab16a"
-          license: "Apache-2.0"
-
-  automations:
-    aliases: []
-    path: "skills/automations"
-    entrypoint: "skills/automations/SKILL.md"
-    status: active
-    independence: generic_domain
-
+    provenance: {adaptation: true, sources: [{source: "OpenAI Dreaming memory synthesis guidance", reviewed_on: "2026-09-14"}, {source: "Anthropic context engineering and long-running harness guidance", reviewed_on: "2026-09-14"}, {repo: letta-ai/letta, commit: 5bcdd177d70fa2b31a754cfcd801e77b2e1ab16a, license: Apache-2.0}]}
+  automations: {aliases: [], path: skills/automations, entrypoint: skills/automations/SKILL.md, status: active, independence: generic_domain}
   skill-acquisition:
     aliases: []
-    path: "skills/skill-acquisition"
-    entrypoint: "skills/skill-acquisition/SKILL.md"
+    path: skills/skill-acquisition
+    entrypoint: skills/skill-acquisition/SKILL.md
     status: active
     independence: meta_domain
     benchmark_provenance:
       reviewed_on: "2026-09-14"
       sources:
-        - repo: "mattpocock/skills"
-          commit: "3cca18b368ae95cdbdebbff572ccafa662551015"
-        - repo: "anthropics/skills"
-          commit: "34040c9c568585f6929bedeaad110ad08f079624"
-        - repo: "vercel-labs/agent-skills"
-          commit: "063bee94c3f4df8453406c830b0a7df0f2860278"
-        - repo: "microsoft/skills"
-          commit: "903dc62b1e4c833235b54db918a9a51cb6d3cc8f"
-        - repo: "obra/superpowers"
-          commit: "b36e0829c6d0140e93cfef2ca599b1b07d4a7797"
-        - repo: "Leonxlnx/taste-skill"
-          commit: "ccbc15639c97057cbfcf32ecebc38ef716e4bb37"
-        - repo: "lllllllama/RigorPilot-Skills"
-          commit: "bd91195ad73199b95e24532b581ff12c07dcce09"
-        - repo: "pbakaus/impeccable"
-          commit: "cb56ed6c19a07329a9fa0cd4e657bee040156593"
-        - repo: "nextlevelbuilder/ui-ux-pro-max-skill"
-          commit: "7f69fed6a2717900085f1bc3b263721f8ba025e2"
-        - repo: "humanlayer/12-factor-agents"
-          commit: "d20c728368bf9c189d6d7aab704744decb6ec0cc"
-        - repo: "stanfordnlp/dspy"
-          commit: "ecba33763316d2a4c6c756046a1118ecbff033e7"
-        - repo: "SWE-agent/SWE-agent"
-          commit: "3ea751c087f32b16e039a2233dd6eefecef325d5"
-        - repo: "OWASP/www-project-top-10-for-large-language-model-applications"
-          commit: "99f4395589bdbd120ae961f9cd179e79d7f9b27f"
-        - repo: "agentsmd/agents.md"
-          commit: "d001185d792eb6402a58e4cbef1c228b309ec25d"
-        - repo: "slsa-framework/slsa"
-          commit: "54b88b009fd45acb331c7e6578a526e0f36e0430"
-        - repo: "fivetran/great_expectations"
-          commit: "3798c021bbfb0b13ff384b2238f643d04bdea5f2"
-        - repo: "OpenRefine/OpenRefine"
-          commit: "6d5d0579ee84c787eb31d04fa1676582f6e7b65e"
-        - repo: "vale-cli/vale"
-          commit: "cf649e6e7089804dd1bad745fdcd12aeee7f7aae"
-        - repo: "tencent-ailab/IP-Adapter"
-          commit: "62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2"
-        - repo: "letta-ai/letta"
-          commit: "5bcdd177d70fa2b31a754cfcd801e77b2e1ab16a"
-        - repo: "DwonnG/qa-agent-skills"
-          commit: "c5dcf11d22bd40a55d4f7c30baa2f272b4dcf576"
-        - repo: "petrkindlmann/qa-skills"
-          commit: "b3bb61bd268b147476252c6ed5a0440c87b97441"
-        - repo: "cloudflare/skills"
-          commit: "b052c32bab7dd493513260228a36c88294f343f1"
-        - repo: "neondatabase/postgres-skills"
-          commit: "27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26"
-        - repo: "supabase/agent-skills"
-          commit: "8331f910845103c08d51f6ca1d86ebb7d1f745e3"
-        - repo: "getsentry/sentry-for-ai"
-          commit: "2dc3b5d1232b38f88c881a07c1cddf825f1d4ffd"
+        - {repo: mattpocock/skills, commit: 3cca18b368ae95cdbdebbff572ccafa662551015}
+        - {repo: anthropics/skills, commit: 34040c9c568585f6929bedeaad110ad08f079624}
+        - {repo: vercel-labs/agent-skills, commit: 063bee94c3f4df8453406c830b0a7df0f2860278}
+        - {repo: microsoft/skills, commit: 903dc62b1e4c833235b54db918a9a51cb6d3cc8f}
+        - {repo: obra/superpowers, commit: b36e0829c6d0140e93cfef2ca599b1b07d4a7797}
+        - {repo: nextlevelbuilder/ui-ux-pro-max-skill, commit: 7f69fed6a2717900085f1bc3b263721f8ba025e2}
+        - {repo: humanlayer/12-factor-agents, commit: d20c728368bf9c189d6d7aab704744decb6ec0cc}
+        - {repo: cloudflare/skills, commit: b052c32bab7dd493513260228a36c88294f343f1}
+        - {repo: neondatabase/postgres-skills, commit: 27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26}
+        - {repo: supabase/agent-skills, commit: 8331f910845103c08d51f6ca1d86ebb7d1f745e3}
+        - {repo: getsentry/sentry-for-ai, commit: 2dc3b5d1232b38f88c881a07c1cddf825f1d4ffd}
+        - {repo: hashicorp/agent-skills, commit: c2d65dfe492f74d360d35b859b88932222470bd8}

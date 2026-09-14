@@ -20,6 +20,8 @@ Route here only when at least one of these is true:
 
 Discovery alone is not a reason to expand the active skill set. First ask whether the need belongs to an existing owner and can be solved by tuning, consolidation, or ordinary domain work.
 
+The proactive capability-expansion wave closed at v0.24.0. Default now to ordinary-work outcome validation; reopen expansion only for explicit Creator requests or evidence-backed uncovered gaps/material underperformance.
+
 ## Principle
 
 **Reuse ideas; inherit trust only after verification.**
@@ -84,3 +86,4 @@ For instruction-heavy skills, default to synthesis: keep the useful idea, rewrit
 - `references/database-engineering-deep-audit-2026-09-14.md` — engine-aware schema/query/transaction/migration ownership and promotion audit.
 - `references/mobile-engineering-reference-audit-2026-09-14.md` — Flutter/Android reference-pack audit and explicit anti-bloat promotion decision.
 - `references/reliability-engineering-deep-audit-2026-09-14.md` — service-health, observability, alerting, incident-response, recovery, and postmortem ownership audit.
+- `references/infrastructure-engineering-deep-audit-2026-09-14.md` — infrastructure lifecycle, plan/apply/state/drift, recovery, ownership boundaries, promotion decision, and capability-wave close.

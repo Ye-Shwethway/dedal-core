@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {"id":"IE-01","intent":"Refactor Terraform modules without recreating resources","expect_primary":"infrastructure-engineering","expect_supporting":["software-development"]},
+    {"id":"IE-02","intent":"Review Terraform plan with destroy and replace actions","expect_primary":"infrastructure-engineering","expect_supporting":["security-engineering"]},
+    {"id":"IE-03","intent":"Implement application business logic","expect_primary":"software-development"},
+    {"id":"IE-04","intent":"Promote an application artifact to production","expect_primary":"release-engineering"},
+    {"id":"IE-05","intent":"Investigate a live outage after deployment","expect_primary":"reliability-engineering"},
+    {"id":"IE-06","intent":"Choose Cloudflare products and edge topology","expect_primary":"cloudflare-platform"},
+    {"id":"IE-07","intent":"Define infrastructure credential and trust policy","expect_primary":"security-engineering","expect_supporting":["infrastructure-engineering"]},
+    {"id":"IE-08","intent":"Inspect database isolation and locking semantics","expect_primary":"database-engineering"},
+    {"id":"IE-N1","claim":"A speculative Terraform plan proves the change was applied","reject":true},
+    {"id":"IE-N2","claim":"terraform apply succeeded, therefore the service is healthy","reject":true},
+    {"id":"IE-N3","claim":"auto-approve grants permission to mutate infrastructure","reject":true},
+    {"id":"IE-N4","claim":"Directly editing state is the normal first fix for drift","reject":true},
+    {"id":"IE-N5","claim":"A resource import proves configuration fully matches live reality","reject":true},
+    {"id":"IE-N6","claim":"Provider/version-specific IaC behavior can be frozen permanently in Core","reject":true}
+  ]
+}

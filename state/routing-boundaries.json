@@ -1,5 +1,5 @@
 {
-  "schema_version": 6,
+  "schema_version": 7,
   "phase": "hardening-consolidation-outcome-validation",
   "composition_model": {
     "architecture": "persistent-cognitive-runtime",
@@ -15,12 +15,29 @@
       "primary_owner_by_intent": {
         "repository-mechanics": "github",
         "implementation-debug-test": "software-development",
+        "infrastructure-lifecycle-reconciliation": "infrastructure-engineering",
         "independent-product-quality-verification": "quality-engineering",
         "artifact-promotion-rollback": "release-engineering",
         "live-service-health-incident-response": "reliability-engineering",
         "agent-tool-harness-design": "agent-engineering"
       },
-      "rule": "Implementation, independent quality assessment, release promotion, and live-service reliability are distinct ownership layers; pair only when another owner contributes a necessary layer."
+      "rule": "Implementation, infrastructure lifecycle, independent quality assessment, release promotion, and live-service reliability are distinct ownership layers."
+    },
+    {
+      "id": "infrastructure-boundary",
+      "primary_owner_by_intent": {
+        "iac-config-state-live-reconciliation": "infrastructure-engineering",
+        "iac-plan-apply-import-move-drift": "infrastructure-engineering",
+        "iac-module-provider-lifecycle": "infrastructure-engineering",
+        "application-implementation": "software-development",
+        "application-release-promotion": "release-engineering",
+        "live-service-health": "reliability-engineering",
+        "cloudflare-product-platform-semantics": "cloudflare-platform",
+        "database-engine-semantics": "database-engineering",
+        "infrastructure-security-policy-authority": "security-engineering",
+        "independent-infrastructure-readiness": "quality-engineering"
+      },
+      "rule": "Infrastructure Engineering owns declarative resource lifecycle and reconciliation; provider architecture, security authority, application release, database semantics and live-service health remain separate."
     },
     {
       "id": "reliability-boundary",
@@ -28,6 +45,7 @@
         "sli-slo-error-budget-service-health": "reliability-engineering",
         "telemetry-observability-strategy": "reliability-engineering",
         "production-incident-triage-mitigation-recovery": "reliability-engineering",
+        "infrastructure-change-semantics": "infrastructure-engineering",
         "application-instrumentation-implementation": "software-development",
         "release-deployment-rollback-mechanics": "release-engineering",
         "independent-pre-release-readiness": "quality-engineering",
@@ -35,12 +53,13 @@
         "provider-platform-semantics": "cloudflare-platform",
         "database-engine-semantics": "database-engineering"
       },
-      "rule": "Reliability Engineering owns live service health and incident learning; tools and provider/database evidence support it without replacing their existing owners."
+      "rule": "Reliability Engineering owns live service health and incident learning; Infrastructure Engineering owns resource lifecycle/reconciliation even when an infrastructure change triggers an incident."
     },
     {
       "id": "cloudflare-platform-boundary",
       "primary_owner_by_intent": {
         "cloudflare-product-selection-composition": "cloudflare-platform",
+        "cloudflare-iac-resource-lifecycle": "infrastructure-engineering",
         "cloudflare-application-implementation": "software-development",
         "cloudflare-database-semantics": "database-engineering",
         "cloudflare-release-promotion-rollback": "release-engineering",
@@ -48,19 +67,20 @@
         "cloudflare-trust-access-security-policy": "security-engineering",
         "cloudflare-independent-readiness": "quality-engineering"
       },
-      "rule": "Cloudflare Platform owns provider semantics; Reliability Engineering owns cross-component service health and incident response. Drift-sensitive provider facts require current official documentation when material."
+      "rule": "Cloudflare Platform owns provider/product semantics; Infrastructure Engineering owns IaC lifecycle when Cloudflare resources are declaratively managed."
     },
     {
       "id": "database-boundary",
       "primary_owner_by_intent": {
         "database-schema-index-query-plan-transaction-concurrency": "database-engineering",
+        "database-infrastructure-resource-lifecycle": "infrastructure-engineering",
         "database-application-implementation": "software-development",
         "record-reconciliation-staging-deduplication": "data-operations",
         "production-database-migration-promotion": "release-engineering",
         "production-database-service-health": "reliability-engineering",
         "independent-database-readiness-verification": "quality-engineering"
       },
-      "rule": "Database Engineering owns database semantics; Reliability Engineering may use database evidence for live-service diagnosis without replacing engine ownership."
+      "rule": "Database Engineering owns engine/database semantics; Infrastructure Engineering may manage infrastructure resources but does not redefine database behavior."
     },
     {
       "id": "quality-interface-security",
@@ -69,7 +89,7 @@
         "verify-user-visible-behavior-accessibility-regression": "quality-engineering",
         "security-threat-policy-adversarial-reasoning": "security-engineering"
       },
-      "rule": "Quality Engineering verifies agreed behavior and quality evidence but does not own design direction, live-service reliability, or security policy."
+      "rule": "Quality Engineering verifies agreed behavior; Security Engineering owns authority/trust policy, including for infrastructure mutation."
     },
     {
       "id": "state-continuity",
@@ -88,7 +108,7 @@
         "medicine-store-business-rules": "medicine-store-assistant",
         "patient-report-business-rules": "patient-report-assistant"
       },
-      "rule": "Record/data mechanics, database semantics, and specialized business rules are separate ownership layers; pair only when a task actually spans them."
+      "rule": "Record/data mechanics, database semantics, infrastructure lifecycle, and specialized business rules remain separate ownership layers."
     },
     {
       "id": "interface-implementation",
@@ -123,11 +143,12 @@
     "explicit-alias-outranks-generic-overlap",
     "primary-owner-first",
     "pair-only-for-distinct-necessary-layer",
-    "implementation-verification-release-reliability-are-distinct-layers",
-    "database-semantics-are-separate-from-app-code-and-record-operations",
+    "implementation-infrastructure-verification-release-reliability-are-distinct-layers",
+    "iac-config-state-live-reality-are-distinct-evidence-views",
+    "database-semantics-are-separate-from-app-code-record-operations-and-infrastructure-resource-lifecycle",
     "platform-domain-does-not-absorb-cross-cutting-owners",
-    "service-health-evidence-does-not-collapse-into-deploy-or-dashboard-status",
-    "engine-and-version-specific-facts-live-verified-when-material",
+    "service-health-evidence-does-not-collapse-into-deploy-or-infrastructure-apply-status",
+    "engine-provider-and-version-specific-facts-live-verified-when-material",
     "execution-surface-selection-is-separate-from-skill-selection",
     "recompose-on-material-subgoal-change",
     "no-new-skill-for-already-owned-intent",

@@ -1,45 +1,44 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.23.0",
+  "version": "0.24.0",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with an always-active Cognitive Runtime and progressively disclosed specialist faculties.",
-    "Quality Engineering, Cloudflare Platform, Database Engineering, and Reliability Engineering are active with distinct ownership boundaries.",
-    "Reliability Engineering owns live-service reliability: service-health objectives, observability strategy, actionable alerting, production incident response/mitigation, recovery verification, and post-incident learning.",
-    "Reliability Engineering does not absorb application implementation, release promotion authority, independent QA, security policy, Cloudflare/provider semantics, database-engine semantics, or agent-harness design.",
-    "Release success, provider health, alert clearance, telemetry normalization, and user-visible recovery are separate evidence layers; completion claims must not collapse them.",
-    "Telemetry volume is not an objective. Metrics, logs, traces, profiles/events, synthetics, and provider-native signals are selected to answer operational questions.",
-    "Actionable symptom/user-impact alerts are preferred over noisy internal threshold paging; internal alerts remain justified when they predict imminent impact or enable a concrete action.",
-    "Active incidents prioritize safe impact reduction and truthful partial-state tracking over perfect root-cause explanation; rollback is a production action and does not imply data-side-effect reversal.",
-    "Post-incident analysis should improve detection, mitigation, architecture, coordination, runbooks, or regression safeguards rather than reduce complex failures to a single human cause.",
-    "Sentry/OpenTelemetry/provider dashboards are execution/reference surfaces and do not create mutation authority or become the Reliability Engineering identity.",
-    "Provider/version-specific observability APIs, query syntax, retention, pricing, sampling defaults, alert semantics, and feature status require current authoritative documentation when material.",
-    "Mobile Flutter/Android remains an approved progressive reference pack rather than a top-level faculty.",
-    "The next capability audit is Infrastructure/IaC and remains reference-first until a distinct ownership layer beyond Software Development, Release Engineering, Security Engineering, Cloudflare Platform, and Reliability Engineering is proven."
+    "Quality Engineering, Cloudflare Platform, Database Engineering, Reliability Engineering, and Infrastructure Engineering are active with distinct ownership boundaries.",
+    "Infrastructure Engineering owns declarative infrastructure lifecycle semantics: configuration/state/live-resource reconciliation, plan/apply review, drift, imports/moves/refactors, module/provider lifecycle, destructive-change review, state/backend safety, and infrastructure recovery reasoning.",
+    "Infrastructure Engineering does not absorb application implementation, application artifact promotion, live-service reliability, Cloudflare/provider product architecture, database-engine semantics, security authority/policy, or independent QA.",
+    "Desired configuration, IaC state, and live provider reality are separate evidence views. A speculative plan is not an applied change; apply success is not proof of user-visible service health.",
+    "Drift must be classified before reconciliation; supported import/move/refactor mechanisms are preferred over direct state surgery; direct state mutation is elevated recovery work.",
+    "Terraform, OpenTofu, Packer, cloud CLIs, provider APIs and MCP/tools are execution/reference surfaces and do not create mutation authority.",
+    "Provider/tool/version/backend-specific behavior remains live-doc-sensitive when material.",
+    "The proactive capability-expansion wave that began with ecosystem capability-gap scanning is now closed. Immediate high-value candidates have either been promoted, mapped to reference packs, or rejected as standalone faculties.",
+    "Mobile Flutter/Android remains a progressive reference pack; observability tooling is owned by Reliability Engineering; Postgres practices are owned by Database Engineering; Terraform/OpenTofu/Packer knowledge is owned progressively by Infrastructure Engineering; browser/computer control remains an execution surface.",
+    "Healthcare/clinical informatics remains a later/high-bar bounded area rather than an immediate generic medical skill because of its high-stakes evidence requirements.",
+    "Further skill expansion should restart only when representative ordinary work exposes a concrete uncovered capability gap or a current faculty materially underperforms."
   ],
   "evidence": [
-    {"id":"reliability-engineering-deep-audit-2026-09-14","kind":"multi-source-first-party-methodology-audit","status":"promotion_approved_with_cross-owner_boundaries"},
-    {"id":"google-sre-current-guidance","kind":"first_party_methodology","status":"reviewed_2026_09_14_for_monitoring_slo_alerting_incident_management_and_postmortems"},
-    {"id":"opentelemetry-current-docs","kind":"open-standard-first-party-documentation","status":"reviewed_2026_09_14_for_observability_signals_and_instrumentation_boundary"},
-    {"id":"getsentry-sentry-for-ai","kind":"first_party_skill_corpus","status":"pinned_2dc3b5d1232b38f88c881a07c1cddf825f1d4ffd_mit"},
-    {"id":"reliability-engineering-routing-v1","kind":"contract_validation","status":"service_health_release_implementation_quality_security_and_negative_reliability_claim_boundaries_ci_enforced"},
-    {"id":"capability-gap-map-v6","kind":"architecture_state","status":"reliability_promoted_infra_iac_next"}
+    {"id":"infrastructure-engineering-deep-audit-2026-09-14","kind":"first-party-multi-source-methodology-audit","status":"promotion_approved_with_cross-owner_boundaries"},
+    {"id":"hashicorp-agent-skills","kind":"first_party_skill_corpus","status":"pinned_c2d65dfe492f74d360d35b859b88932222470bd8"},
+    {"id":"terraform-current-docs","kind":"first_party_documentation","status":"reviewed_2026_09_14_for_plan_apply_state_drift_and_refresh_semantics"},
+    {"id":"opentofu-current-docs","kind":"open_source_first_party_documentation","status":"reviewed_2026_09_14_for_plan_apply_semantics"},
+    {"id":"infrastructure-engineering-routing-v1","kind":"contract_validation","status":"infrastructure_implementation_release_reliability_provider_database_security_and_negative_claim_boundaries_ci_enforced"},
+    {"id":"capability-gap-map-v7","kind":"architecture_state","status":"current_proactive_skill_wave_closed"}
   ],
   "unresolved_risks": [
-    "Reliability Engineering promotion is architecture- and contract-supported, but measurable DEDAL-specific outcome gains still require representative ordinary production work.",
-    "Small/local systems can be overburdened by formal SLO/on-call ceremony; process must scale to actual risk and operating model.",
-    "Telemetry can be incomplete, sampled, delayed, or provider-specific; production claims must remain scoped to evidence quality.",
-    "Incident mitigation can itself cause side effects; authority and recovery semantics remain mandatory.",
-    "The new faculty may be over-routed onto ordinary debugging unless the task is genuinely about live service health or operational reliability."
+    "Infrastructure Engineering promotion is architecture- and contract-supported, but measurable DEDAL-specific outcome gains still require representative ordinary infrastructure work.",
+    "Infrastructure tooling/provider behavior changes quickly; live official documentation remains necessary for material syntax, backend, provider, compatibility and migration details.",
+    "State and partial-apply recovery can be destructive; task-scoped authority and explicit recovery semantics remain mandatory.",
+    "Small single-host workflows can be over-engineered if Infrastructure Engineering is invoked for trivial shell configuration; smallest-sufficient composition remains mandatory.",
+    "Healthcare/clinical informatics may later justify bounded specialist capabilities, but generic clinical-skill promotion remains intentionally deferred."
   ],
   "next_executable_step": {
-    "id": "INFRA-IAC-REFERENCE-AUDIT-01",
-    "action": "Deep-audit high-signal Infrastructure-as-Code and infrastructure lifecycle guidance, including the pinned HashiCorp agent-skill corpus. Determine whether provisioning/state/plan/apply/drift/infrastructure lifecycle is a distinct recurring owner or should remain progressive reference knowledge under Software Development, Release Engineering, Security Engineering, Cloudflare Platform, and Reliability Engineering."
+    "id": "CAPABILITY-WAVE-OUTCOME-01",
+    "action": "Pause proactive skill expansion. Apply the current Cognitive Runtime and 24 active faculties naturally during ordinary Creator work. Record genuine routing wins, missed support, context waste, ownership collisions, regressions, or uncovered capability gaps. Reopen Skill Acquisition only when such evidence or an explicit Creator request justifies it."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "cca17d2fba1136eee5b15e89bebd55ba4e79c947",
-    "relation": "verified v0.22.1 mobile reference-pack baseline before the 0.23.0 Reliability Engineering promotion transaction"
+    "sha": "7e9da331feb7e44c0ea7f34d2429a5f46e5d767b",
+    "relation": "verified v0.23.0 Reliability Engineering baseline before the 0.24.0 Infrastructure Engineering promotion and wave-close transaction"
   }
 }

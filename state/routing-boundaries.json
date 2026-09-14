@@ -1,6 +1,14 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "phase": "hardening-consolidation-outcome-validation",
+  "composition_model": {
+    "architecture": "persistent-cognitive-runtime",
+    "roles": ["RUNTIME", "PRIMARY", "SUPPORTING", "EXECUTION", "DORMANT"],
+    "runtime_always_active": true,
+    "specialist_loading": "progressive",
+    "explicit_alias_selects_primary_without_disabling_runtime_or_needed_support": true,
+    "recompose_on_material_subgoal_change": true
+  },
   "clusters": [
     {
       "id": "repo-lifecycle",
@@ -57,10 +65,14 @@
     }
   ],
   "routing_principles": [
+    "one-coherent-intelligence-with-dynamic-faculties",
+    "runtime-always-active-specialists-progressive",
     "select-smallest-sufficient-skill-set",
     "explicit-alias-outranks-generic-overlap",
     "primary-owner-first",
     "pair-only-for-distinct-necessary-layer",
+    "execution-surface-selection-is-separate-from-skill-selection",
+    "recompose-on-material-subgoal-change",
     "no-new-skill-for-already-owned-intent",
     "needs-evidence-before-merge-or-remove"
   ]

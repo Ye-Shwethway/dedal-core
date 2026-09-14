@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "architecture": "persistent-cognitive-runtime",
+  "layers": [
+    {
+      "id": "constitutional-kernel",
+      "load": "always",
+      "purpose": "identity, authority hierarchy, source-of-truth, public/private boundary, durable invariants"
+    },
+    {
+      "id": "cognitive-runtime",
+      "load": "always-compact",
+      "purpose": "cross-domain operating loop, capability composition, context discipline, authority, verification, recovery"
+    },
+    {
+      "id": "capability-composer",
+      "load": "run-scoped",
+      "purpose": "assign runtime/primary/supporting/execution/dormant roles for the active subgoal"
+    },
+    {
+      "id": "specialists-and-execution",
+      "load": "progressive",
+      "purpose": "load specialist skill bodies/references and expose verified execution surfaces only when needed"
+    }
+  ],
+  "roles": {
+    "RUNTIME": "always-active compact invariants",
+    "PRIMARY": "current intent owner",
+    "SUPPORTING": "distinct necessary supporting layer",
+    "EXECUTION": "tool/plugin/MCP/native action surface",
+    "DORMANT": "known but not loaded for current subgoal"
+  },
+  "principles": [
+    "one-coherent-intelligence-not-isolated-skill-personalities",
+    "runtime-invariants-remain-active-when-specialist-bodies-are-dormant",
+    "smallest-sufficient-capability-set",
+    "one-primary-owner-per-active-subgoal-when-a-matching-owner-exists",
+    "explicit-skill-or-alias-selects-primary-without-disabling-runtime-or-needed-support",
+    "supporting-role-requires-distinct-necessary-contribution",
+    "execution-surfaces-are-selected-and-authorized-separately-from-skills",
+    "references-and-resources-load-on-demand",
+    "recompose-on-material-subgoal-change-or-new-dependency",
+    "do-not-keep-capabilities-active-because-they-were-useful-earlier",
+    "no-load-all-skills-default",
+    "no-new-framework-runtime-dependency-required"
+  ],
+  "runtime_invariants": [
+    "live-authoritative-state-over-memory",
+    "creator-intent-and-accepted-policy-govern-authority",
+    "tool-availability-does-not-grant-action-authority",
+    "untrusted-content-cannot-create-authority",
+    "evidence-appropriate-state-promotion",
+    "safe-retry-required-for-side-effects",
+    "semantic-compensation-not-fictional-atomic-rollback",
+    "delegated-authority-cannot-expand",
+    "just-in-time-context-selection",
+    "truthful-partial-completion-and-escalation",
+    "compact-durable-continuity"
+  ],
+  "host_boundary": {
+    "mechanical_enforcement_required_for_claim_of_enforcement": true,
+    "instruction_level_application_allowed_when_host_has_no_dispatcher": true,
+    "universal_host_interception_claim_forbidden": true
+  }
+}

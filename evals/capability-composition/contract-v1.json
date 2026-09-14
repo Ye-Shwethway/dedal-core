@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "policy": "runtime/capability-composition-policy.json",
+  "cases": [
+    {
+      "id": "CC-01",
+      "expect": "accept",
+      "task": "Generate a consistent character-expression image set from canonical references.",
+      "composition": {
+        "RUNTIME": ["cognitive-runtime"],
+        "PRIMARY": ["visual-direction"],
+        "SUPPORTING": ["files"],
+        "EXECUTION": ["image-generation-tool"],
+        "DORMANT": ["agent-engineering", "software-development"]
+      },
+      "supporting_rationale": {"files": "retrieve canonical visual references"}
+    },
+    {
+      "id": "CC-02",
+      "expect": "accept",
+      "task": "Load visual-direction explicitly and generate an image.",
+      "explicit_skill": "visual-direction",
+      "composition": {
+        "RUNTIME": ["cognitive-runtime"],
+        "PRIMARY": ["visual-direction"],
+        "SUPPORTING": [],
+        "EXECUTION": ["image-generation-tool"],
+        "DORMANT": ["agent-engineering"]
+      },
+      "supporting_rationale": {}
+    },
+    {
+      "id": "CC-03",
+      "expect": "reject",
+      "task": "Load visual-direction explicitly and generate an image.",
+      "explicit_skill": "visual-direction",
+      "composition": {
+        "RUNTIME": [],
+        "PRIMARY": ["visual-direction"],
+        "SUPPORTING": [],
+        "EXECUTION": ["image-generation-tool"],
+        "DORMANT": []
+      },
+      "supporting_rationale": {},
+      "reason": "named specialist activation must not disable the always-on runtime"
+    },
+    {
+      "id": "CC-04",
+      "expect": "reject",
+      "task": "Generate one simple image.",
+      "composition": {
+        "RUNTIME": ["cognitive-runtime"],
+        "PRIMARY": ["visual-direction"],
+        "SUPPORTING": ["agent-engineering", "security-engineering", "software-development", "research", "knowledge-memory"],
+        "EXECUTION": ["image-generation-tool"],
+        "DORMANT": []
+      },
+      "supporting_rationale": {},
+      "reason": "load-all behavior violates smallest-sufficient composition and supporting roles lack distinct necessity"
+    },
+    {
+      "id": "CC-05",
+      "expect": "accept",
+      "task": "Design a task-scoped authority model for an AI agent.",
+      "composition": {
+        "RUNTIME": ["cognitive-runtime"],
+        "PRIMARY": ["agent-engineering"],
+        "SUPPORTING": ["security-engineering", "research"],
+        "EXECUTION": ["web-search"],
+        "DORMANT": ["visual-direction"]
+      },
+      "supporting_rationale": {
+        "security-engineering": "authority and trust-boundary analysis",
+        "research": "current external architecture evidence"
+      }
+    },
+    {
+      "id": "CC-06",
+      "expect": "accept",
+      "task": "Use $msa to reconcile a medicine-store intake sheet with duplicate rows.",
+      "explicit_skill": "medicine-store-assistant",
+      "composition": {
+        "RUNTIME": ["cognitive-runtime"],
+        "PRIMARY": ["medicine-store-assistant"],
+        "SUPPORTING": ["data-operations", "files"],
+        "EXECUTION": ["spreadsheet-tool"],
+        "DORMANT": ["patient-report-assistant"]
+      },
+      "supporting_rationale": {
+        "data-operations": "generic reconciliation/deduplication mechanics subordinate to MSA business rules",
+        "files": "workbook retrieval/version identity"
+      }
+    },
+    {
+      "id": "CC-07",
+      "expect": "accept",
+      "task": "Answer a simple conceptual question with no specialist workflow required.",
+      "composition": {
+        "RUNTIME": ["cognitive-runtime"],
+        "PRIMARY": [],
+        "SUPPORTING": [],
+        "EXECUTION": [],
+        "DORMANT": ["agent-engineering", "visual-direction", "software-development"]
+      },
+      "supporting_rationale": {}
+    },
+    {
+      "id": "CC-08",
+      "expect": "reject",
+      "task": "Use $ika to retrieve an evidence-linked project fact.",
+      "explicit_skill": "knowledge-archive",
+      "composition": {
+        "RUNTIME": ["cognitive-runtime"],
+        "PRIMARY": ["knowledge-memory"],
+        "SUPPORTING": ["knowledge-archive"],
+        "EXECUTION": [],
+        "DORMANT": []
+      },
+      "supporting_rationale": {"knowledge-archive": "explicit alias was demoted"},
+      "reason": "explicit alias must remain primary for its owned intent"
+    }
+  ]
+}

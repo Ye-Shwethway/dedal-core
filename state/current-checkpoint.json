@@ -1,47 +1,46 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.18.8",
+  "version": "0.19.0",
   "accepted_state": [
-    "Initial eight-area capability expansion is complete.",
-    "Default operating phase is hardening, consolidation, outcome validation, and gap-oriented learning rather than default skill expansion.",
-    "GitHub mutation guard contracts remain CI-validated; native provider interception is deferred unless a controllable dispatcher surface becomes available.",
-    "Every live skill entrypoint has a consolidation classification and routing overlap clusters have machine-readable primary ownership rules.",
-    "Agent Engineering treats executor/model claims as candidate state and requires evidence-appropriate promotion into durable accepted state.",
-    "Tracing/evaluation, context engineering, controlled self-improvement, task-scoped tool authority, and delegation-authority contracts remain CI-validated.",
-    "Multi-agent delegation attenuates authority and does not silently expand tools, modes, resource scope, intent, credentials, confirmation state, or re-delegation permission.",
-    "Failure recovery now distinguishes retry, compensation, accepted partial completion, and escalation rather than treating every failure as automatic retry or rollback.",
-    "Retry of side-effecting work requires explicit evidence that repetition is idempotent or otherwise safe.",
-    "Compensation across external systems is semantic counter-action rather than atomic rollback; irreversible residual effects must remain disclosed.",
-    "Partial completion must record residual effects and blocked work, and failed compensation must escalate rather than being reported as recovered.",
-    "The current agent-refinement learning campaign is paused after v0.18.8; existing outcome checkpoints should accumulate naturally during ordinary work."
+    "Initial eight-area capability expansion is complete and the proactive agent-refinement learning campaign remains paused after v0.18.8.",
+    "DEDAL is now explicitly modeled as one coherent persistent intelligence with specialized faculties rather than isolated skill personalities.",
+    "The minimal boot now includes a compact always-active Cognitive Runtime between the Stable Kernel and progressively disclosed specialist skills.",
+    "Capability composition uses RUNTIME, PRIMARY, SUPPORTING, EXECUTION, and DORMANT roles for the active subgoal.",
+    "RUNTIME remains active across all DEDAL tasks while full specialist skill bodies load only when selected as PRIMARY or genuinely necessary SUPPORTING capabilities.",
+    "Explicit skill requests and aliases are strong PRIMARY routing signals but do not disable the Cognitive Runtime or prohibit distinct necessary support.",
+    "Execution surfaces such as tools, plugins, MCP/apps, and native capabilities are selected and authorized separately from specialist skill selection.",
+    "Capability composition may be recomputed when the active subgoal materially changes; prior activation is not permanent conversation state.",
+    "Cross-domain rules from agent/context/security/authority/delegation/recovery work are distilled into compact Runtime invariants rather than requiring the full Agent Engineering or Security Engineering skill on every task.",
+    "Progressive disclosure remains the context discipline: routing metadata first, specialist entrypoint on match, references/resources only when required.",
+    "No external agent framework or orchestration runtime was added as a Core dependency.",
+    "Existing authority, delegation, failure-recovery, context, trajectory, self-improvement, and GitHub mutation contracts remain in force."
   ],
   "evidence": [
-    {"id": "GMG-v1", "kind": "contract_validation", "status": "covered_by_negative_and_positive_cases"},
-    {"id": "routing-boundaries-v1", "kind": "contract_validation", "status": "primary_ownership_clusters_defined_and_ci_checked"},
-    {"id": "trajectory-contract-v1", "kind": "contract_validation", "status": "positive_and_negative_cases_ci_enforced"},
-    {"id": "context-engineering-contract-v1", "kind": "contract_validation", "status": "freshness_compaction_protected_state_and_isolation_cases_ci_enforced"},
-    {"id": "self-improvement-contract-v1", "kind": "contract_validation", "status": "baseline_protected_eval_heldout_regression_and_antibenchmaxxing_cases_ci_enforced"},
-    {"id": "tool-authority-contract-v1", "kind": "contract_validation", "status": "read_write_authority_intent_scope_confirmation_and_external_mcp_cases_ci_enforced"},
+    {"id": "cognitive-runtime-capability-composition-audit-2026-09-14", "kind": "external_pattern_audit", "status": "adapted_progressive_disclosure_always_on_runtime_dynamic_composition_and_agent_os_layering"},
+    {"id": "capability-composition-contract-v1", "kind": "contract_validation", "status": "runtime_primary_supporting_execution_dormant_explicit_skill_and_load_all_cases_ci_enforced"},
+    {"id": "agentskills-progressive-disclosure", "kind": "external_architecture_evidence", "status": "pinned_agentskills_agentskills_69ef37e9424c0a7ea9dd2293b559e43ec8176379"},
+    {"id": "deepagents-runtime-layering", "kind": "external_architecture_evidence", "status": "pinned_langchain_ai_deepagents_c08cae693e0036fcd45d979a7dfa3a7e306a0515"},
+    {"id": "openai-agents-runtime-composition", "kind": "external_architecture_evidence", "status": "reviewed_shared_context_dynamic_tool_handoff_and_deferred_tool_patterns_2026_09_14"},
+    {"id": "failure-recovery-contract-v1", "kind": "contract_validation", "status": "retry_compensation_partial_completion_irreversible_residual_and_compensation_failure_cases_ci_enforced"},
     {"id": "delegation-authority-contract-v1", "kind": "contract_validation", "status": "tool_mode_resource_intent_redelegation_and_provenance_subset_cases_ci_enforced"},
-    {"id": "failure-recovery-audit-2026-09-14", "kind": "external_pattern_audit", "status": "adapted_retry_safety_semantic_compensation_partial_state_and_recovery_escalation"},
-    {"id": "failure-recovery-contract-v1", "kind": "contract_validation", "status": "retry_compensation_partial_completion_irreversible_residual_and_compensation_failure_cases_ci_enforced"}
+    {"id": "tool-authority-contract-v1", "kind": "contract_validation", "status": "read_write_authority_intent_scope_confirmation_and_external_mcp_cases_ci_enforced"}
   ],
   "unresolved_risks": [
-    "The public Core cannot intercept every native provider/tool/sub-agent call unless the host routes execution through an enforceable dispatcher or service ACL seam.",
-    "Eight skills remain NEEDS_EVIDENCE and should not be promoted to stronger consolidation decisions without representative outcomes.",
-    "Routing, verified-state, trajectory, context, self-improvement, authority, delegation, and recovery contracts remain contract-level refinements until representative real-task evidence accumulates.",
-    "Compensating actions may themselves be unavailable, lossy, or fail; external systems do not provide universal atomic rollback.",
-    "Idempotency and reversibility are action-specific and must not be inferred from tool availability alone."
+    "The public Core cannot mechanically inject or enforce composition on every native ChatGPT/provider surface; instruction-level application must not be reported as universal host enforcement.",
+    "The always-loaded Cognitive Runtime creates permanent context cost and must remain compact; future additions require a higher bar than specialist-skill additions.",
+    "Capability-composition rules are contract-level architecture until representative ordinary tasks show better continuity/routing without excess context or unnecessary supporting skills.",
+    "Dynamic recomposition can become ceremony or oscillate if subgoal boundaries are defined too aggressively; the smallest-sufficient principle remains the brake.",
+    "Eight skills remain NEEDS_EVIDENCE and should not be promoted to stronger consolidation decisions without representative outcomes."
   ],
   "next_executable_step": {
-    "id": "AGENT-REFINEMENT-PAUSE-01",
-    "action": "Pause proactive agent-refinement learning. Apply the existing contracts naturally during ordinary work, preserve genuine outcome evidence and regressions when they occur, and shift the next deliberate improvement campaign to a non-agent area selected with the Creator."
+    "id": "COGNITIVE-RUNTIME-OUTCOME-01",
+    "action": "Apply the layered Cognitive Runtime naturally during ordinary work. Treat named skills as primary faculties rather than exclusive modes, add supporting skills only for distinct necessary layers, keep unrelated skill bodies dormant, and recompose only when the active subgoal materially changes. Record genuine routing wins, context waste, missed supporting capabilities, instruction collisions, or regressions as outcome evidence without pausing other capability work to manufacture tests."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "31c794d5a48b6d09e5703258dc915a31007de1d2",
-    "relation": "verified v0.18.7 baseline before the 0.18.8 failure-recovery transaction"
+    "sha": "b190d5669fc37e3f66e2291884e0d82758db01af",
+    "relation": "verified v0.18.8 baseline before the 0.19.0 persistent-cognitive-runtime transaction"
   }
 }

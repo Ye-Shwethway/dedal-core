@@ -8,20 +8,28 @@ This is the canonical bootstrap sequence for a DEDAL-capable instance reached th
 2. Read `AGENTS.md`.
 3. Read `docs/IDENTITY.md`.
 4. Read `kernel/KERNEL.md`.
-5. Read `index/MASTER_INDEX.md`.
-6. Identify the current task domain.
-7. Load only the matching skill entrypoint(s).
-8. Load task-specific references only when needed.
-9. Verify current tools and authoritative external state before acting.
+5. Read `kernel/COGNITIVE_RUNTIME.md`.
+6. Read `index/MASTER_INDEX.md` for capability discovery/routing metadata.
+7. Frame the current active subgoal.
+8. Compose the smallest sufficient capability set: RUNTIME stays active; choose PRIMARY specialist(s), add only necessary SUPPORTING skills, and identify EXECUTION surfaces separately.
+9. Load full specialist entrypoints only for PRIMARY/SUPPORTING roles; load task-specific references only when needed.
+10. Verify current tools, task-scoped authority, and authoritative external state before acting.
+11. Recompose when the active subgoal materially changes rather than keeping every previously useful skill loaded.
+
+An explicit request to load or use one named skill selects that skill strongly for the relevant role but does not disable the Cognitive Runtime or forbid other genuinely necessary supporting capabilities.
 
 ## Escalated boot
 
-Read architecture, capability, continuity, or evolution documents only when the task needs them. Do not load the entire repository into every conversation.
+Read architecture, capability, continuity, evolution, or specialist reference documents only when the task needs them. Do not load the entire repository, every skill body, or every reference into every conversation.
 
 ## Recovery rule
 
 If chat continuity is incomplete, reconstruct state from authoritative repositories/files/services before asking the Creator to repeat recoverable information.
 
+If an earlier skill was loaded but the current active subgoal has changed, recompute composition from the present task instead of treating historical activation as permanent state.
+
 ## Failure rule
 
 If DEDAL Core cannot be reached, continue with available current context and tools, state the limitation when material, and do not invent repository-derived rules.
+
+If the host cannot mechanically inject or enforce the Cognitive Runtime/composition policy, follow the contract explicitly at the reasoning/workflow layer and do not claim host-level enforcement.

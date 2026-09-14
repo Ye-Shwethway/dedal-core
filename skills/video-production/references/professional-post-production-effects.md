@@ -30,6 +30,7 @@ Do not use every available effect merely because the execution surface supports 
 - Freeze frames, micro-pauses, punch-ins, flashes, camera shake, blur, and impact emphasis should be sparse and event-driven.
 - For fight/action edits, reserve strongest effects for a small number of high-value impacts or turns. Repetition rapidly makes the edit feel synthetic.
 - Judge stylization against a clean baseline. If the effect cannot be tied to a clear gain in rhythm, orientation, emphasis, comprehension, or delivery, it is decoration rather than improvement.
+- Do not equate clean timestamps with smooth motion. Retimed/effects-heavy regions need cadence checks for duplicate/dropped frames, interpolation artifacts, and perceptual hitches at effect boundaries.
 
 ## Captions and subtitles
 
@@ -41,6 +42,45 @@ Do not use every available effect merely because the execution surface supports 
 - Animated/word-highlight captions are a style choice; do not default to social-media caption animation for cinematic or dramatic material.
 - Separate subtitle **render quality** from subtitle **text truth**. Readable placement, contrast, and typography do not validate wording or timing.
 - If subtitle text comes from web transcripts, recaps, inferred dialogue, OCR, or a different release, treat it as provisional until reconciled with local audiovisual evidence or another trustworthy source tied to the actual cut.
+
+### Subtitle synchronization hierarchy
+
+Prefer synchronization evidence in this order:
+
+1. correctly timed subtitle track from the exact local media/release;
+2. forced alignment of trusted transcript text against the actual local audio;
+3. audio-driven subtitle synchronizers that align speech activity or recognized words to the local audio;
+4. verified multi-anchor original-to-local timeline mapping;
+5. one global manual offset only when early/middle/late anchors prove the offset is constant.
+
+Do not burn subtitles into a production master from a single inferred offset when the source has been trimmed, concatenated, retimed, or remapped.
+
+### Global offset versus drift
+
+- A **global offset** means every caption is early/late by roughly the same amount; shifting all cues can fix it.
+- **Drift** means the error changes over time, often because frame-rate assumptions differ or edits were inserted/removed.
+- **Piecewise mismatch** means different timeline regions need different offsets because content was cut, inserted, concatenated, or re-ordered.
+- Validate at least three anchors across the working clip: early, middle, late. More anchors are appropriate for long or heavily edited footage.
+- If one shift cannot satisfy all anchors, do not keep tuning one global offset; switch to piecewise alignment or local-audio forced alignment.
+
+### Audio-driven methods worth using
+
+- **FFsubsync-style VAD/correlation:** convert audio speech/non-speech activity and subtitle on/off activity into comparable timelines, then optimize alignment. Useful when wording is already mostly correct and only timing is wrong. Piecewise alignment is preferable when cuts differ between releases.
+- **WhisperX-style forced alignment:** transcribe or take trusted text, then align words/phonemes to local audio using an alignment model. Prefer this when exact word-level timing matters; generic Whisper utterance timestamps can be wrong by seconds.
+- **Stable-ts-style alignment/refinement:** align known text against audio, suppress silence-related timing errors, and refine word/segment boundaries. Treat this as a methodological influence; the upstream repository was archived in 2026, so do not make it a hard runtime dependency.
+- Visual waveform/NLE correction remains useful as a human/manual fallback, especially for a few bad lines after automation.
+
+When ASR and transcript wording disagree, separate **what was said** from **when it was said**. Forced alignment is strongest when the text is already trustworthy.
+
+### Confidence gate
+
+Before burning captions, classify timing/text confidence:
+
+- **high:** exact local subtitle track or successful forced alignment with consistent anchors;
+- **medium:** audio-driven auto-sync with good score plus spot checks;
+- **low:** web transcript/remap/manual arithmetic without local-audio confirmation.
+
+Low-confidence captions should remain soft/provisional or receive explicit review before hard burn-in.
 
 ## Audio finishing
 
@@ -150,7 +190,8 @@ When a prior clean/proven render exists, treat it as the baseline and compare th
 - subtitle presence/mode and safe-area rendering;
 - compression/bitrate/file-size changes with visible quality checks;
 - A/V sync and representative playback;
-- timestamp health: unexpected non-monotonic DTS/PTS warnings, discontinuities, or muxing anomalies are regressions even when playback appears successful.
+- timestamp health: unexpected non-monotonic DTS/PTS warnings, discontinuities, or muxing anomalies are regressions even when playback appears successful;
+- retimed/effects regions: inspect cadence and perceptual smoothness independently of timestamp monotonicity.
 
 ### Decision labels
 
@@ -169,17 +210,18 @@ Before calling an effects-heavy render finished, verify:
 
 1. The edit remains understandable without the effects.
 2. No transition/effect starts or ends on an accidental frame.
-3. Speed changes do not create unacceptable interpolation artifacts or audio pitch/timing errors.
+3. Speed changes do not create unacceptable interpolation artifacts, cadence hitches, or audio pitch/timing errors.
 4. Captions remain readable and inside safe areas through reframes/transitions, and their wording/timing has an identified confidence level/source.
-5. Audio has no clipping, abrupt ambience jumps, or dialogue masking introduced by the edit.
-6. Color transforms did not create illegal/clipped or obviously damaged imagery.
-7. Composites/graphics do not cover critical content.
-8. The first and last beats feel intentional rather than abruptly truncated.
-9. Final output metadata, duration, streams and delivery format match intent.
-10. Representative playback/frame/audio evidence has been inspected after render.
-11. Mux/timestamp diagnostics show no unexplained DTS/PTS regressions.
-12. A baseline A/B review has identified both gains and losses before handoff.
+5. Subtitle sync has been checked at early/middle/late anchors; if one offset does not fit all three, use piecewise/audio-driven alignment.
+6. Audio has no clipping, abrupt ambience jumps, or dialogue masking introduced by the edit.
+7. Color transforms did not create illegal/clipped or obviously damaged imagery.
+8. Composites/graphics do not cover critical content.
+9. The first and last beats feel intentional rather than abruptly truncated.
+10. Final output metadata, duration, streams and delivery format match intent.
+11. Representative playback/frame/audio evidence has been inspected after render.
+12. Mux/timestamp diagnostics show no unexplained DTS/PTS regressions.
+13. A baseline A/B review has identified both gains and losses before handoff.
 
 ## Source influences
 
-This reference synthesizes patterns from current FFmpeg filter documentation; Adobe Premiere guidance on transitions, J/L cuts, audio crossfades/ducking and time remapping; Blackmagic Design DaVinci Resolve certified editing/color/Fairlight training; Avid split-edit guidance; mature open-source tools including LosslessCut, Auto-Editor, MoviePy, OpenCut and Remotion; and the audited `kajisho5/ffmpeg-skill`. It adapts methodology rather than vendoring third-party implementation or provider-specific command surfaces.
+This reference synthesizes patterns from current FFmpeg filter documentation; Adobe Premiere guidance on transitions, J/L cuts, audio crossfades/ducking and time remapping; Blackmagic Design DaVinci Resolve certified editing/color/Fairlight training; Avid split-edit guidance; mature open-source tools including LosslessCut, Auto-Editor, MoviePy, OpenCut and Remotion; subtitle synchronization/alignment methods from FFsubsync, WhisperX, and stable-ts; and the audited `kajisho5/ffmpeg-skill`. It adapts methodology rather than vendoring third-party implementation or provider-specific command surfaces.

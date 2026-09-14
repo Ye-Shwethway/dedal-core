@@ -1,4 +1,4 @@
-version: 17
+version: 18
 last_reviewed: "2026-09-14"
 
 routing:
@@ -126,6 +126,24 @@ skills:
           commit: "27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26"
         - repo: "supabase/agent-skills"
           commit: "8331f910845103c08d51f6ca1d86ebb7d1f745e3"
+      adapted_on: "2026-09-14"
+
+  reliability-engineering:
+    aliases: ["sre", "reliability-engineering"]
+    path: "skills/reliability-engineering"
+    entrypoint: "skills/reliability-engineering/SKILL.md"
+    status: active
+    independence: generic_domain
+    provenance:
+      adaptation: true
+      sources:
+        - source: "Google SRE current monitoring, SLO/alerting, incident-management and postmortem guidance"
+          reviewed_on: "2026-09-14"
+        - source: "OpenTelemetry current official observability/signals documentation"
+          reviewed_on: "2026-09-14"
+        - repo: "getsentry/sentry-for-ai"
+          commit: "2dc3b5d1232b38f88c881a07c1cddf825f1d4ffd"
+          license: "MIT"
       adapted_on: "2026-09-14"
 
   decision-design:
@@ -370,3 +388,5 @@ skills:
           commit: "27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26"
         - repo: "supabase/agent-skills"
           commit: "8331f910845103c08d51f6ca1d86ebb7d1f745e3"
+        - repo: "getsentry/sentry-for-ai"
+          commit: "2dc3b5d1232b38f88c881a07c1cddf825f1d4ffd"

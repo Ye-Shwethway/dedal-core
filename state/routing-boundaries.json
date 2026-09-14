@@ -1,5 +1,5 @@
 {
-  "schema_version": 5,
+  "schema_version": 6,
   "phase": "hardening-consolidation-outcome-validation",
   "composition_model": {
     "architecture": "persistent-cognitive-runtime",
@@ -17,9 +17,25 @@
         "implementation-debug-test": "software-development",
         "independent-product-quality-verification": "quality-engineering",
         "artifact-promotion-rollback": "release-engineering",
+        "live-service-health-incident-response": "reliability-engineering",
         "agent-tool-harness-design": "agent-engineering"
       },
-      "rule": "Implementation, independent quality assessment, and release promotion are distinct ownership layers; pair only when another owner contributes a necessary layer."
+      "rule": "Implementation, independent quality assessment, release promotion, and live-service reliability are distinct ownership layers; pair only when another owner contributes a necessary layer."
+    },
+    {
+      "id": "reliability-boundary",
+      "primary_owner_by_intent": {
+        "sli-slo-error-budget-service-health": "reliability-engineering",
+        "telemetry-observability-strategy": "reliability-engineering",
+        "production-incident-triage-mitigation-recovery": "reliability-engineering",
+        "application-instrumentation-implementation": "software-development",
+        "release-deployment-rollback-mechanics": "release-engineering",
+        "independent-pre-release-readiness": "quality-engineering",
+        "security-incident-policy-authority": "security-engineering",
+        "provider-platform-semantics": "cloudflare-platform",
+        "database-engine-semantics": "database-engineering"
+      },
+      "rule": "Reliability Engineering owns live service health and incident learning; tools and provider/database evidence support it without replacing their existing owners."
     },
     {
       "id": "cloudflare-platform-boundary",
@@ -28,10 +44,11 @@
         "cloudflare-application-implementation": "software-development",
         "cloudflare-database-semantics": "database-engineering",
         "cloudflare-release-promotion-rollback": "release-engineering",
+        "cloudflare-live-service-health": "reliability-engineering",
         "cloudflare-trust-access-security-policy": "security-engineering",
         "cloudflare-independent-readiness": "quality-engineering"
       },
-      "rule": "Cloudflare Platform owns Cloudflare-specific product/platform semantics; Database Engineering owns database behavior inside D1/Hyperdrive-backed systems; implementation, promotion authority, security policy, and independent readiness keep their existing owners. Drift-sensitive Cloudflare facts require current official documentation when material."
+      "rule": "Cloudflare Platform owns provider semantics; Reliability Engineering owns cross-component service health and incident response. Drift-sensitive provider facts require current official documentation when material."
     },
     {
       "id": "database-boundary",
@@ -40,9 +57,10 @@
         "database-application-implementation": "software-development",
         "record-reconciliation-staging-deduplication": "data-operations",
         "production-database-migration-promotion": "release-engineering",
+        "production-database-service-health": "reliability-engineering",
         "independent-database-readiness-verification": "quality-engineering"
       },
-      "rule": "Database Engineering owns database semantics; application code, record/data operations, production promotion authority, and independent readiness remain separate layers. Engine-specific advice must match the actual engine/version/deployment model."
+      "rule": "Database Engineering owns database semantics; Reliability Engineering may use database evidence for live-service diagnosis without replacing engine ownership."
     },
     {
       "id": "quality-interface-security",
@@ -51,7 +69,7 @@
         "verify-user-visible-behavior-accessibility-regression": "quality-engineering",
         "security-threat-policy-adversarial-reasoning": "security-engineering"
       },
-      "rule": "Quality Engineering verifies agreed behavior and quality evidence but does not own design direction or security policy."
+      "rule": "Quality Engineering verifies agreed behavior and quality evidence but does not own design direction, live-service reliability, or security policy."
     },
     {
       "id": "state-continuity",
@@ -105,9 +123,10 @@
     "explicit-alias-outranks-generic-overlap",
     "primary-owner-first",
     "pair-only-for-distinct-necessary-layer",
-    "implementation-verification-release-are-distinct-layers",
+    "implementation-verification-release-reliability-are-distinct-layers",
     "database-semantics-are-separate-from-app-code-and-record-operations",
     "platform-domain-does-not-absorb-cross-cutting-owners",
+    "service-health-evidence-does-not-collapse-into-deploy-or-dashboard-status",
     "engine-and-version-specific-facts-live-verified-when-material",
     "execution-surface-selection-is-separate-from-skill-selection",
     "recompose-on-material-subgoal-change",

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {"id":"RE-01","intent":"Define user-facing SLI/SLOs and actionable alerts for a production API","primary":"reliability-engineering","supporting":[],"accept":true},
+    {"id":"RE-02","intent":"Investigate an active production outage using service telemetry, recent changes, Cloudflare and database evidence","primary":"reliability-engineering","supporting":["cloudflare-platform","database-engineering"],"accept":true},
+    {"id":"RE-03","intent":"Build and deploy a release artifact, then observe post-deploy service health","primary":"release-engineering","supporting":["reliability-engineering"],"accept":true},
+    {"id":"RE-04","intent":"Implement OpenTelemetry instrumentation in application code according to an agreed signal plan","primary":"software-development","supporting":["reliability-engineering"],"accept":true},
+    {"id":"RE-05","intent":"Perform independent pre-release acceptance and regression verification","primary":"quality-engineering","supporting":[],"accept":true},
+    {"id":"RE-06","intent":"Respond to a security incident where availability telemetry is also needed","primary":"security-engineering","supporting":["reliability-engineering"],"accept":true},
+    {"id":"RE-07","intent":"Page a human on every internal metric threshold regardless of user impact or actionability","primary":"reliability-engineering","supporting":[],"accept":false},
+    {"id":"RE-08","intent":"Declare the incident recovered because the alert cleared without checking representative user behavior","primary":"reliability-engineering","supporting":[],"accept":false},
+    {"id":"RE-09","intent":"Claim a system is observable solely because logs, metrics, and traces are being emitted","primary":"reliability-engineering","supporting":[],"accept":false},
+    {"id":"RE-10","intent":"Treat rollback of application code as proof that database/data side effects were undone","primary":"reliability-engineering","supporting":["database-engineering"],"accept":false}
+  ]
+}

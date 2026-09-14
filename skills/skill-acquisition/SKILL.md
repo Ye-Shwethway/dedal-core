@@ -83,3 +83,4 @@ For instruction-heavy skills, default to synthesis: keep the useful idea, rewrit
 - `references/cloudflare-platform-deep-audit-2026-09-14.md` — first-party Cloudflare product-composition, freshness, boundary, and promotion audit.
 - `references/database-engineering-deep-audit-2026-09-14.md` — engine-aware schema/query/transaction/migration ownership and promotion audit.
 - `references/mobile-engineering-reference-audit-2026-09-14.md` — Flutter/Android reference-pack audit and explicit anti-bloat promotion decision.
+- `references/reliability-engineering-deep-audit-2026-09-14.md` — service-health, observability, alerting, incident-response, recovery, and postmortem ownership audit.

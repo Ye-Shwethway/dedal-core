@@ -1,11 +1,12 @@
 {
-  "schema_version": 5,
+  "schema_version": 6,
   "reviewed_on": "2026-09-14",
   "principle": "capability gaps before skill count",
   "promoted": [
     {"id":"quality-engineering","version":"0.20.0","status":"active","reason":"Independent acceptance, risk-based verification, exploratory/E2E/regression evidence, defect characterization, and readiness verdicts form a recurring ownership layer distinct from implementation, design, security, and release promotion."},
     {"id":"cloudflare-platform","version":"0.21.0","status":"active","reason":"Repeated cross-project work needs an independent owner for Cloudflare product selection/composition, bindings/configuration, edge/network topology, and provider-native operational semantics while cross-cutting implementation/security/release/data/QA ownership remains separate."},
-    {"id":"database-engineering","version":"0.22.0","status":"active","reason":"Schema invariants, indexes/access paths, query plans, transaction/isolation/locking behavior, migration safety, connection semantics, and engine-specific concurrency form a recurring ownership layer distinct from application implementation, record reconciliation, provider setup, release promotion, and independent QA."}
+    {"id":"database-engineering","version":"0.22.0","status":"active","reason":"Schema invariants, indexes/access paths, query plans, transaction/isolation/locking behavior, migration safety, connection semantics, and engine-specific concurrency form a recurring ownership layer distinct from application implementation, record reconciliation, provider setup, release promotion, and independent QA."},
+    {"id":"reliability-engineering","version":"0.23.0","status":"active","reason":"Service-health objectives, observability strategy, actionable alerting, production incident response, recovery verification, and post-incident learning form a recurring live-operations ownership layer distinct from implementation, QA, release promotion, security policy, provider semantics, and database semantics."}
   ],
   "top_level_candidates": [],
   "reference_pack_first": [
@@ -14,7 +15,7 @@
       "status": "reference-pack-approved",
       "owners": ["software-development", "interface-design", "quality-engineering", "release-engineering", "database-engineering"],
       "sources": ["flutter/agent-plugins@7cdb7d3c33679ef14a7a7584cec1d5ecb8752586", "android/skills@bac232fd02b0855df9275281a2a7a47643768719"],
-      "reason": "Official Flutter and Android corpora contain high-value framework/toolchain recipes, but audited workflows map cleanly onto existing owners. Keep mobile expertise progressive and live-doc-aware rather than adding a duplicate Mobile Engineering faculty."
+      "reason": "Official Flutter and Android corpora contain high-value framework/toolchain recipes, but audited workflows map cleanly onto existing owners."
     },
     {
       "id": "postgres-database-practices",
@@ -23,15 +24,17 @@
       "reason": "Progressive specialist references under Database Engineering rather than a separate provider skill."
     },
     {
-      "id": "infra-iac",
-      "owners": ["release-engineering", "security-engineering", "software-development", "cloudflare-platform"],
-      "sources": ["hashicorp/agent-skills@c2d65dfe492f74d360d35b859b88932222470bd8"],
-      "reason": "Terraform/Packer knowledge remains reference-level; provider-specific IaC concerns pair with the relevant platform owner."
+      "id": "observability-tooling",
+      "status": "owned-by-reliability-engineering",
+      "owners": ["reliability-engineering", "software-development", "cloudflare-platform", "database-engineering", "agent-engineering"],
+      "sources": ["OpenTelemetry current official docs reviewed 2026-09-14", "getsentry/sentry-for-ai@2dc3b5d1232b38f88c881a07c1cddf825f1d4ffd"],
+      "reason": "Telemetry vendors and instrumentation remain progressive execution/reference knowledge under the new Reliability Engineering owner; implementation/provider/engine-specific layers retain their own owners."
     },
     {
-      "id": "observability-sre",
-      "owners": ["release-engineering", "software-development", "security-engineering", "quality-engineering", "cloudflare-platform", "database-engineering"],
-      "reason": "Logs, traces, metrics, production diagnosis, DB diagnostics, and incident evidence remain cross-cutting. This is the next audit because repeated production operations may reveal a distinct SRE/observability owner or may confirm reference-only status."
+      "id": "infra-iac",
+      "owners": ["release-engineering", "security-engineering", "software-development", "cloudflare-platform", "reliability-engineering"],
+      "sources": ["hashicorp/agent-skills@c2d65dfe492f74d360d35b859b88932222470bd8"],
+      "reason": "Terraform/Packer knowledge remains reference-level; next audit should test whether infrastructure lifecycle deserves distinct ownership or remains cross-cutting implementation/release/platform/reliability support."
     },
     {
       "id": "browser-computer-automation",
@@ -48,11 +51,12 @@
   ],
   "reject_as_top_level": [
     "Mobile Engineering solely because a project uses Flutter or Android; use the approved reference pack until distinct ownership is proven",
+    "monitoring vendor wrappers as standalone faculties; route live-service reliability to Reliability Engineering",
     "large marketplace imports selected by popularity alone",
     "site-specific browser action packs as standalone faculties",
     "thin vendor wrappers when an existing owner plus reference pack is sufficient",
     "generic doctor/medical skills with weak provenance or unclear evidence boundaries",
     "skills that duplicate Cognitive Runtime invariants or existing routing ownership"
   ],
-  "next_deep_audit": "observability-sre"
+  "next_deep_audit": "infra-iac"
 }

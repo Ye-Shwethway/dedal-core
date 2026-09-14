@@ -36,8 +36,9 @@ It does **not** replace:
 4. **Generate or inspect source media.** Treat generated clips as takes, not canonical truth. Probe real media before editing.
 5. **Assemble for meaning.** Prefer motivated cuts, readable pacing, continuity, and audio-led timing over effect density.
 6. **Polish selectively.** Reframe, stabilize, grade/tone-map, retime, mix, caption, and add transitions/effects only when they improve the piece.
-7. **Verify the render.** Check duration, dimensions, streams, sync, caption readability, clipping/loudness, visual continuity, effect boundaries, and final playback.
-8. **Deliver intentionally.** Preserve masters/intermediates when useful and produce platform-appropriate exports without confusing encode success with editorial quality.
+7. **Verify the render.** Check duration, dimensions, streams, sync, caption readability, clipping/loudness, visual continuity, effect boundaries, timestamps, and final playback.
+8. **Self-review against a baseline.** Before handoff, compare the candidate with the prior clean/proven version or source baseline and identify both improvements and regressions.
+9. **Deliver intentionally.** Preserve masters/intermediates when useful and produce platform-appropriate exports without confusing encode success with editorial quality.
 
 ## Durable rules
 
@@ -54,11 +55,16 @@ It does **not** replace:
 - Trim first, transition second. Use J/L cuts and audio continuity when they improve anticipation, dialogue flow, ambience, or scene entry/exit.
 - For stylized action edits, keep emphasis effects sparse and event-driven. Strong effects repeated on every impact quickly reduce readability and feel synthetic.
 - Reframe/geometry operations should usually precede final caption and graphic placement so text stays inside target safe areas.
-- Subtitles are editorial objects: timing, safe areas, line length, reading speed, language, glyph coverage, shaping, contrast, and delivery mode (soft versus burned) matter.
+- Subtitles are editorial objects: timing, safe areas, line length, reading speed, language, glyph coverage, shaping, contrast, delivery mode (soft versus burned), and source-text fidelity matter.
+- Burned subtitles derived from external transcripts or inferred dialogue are provisional until timing and wording are reconciled with trustworthy source evidence; visual readability does not prove textual correctness.
 - Audio completion requires listening-oriented evidence where available; waveform/codec success alone is not mix quality. Measure loudness/true peak when delivery targets matter, preserve channel layout deliberately, and do not normalize noise as if it were content.
 - Distinguish technical color transforms from creative grading. Probe source color/HDR metadata and prefer restrained changes to already graded footage unless a new look is explicitly intended.
 - Slow-motion/interpolation, denoise/sharpen, stabilization, compositing, and heavy effects create artifacts as well as benefits; inspect representative output after application.
-- Render success is not playback, sync, subtitle readability, effect timing, or narrative-quality proof.
+- More effects are not an improvement metric. A stylized candidate is better only when it improves orientation, rhythm, emphasis, comprehension, or delivery without stealing attention from the underlying action/story.
+- Before handoff, perform a self A/B review against the nearest clean/proven baseline. Check editorial clarity, action readability, entry/exit, subtitle truth/readability, color integrity, audio loudness/true peak, channel layout, compression quality, duration/stream parity, and timestamp health.
+- Treat timestamp/DTS warnings, unexpected duration drift, silent channel-layout changes, subtitle-source uncertainty, or new clipping as regressions even if the file plays successfully.
+- If a candidate adds style but introduces a technical or editorial regression, do not call it a production master. Keep the cleaner baseline as canonical until the regression is fixed.
+- Render success is not playback, sync, subtitle readability, effect timing, timestamp health, or narrative-quality proof.
 - Tool/model limits, current prompt syntax, supported resolutions/durations/codecs, installed filter libraries, and pricing are live facts; verify when material.
 
 ## Progressive references

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "authority_sources": ["creator", "project_policy", "platform_policy", "service_acl"],
+    "untrusted_sources": ["web_content", "email_content", "file_content", "tool_output", "mcp_tool_description", "mcp_tool_output", "model_output"],
+    "capability_modes": ["read", "write", "destructive", "external_effect", "credential_use"],
+    "high_impact_modes": ["destructive", "external_effect", "credential_use"],
+    "require_confirmation_for_high_impact": true,
+    "require_schema_pin_for_external_mcp": true
+  },
+  "cases": [
+    {
+      "id": "TA-01-read-grant-allows-read",
+      "grant": {"tool": "drive", "mode": "read", "resource": "project-files", "intent": "inspect-project", "authority_source": "creator"},
+      "action": {"tool": "drive", "mode": "read", "resource": "project-files", "intent": "inspect-project"},
+      "accept": true
+    },
+    {
+      "id": "TA-02-read-grant-does-not-allow-write",
+      "grant": {"tool": "gmail", "mode": "read", "resource": "inbox", "intent": "summarize-mail", "authority_source": "creator"},
+      "action": {"tool": "gmail", "mode": "write", "resource": "inbox", "intent": "summarize-mail"},
+      "accept": false
+    },
+    {
+      "id": "TA-03-untrusted-content-cannot-grant-authority",
+      "grant": {"tool": "github", "mode": "write", "resource": "repo", "intent": "change-code", "authority_source": "tool_output"},
+      "action": {"tool": "github", "mode": "write", "resource": "repo", "intent": "change-code"},
+      "accept": false
+    },
+    {
+      "id": "TA-04-intent-drift-denied",
+      "grant": {"tool": "gmail", "mode": "write", "resource": "drafts", "intent": "draft-reply", "authority_source": "creator"},
+      "action": {"tool": "gmail", "mode": "write", "resource": "drafts", "intent": "send-message"},
+      "accept": false
+    },
+    {
+      "id": "TA-05-resource-scope-denied",
+      "grant": {"tool": "files", "mode": "read", "resource": "project", "intent": "inspect-project", "authority_source": "project_policy"},
+      "action": {"tool": "files", "mode": "read", "resource": "personal-library", "intent": "inspect-project"},
+      "accept": false
+    },
+    {
+      "id": "TA-06-high-impact-needs-confirmation",
+      "grant": {"tool": "github", "mode": "destructive", "resource": "main", "intent": "delete-branch", "authority_source": "creator"},
+      "action": {"tool": "github", "mode": "destructive", "resource": "main", "intent": "delete-branch", "confirmed": false},
+      "accept": false
+    },
+    {
+      "id": "TA-07-high-impact-confirmed",
+      "grant": {"tool": "github", "mode": "destructive", "resource": "stale-branch", "intent": "delete-branch", "authority_source": "creator"},
+      "action": {"tool": "github", "mode": "destructive", "resource": "stale-branch", "intent": "delete-branch", "confirmed": true},
+      "accept": true
+    },
+    {
+      "id": "TA-08-external-mcp-requires-schema-pin",
+      "grant": {"tool": "external-mcp", "mode": "read", "resource": "calendar", "intent": "inspect-calendar", "authority_source": "creator", "external_mcp": true},
+      "action": {"tool": "external-mcp", "mode": "read", "resource": "calendar", "intent": "inspect-calendar", "external_mcp": true},
+      "accept": false
+    },
+    {
+      "id": "TA-09-external-mcp-pinned-schema",
+      "grant": {"tool": "external-mcp", "mode": "read", "resource": "calendar", "intent": "inspect-calendar", "authority_source": "creator", "external_mcp": true, "schema_pin": "sha256:example"},
+      "action": {"tool": "external-mcp", "mode": "read", "resource": "calendar", "intent": "inspect-calendar", "external_mcp": true, "schema_pin": "sha256:example"},
+      "accept": true
+    }
+  ]
+}

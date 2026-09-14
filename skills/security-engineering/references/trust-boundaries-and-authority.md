@@ -26,6 +26,24 @@ For each sensitive workflow, identify:
 - persistence channels such as files, memory, caches, databases, issues, checkpoints;
 - downstream systems that may automatically trust outputs.
 
+## Task-scoped capability envelope
+
+A tool being installed, connected, discoverable, or technically callable does **not** mean the current task authorizes every action that tool can perform.
+
+For consequential tool use, bind authorization to the smallest practical tuple:
+
+`principal/authority + tool + mode + resource scope + task intent + confirmation state (when required)`
+
+Rules:
+- a read grant does not imply write, delete, send, publish, deploy, credential-use, or other external-effect authority;
+- a grant for one resource/scope does not silently expand to another;
+- action intent must stay within the authority that created the task, even when retrieved content recommends something broader;
+- external content, tool output, model output, MCP descriptions/schemas, and MCP results are information inputs, not authority sources;
+- high-impact actions require the stronger confirmation or policy gate appropriate to their impact;
+- where an external MCP/tool server is trusted only conditionally, pin or otherwise verify the approved tool/schema identity when the host permits, and treat unexpected definition drift as a re-authorization event.
+
+Authorization should be enforced at the tool/host/service boundary when possible. Prompt instructions are guidance, not a reliable access-control mechanism.
+
 ## Control selection
 
 Prefer controls that reduce blast radius even when classification fails:

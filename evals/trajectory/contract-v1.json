@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "event_types": ["context_read", "tool_call", "tool_result", "guardrail", "retry", "state_transition", "verification", "handoff"],
+    "statuses": ["started", "succeeded", "failed", "blocked", "skipped"],
+    "forbidden_event_fields": ["prompt", "response", "reasoning", "chain_of_thought", "raw_input", "raw_output"],
+    "max_retries_per_failed_event": 2
+  },
+  "cases": [
+    {
+      "id": "TE-01",
+      "description": "successful mutation is verified before durable state promotion",
+      "accept": true,
+      "events": [
+        {"seq": 1, "type": "tool_call", "name": "repository_mutation", "status": "succeeded", "mutation": true},
+        {"seq": 2, "type": "verification", "name": "readback", "status": "succeeded", "for_event_seq": 1, "evidence_ref": "example:readback"},
+        {"seq": 3, "type": "state_transition", "name": "promote_accepted_state", "status": "succeeded", "accepted": true, "evidence_ref": "example:readback"}
+      ]
+    },
+    {
+      "id": "TE-02",
+      "description": "successful mutation without verification is rejected",
+      "accept": false,
+      "events": [
+        {"seq": 1, "type": "tool_call", "name": "repository_mutation", "status": "succeeded", "mutation": true}
+      ]
+    },
+    {
+      "id": "TE-03",
+      "description": "accepted durable state cannot cite unverified evidence",
+      "accept": false,
+      "events": [
+        {"seq": 1, "type": "state_transition", "name": "promote_accepted_state", "status": "succeeded", "accepted": true, "evidence_ref": "missing:evidence"}
+      ]
+    },
+    {
+      "id": "TE-04",
+      "description": "bounded retry explicitly references the failed event",
+      "accept": true,
+      "events": [
+        {"seq": 1, "type": "tool_call", "name": "read_service", "status": "failed"},
+        {"seq": 2, "type": "retry", "name": "retry_read", "status": "succeeded", "for_event_seq": 1},
+        {"seq": 3, "type": "tool_call", "name": "read_service", "status": "succeeded"},
+        {"seq": 4, "type": "verification", "name": "source_check", "status": "succeeded", "evidence_ref": "example:source"}
+      ]
+    },
+    {
+      "id": "TE-05",
+      "description": "raw prompt or hidden reasoning is not valid Core trajectory metadata",
+      "accept": false,
+      "events": [
+        {"seq": 1, "type": "context_read", "name": "skill_entrypoint", "status": "succeeded", "prompt": "raw private prompt"}
+      ]
+    },
+    {
+      "id": "TE-06",
+      "description": "retry chains are bounded",
+      "accept": false,
+      "events": [
+        {"seq": 1, "type": "tool_call", "name": "read_service", "status": "failed"},
+        {"seq": 2, "type": "retry", "name": "retry_read", "status": "succeeded", "for_event_seq": 1},
+        {"seq": 3, "type": "retry", "name": "retry_read", "status": "succeeded", "for_event_seq": 1},
+        {"seq": 4, "type": "retry", "name": "retry_read", "status": "succeeded", "for_event_seq": 1}
+      ]
+    }
+  ]
+}

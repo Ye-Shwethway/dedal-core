@@ -1,16 +1,19 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.18.2",
+  "version": "0.18.3",
   "accepted_state": [
     "Initial eight-area capability expansion is complete.",
     "Default operating phase is hardening, consolidation, outcome validation, and gap-oriented learning rather than default skill expansion.",
     "GitHub mutation guard contracts exist and remain CI-validated; native provider interception is deferred unless a controllable dispatcher surface becomes available.",
     "Every live skill entrypoint has a consolidation classification and routing overlap clusters have machine-readable primary ownership rules.",
     "Skill Acquisition is phase-gated and must not trigger a new expansion wave without explicit request or demonstrated gap.",
-    "Agent Engineering now treats executor/model claims as candidate state and requires evidence-appropriate promotion into durable accepted state.",
+    "Agent Engineering treats executor/model claims as candidate state and requires evidence-appropriate promotion into durable accepted state.",
     "Independent verifier/auditor roles should be read-only where practical; unauthorized verifier mutation contaminates verification evidence.",
-    "Long-horizon carryover should prefer compact verified facts and references over replaying raw trajectories.",
+    "Long-horizon carryover prefers compact verified facts and references over replaying raw trajectories.",
+    "Tracing and evaluation are separate layers: traces describe execution while evals judge contract satisfaction.",
+    "A CI-validated trajectory contract now enforces privacy-minimal typed events, bounded retries, verification after successful mutation, and evidence-linked accepted-state promotion.",
+    "Core trajectory metadata must not persist raw prompts, raw responses, hidden reasoning, or chain-of-thought.",
     "Executable continuity checkpoint state remains CI-validated."
   ],
   "evidence": [
@@ -18,22 +21,25 @@
     {"id": "GMG-v1", "kind": "contract_validation", "status": "covered_by_negative_and_positive_cases"},
     {"id": "skill-consolidation-v1", "kind": "structural_classification", "status": "complete_coverage_no_merge_or_remove_without_outcome_evidence"},
     {"id": "routing-boundaries-v1", "kind": "contract_validation", "status": "primary_ownership_clusters_defined_and_ci_checked"},
-    {"id": "longhorizon-harness-audit-2026-09-14", "kind": "external_pattern_audit", "status": "adapted_verified_state_promotion_read_only_verification_and_compact_carryover"}
+    {"id": "longhorizon-harness-audit-2026-09-14", "kind": "external_pattern_audit", "status": "adapted_verified_state_promotion_read_only_verification_and_compact_carryover"},
+    {"id": "trajectory-observability-audit-2026-09-14", "kind": "external_pattern_audit", "status": "adapted_trace_eval_separation_privacy_minimal_events_and_failure_to_regression"},
+    {"id": "trajectory-contract-v1", "kind": "contract_validation", "status": "positive_and_negative_cases_ci_enforced"}
   ],
   "unresolved_risks": [
     "The public Core guard cannot intercept native provider GitHub tools unless the host routes mutation calls through it.",
     "Eight skills remain NEEDS_EVIDENCE and should not be promoted to stronger consolidation decisions without representative outcomes.",
-    "Routing boundaries and verified-state promotion are contract-level refinements and still need representative real-task outcome evidence.",
+    "Routing boundaries, verified-state promotion, and trajectory contracts are contract-level refinements and still need representative real-task outcome evidence.",
+    "Available host tools do not always expose a complete replayable execution seam, so record/replay must not be simulated from incomplete logs.",
     "A separate auditor agent is not assumed to improve every task; topology must remain evidence-driven and smallest-sufficient."
   ],
   "next_executable_step": {
-    "id": "VERIFIED-STATE-OUTCOME-01",
-    "action": "Exercise verified-state promotion naturally on ordinary real work: distinguish candidate model claims from accepted externally verified state, record observable verification/rework outcomes, and only strengthen the pattern if representative tasks show net value. Continue gap-oriented learning without creating new skills unless a demonstrated capability gap remains after adaptation."
+    "id": "TRAJECTORY-OUTCOME-01",
+    "action": "On ordinary real tasks, capture only observable privacy-minimal trajectory metadata when the execution surface exposes it; shadow-score verification, retries, routing, rework, and correctness, then promote the first genuine observed failure into a small regression case. Do not fabricate missing traces or claim outcome improvement from the contract alone."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "b86637d5bf37bd1e43154894da6f5159961ad7db",
-    "relation": "verified v0.18.1 baseline before the 0.18.2 long-horizon harness learning transaction"
+    "sha": "917c25eb27ec52da98adebe2066f25f0026eb490",
+    "relation": "verified v0.18.2 baseline before the 0.18.3 trajectory-evaluation learning transaction"
   }
 }

@@ -70,3 +70,5 @@ For instruction-heavy skills, default to synthesis: keep the useful idea, rewrit
 - `references/independent-high-signal-audit-2026-09-14.md` — Superpowers, taste-skill, RigorPilot, and Impeccable audit.
 - `references/ui-ux-pro-max-deep-audit-2026-09-14.md` — searchable UI/UX design-intelligence architecture audit.
 - `references/agent-engineering-corpus-audit-2026-09-14.md` — prompt/context, harness, loop, orchestration, and evaluation corpus audit.
+- `references/longhorizon-harness-deep-audit-2026-09-14.md` — verified-state, read-only audit, and compact carryover patterns.
+- `references/trajectory-eval-observability-audit-2026-09-14.md` — typed traces, trajectory assertions, replay, and regression patterns.

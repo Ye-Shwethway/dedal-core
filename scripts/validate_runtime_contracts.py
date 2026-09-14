@@ -103,11 +103,86 @@ def validate_routing_boundaries() -> None:
         raise AssertionError(f"routing boundary coverage missing overlap owners: {missing}")
 
 
+def _trajectory_case_is_valid(policy: dict, events: list[dict]) -> bool:
+    event_types = set(policy["event_types"])
+    statuses = set(policy["statuses"])
+    forbidden_fields = set(policy["forbidden_event_fields"])
+    max_retries = int(policy["max_retries_per_failed_event"])
+
+    if not events:
+        return False
+    for expected_seq, event in enumerate(events, start=1):
+        if event.get("seq") != expected_seq:
+            return False
+        if event.get("type") not in event_types or event.get("status") not in statuses:
+            return False
+        if not event.get("name"):
+            return False
+        if forbidden_fields.intersection(event):
+            return False
+
+    by_seq = {event["seq"]: event for event in events}
+
+    retry_counts: dict[int, int] = {}
+    for event in events:
+        if event["type"] == "retry":
+            target = event.get("for_event_seq")
+            failed = by_seq.get(target)
+            if failed is None or failed.get("status") != "failed" or target >= event["seq"]:
+                return False
+            retry_counts[target] = retry_counts.get(target, 0) + 1
+            if retry_counts[target] > max_retries:
+                return False
+
+    successful_verifications = [
+        event for event in events
+        if event["type"] == "verification" and event["status"] == "succeeded"
+    ]
+
+    for event in events:
+        if event["type"] == "tool_call" and event.get("mutation") is True and event["status"] == "succeeded":
+            if not any(
+                verification.get("for_event_seq") == event["seq"] and verification["seq"] > event["seq"]
+                for verification in successful_verifications
+            ):
+                return False
+
+        if event["type"] == "state_transition" and event.get("accepted") is True:
+            evidence_ref = event.get("evidence_ref")
+            if not evidence_ref:
+                return False
+            if not any(
+                verification.get("evidence_ref") == evidence_ref and verification["seq"] < event["seq"]
+                for verification in successful_verifications
+            ):
+                return False
+
+    return True
+
+
+def validate_trajectory_contract() -> None:
+    data = json.loads((ROOT / "evals" / "trajectory" / "contract-v1.json").read_text(encoding="utf-8"))
+    policy = data.get("policy", {})
+    required_policy = {"event_types", "statuses", "forbidden_event_fields", "max_retries_per_failed_event"}
+    if not required_policy.issubset(policy):
+        raise AssertionError("trajectory policy missing required keys")
+    cases = data.get("cases", [])
+    ids = [case.get("id") for case in cases]
+    if not cases or len(ids) != len(set(ids)):
+        raise AssertionError("trajectory contract requires non-empty unique case ids")
+    for case in cases:
+        actual = _trajectory_case_is_valid(policy, case.get("events", []))
+        expected = bool(case.get("accept"))
+        if actual != expected:
+            raise AssertionError(f"{case.get('id')}: expected accept={expected} got {actual}")
+
+
 def main() -> int:
     validate_guard_cases()
     validate_checkpoint()
     validate_skill_consolidation()
     validate_routing_boundaries()
+    validate_trajectory_contract()
     print("runtime contracts: valid")
     return 0
 

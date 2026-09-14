@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "operators": ["write", "select", "compress", "isolate", "refresh", "drop"],
+    "protected_classes": ["durable_policy", "accepted_decision", "unresolved_risk", "evidence_identity", "next_executable_step"],
+    "volatile_classes": ["authoritative_external_live"],
+    "ephemeral_classes": ["tool_result", "interaction_history"]
+  },
+  "cases": [
+    {
+      "id": "CTX-01",
+      "accept": true,
+      "description": "Just-in-time selection keeps references and refreshes volatile live state before use.",
+      "items": [
+        {"id": "repo-head", "class": "authoritative_external_live", "fresh": false, "source_ref": "repo:main"},
+        {"id": "decision", "class": "accepted_decision", "source_ref": "state:checkpoint"}
+      ],
+      "operations": [
+        {"op": "refresh", "item": "repo-head"},
+        {"op": "select", "item": "repo-head", "mode": "reference"},
+        {"op": "select", "item": "decision", "mode": "summary"}
+      ]
+    },
+    {
+      "id": "CTX-02",
+      "accept": false,
+      "description": "Stale live authority cannot be selected without refresh.",
+      "items": [
+        {"id": "repo-head", "class": "authoritative_external_live", "fresh": false, "source_ref": "repo:main"}
+      ],
+      "operations": [
+        {"op": "select", "item": "repo-head", "mode": "summary"}
+      ]
+    },
+    {
+      "id": "CTX-03",
+      "accept": true,
+      "description": "Compaction may summarize protected state when anchors and a recovery reference are preserved.",
+      "items": [
+        {"id": "risk", "class": "unresolved_risk", "source_ref": "state:checkpoint"},
+        {"id": "tool-log", "class": "tool_result", "source_ref": "trace:42"}
+      ],
+      "operations": [
+        {"op": "compress", "item": "risk", "preserves_anchor": true, "source_ref": "state:checkpoint"},
+        {"op": "drop", "item": "tool-log"}
+      ]
+    },
+    {
+      "id": "CTX-04",
+      "accept": false,
+      "description": "Protected decision state cannot be dropped during compaction.",
+      "items": [
+        {"id": "decision", "class": "accepted_decision", "source_ref": "state:checkpoint"}
+      ],
+      "operations": [
+        {"op": "drop", "item": "decision"}
+      ]
+    },
+    {
+      "id": "CTX-05",
+      "accept": false,
+      "description": "Protected state compression without a recoverable source/reference is unsafe.",
+      "items": [
+        {"id": "next", "class": "next_executable_step", "source_ref": "state:checkpoint"}
+      ],
+      "operations": [
+        {"op": "compress", "item": "next", "preserves_anchor": true}
+      ]
+    },
+    {
+      "id": "CTX-06",
+      "accept": true,
+      "description": "Isolation is valid when scope and compact return contract are explicit.",
+      "items": [
+        {"id": "research-set", "class": "evidence_identity", "source_ref": "sources:context-audit"}
+      ],
+      "operations": [
+        {"op": "isolate", "item": "research-set", "purpose": "independent research breadth", "return_mode": "compact_evidence_with_refs"}
+      ]
+    },
+    {
+      "id": "CTX-07",
+      "accept": false,
+      "description": "Isolation without an explicit compact return contract risks transcript dumping.",
+      "items": [
+        {"id": "research-set", "class": "evidence_identity", "source_ref": "sources:context-audit"}
+      ],
+      "operations": [
+        {"op": "isolate", "item": "research-set", "purpose": "research"}
+      ]
+    }
+  ]
+}

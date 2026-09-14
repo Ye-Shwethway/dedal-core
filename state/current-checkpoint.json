@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.18.3",
+  "version": "0.18.4",
   "accepted_state": [
     "Initial eight-area capability expansion is complete.",
     "Default operating phase is hardening, consolidation, outcome validation, and gap-oriented learning rather than default skill expansion.",
@@ -9,11 +9,11 @@
     "Every live skill entrypoint has a consolidation classification and routing overlap clusters have machine-readable primary ownership rules.",
     "Skill Acquisition is phase-gated and must not trigger a new expansion wave without explicit request or demonstrated gap.",
     "Agent Engineering treats executor/model claims as candidate state and requires evidence-appropriate promotion into durable accepted state.",
-    "Independent verifier/auditor roles should be read-only where practical; unauthorized verifier mutation contaminates verification evidence.",
-    "Long-horizon carryover prefers compact verified facts and references over replaying raw trajectories.",
-    "Tracing and evaluation are separate layers: traces describe execution while evals judge contract satisfaction.",
-    "A CI-validated trajectory contract now enforces privacy-minimal typed events, bounded retries, verification after successful mutation, and evidence-linked accepted-state promotion.",
-    "Core trajectory metadata must not persist raw prompts, raw responses, hidden reasoning, or chain-of-thought.",
+    "Tracing and evaluation are separate layers, with privacy-minimal typed trajectory metadata preferred over raw conversation logging.",
+    "Context engineering now uses explicit write/select/compress/isolate operators instead of treating memory or summarization as one undifferentiated action.",
+    "Context selection is reference-first and freshness-aware: volatile authoritative state must be refreshed when staleness can change the next action.",
+    "Compaction is a lossy optimization rather than a new source of truth; protected decision anchors and recoverable source references must survive when relevant.",
+    "Isolated workers should return compact evidence, uncertainty, conclusions, and references rather than full transcript dumps.",
     "Executable continuity checkpoint state remains CI-validated."
   ],
   "evidence": [
@@ -22,24 +22,26 @@
     {"id": "skill-consolidation-v1", "kind": "structural_classification", "status": "complete_coverage_no_merge_or_remove_without_outcome_evidence"},
     {"id": "routing-boundaries-v1", "kind": "contract_validation", "status": "primary_ownership_clusters_defined_and_ci_checked"},
     {"id": "longhorizon-harness-audit-2026-09-14", "kind": "external_pattern_audit", "status": "adapted_verified_state_promotion_read_only_verification_and_compact_carryover"},
-    {"id": "trajectory-observability-audit-2026-09-14", "kind": "external_pattern_audit", "status": "adapted_trace_eval_separation_privacy_minimal_events_and_failure_to_regression"},
-    {"id": "trajectory-contract-v1", "kind": "contract_validation", "status": "positive_and_negative_cases_ci_enforced"}
+    {"id": "trajectory-contract-v1", "kind": "contract_validation", "status": "positive_and_negative_cases_ci_enforced"},
+    {"id": "context-engineering-audit-2026-09-14", "kind": "external_pattern_audit", "status": "adapted_write_select_compress_isolate_reference_first_and_recoverable_compaction"},
+    {"id": "context-engineering-contract-v1", "kind": "contract_validation", "status": "freshness_compaction_protected_state_and_isolation_cases_ci_enforced"}
   ],
   "unresolved_risks": [
     "The public Core guard cannot intercept native provider GitHub tools unless the host routes mutation calls through it.",
     "Eight skills remain NEEDS_EVIDENCE and should not be promoted to stronger consolidation decisions without representative outcomes.",
-    "Routing boundaries, verified-state promotion, and trajectory contracts are contract-level refinements and still need representative real-task outcome evidence.",
-    "Available host tools do not always expose a complete replayable execution seam, so record/replay must not be simulated from incomplete logs.",
-    "A separate auditor agent is not assumed to improve every task; topology must remain evidence-driven and smallest-sufficient."
+    "Routing boundaries, verified-state promotion, trajectory contracts, and context-operator contracts remain contract-level refinements until real-task evidence accumulates.",
+    "Compaction can still lose future-relevant nuance; source/reference recoverability reduces but does not eliminate that risk.",
+    "Available host surfaces do not expose uniform token accounting or full replayable context state, so global context-efficiency percentages must not be invented.",
+    "A separate auditor or isolated sub-agent is not assumed to improve every task; topology must remain evidence-driven and smallest-sufficient."
   ],
   "next_executable_step": {
-    "id": "TRAJECTORY-OUTCOME-01",
-    "action": "On ordinary real tasks, capture only observable privacy-minimal trajectory metadata when the execution surface exposes it; shadow-score verification, retries, routing, rework, and correctness, then promote the first genuine observed failure into a small regression case. Do not fabricate missing traces or claim outcome improvement from the contract alone."
+    "id": "CONTEXT-OUTCOME-01",
+    "action": "On ordinary real tasks, apply write/select/compress/isolate only when needed; observe stale-source refreshes, unnecessary context reads, compaction recovery, transcript-dump avoidance, rework, and correctness. Promote real failures into regression cases and do not claim token or latency gains where the host does not expose comparable measurements."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "917c25eb27ec52da98adebe2066f25f0026eb490",
-    "relation": "verified v0.18.2 baseline before the 0.18.3 trajectory-evaluation learning transaction"
+    "sha": "e097697c1de967dd1ad369b1bf1714ea50337115",
+    "relation": "verified v0.18.3 baseline before the 0.18.4 context-engineering learning transaction"
   }
 }

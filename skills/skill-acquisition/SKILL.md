@@ -72,3 +72,4 @@ For instruction-heavy skills, default to synthesis: keep the useful idea, rewrit
 - `references/agent-engineering-corpus-audit-2026-09-14.md` — prompt/context, harness, loop, orchestration, and evaluation corpus audit.
 - `references/longhorizon-harness-deep-audit-2026-09-14.md` — verified-state, read-only audit, and compact carryover patterns.
 - `references/trajectory-eval-observability-audit-2026-09-14.md` — typed traces, trajectory assertions, replay, and regression patterns.
+- `references/context-engineering-compaction-audit-2026-09-14.md` — write/select/compress/isolate, freshness-aware retrieval, and recoverable compaction patterns.

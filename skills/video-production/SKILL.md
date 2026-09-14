@@ -46,6 +46,10 @@ It does **not** replace:
 - Describe physical subject, scene, and camera motion clearly; avoid contradictory choreography and overstuffed short clips.
 - Continuity is multi-layered: subject identity, wardrobe/props, location, screen direction, lighting, time, lens/framing language, and motion state.
 - Probe before edit. Prefer stream copy only when cut precision/codec constraints permit; otherwise re-encode deliberately.
+- For extraction tasks, distinguish **scene boundary**, **requested action boundary**, and **contextual edit boundary**. If the Creator asks for one specific action, do not silently widen it to the whole surrounding scene.
+- Sparse contact sheets are for localization, not exact editorial boundaries. Refine candidate cuts with dense frame inspection plus audio/subtitle cues when precision matters.
+- External recaps, transcripts, subtitle timing, clip descriptions, or web timestamps may help locate an event, but they are locator evidence only until reconciled with the actual local media timeline.
+- When editing a rough cut/excerpt, maintain an explicit original-to-local timeline mapping and verify anchors if keyframe seeking, timestamp preservation, concat, or multiple source ranges may have shifted the nominal offset.
 - Subtitles are editorial objects: timing, safe areas, line length, reading speed, language, and contrast matter.
 - Audio completion requires listening-oriented evidence where available; waveform/codec success alone is not mix quality.
 - Render success is not playback, sync, or narrative-quality proof.
@@ -55,3 +59,4 @@ It does **not** replace:
 
 - `references/generative-video-direction.md`
 - `references/post-production-and-delivery.md`
+- `references/scene-and-action-boundary-extraction.md`

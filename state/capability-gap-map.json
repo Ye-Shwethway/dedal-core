@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "reviewed_on": "2026-09-14",
   "principle": "capability gaps before skill count",
   "promoted": [
@@ -25,45 +25,51 @@
         "Cloudflare current developer documentation reviewed 2026-09-14",
         "cloudflare-platform-routing-contract-v1"
       ]
-    }
-  ],
-  "top_level_candidates": [
+    },
     {
       "id": "database-engineering",
-      "priority": 1,
-      "reason": "Schema design, indexing, migrations, query plans, transactions, concurrency, and SQL performance are distinct from Data Operations reconciliation mechanics.",
-      "promotion_gate": "Start with reference packs and promote only if recurring work shows routing value beyond Software Development plus Data Operations."
+      "version": "0.22.0",
+      "status": "active",
+      "reason": "Schema invariants, indexes/access paths, query plans, transaction/isolation/locking behavior, migration safety, connection semantics, and engine-specific concurrency form a recurring ownership layer distinct from application implementation, record reconciliation, provider setup, release promotion, and independent QA.",
+      "evidence": [
+        "PostgreSQL 18 concurrency-control documentation reviewed 2026-09-14",
+        "SQLite transaction/isolation/WAL documentation reviewed 2026-09-14",
+        "neondatabase/postgres-skills@27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26",
+        "supabase/agent-skills@8331f910845103c08d51f6ca1d86ebb7d1f745e3",
+        "database-engineering-routing-contract-v1"
+      ]
     }
   ],
+  "top_level_candidates": [],
   "reference_pack_first": [
     {
       "id": "flutter-mobile",
       "owners": ["software-development", "interface-design", "release-engineering", "quality-engineering"],
       "sources": ["flutter/agent-plugins@7cdb7d3c33679ef14a7a7584cec1d5ecb8752586"],
-      "reason": "Official Flutter corpus is strong, but framework-specific implementation/testing guidance fits existing faculties."
+      "reason": "Official Flutter corpus is strong, but framework-specific implementation/testing guidance fits existing faculties; audit whether a shared Mobile Engineering reference pack improves routing without adding a duplicate top-level owner."
     },
     {
       "id": "android-native",
       "owners": ["software-development", "release-engineering", "quality-engineering"],
       "sources": ["android/skills@bac232fd02b0855df9275281a2a7a47643768719"],
-      "reason": "Use official Android guidance on demand, especially where evaluations show model weakness; do not create a duplicate mobile top-level owner yet."
+      "reason": "Use official Android guidance on demand, especially where evaluations show model weakness; compare with Flutter needs before considering any broader mobile faculty."
     },
     {
       "id": "postgres-database-practices",
-      "owners": ["software-development", "data-operations"],
-      "sources": ["neondatabase/postgres-skills@27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26", "supabase/agent-skills"],
-      "reason": "High-value specialist knowledge and evidence for the future Database Engineering candidate."
+      "owners": ["database-engineering"],
+      "sources": ["neondatabase/postgres-skills@27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26", "supabase/agent-skills@8331f910845103c08d51f6ca1d86ebb7d1f745e3"],
+      "reason": "Now routed as progressive specialist references under Database Engineering rather than a separate top-level provider skill."
     },
     {
       "id": "infra-iac",
       "owners": ["release-engineering", "security-engineering", "software-development", "cloudflare-platform"],
       "sources": ["hashicorp/agent-skills@c2d65dfe492f74d360d35b859b88932222470bd8"],
-      "reason": "Terraform/Packer knowledge remains reference-level; Cloudflare-specific IaC concerns route through Cloudflare Platform plus the cross-cutting owner."
+      "reason": "Terraform/Packer knowledge remains reference-level; provider-specific IaC concerns pair with the relevant platform owner."
     },
     {
       "id": "observability-sre",
-      "owners": ["release-engineering", "software-development", "security-engineering", "quality-engineering", "cloudflare-platform"],
-      "reason": "Logs, traces, metrics, production diagnosis, and incident evidence remain cross-cutting; Cloudflare Platform owns only provider-native observability semantics."
+      "owners": ["release-engineering", "software-development", "security-engineering", "quality-engineering", "cloudflare-platform", "database-engineering"],
+      "reason": "Logs, traces, metrics, production diagnosis, DB diagnostics, and incident evidence remain cross-cutting; gather outcomes before creating a separate SRE owner."
     },
     {
       "id": "browser-computer-automation",
@@ -85,5 +91,5 @@
     "generic doctor/medical skills with weak provenance or unclear evidence boundaries",
     "skills that duplicate Cognitive Runtime invariants or existing routing ownership"
   ],
-  "next_deep_audit": "database-engineering"
+  "next_deep_audit": "mobile-engineering-reference-pack"
 }

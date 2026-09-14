@@ -1,43 +1,46 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with an always-active Cognitive Runtime and progressively disclosed specialist faculties.",
-    "Quality Engineering remains active as the independent verification/readiness owner.",
-    "Cloudflare Platform is now an active top-level faculty because repeated cross-project work requires a distinct owner for Cloudflare product selection/composition, bindings/configuration, edge/network topology, and provider-native operational semantics.",
-    "Cloudflare Platform does not absorb cross-cutting ownership: Software Development owns application implementation, Release Engineering owns promotion/provenance/rollback, Security Engineering owns threat/access policy, Data Operations or a future database owner owns data correctness, Quality Engineering owns independent readiness, and Agent Engineering owns agent/harness design.",
-    "Cloudflare platform reasoning is workload-first: choose the smallest coherent product set that satisfies concrete compute/state/storage/coordination/network/security/observability requirements.",
-    "Existing working Pages/Workers/Access/Tunnel and other Cloudflare architectures are preserved during unrelated maintenance; migration requires explicit intent or evidence of a material defect.",
-    "Drift-sensitive Cloudflare facts such as product availability, beta/stable status, limits, pricing, CLI/API syntax, compatibility, plan requirements, and migration recommendations require current authoritative Cloudflare documentation when material.",
-    "Cloudflare source/config, account-resource state, deployment state, DNS/network/identity routing, data/service state, and runtime observation are separate evidence layers; command success is not universal end-to-end proof.",
-    "Cloudflare MCP/API/CLI/native tool availability does not grant mutation authority; existing task-scoped authority and recovery contracts remain in force.",
-    "The official cloudflare/skills corpus is adapted as provenance and methodology, not imported wholesale as a frozen product manual or external runtime dependency.",
-    "Database Engineering is now the next capability candidate for deep audit and remains reference-pack-first until its ownership boundary and recurring outcome value are proven.",
-    "Existing Cognitive Runtime, authority, delegation, recovery, context, trajectory, self-improvement, GitHub mutation, capability-composition, and Quality Engineering contracts remain in force."
+    "Quality Engineering remains the independent verification/readiness owner and Cloudflare Platform remains the Cloudflare-specific platform-semantics owner.",
+    "Database Engineering is now an active top-level faculty because schema invariants, indexes/query plans, transaction/isolation/locking semantics, migration safety, connection behavior, and engine-specific concurrency form a distinct recurring reasoning layer.",
+    "Database Engineering does not absorb application implementation, record reconciliation/staging, provider product setup, production promotion authority, independent QA, or security policy.",
+    "Software Development owns ORM/application implementation; Data Operations owns record authority/reconciliation/deduplication/staging; Cloudflare Platform owns D1/Hyperdrive provider semantics; Release Engineering owns production promotion/rollback; Quality Engineering owns independent readiness; Security Engineering owns trust/access policy.",
+    "Database advice is engine-aware: PostgreSQL, SQLite/D1, and provider-managed variants must not inherit each other's locking, isolation, planner, connection, or operational assumptions without verification.",
+    "Index and performance recommendations are hypotheses until supported by representative workload and planner/runtime evidence where feasible.",
+    "Schema rollback and data rollback are separate claims; irreversible transforms, backfills, lock impact, compatibility windows, and recovery must be modeled explicitly for risky migrations.",
+    "Database tools, MCP servers, CLIs, and direct connections are execution surfaces and do not grant mutation authority.",
+    "Engine-version and provider-specific features, changed defaults, migration commands, compatibility, and limits require current authoritative documentation when material.",
+    "Postgres/SQLite/Neon/Supabase sources are adapted as progressive methodology and reference provenance, not imported wholesale as a frozen database manual.",
+    "The next capability campaign should audit Flutter/Android/mobile guidance as a reference-pack-first area before considering any new top-level Mobile Engineering faculty.",
+    "Existing Cognitive Runtime, authority, delegation, recovery, context, trajectory, self-improvement, GitHub mutation, capability-composition, Quality Engineering, and Cloudflare Platform contracts remain in force."
   ],
   "evidence": [
-    {"id": "cloudflare-platform-deep-audit-2026-09-14", "kind": "first_party_external_pattern_audit", "status": "promotion_approved_with_live_freshness_and_cross_owner_boundary"},
-    {"id": "cloudflare-platform-routing-contract-v1", "kind": "contract_validation", "status": "product_selection_implementation_release_security_quality_freshness_migration_evidence_and_authority_cases_ci_enforced"},
-    {"id": "cloudflare-skills", "kind": "first_party_skill_corpus", "status": "pinned_b052c32bab7dd493513260228a36c88294f343f1_apache_2_0"},
-    {"id": "cloudflare-current-docs", "kind": "first_party_documentation", "status": "reviewed_2026_09_14_for_workers_pages_storage_wrangler_network_access_observability_patterns"},
-    {"id": "capability-gap-map-v3", "kind": "architecture_state", "status": "quality_and_cloudflare_promoted_database_next"}
+    {"id": "database-engineering-deep-audit-2026-09-14", "kind": "multi_source_external_pattern_audit", "status": "promotion_approved_with_engine_aware_and_cross_owner_boundary"},
+    {"id": "database-engineering-routing-contract-v1", "kind": "contract_validation", "status": "implementation_data_provider_release_quality_and_negative_database_claim_boundaries_ci_enforced"},
+    {"id": "postgresql-current-docs", "kind": "first_party_documentation", "status": "reviewed_2026_09_14_for_mvcc_isolation_locking_and_concurrency"},
+    {"id": "sqlite-current-docs", "kind": "first_party_documentation", "status": "reviewed_2026_09_14_for_transactions_isolation_locking_and_wal"},
+    {"id": "neondatabase-postgres-skills", "kind": "specialist_skill_corpus", "status": "pinned_27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26"},
+    {"id": "supabase-agent-skills", "kind": "first_party_skill_corpus", "status": "pinned_8331f910845103c08d51f6ca1d86ebb7d1f745e3"},
+    {"id": "capability-gap-map-v4", "kind": "architecture_state", "status": "quality_cloudflare_database_promoted_mobile_reference_audit_next"}
   ],
   "unresolved_risks": [
-    "Cloudflare Platform promotion is architecture- and contract-supported, but DEDAL-specific outcome gains still need representative ordinary project use.",
-    "Cloudflare product APIs, recommendations, limits, pricing, and preview/stable status can change quickly; stale bundled facts remain a material risk if live-doc discipline is skipped.",
-    "A platform specialist can become an oversized vendor wrapper if product-specific details are loaded eagerly; progressive disclosure and smallest-sufficient routing remain mandatory.",
-    "Cloudflare tasks often span security, release, data, and QA concerns; poor routing could let the provider specialist overreach into cross-cutting owners.",
-    "Database Engineering may still overlap Software Development and Data Operations unless the next audit proves a distinct database-semantics ownership layer."
+    "Database Engineering promotion is architecture- and contract-supported, but DEDAL-specific outcome gains still need representative ordinary project use.",
+    "Database guidance can become dangerously generic if engine/version/provider context is skipped; live authoritative docs remain necessary for material version-specific behavior.",
+    "Query-plan and performance evidence can be workload-sensitive; synthetic or development results must not be overstated as production proof.",
+    "Production migrations can have irreversible data effects even when schema rollback exists; recovery claims require explicit evidence.",
+    "The new faculty may be over-routed onto simple CRUD coding tasks unless smallest-sufficient composition remains enforced."
   ],
   "next_executable_step": {
-    "id": "DATABASE-ENGINEERING-DEEP-AUDIT-01",
-    "action": "Deep-audit database-engineering methodology and first-party/high-signal Postgres, Supabase, Neon, SQLite/D1, migration, query-plan, indexing, transaction, concurrency, and schema-evolution guidance. Define the ownership boundary against Software Development, Data Operations, Cloudflare Platform, Release Engineering, and Quality Engineering; start reference-first and promote only if a distinct recurring faculty is justified."
+    "id": "MOBILE-ENGINEERING-REFERENCE-AUDIT-01",
+    "action": "Deep-audit the pinned official Flutter and Android skill corpora as a reference-pack-first area. Extract high-value architecture, testing, platform/version, build/release, and mobile-specific debugging guidance into existing Software Development/Interface Design/Quality Engineering/Release Engineering ownership where possible; promote a Mobile Engineering faculty only if a distinct recurring ownership layer is proven."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "6c26e5a2cf152d36f9839a693a971dc6960e7a36",
-    "relation": "verified v0.20.0 Quality Engineering baseline before the 0.21.0 Cloudflare Platform promotion transaction"
+    "sha": "fa161a648cab2ac35876f71e9a88b2cdf3c3454b",
+    "relation": "verified v0.21.0 Cloudflare Platform baseline before the 0.22.0 Database Engineering promotion transaction"
   }
 }

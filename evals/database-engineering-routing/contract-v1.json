@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {"id":"DB-01","intent":"Implement an ORM repository method against an already accepted schema","primary":"software-development","supporting":[],"accept":true},
+    {"id":"DB-02","intent":"Design schema constraints and indexes for a workload and inspect the query plan","primary":"database-engineering","supporting":["software-development"],"accept":true},
+    {"id":"DB-03","intent":"Reconcile duplicate operational records from CSV exports before import","primary":"data-operations","supporting":["database-engineering"],"accept":true},
+    {"id":"DB-04","intent":"Choose D1 versus another Cloudflare storage product and wire the binding","primary":"cloudflare-platform","supporting":["database-engineering"],"accept":true},
+    {"id":"DB-05","intent":"Promote a production schema migration with rollout and rollback evidence","primary":"release-engineering","supporting":["database-engineering","quality-engineering"],"accept":true},
+    {"id":"DB-06","intent":"Independently verify agreed transactional behavior and migration readiness","primary":"quality-engineering","supporting":["database-engineering"],"accept":true},
+    {"id":"DB-07","intent":"Add an index because a filtered column looks important without workload or plan evidence","primary":"database-engineering","supporting":[],"accept":false},
+    {"id":"DB-08","intent":"Claim a down migration guarantees recovery after irreversible data transformation","primary":"database-engineering","supporting":["release-engineering"],"accept":false},
+    {"id":"DB-09","intent":"Treat ORM schema compilation as proof that database constraints and runtime behavior are correct","primary":"database-engineering","supporting":["software-development"],"accept":false},
+    {"id":"DB-10","intent":"Apply PostgreSQL MVCC and locking assumptions directly to SQLite or D1 without checking engine semantics","primary":"database-engineering","supporting":[],"accept":false}
+  ]
+}

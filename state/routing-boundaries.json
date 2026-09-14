@@ -1,5 +1,5 @@
 {
-  "schema_version": 4,
+  "schema_version": 5,
   "phase": "hardening-consolidation-outcome-validation",
   "composition_model": {
     "architecture": "persistent-cognitive-runtime",
@@ -26,11 +26,23 @@
       "primary_owner_by_intent": {
         "cloudflare-product-selection-composition": "cloudflare-platform",
         "cloudflare-application-implementation": "software-development",
+        "cloudflare-database-semantics": "database-engineering",
         "cloudflare-release-promotion-rollback": "release-engineering",
         "cloudflare-trust-access-security-policy": "security-engineering",
         "cloudflare-independent-readiness": "quality-engineering"
       },
-      "rule": "Cloudflare Platform owns Cloudflare-specific product/platform semantics; implementation, promotion authority, security policy, and independent readiness keep their existing owners. Drift-sensitive Cloudflare facts require current official documentation when material."
+      "rule": "Cloudflare Platform owns Cloudflare-specific product/platform semantics; Database Engineering owns database behavior inside D1/Hyperdrive-backed systems; implementation, promotion authority, security policy, and independent readiness keep their existing owners. Drift-sensitive Cloudflare facts require current official documentation when material."
+    },
+    {
+      "id": "database-boundary",
+      "primary_owner_by_intent": {
+        "database-schema-index-query-plan-transaction-concurrency": "database-engineering",
+        "database-application-implementation": "software-development",
+        "record-reconciliation-staging-deduplication": "data-operations",
+        "production-database-migration-promotion": "release-engineering",
+        "independent-database-readiness-verification": "quality-engineering"
+      },
+      "rule": "Database Engineering owns database semantics; application code, record/data operations, production promotion authority, and independent readiness remain separate layers. Engine-specific advice must match the actual engine/version/deployment model."
     },
     {
       "id": "quality-interface-security",
@@ -54,10 +66,11 @@
       "id": "data-domain",
       "primary_owner_by_intent": {
         "generic-data-integrity-reconciliation": "data-operations",
+        "database-engine-semantics": "database-engineering",
         "medicine-store-business-rules": "medicine-store-assistant",
         "patient-report-business-rules": "patient-report-assistant"
       },
-      "rule": "Generic mechanics may support domain skills but never override their accepted business rules."
+      "rule": "Record/data mechanics, database semantics, and specialized business rules are separate ownership layers; pair only when a task actually spans them."
     },
     {
       "id": "interface-implementation",
@@ -93,8 +106,9 @@
     "primary-owner-first",
     "pair-only-for-distinct-necessary-layer",
     "implementation-verification-release-are-distinct-layers",
+    "database-semantics-are-separate-from-app-code-and-record-operations",
     "platform-domain-does-not-absorb-cross-cutting-owners",
-    "drift-sensitive-platform-facts-live-verified",
+    "engine-and-version-specific-facts-live-verified-when-material",
     "execution-surface-selection-is-separate-from-skill-selection",
     "recompose-on-material-subgoal-change",
     "no-new-skill-for-already-owned-intent",

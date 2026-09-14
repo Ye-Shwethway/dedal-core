@@ -1,4 +1,4 @@
-version: 16
+version: 17
 last_reviewed: "2026-09-14"
 
 routing:
@@ -107,6 +107,25 @@ skills:
           license: "Apache-2.0"
         - source: "Cloudflare current developer documentation"
           reviewed_on: "2026-09-14"
+      adapted_on: "2026-09-14"
+
+  database-engineering:
+    aliases: []
+    path: "skills/database-engineering"
+    entrypoint: "skills/database-engineering/SKILL.md"
+    status: active
+    independence: specialist_domain
+    provenance:
+      adaptation: true
+      sources:
+        - source: "PostgreSQL current official documentation: concurrency, isolation, locking, query planning"
+          reviewed_on: "2026-09-14"
+        - source: "SQLite current official documentation: transactions, isolation, locking, WAL"
+          reviewed_on: "2026-09-14"
+        - repo: "neondatabase/postgres-skills"
+          commit: "27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26"
+        - repo: "supabase/agent-skills"
+          commit: "8331f910845103c08d51f6ca1d86ebb7d1f745e3"
       adapted_on: "2026-09-14"
 
   decision-design:
@@ -347,3 +366,7 @@ skills:
           commit: "b3bb61bd268b147476252c6ed5a0440c87b97441"
         - repo: "cloudflare/skills"
           commit: "b052c32bab7dd493513260228a36c88294f343f1"
+        - repo: "neondatabase/postgres-skills"
+          commit: "27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26"
+        - repo: "supabase/agent-skills"
+          commit: "8331f910845103c08d51f6ca1d86ebb7d1f745e3"

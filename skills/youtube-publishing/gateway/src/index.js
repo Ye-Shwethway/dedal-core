@@ -84,7 +84,7 @@ async function route(request, env, requestId) {
     const ticket = randomToken(32);
     const ticketHash = await sha256(ticket);
     const now = new Date();
-    const expires = new Date(now.getTime() + 10 * 60 * 1000).toISOString();
+    const expires = new Date(now.getTime() + 30 * 60 * 1000).toISOString();
     await env.DB.prepare(
       "INSERT INTO connect_tickets(ticket_hash,profile_alias,expires_at,consumed_at,created_at) VALUES(?,?,?,NULL,?)"
     ).bind(ticketHash, alias, expires, now.toISOString()).run();
@@ -106,14 +106,13 @@ async function route(request, env, requestId) {
     const row = await env.DB.prepare(
       "SELECT profile_alias,expires_at,consumed_at FROM connect_tickets WHERE ticket_hash=?"
     ).bind(ticketHash).first();
-    if (!row || row.profile_alias !== alias || row.consumed_at || row.expires_at <= isoNow()) {
+    if (!row || row.profile_alias !== alias || row.expires_at <= isoNow()) {
       throw httpError(401, "invalid_or_expired_connect_ticket");
     }
-    const consumed = await env.DB.prepare(
-      "UPDATE connect_tickets SET consumed_at=? WHERE ticket_hash=? AND consumed_at IS NULL AND expires_at>?"
-    ).bind(isoNow(), ticketHash, isoNow()).run();
-    if (!consumed.meta || consumed.meta.changes !== 1) throw httpError(409, "connect_ticket_already_used");
 
+    // The ticket is time-bounded but intentionally reusable. Link previewers and
+    // browser prefetchers may issue a GET before the Creator opens the page.
+    // The OAuth state remains browser-bound, short-lived, and single-use.
     const profile = await getProfile(env, alias);
     const state = randomToken(32);
     const browser = randomToken(32);

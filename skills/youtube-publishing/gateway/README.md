@@ -16,7 +16,7 @@ added for this slice.
 ## Security contract
 
 - Pre-register alias + exact `channel_id` before OAuth.
-- OAuth uses one-use connect tickets, one-use state, browser-bound HttpOnly cookie,
+- OAuth uses 30-minute preview-safe connect tickets, one-use state, browser-bound HttpOnly cookie,
   PKCE S256, and ten-minute expiration.
 - Callback calls `channels.list(mine=true)`; mismatch stores no credential.
 - Refresh tokens and resumable session URIs are AES-256-GCM ciphertext in dedicated
@@ -63,7 +63,7 @@ curl https://youtube.drthorne.uk/v1/channels \
   --data '{"alias":"archive","channel_id":"UC_REPLACE_WITH_EXACT_ID"}'
 ```
 
-4. Mint a ten-minute URL:
+4. Mint a 30-minute URL:
 
 ```bash
 curl -X POST https://youtube.drthorne.uk/v1/channels/archive/connect-ticket \

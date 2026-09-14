@@ -18,3 +18,12 @@ The runner gets an encrypted-at-rest resumable session URI, not a Google token. 
 recovers from interruption through YouTube's confirmed byte offset. An expired or
 ambiguous session is not automatically replaced because a lost completion response
 could otherwise create a duplicate.
+
+
+## Link-preview resilience
+
+Connect tickets are bearer links valid for 30 minutes and may initiate more than one
+OAuth state during that window. They are not consumed by GET because chat clients,
+security scanners, and browsers may prefetch links. Each resulting OAuth state is
+still browser-bound, expires after ten minutes, and is atomically single-use. Exact
+channel-ID matching prevents a leaked ticket from binding an unrelated channel.

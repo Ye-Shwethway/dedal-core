@@ -422,7 +422,194 @@ async function assertChannel(accessToken, expected) {
 
 async function getProfile(env, alias) {
   const row = await env.DB.prepare("SELECT * FROM channel_profiles WHERE alias=?").bind(alias).first();
-  if (!row) thr
+  if (!row) throw httpError(404, "profile_not_found");
+  return row;
+}
 
---- TRUNCATED ---
-Response was ~7,757 tokens (limit: 6,000). Use more specific queries to reduce response size.
+async function getConnectedProfile(env, alias) {
+  const row = await getProfile(env, alias);
+  if (!row.enabled || !row.credential_ref) throw httpError(409, "profile_not_connected");
+  return row;
+}
+
+async function getJob(env, id) {
+  const row = await env.DB.prepare("SELECT * FROM upload_jobs WHERE id=?").bind(id).first();
+  if (!row) throw httpError(404, "job_not_found");
+  return row;
+}
+
+function publicJob(job) {
+  return {
+    id: job.id,
+    profile_alias: job.profile_alias,
+    channel_id: job.channel_id,
+    source_type: job.source_type,
+    source_fingerprint: job.source_fingerprint,
+    title: job.title,
+    requested_privacy: job.requested_privacy,
+    publish_at: job.publish_at,
+    status: job.status,
+    bytes_total: job.bytes_total == null ? null : Number(job.bytes_total),
+    bytes_uploaded: Number(job.bytes_uploaded || 0),
+    youtube_video_id: job.youtube_video_id,
+    error_summary: job.error_summary,
+    result_summary: parseJson(job.result_summary),
+    created_at: job.created_at,
+    updated_at: job.updated_at,
+    completed_at: job.completed_at,
+  };
+}
+
+function runnerJob(job) {
+  return {
+    ...publicJob(job),
+    source: { type: job.source_type, locator: job.source_locator },
+  };
+}
+
+async function failJob(env, id, summary) {
+  await env.DB.prepare("UPDATE upload_jobs SET status='failed',error_summary=?,updated_at=? WHERE id=?")
+    .bind(summary,isoNow(),id).run();
+}
+
+async function audit(env, actor, action, alias, channelId, jobId, outcome, details) {
+  await env.DB.prepare(
+    "INSERT INTO mutation_audit(id,actor_type,action,profile_alias,channel_id,job_id,outcome,details_json,created_at) VALUES(?,?,?,?,?,?,?,?,?)"
+  ).bind(crypto.randomUUID(),actor,action,alias,channelId,jobId,outcome,JSON.stringify(details || {}),isoNow()).run();
+}
+
+async function requireActor(request, secret, actor) {
+  if (!secret) throw httpError(503, "gateway_not_configured");
+  const header = request.headers.get("Authorization") || "";
+  const presented = header.startsWith("Bearer ") ? header.slice(7) : "";
+  if (!presented || !(await secureEqual(presented, secret))) throw httpError(401, `${actor}_authentication_required`);
+}
+
+function requireOAuthConfig(env) {
+  requireCryptoConfig(env);
+  if (!env.GOOGLE_CLIENT_ID || !env.GOOGLE_CLIENT_SECRET) throw httpError(503, "oauth_not_configured");
+}
+
+function requireCryptoConfig(env) {
+  if (!env.DB || !env.TOKEN_ENCRYPTION_KEY_B64) throw httpError(503, "secure_storage_not_configured");
+}
+
+async function seal(env, plaintext, aad) {
+  const key = await encryptionKey(env);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encoded = new TextEncoder();
+  const ciphertext = await crypto.subtle.encrypt({ name: "AES-GCM", iv, additionalData: encoded.encode(aad) }, key, encoded.encode(plaintext));
+  return { ciphertext: base64url(ciphertext), iv: base64url(iv) };
+}
+
+async function unseal(env, ciphertext, iv, aad) {
+  const key = await encryptionKey(env);
+  const encoded = new TextEncoder();
+  try {
+    const plaintext = await crypto.subtle.decrypt(
+      { name: "AES-GCM", iv: fromBase64url(iv), additionalData: encoded.encode(aad) },
+      key,
+      fromBase64url(ciphertext),
+    );
+    return new TextDecoder().decode(plaintext);
+  } catch {
+    throw httpError(500, "credential_decryption_failed");
+  }
+}
+
+async function encryptionKey(env) {
+  const raw = fromBase64url(env.TOKEN_ENCRYPTION_KEY_B64);
+  if (raw.byteLength !== 32) throw httpError(503, "invalid_encryption_key");
+  return crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["encrypt","decrypt"]);
+}
+
+async function sha256(value) {
+  return base64url(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value)));
+}
+
+async function secureEqual(a, b) {
+  const [ha,hb] = await Promise.all([sha256(String(a)),sha256(String(b))]);
+  if (ha.length !== hb.length) return false;
+  let diff = 0;
+  for (let i=0;i<ha.length;i++) diff |= ha.charCodeAt(i) ^ hb.charCodeAt(i);
+  return diff === 0;
+}
+
+function randomToken(bytes) {
+  return base64url(crypto.getRandomValues(new Uint8Array(bytes)));
+}
+
+function base64url(input) {
+  const bytes = input instanceof ArrayBuffer ? new Uint8Array(input) : new Uint8Array(input.buffer || input);
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+}
+
+function fromBase64url(value) {
+  const base = String(value).replace(/-/g,"+").replace(/_/g,"/");
+  const padded = base + "=".repeat((4 - base.length % 4) % 4);
+  const binary = atob(padded);
+  return Uint8Array.from(binary, c => c.charCodeAt(0));
+}
+
+function validAlias(value) {
+  const alias = String(value || "");
+  if (!/^[a-z][a-z0-9_-]{1,31}$/.test(alias)) throw httpError(400, "invalid_alias");
+  return alias;
+}
+
+function validChannelId(value) {
+  const id = String(value || "");
+  if (!/^UC[A-Za-z0-9_-]{20,30}$/.test(id)) throw httpError(400, "invalid_channel_id");
+  return id;
+}
+
+async function bodyJson(request) {
+  const length = Number(request.headers.get("Content-Length") || 0);
+  if (length > 64 * 1024) throw httpError(413, "request_too_large");
+  try { return await request.json(); } catch { throw httpError(400, "invalid_json"); }
+}
+
+function cookie(request, name) {
+  const match = (request.headers.get("Cookie") || "").match(new RegExp("(?:^|;\\s*)" + name + "=([^;]+)"));
+  return match ? match[1] : "";
+}
+
+function reply(payload, status=200) {
+  return new Response(JSON.stringify(payload), {
+    status,
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" },
+  });
+}
+
+function html(message, status=200) {
+  return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>DEDAL YouTube Gateway</title><body><main><h1>DEDAL YouTube Gateway</h1><p>${message}</p></main></body>`, {
+    status,
+    headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'none'" },
+  });
+}
+
+function httpError(status, code, message) {
+  const error = new Error(message || code);
+  error.status = status;
+  error.code = code;
+  return error;
+}
+
+function safeError(error) {
+  return error && error.code ? error.code : "internal_error";
+}
+
+async function safeGoogleError(response) {
+  try {
+    const data = await response.json();
+    return data?.error?.message || `Google API HTTP ${response.status}`;
+  } catch {
+    return `Google API HTTP ${response.status}`;
+  }
+}
+
+function isoNow() { return new Date().toISOString(); }
+function parseJson(value) { try { return value ? JSON.parse(value) : null; } catch { return null; } }
+function escapeHtml(value) { return String(value || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }

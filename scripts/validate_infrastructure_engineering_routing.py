@@ -23,13 +23,12 @@ for cid, primary in expected.items():
 for cid in ["IE-N1", "IE-N2", "IE-N3", "IE-N4", "IE-N5", "IE-N6"]:
     assert cases[cid].get("reject") is True, cid
 
-assert "infrastructure-engineering" in cases["IE-02"].get("expect_primary", "")
 assert "security-engineering" in cases["IE-02"].get("expect_supporting", [])
 assert "infrastructure-engineering" in cases["IE-07"].get("expect_supporting", [])
 
 skill = (ROOT / "skills/infrastructure-engineering/SKILL.md").read_text()
 for phrase in [
-    "configuration, state, and live provider reality",
+    "Desired configuration, IaC state, and live provider reality",
     "A speculative plan is not an applied change",
     "auto-approve",
     "Direct state mutation",

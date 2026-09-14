@@ -35,8 +35,8 @@ It does **not** replace:
 3. **Choose the execution lane.** Generative-video app, footage edit, image-to-video, Remotion/motion graphics, FFmpeg post-production, or a hybrid.
 4. **Generate or inspect source media.** Treat generated clips as takes, not canonical truth. Probe real media before editing.
 5. **Assemble for meaning.** Prefer motivated cuts, readable pacing, continuity, and audio-led timing over effect density.
-6. **Polish selectively.** Reframe, stabilize, grade/tone-map, retime, mix, caption, and add transitions only when they improve the piece.
-7. **Verify the render.** Check duration, dimensions, streams, sync, caption readability, clipping/loudness, visual continuity, and final playback.
+6. **Polish selectively.** Reframe, stabilize, grade/tone-map, retime, mix, caption, and add transitions/effects only when they improve the piece.
+7. **Verify the render.** Check duration, dimensions, streams, sync, caption readability, clipping/loudness, visual continuity, effect boundaries, and final playback.
 8. **Deliver intentionally.** Preserve masters/intermediates when useful and produce platform-appropriate exports without confusing encode success with editorial quality.
 
 ## Durable rules
@@ -50,13 +50,20 @@ It does **not** replace:
 - Sparse contact sheets are for localization, not exact editorial boundaries. Refine candidate cuts with dense frame inspection plus audio/subtitle cues when precision matters.
 - External recaps, transcripts, subtitle timing, clip descriptions, or web timestamps may help locate an event, but they are locator evidence only until reconciled with the actual local media timeline.
 - When editing a rough cut/excerpt, maintain an explicit original-to-local timeline mapping and verify anchors if keyframe seeking, timestamp preservation, concat, or multiple source ranges may have shifted the nominal offset.
-- Subtitles are editorial objects: timing, safe areas, line length, reading speed, language, and contrast matter.
-- Audio completion requires listening-oriented evidence where available; waveform/codec success alone is not mix quality.
-- Render success is not playback, sync, or narrative-quality proof.
-- Tool/model limits, current prompt syntax, supported resolutions/durations/codecs, and pricing are live facts; verify when material.
+- Build the readable edit before decorating it. A straight cut is the default; transitions, speed ramps, flashes, shake, zooms, blur, LUTs, animated captions, and other effects need an editorial job rather than mere availability.
+- Trim first, transition second. Use J/L cuts and audio continuity when they improve anticipation, dialogue flow, ambience, or scene entry/exit.
+- For stylized action edits, keep emphasis effects sparse and event-driven. Strong effects repeated on every impact quickly reduce readability and feel synthetic.
+- Reframe/geometry operations should usually precede final caption and graphic placement so text stays inside target safe areas.
+- Subtitles are editorial objects: timing, safe areas, line length, reading speed, language, glyph coverage, shaping, contrast, and delivery mode (soft versus burned) matter.
+- Audio completion requires listening-oriented evidence where available; waveform/codec success alone is not mix quality. Measure loudness/true peak when delivery targets matter, preserve channel layout deliberately, and do not normalize noise as if it were content.
+- Distinguish technical color transforms from creative grading. Probe source color/HDR metadata and prefer restrained changes to already graded footage unless a new look is explicitly intended.
+- Slow-motion/interpolation, denoise/sharpen, stabilization, compositing, and heavy effects create artifacts as well as benefits; inspect representative output after application.
+- Render success is not playback, sync, subtitle readability, effect timing, or narrative-quality proof.
+- Tool/model limits, current prompt syntax, supported resolutions/durations/codecs, installed filter libraries, and pricing are live facts; verify when material.
 
 ## Progressive references
 
 - `references/generative-video-direction.md`
 - `references/post-production-and-delivery.md`
 - `references/scene-and-action-boundary-extraction.md`
+- `references/professional-post-production-effects.md`

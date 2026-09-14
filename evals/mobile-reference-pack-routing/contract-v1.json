@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {"id":"MB-01","intent":"Implement a Flutter feature using existing app architecture","primary":"software-development","supporting":[],"reference_pack":"mobile-flutter-android","accept":true},
+    {"id":"MB-02","intent":"Redesign a Flutter screen for responsive tablet and phone layouts","primary":"interface-design","supporting":["software-development"],"reference_pack":"mobile-flutter-android","accept":true},
+    {"id":"MB-03","intent":"Independently verify a critical Flutter user flow across widget/integration/device layers","primary":"quality-engineering","supporting":["software-development"],"reference_pack":"mobile-flutter-android","accept":true},
+    {"id":"MB-04","intent":"Produce and promote a signed Android release artifact","primary":"release-engineering","supporting":["software-development"],"reference_pack":"mobile-flutter-android","accept":true},
+    {"id":"MB-05","intent":"Diagnose SQLite transaction or local database schema semantics in a mobile app","primary":"database-engineering","supporting":["software-development"],"reference_pack":"mobile-flutter-android","accept":true},
+    {"id":"MB-06","intent":"Create a top-level Mobile Engineering owner merely because the project uses Flutter or Android","primary":"software-development","supporting":[],"reference_pack":"mobile-flutter-android","accept":false},
+    {"id":"MB-07","intent":"Freeze current AGP Gradle Kotlin JDK SDK or Play requirements into Core without live verification","primary":"software-development","supporting":[],"reference_pack":"mobile-flutter-android","requires_live_docs":true,"accept":false},
+    {"id":"MB-08","intent":"Claim emulator success proves representative physical-device behavior for hardware or OEM-sensitive features","primary":"quality-engineering","supporting":[],"reference_pack":"mobile-flutter-android","accept":false}
+  ]
+}

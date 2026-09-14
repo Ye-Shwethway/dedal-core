@@ -1,64 +1,26 @@
 {
-  "schema_version": 4,
+  "schema_version": 5,
   "reviewed_on": "2026-09-14",
   "principle": "capability gaps before skill count",
   "promoted": [
-    {
-      "id": "quality-engineering",
-      "version": "0.20.0",
-      "status": "active",
-      "reason": "Independent acceptance, risk-based verification, exploratory/E2E/regression evidence, defect characterization, and readiness verdicts form a recurring ownership layer distinct from implementation, design, security, and release promotion.",
-      "evidence": [
-        "Playwright current documentation reviewed 2026-09-14",
-        "DwonnG/qa-agent-skills@c5dcf11d22bd40a55d4f7c30baa2f272b4dcf576",
-        "petrkindlmann/qa-skills@b3bb61bd268b147476252c6ed5a0440c87b97441",
-        "quality-engineering-routing-contract-v1"
-      ]
-    },
-    {
-      "id": "cloudflare-platform",
-      "version": "0.21.0",
-      "status": "active",
-      "reason": "Repeated cross-project work needs an independent owner for Cloudflare product selection/composition, bindings/configuration, edge/network topology, and provider-native operational semantics while cross-cutting implementation/security/release/data/QA ownership remains separate.",
-      "evidence": [
-        "cloudflare/skills@b052c32bab7dd493513260228a36c88294f343f1",
-        "Cloudflare current developer documentation reviewed 2026-09-14",
-        "cloudflare-platform-routing-contract-v1"
-      ]
-    },
-    {
-      "id": "database-engineering",
-      "version": "0.22.0",
-      "status": "active",
-      "reason": "Schema invariants, indexes/access paths, query plans, transaction/isolation/locking behavior, migration safety, connection semantics, and engine-specific concurrency form a recurring ownership layer distinct from application implementation, record reconciliation, provider setup, release promotion, and independent QA.",
-      "evidence": [
-        "PostgreSQL 18 concurrency-control documentation reviewed 2026-09-14",
-        "SQLite transaction/isolation/WAL documentation reviewed 2026-09-14",
-        "neondatabase/postgres-skills@27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26",
-        "supabase/agent-skills@8331f910845103c08d51f6ca1d86ebb7d1f745e3",
-        "database-engineering-routing-contract-v1"
-      ]
-    }
+    {"id":"quality-engineering","version":"0.20.0","status":"active","reason":"Independent acceptance, risk-based verification, exploratory/E2E/regression evidence, defect characterization, and readiness verdicts form a recurring ownership layer distinct from implementation, design, security, and release promotion."},
+    {"id":"cloudflare-platform","version":"0.21.0","status":"active","reason":"Repeated cross-project work needs an independent owner for Cloudflare product selection/composition, bindings/configuration, edge/network topology, and provider-native operational semantics while cross-cutting implementation/security/release/data/QA ownership remains separate."},
+    {"id":"database-engineering","version":"0.22.0","status":"active","reason":"Schema invariants, indexes/access paths, query plans, transaction/isolation/locking behavior, migration safety, connection semantics, and engine-specific concurrency form a recurring ownership layer distinct from application implementation, record reconciliation, provider setup, release promotion, and independent QA."}
   ],
   "top_level_candidates": [],
   "reference_pack_first": [
     {
-      "id": "flutter-mobile",
-      "owners": ["software-development", "interface-design", "release-engineering", "quality-engineering"],
-      "sources": ["flutter/agent-plugins@7cdb7d3c33679ef14a7a7584cec1d5ecb8752586"],
-      "reason": "Official Flutter corpus is strong, but framework-specific implementation/testing guidance fits existing faculties; audit whether a shared Mobile Engineering reference pack improves routing without adding a duplicate top-level owner."
-    },
-    {
-      "id": "android-native",
-      "owners": ["software-development", "release-engineering", "quality-engineering"],
-      "sources": ["android/skills@bac232fd02b0855df9275281a2a7a47643768719"],
-      "reason": "Use official Android guidance on demand, especially where evaluations show model weakness; compare with Flutter needs before considering any broader mobile faculty."
+      "id": "mobile-flutter-android",
+      "status": "reference-pack-approved",
+      "owners": ["software-development", "interface-design", "quality-engineering", "release-engineering", "database-engineering"],
+      "sources": ["flutter/agent-plugins@7cdb7d3c33679ef14a7a7584cec1d5ecb8752586", "android/skills@bac232fd02b0855df9275281a2a7a47643768719"],
+      "reason": "Official Flutter and Android corpora contain high-value framework/toolchain recipes, but audited workflows map cleanly onto existing owners. Keep mobile expertise progressive and live-doc-aware rather than adding a duplicate Mobile Engineering faculty."
     },
     {
       "id": "postgres-database-practices",
       "owners": ["database-engineering"],
       "sources": ["neondatabase/postgres-skills@27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26", "supabase/agent-skills@8331f910845103c08d51f6ca1d86ebb7d1f745e3"],
-      "reason": "Now routed as progressive specialist references under Database Engineering rather than a separate top-level provider skill."
+      "reason": "Progressive specialist references under Database Engineering rather than a separate provider skill."
     },
     {
       "id": "infra-iac",
@@ -69,7 +31,7 @@
     {
       "id": "observability-sre",
       "owners": ["release-engineering", "software-development", "security-engineering", "quality-engineering", "cloudflare-platform", "database-engineering"],
-      "reason": "Logs, traces, metrics, production diagnosis, DB diagnostics, and incident evidence remain cross-cutting; gather outcomes before creating a separate SRE owner."
+      "reason": "Logs, traces, metrics, production diagnosis, DB diagnostics, and incident evidence remain cross-cutting. This is the next audit because repeated production operations may reveal a distinct SRE/observability owner or may confirm reference-only status."
     },
     {
       "id": "browser-computer-automation",
@@ -85,11 +47,12 @@
     }
   ],
   "reject_as_top_level": [
+    "Mobile Engineering solely because a project uses Flutter or Android; use the approved reference pack until distinct ownership is proven",
     "large marketplace imports selected by popularity alone",
     "site-specific browser action packs as standalone faculties",
     "thin vendor wrappers when an existing owner plus reference pack is sufficient",
     "generic doctor/medical skills with weak provenance or unclear evidence boundaries",
     "skills that duplicate Cognitive Runtime invariants or existing routing ownership"
   ],
-  "next_deep_audit": "mobile-engineering-reference-pack"
+  "next_deep_audit": "observability-sre"
 }

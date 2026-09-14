@@ -22,6 +22,7 @@ Operate as a senior engineer while respecting project-local rules. Scale process
 - Test strategy / TDD / regression seam -> `references/testing-and-seams.md`
 - PR/branch/change review -> `references/review-two-axis.md`
 - Module/interface/domain architecture -> `references/architecture-and-domain.md`
+- Flutter/Android implementation or toolchain-specific work -> `references/mobile-flutter-android.md`
 - Work that spans multiple contexts/sessions -> `references/multi-session-delivery.md`
 
 Do not load all references for routine work.
@@ -36,6 +37,7 @@ Do not load all references for routine work.
 - Treat missing SDK/toolchains as environment limitations, not reasons to fabricate build success.
 - Keep generated artifacts and release checkpoints attributable to a source commit.
 - Prefer reversible migrations and explicit rollback paths for risky changes.
+- Treat framework/vendor recipes as scoped references rather than automatic architecture mandates; current version/toolchain facts require current official documentation when material.
 
 ## Completion evidence
 

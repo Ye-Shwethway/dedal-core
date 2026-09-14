@@ -1,46 +1,39 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.22.0",
+  "version": "0.22.1",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with an always-active Cognitive Runtime and progressively disclosed specialist faculties.",
-    "Quality Engineering remains the independent verification/readiness owner and Cloudflare Platform remains the Cloudflare-specific platform-semantics owner.",
-    "Database Engineering is now an active top-level faculty because schema invariants, indexes/query plans, transaction/isolation/locking semantics, migration safety, connection behavior, and engine-specific concurrency form a distinct recurring reasoning layer.",
-    "Database Engineering does not absorb application implementation, record reconciliation/staging, provider product setup, production promotion authority, independent QA, or security policy.",
-    "Software Development owns ORM/application implementation; Data Operations owns record authority/reconciliation/deduplication/staging; Cloudflare Platform owns D1/Hyperdrive provider semantics; Release Engineering owns production promotion/rollback; Quality Engineering owns independent readiness; Security Engineering owns trust/access policy.",
-    "Database advice is engine-aware: PostgreSQL, SQLite/D1, and provider-managed variants must not inherit each other's locking, isolation, planner, connection, or operational assumptions without verification.",
-    "Index and performance recommendations are hypotheses until supported by representative workload and planner/runtime evidence where feasible.",
-    "Schema rollback and data rollback are separate claims; irreversible transforms, backfills, lock impact, compatibility windows, and recovery must be modeled explicitly for risky migrations.",
-    "Database tools, MCP servers, CLIs, and direct connections are execution surfaces and do not grant mutation authority.",
-    "Engine-version and provider-specific features, changed defaults, migration commands, compatibility, and limits require current authoritative documentation when material.",
-    "Postgres/SQLite/Neon/Supabase sources are adapted as progressive methodology and reference provenance, not imported wholesale as a frozen database manual.",
-    "The next capability campaign should audit Flutter/Android/mobile guidance as a reference-pack-first area before considering any new top-level Mobile Engineering faculty.",
-    "Existing Cognitive Runtime, authority, delegation, recovery, context, trajectory, self-improvement, GitHub mutation, capability-composition, Quality Engineering, and Cloudflare Platform contracts remain in force."
+    "Quality Engineering, Cloudflare Platform, and Database Engineering remain active with their accepted ownership boundaries.",
+    "Mobile Engineering is not promoted as a top-level faculty at this checkpoint. Flutter and Android guidance is approved as a progressive reference pack under existing owners.",
+    "Software Development owns Flutter/Android implementation, architecture refactoring, plugin integration, and build/config code changes; Interface Design owns mobile UX/UI direction; Quality Engineering owns independent widget/integration/device acceptance; Release Engineering owns APK/AAB/signing/store promotion; Database Engineering owns local database semantics.",
+    "Framework/vendor recipes do not override coherent project-local architecture merely because an upstream example prefers a particular pattern such as MVVM or Repository.",
+    "Flutter/Android/AGP/Gradle/Kotlin/JDK/SDK/Play policy/plugin compatibility and tool-command facts are drift-sensitive and require current official documentation when material.",
+    "Build success, emulator success, integration-test success, representative physical-device behavior, and store acceptance are distinct evidence layers.",
+    "The Android first-party skill corpus provides a useful acquisition principle: prioritize evaluated model weaknesses instead of creating skills for areas already handled adequately.",
+    "The next capability audit is Observability/SRE, still reference-first until distinct ownership beyond Software Development, Release Engineering, Security Engineering, Quality Engineering, Cloudflare Platform, and Database Engineering is proven."
   ],
   "evidence": [
-    {"id": "database-engineering-deep-audit-2026-09-14", "kind": "multi_source_external_pattern_audit", "status": "promotion_approved_with_engine_aware_and_cross_owner_boundary"},
-    {"id": "database-engineering-routing-contract-v1", "kind": "contract_validation", "status": "implementation_data_provider_release_quality_and_negative_database_claim_boundaries_ci_enforced"},
-    {"id": "postgresql-current-docs", "kind": "first_party_documentation", "status": "reviewed_2026_09_14_for_mvcc_isolation_locking_and_concurrency"},
-    {"id": "sqlite-current-docs", "kind": "first_party_documentation", "status": "reviewed_2026_09_14_for_transactions_isolation_locking_and_wal"},
-    {"id": "neondatabase-postgres-skills", "kind": "specialist_skill_corpus", "status": "pinned_27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26"},
-    {"id": "supabase-agent-skills", "kind": "first_party_skill_corpus", "status": "pinned_8331f910845103c08d51f6ca1d86ebb7d1f745e3"},
-    {"id": "capability-gap-map-v4", "kind": "architecture_state", "status": "quality_cloudflare_database_promoted_mobile_reference_audit_next"}
+    {"id":"mobile-engineering-reference-audit-2026-09-14","kind":"first_party_multi_corpus_audit","status":"reference_pack_approved_top_level_rejected_for_now"},
+    {"id":"flutter-agent-plugins","kind":"first_party_skill_corpus","status":"pinned_7cdb7d3c33679ef14a7a7584cec1d5ecb8752586"},
+    {"id":"android-skills","kind":"first_party_skill_corpus","status":"pinned_bac232fd02b0855df9275281a2a7a47643768719_apache_2_0"},
+    {"id":"mobile-reference-pack-routing-v1","kind":"contract_validation","status":"existing_owner_and_anti_bloat_cases_ci_enforced"},
+    {"id":"capability-gap-map-v5","kind":"architecture_state","status":"mobile_reference_pack_approved_observability_sre_next"}
   ],
   "unresolved_risks": [
-    "Database Engineering promotion is architecture- and contract-supported, but DEDAL-specific outcome gains still need representative ordinary project use.",
-    "Database guidance can become dangerously generic if engine/version/provider context is skipped; live authoritative docs remain necessary for material version-specific behavior.",
-    "Query-plan and performance evidence can be workload-sensitive; synthetic or development results must not be overstated as production proof.",
-    "Production migrations can have irreversible data effects even when schema rollback exists; recovery claims require explicit evidence.",
-    "The new faculty may be over-routed onto simple CRUD coding tasks unless smallest-sufficient composition remains enforced."
+    "Framework and platform guidance changes quickly; stale toolchain details remain a risk if live-doc verification is skipped.",
+    "A shared reference pack can still become oversized if loaded for every mobile task; progressive disclosure remains mandatory.",
+    "Physical-device and OEM-sensitive behavior may escape emulator and CI coverage; evidence claims must remain scoped.",
+    "A distinct Mobile Engineering faculty may become justified later if repeated cross-platform lifecycle/device/store concerns prove they do not fit existing owners."
   ],
   "next_executable_step": {
-    "id": "MOBILE-ENGINEERING-REFERENCE-AUDIT-01",
-    "action": "Deep-audit the pinned official Flutter and Android skill corpora as a reference-pack-first area. Extract high-value architecture, testing, platform/version, build/release, and mobile-specific debugging guidance into existing Software Development/Interface Design/Quality Engineering/Release Engineering ownership where possible; promote a Mobile Engineering faculty only if a distinct recurring ownership layer is proven."
+    "id": "OBSERVABILITY-SRE-REFERENCE-AUDIT-01",
+    "action": "Deep-audit observability/SRE methodology and high-signal first-party ecosystems for logs, metrics, traces, alerting, incident diagnosis, production health, service-level thinking, and post-incident learning. Define ownership against Software Development, Release Engineering, Security Engineering, Quality Engineering, Cloudflare Platform, Database Engineering, and Agent Engineering; remain reference-first unless a distinct recurring operational ownership layer is proven."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "fa161a648cab2ac35876f71e9a88b2cdf3c3454b",
-    "relation": "verified v0.21.0 Cloudflare Platform baseline before the 0.22.0 Database Engineering promotion transaction"
+    "sha": "d6eb45a08bfc2de167aefaa0bcafd2340dee3478",
+    "relation": "verified v0.22.0 Database Engineering baseline before the 0.22.1 mobile reference-pack transaction"
   }
 }

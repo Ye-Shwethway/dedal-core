@@ -20,7 +20,7 @@
         "independent-output-readiness": "quality-engineering",
         "factual-evidence": "domain-owner-or-research"
       },
-      "rule": "Still visual continuity, temporal media production, deck production, prose, factual authority, and independent QA are distinct layers; generation/editing/slide tools remain execution surfaces."
+      "rule": "Still visual continuity, temporal media production, deck production, prose, factual authority, and independent QA are distinct layers; generators, editors and slide tools remain execution surfaces."
     },
     {
       "id": "repo-lifecycle",
@@ -32,16 +32,76 @@
         "artifact-promotion-rollback": "release-engineering",
         "live-service-health-incident-response": "reliability-engineering",
         "agent-tool-harness-design": "agent-engineering"
-      }
+      },
+      "rule": "Implementation, infrastructure lifecycle, independent quality assessment, release promotion, and live-service reliability are distinct ownership layers."
     },
     {
-      "id": "platform-data-security",
+      "id": "infrastructure-boundary",
       "primary_owner_by_intent": {
+        "iac-config-state-live-reconciliation": "infrastructure-engineering",
+        "iac-plan-apply-import-move-drift": "infrastructure-engineering",
+        "iac-module-provider-lifecycle": "infrastructure-engineering",
+        "application-implementation": "software-development",
+        "application-release-promotion": "release-engineering",
+        "live-service-health": "reliability-engineering",
         "cloudflare-product-platform-semantics": "cloudflare-platform",
         "database-engine-semantics": "database-engineering",
-        "record-reconciliation-staging": "data-operations",
-        "security-threat-policy-authority": "security-engineering"
-      }
+        "infrastructure-security-policy-authority": "security-engineering",
+        "independent-infrastructure-readiness": "quality-engineering"
+      },
+      "rule": "Infrastructure Engineering owns declarative resource lifecycle and reconciliation; provider architecture, security authority, application release, database semantics and live-service health remain separate."
+    },
+    {
+      "id": "reliability-boundary",
+      "primary_owner_by_intent": {
+        "sli-slo-error-budget-service-health": "reliability-engineering",
+        "telemetry-observability-strategy": "reliability-engineering",
+        "production-incident-triage-mitigation-recovery": "reliability-engineering",
+        "infrastructure-change-semantics": "infrastructure-engineering",
+        "application-instrumentation-implementation": "software-development",
+        "release-deployment-rollback-mechanics": "release-engineering",
+        "independent-pre-release-readiness": "quality-engineering",
+        "security-incident-policy-authority": "security-engineering",
+        "provider-platform-semantics": "cloudflare-platform",
+        "database-engine-semantics": "database-engineering"
+      },
+      "rule": "Reliability Engineering owns live service health and incident learning; Infrastructure Engineering owns resource lifecycle/reconciliation even when an infrastructure change triggers an incident."
+    },
+    {
+      "id": "cloudflare-platform-boundary",
+      "primary_owner_by_intent": {
+        "cloudflare-product-selection-composition": "cloudflare-platform",
+        "cloudflare-iac-resource-lifecycle": "infrastructure-engineering",
+        "cloudflare-application-implementation": "software-development",
+        "cloudflare-database-semantics": "database-engineering",
+        "cloudflare-release-promotion-rollback": "release-engineering",
+        "cloudflare-live-service-health": "reliability-engineering",
+        "cloudflare-trust-access-security-policy": "security-engineering",
+        "cloudflare-independent-readiness": "quality-engineering"
+      },
+      "rule": "Cloudflare Platform owns provider/product semantics; Infrastructure Engineering owns IaC lifecycle when Cloudflare resources are declaratively managed."
+    },
+    {
+      "id": "database-boundary",
+      "primary_owner_by_intent": {
+        "database-schema-index-query-plan-transaction-concurrency": "database-engineering",
+        "database-infrastructure-resource-lifecycle": "infrastructure-engineering",
+        "database-application-implementation": "software-development",
+        "record-reconciliation-staging-deduplication": "data-operations",
+        "production-database-migration-promotion": "release-engineering",
+        "production-database-service-health": "reliability-engineering",
+        "independent-database-readiness-verification": "quality-engineering"
+      },
+      "rule": "Database Engineering owns engine/database semantics; Infrastructure Engineering may manage infrastructure resources but does not redefine database behavior."
+    },
+    {
+      "id": "quality-interface-security",
+      "primary_owner_by_intent": {
+        "ux-ui-direction-audit": "interface-design",
+        "verify-user-visible-behavior-accessibility-regression": "quality-engineering",
+        "security-threat-policy-adversarial-reasoning": "security-engineering"
+      },
+      "rule": "Quality Engineering verifies agreed behavior; Security Engineering owns authority/trust policy, including for infrastructure mutation."
     },
     {
       "id": "state-continuity",
@@ -49,14 +109,43 @@
         "concrete-evidence-linked-archive": "ika",
         "generic-memory-scope-governance": "knowledge-memory",
         "repo-entry-resume-context-map": "project-bootstrap"
-      }
+      },
+      "rule": "Do not duplicate persistent state across owners; live canonical project state outranks all three."
+    },
+    {
+      "id": "data-domain",
+      "primary_owner_by_intent": {
+        "generic-data-integrity-reconciliation": "data-operations",
+        "database-engine-semantics": "database-engineering",
+        "medicine-store-business-rules": "medicine-store-assistant",
+        "patient-report-business-rules": "patient-report-assistant"
+      },
+      "rule": "Record/data mechanics, database semantics, infrastructure lifecycle, and specialized business rules remain separate ownership layers."
+    },
+    {
+      "id": "interface-implementation",
+      "primary_owner_by_intent": {
+        "ux-ui-direction-audit": "interface-design",
+        "code-implementation-debugging": "software-development",
+        "visual-reference-image-continuity": "visual-direction"
+      },
+      "rule": "Pair design with implementation only when both are actually required; image-production continuity is not UI design."
     },
     {
       "id": "evidence-acquisition",
       "primary_owner_by_intent": {
         "current-fact-research-synthesis": "research",
         "external-skill-discovery-adaptation": "skill-acquisition"
-      }
+      },
+      "rule": "Skill Acquisition is not a general research alias and is phase-gated against default expansion."
+    },
+    {
+      "id": "expression-truth",
+      "primary_owner_by_intent": {
+        "expression-translation-editorial-quality": "writing-editorial",
+        "domain-facts": "domain-owner-or-research"
+      },
+      "rule": "Editorial polish never becomes factual authority."
     }
   ],
   "routing_principles": [
@@ -66,10 +155,14 @@
     "explicit-alias-outranks-generic-overlap",
     "primary-owner-first",
     "pair-only-for-distinct-necessary-layer",
+    "implementation-infrastructure-verification-release-reliability-are-distinct-layers",
     "still-visual-temporal-video-and-presentation-production-are-distinct-owners",
+    "iac-config-state-live-reality-are-distinct-evidence-views",
+    "database-semantics-are-separate-from-app-code-record-operations-and-infrastructure-resource-lifecycle",
     "execution-surface-selection-is-separate-from-skill-selection",
     "render-or-encode-success-is-not-quality-proof",
     "provider-model-library-and-version-specific-facts-live-verified-when-material",
+    "recompose-on-material-subgoal-change",
     "no-new-skill-for-already-owned-intent",
     "needs-evidence-before-merge-or-remove"
   ]

@@ -7,54 +7,70 @@ _Date: 2026-09-14_
 - Repository: `Ye-Shwethway/dedal-core`
 - Visibility: public
 - Default branch: `main`
-- Current version: `0.17.0`
+- Current version: `0.18.0`
 - Purpose: durable public operational core for DEDAL
 
-## Active skills
+## Operating phase
 
-Domain: `$msa`, `$pra`, `$ika`.
+The initial eight-area capability expansion campaign is complete. DEDAL is now in **hardening + consolidation + outcome validation** mode, not default skill-expansion mode.
 
-Generic/meta: GitHub, Files & Artifacts, Research, Software Development, Decision Design v2, Interface Design, Agent Engineering, Security Engineering, Project Bootstrap, Release Engineering, Data Operations, Writing / Editorial Engineering, Visual Direction / Image Production, Knowledge / Memory Architecture, Automations, Skill Acquisition.
+The consolidation efficiency baseline remains valid as preliminary evidence only. Numeric claims must continue to use directly observable counts or be labeled structural proxies.
 
-## Capability campaign
+## Hardening campaign state
 
-The initial eight-area capability expansion campaign is complete. All eight planned areas are active, with Decision / Planning Intelligence v2 merged into Decision Design rather than becoming a duplicate top-level skill.
+### 1. GitHub mutation guardrails
 
-Do not begin another skill-growth wave by default. Current operating phase is **consolidation + outcome validation**.
+Added an executable fail-closed mutation guard under `runtime/` plus positive/negative contract cases under `evals/github-mutation-guard/`.
 
-## Consolidation / efficiency review
+The guard enforces the locked work-unit mode:
+- direct mode permits one direct contents mutation and rejects atomic Git-data mutation tools;
+- atomic mode permits `create_blob(s) -> create_tree -> create_commit -> update_ref`, rejects direct contents writes, rejects out-of-order transitions, and rejects mutation tools unknown to the current policy when the host marks them as mutations.
 
-Protocol: `evals/consolidation/README.md`.
-Cases: `evals/consolidation/cases-v1.yaml`.
-Baseline: `evals/consolidation/efficiency-baseline-2026-09-14.md`.
+Important residual risk: the public Core repository cannot intercept native provider GitHub tools by itself. Actual platform-level prevention requires a host/tool dispatcher to route mutation calls through the guard. Until then, this is **executable contract enforcement available for integration**, not universal native-tool interception.
 
-Preliminary evidence:
-- repository mutation: early failed coherent work used three commits for one intended milestone; recent clean v0.16/v0.17 milestones use one atomic commit, a 66.7% reduction in commit amplification on the comparable observed unit;
-- CI verification: bounded commit-scoped run discovery followed by exact run/job checks is observed and avoids premature success claims, but no pre-Harness numeric polling baseline exists;
-- context routing: 19 active entrypoints exist, while six representative route simulations select an average 1.67 entrypoints/task, a 91.2% reduction in entrypoint-count load versus a load-everything baseline; this is a structural proxy, not a measured token/latency saving;
-- research: RS-02 PASS; RS-01 PARTIAL;
-- v0.15 proves mutation guidance is not runtime enforcement, so the transaction gain is real but not permanently guaranteed;
-- Data Operations, Visual Direction, Decision Design v2, Knowledge/Memory, Project Bootstrap, Release Engineering and several other expanded skills still need more representative real-task efficiency evidence before numeric claims.
+The v0.15 wrong-tool regression remains preserved as evidence of why instruction-only safeguards are insufficient.
 
-Current conclusion: DEDAL is **meaningfully more efficient in several observed dimensions, but not yet globally quantified or fully outcome-validated**.
+### 2. Skill overlap / routing consolidation
 
-## Harness benchmark
+`state/skill-consolidation.json` now classifies every live skill entrypoint with one of KEEP / TUNE / MERGE / REMOVE / NEEDS_EVIDENCE and records the primary overlap boundary.
 
-Harness v1 remains contract-validated with accumulating outcome evidence.
+Current classification counts:
+- KEEP: 10
+- TUNE: 1 (`skill-acquisition`, because the expansion campaign is complete and acquisition should now be gap-driven)
+- NEEDS_EVIDENCE: 8
+- MERGE: 0
+- REMOVE: 0
 
-Current compact evidence:
-- GH-01: latest clean reruns/milestones demonstrate atomic behavior; v0.15 regression remains preserved as evidence of non-enforced tooling;
+No skill was merged or removed without representative outcome evidence.
+
+### 3. Executable continuity checkpoint
+
+`state/checkpoint.schema.json` and `state/current-checkpoint.json` now provide a machine-readable checkpoint carrying:
+- accepted state;
+- evidence;
+- unresolved risks;
+- next executable step;
+- owner;
+- last verified revision.
+
+`python3 scripts/validate_runtime_contracts.py` validates this checkpoint shape, skill-classification coverage, and GitHub mutation-guard cases in CI.
+
+## Consolidation / benchmark evidence
+
+Existing benchmark evidence is preserved rather than normalized away:
+- GH-01: clean atomic milestones exist, while v0.15 remains regression evidence;
 - GH-02: PASS;
 - RS-01: PARTIAL;
 - RS-02: PASS;
-- LH-01 / LH-02: await representative continuity/recovery work.
+- LH-01 / LH-02: still need representative continuity/recovery work;
+- several expanded skills remain contract-validated but not outcome-validated.
+
+No new universal efficiency percentage is claimed by this hardening release.
 
 ## Next executable phase
 
-1. Shadow-score ordinary real work against consolidation cases CE-01..CE-06 rather than manufacturing large synthetic benchmarks.
-2. Record observable counts only; label architecture-only numbers as structural proxies.
-3. Protect correctness/verification/authority as gates before efficiency.
-4. Identify skills/workflows as KEEP / TUNE / MERGE / REMOVE / NEEDS EVIDENCE based on actual outcomes and context/process cost.
-5. Use resumed/new-chat work to exercise LH-01/LH-02 and Knowledge/Memory Architecture naturally.
-6. Re-exercise RS-01 only when a real stale-secondary/current-primary conflict appears.
-7. Prefer consolidation/removal over further skill expansion until the current capability set has enough outcome evidence.
+1. Integrate the mutation guard into any controllable GitHub tool dispatcher / harness surface so a locked mode can actually block disallowed provider calls before execution.
+2. Shadow-score ordinary real work for the eight `NEEDS_EVIDENCE` skills and update classifications only from observed outcomes.
+3. Tune Skill Acquisition routing so it activates for explicit acquisition work or a demonstrated capability gap, not roadmap momentum.
+4. Exercise the machine-readable checkpoint during a real new-chat/resume cycle for LH-01/LH-02 evidence.
+5. Keep MERGE/REMOVE at zero until evidence shows duplicated ownership or context/process cost that exceeds value.

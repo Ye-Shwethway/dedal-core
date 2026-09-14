@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "known_mutators": [
+    "create_file",
+    "update_file",
+    "delete_file",
+    "create_blob",
+    "create_tree",
+    "create_commit",
+    "update_ref"
+  ],
+  "modes": {
+    "direct-single-file": {
+      "allowed_mutators": ["create_file", "update_file", "delete_file"],
+      "max_successful_mutations": 1
+    },
+    "atomic-multi-file": {
+      "allowed_mutators": ["create_blob", "create_tree", "create_commit", "update_ref"],
+      "ordered_phases": [
+        ["create_blob"],
+        ["create_tree"],
+        ["create_commit"],
+        ["update_ref"]
+      ],
+      "repeatable": ["create_blob"]
+    }
+  }
+}

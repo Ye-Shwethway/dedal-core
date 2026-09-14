@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "cases": [
+    {"id": "GMG-01", "mode": "atomic-multi-file", "tools": ["create_blob", "create_blob", "create_tree", "create_commit", "update_ref"], "accept": true, "complete": true},
+    {"id": "GMG-02", "mode": "atomic-multi-file", "tools": ["create_blob", "update_file"], "accept": false},
+    {"id": "GMG-03", "mode": "atomic-multi-file", "tools": ["create_tree"], "accept": false},
+    {"id": "GMG-04", "mode": "atomic-multi-file", "tools": ["create_blob", "create_tree", "create_blob"], "accept": false},
+    {"id": "GMG-05", "mode": "direct-single-file", "tools": ["update_file"], "accept": true, "complete": true},
+    {"id": "GMG-06", "mode": "direct-single-file", "tools": ["update_file", "delete_file"], "accept": false},
+    {"id": "GMG-07", "mode": "direct-single-file", "tools": ["create_blob"], "accept": false},
+    {"id": "GMG-08", "mode": "atomic-multi-file", "tools": ["create_blob", "create_tree", "create_commit", "update_ref", "update_ref"], "accept": false}
+  ]
+}

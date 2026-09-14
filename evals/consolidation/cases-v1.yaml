@@ -4,7 +4,7 @@ families:
   - id: CE-01
     name: repo-mutation-and-ci
     primary_metrics: [milestone_commits, unintended_writes, reconciliation_commits, scoped_ci_checks, correctness]
-    current_status: positive_observed_with_regression_risk
+    current_status: positive_observed_guard_contract_added_host_integration_pending
   - id: CE-02
     name: research-and-evidence
     primary_metrics: [relevant_sources_loaded, unsupported_claims, stale_source_conflicts, redundant_retrieval, correctness]

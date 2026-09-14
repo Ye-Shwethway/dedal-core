@@ -78,3 +78,4 @@ For instruction-heavy skills, default to synthesis: keep the useful idea, rewrit
 - `references/delegation-authority-audit-2026-09-14.md` — authority attenuation, bounded re-delegation, and provenance-return patterns.
 - `references/failure-recovery-compensation-audit-2026-09-14.md` — retry safety, compensation, truthful partial completion, and recovery escalation.
 - `references/cognitive-runtime-capability-composition-audit-2026-09-14.md` — always-on runtime, progressive disclosure, dynamic composition, and Agent-OS convergence audit.
+- `references/ecosystem-capability-gap-audit-2026-09-14.md` — broad ecosystem gap map and top-level/reference-pack/later/reject classification.

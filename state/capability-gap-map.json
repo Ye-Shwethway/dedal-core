@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-09-14",
+  "principle": "capability gaps before skill count",
+  "top_level_candidates": [
+    {
+      "id": "quality-engineering",
+      "priority": 1,
+      "reason": "Cross-project verification, exploratory testing, regression, E2E, visual testing, and acceptance evidence are not fully owned by Software Development or Release Engineering.",
+      "promotion_gate": "Deep-audit representative QA corpora, define ownership boundary, and show net benefit on real DEDAL projects before activation."
+    },
+    {
+      "id": "cloudflare-platform",
+      "priority": 2,
+      "reason": "Repeated multi-project use spans Workers, Pages, D1, R2, Access, Tunnel, networking, observability, Wrangler, and Agents SDK; the domain is broad enough to justify a specialist owner if evidence supports it.",
+      "promotion_gate": "Deep-audit the official Cloudflare skill corpus and adapt without importing runtime dependencies or stale product facts."
+    },
+    {
+      "id": "database-engineering",
+      "priority": 3,
+      "reason": "Schema design, indexing, migrations, query plans, transactions, concurrency, and SQL performance are distinct from Data Operations reconciliation mechanics.",
+      "promotion_gate": "Start with reference packs and promote only if recurring work shows routing value beyond Software Development plus Data Operations."
+    }
+  ],
+  "reference_pack_first": [
+    {
+      "id": "flutter-mobile",
+      "owners": ["software-development", "interface-design", "release-engineering"],
+      "sources": ["flutter/agent-plugins@7cdb7d3c33679ef14a7a7584cec1d5ecb8752586"],
+      "reason": "Official Flutter corpus is strong, but current need is framework-specific implementation guidance rather than a proven independent faculty."
+    },
+    {
+      "id": "android-native",
+      "owners": ["software-development", "release-engineering"],
+      "sources": ["android/skills@bac232fd02b0855df9275281a2a7a47643768719"],
+      "reason": "Use official Android guidance on demand, especially where evaluations show model weakness; do not create a duplicate mobile top-level owner yet."
+    },
+    {
+      "id": "postgres-database-practices",
+      "owners": ["software-development", "data-operations"],
+      "sources": ["neondatabase/postgres-skills@27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26", "supabase/agent-skills"],
+      "reason": "High-value specialist knowledge for schema/index/query/concurrency work; also evidence for the future Database Engineering candidate."
+    },
+    {
+      "id": "infra-iac",
+      "owners": ["release-engineering", "security-engineering", "software-development"],
+      "sources": ["hashicorp/agent-skills@c2d65dfe492f74d360d35b859b88932222470bd8"],
+      "reason": "Terraform/Packer knowledge is tool-specific and should remain reference-level until recurring infrastructure-as-code work justifies a broader owner."
+    },
+    {
+      "id": "observability-sre",
+      "owners": ["release-engineering", "software-development", "security-engineering"],
+      "sources": ["OpenTelemetry upstream-grounded community skills", "Sentry official AI skills"],
+      "reason": "Logs, traces, metrics, production diagnosis, and incident evidence are valuable, but current ownership overlap is high; gather outcomes first."
+    },
+    {
+      "id": "browser-computer-automation",
+      "owners": ["automations", "research", "quality-engineering-candidate"],
+      "reason": "Browser/computer control is primarily an execution surface. Site-specific action packs may be references, but should not become a generic top-level personality/faculty."
+    }
+  ],
+  "later_high_bar": [
+    {
+      "id": "healthcare-clinical-informatics",
+      "sources": ["awslabs/hcls-agent-skills", "NVIDIA/digital-health-skills"],
+      "reason": "The ecosystem is substantial, but medical workflows are high-stakes. Prefer bounded informatics/data/documentation workflows, current guideline verification, and explicit evidence over a generic clinical-reasoning skill."
+    }
+  ],
+  "reject_as_top_level": [
+    "large marketplace imports selected by popularity alone",
+    "site-specific browser action packs as standalone faculties",
+    "thin vendor wrappers when an existing owner plus reference pack is sufficient",
+    "generic doctor/medical skills with weak provenance or unclear evidence boundaries",
+    "skills that duplicate Cognitive Runtime invariants or existing routing ownership"
+  ],
+  "next_deep_audit": "quality-engineering"
+}

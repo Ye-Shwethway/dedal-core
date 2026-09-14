@@ -1,46 +1,45 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.19.0",
+  "version": "0.19.1",
   "accepted_state": [
-    "Initial eight-area capability expansion is complete and the proactive agent-refinement learning campaign remains paused after v0.18.8.",
-    "DEDAL is now explicitly modeled as one coherent persistent intelligence with specialized faculties rather than isolated skill personalities.",
-    "The minimal boot now includes a compact always-active Cognitive Runtime between the Stable Kernel and progressively disclosed specialist skills.",
-    "Capability composition uses RUNTIME, PRIMARY, SUPPORTING, EXECUTION, and DORMANT roles for the active subgoal.",
-    "RUNTIME remains active across all DEDAL tasks while full specialist skill bodies load only when selected as PRIMARY or genuinely necessary SUPPORTING capabilities.",
-    "Explicit skill requests and aliases are strong PRIMARY routing signals but do not disable the Cognitive Runtime or prohibit distinct necessary support.",
-    "Execution surfaces such as tools, plugins, MCP/apps, and native capabilities are selected and authorized separately from specialist skill selection.",
-    "Capability composition may be recomputed when the active subgoal materially changes; prior activation is not permanent conversation state.",
-    "Cross-domain rules from agent/context/security/authority/delegation/recovery work are distilled into compact Runtime invariants rather than requiring the full Agent Engineering or Security Engineering skill on every task.",
-    "Progressive disclosure remains the context discipline: routing metadata first, specialist entrypoint on match, references/resources only when required.",
-    "No external agent framework or orchestration runtime was added as a Core dependency.",
-    "Existing authority, delegation, failure-recovery, context, trajectory, self-improvement, and GitHub mutation contracts remain in force."
+    "DEDAL remains one coherent persistent intelligence with an always-active Cognitive Runtime and progressively disclosed specialist faculties.",
+    "The ecosystem capability-gap audit is complete enough to establish a ranked next expansion campaign without adding a new active skill yet.",
+    "Quality Engineering is the first top-level promotion candidate because independent product-quality strategy, exploratory testing, E2E/regression, visual/accessibility verification, and readiness evidence are not fully owned by Software Development or Release Engineering.",
+    "Cloudflare Platform is the second top-level promotion candidate because repeated Creator workflows span Workers, Pages, D1, R2, Access, Tunnel, networking, Wrangler, observability, and agent infrastructure across multiple projects.",
+    "Database Engineering is a third candidate, but schema/index/query/migration/concurrency knowledge should begin as reference packs and earn promotion through recurring outcome evidence.",
+    "Flutter, Android, Postgres/Supabase/Neon, Terraform/IaC, observability/SRE, and browser/computer automation are reference-pack-first areas rather than immediate new top-level faculties.",
+    "Browser and computer control are execution surfaces; QA, Research, Automations, or another domain owner should own the task intent.",
+    "Healthcare and clinical-informatics acquisition remains a later high-bar area: prefer bounded interoperability, evidence retrieval, terminology, documentation, and de-identified data workflows over a generic doctor or autonomous clinical-reasoning skill.",
+    "Bulk marketplace imports, popularity-driven promotion, weakly grounded generic medical/persona skills, and thin vendor wrappers that duplicate existing ownership are rejected as top-level expansion strategies.",
+    "Existing Cognitive Runtime, authority, delegation, recovery, context, trajectory, self-improvement, and GitHub mutation contracts remain in force."
   ],
   "evidence": [
-    {"id": "cognitive-runtime-capability-composition-audit-2026-09-14", "kind": "external_pattern_audit", "status": "adapted_progressive_disclosure_always_on_runtime_dynamic_composition_and_agent_os_layering"},
-    {"id": "capability-composition-contract-v1", "kind": "contract_validation", "status": "runtime_primary_supporting_execution_dormant_explicit_skill_and_load_all_cases_ci_enforced"},
-    {"id": "agentskills-progressive-disclosure", "kind": "external_architecture_evidence", "status": "pinned_agentskills_agentskills_69ef37e9424c0a7ea9dd2293b559e43ec8176379"},
-    {"id": "deepagents-runtime-layering", "kind": "external_architecture_evidence", "status": "pinned_langchain_ai_deepagents_c08cae693e0036fcd45d979a7dfa3a7e306a0515"},
-    {"id": "openai-agents-runtime-composition", "kind": "external_architecture_evidence", "status": "reviewed_shared_context_dynamic_tool_handoff_and_deferred_tool_patterns_2026_09_14"},
-    {"id": "failure-recovery-contract-v1", "kind": "contract_validation", "status": "retry_compensation_partial_completion_irreversible_residual_and_compensation_failure_cases_ci_enforced"},
-    {"id": "delegation-authority-contract-v1", "kind": "contract_validation", "status": "tool_mode_resource_intent_redelegation_and_provenance_subset_cases_ci_enforced"},
-    {"id": "tool-authority-contract-v1", "kind": "contract_validation", "status": "read_write_authority_intent_scope_confirmation_and_external_mcp_cases_ci_enforced"}
+    {"id": "ecosystem-capability-gap-audit-2026-09-14", "kind": "external_pattern_audit", "status": "classified_top_level_reference_pack_later_and_reject_candidates"},
+    {"id": "capability-gap-map-v1", "kind": "architecture_state", "status": "quality_engineering_priority_1_cloudflare_priority_2_database_priority_3"},
+    {"id": "cloudflare-skills", "kind": "first_party_skill_corpus", "status": "pinned_b052c32bab7dd493513260228a36c88294f343f1"},
+    {"id": "flutter-agent-plugins", "kind": "first_party_skill_corpus", "status": "pinned_7cdb7d3c33679ef14a7a7584cec1d5ecb8752586"},
+    {"id": "android-skills", "kind": "first_party_skill_corpus", "status": "pinned_bac232fd02b0855df9275281a2a7a47643768719"},
+    {"id": "hashicorp-agent-skills", "kind": "first_party_skill_corpus", "status": "pinned_c2d65dfe492f74d360d35b859b88932222470bd8"},
+    {"id": "neon-postgres-skills", "kind": "specialist_skill_corpus", "status": "pinned_27fe45e0f71ea89a6eaf9ea4d2e4068957c81c26"},
+    {"id": "cognitive-runtime-capability-composition-audit-2026-09-14", "kind": "external_pattern_audit", "status": "active_foundation_unchanged"}
   ],
   "unresolved_risks": [
-    "The public Core cannot mechanically inject or enforce composition on every native ChatGPT/provider surface; instruction-level application must not be reported as universal host enforcement.",
-    "The always-loaded Cognitive Runtime creates permanent context cost and must remain compact; future additions require a higher bar than specialist-skill additions.",
-    "Capability-composition rules are contract-level architecture until representative ordinary tasks show better continuity/routing without excess context or unnecessary supporting skills.",
-    "Dynamic recomposition can become ceremony or oscillate if subgoal boundaries are defined too aggressively; the smallest-sufficient principle remains the brake.",
-    "Eight skills remain NEEDS_EVIDENCE and should not be promoted to stronger consolidation decisions without representative outcomes."
+    "The public skill ecosystem is large and uneven; first-party provenance improves confidence but does not prove DEDAL-specific outcome gains.",
+    "Quality Engineering currently lacks one canonical first-party cross-framework skill corpus, so methodology synthesis must separate durable QA principles from tool-specific community conventions.",
+    "Cloudflare product facts and APIs can drift quickly; any specialist skill must bias toward live official documentation rather than freezing a large product manual into Core.",
+    "Database Engineering may overlap Software Development and Data Operations unless its ownership boundary is kept to database semantics and operational behavior.",
+    "Healthcare skill ecosystems contain useful domain workflows but carry higher factual and safety stakes; generic clinical automation must not be promoted from popularity or vendor claims alone.",
+    "Capability candidates remain discovery-level until representative real-task baselines and regression evidence justify promotion."
   ],
   "next_executable_step": {
-    "id": "COGNITIVE-RUNTIME-OUTCOME-01",
-    "action": "Apply the layered Cognitive Runtime naturally during ordinary work. Treat named skills as primary faculties rather than exclusive modes, add supporting skills only for distinct necessary layers, keep unrelated skill bodies dormant, and recompose only when the active subgoal materially changes. Record genuine routing wins, context waste, missed supporting capabilities, instruction collisions, or regressions as outcome evidence without pausing other capability work to manufacture tests."
+    "id": "QUALITY-ENGINEERING-DEEP-AUDIT-01",
+    "action": "Deep-audit quality-engineering methodology and representative QA skill/tool corpora. Define the exact ownership boundary against Software Development, Interface Design, Release Engineering, and Automations; extract durable patterns; design baseline/evaluation cases from real DEDAL project workflows; then decide whether Quality Engineering merits top-level activation."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "b190d5669fc37e3f66e2291884e0d82758db01af",
-    "relation": "verified v0.18.8 baseline before the 0.19.0 persistent-cognitive-runtime transaction"
+    "sha": "ac04e56de408073900148d1c8495ce5d5c98adb2",
+    "relation": "verified v0.19.0 baseline before the 0.19.1 capability-gap audit transaction"
   }
 }

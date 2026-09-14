@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "required_fields": ["id", "failure", "hypothesis", "baseline", "candidate", "eval_set", "decision"],
+    "decisions": ["retain", "revert", "inconclusive"],
+    "protected_eval": true,
+    "require_comparable_baseline": true,
+    "require_regression_check": true,
+    "forbid_task_specific_benchmaxxing": true
+  },
+  "cases": [
+    {
+      "id": "SI-01",
+      "accept": true,
+      "experiment": {
+        "id": "exp-1",
+        "failure": "Observed unnecessary duplicate context reads on representative task",
+        "hypothesis": "Reference-first retrieval will reduce redundant reads without correctness loss",
+        "baseline": {"revision": "base", "tasks": ["t1", "t2"], "results": {"t1": "pass", "t2": "pass_with_rework"}},
+        "candidate": {"revision": "candidate", "change_scope": ["context-selection-policy"], "results": {"t1": "pass", "t2": "pass"}},
+        "eval_set": {"held_in": ["t2"], "held_out": ["t1"], "modified_by_candidate": false},
+        "decision": "retain",
+        "regressions": []
+      }
+    },
+    {
+      "id": "SI-02",
+      "accept": false,
+      "experiment": {
+        "id": "exp-2",
+        "failure": "A routing failure occurred",
+        "hypothesis": "Change routing",
+        "baseline": null,
+        "candidate": {"revision": "candidate", "change_scope": ["routing"]},
+        "eval_set": {"held_in": ["t1"], "held_out": [], "modified_by_candidate": false},
+        "decision": "retain",
+        "regressions": []
+      }
+    },
+    {
+      "id": "SI-03",
+      "accept": false,
+      "experiment": {
+        "id": "exp-3",
+        "failure": "Eval failure",
+        "hypothesis": "Patch exact eval task",
+        "baseline": {"revision": "base", "tasks": ["t1"]},
+        "candidate": {"revision": "candidate", "change_scope": ["task:t1-special-case"]},
+        "eval_set": {"held_in": ["t1"], "held_out": ["t2"], "modified_by_candidate": true},
+        "decision": "retain",
+        "regressions": []
+      }
+    },
+    {
+      "id": "SI-04",
+      "accept": false,
+      "experiment": {
+        "id": "exp-4",
+        "failure": "Candidate fixes held-in task",
+        "hypothesis": "Broader change helps",
+        "baseline": {"revision": "base", "tasks": ["t1", "t2"]},
+        "candidate": {"revision": "candidate", "change_scope": ["agent-loop"]},
+        "eval_set": {"held_in": ["t1"], "held_out": ["t2"], "modified_by_candidate": false},
+        "decision": "retain",
+        "regressions": ["t2"]
+      }
+    },
+    {
+      "id": "SI-05",
+      "accept": true,
+      "experiment": {
+        "id": "exp-5",
+        "failure": "Candidate change did not improve comparable outcomes",
+        "hypothesis": "Retry tweak might help",
+        "baseline": {"revision": "base", "tasks": ["t1", "t2"]},
+        "candidate": {"revision": "candidate", "change_scope": ["retry-policy"]},
+        "eval_set": {"held_in": ["t1"], "held_out": ["t2"], "modified_by_candidate": false},
+        "decision": "revert",
+        "regressions": []
+      }
+    }
+  ]
+}

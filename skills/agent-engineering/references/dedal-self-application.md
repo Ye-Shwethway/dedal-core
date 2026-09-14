@@ -3,15 +3,40 @@
 Use this reference when DEDAL is improving its own operating workflow rather than designing an external agent system.
 
 ## Work-unit envelope
-Before substantial multi-step execution, establish the smallest useful envelope: goal, authoritative sources, mutation authority, success evidence, meaningful risks, and stop/escalation conditions. Do not turn this into ceremony for trivial work.
+
+Before substantial multi-step execution, establish the smallest useful envelope:
+
+- goal / requested outcome;
+- authoritative source(s) of truth;
+- current authority for mutations or irreversible actions;
+- success evidence;
+- meaningful risks;
+- stop / escalation conditions.
+
+Do not turn this into ceremony for trivial work.
 
 ## Context discipline
-Bootstrap constitutional state once when needed; load only matching skill entrypoints and references on demand; prefer live project/repository/service state over remembered summaries; keep transient tool output out of durable context unless it changes a decision or proves completion.
+
+1. Bootstrap constitutional state once for a coherent task/session when needed.
+2. Load only the matching skill entrypoint(s), then references on demand.
+3. Do not repeatedly reread stable documents unless state may have changed or a conflict appears.
+4. Prefer live project/repository/service state over remembered summaries.
+5. Keep transient tool output out of durable context unless it changes a decision or proves completion.
 
 ## Verified-state promotion
-Treat model/executor claims as candidate state, not accepted state. Promote only when the evidence level matches the claim: read-back for mutations, tests for behavior, artifact attribution for builds, deployment/runtime checks for deployed behavior, or another authoritative verifier. Prefer compact verified facts and references over raw trajectory replay. Separate verifier roles should be read-only where practical; verifier-created mutation contaminates independent evidence unless explicitly authorized and separately accounted for.
+
+Treat model/executor claims as **candidate state**, not accepted state.
+
+Promote a claim into durable accepted state only when the evidence level matches the claim: read-back for mutations, tests for behavior, artifact attribution for builds, deployment/runtime checks for deployed behavior, or another independent authoritative verifier when appropriate.
+
+For long-horizon work, carry forward compact verified facts, accepted decisions, unresolved gaps, and references. Keep raw trajectories/logs available for diagnosis rather than replaying them into every future context.
+
+When a separate verifier/auditor role is useful, prefer read-only authority where the execution surface supports it. A verifier that changes the state it is judging creates contaminated evidence; reject or downgrade that audit unless mutation was explicitly part of the verifier contract and independently accounted for.
+
+Do not require a separate verifier agent when deterministic tests, service read-back, CI, or another cheaper objective check provides equivalent evidence.
 
 ## Controlled self-improvement
+
 Treat every material DEDAL self-change as an experiment, not an assumed upgrade.
 
 1. Start from an observed failure, measurable friction, explicit Creator request, or externally evidenced capability gap.
@@ -26,19 +51,81 @@ Treat every material DEDAL self-change as an experiment, not an assumed upgrade.
 10. Automation may propose or test bounded changes, but Creator authority, platform safety, and mutation permissions remain unchanged.
 
 The control loop is:
+
 `observe -> classify owner -> hypothesize -> isolate candidate -> run comparable eval -> inspect regressions -> retain/revert -> record evidence`
 
 ## Tool-call discipline
-Batch independent reads/searches when possible, serialize writes to the same owner, prefer the narrowest sufficient tool, avoid large outputs, and treat tool errors as observations rather than reasons for blind retry.
+
+- Batch independent reads/searches when possible.
+- Serialize writes that touch the same state owner.
+- Prefer the narrowest tool that returns enough evidence.
+- Avoid large outputs when a scoped query, range, diff, or status is enough.
+- Treat tool errors as observations: refine the call or change strategy rather than blindly repeating it.
 
 ## Git transaction pattern
-Before repository mutation, lock direct-single-file or atomic-multi-file mode. Atomic mode refreshes HEAD, prepares the whole write set, creates one tree/commit without contents writes, fast-forwards only from the observed HEAD, reconciles drift without force, then verifies final state and relevant CI. No-op commits are regressions, not progress.
+
+Before the first repository mutation, lock one mode for the work unit:
+
+- **direct single-file write** — one isolated file change where a contents write is the natural transaction; or
+- **atomic multi-file transaction** — one coherent milestone spanning multiple files.
+
+For atomic multi-file mode:
+
+1. refresh branch HEAD;
+2. prepare the complete coherent write set;
+3. create the tree and commit without direct contents writes for that work unit;
+4. fast-forward the branch ref from the observed HEAD;
+5. if the ref moved because of an observed external change, refetch and rebuild/reconcile from the new authoritative HEAD instead of forcing;
+6. verify final branch state and relevant CI.
+
+For direct single-file mode, compare the intended content with current content before updating. If they are identical, skip the write entirely; a no-op commit is a harness regression, not progress.
+
+Do not switch mutation modes mid-unit merely because a different tool is convenient. Complete, abandon, or explicitly reconcile the current transaction first.
+
+## Bounded status polling
+
+Polling must have a reason and a bound.
+
+- First check whether the downstream run/status is registered.
+- If queued/running, poll only the specific run/status needed for the user's completion claim.
+- Prefer job/step status over refetching broad workflow lists once the run ID is known.
+- Stop after a reasonable bounded sequence and report pending state truthfully if completion cannot yet be observed in the current turn.
 
 ## Completion evidence ladder
-Use only as much evidence as needed: mutation receipt -> read-back -> test/CI -> build attribution -> deployment/runtime verification. A model saying complete never substitutes for an available objective check.
+
+Use only as much evidence as the task requires:
+
+1. mutation receipt;
+2. read-back / final-state verification;
+3. test or CI conclusion;
+4. build/artifact attribution;
+5. deployment/runtime verification.
+
+Do not climb higher when the task does not require it, and do not claim a higher level from lower-level evidence.
+
+A model or manager saying a task is complete is never a substitute for an available objective completion check. When objective verification exists, completion becomes accepted state only after that check passes.
+
+## Progress communication
+
+Update the Creator at meaningful milestones or when a finding changes direction. Do not narrate every tool call. Surface useful partial findings early.
 
 ## Long-horizon continuity
-Leave accepted state, completed evidence, unresolved risks/failures, and next executable step. Do not persist hidden chain-of-thought or private data for continuity.
 
-## Evidence maturity
-Separate design rationale, contract validation, and outcome validation. Contract validation is not proof that representative real-task outcomes improved.
+When work spans sessions or risks context loss, leave a compact truthful handoff in the owning project/repository:
+
+- accepted state;
+- evidence completed;
+- unresolved risks/failures;
+- next executable step.
+
+Do not persist hidden chain-of-thought or private data merely for continuity.
+
+## Self-improvement evidence
+
+Separate three claims:
+
+- **design rationale** — why a harness change should help;
+- **contract validation** — whether the new rules are internally consistent and regression-safe;
+- **outcome validation** — whether representative real tasks actually improved versus baseline.
+
+Contract validation is not proof of outcome improvement. Capture real-task evidence before making stronger claims.

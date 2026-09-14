@@ -54,6 +54,22 @@ The control loop is:
 
 `observe -> classify owner -> hypothesize -> isolate candidate -> run comparable eval -> inspect regressions -> retain/revert -> record evidence`
 
+## Delegation and handoff authority
+
+Use multi-agent topology only when specialization, independence, parallelism, or context isolation produces a concrete advantage.
+
+When delegating:
+- define the child's subtask and success evidence explicitly;
+- derive a child capability envelope as a strict or equal subset of the parent's current task authority;
+- do not copy ambient credentials or unrelated tools merely for convenience;
+- distinguish handoff of workflow control from transfer of authority;
+- require explicit permission for child re-delegation;
+- if additional authority is needed, return a blocked/escalation request to the parent or Creator rather than self-expanding;
+- require a compact return containing conclusion, evidence/provenance, uncertainty, and unresolved or blocked actions;
+- verify consequential child claims before durable state promotion.
+
+Prefer one capable agent over unnecessary delegation when the child would add no independent evidence, context isolation, or meaningful parallelism.
+
 ## Tool-call discipline
 
 - Batch independent reads/searches when possible.

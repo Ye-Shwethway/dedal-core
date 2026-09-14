@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "require_subset_tools": true,
+    "require_subset_modes": true,
+    "require_subset_resources": true,
+    "require_intent_subset": true,
+    "require_parent_authority": true,
+    "require_provenance_on_return": true,
+    "redelegation_requires_explicit_grant": true
+  },
+  "cases": [
+    {
+      "id": "DA-01-valid-read-delegation",
+      "parent": {"tools": ["github"], "modes": ["read", "write"], "resources": ["repo:A"], "intents": ["inspect", "fix"], "can_redelegate": false},
+      "child": {"tools": ["github"], "modes": ["read"], "resources": ["repo:A"], "intents": ["inspect"], "can_redelegate": false},
+      "return": {"provenance": true, "evidence_refs": ["readback:1"]},
+      "accept": true
+    },
+    {
+      "id": "DA-02-tool-escalation",
+      "parent": {"tools": ["github"], "modes": ["read"], "resources": ["repo:A"], "intents": ["inspect"], "can_redelegate": false},
+      "child": {"tools": ["github", "gmail"], "modes": ["read"], "resources": ["repo:A"], "intents": ["inspect"], "can_redelegate": false},
+      "return": {"provenance": true, "evidence_refs": []},
+      "accept": false
+    },
+    {
+      "id": "DA-03-mode-escalation",
+      "parent": {"tools": ["github"], "modes": ["read"], "resources": ["repo:A"], "intents": ["inspect"], "can_redelegate": false},
+      "child": {"tools": ["github"], "modes": ["write"], "resources": ["repo:A"], "intents": ["inspect"], "can_redelegate": false},
+      "return": {"provenance": true, "evidence_refs": []},
+      "accept": false
+    },
+    {
+      "id": "DA-04-resource-escalation",
+      "parent": {"tools": ["github"], "modes": ["write"], "resources": ["repo:A"], "intents": ["fix"], "can_redelegate": false},
+      "child": {"tools": ["github"], "modes": ["write"], "resources": ["repo:B"], "intents": ["fix"], "can_redelegate": false},
+      "return": {"provenance": true, "evidence_refs": []},
+      "accept": false
+    },
+    {
+      "id": "DA-05-intent-escalation",
+      "parent": {"tools": ["github"], "modes": ["write"], "resources": ["repo:A"], "intents": ["fix"], "can_redelegate": false},
+      "child": {"tools": ["github"], "modes": ["write"], "resources": ["repo:A"], "intents": ["publish"], "can_redelegate": false},
+      "return": {"provenance": true, "evidence_refs": []},
+      "accept": false
+    },
+    {
+      "id": "DA-06-unauthorized-redelegation",
+      "parent": {"tools": ["github"], "modes": ["read"], "resources": ["repo:A"], "intents": ["inspect"], "can_redelegate": false},
+      "child": {"tools": ["github"], "modes": ["read"], "resources": ["repo:A"], "intents": ["inspect"], "can_redelegate": true},
+      "return": {"provenance": true, "evidence_refs": ["readback:2"]},
+      "accept": false
+    },
+    {
+      "id": "DA-07-missing-provenance",
+      "parent": {"tools": ["github"], "modes": ["read"], "resources": ["repo:A"], "intents": ["inspect"], "can_redelegate": false},
+      "child": {"tools": ["github"], "modes": ["read"], "resources": ["repo:A"], "intents": ["inspect"], "can_redelegate": false},
+      "return": {"provenance": false, "evidence_refs": []},
+      "accept": false
+    },
+    {
+      "id": "DA-08-handoff-no-authority-manufacture",
+      "parent": {"tools": [], "modes": [], "resources": [], "intents": ["research"], "can_redelegate": true},
+      "child": {"tools": ["github"], "modes": ["read"], "resources": ["repo:A"], "intents": ["research"], "can_redelegate": false},
+      "return": {"provenance": true, "evidence_refs": []},
+      "accept": false
+    }
+  ]
+}

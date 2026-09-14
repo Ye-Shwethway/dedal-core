@@ -44,6 +44,26 @@ Rules:
 
 Authorization should be enforced at the tool/host/service boundary when possible. Prompt instructions are guidance, not a reliable access-control mechanism.
 
+## Delegation attenuation
+
+Delegation creates a new principal boundary. Do not copy the parent's ambient authority into a child merely because the child is working on the same goal.
+
+For each delegation/handoff, derive an explicit child envelope from the parent's **currently authorized** envelope:
+
+`child authority ⊆ parent authority`
+
+Apply this across tools, action modes, resource scopes, task intent, credential reach, confirmation state, and re-delegation permission.
+
+Rules:
+- delegation cannot manufacture authority the parent does not hold;
+- a workflow handoff may transfer control, but authority must still be explicit and bounded;
+- default to attenuation: give the child only what its subtask needs;
+- if the child reaches an authority boundary, it must return/escalate the blocked action rather than self-authorize;
+- re-delegation requires explicit permission and remains recursively bounded by the original grant;
+- prefer brokered or scoped capabilities over copying long-lived credentials into child workers;
+- delegated results should return provenance, evidence references, unresolved uncertainty, and blocked/escalated actions;
+- child claims remain candidate state until the owning workflow verifies them at the evidence level appropriate to the claim.
+
 ## Control selection
 
 Prefer controls that reduce blast radius even when classification fails:

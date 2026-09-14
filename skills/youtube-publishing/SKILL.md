@@ -85,3 +85,6 @@ Promote this skill to the active registry only after representative Creator work
 - `references/direct-api-and-auth.md`
 - `channel-profiles.example.json`
 - `scripts/youtube_channel_ops.py`
+- `gateway/README.md`
+- `references/cloudflare-gateway-architecture.md`
+- `CURRENT_CHECKPOINT.md`

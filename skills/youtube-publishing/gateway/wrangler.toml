@@ -1,0 +1,16 @@
+name = "dedal-youtube-gateway"
+main = "src/index.js"
+compatibility_date = "2026-09-14"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dedal-youtube-gateway-prod"
+database_id = "d8f23966-eda9-472f-a61e-441771e8b6ab"
+migrations_dir = "migrations"
+
+# Worker Secrets: GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET,
+# TOKEN_ENCRYPTION_KEY_B64, ADMIN_API_TOKEN, RUNNER_API_TOKEN

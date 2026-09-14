@@ -29,6 +29,7 @@ Do not use every available effect merely because the execution surface supports 
 - Slow motion from low-frame-rate footage can judder or require motion interpolation; interpolation can create warping/ghosting and must be visually checked.
 - Freeze frames, micro-pauses, punch-ins, flashes, camera shake, blur, and impact emphasis should be sparse and event-driven.
 - For fight/action edits, reserve strongest effects for a small number of high-value impacts or turns. Repetition rapidly makes the edit feel synthetic.
+- Judge stylization against a clean baseline. If the effect cannot be tied to a clear gain in rhythm, orientation, emphasis, comprehension, or delivery, it is decoration rather than improvement.
 
 ## Captions and subtitles
 
@@ -38,6 +39,8 @@ Do not use every available effect merely because the execution surface supports 
 - Verify font glyph coverage for the actual language. Complex scripts require a capable shaping/rendering path.
 - Keep line length, reading speed, contrast, outline/background, and lower-safe-area placement readable on the target device.
 - Animated/word-highlight captions are a style choice; do not default to social-media caption animation for cinematic or dramatic material.
+- Separate subtitle **render quality** from subtitle **text truth**. Readable placement, contrast, and typography do not validate wording or timing.
+- If subtitle text comes from web transcripts, recaps, inferred dialogue, OCR, or a different release, treat it as provisional until reconciled with local audiovisual evidence or another trustworthy source tied to the actual cut.
 
 ## Audio finishing
 
@@ -50,6 +53,7 @@ Treat audio as a first-class editorial layer, not an afterthought.
 - Use music ducking/sidechain behavior when dialogue or critical effects need priority.
 - Crossfade adjacent audio when a hard cut creates clicks, ambience discontinuity, or an unnatural scene edge.
 - Preserve channel layout deliberately. Do not silently collapse 5.1 to stereo unless delivery requires it.
+- Compare candidate loudness/true-peak behavior with the baseline. A louder result is not automatically a better result; new clipping or reduced headroom is a regression.
 
 ## Color and image finishing
 
@@ -99,6 +103,7 @@ From mature automation/editing tools, preserve these patterns:
 - **Declarative edit state:** for multi-step/repeatable work, represent clips, transitions, captions, overlays, music, loudness, and export settings explicitly so edits can be reproduced and revised.
 - **Typed operations over arbitrary filter strings:** where a reusable automation layer exists, expose bounded parameters with validation rather than unconstrained command injection.
 - **Output verification:** probe the written file, inspect representative frames, and verify duration/streams/sync/loudness/delivery instead of equating process exit code with editorial success.
+- **Baseline A/B gate:** compare a candidate with the nearest clean/proven version before handoff. Improvements should be named and regressions should be surfaced rather than hidden by overall enthusiasm.
 
 ## Tasteful default versus stylized mode
 
@@ -123,6 +128,41 @@ Use only when the requested aesthetic justifies it:
 
 Never let stylized mode obscure action readability, dialogue, subject identity, or narrative continuity.
 
+## Self A/B review before handoff
+
+When a prior clean/proven render exists, treat it as the baseline and compare the new candidate across both editorial and technical axes.
+
+### Editorial axes
+
+- **Orientation:** does the viewer understand where/when the clip begins?
+- **Action readability:** are choreography, gestures, dialogue, and critical visual information still easy to follow?
+- **Rhythm/emphasis:** did transitions, retiming, effects, or audio work improve pacing or only add novelty?
+- **Entry/exit:** do the opening and ending feel intentional and resolved?
+- **Subtitle quality:** are captions readable, non-obstructive, correctly timed, and textually trustworthy?
+- **Attention economy:** do effects support the subject, or steal attention from it?
+
+### Technical axes
+
+- duration and frame-rate parity unless a deliberate change was requested;
+- dimensions/aspect ratio and color metadata;
+- audio stream count/channel layout;
+- integrated loudness and true peak;
+- subtitle presence/mode and safe-area rendering;
+- compression/bitrate/file-size changes with visible quality checks;
+- A/V sync and representative playback;
+- timestamp health: unexpected non-monotonic DTS/PTS warnings, discontinuities, or muxing anomalies are regressions even when playback appears successful.
+
+### Decision labels
+
+Use one of these conclusions internally before handoff:
+
+- **PROMOTE:** candidate is a net improvement with no material regression.
+- **PROMOTE WITH CAVEAT:** candidate improves the viewing experience but has a known non-blocking issue that must be disclosed.
+- **HOLD BASELINE:** candidate adds style or features but introduces a meaningful editorial/technical regression; keep the clean version canonical.
+- **REJECT:** candidate fails intent, readability, integrity, or delivery requirements.
+
+Do not call an effects-heavy version a production master merely because it is more elaborate than the baseline.
+
 ## Acceptance checks
 
 Before calling an effects-heavy render finished, verify:
@@ -130,13 +170,15 @@ Before calling an effects-heavy render finished, verify:
 1. The edit remains understandable without the effects.
 2. No transition/effect starts or ends on an accidental frame.
 3. Speed changes do not create unacceptable interpolation artifacts or audio pitch/timing errors.
-4. Captions remain readable and inside safe areas through reframes/transitions.
+4. Captions remain readable and inside safe areas through reframes/transitions, and their wording/timing has an identified confidence level/source.
 5. Audio has no clipping, abrupt ambience jumps, or dialogue masking introduced by the edit.
 6. Color transforms did not create illegal/clipped or obviously damaged imagery.
 7. Composites/graphics do not cover critical content.
 8. The first and last beats feel intentional rather than abruptly truncated.
 9. Final output metadata, duration, streams and delivery format match intent.
 10. Representative playback/frame/audio evidence has been inspected after render.
+11. Mux/timestamp diagnostics show no unexplained DTS/PTS regressions.
+12. A baseline A/B review has identified both gains and losses before handoff.
 
 ## Source influences
 

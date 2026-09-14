@@ -54,11 +54,11 @@ def resolve(job,state_dir):
         bridge_repo=os.getenv("DEDAL_YOUTUBE_DRIVE_BRIDGE_REPO")
         if not bridge_repo:
             raise RunnerError("DEDAL_YOUTUBE_DRIVE_BRIDGE_REPO is not set")
-        target=Path(bridge_repo).resolve()/"downloads"/"dedal-youtube"/job["id"]
+        target=Path(bridge_repo).resolve()/"downloads"/"dedal-youtube"/"drive"/file_id
         target.mkdir(parents=True,exist_ok=True)
         files=[p for p in target.iterdir() if p.is_file()]
         if not files:
-            container_target=f"/app/downloads/dedal-youtube/{job['id']}/"
+            container_target=f"/app/downloads/dedal-youtube/drive/{file_id}/"
             result=subprocess.run(
                 ["docker","exec","mirror-bot","rclone","backend","copyid",
                  "gdrive:",file_id,container_target],

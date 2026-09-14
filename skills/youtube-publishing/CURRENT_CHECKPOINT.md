@@ -26,13 +26,27 @@
   read or exposed during verification.
 - OAuth mutation audit records `channel_profile.bind` with outcome `success`.
 
+## Newly verified private-upload evidence
+
+- The isolated VPS runner authenticated with its scoped credential without receiving
+  a Google or YouTube refresh token.
+- A private Google Drive object was resolved by exact Drive file ID through the
+  existing authenticated media-gateway route. Filename, byte length, MIME type, and
+  SHA-256 were verified on the VPS before job creation.
+- D1 migration 2 adds `google_drive` as a bounded source type. The runner attests
+  SHA-256 at claim time and the gateway locks it before creating a YouTube session.
+- One real private video completed the official resumable upload path directly from
+  the VPS to YouTube; the Worker did not proxy the media body.
+- Gateway read-back verified the returned video identity, exact target channel,
+  requested title, and `private` privacy. Evidence IDs and private video metadata
+  remain outside this public repository.
+
 ## Not yet verified
 
-Deliberate channel-ID mismatch rejection,
-private resumable upload, interruption resume, and remote YouTube read-back. The
-skill remains candidate.
+A deliberate channel-ID mismatch rejection, interruption/resume behavior, and a
+relevant thumbnail or playlist secondary operation. The skill remains candidate.
 
 ## Next step
 
-Exercise deliberate mismatch rejection and one private resumable upload through the VPS runner. Promotion still
-requires a relevant thumbnail/playlist secondary operation.
+Exercise deliberate mismatch rejection and interruption recovery without creating a
+duplicate. Then validate one relevant secondary operation before promotion.

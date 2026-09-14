@@ -54,6 +54,10 @@ def validate_checkpoint() -> None:
         raise AssertionError("checkpoint version must be semantic X.Y.Z")
 
 
+def live_skills() -> list[str]:
+    return sorted(p.parent.name for p in (ROOT / "skills").glob("*/SKILL.md"))
+
+
 def validate_skill_consolidation() -> None:
     data = json.loads((ROOT / "state" / "skill-consolidation.json").read_text(encoding="utf-8"))
     allowed = {"KEEP", "TUNE", "MERGE", "REMOVE", "NEEDS_EVIDENCE"}
@@ -61,7 +65,7 @@ def validate_skill_consolidation() -> None:
     names = [entry.get("skill") for entry in entries]
     if len(names) != len(set(names)):
         raise AssertionError("skill consolidation contains duplicate skill entries")
-    live = sorted(p.parent.name for p in (ROOT / "skills").glob("*/SKILL.md"))
+    live = live_skills()
     if sorted(names) != live:
         raise AssertionError(f"skill consolidation coverage mismatch: classified={sorted(names)} live={live}")
     for entry in entries:
@@ -71,10 +75,39 @@ def validate_skill_consolidation() -> None:
             raise AssertionError(f"incomplete consolidation entry: {entry.get('skill')}")
 
 
+def validate_routing_boundaries() -> None:
+    data = json.loads((ROOT / "state" / "routing-boundaries.json").read_text(encoding="utf-8"))
+    live = set(live_skills())
+    clusters = data.get("clusters", [])
+    ids = [cluster.get("id") for cluster in clusters]
+    if not clusters or len(ids) != len(set(ids)):
+        raise AssertionError("routing boundaries require non-empty unique cluster ids")
+    referenced: set[str] = set()
+    for cluster in clusters:
+        owners = cluster.get("primary_owner_by_intent", {})
+        if not owners or not cluster.get("rule"):
+            raise AssertionError(f"incomplete routing cluster: {cluster.get('id')}")
+        for owner in owners.values():
+            if owner in live:
+                referenced.add(owner)
+            elif owner != "domain-owner-or-research":
+                raise AssertionError(f"routing cluster {cluster.get('id')} references unknown owner: {owner}")
+    required_overlap_owners = {
+        "github", "software-development", "release-engineering", "agent-engineering",
+        "ika", "knowledge-memory", "project-bootstrap", "data-operations",
+        "medicine-store-assistant", "patient-report-assistant", "interface-design",
+        "visual-direction", "research", "skill-acquisition", "writing-editorial"
+    }
+    missing = sorted(required_overlap_owners - referenced)
+    if missing:
+        raise AssertionError(f"routing boundary coverage missing overlap owners: {missing}")
+
+
 def main() -> int:
     validate_guard_cases()
     validate_checkpoint()
     validate_skill_consolidation()
+    validate_routing_boundaries()
     print("runtime contracts: valid")
     return 0
 

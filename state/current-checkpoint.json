@@ -1,33 +1,35 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "accepted_state": [
     "Initial eight-area capability expansion is complete.",
     "Default operating phase is hardening, consolidation, and outcome validation rather than skill expansion.",
-    "GitHub mutation mode is locked per work unit as direct-single-file or atomic-multi-file.",
-    "Executable mutation guard contract exists for host integration and CI negative testing.",
-    "Every live skill entrypoint has a machine-readable consolidation classification.",
-    "Executable continuity checkpoint state is CI-validated."
+    "GitHub mutation guard contracts exist and remain CI-validated; native provider interception is deferred unless a controllable dispatcher surface becomes available.",
+    "Every live skill entrypoint has a consolidation classification.",
+    "Routing overlap clusters now have machine-readable primary ownership rules.",
+    "Skill Acquisition is phase-gated and must not trigger a new expansion wave without explicit request or demonstrated gap.",
+    "Executable continuity checkpoint state remains CI-validated."
   ],
   "evidence": [
     {"id": "CE-01", "kind": "observed", "status": "positive_with_regression_risk"},
     {"id": "GMG-v1", "kind": "contract_validation", "status": "covered_by_negative_and_positive_cases"},
-    {"id": "skill-consolidation-v1", "kind": "structural_classification", "status": "complete_coverage_no_merge_or_remove_without_outcome_evidence"}
+    {"id": "skill-consolidation-v1", "kind": "structural_classification", "status": "complete_coverage_no_merge_or_remove_without_outcome_evidence"},
+    {"id": "routing-boundaries-v1", "kind": "contract_validation", "status": "primary_ownership_clusters_defined_and_ci_checked"}
   ],
   "unresolved_risks": [
     "The public Core guard cannot intercept native provider GitHub tools unless the host routes mutation calls through it.",
     "Eight skills remain NEEDS_EVIDENCE and should not be promoted to stronger consolidation decisions without representative outcomes.",
-    "The machine-readable checkpoint still needs a real resume/new-chat exercise for LH-01/LH-02 outcome evidence."
+    "Routing boundaries are contract-level consolidation and still need representative real-task outcome evidence."
   ],
   "next_executable_step": {
-    "id": "GITHUB-GUARD-HOST-01",
-    "action": "Integrate the mutation guard into any controllable GitHub tool dispatcher or harness surface, then exercise it on a real repository mutation while preserving the provider-native enforcement gap where integration is unavailable."
+    "id": "ROUTING-OUTCOME-01",
+    "action": "Shadow-score ordinary real tasks against the routing boundary clusters and consolidation cases; record only observable misroutes, unnecessary pairings, context reads, rework, and correctness outcomes, then promote individual skill decisions only when evidence justifies it."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "7882ea638491666b593fe6f3d14de2f61fdd479a",
-    "relation": "verified baseline before the 0.18.0 hardening transaction"
+    "sha": "164a576b31972ef7542aabfe34476746c0be5f83",
+    "relation": "verified v0.18.0 baseline before the 0.18.1 routing-consolidation transaction"
   }
 }

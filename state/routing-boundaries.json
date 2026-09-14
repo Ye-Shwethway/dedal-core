@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "phase": "hardening-consolidation-outcome-validation",
+  "clusters": [
+    {
+      "id": "repo-lifecycle",
+      "primary_owner_by_intent": {
+        "repository-mechanics": "github",
+        "implementation-debug-test": "software-development",
+        "artifact-promotion-rollback": "release-engineering",
+        "agent-tool-harness-design": "agent-engineering"
+      },
+      "rule": "Route by the requested outcome, then pair only when another owner contributes a distinct necessary layer."
+    },
+    {
+      "id": "state-continuity",
+      "primary_owner_by_intent": {
+        "concrete-evidence-linked-archive": "ika",
+        "generic-memory-scope-governance": "knowledge-memory",
+        "repo-entry-resume-context-map": "project-bootstrap"
+      },
+      "rule": "Do not duplicate persistent state across owners; live canonical project state outranks all three."
+    },
+    {
+      "id": "data-domain",
+      "primary_owner_by_intent": {
+        "generic-data-integrity-reconciliation": "data-operations",
+        "medicine-store-business-rules": "medicine-store-assistant",
+        "patient-report-business-rules": "patient-report-assistant"
+      },
+      "rule": "Generic mechanics may support domain skills but never override their accepted business rules."
+    },
+    {
+      "id": "interface-implementation",
+      "primary_owner_by_intent": {
+        "ux-ui-direction-audit": "interface-design",
+        "code-implementation-debugging": "software-development",
+        "visual-reference-image-continuity": "visual-direction"
+      },
+      "rule": "Pair design with implementation only when both are actually required; image-production continuity is not UI design."
+    },
+    {
+      "id": "evidence-acquisition",
+      "primary_owner_by_intent": {
+        "current-fact-research-synthesis": "research",
+        "external-skill-discovery-adaptation": "skill-acquisition"
+      },
+      "rule": "Skill Acquisition is not a general research alias and is phase-gated against default expansion."
+    },
+    {
+      "id": "expression-truth",
+      "primary_owner_by_intent": {
+        "expression-translation-editorial-quality": "writing-editorial",
+        "domain-facts": "domain-owner-or-research"
+      },
+      "rule": "Editorial polish never becomes factual authority."
+    }
+  ],
+  "routing_principles": [
+    "select-smallest-sufficient-skill-set",
+    "explicit-alias-outranks-generic-overlap",
+    "primary-owner-first",
+    "pair-only-for-distinct-necessary-layer",
+    "no-new-skill-for-already-owned-intent",
+    "needs-evidence-before-merge-or-remove"
+  ]
+}

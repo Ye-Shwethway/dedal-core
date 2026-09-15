@@ -7,6 +7,7 @@ from pathlib import Path
 
 GATEWAY="https://youtube.drthorne.uk"
 CHUNK=8*1024*1024
+USER_AGENT="dedal-youtube-uploader/0.2.0"
 
 class RunnerError(RuntimeError): pass
 
@@ -16,7 +17,7 @@ def api(base, token, method, path, payload):
         data=json.dumps(payload).encode(),
         method=method,
         headers={"Authorization":f"Bearer {token}","Content-Type":"application/json",
-                 "User-Agent":"dedal-youtube-uploader/0.1.0"})
+                 "User-Agent":USER_AGENT})
     try:
         with urllib.request.urlopen(req,timeout=60) as response:
             return json.load(response)
@@ -27,7 +28,7 @@ def api(base, token, method, path, payload):
 def download(url, target):
     target.parent.mkdir(parents=True,exist_ok=True)
     offset=target.stat().st_size if target.exists() else 0
-    headers={"User-Agent":"dedal-youtube-uploader/0.1.0"}
+    headers={"User-Agent":USER_AGENT}
     if offset: headers["Range"]=f"bytes={offset}-"
     try:
         response=urllib.request.urlopen(urllib.request.Request(url,headers=headers),timeout=120)
@@ -45,26 +46,41 @@ def download(url, target):
         raise RunnerError("Downloaded source is empty")
     return target
 
+def _rclone_settings():
+    binary=Path(os.getenv("DEDAL_YOUTUBE_RCLONE_BIN","/opt/dedal-youtube-runner/bin/rclone"))
+    config=Path(os.getenv("DEDAL_YOUTUBE_RCLONE_CONFIG","/opt/dedal-youtube-runner/config/rclone.conf"))
+    remote=os.getenv("DEDAL_YOUTUBE_RCLONE_REMOTE","gdrive:")
+    if not binary.is_file():
+        raise RunnerError(f"Dedicated rclone binary not found: {binary}")
+    if not os.access(binary,os.X_OK):
+        raise RunnerError(f"Dedicated rclone binary is not executable: {binary}")
+    if not config.is_file():
+        raise RunnerError(f"Dedicated rclone config not found: {config}")
+    if not remote.endswith(":"):
+        raise RunnerError("DEDAL_YOUTUBE_RCLONE_REMOTE must be an rclone remote name ending in ':'")
+    return binary,config,remote
+
+def _drive_fetch(file_id, target):
+    binary,config,remote=_rclone_settings()
+    target.mkdir(parents=True,exist_ok=True)
+    result=subprocess.run(
+        [str(binary),"backend","copyid","--config",str(config),remote,file_id,str(target)+"/"],
+        stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=1800)
+    if result.returncode:
+        summary=(result.stdout or "")[-2000:].replace("\n"," ").strip()
+        raise RunnerError(f"Drive source fetch failed (exit {result.returncode}): {summary}")
+
 def resolve(job,state_dir):
     source=job["source"]
     if source["type"]=="google_drive":
         file_id=source["locator"]
         if not re.fullmatch(r"[A-Za-z0-9_-]{10,100}",file_id):
             raise RunnerError("Invalid Google Drive file ID")
-        bridge_repo=os.getenv("DEDAL_YOUTUBE_DRIVE_BRIDGE_REPO")
-        if not bridge_repo:
-            raise RunnerError("DEDAL_YOUTUBE_DRIVE_BRIDGE_REPO is not set")
-        target=Path(bridge_repo).resolve()/"downloads"/"dedal-youtube"/"drive"/file_id
+        target=state_dir/"drive"/file_id
         target.mkdir(parents=True,exist_ok=True)
         files=[p for p in target.iterdir() if p.is_file()]
         if not files:
-            container_target=f"/app/downloads/dedal-youtube/drive/{file_id}/"
-            result=subprocess.run(
-                ["docker","exec","mirror-bot","rclone","backend","copyid",
-                 "gdrive:",file_id,container_target],
-                stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=1800)
-            if result.returncode:
-                raise RunnerError(f"Drive source fetch failed (exit {result.returncode})")
+            _drive_fetch(file_id,target)
             files=[p for p in target.iterdir() if p.is_file()]
         if len(files)!=1:
             raise RunnerError(f"Drive source resolution expected one file, found {len(files)}")
@@ -153,7 +169,9 @@ def main():
     if not token: raise RunnerError("DEDAL_YOUTUBE_RUNNER_TOKEN is not set")
     inspected=api(args.gateway,token,"POST",
         f"/v1/upload-jobs/{args.job_id}/claim",{"inspect_only":True})["job"]
-    source=resolve(inspected,Path(args.state_dir))
+    state_dir=Path(args.state_dir)
+    state_dir.mkdir(parents=True,exist_ok=True)
+    source=resolve(inspected,state_dir)
     actual=fingerprint(source); verify_fingerprint(inspected,actual)
     total=source.stat().st_size
     mime=mimetypes.guess_type(source.name)[0] or "application/octet-stream"

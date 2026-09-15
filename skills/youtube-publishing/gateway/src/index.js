@@ -1,5 +1,5 @@
 
-const VERSION = "0.1.0";
+const VERSION = "0.2.0";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -228,6 +228,8 @@ async function route(request, env, requestId) {
     if (privacy !== "private" && body.explicit_visibility_intent !== true) throw httpError(409, "explicit_visibility_intent_required");
     if (body.publish_at && body.explicit_publication_intent !== true) throw httpError(409, "explicit_publication_intent_required");
     if (body.publish_at && privacy !== "private") throw httpError(400, "publish_at_requires_private");
+    const playlistId = body.playlist_id == null ? null : String(body.playlist_id).trim();
+    if (playlistId && !/^[A-Za-z0-9_-]{10,100}$/.test(playlistId)) throw httpError(400, "invalid_playlist_id");
     const idempotencyKey = String(body.idempotency_key || "").trim();
     if (!idempotencyKey || idempotencyKey.length > 200) throw httpError(400, "idempotency_key_required");
     const existing = await env.DB.prepare("SELECT * FROM upload_jobs WHERE idempotency_key=?").bind(idempotencyKey).first();
@@ -239,7 +241,7 @@ async function route(request, env, requestId) {
       "INSERT INTO upload_jobs(id,idempotency_key,profile_alias,channel_id,source_type,source_locator,source_fingerprint,title,description,tags_json,category_id,made_for_kids,playlist_id,thumbnail_locator,requested_privacy,publish_at,status,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
     ).bind(id,idempotencyKey,alias,profile.channel_id,sourceType,body.source_locator.trim(),body.source_fingerprint || null,
       body.title.trim(),String(body.description || ""),JSON.stringify(tags),String(body.category_id || "22"),
-      body.made_for_kids === true ? 1 : 0,body.playlist_id || null,body.thumbnail_locator || null,privacy,
+      body.made_for_kids === true ? 1 : 0,playlistId,body.thumbnail_locator || null,privacy,
       body.publish_at || null,"queued",now,now).run();
     const job = await getJob(env, id);
     await audit(env, "admin", "upload_job.create", alias, profile.channel_id, id, "success", { privacy });
@@ -377,6 +379,23 @@ async function route(request, env, requestId) {
       });
       throw httpError(409, "remote_readback_mismatch");
     }
+
+    let secondaryOperation = null;
+    if (job.playlist_id) {
+      try {
+        secondaryOperation = await ensurePlaylistMembership(accessToken, job.channel_id, job.playlist_id, videoId);
+        await audit(env, "gateway", "upload_job.playlist", job.profile_alias, job.channel_id, job.id, "success", secondaryOperation);
+      } catch (error) {
+        const code = safeError(error);
+        await env.DB.prepare("UPDATE upload_jobs SET error_summary=?,updated_at=? WHERE id=?")
+          .bind(code,isoNow(),job.id).run();
+        await audit(env, "gateway", "upload_job.playlist", job.profile_alias, job.channel_id, job.id, "failed", {
+          video_id: videoId, playlist_id: job.playlist_id, reason: code,
+        });
+        throw error;
+      }
+    }
+
     const stamp = isoNow();
     const summary = JSON.stringify({
       video_id: videoId,
@@ -385,6 +404,7 @@ async function route(request, env, requestId) {
       privacy: remote.status.privacyStatus,
       upload_status: remote.status.uploadStatus || null,
       processing_status: remote.processingDetails ? remote.processingDetails.processingStatus : null,
+      secondary_operation: secondaryOperation,
     });
     await env.DB.prepare(
       "UPDATE upload_jobs SET status='verified',bytes_uploaded=COALESCE(bytes_total,bytes_uploaded),result_summary=?,error_summary=NULL,updated_at=?,completed_at=? WHERE id=?"
@@ -432,6 +452,61 @@ async function assertChannel(accessToken, expected) {
   return actual;
 }
 
+async function ensurePlaylistMembership(accessToken, expectedChannelId, playlistId, videoId) {
+  const authHeaders = { Authorization: `Bearer ${accessToken}` };
+  const playlistResponse = await fetch(
+    `https://www.googleapis.com/youtube/v3/playlists?part=id,snippet&id=${encodeURIComponent(playlistId)}`,
+    { headers: authHeaders },
+  );
+  const playlistData = await playlistResponse.json();
+  if (!playlistResponse.ok) {
+    throw httpError(502, "playlist_lookup_failed", playlistData?.error?.message || `Google API HTTP ${playlistResponse.status}`);
+  }
+  const playlist = playlistData.items && playlistData.items.length === 1 ? playlistData.items[0] : null;
+  if (!playlist) throw httpError(409, "playlist_not_found_or_inaccessible");
+  if (playlist.snippet?.channelId !== expectedChannelId) throw httpError(409, "playlist_channel_mismatch");
+
+  const membershipUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=id,snippet&playlistId=${encodeURIComponent(playlistId)}&videoId=${encodeURIComponent(videoId)}&maxResults=50`;
+  const existingResponse = await fetch(membershipUrl, { headers: authHeaders });
+  const existingData = await existingResponse.json();
+  if (!existingResponse.ok) {
+    throw httpError(502, "playlist_membership_lookup_failed", existingData?.error?.message || `Google API HTTP ${existingResponse.status}`);
+  }
+  const existing = (existingData.items || []).find(item => item.snippet?.resourceId?.videoId === videoId);
+  if (existing) {
+    return { type: "playlist", playlist_id: playlistId, status: "already_present", playlist_item_id: existing.id || null };
+  }
+
+  const insertResponse = await fetch("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet", {
+    method: "POST",
+    headers: { ...authHeaders, "Content-Type": "application/json; charset=UTF-8" },
+    body: JSON.stringify({
+      snippet: {
+        playlistId,
+        resourceId: { kind: "youtube#video", videoId },
+      },
+    }),
+  });
+  const inserted = await insertResponse.json();
+  if (!insertResponse.ok) {
+    throw httpError(502, "playlist_insert_failed", inserted?.error?.message || `Google API HTTP ${insertResponse.status}`);
+  }
+
+  const verifyResponse = await fetch(membershipUrl, { headers: authHeaders });
+  const verifyData = await verifyResponse.json();
+  if (!verifyResponse.ok) {
+    throw httpError(502, "playlist_readback_failed", verifyData?.error?.message || `Google API HTTP ${verifyResponse.status}`);
+  }
+  const verified = (verifyData.items || []).find(item => item.snippet?.resourceId?.videoId === videoId);
+  if (!verified) throw httpError(502, "playlist_readback_mismatch");
+  return {
+    type: "playlist",
+    playlist_id: playlistId,
+    status: "inserted",
+    playlist_item_id: verified.id || inserted.id || null,
+  };
+}
+
 async function getProfile(env, alias) {
   const row = await env.DB.prepare("SELECT * FROM channel_profiles WHERE alias=?").bind(alias).first();
   if (!row) throw httpError(404, "profile_not_found");
@@ -458,6 +533,7 @@ function publicJob(job) {
     source_type: job.source_type,
     source_fingerprint: job.source_fingerprint,
     title: job.title,
+    playlist_id: job.playlist_id,
     requested_privacy: job.requested_privacy,
     publish_at: job.publish_at,
     status: job.status,

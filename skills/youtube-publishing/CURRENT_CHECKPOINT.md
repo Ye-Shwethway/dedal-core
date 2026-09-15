@@ -78,12 +78,51 @@
 - `mirror-bot` remained untouched throughout migration and final verification;
   restart count remained zero.
 
+## Promotion-test hardening prepared and deployed
+
+- The gateway source already fails closed when OAuth resolves a YouTube channel ID
+  different from the pre-registered profile: HTTP 409, denied audit record, and no
+  credential storage. Upload claim and completion also re-assert the authenticated
+  channel against the locked job channel. A deliberate live mismatch proof is still
+  required.
+- Runner `dedal-youtube-uploader/0.3.0` adds an explicit test-only
+  `--test-interrupt-after-chunks` option. It stops only after YouTube has accepted a
+  resumable chunk and progress has been recorded; rerunning the same job without the
+  flag reuses the stored upload session and queries YouTube for the confirmed offset.
+- Runner v0.3.0 is deployed on the VPS through the isolated GitHub Actions route.
+  Deployment verified the new test flag, standalone Drive retrieval, absence of the
+  shared-rclone-client warning, and unchanged `mirror-bot` start/restart state. No
+  YouTube upload was performed by the deployment workflow.
+- Gateway source version 0.2.0 now implements optional playlist membership as the
+  secondary operation. It verifies playlist ownership against the locked channel,
+  checks for existing membership before insertion, inserts only when absent, and
+  performs read-back verification. Retrying completion is duplicate-safe because an
+  existing playlist item is detected before insertion.
+- Gateway v0.2.0 source is committed but is not yet claimed as deployed. The current
+  tool surface has no existing GitHub Actions route for the Cloudflare Worker deploy;
+  deployment requires the authorized Cloudflare execution path.
+- Runtime CI now syntax-checks both the Python YouTube runner and the JavaScript
+  gateway in addition to the existing contracts. Repo Integrity and Runtime Contracts
+  are green for the hardening changes.
+- `youtube-publishing` is explicitly classified `NEEDS_EVIDENCE` in the Core skill
+  consolidation state until the live promotion gates below pass.
+
 ## Not yet verified
 
-A deliberate channel-ID mismatch rejection, interruption/resume behavior, and a
-relevant thumbnail or playlist secondary operation. The skill remains candidate.
+1. A deliberate live channel-ID mismatch rejection with no credential stored and no
+   upload initiated.
+2. A real interrupted resumable upload that resumes the same session/job and produces
+   exactly one YouTube video.
+3. A real playlist secondary operation with read-back verification.
 
-## Next step
+The skill remains candidate.
 
-Exercise deliberate mismatch rejection and interruption recovery without creating a
-duplicate. Then validate one relevant secondary operation before promotion.
+## Next executable step
+
+Use the authorized Cloudflare execution path once to deploy gateway v0.2.0 and verify
+`GET /health` reports the new version. Then run the deliberate mismatch test without
+an upload. Finally, use one fresh private video job with a valid Creator-owned
+CHILIVIDS playlist to combine the remaining two gates: stop after the first accepted
+chunk, rerun the same job to resume, verify exactly one resulting video, and verify
+idempotent playlist membership by read-back. Promote the skill only after all three
+live gates pass.

@@ -60,10 +60,23 @@
   installation and the Drive proof; both remained unchanged and restart count stayed
   zero during the isolation test.
 - No YouTube upload was performed during the isolation proof.
-- Runtime emitted a current rclone warning that the configured `gdrive:` remote still
-  uses rclone's shared Google Drive client ID, which is being retired during 2026.
-  Migrating that remote to a Creator-owned Google OAuth client is the next
-  infrastructure hardening task.
+
+## Verified Creator-owned Google Drive OAuth migration
+
+- The `gdrive:` remote was migrated away from rclone's retiring shared Google Drive
+  client ID to a Creator-owned Desktop OAuth client.
+- Existing bot and dedicated-runner rclone configurations were backed up before the
+  change, and the failed first attempt rolled back cleanly before retry.
+- The Creator-authorized token was installed non-interactively; no VPS browser or
+  loopback OAuth flow is required for normal operation.
+- Both the original bot-side `gdrive:` configuration and the dedicated YouTube runner
+  configuration passed authenticated Drive API checks after migration.
+- A standalone Drive file-ID retrieval through the dedicated runner succeeded with
+  the Creator-owned OAuth client.
+- The previous `shared Google Drive client_id` retirement warning was absent during
+  that proof.
+- `mirror-bot` remained untouched throughout migration and final verification;
+  restart count remained zero.
 
 ## Not yet verified
 
@@ -72,7 +85,5 @@ relevant thumbnail or playlist secondary operation. The skill remains candidate.
 
 ## Next step
 
-First migrate the runner `gdrive:` remote away from rclone's retiring shared Google
-Drive client ID while preserving bot isolation. Then exercise deliberate mismatch
-rejection and interruption recovery without creating a duplicate, and validate one
-relevant secondary operation before promotion.
+Exercise deliberate mismatch rejection and interruption recovery without creating a
+duplicate. Then validate one relevant secondary operation before promotion.

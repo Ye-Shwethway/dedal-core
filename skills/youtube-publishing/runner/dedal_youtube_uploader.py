@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """VPS runner: source bytes go directly to YouTube; no Google token is stored here."""
 from __future__ import annotations
-import argparse, hashlib, json, mimetypes, os, re, subprocess, sys
+import argparse, hashlib, hmac, json, mimetypes, os, re, subprocess, sys
 import urllib.error, urllib.request
 from pathlib import Path
 
 GATEWAY="https://youtube.drthorne.uk"
 CHUNK=8*1024*1024
-USER_AGENT="dedal-youtube-uploader/0.3.0"
+USER_AGENT="dedal-youtube-uploader/0.3.1"
 
 class RunnerError(RuntimeError): pass
 
@@ -106,7 +106,7 @@ def verify_fingerprint(job,actual):
     expected=job.get("source_fingerprint")
     if not expected: return
     expected=expected if expected.startswith("sha256:") else "sha256:"+expected
-    if not hashlib.compare_digest(expected.lower(),actual.lower()):
+    if not hmac.compare_digest(expected.lower(),actual.lower()):
         raise RunnerError(f"Source fingerprint mismatch: expected={expected} actual={actual}")
 
 def confirmed_offset(session,total):

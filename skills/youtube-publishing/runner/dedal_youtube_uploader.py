@@ -64,7 +64,7 @@ def _drive_fetch(file_id, target):
     binary,config,remote=_rclone_settings()
     target.mkdir(parents=True,exist_ok=True)
     result=subprocess.run(
-        [str(binary),"backend","copyid","--config",str(config),remote,file_id,str(target)+"/"],
+        [str(binary),"--config",str(config),"backend","copyid",remote,file_id,str(target)+"/"],
         stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=1800)
     if result.returncode:
         summary=(result.stdout or "")[-2000:].replace("\n"," ").strip()

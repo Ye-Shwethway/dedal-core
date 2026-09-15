@@ -1,5 +1,5 @@
 
-const VERSION = "0.2.0";
+const VERSION = "0.3.0";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -57,7 +57,7 @@ async function route(request, env, requestId) {
   }
 
   if (request.method === "GET" && path === "/v1/channels") {
-    await requireActor(request, env.ADMIN_API_TOKEN, "admin");
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
     const rows = await env.DB.prepare(
       "SELECT alias,channel_id,display_name,default_privacy,enabled,credential_ref IS NOT NULL AS connected,created_at,updated_at FROM channel_profiles ORDER BY alias"
     ).all();
@@ -66,7 +66,7 @@ async function route(request, env, requestId) {
 
   const channelMatch = path.match(/^\/v1\/channels\/([^/]+)$/);
   if (request.method === "GET" && channelMatch) {
-    await requireActor(request, env.ADMIN_API_TOKEN, "admin");
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
     const alias = validAlias(decodeURIComponent(channelMatch[1]));
     const row = await env.DB.prepare(
       "SELECT alias,channel_id,display_name,default_privacy,enabled,credential_ref IS NOT NULL AS connected,created_at,updated_at FROM channel_profiles WHERE alias=?"
@@ -94,6 +94,164 @@ async function route(request, env, requestId) {
       connect_url: `https://youtube.drthorne.uk/oauth/connect/${encodeURIComponent(alias)}?ticket=${encodeURIComponent(ticket)}`,
       expires_at: expires,
     }, 201);
+  }
+
+  const videosMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos$/);
+  if (request.method === "GET" && videosMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(videosMatch[1]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    const maxResults = boundedInt(url.searchParams.get("max_results"), 10, 1, 50);
+    const channel = await googleJson(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${encodeURIComponent(profile.channel_id)}`, accessToken, "channel_content_lookup_failed");
+    const uploadsId = channel.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+    if (!uploadsId) throw httpError(502, "uploads_playlist_missing");
+    const items = await googleJson(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${encodeURIComponent(uploadsId)}&maxResults=${maxResults}`, accessToken, "video_list_failed");
+    return reply({ profile_alias: alias, channel_id: profile.channel_id, videos: (items.items || []).map(publicPlaylistVideo) });
+  }
+
+  const videoMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos\/([^/]+)$/);
+  if (request.method === "GET" && videoMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(videoMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(videoMatch[2]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    return reply({ video: publicVideo(await ownedVideo(accessToken, profile.channel_id, videoId)) });
+  }
+
+  if (request.method === "PATCH" && videoMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(videoMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(videoMatch[2]));
+    const body = await bodyJson(request);
+    const { profile, accessToken } = await channelContext(env, alias);
+    const current = await ownedVideo(accessToken, profile.channel_id, videoId);
+    const snippet = { ...current.snippet };
+    delete snippet.channelId; delete snippet.channelTitle; delete snippet.publishedAt; delete snippet.thumbnails; delete snippet.liveBroadcastContent; delete snippet.localized;
+    if (body.title !== undefined) snippet.title = validTitle(body.title);
+    if (body.description !== undefined) snippet.description = String(body.description).slice(0, 5000);
+    if (body.tags !== undefined) snippet.tags = validTags(body.tags);
+    if (body.category_id !== undefined) snippet.categoryId = validCategory(body.category_id);
+    const updated = await googleJson("https://www.googleapis.com/youtube/v3/videos?part=snippet", accessToken, "video_update_failed", {
+      method: "PUT", body: { id: videoId, snippet },
+    });
+    const verified = await ownedVideo(accessToken, profile.channel_id, videoId);
+    if (verified.snippet.title !== snippet.title || verified.snippet.description !== snippet.description) throw httpError(409, "video_update_readback_mismatch");
+    await audit(env, "admin", "video.update", alias, profile.channel_id, null, "success", { video_id: videoId, fields: Object.keys(body).filter(k => ["title","description","tags","category_id"].includes(k)) });
+    return reply({ video: publicVideo(verified), google_id: updated.id || videoId });
+  }
+
+  const privacyMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos\/([^/]+)\/privacy$/);
+  if (request.method === "POST" && privacyMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(privacyMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(privacyMatch[2]));
+    const body = await bodyJson(request);
+    const privacy = validPrivacy(body.privacy);
+    if (privacy !== "private" && body.explicit_visibility_intent !== true) throw httpError(409, "explicit_visibility_intent_required");
+    const { profile, accessToken } = await channelContext(env, alias);
+    const current = await ownedVideo(accessToken, profile.channel_id, videoId);
+    const status = writableStatus(current.status, { privacyStatus: privacy, publishAt: null });
+    await googleJson("https://www.googleapis.com/youtube/v3/videos?part=status", accessToken, "video_privacy_update_failed", { method: "PUT", body: { id: videoId, status } });
+    const verified = await ownedVideo(accessToken, profile.channel_id, videoId);
+    if (verified.status.privacyStatus !== privacy) throw httpError(409, "video_privacy_readback_mismatch");
+    await audit(env, "admin", "video.set_privacy", alias, profile.channel_id, null, "success", { video_id: videoId, privacy });
+    return reply({ video: publicVideo(verified) });
+  }
+
+  const scheduleMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos\/([^/]+)\/schedule$/);
+  if (request.method === "POST" && scheduleMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(scheduleMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(scheduleMatch[2]));
+    const body = await bodyJson(request);
+    if (body.explicit_publication_intent !== true) throw httpError(409, "explicit_publication_intent_required");
+    const publishAt = validFutureTime(body.publish_at);
+    const { profile, accessToken } = await channelContext(env, alias);
+    const current = await ownedVideo(accessToken, profile.channel_id, videoId);
+    const status = writableStatus(current.status, { privacyStatus: "private", publishAt });
+    await googleJson("https://www.googleapis.com/youtube/v3/videos?part=status", accessToken, "video_schedule_failed", { method: "PUT", body: { id: videoId, status } });
+    const verified = await ownedVideo(accessToken, profile.channel_id, videoId);
+    if (verified.status.privacyStatus !== "private" || verified.status.publishAt !== publishAt) throw httpError(409, "video_schedule_readback_mismatch");
+    await audit(env, "admin", "video.schedule", alias, profile.channel_id, null, "success", { video_id: videoId, publish_at: publishAt });
+    return reply({ video: publicVideo(verified) });
+  }
+
+  const playlistsMatch = path.match(/^\/v1\/channels\/([^/]+)\/playlists$/);
+  if (request.method === "GET" && playlistsMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(playlistsMatch[1]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    const maxResults = boundedInt(url.searchParams.get("max_results"), 25, 1, 50);
+    const data = await googleJson(`https://www.googleapis.com/youtube/v3/playlists?part=id,snippet,contentDetails&mine=true&maxResults=${maxResults}`, accessToken, "playlist_list_failed");
+    const playlists = (data.items || []).filter(x => x.snippet?.channelId === profile.channel_id).map(publicPlaylist);
+    return reply({ profile_alias: alias, channel_id: profile.channel_id, playlists });
+  }
+
+  if (request.method === "POST" && playlistsMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(playlistsMatch[1]));
+    const body = await bodyJson(request);
+    const title = validTitle(body.title);
+    const privacy = validPrivacy(body.privacy || "private");
+    if (privacy !== "private" && body.explicit_visibility_intent !== true) throw httpError(409, "explicit_visibility_intent_required");
+    const { profile, accessToken } = await channelContext(env, alias);
+    const created = await googleJson("https://www.googleapis.com/youtube/v3/playlists?part=snippet,status", accessToken, "playlist_create_failed", {
+      method: "POST", body: { snippet: { title, description: String(body.description || "").slice(0, 5000) }, status: { privacyStatus: privacy } },
+    });
+    if (created.snippet?.channelId !== profile.channel_id) throw httpError(409, "playlist_create_channel_mismatch");
+    await audit(env, "admin", "playlist.create", alias, profile.channel_id, null, "success", { playlist_id: created.id, privacy });
+    return reply({ playlist: publicPlaylist(created) }, 201);
+  }
+
+  const playlistItemMatch = path.match(/^\/v1\/channels\/([^/]+)\/playlists\/([^/]+)\/videos\/([^/]+)$/);
+  if (request.method === "POST" && playlistItemMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(playlistItemMatch[1]));
+    const playlistId = validPlaylistId(decodeURIComponent(playlistItemMatch[2]));
+    const videoId = validVideoId(decodeURIComponent(playlistItemMatch[3]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    await ownedVideo(accessToken, profile.channel_id, videoId);
+    const result = await ensurePlaylistMembership(accessToken, profile.channel_id, playlistId, videoId);
+    await audit(env, "admin", "playlist.add_video", alias, profile.channel_id, null, "success", { playlist_id: playlistId, video_id: videoId, status: result.status });
+    return reply({ operation: result });
+  }
+
+  if (request.method === "DELETE" && playlistItemMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(playlistItemMatch[1]));
+    const playlistId = validPlaylistId(decodeURIComponent(playlistItemMatch[2]));
+    const videoId = validVideoId(decodeURIComponent(playlistItemMatch[3]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    await ownedPlaylist(accessToken, profile.channel_id, playlistId);
+    const found = await playlistMembership(accessToken, playlistId, videoId);
+    if (found) await googleJson(`https://www.googleapis.com/youtube/v3/playlistItems?id=${encodeURIComponent(found.id)}`, accessToken, "playlist_remove_failed", { method: "DELETE", expectEmpty: true });
+    const verified = await playlistMembership(accessToken, playlistId, videoId);
+    if (verified) throw httpError(409, "playlist_remove_readback_mismatch");
+    await audit(env, "admin", "playlist.remove_video", alias, profile.channel_id, null, "success", { playlist_id: playlistId, video_id: videoId, status: found ? "removed" : "already_absent" });
+    return reply({ operation: { type: "playlist", playlist_id: playlistId, video_id: videoId, status: found ? "removed" : "already_absent" } });
+  }
+
+  const analyticsMatch = path.match(/^\/v1\/channels\/([^/]+)\/analytics\/summary$/);
+  if (request.method === "GET" && analyticsMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(analyticsMatch[1]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    const { startDate, endDate } = analyticsDates(url);
+    const qs = new URLSearchParams({ ids: "channel==MINE", startDate, endDate, metrics: "views,estimatedMinutesWatched,averageViewDuration,subscribersGained,subscribersLost" });
+    const data = await googleJson(`https://youtubeanalytics.googleapis.com/v2/reports?${qs}`, accessToken, "analytics_summary_failed");
+    return reply({ profile_alias: alias, channel_id: profile.channel_id, start_date: startDate, end_date: endDate, analytics: analyticsRows(data) });
+  }
+
+  const searchTermsMatch = path.match(/^\/v1\/channels\/([^/]+)\/analytics\/search-terms$/);
+  if (request.method === "GET" && searchTermsMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(searchTermsMatch[1]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    const { startDate, endDate } = analyticsDates(url);
+    const maxResults = boundedInt(url.searchParams.get("max_results"), 25, 1, 50);
+    const qs = new URLSearchParams({ ids: "channel==MINE", startDate, endDate, dimensions: "insightTrafficSourceDetail", filters: "insightTrafficSourceType==YT_SEARCH", metrics: "views,estimatedMinutesWatched", sort: "-views", maxResults: String(maxResults) });
+    const data = await googleJson(`https://youtubeanalytics.googleapis.com/v2/reports?${qs}`, accessToken, "analytics_search_terms_failed");
+    return reply({ profile_alias: alias, channel_id: profile.channel_id, start_date: startDate, end_date: endDate, search_terms: analyticsRows(data) });
   }
 
   const connectMatch = path.match(/^\/oauth\/connect\/([^/]+)$/);
@@ -208,7 +366,7 @@ async function route(request, env, requestId) {
   }
 
   if (request.method === "POST" && path === "/v1/upload-jobs") {
-    await requireActor(request, env.ADMIN_API_TOKEN, "admin");
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
     const body = await bodyJson(request);
     const alias = validAlias(body.profile_alias);
     const profile = await getConnectedProfile(env, alias);
@@ -232,14 +390,24 @@ async function route(request, env, requestId) {
     if (playlistId && !/^[A-Za-z0-9_-]{10,100}$/.test(playlistId)) throw httpError(400, "invalid_playlist_id");
     const idempotencyKey = String(body.idempotency_key || "").trim();
     if (!idempotencyKey || idempotencyKey.length > 200) throw httpError(400, "idempotency_key_required");
+    const requestedFingerprint = body.source_fingerprint == null ? null : String(body.source_fingerprint).toLowerCase();
+    if (requestedFingerprint && !/^sha256:[a-f0-9]{64}$/.test(requestedFingerprint)) throw httpError(400, "invalid_source_fingerprint");
     const existing = await env.DB.prepare("SELECT * FROM upload_jobs WHERE idempotency_key=?").bind(idempotencyKey).first();
-    if (existing) return reply({ job: publicJob(existing), deduplicated: true }, 200);
+    if (existing) {
+      const sameRequest = existing.profile_alias === alias && existing.channel_id === profile.channel_id &&
+        existing.source_type === sourceType && existing.source_locator === body.source_locator.trim() &&
+        existing.title === body.title.trim() && existing.requested_privacy === privacy &&
+        (existing.playlist_id || null) === playlistId &&
+        (!requestedFingerprint || !existing.source_fingerprint || existing.source_fingerprint.toLowerCase() === requestedFingerprint);
+      if (!sameRequest) throw httpError(409, "idempotency_key_manifest_mismatch");
+      return reply({ job: publicJob(existing), deduplicated: true }, 200);
+    }
     const id = crypto.randomUUID();
     const now = isoNow();
     const tags = Array.isArray(body.tags) ? body.tags.map(String).slice(0, 50) : [];
     await env.DB.prepare(
       "INSERT INTO upload_jobs(id,idempotency_key,profile_alias,channel_id,source_type,source_locator,source_fingerprint,title,description,tags_json,category_id,made_for_kids,playlist_id,thumbnail_locator,requested_privacy,publish_at,status,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
-    ).bind(id,idempotencyKey,alias,profile.channel_id,sourceType,body.source_locator.trim(),body.source_fingerprint || null,
+    ).bind(id,idempotencyKey,alias,profile.channel_id,sourceType,body.source_locator.trim(),requestedFingerprint,
       body.title.trim(),String(body.description || ""),JSON.stringify(tags),String(body.category_id || "22"),
       body.made_for_kids === true ? 1 : 0,playlistId,body.thumbnail_locator || null,privacy,
       body.publish_at || null,"queued",now,now).run();
@@ -250,7 +418,7 @@ async function route(request, env, requestId) {
 
   const jobGet = path.match(/^\/v1\/upload-jobs\/([^/]+)$/);
   if (request.method === "GET" && jobGet) {
-    await requireActor(request, env.ADMIN_API_TOKEN, "admin");
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
     return reply({ job: publicJob(await getJob(env, jobGet[1])) });
   }
 
@@ -472,9 +640,11 @@ async function ensurePlaylistMembership(accessToken, expectedChannelId, playlist
   if (!existingResponse.ok) {
     throw httpError(502, "playlist_membership_lookup_failed", existingData?.error?.message || `Google API HTTP ${existingResponse.status}`);
   }
-  const existing = (existingData.items || []).find(item => item.snippet?.resourceId?.videoId === videoId);
+  const existingMatches = (existingData.items || []).filter(item => item.snippet?.resourceId?.videoId === videoId);
+  if (existingMatches.length > 1) throw httpError(409, "duplicate_playlist_membership_detected");
+  const existing = existingMatches[0];
   if (existing) {
-    return { type: "playlist", playlist_id: playlistId, status: "already_present", playlist_item_id: existing.id || null };
+    return { type: "playlist", playlist_id: playlistId, status: "already_present", playlist_item_id: existing.id || null, membership_count: 1 };
   }
 
   const insertResponse = await fetch("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet", {
@@ -497,14 +667,104 @@ async function ensurePlaylistMembership(accessToken, expectedChannelId, playlist
   if (!verifyResponse.ok) {
     throw httpError(502, "playlist_readback_failed", verifyData?.error?.message || `Google API HTTP ${verifyResponse.status}`);
   }
-  const verified = (verifyData.items || []).find(item => item.snippet?.resourceId?.videoId === videoId);
-  if (!verified) throw httpError(502, "playlist_readback_mismatch");
+  const verifiedMatches = (verifyData.items || []).filter(item => item.snippet?.resourceId?.videoId === videoId);
+  if (verifiedMatches.length !== 1) throw httpError(502, "playlist_readback_mismatch");
+  const verified = verifiedMatches[0];
   return {
     type: "playlist",
     playlist_id: playlistId,
     status: "inserted",
     playlist_item_id: verified.id || inserted.id || null,
+    membership_count: 1,
   };
+}
+
+async function channelContext(env, alias) {
+  const profile = await getConnectedProfile(env, alias);
+  const accessToken = await profileAccessToken(env, profile);
+  await assertChannel(accessToken, profile.channel_id);
+  return { profile, accessToken };
+}
+
+async function googleJson(url, accessToken, errorCode, options = {}) {
+  const headers = { Authorization: `Bearer ${accessToken}`, ...(options.headers || {}) };
+  if (options.body !== undefined) headers["Content-Type"] = "application/json; charset=UTF-8";
+  const response = await fetch(url, { method: options.method || "GET", headers, body: options.body === undefined ? undefined : JSON.stringify(options.body) });
+  if (options.expectEmpty && response.ok) return null;
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw httpError(response.status === 404 ? 404 : 502, errorCode, data?.error?.message || `Google API HTTP ${response.status}`);
+  return data;
+}
+
+async function ownedVideo(accessToken, expectedChannelId, videoId) {
+  const data = await googleJson(`https://www.googleapis.com/youtube/v3/videos?part=id,snippet,status,contentDetails,statistics&id=${encodeURIComponent(videoId)}`, accessToken, "video_lookup_failed");
+  const video = data.items?.length === 1 ? data.items[0] : null;
+  if (!video) throw httpError(404, "video_not_found");
+  if (video.snippet?.channelId !== expectedChannelId) throw httpError(409, "video_channel_mismatch");
+  return video;
+}
+
+async function ownedPlaylist(accessToken, expectedChannelId, playlistId) {
+  const data = await googleJson(`https://www.googleapis.com/youtube/v3/playlists?part=id,snippet,status,contentDetails&id=${encodeURIComponent(playlistId)}`, accessToken, "playlist_lookup_failed");
+  const playlist = data.items?.length === 1 ? data.items[0] : null;
+  if (!playlist) throw httpError(404, "playlist_not_found");
+  if (playlist.snippet?.channelId !== expectedChannelId) throw httpError(409, "playlist_channel_mismatch");
+  return playlist;
+}
+
+async function playlistMembership(accessToken, playlistId, videoId) {
+  const data = await googleJson(`https://www.googleapis.com/youtube/v3/playlistItems?part=id,snippet&playlistId=${encodeURIComponent(playlistId)}&videoId=${encodeURIComponent(videoId)}&maxResults=50`, accessToken, "playlist_membership_lookup_failed");
+  return (data.items || []).find(item => item.snippet?.resourceId?.videoId === videoId) || null;
+}
+
+function publicPlaylistVideo(item) {
+  return { video_id: item.contentDetails?.videoId || item.snippet?.resourceId?.videoId || null, title: item.snippet?.title || "", published_at: item.contentDetails?.videoPublishedAt || item.snippet?.publishedAt || null };
+}
+
+function publicVideo(video) {
+  return {
+    video_id: video.id,
+    channel_id: video.snippet?.channelId || null,
+    title: video.snippet?.title || "",
+    description: video.snippet?.description || "",
+    tags: video.snippet?.tags || [],
+    category_id: video.snippet?.categoryId || null,
+    published_at: video.snippet?.publishedAt || null,
+    privacy: video.status?.privacyStatus || null,
+    publish_at: video.status?.publishAt || null,
+    made_for_kids: video.status?.madeForKids ?? video.status?.selfDeclaredMadeForKids ?? null,
+    duration: video.contentDetails?.duration || null,
+    statistics: video.statistics || {},
+  };
+}
+
+function publicPlaylist(playlist) {
+  return { playlist_id: playlist.id, channel_id: playlist.snippet?.channelId || null, title: playlist.snippet?.title || "", description: playlist.snippet?.description || "", privacy: playlist.status?.privacyStatus || null, item_count: Number(playlist.contentDetails?.itemCount || 0) };
+}
+
+function writableStatus(current, overrides) {
+  const status = {
+    privacyStatus: overrides.privacyStatus || current.privacyStatus,
+    selfDeclaredMadeForKids: Boolean(current.selfDeclaredMadeForKids),
+  };
+  for (const key of ["embeddable", "license", "publicStatsViewable"]) {
+    if (current[key] !== undefined) status[key] = current[key];
+  }
+  if (overrides.publishAt) status.publishAt = overrides.publishAt;
+  return status;
+}
+
+function analyticsDates(url) {
+  const endDate = validDate(url.searchParams.get("end_date") || new Date(Date.now() - 86400000).toISOString().slice(0, 10));
+  const startDate = validDate(url.searchParams.get("start_date") || new Date(Date.parse(`${endDate}T00:00:00Z`) - 27 * 86400000).toISOString().slice(0, 10));
+  if (startDate > endDate) throw httpError(400, "invalid_analytics_range");
+  if (Date.parse(`${endDate}T00:00:00Z`) - Date.parse(`${startDate}T00:00:00Z`) > 366 * 86400000) throw httpError(400, "analytics_range_too_large");
+  return { startDate, endDate };
+}
+
+function analyticsRows(data) {
+  const headers = (data.columnHeaders || []).map(x => x.name);
+  return (data.rows || []).map(row => Object.fromEntries(headers.map((name, i) => [name, row[i]])));
 }
 
 async function getProfile(env, alias) {
@@ -566,11 +826,12 @@ async function audit(env, actor, action, alias, channelId, jobId, outcome, detai
   ).bind(crypto.randomUUID(),actor,action,alias,channelId,jobId,outcome,JSON.stringify(details || {}),isoNow()).run();
 }
 
-async function requireActor(request, secret, actor) {
+async function requireActor(request, secret, actor, alternateSecret = null) {
   if (!secret) throw httpError(503, "gateway_not_configured");
   const header = request.headers.get("Authorization") || "";
   const presented = header.startsWith("Bearer ") ? header.slice(7) : "";
-  if (!presented || !(await secureEqual(presented, secret))) throw httpError(401, `${actor}_authentication_required`);
+  const accepted = presented && ((await secureEqual(presented, secret)) || (alternateSecret && await secureEqual(presented, alternateSecret)));
+  if (!accepted) throw httpError(401, `${actor}_authentication_required`);
 }
 
 function requireOAuthConfig(env) {
@@ -651,6 +912,61 @@ function validChannelId(value) {
   const id = String(value || "");
   if (!/^UC[A-Za-z0-9_-]{20,30}$/.test(id)) throw httpError(400, "invalid_channel_id");
   return id;
+}
+
+function validVideoId(value) {
+  const id = String(value || "");
+  if (!/^[A-Za-z0-9_-]{6,20}$/.test(id)) throw httpError(400, "invalid_video_id");
+  return id;
+}
+
+function validPlaylistId(value) {
+  const id = String(value || "");
+  if (!/^[A-Za-z0-9_-]{10,100}$/.test(id)) throw httpError(400, "invalid_playlist_id");
+  return id;
+}
+
+function validTitle(value) {
+  const title = String(value || "").trim();
+  if (!title || title.length > 100) throw httpError(400, "invalid_title");
+  return title;
+}
+
+function validTags(value) {
+  if (!Array.isArray(value) || value.length > 50) throw httpError(400, "invalid_tags");
+  const tags = value.map(x => String(x).trim()).filter(Boolean);
+  if (tags.some(x => x.length > 500) || tags.join(",").length > 500) throw httpError(400, "invalid_tags");
+  return tags;
+}
+
+function validCategory(value) {
+  const id = String(value || "");
+  if (!/^\d{1,4}$/.test(id)) throw httpError(400, "invalid_category_id");
+  return id;
+}
+
+function validPrivacy(value) {
+  const privacy = String(value || "");
+  if (!["private", "unlisted", "public"].includes(privacy)) throw httpError(400, "invalid_privacy");
+  return privacy;
+}
+
+function validFutureTime(value) {
+  const date = new Date(String(value || ""));
+  if (!Number.isFinite(date.getTime()) || date.getTime() < Date.now() + 60_000) throw httpError(400, "invalid_publish_at");
+  return date.toISOString();
+}
+
+function validDate(value) {
+  const date = String(value || "");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(Date.parse(`${date}T00:00:00Z`))) throw httpError(400, "invalid_date");
+  return date;
+}
+
+function boundedInt(value, fallback, min, max) {
+  const number = value == null ? fallback : Number(value);
+  if (!Number.isSafeInteger(number) || number < min || number > max) throw httpError(400, "invalid_limit");
+  return number;
 }
 
 async function bodyJson(request) {

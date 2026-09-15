@@ -1,4 +1,4 @@
-# YouTube Publishing Gateway checkpoint — 2026-09-14
+# YouTube Publishing Gateway checkpoint — 2026-09-15
 
 ## Verified
 
@@ -16,7 +16,7 @@
   browser-bound, ten-minute, and atomically single-use.
 - Existing unrelated Workers, DNS, Access, Pages, D1, and Tunnels were preserved.
 
-## Newly verified OAuth evidence
+## Verified OAuth evidence
 
 - Real Creator-owned Google OAuth completed at 2026-09-14T20:02:42Z.
 - Callback resolved display name `CHILIVIDS` and exact channel ID
@@ -26,13 +26,12 @@
   read or exposed during verification.
 - OAuth mutation audit records `channel_profile.bind` with outcome `success`.
 
-## Newly verified private-upload evidence
+## Verified private-upload evidence
 
 - The isolated VPS runner authenticated with its scoped credential without receiving
   a Google or YouTube refresh token.
-- A private Google Drive object was resolved by exact Drive file ID through the
-  existing authenticated media-gateway route. Filename, byte length, MIME type, and
-  SHA-256 were verified on the VPS before job creation.
+- A private Google Drive object was resolved by exact Drive file ID. Filename, byte
+  length, MIME type, and SHA-256 were verified on the VPS before job creation.
 - D1 migration 2 adds `google_drive` as a bounded source type. The runner attests
   SHA-256 at claim time and the gateway locks it before creating a YouTube session.
 - One real private video completed the official resumable upload path directly from
@@ -41,6 +40,31 @@
   requested title, and `private` privacy. Evidence IDs and private video metadata
   remain outside this public repository.
 
+## Verified runtime decoupling evidence
+
+- The first proof upload reused the Link-to-File Bot `mirror-bot` container to execute
+  rclone. That was accepted as a proof path but exposed an undesirable runtime
+  dependency.
+- Root cause of repeated Telegram boot messages was identified separately: the
+  Link-to-File Bot generic VPS deploy workflow previously ran on every `main` push
+  and rebuilt/restarted `mirror-bot`, including YouTube-workflow-only commits.
+- The bot deploy trigger now ignores workflow-only, agent-mailbox, documentation, and
+  root Markdown changes so YouTube workflow maintenance does not redeploy the bot.
+- The YouTube runner now owns a dedicated rclone v1.75.1 binary and a private mode-600
+  copy of the existing rclone configuration under runner-owned paths.
+- Google Drive retrieval now runs directly through the runner-owned rclone binary and
+  config; normal YouTube publishing no longer calls `docker exec mirror-bot`.
+- A real small Drive file-ID retrieval succeeded through the standalone runner-owned
+  rclone path.
+- `mirror-bot` start time and restart count were checked before and after runner
+  installation and the Drive proof; both remained unchanged and restart count stayed
+  zero during the isolation test.
+- No YouTube upload was performed during the isolation proof.
+- Runtime emitted a current rclone warning that the configured `gdrive:` remote still
+  uses rclone's shared Google Drive client ID, which is being retired during 2026.
+  Migrating that remote to a Creator-owned Google OAuth client is the next
+  infrastructure hardening task.
+
 ## Not yet verified
 
 A deliberate channel-ID mismatch rejection, interruption/resume behavior, and a
@@ -48,5 +72,7 @@ relevant thumbnail or playlist secondary operation. The skill remains candidate.
 
 ## Next step
 
-Exercise deliberate mismatch rejection and interruption recovery without creating a
-duplicate. Then validate one relevant secondary operation before promotion.
+First migrate the runner `gdrive:` remote away from rclone's retiring shared Google
+Drive client ID while preserving bot isolation. Then exercise deliberate mismatch
+rejection and interruption recovery without creating a duplicate, and validate one
+relevant secondary operation before promotion.

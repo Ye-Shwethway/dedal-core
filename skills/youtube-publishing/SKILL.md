@@ -1,12 +1,12 @@
 ---
 name: youtube-publishing
 description: Prepare, upload, organize, schedule, and learn from YouTube publishing workflows across multiple Creator-owned channels using direct APIs or another verified execution surface.
-status: candidate
+status: active
 ---
 
 # YouTube Publishing
 
-Own the channel-operations layer after a media artifact is ready for distribution. This candidate skill is intentionally not active in the Master Index until a real Creator-owned upload validates the workflow.
+Own the channel-operations layer after a media artifact is ready for distribution. The production Gateway, isolated uploader runner, and thin MCP control surface have passed the documented promotion evidence gate.
 
 ## Use when
 
@@ -69,9 +69,9 @@ Do not invent universal search-volume numbers. Any DEDAL competition/opportunity
 - OAuth OOB/manual-copy flows are deprecated. The reference client uses the supported desktop loopback flow; mobile-native auth requires an appropriate supported identity flow.
 - API quotas, scopes, upload restrictions, scheduling semantics, and analytics fields are live platform facts; re-verify when material.
 
-## Candidate promotion gate
+## Promotion evidence gate
 
-Promote this skill to the active registry only after representative Creator work demonstrates at least:
+This skill was promoted only after representative Creator work demonstrated:
 
 1. authorization against one real Creator-owned channel;
 2. channel-ID mismatch protection;
@@ -88,3 +88,4 @@ Promote this skill to the active registry only after representative Creator work
 - `gateway/README.md`
 - `references/cloudflare-gateway-architecture.md`
 - `CURRENT_CHECKPOINT.md`
+- `mcp/README.md`

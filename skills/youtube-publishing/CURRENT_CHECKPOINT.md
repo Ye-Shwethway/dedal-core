@@ -78,51 +78,75 @@
 - `mirror-bot` remained untouched throughout migration and final verification;
   restart count remained zero.
 
-## Promotion-test hardening prepared and deployed
+## Promotion gates passed
 
-- The gateway source already fails closed when OAuth resolves a YouTube channel ID
-  different from the pre-registered profile: HTTP 409, denied audit record, and no
-  credential storage. Upload claim and completion also re-assert the authenticated
-  channel against the locked job channel. A deliberate live mismatch proof is still
-  required.
-- Runner `dedal-youtube-uploader/0.3.0` adds an explicit test-only
+- A temporary pre-registered profile intentionally used a channel ID different from
+  the authenticated CHILIVIDS identity. The real OAuth callback returned HTTP 409,
+  wrote a denied `channel_profile.bind` audit with `channel_id_mismatch`, stored no
+  credential, left the profile disabled, and created no job, session, or video. The
+  temporary profile/state/ticket rows were removed; the denied audit was retained.
+- Runner `dedal-youtube-uploader/0.3.1` includes an explicit test-only
   `--test-interrupt-after-chunks` option. It stops only after YouTube has accepted a
   resumable chunk and progress has been recorded; rerunning the same job without the
   flag reuses the stored upload session and queries YouTube for the confirmed offset.
-- Runner v0.3.0 is deployed on the VPS through the isolated GitHub Actions route.
-  Deployment verified the new test flag, standalone Drive retrieval, absence of the
-  shared-rclone-client warning, and unchanged `mirror-bot` start/restart state. No
-  YouTube upload was performed by the deployment workflow.
-- Gateway source version 0.2.0 now implements optional playlist membership as the
+- The first live promotion attempt exposed a pre-upload Python compatibility defect:
+  `hashlib.compare_digest` is unavailable. No YouTube session/video was created. The
+  runner was corrected to `hmac.compare_digest`, promoted to v0.3.1, and redeployed
+  without changing the `mirror-bot` start time or restart count.
+- One fresh private Drive job then created exactly one resumable session. The first
+  execution recorded one accepted 8 MiB chunk and stopped intentionally. The second
+  execution reused that session, queried the confirmed remote offset, resumed the
+  remaining bytes, and produced exactly one YouTube video.
+- Gateway read-back verified exact video identity, locked channel ID, requested title,
+  and `private` privacy before marking the job verified.
+- Gateway version 0.3.0 implements optional playlist membership as the
   secondary operation. It verifies playlist ownership against the locked channel,
   checks for existing membership before insertion, inserts only when absent, and
-  performs read-back verification. Retrying completion is duplicate-safe because an
-  existing playlist item is detected before insertion.
-- Gateway v0.2.0 source is committed but is not yet claimed as deployed. The current
-  tool surface has no existing GitHub Actions route for the Cloudflare Worker deploy;
-  deployment requires the authorized Cloudflare execution path.
-- Runtime CI now syntax-checks both the Python YouTube runner and the JavaScript
-  gateway in addition to the existing contracts. Repo Integrity and Runtime Contracts
-  are green for the hardening changes.
-- `youtube-publishing` is explicitly classified `NEEDS_EVIDENCE` in the Core skill
-  consolidation state until the live promotion gates below pass.
+  performs read-back verification. The live retry returned `already_present` with
+  membership count one, proving duplicate-safe playlist behavior.
 
-## Not yet verified
+## MCP-ready control surface
 
-1. A deliberate live channel-ID mismatch rejection with no credential stored and no
-   upload initiated.
-2. A real interrupted resumable upload that resumes the same session/job and produces
-   exactly one YouTube video.
-3. A real playlist secondary operation with read-back verification.
+- Gateway v0.3.0 is deployed at `youtube.drthorne.uk`; its D1 and existing secret
+  bindings were preserved. It exposes bounded authenticated operations for channel
+  profiles, recent videos, one-video read/update, private-first privacy and scheduling,
+  playlists, upload jobs, analytics summary, and search terms.
+- Public/unlisted changes still require explicit visibility intent. Scheduling still
+  requires explicit publication intent. Every remote video/playlist mutation resolves
+  a connected profile, refreshes server-side credentials, and reasserts the exact
+  YouTube channel before mutation.
+- A dedicated scoped `MCP_API_TOKEN` Worker secret lets a thin MCP service call only
+  the bounded Gateway surface. It does not expose Google credentials or unrestricted
+  Google API passthrough.
+- `dedal-youtube-mcp` v0.1.0 is deployed at `mcp.youtube.drthorne.uk/mcp`. It stores no
+  Google token, supports Streamable HTTP JSON-RPC, advertises 13 narrow tools, and
+  implements OAuth discovery, dynamic client registration, authorization-code + PKCE,
+  short-lived access tokens, rotating issuance, and hashed-token D1 storage.
+- An end-to-end self-test passed OAuth discovery, registration, approval, PKCE token
+  exchange, MCP initialization, tool listing, and a real `youtube_channels` call through
+  MCP to Gateway. Test client/code/token/ticket records were removed afterward.
+- Live Analytics calls currently fail at the Google upstream boundary. The configured
+  OAuth scope is present; the likely remaining project-side prerequisite is enabling
+  the YouTube Analytics API. Do not claim analytics retrieval until enabled and read back.
 
-The skill remains candidate.
+## Remaining integration boundary
 
-## Next executable step
+1. Enable the YouTube Analytics API in the existing Google Cloud project, then rerun
+   the bounded summary and search-term reads.
+2. Register `https://mcp.youtube.drthorne.uk/mcp` in ChatGPT developer mode and complete
+   the MCP OAuth screen with a fresh single-use Creator approval ticket.
 
-Use the authorized Cloudflare execution path once to deploy gateway v0.2.0 and verify
-`GET /health` reports the new version. Then run the deliberate mismatch test without
-an upload. Finally, use one fresh private video job with a valid Creator-owned
-CHILIVIDS playlist to combine the remaining two gates: stop after the first accepted
-chunk, rerun the same job to resume, verify exactly one resulting video, and verify
-idempotent playlist membership by read-back. Promote the skill only after all three
-live gates pass.
+The promotion gate is satisfied. `youtube-publishing` is active and classified KEEP.
+
+## Intended normal control surface
+
+Normal channel management is:
+
+`ChatGPT / DEDAL -> dedal-youtube MCP -> Gateway -> YouTube Data/Analytics APIs`
+
+Large media alone uses:
+
+`Gateway upload job -> dedicated VPS runner -> direct resumable YouTube upload`
+
+GitHub Actions remains a deployment, maintenance, and exceptional remote-execution
+bridge. It is not the normal Creator-facing YouTube management interface.

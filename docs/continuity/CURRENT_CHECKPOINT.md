@@ -35,7 +35,7 @@ The v0.15 wrong-tool regression remains preserved as evidence of why instruction
 `state/skill-consolidation.json` now classifies every live skill entrypoint with one of KEEP / TUNE / MERGE / REMOVE / NEEDS_EVIDENCE and records the primary overlap boundary.
 
 Current classification counts:
-- KEEP: 10
+- KEEP: 18
 - TUNE: 1 (`skill-acquisition`, because the expansion campaign is complete and acquisition should now be gap-driven)
 - NEEDS_EVIDENCE: 8
 - MERGE: 0

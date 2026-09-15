@@ -1,5 +1,5 @@
-version: 20
-last_reviewed: "2026-09-14"
+version: 21
+last_reviewed: "2026-09-15"
 
 routing:
   default_policy: smallest_matching_skill_set
@@ -187,6 +187,16 @@ skills:
         - source: "OpenAI Sora current product-status page"
           reviewed_on: "2026-09-14"
       adapted_on: "2026-09-14"
+
+  youtube-publishing:
+    aliases: ["youtube-publishing"]
+    path: "skills/youtube-publishing"
+    entrypoint: "skills/youtube-publishing/SKILL.md"
+    status: active
+    independence: specialist_platform_domain
+    evidence:
+      promoted_on: "2026-09-15"
+      level: "real-oauth-mismatch-resume-playlist-and-remote-readback-proven"
 
   presentation-engineering:
     aliases: ["presentation-engineering", "pptx", "slides"]

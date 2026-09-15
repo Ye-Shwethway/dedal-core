@@ -7,7 +7,7 @@ from pathlib import Path
 
 GATEWAY="https://youtube.drthorne.uk"
 CHUNK=8*1024*1024
-USER_AGENT="dedal-youtube-uploader/0.2.0"
+USER_AGENT="dedal-youtube-uploader/0.3.0"
 
 class RunnerError(RuntimeError): pass
 
@@ -128,9 +128,10 @@ def progress(base,token,job_id,count):
     api(base,token,"POST",f"/v1/upload-jobs/{job_id}/progress",
         {"bytes_uploaded":count})
 
-def upload(path,session,mime,total,base,token,job_id):
+def upload(path,session,mime,total,base,token,job_id,interrupt_after_chunks=0):
     offset,done=confirmed_offset(session,total)
     if done: return done
+    completed_chunks=0
     with path.open("rb") as stream:
         stream.seek(offset)
         while offset<total:
@@ -150,8 +151,15 @@ def upload(path,session,mime,total,base,token,job_id):
                 if exc.code==308:
                     match=re.search(r"bytes=0-(\d+)",exc.headers.get("Range") or "")
                     offset=int(match.group(1))+1 if match else end+1
-                    stream.seek(offset); progress(base,token,job_id,offset)
-                    print(f"Uploaded {offset}/{total} bytes",flush=True); continue
+                    stream.seek(offset)
+                    progress(base,token,job_id,offset)
+                    completed_chunks+=1
+                    print(f"Uploaded {offset}/{total} bytes",flush=True)
+                    if interrupt_after_chunks and completed_chunks>=interrupt_after_chunks:
+                        raise RunnerError(
+                            f"TEST_INTERRUPT_AFTER_CHUNKS reached after {completed_chunks} chunk(s); "
+                            "rerun the same job without the test flag to verify resume")
+                    continue
                 if exc.code in (404,410):
                     raise RunnerError("Upload session expired; reconcile before replacement") from exc
                 detail=exc.read(4096).decode("utf-8","replace")
@@ -164,7 +172,11 @@ def main():
     p.add_argument("--gateway",default=os.getenv("DEDAL_YOUTUBE_GATEWAY",GATEWAY))
     p.add_argument("--state-dir",default=os.getenv("DEDAL_YOUTUBE_STATE_DIR",
         "/var/lib/dedal-youtube-uploader"))
+    p.add_argument("--test-interrupt-after-chunks",type=int,default=0,
+        help="test-only: stop after N accepted resumable chunks, then rerun the same job without this flag")
     args=p.parse_args()
+    if args.test_interrupt_after_chunks<0:
+        raise RunnerError("--test-interrupt-after-chunks must be zero or greater")
     token=os.getenv("DEDAL_YOUTUBE_RUNNER_TOKEN")
     if not token: raise RunnerError("DEDAL_YOUTUBE_RUNNER_TOKEN is not set")
     inspected=api(args.gateway,token,"POST",
@@ -178,7 +190,7 @@ def main():
     claim=api(args.gateway,token,"POST",f"/v1/upload-jobs/{args.job_id}/claim",
         {"content_length":total,"content_type":mime,"source_fingerprint":actual})
     video_id=upload(source,claim["upload"]["session_url"],mime,total,
-        args.gateway,token,args.job_id)
+        args.gateway,token,args.job_id,args.test_interrupt_after_chunks)
     verified=api(args.gateway,token,"POST",
         f"/v1/upload-jobs/{args.job_id}/complete",{"youtube_video_id":video_id})
     if verified["job"]["status"]!="verified":

@@ -21,7 +21,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile runtime/github_mutation_guard.py scripts/validate_runtime_contracts.py scripts/validate_context_contract.py scripts/validate_self_improvement_contract.py scripts/validate_tool_authority_contract.py scripts/validate_delegation_authority_contract.py scripts/validate_failure_recovery_contract.py scripts/validate_capability_composition_contract.py scripts/validate_quality_engineering_routing.py scripts/validate_cloudflare_platform_routing.py scripts/validate_database_engineering_routing.py scripts/validate_mobile_reference_pack_routing.py scripts/validate_reliability_engineering_routing.py scripts/validate_infrastructure_engineering_routing.py scripts/validate_creative_production_routing.py
+          python3 -m py_compile runtime/github_mutation_guard.py scripts/validate_runtime_contracts.py scripts/validate_context_contract.py scripts/validate_self_improvement_contract.py scripts/validate_tool_authority_contract.py scripts/validate_delegation_authority_contract.py scripts/validate_failure_recovery_contract.py scripts/validate_capability_composition_contract.py scripts/validate_quality_engineering_routing.py scripts/validate_cloudflare_platform_routing.py scripts/validate_database_engineering_routing.py scripts/validate_mobile_reference_pack_routing.py scripts/validate_reliability_engineering_routing.py scripts/validate_infrastructure_engineering_routing.py scripts/validate_creative_production_routing.py skills/youtube-publishing/runner/dedal_youtube_uploader.py
+          node --input-type=module --check < skills/youtube-publishing/gateway/src/index.js
           python3 scripts/validate_runtime_contracts.py
           python3 scripts/validate_context_contract.py
           python3 scripts/validate_self_improvement_contract.py

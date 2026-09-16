@@ -14,6 +14,7 @@ All meaningful DEDAL Core architectural and behavioral changes should be recorde
 - Post-mutation transport/read-back errors require state verification before retry when the upstream mutation may already have committed.
 - Manual production source editing is a last resort when authorized automation remains practical, with explicit attention to mobile-constrained Creator workflows.
 - Cloudflare and integration-aggregation connected capability are marked `verify_per_session` in the public capability registry.
+- YouTube hardening validation no longer hardcodes the global Core next-checkpoint ID, preventing unrelated domain checkpoints from causing false CI failures.
 
 ## 0.11.0 — 2026-09-14
 

@@ -8,14 +8,12 @@ All meaningful DEDAL Core architectural and behavioral changes should be recorde
 - `skills/youtube-seo/` as a first-party-data-first discovery-intelligence faculty for query/entity research, Search/Browse/Suggested surface strategy, packaging hypotheses, analytics diagnosis, experiment design/readout, and channel learning.
 - Transparent YouTube SEO evidence classes and opportunity-factor model that refuse unsupported absolute search volume, universal difficulty, guaranteed rank, or magic-score certainty.
 - YouTube SEO routing/eval contract with explicit ownership separation from YouTube Publishing and private-overlay learning.
-- Structured YouTube SEO analysis and prospective experiment records for preserving target surface, entity/query evidence, baseline package, hypothesis, missing data, confounders, normalized observation windows, and outcome status.
 
 ### Changed
 - YouTube Publishing now owns authenticated YouTube operations and bounded API/MCP transport while YouTube SEO owns discovery intelligence; approved SEO changes still pass through Publishing intent/read-back gates.
 - YouTube Publishing source now includes dedicated owned-video traffic-source, search-term, and retention read helpers for the YouTube SEO feedback loop; deployed references advanced to Gateway `0.7.43` / MCP `0.8.2`.
 - Reporting bridge failures now persist bounded upstream diagnostics to private audit state, allowing service/configuration errors to be distinguished from MCP or aggregation transport failures without exposing credentials.
 - Capability routing/registry/consolidation state now recognizes YouTube discovery intelligence as independently routable without turning Data/Analytics/Reporting APIs or third-party SEO tools into faculties.
-- YouTube SEO packaging now includes an explicit viewer-facing metadata quality gate: concise natural descriptions, useful context first, verified entities, no internal archival/workflow notes, no keyword dumping, and title/description/thumbnail promise consistency.
 
 ## 0.29.0 — 2026-09-16
 

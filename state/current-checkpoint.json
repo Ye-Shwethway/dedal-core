@@ -1,52 +1,51 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.27.0",
+  "version": "0.28.0",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
-    "YOUTUBE-SOURCE-SYNC-01 reconciles the verified public-safe YouTube Gateway/MCP implementation delta into the durable repository.",
-    "The public MCP surface exposes 49 bounded youtube_* tools and the public Gateway carries the corresponding source-sync routes covered by contract validation.",
-    "Public Gateway 0.4.0 and MCP 0.2.0 version independently from the authorized deployed references Gateway 0.7.35 and MCP 0.8.1; byte-for-byte deployment parity is not claimed.",
-    "Playlist-image replacement remains managed-baseline delete -> insert -> readback with rollback; unmanaged replacement fails closed.",
-    "Watermark prior state remains unreadable and unmanaged destructive handling remains fail closed absent explicit Creator authority.",
-    "Public source excludes credentials, Creator-specific operational identifiers/state, raw deployed exports, debug assets, live audit rows, and Cloudflare account/database identifiers."
+    "Cloudflare Platform remains the single top-level Cloudflare faculty; operational hardening is merged into it rather than creating an overlapping duplicate skill.",
+    "Production Cloudflare work distinguishes repository source, build artifacts, deployed Worker content, and sanitized/public reconstructions until equivalence is proven.",
+    "Connector discovery/read capability does not prove write-transport fidelity; source-upload semantics must be verified and the execution surface may change without changing correct application code.",
+    "Authorized automation is preferred before manual dashboard/source editing, especially for mobile-constrained Creator workflows.",
+    "Potentially committed mutations are read back before retry when duplicate/destructive effects are possible; unresolved outcomes keep retry safety explicit.",
+    "Cloudflare and aggregation execution surfaces are session capabilities and are verified live rather than assumed from Core."
   ],
   "evidence": [
     {
-      "id": "youtube-source-sync-contract-v1",
+      "id": "cloudflare-platform-routing-contract-v1",
       "kind": "contract_validation",
       "status": "passed_local_precommit"
     },
     {
-      "id": "youtube-publishing-hardening-contract-v1",
+      "id": "cloudflare-platform-operations-contract-v1",
       "kind": "contract_validation",
       "status": "passed_local_precommit"
     },
     {
-      "id": "youtube-public-repo-privacy-scan",
+      "id": "cloudflare-production-workflow-lessons-2026-09-16",
+      "kind": "observed_workflow_evidence",
+      "status": "encoded_public_safe"
+    },
+    {
+      "id": "public-repo-privacy-scan",
       "kind": "privacy_validation",
       "status": "passed_local_precommit"
-    },
-    {
-      "id": "youtube-authorized-deployed-source-reference-2026-09-16",
-      "kind": "source_reconciliation",
-      "status": "public_safe_delta_reconstructed"
     }
   ],
   "unresolved_risks": [
-    "Channel banner persistent managed rollback is not yet at playlist-image parity.",
-    "Watermark lifecycle remains fail-closed for unmanaged state because prior watermark state cannot be reliably read.",
-    "YouTube vendor media/upload semantics may change and require current live verification when material.",
-    "Previously recorded YouTube Analytics upstream-read issues are not claimed resolved by source synchronization alone."
+    "Connector and aggregation request serialization behavior can drift independently of Cloudflare APIs and must be verified per session.",
+    "Some production source representations may be unavailable through a given execution surface; alternate retrieval or explicit Creator assistance can still be required.",
+    "Cloudflare API schemas, Worker upload semantics, limits, and product status remain drift-sensitive and require current authoritative verification when material."
   ],
   "next_executable_step": {
-    "id": "YOUTUBE-PUBLIC-SOURCE-OUTCOME-01",
-    "action": "Exercise the synchronized public YouTube source in normal maintenance/deployment work, compare observed runtime behavior, and record only real drift or regressions."
+    "id": "CLOUDFLARE-OPS-OUTCOME-01",
+    "action": "Exercise the hardened Cloudflare operational workflow in representative Worker/configuration maintenance and record only observed regressions or missing recovery semantics."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "dadad52475957dff8eec8e87ffba6dc6f3a2da52",
-    "relation": "verified v0.27.0 YOUTUBE-SOURCE-SYNC-01 implementation commit; Repo Integrity and Runtime Contracts passed on this revision"
+    "sha": "6b94305d92648e8169ad82fe5083226f982f8890",
+    "relation": "base HEAD verified before v0.28.0 Cloudflare operational hardening; post-commit revision will be Git-derived"
   }
 }

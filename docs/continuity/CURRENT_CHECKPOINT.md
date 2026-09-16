@@ -6,28 +6,26 @@ _Date: 2026-09-16_
 
 - Repository: `Ye-Shwethway/dedal-core`
 - Branch: `main`
-- Release: `0.27.0`
-- Source-sync base HEAD: `59cbfb5736882afa4efd6745cdfb7d72efdc3d2e`
+- Release: `0.28.0`
+- Change base HEAD: `6b94305d92648e8169ad82fe5083226f982f8890`
 - The exact post-commit HEAD is Git-derived and is reported after the atomic transaction; this file does not self-embed its own commit hash.
 
 ## Operating phase
 
-DEDAL remains in hardening/consolidation/outcome-validation mode. This release closes the public-source drift identified by the YouTube Publishing hardening checkpoint without reopening broad capability expansion.
+DEDAL remains in hardening/consolidation/outcome-validation mode. Cloudflare operational reliability is strengthened inside the existing `cloudflare-platform` faculty rather than by adding an overlapping top-level skill.
 
-## YouTube source-sync status
+## Cloudflare operational status
 
-`YOUTUBE-SOURCE-SYNC-01` reconciles the verified public-safe implementation delta from authorized deployed Gateway/MCP source inspection into the durable repository. Public source now includes the 49-tool MCP surface and the corresponding bounded Gateway implementation for media, caption, playlist-image, branding, Data API, Reporting API, Analytics API, and video-delete routes covered by the source-sync contract.
+The hardened workflow treats repository source, generated/build artifacts, deployed Worker source, and sanitized public reconstructions as distinct until equivalence is proven. Live Worker state outranks stale repository state for production patching.
 
-Public versions are intentionally independent from deployed patch numbering: Gateway `0.4.0` and MCP `0.2.0`; the authorized deployed references used for reconciliation were Gateway `0.7.35` and MCP `0.8.1`. No byte-for-byte deployment parity claim is made.
+Connector read/discovery success is not considered evidence that raw/multipart/module source uploads will preserve request semantics. When a wrapper corrupts transport, DEDAL should switch execution surface rather than modify correct Worker logic to fit the wrapper. Automated native/direct/API/CLI paths are preferred before manual source editing, especially when the Creator is operating from mobile.
 
-## Public-repo boundary
+Potentially committed mutations require read-back before retry when repeating the action can duplicate or destructively compound effects. Eventual-consistency verification may use bounded retries; unresolved outcomes remain explicit and retry safety is recorded.
 
-The synchronized source excludes raw Worker exports, credentials/tokens/cookies, Creator-specific channel/video/playlist/caption identifiers, live D1/audit rows, internal test assets, embedded debug media, and Cloudflare account/database identifiers. Production D1 identity remains private deployment configuration.
+## Capability boundary
 
-## Remaining limits
-
-Banner persistent managed rollback is not yet at playlist-image parity. Watermark prior state is not reliably readable and unmanaged destructive handling therefore remains fail closed. Previously recorded YouTube Analytics upstream-read issues remain unresolved unless later live evidence proves otherwise.
+Cloudflare and integration aggregation are runtime execution surfaces whose availability and fidelity must be verified per session. Core does not permanently assume a specific connector or broker is installed.
 
 ## Next checkpoint
 
-`YOUTUBE-PUBLIC-SOURCE-OUTCOME-01`: exercise the synchronized public source in normal maintenance/deployment work and record only observed runtime drift/regressions.
+`CLOUDFLARE-OPS-OUTCOME-01`: exercise the hardened workflow in representative Worker/configuration maintenance and record only observed regressions or missing recovery semantics.

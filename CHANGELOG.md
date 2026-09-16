@@ -2,6 +2,19 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.28.0 — 2026-09-16
+
+### Added
+- Cloudflare Worker deployment/connector-recovery reference covering live-source identity, transport fidelity, raw/multipart upload recovery, outcome-unknown mutations, aggregation-layer verification, and automation-first mobile workflows.
+- Executable `cloudflare-platform-operations` contract with eight representative failure/recovery cases.
+
+### Changed
+- Cloudflare Platform now distinguishes repository/build/deployed/sanitized source identities and forbids replacing newer live Worker code with stale repository source without proven equivalence.
+- Connector read/discovery capability no longer implies source-upload fidelity; request serialization failures trigger execution-surface switching rather than application-code distortion.
+- Post-mutation transport/read-back errors require state verification before retry when the upstream mutation may already have committed.
+- Manual production source editing is a last resort when authorized automation remains practical, with explicit attention to mobile-constrained Creator workflows.
+- Cloudflare and integration-aggregation connected capability are marked `verify_per_session` in the public capability registry.
+
 ## 0.11.0 — 2026-09-14
 
 ### Added

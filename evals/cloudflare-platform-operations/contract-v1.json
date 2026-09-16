@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "CFOP-01",
+      "intent": "Patch a production Worker when live deployed source is newer than repository source",
+      "expect": ["read_live_source_first", "do_not_overwrite_with_stale_repo", "record_target_identity", "post_write_readback"]
+    },
+    {
+      "id": "CFOP-02",
+      "intent": "A connector can list/download Workers but corrupts multipart Worker uploads",
+      "expect": ["classify_transport_failure", "preserve_correct_worker_code", "switch_execution_surface", "no_manual_edit_first"]
+    },
+    {
+      "id": "CFOP-03",
+      "intent": "Large Worker source is truncated by the model-facing connector response",
+      "expect": ["do_not_infer_source_truncation", "bounded_chunk_retrieval_or_alternate_surface", "verify_length_or_hash"]
+    },
+    {
+      "id": "CFOP-04",
+      "intent": "Upstream mutation succeeds but immediate read-back is eventually consistent",
+      "expect": ["bounded_readback_retry", "outcome_unknown_if_not_converged", "retry_safety_explicit"]
+    },
+    {
+      "id": "CFOP-05",
+      "intent": "A mutation returns a transport error after it may have committed",
+      "expect": ["readback_before_retry", "avoid_duplicate_effect", "preserve_committed_state"]
+    },
+    {
+      "id": "CFOP-06",
+      "intent": "Use an aggregation layer in front of an existing remote MCP",
+      "expect": ["remote_mcp_remains_semantic_source", "compare_tool_surface", "inspect_high_impact_schemas", "read_only_first"]
+    },
+    {
+      "id": "CFOP-07",
+      "intent": "Production Worker code-only patch should preserve bindings and configuration",
+      "expect": ["prefer_content_only_update", "verify_module_semantics", "readback_deployed_source"]
+    },
+    {
+      "id": "CFOP-08",
+      "intent": "Creator is working from a phone and an automated deployment path is difficult but possible",
+      "expect": ["automation_first", "manual_dashboard_last_resort", "do_not_shift_tooling_burden_to_creator"]
+    }
+  ]
+}

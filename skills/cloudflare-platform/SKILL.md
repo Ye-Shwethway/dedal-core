@@ -17,6 +17,8 @@ Own Cloudflare-specific platform reasoning: product selection, service compositi
 6. **Plan environment/binding semantics explicitly.** Know which resources and secrets exist in local, preview, staging, and production; do not assume environment inheritance or binding identity.
 7. **Execute with the appropriate surface.** Use current native/plugin/MCP/API/CLI capabilities when authorized; tool availability does not grant mutation authority.
 8. **Verify the real target.** Read back resource/config state and, where appropriate, exercise the deployed route, binding, storage path, access rule, or tunnel. Do not equate command success with end-to-end correctness.
+9. **Verify execution-surface fidelity.** A connector that can discover/read resources may still rewrite or reject raw/multipart/source-upload requests. Validate the required request semantics before production mutation and change execution surface rather than distorting correct application code.
+10. **Automate before delegating manual edits.** Within granted authority, exhaust practical native/direct/API/CLI paths before asking the Creator to edit production source by hand; manual dashboard editing is a last resort unless human review is explicitly desired.
 
 ## Ownership boundary
 
@@ -35,11 +37,14 @@ Own Cloudflare-specific platform reasoning: product selection, service compositi
 - Distinguish local emulation, preview, deployed Worker/Pages state, DNS propagation, Access policy, Tunnel connectivity, and origin health as separate evidence layers.
 - Never expose secrets in source, logs, screenshots, or public Core. Use supported secret/binding mechanisms.
 - Treat destructive resource deletion, DNS changes, Access-policy changes, production deploys, billing-affecting changes, and data migrations as higher-impact mutations requiring the corresponding authority and recovery thinking.
+- Treat deployed Worker source, repository source, build artifacts, and sanitized public reconstructions as distinct identities until equivalence is proven. Never overwrite a newer live Worker with stale repository source merely because the repository is easier to access.
+- If a mutation may have committed before a connector/read-back failure, verify state before retrying. Avoid blind retries for operations that can duplicate or destructively repeat effects.
 - Cloudflare product recommendations must follow the workload; do not route by brand familiarity.
 
 ## Progressive references
 
 - `references/platform-composition-and-freshness.md` — product-selection method, live-doc policy, incumbent architecture, and environment/binding reasoning.
 - `references/operations-and-verification.md` — deploy/config/network/data-plane verification, observability, troubleshooting, and recovery evidence.
+- `references/worker-deployment-and-connector-recovery.md` — live Worker source identity, connector/aggregation transport fidelity, source upload recovery, outcome-unknown mutations, and automation-first mobile-friendly operations.
 
 Load product-specific Cloudflare documentation only when the active task needs it.

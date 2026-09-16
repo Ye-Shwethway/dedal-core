@@ -34,6 +34,21 @@ Before high-impact changes, record the known-good state or recovery point where 
 
 Use idempotent/safely retryable operations when supported. If a partial change leaves residual effects, report them explicitly and choose retry, compensation, preserve-partial, or escalation according to the Cognitive Runtime recovery contract.
 
+
+## Execution-surface failures
+
+When a connector, MCP, aggregator, CLI, or API wrapper fails, identify whether the failure is in authentication, discovery/schema, serialization/transport, Cloudflare API validation, deployment, runtime, or read-back. Do not change correct application logic merely to accommodate a transport wrapper defect.
+
+Read capability and write capability are separate evidence. A surface that lists Workers or downloads source may still be unable to preserve multipart boundaries, raw request bodies, module metadata, or large response bodies during upload. Verify the required transport semantics before consequential writes and switch to a more faithful surface when needed.
+
+If the Creator is mobile-constrained, prefer automated connector/API recovery over asking for manual code editing. Manual dashboard edits are appropriate only after reasonable automated paths fail or when explicit human review is intended.
+
+## Ambiguous write outcomes
+
+An error returned after an upstream mutation is not proof that the mutation failed. Eventual consistency, post-write verification, timeout, or connector response handling can produce a false-negative result.
+
+Before retrying a non-trivially idempotent mutation, read back state. If the desired state already exists, preserve it and do not retry. If the state remains unknown and retry could duplicate or destroy data, report an outcome-unknown condition with retry safety explicitly characterized.
+
 ## Observability
 
 Use current Cloudflare-native logs, analytics, traces, tailing, build/deploy evidence, and product-specific diagnostics when available. Observability is evidence, not authority: a missing log line does not by itself prove a request never happened, and a healthy edge response does not prove downstream data correctness.

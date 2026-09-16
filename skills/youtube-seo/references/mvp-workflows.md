@@ -60,3 +60,17 @@ A durable channel lesson should contain:
 - confidence/status (`candidate`, `supported`, `superseded`).
 
 Creator/channel-specific records belong in the private operational overlay, never in public Core.
+
+## Prospective experiment runner
+
+1. Apply only an approved package through YouTube Publishing and verify authoritative read-back.
+2. Freeze a T0 record: exact package, target surface, publication time/age, bounded SERP baseline, public stats, source availability, and confounders.
+3. Hold metadata stable unless a factual/policy defect or explicit Creator-directed change requires intervention.
+4. Measure at 24h, 3d, 7d, and 28d when useful. Sparse channels may extend windows rather than forcing a conclusion.
+5. At every window, distinguish measured zero from unavailable/not-yet-processed/suppressed/error states.
+6. Use per-video traffic sources, visible Search detail, retention, Reach impressions/CTR when available, and bounded SERP observations; no single unavailable source blocks the full readout.
+7. At 7d, record a directional status (`supports`, `mixed`, `does_not_support`, `inconclusive`) without upgrading a sequential change into causal proof.
+8. At 28d, extract only evidence-backed channel lessons and retain confounders.
+9. Keep real experiment identifiers/outcomes private; promote only sanitized reusable rules to Core.
+
+See `measurement-and-closeout.md` for the canonical window schema and closeout gate.

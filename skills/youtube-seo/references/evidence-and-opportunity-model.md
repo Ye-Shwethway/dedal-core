@@ -141,3 +141,9 @@ When a field is unavailable:
 2. use an explicitly named proxy only when decision-useful;
 3. lower confidence/evidence strength;
 4. never backfill with invented precision.
+
+## Availability semantics
+
+Measurement records must distinguish `observed_zero`, `observed_nonzero`, `unavailable`, `not_processed_yet`, `suppressed_or_incomplete`, and retrieval `error`. Empty rows do not prove zero traffic/demand/retention. Search-detail rows are non-exhaustive when privacy or aggregation limits can apply.
+
+Prospective packages should remain stable during planned measurement windows unless a factual/policy defect, explicit Creator instruction, or predeclared sequential experiment requires a change. This prevents post-hoc optimization churn from destroying the baseline.

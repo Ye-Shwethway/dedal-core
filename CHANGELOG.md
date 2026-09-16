@@ -5,11 +5,13 @@ All meaningful DEDAL Core architectural and behavioral changes should be recorde
 ## 0.30.0 — 2026-09-16
 
 ### Added
+- A reusable prospective SEO measurement and closeout contract with T0/24h/3d/7d/28d windows, explicit source-availability states, SERP drift handling, anti-churn rules, and feature-complete criteria.
 - `skills/youtube-seo/` as a first-party-data-first discovery-intelligence faculty for query/entity research, Search/Browse/Suggested surface strategy, packaging hypotheses, analytics diagnosis, experiment design/readout, and channel learning.
 - Transparent YouTube SEO evidence classes and opportunity-factor model that refuse unsupported absolute search volume, universal difficulty, guaranteed rank, or magic-score certainty.
 - YouTube SEO routing/eval contract with explicit ownership separation from YouTube Publishing and private-overlay learning.
 
 ### Changed
+- YouTube SEO now distinguishes observed zero from unavailable/not-yet-processed/suppressed/error states and treats longitudinal outcome windows as ongoing validation rather than a blocker to closing the implemented skill scope.
 - YouTube Publishing now owns authenticated YouTube operations and bounded API/MCP transport while YouTube SEO owns discovery intelligence; approved SEO changes still pass through Publishing intent/read-back gates.
 - YouTube Publishing source now includes dedicated owned-video traffic-source, search-term, and retention read helpers for the YouTube SEO feedback loop; deployed references advanced to Gateway `0.7.44` / MCP `0.8.3`.
 - Reporting bridge failures now persist bounded upstream diagnostics to private audit state, allowing service/configuration errors to be distinguished from MCP or aggregation transport failures without exposing credentials.

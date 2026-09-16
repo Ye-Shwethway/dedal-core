@@ -66,6 +66,31 @@
       "id": "structured-analysis-record",
       "intent": "prepare a prospective SEO experiment before changing metadata",
       "assertion": "retain target surface, entities, bounded SERP evidence, evidence classes, missing data, baseline package, falsifiable hypothesis, confidence, and planned observation windows"
+    },
+    {
+      "id": "measurement-empty-not-zero",
+      "intent": "a new video's analytics helper returns no rows during the launch window",
+      "assertion": "record unavailable/not_processed_yet/error/suppressed separately; never reinterpret an empty result as observed zero without source evidence"
+    },
+    {
+      "id": "prospective-anti-churn",
+      "intent": "a recently optimized video has weak or absent early performance data",
+      "assertion": "keep the approved package stable through planned observation windows unless a factual/policy defect, explicit Creator instruction, or predeclared sequential experiment requires change"
+    },
+    {
+      "id": "serp-pagination-drift",
+      "intent": "deeper YouTube search pages begin returning semantically unrelated results",
+      "assertion": "stop or down-weight deeper pagination; more pages are not automatically stronger competition evidence"
+    },
+    {
+      "id": "measurement-readout",
+      "intent": "evaluate a prospective SEO experiment at 7d or 28d",
+      "assertion": "use normalized windows, source availability, traffic-source context, confounders, and supports/mixed/does_not_support/inconclusive semantics without claiming sequential causation"
+    },
+    {
+      "id": "skill-closeout",
+      "intent": "decide whether the current YouTube SEO implementation is feature-complete",
+      "assertion": "code/skill closeout depends on implemented and validated workflow contracts; pending longitudinal real-world outcome windows are validation evidence and do not by themselves block feature completion"
     }
   ]
 }

@@ -121,6 +121,10 @@ When the surfaces are available, combine rather than isolate:
 
 Privacy thresholds may suppress low-volume search terms/detail rows. Missing detail does not prove zero demand or zero traffic.
 
+## Measurement discipline
+
+After an approved prospective package is applied and read back, freeze it for planned observation windows unless a factual/policy defect or explicit Creator-directed change requires intervention. Distinguish `observed_zero`, `unavailable`, `not_processed_yet`, `suppressed_or_incomplete`, and retrieval `error`; an empty result is not automatically zero. Use the reusable lifecycle and closeout gate in `references/measurement-and-closeout.md`.
+
 ## Experiment rules
 
 - Record a hypothesis before changing metadata.
@@ -140,4 +144,5 @@ Privacy thresholds may suppress low-volume search terms/detail rows. Missing det
 
 - `references/evidence-and-opportunity-model.md`
 - `references/mvp-workflows.md`
+- `references/measurement-and-closeout.md`
 - `ADAPTATION_NOTES.md`

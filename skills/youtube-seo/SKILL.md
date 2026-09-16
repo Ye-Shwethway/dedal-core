@@ -43,11 +43,44 @@ Never present an absolute YouTube keyword search volume, universal keyword diffi
 3. **Classify discovery surface.** State the primary hypothesis: Search, Browse, Suggested, mixed, or Shorts feed. Do not apply one SEO template to every surface.
 4. **Collect bounded evidence.** Prefer first-party owned-channel analytics, then official APIs/docs, then live public search observations. Use external tool/community methodology only as lower-authority comparative evidence.
 5. **Build a factor vector, not a magic score.** Track semantic relevance, entity specificity, observed channel evidence, trend evidence, result saturation, exact-match gap, authoritative competition, freshness, channel fit, packaging fit, and later post-publish response.
-6. **Propose packaging.** Produce a primary package plus deliberately different alternates when useful: title, description, minimal tags, playlist placement, and thumbnail promise/brief. Keep the package truthful to the actual video.
-7. **Preflight.** Check API limits, factual fit, duplicate/cannibalization risk, target playlist/niche, title-thumbnail promise consistency, and whether the proposed change could damage an already-performing surface.
+6. **Propose packaging.** Produce a primary package plus deliberately different alternates when useful: title, description, minimal tags, playlist placement, and thumbnail promise/brief. Keep the package truthful to the actual video and apply the user-facing metadata standard below.
+7. **Preflight.** Check API limits, factual fit, duplicate/cannibalization risk, target playlist/niche, title-thumbnail promise consistency, viewer-facing copy quality, and whether the proposed change could damage an already-performing surface.
 8. **Separate proposal from mutation.** Hand writes to YouTube Publishing. Consequential changes retain its ownership/intent/read-back gates.
 9. **Evaluate on normalized windows.** Prefer comparable-age windows (launch/early/first-week/28-day/mature) and segment by traffic source when possible. Do not compare a new upload's raw lifetime totals with an old video's lifetime totals.
 10. **Learn with provenance.** Store Creator/channel-specific evidence in the private operational overlay; promote only sanitized generic lessons to public Core.
+
+## User-facing metadata writing standard
+
+Metadata is product copy for viewers, not an operator note, database label, or private archival annotation.
+
+### Titles
+- Write for a human reader first, while preserving the strongest truthful search/entity language.
+- Prefer clear scene/entity phrasing over mechanical keyword strings.
+- Do not add claims, character names, quotes, episode details, or superlatives unless they are supported by the actual clip.
+- Avoid redundant franchise/episode wording when a shorter form preserves intent.
+
+### Descriptions
+- The opening sentence should tell the viewer what moment they are about to watch and provide the most useful context.
+- Use one or two natural sentences of entity/context language rather than a keyword list.
+- Default to concise copy: usually 2–5 sentences or one short paragraph unless the video genuinely needs more context.
+- Make the copy attractive and informative without hype that the clip cannot support.
+- Do not expose internal workflow language such as `personal archival upload`, `test upload`, `SEO experiment`, `MCP`, operator notes, or private storage intent unless that wording is itself meant for the audience.
+- Do not repeat the title verbatim as the whole description.
+- Avoid tag stuffing, comma-separated keyword blocks, generic boilerplate, or unrelated trending terms.
+- Optional CTA, credits, links, hashtags, or spoiler notes should exist only when they materially help the viewer or channel workflow; keep them subordinate to the actual scene description.
+
+### Tags and hashtags
+- Treat them as supplemental entity/variant metadata, not the main SEO lever.
+- Prefer a small truthful set: franchise/show, season/episode when useful, central character/entity, canonical scene/action term, and meaningful spelling variants.
+- Do not add unrelated high-volume terms.
+
+### Final copy check
+Before proposing a package, ask:
+1. Would this read naturally to a viewer who found the video in Search or Suggested?
+2. Does it explain the clip without sounding like an internal note?
+3. Is every named entity and scene claim actually present in the video?
+4. Is the copy concise enough that the useful context appears immediately?
+5. Would removing an SEO phrase make the copy clearer without losing real discovery intent? If yes, remove or rewrite it.
 
 ## Evidence classes
 

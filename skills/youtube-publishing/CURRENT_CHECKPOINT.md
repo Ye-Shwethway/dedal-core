@@ -1,4 +1,4 @@
-# YouTube Publishing checkpoint — 2026-09-16
+# YouTube Publishing checkpoint â 2026-09-16
 
 ## Phase status
 
@@ -61,3 +61,17 @@ Runtime Contracts, YouTube Publishing hardening, the `youtube-source-sync` contr
 - Chunk transport was revised after live validation: production MCP remains 0.8.4 / 54 actions; Gateway 0.7.49 transparently multiplexes chunk/finalize control envelopes through existing `youtube_media_stage`. This avoids deploying sanitized public MCP auth code over the prod-specific MCP runtime.
 
 - Output-schema compatibility hardening: chunk acknowledgements now retain the existing `youtube_media_stage` required response fields and set `pending: true`; only finalize returns a usable signed URL. Target Gateway 0.7.50.
+
+## Thumbnail Workflow — CLOSED
+
+Status: CLOSED / production-validated.
+
+Closure criteria met:
+- layered strategy/content-truth/reference/generation/QA workflow is documented;
+- creator-approved asset preservation rules are documented;
+- DEDAL-owned native staging replaces credit-metered third-party upload hosts as the default path;
+- bounded chunk transport is production-validated for larger thumbnail assets;
+- thumbnail mutation, authoritative read-back, cleanup, and experiment/confounder recording are operational;
+- live Shadow and Bone validation passed end-to-end;
+- future work should reopen this section only for a contract gap, vendor/API change, or materially new thumbnail capability.
+

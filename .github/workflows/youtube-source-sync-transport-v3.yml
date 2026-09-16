@@ -1,0 +1,41 @@
+name: YouTube Source Sync Transport V3
+on:
+  push:
+    branches:
+      - dedal-youtube-source-sync-stage3
+permissions:
+  contents: write
+jobs:
+  reconstruct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reconstruct and verify exact source files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/dedal-transport /tmp/dedal-extract
+          : > /tmp/dedal-transport/large-files.tar.gz
+          for sha in bb1db4f97f4ee810b2d9abfb1598b82defd3b4e6 fb6545ae514d9960049b0fe9c225136c4c43711d e67b16262880fc20048063bd6e845e959297eac9 58a1103b706e8677eac86fe83736dcfaf66da6ca; do
+            curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$REPO/git/blobs/$sha" | jq -r '.content' | tr -d '\n' | base64 -d >> /tmp/dedal-transport/large-files.tar.gz
+          done
+          echo "f0ac4e43e235b9640c529c54e2deb08b1642da5aab0bd8c79795f280b67cab99  /tmp/dedal-transport/large-files.tar.gz" | sha256sum -c -
+          tar -xzf /tmp/dedal-transport/large-files.tar.gz -C /tmp/dedal-extract
+          GW=/tmp/dedal-extract/skills/youtube-publishing/gateway/src/index.js
+          MCP=/tmp/dedal-extract/skills/youtube-publishing/mcp/src/index.js
+          echo "d51f862d9020feb2db12e94df621b54bf021c4b32bdfa75199b26c0919ddf0a1  $GW" | sha256sum -c -
+          echo "211b85cf780cfb1b926d6cf19a84050000d8ef6b9e4887f118198b91eb7b7b4d  $MCP" | sha256sum -c -
+          test "$(git hash-object "$GW")" = "826bc192bbd544ca0d6c2593a08eb1fbed60c85f"
+          test "$(git hash-object "$MCP")" = "997c100ce376686b0096d2176864f3d7ba2b2300"
+          cp "$GW" skills/youtube-publishing/gateway/src/index.js
+          cp "$MCP" skills/youtube-publishing/mcp/src/index.js
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add skills/youtube-publishing/gateway/src/index.js skills/youtube-publishing/mcp/src/index.js
+          git commit -m "Reconstruct exact YouTube source-sync large files"
+          git push origin HEAD:dedal-youtube-source-sync-stage3

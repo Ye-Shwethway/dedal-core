@@ -29,11 +29,13 @@ Current production evidence covers:
 
 Watermark set/unset tools are exposed, but the watermark lifecycle is intentionally **not** classified as fully live-gated because YouTube does not expose a reliable current-watermark read/list baseline.
 
+## Search research controls
+
+`youtube_search` supports bounded `region_code`, `relevance_language`, `published_after`, `published_before`, `page_token`, and `safe_search` inputs for reproducible public SERP research. Search remains public/global by default rather than silently forcing `forMine`.
+
 ## Version evidence
 
-Public source version: `0.2.2`. The authorized deployed reference used during source sync identified MCP `0.8.2`. Public and deployed version numbers remain independent; source sync records the verified public-safe implementation delta without claiming byte-for-byte deployment parity.
-
-The public `youtube_search` surface also supports bounded SEO research controls for region, relevance language, publish-date bounds, page token, and safe-search filtering. The deployed reference remains independent until the live Worker is updated and re-synced.
+Public source version: `0.2.2`. The authorized deployed reference used during source sync identified MCP `0.8.3`. Public and deployed version numbers remain independent; source sync records the verified public-safe implementation delta without claiming byte-for-byte deployment parity.
 
 ## Developer-mode registration
 

@@ -65,6 +65,23 @@ for marker in banned_debug:
     if marker in gateway or marker in mcp:
         raise SystemExit(f"deployment-only debug artifact leaked into public source: {marker}")
 
+
+search_markers = [
+    "region_code",
+    "relevance_language",
+    "published_after",
+    "published_before",
+    "page_token",
+    "safe_search",
+    "regionCode: a.region_code",
+    "pageToken: a.page_token",
+]
+for marker in search_markers:
+    if marker not in mcp:
+        raise SystemExit(f"missing youtube_search research control: {marker}")
+if 'forMine: a.type === "video"' in mcp:
+    raise SystemExit("youtube_search must not silently force owned-only video results")
+
 print("youtube source sync contract: PASS")
 print(f"MCP tools: {len(tools)}")
-print("deployed reference: Gateway 0.7.43 / MCP 0.8.2")
+print("deployed reference: Gateway 0.7.43 / MCP 0.8.3")

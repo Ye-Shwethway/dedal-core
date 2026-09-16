@@ -66,6 +66,16 @@ for marker in banned_debug:
         raise SystemExit(f"deployment-only debug artifact leaked into public source: {marker}")
 
 
+metadata_markers = [
+    "verifyVideoMetadataEventually",
+    "videoMetadataMatches",
+    "expected = validTags(body.tags).slice().sort()",
+    "actual = (snippet.tags || []).map(x => String(x)).slice().sort()",
+]
+for marker in metadata_markers:
+    if marker not in gateway:
+        raise SystemExit(f"missing video metadata readback hardening: {marker}")
+
 search_markers = [
     "region_code",
     "relevance_language",
@@ -84,4 +94,4 @@ if 'forMine: a.type === "video"' in mcp:
 
 print("youtube source sync contract: PASS")
 print(f"MCP tools: {len(tools)}")
-print("deployed reference: Gateway 0.7.43 / MCP 0.8.3")
+print("deployed reference: Gateway 0.7.44 / MCP 0.8.3")

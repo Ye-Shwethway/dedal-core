@@ -46,6 +46,94 @@ D — external methods can suggest useful transforms/scoring ideas but do not in
 
 E — community observations are useful hypothesis generators, not causal proof.
 
+## Structured analysis record
+
+For a decision-worthy video/candidate, retain a structured record rather than only prose. Fields may be omitted when genuinely unavailable, but must not be silently invented.
+
+```yaml
+object:
+  kind: video|candidate
+  id_or_private_ref: <private operational reference>
+  publication_age/window: <launch|early|first_week|learning|mature|pre_publish>
+objective: <launch research|existing diagnosis|experiment>
+target_surface:
+  primary: Search|Browse|Suggested|Mixed|Shorts
+  confidence: low|medium|high
+entities:
+  franchise: []
+  season_episode: []
+  characters_actors: []
+  scene_actions_topics: []
+  variants: []
+query_landscape:
+  queries: []
+  region: <observed region or unknown>
+  language: <research language or unknown>
+  observed_at: <timestamp>
+  notes: []
+factors:
+  semantic_relevance: <observation>
+  entity_specificity: <observation>
+  observed_channel_evidence: <observation>
+  result_saturation_proxy: <observation>
+  exact_match_gap: <observation>
+  authoritative_competition: <observation>
+  freshness: <observation>
+  channel_fit: <observation>
+  packaging_fit: <observation>
+evidence:
+  - class: A|B|C|D|E
+    source: <surface>
+    claim_supported: <bounded claim>
+missing_data: []
+packaging:
+  current: <summary>
+  proposed_primary: <summary>
+  alternates: []
+hypothesis: <falsifiable expected direction, not guaranteed outcome>
+confidence: low|medium|high
+```
+
+Public Core examples must use synthetic/private-neutral references. Real Creator video IDs, channel IDs, profile aliases, live analytics rows, and experiment outcomes belong in the private operational overlay.
+
+## Experiment record
+
+Record the hypothesis before a metadata mutation so post-publish analysis does not rewrite history.
+
+```yaml
+experiment_id: <private stable id>
+object_ref: <private video/candidate ref>
+created_at: <timestamp>
+target_surface: Search|Browse|Suggested|Mixed|Shorts
+hypothesis: <specific directional claim>
+evidence_at_start:
+  classes: []
+  summary: <bounded baseline>
+baseline_package:
+  title: <current>
+  description_summary: <current>
+  tags_summary: <current>
+  thumbnail_ref: <private ref if needed>
+proposed_change:
+  fields: []
+  package_summary: <new package>
+mutation:
+  status: proposed|approved|applied|rejected|rolled_back
+  applied_at: <timestamp or null>
+observation_windows:
+  - window: 24h|3d|7d|28d|mature
+    traffic_source_mix: <when available>
+    search_term_evidence: <when available>
+    impressions_ctr: <when available>
+    retention: <when available>
+    notes: []
+confounders: []
+outcome_status: pending|supports|mixed|does_not_support|inconclusive
+lesson_status: candidate|supported|superseded
+```
+
+A sequential metadata change is not a clean causal A/B test. Preserve traffic-source changes, age effects, audience expansion, seasonality, and concurrent content changes as confounders.
+
 ## Missing-data behavior
 
 When a field is unavailable:

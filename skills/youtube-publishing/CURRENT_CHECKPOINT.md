@@ -35,6 +35,12 @@ Video metadata writes now use bounded eventual-consistency read-back for all req
 
 Thumbnail mutation hardening now records bounded `media` versus `upload` failure stages. A live custom-thumbnail case confirmed that browser-accessible third-party CDN media may still be unfetchable from the Gateway, while a Gateway-fetchable staged source succeeds. Public Core therefore treats DEDAL-controlled ephemeral media staging plus Gateway fetch preflight as the preferred future workflow; external credit-metered upload hosts are fallback-only.
 
+## Native media staging live validation
+
+After the custom MCP catalog was resynchronized, the deployed 54-action surface exposed `youtube_media_stage` and `youtube_media_unstage` with the expected typed schemas. A known-good PNG completed the live stage path and returned bounded metadata, a short-lived signed HTTPS source URL, and a stage id; explicit unstage then deleted the object successfully. Temporary validation objects were cleaned up.
+
+The existing approved production thumbnail was intentionally left unchanged during this validation. A malformed/truncated large Base64 test payload failed before any YouTube mutation, so this does not count as a production-thumbnail failure. Future callers should transfer the approved file bytes intact before invoking `youtube_media_stage`; do not silently recompress or substitute a lower-quality asset merely to satisfy transport limits.
+
 ## Remaining boundaries
 
 - Banner persistent managed rollback is not yet at playlist-image parity.

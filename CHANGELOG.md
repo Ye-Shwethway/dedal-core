@@ -1,5 +1,7 @@
 # Changelog
 
+- Confirmed live custom-MCP resync to 54 actions and validated the DEDAL-owned media staging lifecycle through `youtube_media_stage` -> signed HTTPS stage -> `youtube_media_unstage`, with cleanup and no production-thumbnail churn. A malformed/truncated large Base64 client payload was treated as a transport/input failure rather than retried against YouTube.
+
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
 ## 0.30.0 — 2026-09-16

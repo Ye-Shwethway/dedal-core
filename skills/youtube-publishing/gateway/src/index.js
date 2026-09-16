@@ -1,5 +1,5 @@
 
-const VERSION = "0.4.3";
+const VERSION = "0.4.4";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -137,8 +137,8 @@ async function route(request, env, requestId) {
     const updated = await googleJson("https://www.googleapis.com/youtube/v3/videos?part=snippet", accessToken, "video_update_failed", {
       method: "PUT", body: { id: videoId, snippet },
     });
-    const verified = await ownedVideo(accessToken, profile.channel_id, videoId);
-    if (verified.snippet.title !== snippet.title || verified.snippet.description !== snippet.description) throw httpError(409, "video_update_readback_mismatch");
+    const verified = await verifyVideoMetadataEventually(accessToken, profile.channel_id, videoId, body);
+    if (!videoMetadataMatches(verified, body)) throw httpError(409, "video_update_readback_mismatch");
     await audit(env, "admin", "video.update", alias, profile.channel_id, null, "success", { video_id: videoId, fields: Object.keys(body).filter(k => ["title","description","tags","category_id"].includes(k)) });
     return reply({ video: publicVideo(verified), google_id: updated.id || videoId });
   }
@@ -1226,6 +1226,30 @@ function publicVideo(video) {
 
 function publicPlaylist(playlist) {
   return { playlist_id: playlist.id, channel_id: playlist.snippet?.channelId || null, title: playlist.snippet?.title || "", description: playlist.snippet?.description || "", privacy: playlist.status?.privacyStatus || null, item_count: Number(playlist.contentDetails?.itemCount || 0) };
+}
+
+function videoMetadataMatches(video, body) {
+  const snippet = video?.snippet || {};
+  if (body.title !== undefined && snippet.title !== validTitle(body.title)) return false;
+  if (body.description !== undefined && snippet.description !== String(body.description).slice(0, 5000)) return false;
+  if (body.category_id !== undefined && snippet.categoryId !== validCategory(body.category_id)) return false;
+  if (body.tags !== undefined) {
+    const expected = validTags(body.tags).slice().sort();
+    const actual = (snippet.tags || []).map(x => String(x)).slice().sort();
+    if (expected.length !== actual.length || expected.some((tag, i) => tag !== actual[i])) return false;
+  }
+  return true;
+}
+
+async function verifyVideoMetadataEventually(accessToken, channelId, videoId, body) {
+  const delays = [0, 200, 500, 1000, 2000, 5000];
+  let video = null;
+  for (const delay of delays) {
+    if (delay) await new Promise(resolve => setTimeout(resolve, delay));
+    video = await ownedVideo(accessToken, channelId, videoId);
+    if (videoMetadataMatches(video, body)) return video;
+  }
+  return video;
 }
 
 async function verifyVideoStatusEventually(accessToken, channelId, videoId, predicate) {

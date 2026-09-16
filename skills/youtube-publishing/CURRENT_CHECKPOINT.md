@@ -10,7 +10,7 @@ Large video bytes continue through the isolated uploader runner rather than MCP/
 
 ## Public source reconciliation
 
-The public Gateway now carries the verified public-safe source delta for external-media guards, captions, thumbnails, playlist images, banner diagnostics, watermark safety boundaries, bounded Data/Reporting/Analytics bridges, and dedicated video deletion. The MCP surface exposes 52 bounded `youtube_*` tools. Three dedicated read-only SEO analytics helpers now expose owned-video traffic sources, owned-video search terms, and owned-video retention without requiring callers to assemble generic Analytics queries.
+The public Gateway now carries the verified public-safe source delta for external-media guards, captions, thumbnails, playlist images, banner diagnostics, watermark safety boundaries, bounded Data/Reporting/Analytics bridges, and dedicated video deletion. The MCP surface exposes 52 bounded `youtube_*` tools. Three dedicated read-only SEO analytics helpers now expose owned-video traffic sources, owned-video search terms, and owned-video retention without requiring callers to assemble generic Analytics queries. `youtube_search` also exposes bounded SEO research controls for region, relevance language, publication bounds, pagination, and safe-search policy without forcing owned-only results.
 
 Playlist-image replacement requires a managed baseline and uses delete -> insert -> read back with rollback to the previous managed source if insertion fails. Native `playlistImages.update` is not a production replacement dependency.
 
@@ -25,11 +25,11 @@ Aggregation-layer outcome validation also passed with the existing remote MCP pr
 - Public Gateway source: `0.4.3`
 - Authorized deployed Gateway reference used for reconciliation: `0.7.43`
 - Public MCP source: `0.2.2`
-- Authorized deployed MCP reference used for reconciliation: `0.8.2`
+- Authorized deployed MCP reference used for reconciliation: `0.8.3`
 
 These version lines are intentionally independent. The checkpoint establishes public-safe behavioral/source reconciliation for the covered contracts; it does not claim byte-for-byte parity with deployed exports.
 
-Reporting API failures now record bounded upstream diagnostics in the private mutation audit. Live outcome testing identified a disabled upstream Reporting API service as the current Reach blocker; project-specific service diagnostics remain private and are not embedded in Core.
+Reporting API failures now record bounded upstream diagnostics in the private mutation audit. Live outcome testing has now passed Reporting API service enablement, report-type discovery, and scheduled-job creation/read-back. Generated Reach report availability remains asynchronous and should be verified before impressions/CTR are treated as available evidence.
 
 ## Remaining boundaries
 
@@ -44,6 +44,3 @@ Runtime Contracts, YouTube Publishing hardening, the `youtube-source-sync` contr
 ## Next checkpoint
 
 `YOUTUBE-PUBLIC-SOURCE-OUTCOME-01`: exercise the synchronized public source in normal maintenance/deployment work, compare observed runtime behavior, and record only real drift or regressions.
-
-
-Public source now includes bounded YouTube search research controls (`regionCode`, `relevanceLanguage`, publish-date bounds, pagination token, and `safeSearch`). These source changes are ahead of the current deployed MCP reference and require a later live deployment/read-back before runtime parity is claimed.

@@ -67,4 +67,4 @@ for marker in banned_debug:
 
 print("youtube source sync contract: PASS")
 print(f"MCP tools: {len(tools)}")
-print("deployed reference: Gateway 0.7.42 / MCP 0.8.2")
+print("deployed reference: Gateway 0.7.43 / MCP 0.8.2")

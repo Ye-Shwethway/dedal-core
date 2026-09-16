@@ -22,12 +22,14 @@ Aggregation-layer outcome validation also passed with the existing remote MCP pr
 
 ## Version identity
 
-- Public Gateway source: `0.4.2`
-- Authorized deployed Gateway reference used for reconciliation: `0.7.42`
+- Public Gateway source: `0.4.3`
+- Authorized deployed Gateway reference used for reconciliation: `0.7.43`
 - Public MCP source: `0.2.1`
 - Authorized deployed MCP reference used for reconciliation: `0.8.2`
 
 These version lines are intentionally independent. The checkpoint establishes public-safe behavioral/source reconciliation for the covered contracts; it does not claim byte-for-byte parity with deployed exports.
+
+Reporting API failures now record bounded upstream diagnostics in the private mutation audit. Live outcome testing identified a disabled upstream Reporting API service as the current Reach blocker; project-specific service diagnostics remain private and are not embedded in Core.
 
 ## Remaining boundaries
 

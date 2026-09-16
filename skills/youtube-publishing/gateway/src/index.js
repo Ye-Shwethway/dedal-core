@@ -1,5 +1,5 @@
 
-const VERSION = "0.4.2";
+const VERSION = "0.4.3";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -585,10 +585,18 @@ async function route(request, env, requestId) {
     await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
     const alias = validAlias(decodeURIComponent(reportingApiMatch[1]));
     const body = await bodyJson(request);
-    const { profile, accessToken } = await channelContext(env, alias);
-    const result = await youtubeReportingApi(accessToken, body);
-    await audit(env, "admin", "youtube.reporting_api", alias, profile.channel_id, null, "success", { resource: body.resource, operation: body.operation });
-    return reply({ profile_alias: alias, channel_id: profile.channel_id, resource: body.resource, operation: body.operation, result });
+    let profile;
+    try {
+      const context = await channelContext(env, alias);
+      profile = context.profile;
+      const result = await youtubeReportingApi(context.accessToken, body);
+      await audit(env, "admin", "youtube.reporting_api", alias, profile.channel_id, null, "success", { resource: body.resource, operation: body.operation });
+      return reply({ profile_alias: alias, channel_id: profile.channel_id, resource: body.resource, operation: body.operation, result });
+    } catch (error) {
+      const d = error?.diagnostic || {};
+      await audit(env, "admin", "youtube.reporting_api", alias, profile?.channel_id || null, null, "failed", { resource: body.resource, operation: body.operation, error_code: error?.code || "youtube_reporting_api_failed", google_status: d.google_status || null, google_reason: d.google_reason || null, google_message: d.google_message || null });
+      throw error;
+    }
   }
 
   const analyticsApiMatch = path.match(/^\/v1\/channels\/([^/]+)\/analytics-api$/);

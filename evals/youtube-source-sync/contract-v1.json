@@ -2,7 +2,7 @@
   "version": 1,
   "checkpoint": "YOUTUBE-SOURCE-SYNC-01",
   "deployed_reference": {
-    "gateway": "0.7.42",
+    "gateway": "0.7.43",
     "mcp": "0.8.2"
   },
   "expected_mcp_tool_count": 52,

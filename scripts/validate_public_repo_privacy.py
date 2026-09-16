@@ -24,11 +24,16 @@ video_id = re.compile(r"(?<![A-Za-z0-9_-])[A-Za-z0-9_-]{11}(?![A-Za-z0-9_-])")
 long_base64 = re.compile(r"(?<![A-Za-z0-9+/=])[A-Za-z0-9+/]{400,}={0,2}(?![A-Za-z0-9+/=])")
 
 findings = []
+BANNED_PRIVATE_PATH_PARTS = {"private-overlay", ".dedal-private-overlay"}
+BANNED_PRIVATE_FILENAMES = {"overlay-manifest.json"}
 for path in ROOT.rglob("*"):
+    rel = path.relative_to(ROOT)
+    if any(part in BANNED_PRIVATE_PATH_PARTS for part in rel.parts) or path.name in BANNED_PRIVATE_FILENAMES:
+        findings.append((str(rel), 0, "private operational overlay path present in public repository", str(rel)))
+        continue
     if not path.is_file() or path.suffix.lower() not in TEXT_EXTENSIONS or any(part in SKIP_DIRS for part in path.parts):
         continue
     text = path.read_text(errors="ignore")
-    rel = path.relative_to(ROOT)
     for label, rx in patterns.items():
         for m in rx.finditer(text):
             # Source-code examples that literally contain the scanner's regex should not self-trigger.

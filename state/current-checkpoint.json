@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.28.0",
+  "version": "0.29.0",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "Cloudflare Platform remains the single top-level Cloudflare faculty; operational hardening is merged into it rather than creating an overlapping duplicate skill.",
@@ -9,7 +9,9 @@
     "Connector discovery/read capability does not prove write-transport fidelity; source-upload semantics must be verified and the execution surface may change without changing correct application code.",
     "Authorized automation is preferred before manual dashboard/source editing, especially for mobile-constrained Creator workflows.",
     "Potentially committed mutations are read back before retry when duplicate/destructive effects are possible; unresolved outcomes keep retry safety explicit.",
-    "Cloudflare and aggregation execution surfaces are session capabilities and are verified live rather than assumed from Core."
+    "Cloudflare and aggregation execution surfaces are session capabilities and are verified live rather than assumed from Core.",
+    "Optional Library-only private operational overlays may provide Creator/project-specific non-secret context through progressive disclosure while remaining outside public Git synchronization.",
+    "Overlay facts are subordinate to authoritative live-service and GitHub read-back; actual credentials remain outside both Core and the overlay."
   ],
   "evidence": [
     {
@@ -31,12 +33,18 @@
       "id": "public-repo-privacy-scan",
       "kind": "privacy_validation",
       "status": "passed_local_precommit"
+    },
+    {
+      "id": "private-operational-overlay-boundary-v1",
+      "kind": "architecture_contract",
+      "status": "passed_local_precommit"
     }
   ],
   "unresolved_risks": [
     "Connector and aggregation request serialization behavior can drift independently of Cloudflare APIs and must be verified per session.",
     "Some production source representations may be unavailable through a given execution surface; alternate retrieval or explicit Creator assistance can still be required.",
-    "Cloudflare API schemas, Worker upload semantics, limits, and product status remain drift-sensitive and require current authoritative verification when material."
+    "Cloudflare API schemas, Worker upload semantics, limits, and product status remain drift-sensitive and require current authoritative verification when material.",
+    "Private overlay facts can become stale; task execution must prefer live authoritative read-back when current state matters."
   ],
   "next_executable_step": {
     "id": "CLOUDFLARE-OPS-OUTCOME-01",
@@ -45,7 +53,7 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "6b94305d92648e8169ad82fe5083226f982f8890",
-    "relation": "base HEAD verified before v0.28.0 Cloudflare operational hardening; post-commit revision will be Git-derived"
+    "sha": "2a9887f6c693fb616ab64bb9793d06c4dda3b769",
+    "relation": "base HEAD verified before v0.29.0 private operational overlay boundary"
   }
 }

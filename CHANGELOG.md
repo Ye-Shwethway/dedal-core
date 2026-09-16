@@ -2,6 +2,16 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.29.0 — 2026-09-16
+
+### Added
+- Optional Library-only private operational overlay contract for Creator/project-specific non-secret context, loaded manifest-first and only when task-relevant.
+- Fail-closed public privacy guard rejecting private-overlay paths or overlay manifests if they enter the repository tree.
+
+### Changed
+- Boot authority now distinguishes public Core contracts, private operational context, live connected-service state, and GitHub repository identity.
+- Private overlay data is explicitly excluded from GitHub mutation candidates, public patches, release archives, and public fixtures; actual credentials remain outside both Core and the overlay.
+
 ## 0.28.0 — 2026-09-16
 
 ### Added

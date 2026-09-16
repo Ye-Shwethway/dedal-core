@@ -13,6 +13,11 @@ secrets/
 memory-export/
 *.local.*
 
+# DEDAL Library-only operational overlay (defense in depth)
+private-overlay/
+.dedal-private-overlay/
+overlay-manifest.json
+
 # Python
 __pycache__/
 *.py[cod]

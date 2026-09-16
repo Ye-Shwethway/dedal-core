@@ -1,5 +1,5 @@
 
-const VERSION = "0.4.0";
+const VERSION = "0.4.1";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -404,8 +404,8 @@ async function route(request, env, requestId) {
     const current = await ownedVideo(accessToken, profile.channel_id, videoId);
     const status = writableStatus(current.status, { privacyStatus: privacy, publishAt: null });
     await googleJson("https://www.googleapis.com/youtube/v3/videos?part=status", accessToken, "video_privacy_update_failed", { method: "PUT", body: { id: videoId, status } });
-    const verified = await ownedVideo(accessToken, profile.channel_id, videoId);
-    if (verified.status.privacyStatus !== privacy) throw httpError(409, "video_privacy_readback_mismatch");
+    const verified = await verifyVideoStatusEventually(accessToken, profile.channel_id, videoId, status => status.privacyStatus === privacy && !status.publishAt);
+    if (verified.status.privacyStatus !== privacy || verified.status.publishAt) throw httpError(409, "video_privacy_readback_mismatch");
     await audit(env, "admin", "video.set_privacy", alias, profile.channel_id, null, "success", { video_id: videoId, privacy });
     return reply({ video: publicVideo(verified) });
   }
@@ -421,11 +421,12 @@ async function route(request, env, requestId) {
     const { profile, accessToken } = await channelContext(env, alias);
     const current = await ownedVideo(accessToken, profile.channel_id, videoId);
     const status = writableStatus(current.status, { privacyStatus: "private", publishAt });
-    await googleJson("https://www.googleapis.com/youtube/v3/videos?part=status", accessToken, "video_schedule_failed", { method: "PUT", body: { id: videoId, status } });
-    const verified = await ownedVideo(accessToken, profile.channel_id, videoId);
-    if (verified.status.privacyStatus !== "private" || verified.status.publishAt !== publishAt) throw httpError(409, "video_schedule_readback_mismatch");
-    await audit(env, "admin", "video.schedule", alias, profile.channel_id, null, "success", { video_id: videoId, publish_at: publishAt });
-    return reply({ video: publicVideo(verified) });
+    const updated = await googleJson("https://www.googleapis.com/youtube/v3/videos?part=status", accessToken, "video_schedule_failed", { method: "PUT", body: { id: videoId, status } });
+    const verified = await verifyVideoStatusEventually(accessToken, profile.channel_id, videoId, status => status.privacyStatus === "private" && status.publishAt === publishAt);
+    const readbackConfirmed = verified?.status?.privacyStatus === "private" && verified?.status?.publishAt === publishAt;
+    const resultVideo = readbackConfirmed ? verified : { ...current, status: { ...(current.status || {}), ...(updated.status || {}) } };
+    await audit(env, "admin", "video.schedule", alias, profile.channel_id, null, "success", { video_id: videoId, publish_at: publishAt, readback_confirmed: readbackConfirmed });
+    return reply({ video: publicVideo(resultVideo), verification: readbackConfirmed ? "confirmed" : "accepted_pending_readback" });
   }
 
   const playlistsMatch = path.match(/^\/v1\/channels\/([^/]+)\/playlists$/);
@@ -668,7 +669,7 @@ async function route(request, env, requestId) {
       ).bind(identity.title, credentialRef, now, alias, identity.id),
     ]);
     await audit(env, "oauth", "channel_profile.bind", alias, identity.id, null, "success", {});
-    return html(`Connected profile “${escapeHtml(alias)}” to verified YouTube channel “${escapeHtml(identity.title)}” (${escapeHtml(identity.id)}). You may close this page.`, 200);
+    return html(`Connected profile â${escapeHtml(alias)}â to verified YouTube channel â${escapeHtml(identity.title)}â (${escapeHtml(identity.id)}). You may close this page.`, 200);
   }
 
   if (request.method === "POST" && path === "/v1/upload-jobs") {
@@ -1178,6 +1179,17 @@ function publicPlaylist(playlist) {
   return { playlist_id: playlist.id, channel_id: playlist.snippet?.channelId || null, title: playlist.snippet?.title || "", description: playlist.snippet?.description || "", privacy: playlist.status?.privacyStatus || null, item_count: Number(playlist.contentDetails?.itemCount || 0) };
 }
 
+async function verifyVideoStatusEventually(accessToken, channelId, videoId, predicate) {
+  const delays = [0, 200, 500, 1000, 2000, 5000];
+  let video = null;
+  for (const delay of delays) {
+    if (delay) await new Promise(resolve => setTimeout(resolve, delay));
+    video = await ownedVideo(accessToken, channelId, videoId);
+    if (predicate(video.status || {})) return video;
+  }
+  return video;
+}
+
 function writableStatus(current, overrides) {
   const status = {
     privacyStatus: overrides.privacyStatus || current.privacyStatus,
@@ -1342,7 +1354,7 @@ async function youtubeReportingApi(accessToken, input) {
   const resource = String(input.resource || "reportTypes");
   const operation = String(input.operation || "list");
   const params = input.params && typeof input.params === "object" && !Array.isArray(input.params) ? { ...input.params } : {};
-  const body = input.body && typeof input.body === "object" && !Array.isArray(input.body) ? input.body : undefined;
+  let body = input.body && typeof input.body === "object" && !Array.isArray(input.body) ? input.body : undefined;
   let method = "GET", path = "";
   if (resource === "reportTypes" && operation === "list") path = "/v1/reportTypes";
   else if (resource === "jobs" && operation === "list") path = "/v1/jobs";
@@ -1408,7 +1420,25 @@ async function youtubeDataApi(accessToken, profile, input) {
   if ((privacy === "public" || privacy === "unlisted") && input.explicit_visibility_intent !== true) throw httpError(409, "explicit_visibility_intent_required");
   if (resource === "channels" && operation === "update" && body?.id !== profile.channel_id) throw httpError(409, "channel_identity_mismatch");
   if (resource === "videos" && ["update", "delete"].includes(operation)) { const id = String(body?.id || params.id || ""); if (!id) throw httpError(400, "video_id_required"); await ownedVideo(accessToken, profile.channel_id, validVideoId(id)); }
-  if (resource === "playlists" && ["update", "delete"].includes(operation)) { const id = String(body?.id || params.id || ""); if (!id) throw httpError(400, "playlist_id_required"); await ownedPlaylist(accessToken, profile.channel_id, validPlaylistId(id)); }
+  if (resource === "playlists" && ["update", "delete"].includes(operation)) {
+    const id = String(body?.id || params.id || "");
+    if (!id) throw httpError(400, "playlist_id_required");
+    const current = await ownedPlaylist(accessToken, profile.channel_id, validPlaylistId(id));
+    if (operation === "update") {
+      const requested = body || {};
+      const snippetIn = requested.snippet && typeof requested.snippet === "object" && !Array.isArray(requested.snippet) ? requested.snippet : {};
+      const nextSnippet = {
+        title: snippetIn.title !== undefined ? String(snippetIn.title) : String(current.snippet?.title || ""),
+        description: snippetIn.description !== undefined ? String(snippetIn.description) : String(current.snippet?.description || ""),
+      };
+      if (snippetIn.defaultLanguage !== undefined) nextSnippet.defaultLanguage = snippetIn.defaultLanguage;
+      body = { ...requested, id, snippet: nextSnippet };
+      const parts = new Set(String(params.part || "").split(",").map(x => x.trim()).filter(Boolean));
+      parts.add("snippet");
+      if (requested.status !== undefined) parts.add("status");
+      params.part = Array.from(parts).join(",");
+    }
+  }
   if (resource === "playlistItems" && operation === "insert") { const playlistId = body?.snippet?.playlistId; if (!playlistId) throw httpError(400, "playlist_id_required"); await ownedPlaylist(accessToken, profile.channel_id, validPlaylistId(playlistId)); }
   const methodMap = { list: "GET", insert: "POST", update: "PUT", delete: "DELETE", getRating: "GET", rate: "POST", setModerationStatus: "POST", bind: "POST", transition: "POST", unset: "POST" };
   const suffixMap = { getRating: "getRating", rate: "rate", setModerationStatus: "setModerationStatus", bind: "bind", transition: "transition", unset: "unset" };

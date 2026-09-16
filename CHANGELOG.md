@@ -2,7 +2,7 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
-## 0.28.0 — 2026-09-16
+## 0.28.0 â 2026-09-16
 
 ### Added
 - Cloudflare Worker deployment/connector-recovery reference covering live-source identity, transport fidelity, raw/multipart upload recovery, outcome-unknown mutations, aggregation-layer verification, and automation-first mobile workflows.
@@ -16,7 +16,12 @@ All meaningful DEDAL Core architectural and behavioral changes should be recorde
 - Cloudflare and integration-aggregation connected capability are marked `verify_per_session` in the public capability registry.
 - YouTube hardening validation no longer hardcodes the global Core next-checkpoint ID, preventing unrelated domain checkpoints from causing false CI failures.
 
-## 0.11.0 — 2026-09-14
+### Fixed
+- YouTube playlist visibility updates now preserve mandatory snippet metadata and include the required `snippet` part, fixing `400 unexpectedPart` failures on privacy-only changes.
+- Video privacy and scheduling mutations now use bounded eventual-consistency read-back; privacy changes also verify scheduled `publishAt` state is cleared, while accepted schedules can report `accepted_pending_readback` instead of a false failure.
+- Live outcome validation covered private/unlisted/public round-trips and schedule creation/cancellation, with final controlled assets restored to private.
+
+## 0.11.0 â 2026-09-14
 
 ### Added
 - `skills/agent-engineering/references/dedal-self-application.md` for applying Agent Engineering to DEDAL's own context loading, tool use, Git transactions, polling, completion evidence, progress communication, and long-horizon continuity.
@@ -37,7 +42,7 @@ All meaningful DEDAL Core architectural and behavioral changes should be recorde
 
 This release establishes contract-level harness improvements. Outcome validation will come from representative real tasks; no universal quality gain is claimed yet.
 
-## 0.10.0 — 2026-09-14
+## 0.10.0 â 2026-09-14
 
 ### Added
 - `skills/agent-engineering/` as an independently routable generic skill for prompt/context engineering, model-facing tool design, harness control, agentic loops, orchestration, evals/observability, and long-horizon continuity.
@@ -53,18 +58,18 @@ This release establishes contract-level harness improvements. Outcome validation
 - Model-facing tool names, schemas, results, errors, token footprint, and authority semantics are treated as part of agent performance.
 - Agent loops require explicit completion, retry, non-progress, budget, authority, and escalation behavior appropriate to the workflow.
 - Reflection/refinement is bounded and requires an evaluator, rubric, environment/tool feedback, source contradiction, test, or Creator feedback capable of changing the next attempt.
-- Multi-agent systems are topology choices for independent breadth, specialization, or context separation—not default upgrades.
+- Multi-agent systems are topology choices for independent breadth, specialization, or context separationânot default upgrades.
 - Long-horizon agent state should be externalized into inspectable artifacts rather than hidden conversational memory.
 
 ### Source snapshots and conceptual corpus
-- `humanlayer/12-factor-agents` @ `d20c728368bf9c189d6d7aab704744decb6ec0cc` — Apache-2.0.
-- `stanfordnlp/dspy` @ `ecba33763316d2a4c6c756046a1118ecbff033e7` — conceptual use only.
-- `SWE-agent/SWE-agent` @ `3ea751c087f32b16e039a2233dd6eefecef325d5` — conceptual use only.
+- `humanlayer/12-factor-agents` @ `d20c728368bf9c189d6d7aab704744decb6ec0cc` â Apache-2.0.
+- `stanfordnlp/dspy` @ `ecba33763316d2a4c6c756046a1118ecbff033e7` â conceptual use only.
+- `SWE-agent/SWE-agent` @ `3ea751c087f32b16e039a2233dd6eefecef325d5` â conceptual use only.
 - Anthropic and OpenAI official agent-engineering guidance plus ReAct, Self-Refine, Reflexion, and AgentBench informed the DEDAL-native synthesis.
 
 No third-party agent framework, package, or executable was installed or executed.
 
-## 0.9.0 — 2026-09-14
+## 0.9.0 â 2026-09-14
 
 ### Added
 - Deep audit of `nextlevelbuilder/ui-ux-pro-max-skill` pinned to `7f69fed6a2717900085f1bc3b263721f8ba025e2` with verified MIT license.
@@ -86,9 +91,9 @@ No third-party agent framework, package, or executable was installed or executed
 - Upstream executables/scripts were inspected but not installed or executed.
 
 ### Source snapshot
-- `nextlevelbuilder/ui-ux-pro-max-skill` @ `7f69fed6a2717900085f1bc3b263721f8ba025e2` — MIT.
+- `nextlevelbuilder/ui-ux-pro-max-skill` @ `7f69fed6a2717900085f1bc3b263721f8ba025e2` â MIT.
 
-## 0.8.0 — 2026-09-14
+## 0.8.0 â 2026-09-14
 
 ### Added
 - Independent/high-signal ecosystem audit covering `obra/superpowers`, `Leonxlnx/taste-skill`, `lllllllama/RigorPilot-Skills`, and `pbakaus/impeccable` at pinned source commits with verified MIT/Apache-2.0 licenses.
@@ -108,12 +113,12 @@ No third-party agent framework, package, or executable was installed or executed
 - Impeccable provider-specific launchers/hooks/agents and universal maximalist framing were not adopted.
 
 ### Source snapshots
-- `obra/superpowers` @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` — MIT.
-- `Leonxlnx/taste-skill` @ `ccbc15639c97057cbfcf32ecebc38ef716e4bb37` — MIT.
-- `lllllllama/RigorPilot-Skills` @ `bd91195ad73199b95e24532b581ff12c07dcce09` — MIT.
-- `pbakaus/impeccable` @ `cb56ed6c19a07329a9fa0cd4e657bee040156593` — Apache-2.0.
+- `obra/superpowers` @ `b36e0829c6d0140e93cfef2ca599b1b07d4a7797` â MIT.
+- `Leonxlnx/taste-skill` @ `ccbc15639c97057cbfcf32ecebc38ef716e4bb37` â MIT.
+- `lllllllama/RigorPilot-Skills` @ `bd91195ad73199b95e24532b581ff12c07dcce09` â MIT.
+- `pbakaus/impeccable` @ `cb56ed6c19a07329a9fa0cd4e657bee040156593` â Apache-2.0.
 
-## 0.7.0 — 2026-09-14
+## 0.7.0 â 2026-09-14
 
 ### Added
 - Structured first-party/vendor corpus audit covering `anthropics/skills`, `vercel-labs/agent-skills`, and `microsoft/skills` with pinned source commits.
@@ -135,7 +140,7 @@ No third-party agent framework, package, or executable was installed or executed
 
 Anthropic and Vercel material was used as pattern-level inspiration where a repository-wide license was not verified at the pinned snapshot. Microsoft root license was verified as MIT. No third-party package was installed or executed.
 
-## 0.6.0 — 2026-09-14
+## 0.6.0 â 2026-09-14
 
 ### Added
 - Deep audit of `mattpocock/skills` pinned to source commit/tree `3cca18b368ae95cdbdebbff572ccafa662551015` (MIT).
@@ -153,7 +158,7 @@ Anthropic and Vercel material was used as pattern-level inspiration where a repo
 - Upstream provider-specific Skill/subagent/plugin mechanics were not copied into durable DEDAL contracts.
 - The source's MIT license and pinned provenance are recorded; the DEDAL text is a rewritten adaptation, not a verbatim import.
 
-## 0.5.0 — 2026-09-14
+## 0.5.0 â 2026-09-14
 
 ### Added
 - `skills/skill-acquisition/` as the DEDAL workflow for discovering, auditing, adapting, evaluating, and promoting external Agent Skills patterns.
@@ -172,7 +177,7 @@ Anthropic and Vercel material was used as pattern-level inspiration where a repo
 - Registry reputation, stars, install counts, malware/static scans, and AI security verdicts are signals rather than sufficient trust proof.
 - Prefer DEDAL-native synthesis over verbatim import unless exact reuse is clearly justified and license/runtime/security are understood.
 
-## 0.4.0 — 2026-09-14
+## 0.4.0 â 2026-09-14
 
 ### Added
 - DEDAL-native Knowledge Archive skill at `skills/ika/` with `$ika` routing.
@@ -190,7 +195,7 @@ Anthropic and Vercel material was used as pattern-level inspiration where a repo
 - Source commit: `fbed860928c1a93261306f70a47fa700da56ce29`
 - Legacy source path: `skills/ianeo-knowledge-archive/`
 
-## 0.3.0 — 2026-09-14
+## 0.3.0 â 2026-09-14
 
 ### Added
 - Formal Stable Kernel directory with `KERNEL.md`, `BOOT_CONTRACT.md`, and `STATE_BOUNDARY.md`.
@@ -202,7 +207,7 @@ Anthropic and Vercel material was used as pattern-level inspiration where a repo
 - `SKILL_REGISTRY.yaml` version 2 registers the five generic skills as active instead of scaffolds.
 - Generic skills are intentionally provider-agnostic and verify current execution surfaces before acting.
 
-## 0.2.0 — 2026-09-13
+## 0.2.0 â 2026-09-13
 
 ### Added
 - Reconstructed BIOS/bootstrap architecture for Custom Instructions -> DEDAL Core -> master index routing.
@@ -221,6 +226,6 @@ Anthropic and Vercel material was used as pattern-level inspiration where a repo
 - Source commit: `6b8f35e4056f030a1ace2dac137cde1071a00051`
 - Imported packages: `skills/medicine-store-assistant/`, `skills/patient-report-assistant/`
 
-## 0.1.0 — 2026-09-13
+## 0.1.0 â 2026-09-13
 
 Initial DEDAL Core foundation: identity, operating contract, security boundary, capability registry, continuity checkpoint, improvement protocol, foundational architecture, and repository integrity workflow.

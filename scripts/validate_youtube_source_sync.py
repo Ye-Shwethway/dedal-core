@@ -21,6 +21,7 @@ required_gateway = [
     "video.thumbnail_set", "channel.banner_set", "channel.watermark_set",
     "youtubeDataApi", "youtubeReportingApi", "youtubeAnalyticsApi",
     "resumable_init", "resumable_media", "google_location_type",
+    "verifyVideoStatusEventually", "accepted_pending_readback",
 ]
 missing = [x for x in required_gateway if x not in gateway]
 if missing:
@@ -49,6 +50,11 @@ required_tools = {
 if not required_tools.issubset(tools):
     raise SystemExit(f"missing MCP tools: {sorted(required_tools - set(tools))}")
 
+if 'let body = input.body' not in gateway or 'parts.add("snippet")' not in gateway:
+    raise SystemExit("playlist update normalization markers missing")
+if 'status.privacyStatus === privacy && !status.publishAt' not in gateway:
+    raise SystemExit("video privacy eventual-readback/cancel marker missing")
+
 # Deployed debug conveniences must never enter the public source mirror.
 banned_debug = [
     "test-assets/dedal-caption", "test-assets/spices-from-movies",
@@ -60,4 +66,4 @@ for marker in banned_debug:
 
 print("youtube source sync contract: PASS")
 print(f"MCP tools: {len(tools)}")
-print("deployed reference: Gateway 0.7.35 / MCP 0.8.1")
+print("deployed reference: Gateway 0.7.41 / MCP 0.8.1")

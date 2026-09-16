@@ -3,7 +3,7 @@
   "checkpoint": "YOUTUBE-SOURCE-SYNC-01",
   "deployed_reference": {
     "gateway": "0.7.43",
-    "mcp": "0.8.2"
+    "mcp": "0.8.3"
   },
   "expected_mcp_tool_count": 52,
   "cases": [
@@ -107,6 +107,19 @@
         "no_private_keys",
         "no_live_media_urls",
         "no_debug_base64"
+      ]
+    },
+    {
+      "id": "YT-SYNC-10",
+      "name": "search research controls",
+      "expect": [
+        "region_code",
+        "relevance_language",
+        "published_after",
+        "published_before",
+        "page_token",
+        "safe_search",
+        "public_search_not_forMine"
       ]
     }
   ]

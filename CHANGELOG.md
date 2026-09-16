@@ -5,12 +5,16 @@ All meaningful DEDAL Core architectural and behavioral changes should be recorde
 ## 0.30.0 — 2026-09-16
 
 ### Added
+- A layered YouTube thumbnail workflow contract covering content-truth lock, discovery strategy, visual-reference authority, concept planning, edit/generation choice, mobile QA, DEDAL-controlled staging, authenticated mutation, read-back, and experiment measurement.
+- A thumbnail media-staging publishing reference that makes Creator-controlled ephemeral HTTPS staging the preferred path and treats credit-metered third-party upload hosts as fallback-only.
 - A reusable prospective SEO measurement and closeout contract with T0/24h/3d/7d/28d windows, explicit source-availability states, SERP drift handling, anti-churn rules, and feature-complete criteria.
 - `skills/youtube-seo/` as a first-party-data-first discovery-intelligence faculty for query/entity research, Search/Browse/Suggested surface strategy, packaging hypotheses, analytics diagnosis, experiment design/readout, and channel learning.
 - Transparent YouTube SEO evidence classes and opportunity-factor model that refuse unsupported absolute search volume, universal difficulty, guaranteed rank, or magic-score certainty.
 - YouTube SEO routing/eval contract with explicit ownership separation from YouTube Publishing and private-overlay learning.
 
 ### Changed
+- YouTube thumbnail packaging now composes SEO, Visual Direction, and Publishing explicitly; scene/character-specific image generation must not skip strategy/reference locking, and text-only edits must preserve accepted subject anatomy/composition.
+- Public YouTube Gateway source advanced to `0.4.5` and the authorized deployed reference to `0.7.46`; thumbnail failures now distinguish media-fetch/validation from upstream upload failure in bounded private audit diagnostics.
 - YouTube SEO now distinguishes observed zero from unavailable/not-yet-processed/suppressed/error states and treats longitudinal outcome windows as ongoing validation rather than a blocker to closing the implemented skill scope.
 - YouTube Publishing now owns authenticated YouTube operations and bounded API/MCP transport while YouTube SEO owns discovery intelligence; approved SEO changes still pass through Publishing intent/read-back gates.
 - YouTube Publishing source now includes dedicated owned-video traffic-source, search-term, and retention read helpers for the YouTube SEO feedback loop; deployed references advanced to Gateway `0.7.44` / MCP `0.8.3`.

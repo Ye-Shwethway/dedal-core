@@ -37,6 +37,20 @@ Before proposing or mutating a package:
 - Tags/hashtags: small supplemental set only; never use them to compensate for weak title/description copy.
 - Promise consistency: title, description, thumbnail brief, and actual clip must describe the same viewer promise.
 
+## Thumbnail package workflow
+
+Use this sequence for a missing/custom thumbnail or a deliberate thumbnail experiment:
+
+`content truth -> discovery strategy -> visual reference map -> concept directions -> generate/edit -> visual QA/Creator acceptance -> asset finalization -> DEDAL staging -> dedicated publish -> remote read-back -> experiment event`
+
+Rules:
+- Do not jump from video title to image generation when the source scene/character truth is specific.
+- If a base image is accepted, preserve it and edit only the requested layer whenever practical.
+- Treat thumbnail text as complementary packaging, not a duplicate full title; prioritize mobile readability and safe composition space.
+- The staging URL must be fetchable by the Gateway, not only by a browser.
+- Record a post-T0 thumbnail introduction as a confounder/package event in later measurement.
+- See `thumbnail-workflow.md` for the full ownership and stop-rule contract.
+
 ## Post-publish windows
 
 Suggested comparison windows when enough data exists:

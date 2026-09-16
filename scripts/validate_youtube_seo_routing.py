@@ -15,6 +15,7 @@ for path in [
     "skills/youtube-seo/ADAPTATION_NOTES.md",
     "skills/youtube-seo/references/evidence-and-opportunity-model.md",
     "skills/youtube-seo/references/mvp-workflows.md",
+    "skills/youtube-seo/references/thumbnail-workflow.md",
     "evals/youtube-seo/contract-v1.json",
 ]:
     if not (ROOT / path).exists():
@@ -27,6 +28,9 @@ require("skills/youtube-publishing/SKILL.md", "YouTube SEO owns", "publishing bo
 require("skills/youtube-seo/SKILL.md", "Do not turn missing data into fake precision", "truth gate")
 require("skills/youtube-seo/SKILL.md", "OWNED_FIRST_PARTY", "evidence classes")
 require("skills/youtube-seo/SKILL.md", "Search, Browse, Suggested", "surface model")
+require("skills/youtube-seo/SKILL.md", "Thumbnail packaging workflow", "thumbnail workflow routing")
+require("skills/youtube-seo/references/thumbnail-workflow.md", "Layer 1 — Content-truth lock", "thumbnail truth lock")
+require("skills/youtube-seo/references/thumbnail-workflow.md", "DEDAL-controlled media staging", "thumbnail staging boundary")
 
 contract = json.loads((ROOT / "evals/youtube-seo/contract-v1.json").read_text(encoding="utf-8"))
 if len(contract.get("cases", [])) < 8:

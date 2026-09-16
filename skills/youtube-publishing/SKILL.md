@@ -40,6 +40,15 @@ It does **not** replace:
 7. **Recover safely.** For replace-style media, restore the prior DEDAL-managed source if the replacement insert/apply fails and rollback is possible.
 8. **Checkpoint durable lessons.** Record vendor quirks, managed-state requirements, and unresolved readback gaps without committing secrets/private tokens.
 
+## Thumbnail execution pipeline
+
+Publishing receives an approved thumbnail asset/brief from the composed SEO + Visual Direction workflow; it does not invent the visual strategy at mutation time. The execution path is:
+
+`approved asset -> DEDAL-controlled ephemeral staging -> Gateway-fetch preflight -> dedicated thumbnail mutation -> stage-aware diagnostics -> authoritative read-back -> staging cleanup -> package-event record`
+
+Prefer Creator-controlled staging (for example a bounded Cloudflare R2/Worker upload/download surface) over credit-metered third-party upload hosts. Third-party "upload to URL" services are fallback-only, not a Core dependency. A URL is valid only when the Gateway can actually fetch and validate it; browser accessibility alone is insufficient. See `references/thumbnail-media-staging.md`.
+
+
 ## Managed replacement rules
 
 - Native vendor `update` semantics are not assumed reliable merely because an endpoint exists.
@@ -86,6 +95,7 @@ Use YouTube SEO for query/entity research, Search/Browse/Suggested strategy, pac
 
 - `references/direct-api-and-auth.md`
 - `references/mutation-hardening-and-recovery.md`
+- `references/thumbnail-media-staging.md`
 - `channel-profiles.example.json`
 - `scripts/youtube_channel_ops.py`
 - `gateway/README.md`

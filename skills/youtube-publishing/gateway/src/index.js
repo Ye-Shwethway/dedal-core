@@ -1,5 +1,5 @@
 
-const VERSION = "0.4.4";
+const VERSION = "0.4.5";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -153,8 +153,21 @@ async function route(request, env, requestId) {
     if (body.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
     const { profile, accessToken } = await channelContext(env, alias);
     await ownedVideo(accessToken, profile.channel_id, videoId);
-    const media = await fetchExternalMedia(body.source_url, 50 * 1024 * 1024, ["image/jpeg", "image/png", "application/octet-stream"]);
-    const data = await googleRawMedia("POST", "https://www.googleapis.com/upload/youtube/v3/thumbnails/set?uploadType=media&videoId=" + encodeURIComponent(videoId), accessToken, media, "thumbnail_set_failed");
+    let media;
+    try {
+      media = await fetchExternalMedia(body.source_url, 50 * 1024 * 1024, ["image/jpeg", "image/png", "application/octet-stream"]);
+    } catch (error) {
+      await audit(env, "admin", "video.thumbnail_set", alias, profile.channel_id, null, "failed", { video_id: videoId, stage: "media", error_code: error?.code || "media_fetch_failed", error_status: Number.isInteger(error?.status) ? error.status : null, error_message: String(error?.message || error?.code || "media_fetch_failed").slice(0, 300) });
+      throw error;
+    }
+    let data;
+    try {
+      data = await googleRawMedia("POST", "https://www.googleapis.com/upload/youtube/v3/thumbnails/set?uploadType=media&videoId=" + encodeURIComponent(videoId), accessToken, media, "thumbnail_set_failed");
+    } catch (error) {
+      const d = error?.diagnostic || {};
+      await audit(env, "admin", "video.thumbnail_set", alias, profile.channel_id, null, "failed", { video_id: videoId, stage: "upload", error_code: error?.code || "thumbnail_set_failed", google_status: d.google_status ?? null, google_reason: d.google_reason ?? null, google_message: String(d.google_message || error?.message || "thumbnail_set_failed").slice(0, 500) });
+      throw error;
+    }
     await audit(env, "admin", "video.thumbnail_set", alias, profile.channel_id, null, "success", { video_id: videoId, bytes: media.bytes.byteLength, content_type: media.contentType });
     return reply({ video_id: videoId, thumbnail_set: true, thumbnails: data.items || [] });
   }

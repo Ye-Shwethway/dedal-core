@@ -2,7 +2,7 @@
   "version": 1,
   "checkpoint": "YOUTUBE-SOURCE-SYNC-01",
   "deployed_reference": {
-    "gateway": "0.7.44",
+    "gateway": "0.7.46",
     "mcp": "0.8.3"
   },
   "expected_mcp_tool_count": 52,
@@ -133,6 +133,16 @@
         "order_insensitive_tags",
         "bounded_retry",
         "readback_before_success"
+      ]
+    },
+    {
+      "id": "YT-SYNC-12",
+      "name": "thumbnail stage diagnostics",
+      "expect": [
+        "media_stage",
+        "upload_stage",
+        "bounded_failure_audit",
+        "readback_before_blind_retry"
       ]
     }
   ]

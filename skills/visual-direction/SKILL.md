@@ -26,6 +26,10 @@ Use this skill when image quality depends on preserving a subject, style, compos
 11. **Metrics are advisory** — automated similarity/reward scores may help triage but do not replace human/Creator visual acceptance, especially for identity and aesthetic quality.
 12. **Persist only durable visual truth** — record canonical traits, reference roles, approved anchors, and accepted direction; do not persist every failed prompt.
 
+## YouTube thumbnail composition
+
+When paired with YouTube SEO, consume an explicit thumbnail strategy/content-truth brief before rendering a scene- or character-specific thumbnail. Establish reference roles for identity, body/scale, wardrobe, environment, and style before generation. If the Creator accepts a base image, switch to edit-first behavior: preserve accepted anatomy, proportions, faces, pose, and composition unless the requested change requires otherwise. Text-only revisions should change typography only. Always inspect mobile-scale readability and safe-area placement before acceptance.
+
 ## Production modes
 
 - **Identity-first** — portraits/characters where facial/body/age/grooming continuity dominates.

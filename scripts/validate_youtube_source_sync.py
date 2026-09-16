@@ -18,7 +18,7 @@ required_gateway = [
     "managedPlaylistImageReplace", "playlist_image_state",
     "playlist_image_replace_requires_managed_baseline", "playlist.image_rollback",
     "caption.insert", "caption.update", "caption.delete",
-    "video.thumbnail_set", "channel.banner_set", "channel.watermark_set",
+    "video.thumbnail_set", "stage: \"media\"", "stage: \"upload\"", "channel.banner_set", "channel.watermark_set",
     "youtubeDataApi", "youtubeReportingApi", "youtubeAnalyticsApi",
     "resumable_init", "resumable_media", "google_location_type",
     "verifyVideoStatusEventually", "accepted_pending_readback",
@@ -94,4 +94,4 @@ if 'forMine: a.type === "video"' in mcp:
 
 print("youtube source sync contract: PASS")
 print(f"MCP tools: {len(tools)}")
-print("deployed reference: Gateway 0.7.44 / MCP 0.8.3")
+print("deployed reference: Gateway 0.7.46 / MCP 0.8.3")

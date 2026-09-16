@@ -82,6 +82,14 @@ Before proposing a package, ask:
 4. Is the copy concise enough that the useful context appears immediately?
 5. Would removing an SEO phrase make the copy clearer without losing real discovery intent? If yes, remove or rewrite it.
 
+## Thumbnail packaging workflow
+
+Thumbnail work is a layered package workflow, not an image-generation shortcut. For scene/character-specific work, do not generate before the content-truth lock, discovery strategy, and visual-reference roles are sufficiently defined. Use `references/thumbnail-workflow.md` as the canonical lifecycle.
+
+SEO owns the thumbnail strategy brief, title-thumbnail promise, target discovery surface, and experiment hypothesis. Visual Direction owns reference grounding, generation/editing, drift detection, mobile readability, and image acceptance. YouTube Publishing owns final media staging, authenticated mutation, diagnostics, and remote read-back.
+
+If a Creator-approved base image already exists, prefer the narrowest edit that satisfies the request. A text-only thumbnail change must not silently resize subjects, alter anatomy, drift identity, or redesign the composition.
+
 ## Evidence classes
 
 Use these labels when they materially improve traceability:
@@ -145,4 +153,5 @@ After an approved prospective package is applied and read back, freeze it for pl
 - `references/evidence-and-opportunity-model.md`
 - `references/mvp-workflows.md`
 - `references/measurement-and-closeout.md`
+- `references/thumbnail-workflow.md`
 - `ADAPTATION_NOTES.md`

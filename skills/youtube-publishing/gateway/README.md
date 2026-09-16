@@ -8,9 +8,9 @@ Production-minded Cloudflare control plane with a separate VPS byte-transfer run
 - Domain: `https://youtube.drthorne.uk`
 - D1: `dedal-youtube-gateway-prod` (`DB`)
 - API family: `v1`
-- Latest external hardening evidence in the 2026-09-16 checkpoint reports deployed Gateway `0.7.44`.
-- Public source version: `0.4.4`.
-- Authorized deployed-reference version used for source sync: Gateway `0.7.44`.
+- Latest external hardening evidence in the 2026-09-16 checkpoint reports deployed Gateway `0.7.46`.
+- Public source version: `0.4.5`.
+- Authorized deployed-reference version used for source sync: Gateway `0.7.46`.
 - Public and deployed version numbers are intentionally independent. `YOUTUBE-SOURCE-SYNC-01` reconciles verified behavior/source deltas; it does **not** claim byte-for-byte identity with the deployed Worker export.
 
 ## Security contract
@@ -40,6 +40,8 @@ Playlist-image replacement uses managed state and delete -> insert -> readback r
 Watermark set/unset remains exposed but not fully live-gated because prior watermark state cannot be reliably read. Unmanaged watermark state must fail closed.
 
 ## Stage-aware mutation audit
+
+Thumbnail failures distinguish `media` (source fetch/validation) from `upload` (YouTube thumbnail endpoint rejection) before success is claimed. This supports owned media staging diagnostics without leaking credentials or unbounded payloads.
 
 For hard failures use:
 

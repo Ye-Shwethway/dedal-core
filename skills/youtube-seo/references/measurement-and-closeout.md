@@ -43,6 +43,9 @@ Never collapse these into a single empty value.
 
 ## Stability / anti-churn rule
 
+A thumbnail added or replaced after T0 is a package event/confounder unless it was part of the frozen baseline. Record its apply time and asset/concept identity; later sequential change cannot be attributed to metadata alone.
+
+
 Once a prospective package is applied and verified, keep title/description/tags stable through the planned observation window unless one of these applies:
 - factual error or unsupported entity claim;
 - broken link/critical viewer-facing defect;

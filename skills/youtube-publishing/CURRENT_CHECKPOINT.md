@@ -22,8 +22,8 @@ Aggregation-layer outcome validation also passed with the existing remote MCP pr
 
 ## Version identity
 
-- Public Gateway source: `0.4.4`
-- Authorized deployed Gateway reference used for reconciliation: `0.7.44`
+- Public Gateway source: `0.4.5`
+- Authorized deployed Gateway reference used for reconciliation: `0.7.46`
 - Public MCP source: `0.2.2`
 - Authorized deployed MCP reference used for reconciliation: `0.8.3`
 
@@ -32,6 +32,8 @@ These version lines are intentionally independent. The checkpoint establishes pu
 Reporting API failures now record bounded upstream diagnostics in the private mutation audit. Live outcome testing has now passed Reporting API service enablement, report-type discovery, and scheduled-job creation/read-back. Generated Reach report availability remains asynchronous and should be verified before impressions/CTR are treated as available evidence.
 
 Video metadata writes now use bounded eventual-consistency read-back for all requested snippet fields, including order-insensitive tag verification. This closes a live case where title/description committed but immediate tag state was not verified.
+
+Thumbnail mutation hardening now records bounded `media` versus `upload` failure stages. A live custom-thumbnail case confirmed that browser-accessible third-party CDN media may still be unfetchable from the Gateway, while a Gateway-fetchable staged source succeeds. Public Core therefore treats DEDAL-controlled ephemeral media staging plus Gateway fetch preflight as the preferred future workflow; external credit-metered upload hosts are fallback-only.
 
 ## Remaining boundaries
 

@@ -91,6 +91,26 @@
       "id": "skill-closeout",
       "intent": "decide whether the current YouTube SEO implementation is feature-complete",
       "assertion": "code/skill closeout depends on implemented and validated workflow contracts; pending longitudinal real-world outcome windows are validation evidence and do not by themselves block feature completion"
+    },
+    {
+      "id": "thumbnail-strategy-before-generation",
+      "intent": "create a scene-specific YouTube thumbnail for a known clip",
+      "assertion": "lock content truth and target discovery strategy before image generation; do not substitute a generic or incorrect scene/character"
+    },
+    {
+      "id": "thumbnail-edit-preserves-approved-base",
+      "intent": "add only thumbnail text to a Creator-approved base image",
+      "assertion": "use edit-first behavior and preserve accepted subject anatomy, proportions, face, pose, and composition unless the requested change requires otherwise"
+    },
+    {
+      "id": "thumbnail-staging-owned-first",
+      "intent": "publish an approved custom thumbnail through a source_url-based setter",
+      "assertion": "prefer DEDAL-controlled ephemeral staging, prove Gateway fetchability before mutation, and treat credit-metered third-party upload hosts as fallback-only"
+    },
+    {
+      "id": "thumbnail-package-event",
+      "intent": "a custom thumbnail is introduced after the prospective SEO T0 baseline",
+      "assertion": "record the thumbnail introduction as a package event/confounder and do not attribute later sequential performance change to metadata alone"
     }
   ]
 }

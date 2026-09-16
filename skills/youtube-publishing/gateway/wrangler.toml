@@ -9,8 +9,8 @@ head_sampling_rate = 1
 [[d1_databases]]
 binding = "DB"
 database_name = "dedal-youtube-gateway-prod"
-database_id = "d8f23966-eda9-472f-a61e-441771e8b6ab"
 migrations_dir = "migrations"
+# Supply the production D1 database_id only in private deployment configuration.
 
 # Worker Secrets: GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET,
 # TOKEN_ENCRYPTION_KEY_B64, ADMIN_API_TOKEN, RUNNER_API_TOKEN

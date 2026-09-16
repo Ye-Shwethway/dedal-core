@@ -9,9 +9,9 @@ Production-minded Cloudflare control plane with a separate VPS byte-transfer run
 - D1: `dedal-youtube-gateway-prod` (`DB`)
 - API family: `v1`
 - Latest external hardening evidence in the 2026-09-16 checkpoint reports deployed Gateway `0.7.35`.
-- The source snapshot currently committed under `gateway/src/` still identifies itself as `0.3.0`. Treat deployed/source equivalence as **unverified** until `YOUTUBE-SOURCE-SYNC-01` compares the deployed Worker source against this repository.
-
-Do not “fix” this identity gap by changing a version constant without recovering the corresponding implementation.
+- Public source version: `0.4.0`.
+- Authorized deployed-reference version used for source sync: Gateway `0.7.35`.
+- Public and deployed version numbers are intentionally independent. `YOUTUBE-SOURCE-SYNC-01` reconciles verified behavior/source deltas; it does **not** claim byte-for-byte identity with the deployed Worker export.
 
 ## Security contract
 
@@ -49,6 +49,6 @@ Capture bounded fields such as action, outcome, resource identifiers, stage, err
 
 See `../references/mutation-hardening-and-recovery.md` and `../CURRENT_CHECKPOINT.md` for current production lessons.
 
-## Source-sync limitation
+## Source-sync status
 
-This public repository is the durable Core, but the deployed Worker advanced during live hardening faster than the checked-in source snapshot. Until the deployed source is recovered and compared, use this repository for contracts/checkpoints and use the live service only as runtime evidence; do not claim repo source parity.
+`YOUTUBE-SOURCE-SYNC-01` imports the verified public-safe implementation delta reconstructed from authorized deployed-source inspection. Raw Worker exports, live operational identifiers, credentials, D1 rows, debug assets, and Creator-specific state are intentionally excluded. The public source is behaviorally reconciled for the covered contracts, not asserted to be byte-for-byte deployment parity.

@@ -38,7 +38,7 @@ version = VERSION.read_text().strip()
 if machine.get("version") != version:
     raise SystemExit(f"checkpoint version {machine.get('version')} != VERSION {version}")
 
-if machine["next_executable_step"]["id"] != "YOUTUBE-SOURCE-SYNC-01":
+if machine["next_executable_step"]["id"] not in {"YOUTUBE-SOURCE-SYNC-01", "YOUTUBE-PUBLIC-SOURCE-OUTCOME-01"}:
     raise SystemExit("unexpected next checkpoint")
 
 for path in [CONTRACT, SKILL, REFERENCE, CHECKPOINT, MACHINE]:

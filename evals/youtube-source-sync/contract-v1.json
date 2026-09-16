@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "checkpoint": "YOUTUBE-SOURCE-SYNC-01",
+  "deployed_reference": {
+    "gateway": "0.7.35",
+    "mcp": "0.8.1"
+  },
+  "expected_mcp_tool_count": 49,
+  "cases": [
+    {"id":"YT-SYNC-01","name":"external media safety","expect":["https_only","redirect_revalidation","private_host_block","declared_and_actual_size_guard","mime_allowlist"]},
+    {"id":"YT-SYNC-02","name":"playlist image compatibility listing","expect":["playlistId","parent_raw","parent_resource","fallback_only_on_400"]},
+    {"id":"YT-SYNC-03","name":"playlist managed state","expect":["migration","managed_baseline","readback","persist_after_verification"]},
+    {"id":"YT-SYNC-04","name":"playlist replacement rollback","expect":["delete_then_insert","rollback_previous_source","audit_rollback"]},
+    {"id":"YT-SYNC-05","name":"captions dedicated lifecycle","expect":["ownership","list","insert","update","download","delete"]},
+    {"id":"YT-SYNC-06","name":"thumbnail and banner media paths","expect":["ownership","bounded_media","banner_stages","safe_diagnostics"]},
+    {"id":"YT-SYNC-07","name":"watermark boundary","expect":["explicit_action","explicit_destructive","no_false_readback_claim"]},
+    {"id":"YT-SYNC-08","name":"advanced bridges","expect":["data_allowlist","reporting_allowlist","analytics_allowlist","intent_gates"]},
+    {"id":"YT-SYNC-09","name":"mcp surface parity","expect":["49_unique_tools","dedicated_media_tools","generic_bridge_boundary"]},
+    {"id":"YT-SYNC-10","name":"public repo hygiene","expect":["no_live_ids","no_tokens","no_private_keys","no_live_media_urls","no_debug_base64"]}
+  ]
+}

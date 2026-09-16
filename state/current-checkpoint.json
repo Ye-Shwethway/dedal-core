@@ -1,43 +1,52 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.26.0",
+  "version": "0.27.0",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
-    "YouTube Publishing remains active; this release hardens the already-promoted dedicated MCP/Gateway workflow rather than creating a duplicate capability.",
-    "Caption list/insert/readback/VTT-download/update/delete has representative live evidence and the lifecycle test restored the original video state.",
-    "Thumbnail upload has representative end-to-end live evidence on an owned video.",
-    "Playlist image first insert and managed replacement have representative live evidence; production replacement requires a DEDAL-managed baseline, delete -> insert -> readback, managed-state persistence, and rollback on failed insertion.",
-    "Native playlistImages.update is not a production dependency because isolated live attempts produced inconsistent unexpectedPart failures around resumable processing.",
-    "Channel banner upload/apply/readback has representative live evidence; rollback must retain a recoverable full-resolution source rather than depending on a display-oriented bannerExternalUrl.",
-    "Watermark set/unset is exposed but not fully live-gated because current watermark state cannot be reliably discovered; unmanaged watermark state fails closed absent explicit Creator authority.",
-    "YouTube mutation debugging uses dedicated MCP -> bounded Gateway -> stage-aware D1 audit -> exact vendor error -> minimal patch -> one bounded retry -> readback verification -> checkpoint.",
-    "Live hardening evidence reported Gateway 0.7.35, but the public repo Gateway source still identifies itself as 0.3.0; deployed/source equivalence is not claimed until source sync."
+    "YOUTUBE-SOURCE-SYNC-01 reconciles the verified public-safe YouTube Gateway/MCP implementation delta into the durable repository.",
+    "The public MCP surface exposes 49 bounded youtube_* tools and the public Gateway carries the corresponding source-sync routes covered by contract validation.",
+    "Public Gateway 0.4.0 and MCP 0.2.0 version independently from the authorized deployed references Gateway 0.7.35 and MCP 0.8.1; byte-for-byte deployment parity is not claimed.",
+    "Playlist-image replacement remains managed-baseline delete -> insert -> readback with rollback; unmanaged replacement fails closed.",
+    "Watermark prior state remains unreadable and unmanaged destructive handling remains fail closed absent explicit Creator authority.",
+    "Public source excludes credentials, Creator-specific operational identifiers/state, raw deployed exports, debug assets, live audit rows, and Cloudflare account/database identifiers."
   ],
   "evidence": [
-    {"id": "youtube-caption-lifecycle-2026-09-16", "kind": "live-owned-resource-lifecycle", "status": "passed_and_restored"},
-    {"id": "youtube-thumbnail-set-2026-09-16", "kind": "live-owned-resource-mutation", "status": "passed"},
-    {"id": "youtube-playlist-image-managed-replacement-2026-09-16", "kind": "live-owned-resource-replacement", "status": "passed"},
-    {"id": "youtube-banner-upload-restore-2026-09-16", "kind": "live-owned-channel-branding", "status": "passed_and_restored"},
-    {"id": "youtube-watermark-readback-gap-2026-09-16", "kind": "safety-boundary", "status": "fail_closed_not_live_gated"},
-    {"id": "youtube-hardening-contract-v1", "kind": "contract_validation", "status": "passed_local_precommit"}
+    {
+      "id": "youtube-source-sync-contract-v1",
+      "kind": "contract_validation",
+      "status": "passed_local_precommit"
+    },
+    {
+      "id": "youtube-publishing-hardening-contract-v1",
+      "kind": "contract_validation",
+      "status": "passed_local_precommit"
+    },
+    {
+      "id": "youtube-public-repo-privacy-scan",
+      "kind": "privacy_validation",
+      "status": "passed_local_precommit"
+    },
+    {
+      "id": "youtube-authorized-deployed-source-reference-2026-09-16",
+      "kind": "source_reconciliation",
+      "status": "public_safe_delta_reconstructed"
+    }
   ],
   "unresolved_risks": [
-    "The deployed Gateway advanced beyond the source snapshot committed in this public repository; exact source parity must be recovered before the repo can reproduce the current deployment.",
-    "The exact deployed MCP version was not independently established by this reconciliation; the checked-in source still identifies itself as 0.1.0.",
-    "Channel banner replacement has a proven full-resolution restore technique but does not yet have the same persisted managed-baseline/rollback model as playlist images.",
-    "Watermark lifecycle must remain fail-closed for unmanaged state until a managed-state model or explicit Creator authorization exists.",
-    "YouTube vendor media/upload semantics and documentation can change; current requirements and error behavior need live verification when material.",
-    "YouTube Analytics summary/search-term retrieval remains unresolved from the prior checkpoint; this hardening work did not provide new evidence that the upstream Analytics read path is working."
+    "Channel banner persistent managed rollback is not yet at playlist-image parity.",
+    "Watermark lifecycle remains fail-closed for unmanaged state because prior watermark state cannot be reliably read.",
+    "YouTube vendor media/upload semantics may change and require current live verification when material.",
+    "Previously recorded YouTube Analytics upstream-read issues are not claimed resolved by source synchronization alone."
   ],
   "next_executable_step": {
-    "id": "YOUTUBE-SOURCE-SYNC-01",
-    "action": "Recover and compare the currently deployed YouTube Gateway/MCP source against the public repository, import only the verified missing implementation delta, then add managed baseline/rollback for banner and watermark before promoting watermark lifecycle."
+    "id": "YOUTUBE-PUBLIC-SOURCE-OUTCOME-01",
+    "action": "Exercise the synchronized public YouTube source in normal maintenance/deployment work, compare observed runtime behavior, and record only real drift or regressions."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "5bcc01d15b623a19a1755eb7a88b7719d177e118",
-    "relation": "tree-equivalent recovery HEAD after removing accidental preflight files; original v0.25.0 user baseline was 390baacd6cad31df58843fc6f206cb7677337cb0"
+    "sha": "59cbfb5736882afa4efd6745cdfb7d72efdc3d2e",
+    "relation": "v0.26.0 source-sync base; advance to the verified v0.27.0 implementation commit in the source-sync closure commit"
   }
 }

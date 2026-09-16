@@ -669,7 +669,7 @@ async function route(request, env, requestId) {
       ).bind(identity.title, credentialRef, now, alias, identity.id),
     ]);
     await audit(env, "oauth", "channel_profile.bind", alias, identity.id, null, "success", {});
-    return html(`Connected profile â${escapeHtml(alias)}â to verified YouTube channel â${escapeHtml(identity.title)}â (${escapeHtml(identity.id)}). You may close this page.`, 200);
+    return html(`Connected profile “${escapeHtml(alias)}” to verified YouTube channel “${escapeHtml(identity.title)}” (${escapeHtml(identity.id)}). You may close this page.`, 200);
   }
 
   if (request.method === "POST" && path === "/v1/upload-jobs") {

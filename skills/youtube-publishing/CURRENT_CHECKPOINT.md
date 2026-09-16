@@ -1,4 +1,4 @@
-# YouTube Publishing checkpoint â 2026-09-16
+# YouTube Publishing checkpoint — 2026-09-16
 
 ## Phase status
 

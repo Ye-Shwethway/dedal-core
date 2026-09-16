@@ -7,6 +7,8 @@ Decision: DEDAL-native synthesis; no third-party code or instructions imported v
 
 YouTube Publishing already owns authenticated YouTube operations and bounded analytics transport, but repeated Creator work exposed a distinct need for discovery research, surface-specific packaging, analytics diagnosis, experiments, and channel-specific learning. That intent is independently routable and should not overload publishing/mutation mechanics.
 
+A second packaging gap is copy quality: mechanically correct metadata can still read like an internal operator note rather than useful viewer-facing copy. SEO packaging therefore needs an explicit editorial quality gate without turning the skill into a long-form writing system.
+
 ## Primary evidence
 
 First-party YouTube/Google documentation informed the platform-truth boundary: Search relevance/engagement/quality, metadata semantics, Data API search, Analytics traffic/search/retention, Reporting Reach reports, Studio Trends, CTR interpretation, and native title/thumbnail experiments.
@@ -29,6 +31,7 @@ First-party YouTube/Google documentation informed the platform-truth boundary: S
 - Proposal/approval/mutation/read-back separation.
 - Hypothesis-first experiments with explicit confounders.
 - Private channel learning separated from sanitized generic Core lessons.
+- Viewer-facing metadata quality gate: concise natural copy, useful context first, verified entities, no internal notes, no keyword dumping, and title/description/thumbnail promise consistency.
 
 ## Rejected or constrained patterns
 
@@ -40,7 +43,9 @@ First-party YouTube/Google documentation informed the platform-truth boundary: S
 - single-query/region result position treated as durable rank;
 - sequential metadata changes described as clean A/B tests;
 - bulk auto-optimization without review;
-- copying competitor metadata instead of extracting gaps/patterns.
+- copying competitor metadata instead of extracting gaps/patterns;
+- internal archival/workflow notes presented as public-facing description copy;
+- long generic descriptions padded with SEO phrases when a short scene-specific paragraph is enough.
 
 ## Live MVP-01 outcome validation
 

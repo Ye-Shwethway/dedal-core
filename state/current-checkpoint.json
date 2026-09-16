@@ -46,7 +46,7 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "59cbfb5736882afa4efd6745cdfb7d72efdc3d2e",
-    "relation": "v0.26.0 source-sync base; advance to the verified v0.27.0 implementation commit in the source-sync closure commit"
+    "sha": "dadad52475957dff8eec8e87ffba6dc6f3a2da52",
+    "relation": "verified v0.27.0 YOUTUBE-SOURCE-SYNC-01 implementation commit; Repo Integrity and Runtime Contracts passed on this revision"
   }
 }

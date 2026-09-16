@@ -61,3 +61,10 @@ Use native DEDAL staging first. Credit-metered third-party upload hosts are fall
 ## MCP transport-safe chunking
 
 The custom MCP/aggregation transport can reject large inline Base64 requests before they reach the Gateway. Assets that do not fit the single-call path must be split into bounded Base64 chunks (raw decoded chunk <= 16 KiB), uploaded with `youtube_media_stage_chunk`, finalized with `youtube_media_stage_finalize`, then published from the returned signed URL. Abandoned chunk sessions expire automatically. This keeps third-party upload hosts out of the required path.
+
+
+## Stable MCP surface
+
+Production keeps the existing 54-action MCP surface. Chunking is transported through the existing `youtube_media_stage` action using a Base64-encoded DEDAL control envelope, so no MCP re-sync or separate chunk tools are required. The Gateway recognizes only the versioned envelope marker and routes it to the owned staging Worker; ordinary image Base64 continues through the original single-call path. Recommended raw chunk size is 6 KiB to stay comfortably below connector body limits.
+
+Chunk acknowledgements are wrapped to satisfy the stable `youtube_media_stage` output contract (`pending: true`, empty `source_url`) while carrying `upload_id` as an additional field. Only the finalize response is a publishable stage result.

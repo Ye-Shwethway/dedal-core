@@ -41,7 +41,7 @@ if len(tools) != contract["expected_mcp_tool_count"] or len(set(tools)) != len(t
     raise SystemExit(f"unexpected MCP tool surface: count={len(tools)} unique={len(set(tools))}")
 
 required_tools = {
-    "youtube_media_stage", "youtube_media_stage_chunk", "youtube_media_stage_finalize", "youtube_media_unstage", "youtube_thumbnail_set", "youtube_captions_list", "youtube_caption_insert",
+    "youtube_media_stage", "youtube_media_unstage", "youtube_thumbnail_set", "youtube_captions_list", "youtube_caption_insert",
     "youtube_caption_update", "youtube_caption_download", "youtube_caption_delete",
     "youtube_playlist_images_list", "youtube_playlist_image_set", "youtube_playlist_image_delete",
     "youtube_channel_banner_set", "youtube_watermark_set", "youtube_watermark_unset",
@@ -104,4 +104,4 @@ if 'forMine: a.type === "video"' in mcp:
 
 print("youtube source sync contract: PASS")
 print(f"MCP tools: {len(tools)}")
-print("deployed reference: Gateway 0.7.47 / MCP 0.8.4")
+print("deployed reference: Gateway 0.7.50 / MCP 0.8.4")

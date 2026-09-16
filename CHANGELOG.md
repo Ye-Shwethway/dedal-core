@@ -267,3 +267,7 @@ Anthropic and Vercel material was used as pattern-level inspiration where a repo
 Initial DEDAL Core foundation: identity, operating contract, security boundary, capability registry, continuity checkpoint, improvement protocol, foundational architecture, and repository integrity workflow.
 
 - YouTube Publishing: added transport-safe chunked native media staging (`youtube_media_stage_chunk` + `youtube_media_stage_finalize`) so thumbnail assets no longer depend on third-party upload hosts when inline Base64 exceeds connector body limits.
+
+- YouTube Publishing: retained the stable 54-action MCP surface and moved chunk transport behind the existing `youtube_media_stage` action via a versioned Base64 control envelope; prevents connector body limits without forcing a custom-MCP schema resync.
+
+- YouTube Publishing: made transparent chunk acknowledgements compatible with the existing media-stage output schema; pending chunks can traverse Composio without adding MCP actions.

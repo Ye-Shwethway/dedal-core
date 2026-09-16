@@ -57,3 +57,7 @@ Runtime Contracts, YouTube Publishing hardening, the `youtube-source-sync` contr
 
 
 - Native staging transport hardening: chunked upload/finalize added for MCP body limits; deployed target Gateway 0.7.48 / MCP 0.8.5 / staging Worker 0.1.1; expected MCP surface 56.
+
+- Chunk transport was revised after live validation: production MCP remains 0.8.4 / 54 actions; Gateway 0.7.49 transparently multiplexes chunk/finalize control envelopes through existing `youtube_media_stage`. This avoids deploying sanitized public MCP auth code over the prod-specific MCP runtime.
+
+- Output-schema compatibility hardening: chunk acknowledgements now retain the existing `youtube_media_stage` required response fields and set `pending: true`; only finalize returns a usable signed URL. Target Gateway 0.7.50.

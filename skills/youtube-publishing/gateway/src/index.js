@@ -1,5 +1,5 @@
 
-const VERSION = "0.4.7";
+const VERSION = "0.4.9";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -149,12 +149,18 @@ async function route(request, env, requestId) {
     const body = await bodyJson(request);
     if (body.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
     if (!env.MEDIA_STAGING_URL || !env.MEDIA_STAGING_TOKEN) throw httpError(503, "media_staging_not_configured");
-    const endpoint = String(env.MEDIA_STAGING_URL).replace(/\/+$/, "") + "/v1/stage";
-    const upstream = await fetch(endpoint, { method: "POST", headers: { Authorization: "Bearer " + env.MEDIA_STAGING_TOKEN, "Content-Type": "application/json" }, body: JSON.stringify({ content_base64: body.content_base64, content_type: body.content_type, ttl_seconds: body.ttl_seconds }) });
+    const envelope = mediaStageEnvelope(body.content_base64);
+    const stagingBase = String(env.MEDIA_STAGING_URL).replace(/\/+$/, "");
+    const endpoint = envelope?.op === "chunk" ? stagingBase + "/v1/stage/chunk" : envelope?.op === "finalize" ? stagingBase + "/v1/stage/finalize" : stagingBase + "/v1/stage";
+    const stagingBody = envelope?.op === "chunk" ? { upload_id: envelope.upload_id, chunk_index: envelope.chunk_index, chunk_base64: envelope.chunk_base64, content_type: body.content_type, ttl_seconds: body.ttl_seconds } : envelope?.op === "finalize" ? { upload_id: envelope.upload_id, total_chunks: envelope.total_chunks } : { content_base64: body.content_base64, content_type: body.content_type, ttl_seconds: body.ttl_seconds };
+    const upstream = await fetch(endpoint, { method: "POST", headers: { Authorization: "Bearer " + env.MEDIA_STAGING_TOKEN, "Content-Type": "application/json" }, body: JSON.stringify(stagingBody) });
     const text = await upstream.text();
     let data = {};
     try { data = text ? JSON.parse(text) : {}; } catch { data = { upstream_message: text.slice(0, 500) }; }
     if (!upstream.ok) throw httpError(upstream.status >= 400 && upstream.status < 500 ? upstream.status : 502, data.error || "media_staging_failed");
+    if (envelope?.op === "chunk") {
+      return reply({ ...data, stage_id: data.upload_id, source_url: "", expires_at: 0, content_type: data.content_type || body.content_type, bytes: data.chunk_bytes || 0, sha256: "pending_chunk", pending: true }, upstream.status === 201 ? 201 : 200);
+    }
     return reply(data, upstream.status === 201 ? 201 : 200);
   }
 
@@ -1666,6 +1672,18 @@ function cookie(request, name) {
   return match ? match[1] : "";
 }
 
+
+function mediaStageEnvelope(value) {
+  const text = String(value || "");
+  if (!text.startsWith("eyJkZWRhbF9tZWRpYV9zdGFnZV92Ijox")) return null;
+  try {
+    const decoded = atob(text.replace(/\s+/g, ""));
+    const data = JSON.parse(decoded);
+    if (data?.dedal_media_stage_v !== 1 || !["chunk","finalize"].includes(data.op)) return null;
+    if (data.op === "chunk") return { op: "chunk", upload_id: data.upload_id ? String(data.upload_id) : undefined, chunk_index: Number(data.chunk_index), chunk_base64: String(data.chunk_base64 || "") };
+    return { op: "finalize", upload_id: String(data.upload_id || ""), total_chunks: Number(data.total_chunks) };
+  } catch { throw httpError(400, "invalid_media_stage_envelope"); }
+}
 function reply(payload, status=200) {
   return new Response(JSON.stringify(payload), {
     status,

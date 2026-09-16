@@ -1,5 +1,5 @@
 
-const VERSION = "0.4.1";
+const VERSION = "0.4.2";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -507,6 +507,47 @@ async function route(request, env, requestId) {
     return reply({ profile_alias: alias, channel_id: profile.channel_id, start_date: startDate, end_date: endDate, search_terms: analyticsRows(data) });
   }
 
+
+  const videoTrafficMatch = path.match(/^\/v1\/channels\/([^/]+)\/analytics\/videos\/([^/]+)\/traffic-sources$/);
+  if (request.method === "GET" && videoTrafficMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(videoTrafficMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(videoTrafficMatch[2]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    await ownedVideo(accessToken, profile.channel_id, videoId);
+    const { startDate, endDate } = analyticsDates(url);
+    const maxResults = boundedInt(url.searchParams.get("max_results"), 25, 1, 50);
+    const qs = new URLSearchParams({ ids: "channel==MINE", startDate, endDate, dimensions: "insightTrafficSourceType", filters: `video==${videoId}`, metrics: "views,estimatedMinutesWatched", sort: "-views", maxResults: String(maxResults) });
+    const data = await googleJson(`https://youtubeanalytics.googleapis.com/v2/reports?${qs}`, accessToken, "analytics_video_traffic_sources_failed");
+    return reply({ profile_alias: alias, channel_id: profile.channel_id, video_id: videoId, start_date: startDate, end_date: endDate, traffic_sources: analyticsRows(data) });
+  }
+
+  const videoSearchTermsMatch = path.match(/^\/v1\/channels\/([^/]+)\/analytics\/videos\/([^/]+)\/search-terms$/);
+  if (request.method === "GET" && videoSearchTermsMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(videoSearchTermsMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(videoSearchTermsMatch[2]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    await ownedVideo(accessToken, profile.channel_id, videoId);
+    const { startDate, endDate } = analyticsDates(url);
+    const maxResults = boundedInt(url.searchParams.get("max_results"), 25, 1, 50);
+    const qs = new URLSearchParams({ ids: "channel==MINE", startDate, endDate, dimensions: "insightTrafficSourceDetail", filters: `video==${videoId};insightTrafficSourceType==YT_SEARCH`, metrics: "views,estimatedMinutesWatched", sort: "-views", maxResults: String(maxResults) });
+    const data = await googleJson(`https://youtubeanalytics.googleapis.com/v2/reports?${qs}`, accessToken, "analytics_video_search_terms_failed");
+    return reply({ profile_alias: alias, channel_id: profile.channel_id, video_id: videoId, start_date: startDate, end_date: endDate, search_terms: analyticsRows(data) });
+  }
+
+  const videoRetentionMatch = path.match(/^\/v1\/channels\/([^/]+)\/analytics\/videos\/([^/]+)\/retention$/);
+  if (request.method === "GET" && videoRetentionMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(videoRetentionMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(videoRetentionMatch[2]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    await ownedVideo(accessToken, profile.channel_id, videoId);
+    const { startDate, endDate } = analyticsDates(url);
+    const qs = new URLSearchParams({ ids: "channel==MINE", startDate, endDate, dimensions: "elapsedVideoTimeRatio", filters: `video==${videoId}`, metrics: "audienceWatchRatio,relativeRetentionPerformance" });
+    const data = await googleJson(`https://youtubeanalytics.googleapis.com/v2/reports?${qs}`, accessToken, "analytics_video_retention_failed");
+    return reply({ profile_alias: alias, channel_id: profile.channel_id, video_id: videoId, start_date: startDate, end_date: endDate, retention: analyticsRows(data) });
+  }
 
   const videoDeleteMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos\/([^/]+)\/delete$/);
   if (request.method === "POST" && videoDeleteMatch) {

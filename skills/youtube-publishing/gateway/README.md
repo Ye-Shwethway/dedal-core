@@ -8,9 +8,9 @@ Production-minded Cloudflare control plane with a separate VPS byte-transfer run
 - Domain: `https://youtube.drthorne.uk`
 - D1: `dedal-youtube-gateway-prod` (`DB`)
 - API family: `v1`
-- Latest external hardening evidence in the 2026-09-16 checkpoint reports deployed Gateway `0.7.41`.
-- Public source version: `0.4.1`.
-- Authorized deployed-reference version used for source sync: Gateway `0.7.41`.
+- Latest external hardening evidence in the 2026-09-16 checkpoint reports deployed Gateway `0.7.42`.
+- Public source version: `0.4.2`.
+- Authorized deployed-reference version used for source sync: Gateway `0.7.42`.
 - Public and deployed version numbers are intentionally independent. `YOUTUBE-SOURCE-SYNC-01` reconciles verified behavior/source deltas; it does **not** claim byte-for-byte identity with the deployed Worker export.
 
 ## Security contract

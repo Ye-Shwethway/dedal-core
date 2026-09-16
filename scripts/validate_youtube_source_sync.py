@@ -46,6 +46,7 @@ required_tools = {
     "youtube_playlist_images_list", "youtube_playlist_image_set", "youtube_playlist_image_delete",
     "youtube_channel_banner_set", "youtube_watermark_set", "youtube_watermark_unset",
     "youtube_data_api", "youtube_reporting_api", "youtube_analytics_api",
+    "youtube_video_traffic_sources", "youtube_video_search_terms", "youtube_video_retention",
 }
 if not required_tools.issubset(tools):
     raise SystemExit(f"missing MCP tools: {sorted(required_tools - set(tools))}")
@@ -66,4 +67,4 @@ for marker in banned_debug:
 
 print("youtube source sync contract: PASS")
 print(f"MCP tools: {len(tools)}")
-print("deployed reference: Gateway 0.7.41 / MCP 0.8.1")
+print("deployed reference: Gateway 0.7.42 / MCP 0.8.2")

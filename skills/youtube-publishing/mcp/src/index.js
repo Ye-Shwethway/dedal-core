@@ -1,4 +1,4 @@
-const VERSION = "0.2.0";
+const VERSION = "0.2.1";
 const ISSUER = "https://mcp.youtube.drthorne.uk";
 const RESOURCE = `${ISSUER}/mcp`;
 const GATEWAY = "https://youtube.drthorne.uk";
@@ -54,6 +54,9 @@ const TOOLS = [
   tool("youtube_analytics_api", "Flexible YouTube Analytics API bridge for channel reports and analytics groups.", { profile_alias: str(), resource: { type: "string", enum: ["reports","groups","groupItems"] }, operation: str(), params: obj(), body: obj(), explicit_action_intent: bool(), explicit_destructive_intent: bool() }, false, ["profile_alias","resource","operation"]),
   tool("youtube_analytics_summary", "Get a bounded YouTube Analytics summary.", { profile_alias: str(), start_date: str(), end_date: str() }, true, ["profile_alias"]),
   tool("youtube_search_terms", "Get bounded YouTube search-term analytics where available.", { profile_alias: str(), start_date: str(), end_date: str(), max_results: integer(1,50) }, true, ["profile_alias"]),
+  tool("youtube_video_traffic_sources", "Get bounded traffic-source analytics for one owned video.", { profile_alias: str(), video_id: str(), start_date: str(), end_date: str(), max_results: integer(1,50) }, true, ["profile_alias","video_id"]),
+  tool("youtube_video_search_terms", "Get bounded YouTube search-term analytics for one owned video where available.", { profile_alias: str(), video_id: str(), start_date: str(), end_date: str(), max_results: integer(1,50) }, true, ["profile_alias","video_id"]),
+  tool("youtube_video_retention", "Get audience-retention analytics for one owned video where available.", { profile_alias: str(), video_id: str(), start_date: str(), end_date: str() }, true, ["profile_alias","video_id"]),
 ];
 
 export default {
@@ -204,6 +207,9 @@ async function callGateway(name, a, env) {
     youtube_analytics_api: ["POST", `/v1/channels/${enc(a.profile_alias)}/analytics-api`, pick(a, ["resource","operation","params","body","explicit_action_intent","explicit_destructive_intent"])],
     youtube_analytics_summary: ["GET", `/v1/channels/${enc(a.profile_alias)}/analytics/summary?${query(pick(a, ["start_date", "end_date"]))}`],
     youtube_search_terms: ["GET", `/v1/channels/${enc(a.profile_alias)}/analytics/search-terms?${query(pick(a, ["start_date", "end_date", "max_results"]))}`],
+    youtube_video_traffic_sources: ["GET", `/v1/channels/${enc(a.profile_alias)}/analytics/videos/${enc(a.video_id)}/traffic-sources?${query(pick(a, ["start_date", "end_date", "max_results"]))}`],
+    youtube_video_search_terms: ["GET", `/v1/channels/${enc(a.profile_alias)}/analytics/videos/${enc(a.video_id)}/search-terms?${query(pick(a, ["start_date", "end_date", "max_results"]))}`],
+    youtube_video_retention: ["GET", `/v1/channels/${enc(a.profile_alias)}/analytics/videos/${enc(a.video_id)}/retention?${query(pick(a, ["start_date", "end_date"]))}`],
   };
   const route = routes[name]; if (!route) throw failure(400, "unknown_tool");
   const response = await fetch(GATEWAY + route[1], { method: route[0], headers: { Authorization: `Bearer ${env.GATEWAY_API_TOKEN}`, ...(route[2] ? { "Content-Type": "application/json" } : {}) }, body: route[2] ? JSON.stringify(route[2]) : undefined });

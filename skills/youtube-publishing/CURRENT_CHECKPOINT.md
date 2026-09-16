@@ -10,7 +10,7 @@ Large video bytes continue through the isolated uploader runner rather than MCP/
 
 ## Public source reconciliation
 
-The public Gateway now carries the verified public-safe source delta for external-media guards, captions, thumbnails, playlist images, banner diagnostics, watermark safety boundaries, bounded Data/Reporting/Analytics bridges, and dedicated video deletion. The MCP surface exposes 49 bounded `youtube_*` tools.
+The public Gateway now carries the verified public-safe source delta for external-media guards, captions, thumbnails, playlist images, banner diagnostics, watermark safety boundaries, bounded Data/Reporting/Analytics bridges, and dedicated video deletion. The MCP surface exposes 52 bounded `youtube_*` tools. Three dedicated read-only SEO analytics helpers now expose owned-video traffic sources, owned-video search terms, and owned-video retention without requiring callers to assemble generic Analytics queries.
 
 Playlist-image replacement requires a managed baseline and uses delete -> insert -> read back with rollback to the previous managed source if insertion fails. Native `playlistImages.update` is not a production replacement dependency.
 
@@ -22,10 +22,10 @@ Aggregation-layer outcome validation also passed with the existing remote MCP pr
 
 ## Version identity
 
-- Public Gateway source: `0.4.1`
-- Authorized deployed Gateway reference used for reconciliation: `0.7.41`
-- Public MCP source: `0.2.0`
-- Authorized deployed MCP reference used for reconciliation: `0.8.1`
+- Public Gateway source: `0.4.2`
+- Authorized deployed Gateway reference used for reconciliation: `0.7.42`
+- Public MCP source: `0.2.1`
+- Authorized deployed MCP reference used for reconciliation: `0.8.2`
 
 These version lines are intentionally independent. The checkpoint establishes public-safe behavioral/source reconciliation for the covered contracts; it does not claim byte-for-byte parity with deployed exports.
 

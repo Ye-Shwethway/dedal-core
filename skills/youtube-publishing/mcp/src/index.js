@@ -1,4 +1,4 @@
-const VERSION = "0.1.0";
+const VERSION = "0.2.0";
 const ISSUER = "https://mcp.youtube.drthorne.uk";
 const RESOURCE = `${ISSUER}/mcp`;
 const GATEWAY = "https://youtube.drthorne.uk";

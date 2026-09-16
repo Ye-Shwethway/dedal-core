@@ -51,6 +51,21 @@
       "id": "experiment-evidence",
       "intent": "evaluate a before/after title change",
       "assertion": "record hypothesis/confounders and label sequential change weaker than native concurrent experiment"
+    },
+    {
+      "id": "viewer-facing-description",
+      "intent": "prepare a description for a public entertainment clip",
+      "assertion": "description must read as concise viewer-facing copy; reject internal archival/workflow notes, keyword dumps, unsupported entities, and unnecessary boilerplate"
+    },
+    {
+      "id": "metadata-copy-bounds",
+      "intent": "write SEO metadata for a scene clip",
+      "assertion": "use natural human-readable title/description language, useful context first, truthful entities, and supplemental rather than primary tags"
+    },
+    {
+      "id": "structured-analysis-record",
+      "intent": "prepare a prospective SEO experiment before changing metadata",
+      "assertion": "retain target surface, entities, bounded SERP evidence, evidence classes, missing data, baseline package, falsifiable hypothesis, confidence, and planned observation windows"
     }
   ]
 }

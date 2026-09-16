@@ -46,6 +46,8 @@ Contract coverage includes playlist insert/replacement/rollback/fail-closed case
 
 Live hardening evidence reported a later deployed Gateway than the public checked-in source snapshot. The repository snapshot still self-identifies as Gateway `0.3.0`, while the latest externally verified deployment evidence in this checkpoint reports `0.7.35`. Exact deployed/source equivalence is not claimed.
 
+The earlier YouTube Analytics upstream-read failure is also still unresolved; this media/caption/branding hardening does not prove Analytics retrieval.
+
 ## Next checkpoint
 
 `YOUTUBE-SOURCE-SYNC-01`: recover and compare deployed Gateway/MCP source with the public repo, import only the verified missing implementation delta, then add managed banner/watermark baseline + rollback before promoting watermark lifecycle.

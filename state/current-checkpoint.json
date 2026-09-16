@@ -27,7 +27,8 @@
     "The exact deployed MCP version was not independently established by this reconciliation; the checked-in source still identifies itself as 0.1.0.",
     "Channel banner replacement has a proven full-resolution restore technique but does not yet have the same persisted managed-baseline/rollback model as playlist images.",
     "Watermark lifecycle must remain fail-closed for unmanaged state until a managed-state model or explicit Creator authorization exists.",
-    "YouTube vendor media/upload semantics and documentation can change; current requirements and error behavior need live verification when material."
+    "YouTube vendor media/upload semantics and documentation can change; current requirements and error behavior need live verification when material.",
+    "YouTube Analytics summary/search-term retrieval remains unresolved from the prior checkpoint; this hardening work did not provide new evidence that the upstream Analytics read path is working."
   ],
   "next_executable_step": {
     "id": "YOUTUBE-SOURCE-SYNC-01",

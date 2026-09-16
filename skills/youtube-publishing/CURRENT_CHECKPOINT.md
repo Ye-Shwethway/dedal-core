@@ -56,6 +56,8 @@ The latest external live verification supplied for this hardening sequence repor
 
 The MCP remains the dedicated bounded tool layer. Its public repo snapshot identifies itself as `0.1.0`; an exact newer deployed MCP version was not independently established in this repo reconciliation.
 
+The prior checkpoint's YouTube Analytics upstream-read failure remains unresolved in this reconciliation because no new live evidence here proves Analytics summary/search-term retrieval. Do not infer resolution from the media-management hardening.
+
 ## Safety boundary retained
 
 Exact ownership verification, dedicated typed tools, explicit action/destructive/publication intent, bounded retries, post-mutation readback, rollback capture, and fail-closed handling of unreadable prior state remain mandatory.

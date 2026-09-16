@@ -2,6 +2,17 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.30.0 — 2026-09-16
+
+### Added
+- `skills/youtube-seo/` as a first-party-data-first discovery-intelligence faculty for query/entity research, Search/Browse/Suggested surface strategy, packaging hypotheses, analytics diagnosis, experiment design/readout, and channel learning.
+- Transparent YouTube SEO evidence classes and opportunity-factor model that refuse unsupported absolute search volume, universal difficulty, guaranteed rank, or magic-score certainty.
+- YouTube SEO routing/eval contract with explicit ownership separation from YouTube Publishing and private-overlay learning.
+
+### Changed
+- YouTube Publishing now owns authenticated YouTube operations and bounded API/MCP transport while YouTube SEO owns discovery intelligence; approved SEO changes still pass through Publishing intent/read-back gates.
+- Capability routing/registry/consolidation state now recognizes YouTube discovery intelligence as independently routable without turning Data/Analytics/Reporting APIs or third-party SEO tools into faculties.
+
 ## 0.29.0 — 2026-09-16
 
 ### Added

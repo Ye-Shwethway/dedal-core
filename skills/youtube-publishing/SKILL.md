@@ -19,7 +19,7 @@ Own the channel-operations layer after a media artifact is ready for distributio
 
 ## Ownership boundary
 
-YouTube Publishing owns target-channel resolution, YouTube metadata, upload lifecycle, privacy/scheduling, playlist and thumbnail operations, captions, supported channel branding, managed media state, post-publish analytics, and YouTube discoverability feedback.
+YouTube Publishing owns target-channel resolution, YouTube metadata writes, upload lifecycle, privacy/scheduling, playlist and thumbnail operations, captions, supported channel branding, managed media state, and bounded YouTube Data/Analytics/Reporting transport used by higher-level workflows. YouTube SEO owns discovery research, surface-specific packaging hypotheses, analytics diagnosis, experiments, and discovery-learning synthesis.
 
 It does **not** replace:
 - Video Production for edit quality, codecs, burned-in captions, or the final media master;
@@ -70,9 +70,9 @@ Representative live evidence now covers:
 
 Watermark set/unset tools are exposed but the lifecycle remains **not fully live-gated** because YouTube does not provide a reliable current-watermark read/list baseline.
 
-## Discoverability / SEO rules
+## Discoverability / SEO boundary
 
-DEDAL can optimize from current search patterns, public trend evidence when appropriate, the channel's own Analytics traffic-source/search-term data, semantic clarity, and observed prior performance. Do not invent universal search-volume numbers; label any DEDAL competition/opportunity score as a heuristic.
+Use YouTube SEO for query/entity research, Search/Browse/Suggested strategy, packaging hypotheses, analytics diagnosis, experiments, and channel-learning synthesis. YouTube Publishing remains the execution/transport owner when approved metadata or channel state is actually read or changed. Do not bypass Publishing ownership, intent, mutation, or read-back gates merely because an SEO workflow produced a recommendation.
 
 ## Safety and truth gates
 

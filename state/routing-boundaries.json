@@ -1,9 +1,15 @@
 {
-  "schema_version": 8,
+  "schema_version": 9,
   "phase": "hardening-consolidation-outcome-validation",
   "composition_model": {
     "architecture": "persistent-cognitive-runtime",
-    "roles": ["RUNTIME", "PRIMARY", "SUPPORTING", "EXECUTION", "DORMANT"],
+    "roles": [
+      "RUNTIME",
+      "PRIMARY",
+      "SUPPORTING",
+      "EXECUTION",
+      "DORMANT"
+    ],
     "runtime_always_active": true,
     "specialist_loading": "progressive",
     "explicit_alias_selects_primary_without_disabling_runtime_or_needed_support": true,
@@ -132,6 +138,20 @@
       "rule": "Pair design with implementation only when both are actually required; image-production continuity is not UI design."
     },
     {
+      "id": "youtube-discovery-boundary",
+      "primary_owner_by_intent": {
+        "youtube-discovery-query-entity-research": "youtube-seo",
+        "youtube-search-browse-suggested-packaging-strategy": "youtube-seo",
+        "youtube-analytics-discovery-diagnosis-experiment-learning": "youtube-seo",
+        "youtube-authenticated-channel-metadata-media-mutation": "youtube-publishing",
+        "youtube-upload-privacy-scheduling-playlist-caption-branding": "youtube-publishing",
+        "video-media-master-edit-temporal-quality": "video-production",
+        "thumbnail-image-generation-editing": "visual-direction",
+        "external-current-platform-fact-research": "research"
+      },
+      "rule": "YouTube SEO owns discovery intelligence and hypotheses; YouTube Publishing owns authenticated YouTube operations and provider read/write transport. SEO proposals do not bypass Publishing intent, ownership, mutation, or read-back gates."
+    },
+    {
       "id": "evidence-acquisition",
       "primary_owner_by_intent": {
         "current-fact-research-synthesis": "research",
@@ -164,6 +184,7 @@
     "provider-model-library-and-version-specific-facts-live-verified-when-material",
     "recompose-on-material-subgoal-change",
     "no-new-skill-for-already-owned-intent",
-    "needs-evidence-before-merge-or-remove"
+    "needs-evidence-before-merge-or-remove",
+    "youtube-discovery-intelligence-is-separate-from-authenticated-youtube-mutation"
   ]
 }

@@ -1,34 +1,181 @@
 {
   "schema_version": 1,
   "phase": "hardening-consolidation-outcome-validation",
-  "labels": ["KEEP", "TUNE", "MERGE", "REMOVE", "NEEDS_EVIDENCE"],
+  "labels": [
+    "KEEP",
+    "TUNE",
+    "MERGE",
+    "REMOVE",
+    "NEEDS_EVIDENCE"
+  ],
   "entries": [
-    {"skill":"medicine-store-assistant","decision":"KEEP","evidence_level":"domain-proven","overlap":"Data Operations supplies generic mechanics but not hospital inventory rules."},
-    {"skill":"patient-report-assistant","decision":"KEEP","evidence_level":"domain-proven","overlap":"Data Operations supplies generic mechanics but not patient-report business rules."},
-    {"skill":"ika","decision":"KEEP","evidence_level":"architecturally-distinct","overlap":"Concrete evidence-linked archives; Knowledge/Memory owns generic state architecture."},
-    {"skill":"github","decision":"KEEP","evidence_level":"positive-observed-with-regression-risk","overlap":"Repository mechanics only."},
-    {"skill":"files","decision":"KEEP","evidence_level":"foundational-execution-surface","overlap":"File/artifact mechanics; domain truth remains elsewhere."},
-    {"skill":"research","decision":"KEEP","evidence_level":"mixed-positive","overlap":"Evidence retrieval/synthesis; Skill Acquisition specializes external-skill study."},
-    {"skill":"software-development","decision":"KEEP","evidence_level":"architecturally-distinct","overlap":"Application implementation; not infrastructure, live reliability, database semantics, creative production, QA or release promotion."},
-    {"skill":"quality-engineering","decision":"KEEP","evidence_level":"deep-audit-plus-contract-validated","overlap":"Independent acceptance/readiness, including media/deck readiness when distinct from creation."},
-    {"skill":"cloudflare-platform","decision":"KEEP","evidence_level":"first-party-deep-audit-plus-contract-validated","overlap":"Cloudflare product/provider semantics."},
-    {"skill":"database-engineering","decision":"KEEP","evidence_level":"multi-source-deep-audit-plus-contract-validated","overlap":"Database semantics."},
-    {"skill":"reliability-engineering","decision":"KEEP","evidence_level":"multi-source-first-party-deep-audit-plus-contract-validated","overlap":"Live service health and incidents."},
-    {"skill":"infrastructure-engineering","decision":"KEEP","evidence_level":"first-party-multi-source-deep-audit-plus-contract-validated","overlap":"Declarative infrastructure lifecycle."},
-    {"skill":"video-production","decision":"KEEP","evidence_level":"demonstrated-workflow-plus-multi-source-deep-audit-plus-contract-validated","overlap":"Owns temporal storytelling, generative-video direction, editing, subtitles/audio/motion composition and media delivery; Visual Direction owns still canonical references; tools remain execution surfaces."},
-    {"skill":"presentation-engineering","decision":"KEEP","evidence_level":"demonstrated-workflow-plus-multi-source-deep-audit-plus-contract-validated","overlap":"Owns deck narrative/slide architecture, visual hierarchy, editability and render QA; Research/domain owners own factual truth; Writing owns prose; slide tools remain execution surfaces."},
-    {"skill":"youtube-publishing","decision":"KEEP","evidence_level":"real-oauth-mismatch-plus-interrupted-resume-plus-playlist-readback-proven","overlap":"Owns authenticated YouTube channel binding, upload orchestration, publication state and secondary YouTube mutations; Video Production owns media creation/editing."},
-    {"skill":"decision-design","decision":"NEEDS_EVIDENCE","evidence_level":"contract-validated","overlap":"No duplicate planning skill."},
-    {"skill":"interface-design","decision":"NEEDS_EVIDENCE","evidence_level":"contract-validated","overlap":"Software UX/UI, not presentation or video production."},
-    {"skill":"agent-engineering","decision":"KEEP","evidence_level":"contract-plus-observed-harness-use","overlap":"Model/tool/harness design."},
-    {"skill":"security-engineering","decision":"KEEP","evidence_level":"architecturally-distinct","overlap":"Threat/authority reasoning."},
-    {"skill":"project-bootstrap","decision":"NEEDS_EVIDENCE","evidence_level":"contract-validated","overlap":"Entry/resume context mapping."},
-    {"skill":"release-engineering","decision":"NEEDS_EVIDENCE","evidence_level":"contract-validated","overlap":"Shipping/provenance/rollback."},
-    {"skill":"data-operations","decision":"NEEDS_EVIDENCE","evidence_level":"contract-validated","overlap":"Record/table integrity and reconciliation."},
-    {"skill":"writing-editorial","decision":"NEEDS_EVIDENCE","evidence_level":"contract-validated","overlap":"Expression/fidelity, including scripts and slide copy, never domain truth."},
-    {"skill":"visual-direction","decision":"NEEDS_EVIDENCE","evidence_level":"contract-validated","overlap":"Still/reference visual continuity; Video Production owns temporal assembly/motion direction."},
-    {"skill":"knowledge-memory","decision":"NEEDS_EVIDENCE","evidence_level":"contract-validated","overlap":"Generic state/scope/governance."},
-    {"skill":"automations","decision":"KEEP","evidence_level":"foundational-runtime-domain","overlap":"Scheduled/conditional execution only."},
-    {"skill":"skill-acquisition","decision":"TUNE","evidence_level":"campaign-proven-explicit-gap-reopened","overlap":"Use only for explicit acquisition, demonstrated gaps, underperformance or due freshness review."}
+    {
+      "skill": "medicine-store-assistant",
+      "decision": "KEEP",
+      "evidence_level": "domain-proven",
+      "overlap": "Data Operations supplies generic mechanics but not hospital inventory rules."
+    },
+    {
+      "skill": "patient-report-assistant",
+      "decision": "KEEP",
+      "evidence_level": "domain-proven",
+      "overlap": "Data Operations supplies generic mechanics but not patient-report business rules."
+    },
+    {
+      "skill": "ika",
+      "decision": "KEEP",
+      "evidence_level": "architecturally-distinct",
+      "overlap": "Concrete evidence-linked archives; Knowledge/Memory owns generic state architecture."
+    },
+    {
+      "skill": "github",
+      "decision": "KEEP",
+      "evidence_level": "positive-observed-with-regression-risk",
+      "overlap": "Repository mechanics only."
+    },
+    {
+      "skill": "files",
+      "decision": "KEEP",
+      "evidence_level": "foundational-execution-surface",
+      "overlap": "File/artifact mechanics; domain truth remains elsewhere."
+    },
+    {
+      "skill": "research",
+      "decision": "KEEP",
+      "evidence_level": "mixed-positive",
+      "overlap": "Evidence retrieval/synthesis; Skill Acquisition specializes external-skill study."
+    },
+    {
+      "skill": "software-development",
+      "decision": "KEEP",
+      "evidence_level": "architecturally-distinct",
+      "overlap": "Application implementation; not infrastructure, live reliability, database semantics, creative production, QA or release promotion."
+    },
+    {
+      "skill": "quality-engineering",
+      "decision": "KEEP",
+      "evidence_level": "deep-audit-plus-contract-validated",
+      "overlap": "Independent acceptance/readiness, including media/deck readiness when distinct from creation."
+    },
+    {
+      "skill": "cloudflare-platform",
+      "decision": "KEEP",
+      "evidence_level": "first-party-deep-audit-plus-contract-validated",
+      "overlap": "Cloudflare product/provider semantics."
+    },
+    {
+      "skill": "database-engineering",
+      "decision": "KEEP",
+      "evidence_level": "multi-source-deep-audit-plus-contract-validated",
+      "overlap": "Database semantics."
+    },
+    {
+      "skill": "reliability-engineering",
+      "decision": "KEEP",
+      "evidence_level": "multi-source-first-party-deep-audit-plus-contract-validated",
+      "overlap": "Live service health and incidents."
+    },
+    {
+      "skill": "infrastructure-engineering",
+      "decision": "KEEP",
+      "evidence_level": "first-party-multi-source-deep-audit-plus-contract-validated",
+      "overlap": "Declarative infrastructure lifecycle."
+    },
+    {
+      "skill": "video-production",
+      "decision": "KEEP",
+      "evidence_level": "demonstrated-workflow-plus-multi-source-deep-audit-plus-contract-validated",
+      "overlap": "Owns temporal storytelling, generative-video direction, editing, subtitles/audio/motion composition and media delivery; Visual Direction owns still canonical references; tools remain execution surfaces."
+    },
+    {
+      "skill": "presentation-engineering",
+      "decision": "KEEP",
+      "evidence_level": "demonstrated-workflow-plus-multi-source-deep-audit-plus-contract-validated",
+      "overlap": "Owns deck narrative/slide architecture, visual hierarchy, editability and render QA; Research/domain owners own factual truth; Writing owns prose; slide tools remain execution surfaces."
+    },
+    {
+      "skill": "youtube-publishing",
+      "decision": "KEEP",
+      "evidence_level": "real-oauth-mismatch-plus-interrupted-resume-plus-playlist-readback-proven",
+      "overlap": "Owns authenticated YouTube channel binding, upload orchestration, publication state and secondary YouTube mutations; Video Production owns media creation/editing."
+    },
+    {
+      "skill": "youtube-seo",
+      "decision": "KEEP",
+      "evidence_level": "first-party-plus-multi-source-research-and-live-read-only-evidence",
+      "overlap": "Owns discovery/query/entity research, surface-specific packaging strategy, analytics diagnosis, experiment design/readout and discovery learning; YouTube Publishing owns authenticated YouTube operations and API/MCP mutation transport."
+    },
+    {
+      "skill": "decision-design",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "contract-validated",
+      "overlap": "No duplicate planning skill."
+    },
+    {
+      "skill": "interface-design",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "contract-validated",
+      "overlap": "Software UX/UI, not presentation or video production."
+    },
+    {
+      "skill": "agent-engineering",
+      "decision": "KEEP",
+      "evidence_level": "contract-plus-observed-harness-use",
+      "overlap": "Model/tool/harness design."
+    },
+    {
+      "skill": "security-engineering",
+      "decision": "KEEP",
+      "evidence_level": "architecturally-distinct",
+      "overlap": "Threat/authority reasoning."
+    },
+    {
+      "skill": "project-bootstrap",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "contract-validated",
+      "overlap": "Entry/resume context mapping."
+    },
+    {
+      "skill": "release-engineering",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "contract-validated",
+      "overlap": "Shipping/provenance/rollback."
+    },
+    {
+      "skill": "data-operations",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "contract-validated",
+      "overlap": "Record/table integrity and reconciliation."
+    },
+    {
+      "skill": "writing-editorial",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "contract-validated",
+      "overlap": "Expression/fidelity, including scripts and slide copy, never domain truth."
+    },
+    {
+      "skill": "visual-direction",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "contract-validated",
+      "overlap": "Still/reference visual continuity; Video Production owns temporal assembly/motion direction."
+    },
+    {
+      "skill": "knowledge-memory",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "contract-validated",
+      "overlap": "Generic state/scope/governance."
+    },
+    {
+      "skill": "automations",
+      "decision": "KEEP",
+      "evidence_level": "foundational-runtime-domain",
+      "overlap": "Scheduled/conditional execution only."
+    },
+    {
+      "skill": "skill-acquisition",
+      "decision": "TUNE",
+      "evidence_level": "campaign-proven-explicit-gap-reopened",
+      "overlap": "Use only for explicit acquisition, demonstrated gaps, underperformance or due freshness review."
+    }
   ]
 }

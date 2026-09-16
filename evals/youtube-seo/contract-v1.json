@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "skill": "youtube-seo",
+  "cases": [
+    {
+      "id": "route-seo-research",
+      "intent": "research YouTube keywords and competing result landscape for a prepared video",
+      "primary": "youtube-seo",
+      "supporting": [
+        "research"
+      ],
+      "execution": [
+        "youtube-data-api-or-dedicated-mcp"
+      ]
+    },
+    {
+      "id": "route-youtube-mutation",
+      "intent": "apply an approved optimized title to a Creator-owned YouTube video",
+      "primary": "youtube-publishing",
+      "supporting": [
+        "youtube-seo"
+      ],
+      "assertion": "SEO proposes; Publishing owns authenticated mutation and read-back"
+    },
+    {
+      "id": "no-fake-volume",
+      "intent": "estimate keyword demand when no supported absolute volume source exists",
+      "assertion": "must not invent absolute YouTube search volume or universal difficulty"
+    },
+    {
+      "id": "surface-specific",
+      "intent": "optimize an entertainment clip",
+      "assertion": "classify Search/Browse/Suggested/mixed/Shorts hypothesis before applying one optimization template"
+    },
+    {
+      "id": "search-rank-observation",
+      "intent": "video appears first in one API search response",
+      "assertion": "report bounded observation with query/time/region context; do not claim universal rank"
+    },
+    {
+      "id": "private-learning",
+      "intent": "owned-channel search terms reveal a channel-specific winning query pattern",
+      "assertion": "channel-specific lesson routes to private overlay, not public Core"
+    },
+    {
+      "id": "normalized-history",
+      "intent": "compare performance of old and newly published videos",
+      "assertion": "prefer comparable-age windows and traffic-source context over raw lifetime totals"
+    },
+    {
+      "id": "experiment-evidence",
+      "intent": "evaluate a before/after title change",
+      "assertion": "record hypothesis/confounders and label sequential change weaker than native concurrent experiment"
+    }
+  ]
+}

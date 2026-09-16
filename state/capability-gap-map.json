@@ -1,29 +1,147 @@
 {
-  "schema_version": 8,
-  "reviewed_on": "2026-09-14",
+  "schema_version": 9,
+  "reviewed_on": "2026-09-16",
   "principle": "capability gaps before skill count",
   "promoted": [
-    {"id":"quality-engineering","version":"0.20.0","status":"active"},
-    {"id":"cloudflare-platform","version":"0.21.0","status":"active"},
-    {"id":"database-engineering","version":"0.22.0","status":"active"},
-    {"id":"reliability-engineering","version":"0.23.0","status":"active"},
-    {"id":"infrastructure-engineering","version":"0.24.0","status":"active"},
-    {"id":"video-production","version":"0.25.0","status":"active","reason":"Creator workflows expose a recurring gap across generative-video direction, temporal continuity, editing, subtitles/audio, programmatic motion and delivery that is not owned by still Visual Direction or generic Software Development."},
-    {"id":"presentation-engineering","version":"0.25.0","status":"active","reason":"Creator workflows expose a recurring gap across audience/argument framing, slide-role architecture, evidence mapping, editable PPTX production and rendered deck QA that is not owned by Writing, Interface Design, Research or Files."}
+    {
+      "id": "quality-engineering",
+      "version": "0.20.0",
+      "status": "active"
+    },
+    {
+      "id": "cloudflare-platform",
+      "version": "0.21.0",
+      "status": "active"
+    },
+    {
+      "id": "database-engineering",
+      "version": "0.22.0",
+      "status": "active"
+    },
+    {
+      "id": "reliability-engineering",
+      "version": "0.23.0",
+      "status": "active"
+    },
+    {
+      "id": "infrastructure-engineering",
+      "version": "0.24.0",
+      "status": "active"
+    },
+    {
+      "id": "video-production",
+      "version": "0.25.0",
+      "status": "active",
+      "reason": "Creator workflows expose a recurring gap across generative-video direction, temporal continuity, editing, subtitles/audio, programmatic motion and delivery that is not owned by still Visual Direction or generic Software Development."
+    },
+    {
+      "id": "presentation-engineering",
+      "version": "0.25.0",
+      "status": "active",
+      "reason": "Creator workflows expose a recurring gap across audience/argument framing, slide-role architecture, evidence mapping, editable PPTX production and rendered deck QA that is not owned by Writing, Interface Design, Research or Files."
+    },
+    {
+      "id": "youtube-seo",
+      "version": "0.30.0",
+      "status": "active",
+      "reason": "Creator YouTube workflows expose a recurring independently routable gap across discovery research, Search/Browse/Suggested packaging, analytics diagnosis, experiments and channel-specific learning that should not overload authenticated publishing/mutation mechanics."
+    }
   ],
   "top_level_candidates": [],
   "reference_pack_first": [
-    {"id":"mobile-flutter-android","status":"reference-pack-approved","owners":["software-development","interface-design","quality-engineering","release-engineering","database-engineering"]},
-    {"id":"postgres-database-practices","status":"owned-by-database-engineering","owners":["database-engineering"]},
-    {"id":"observability-tooling","status":"owned-by-reliability-engineering","owners":["reliability-engineering","software-development","cloudflare-platform","database-engineering","agent-engineering"]},
-    {"id":"infra-iac-tools","status":"owned-by-infrastructure-engineering","owners":["infrastructure-engineering","cloudflare-platform","security-engineering","release-engineering","reliability-engineering"]},
-    {"id":"generative-video-providers","status":"owned-by-video-production","owners":["video-production","visual-direction"],"sources":["Google DeepMind Veo current docs","Runway current docs","ByteDance Seedance current first-party material"],"reason":"Provider/model-specific prompting and capability facts are progressive references under Video Production."},
-    {"id":"ffmpeg-remotion-video-tooling","status":"owned-by-video-production","owners":["video-production"],"sources":["kajisho5/ffmpeg-skill@a6232b95f595aa35fa8cea0d055f0163baa908e9","remotion-dev/skills@bd566b65d521b40fe92e1f26766e82de9e291693"]},
-    {"id":"pptx-rendering-tooling","status":"owned-by-presentation-engineering","owners":["presentation-engineering","files"],"sources":["siril9/presentation-skill@311e29920c7c7ab37a93c12676bab7baecc0f4a6","anthropics/skills PPTX comparative audit only"],"reason":"PPTX libraries/native slide tools remain execution surfaces; proprietary Anthropic material is not copied or derived."},
-    {"id":"browser-computer-automation","owners":["automations","research","quality-engineering"],"reason":"Browser/computer control is an execution surface; the domain owner keeps task intent."}
+    {
+      "id": "mobile-flutter-android",
+      "status": "reference-pack-approved",
+      "owners": [
+        "software-development",
+        "interface-design",
+        "quality-engineering",
+        "release-engineering",
+        "database-engineering"
+      ]
+    },
+    {
+      "id": "postgres-database-practices",
+      "status": "owned-by-database-engineering",
+      "owners": [
+        "database-engineering"
+      ]
+    },
+    {
+      "id": "observability-tooling",
+      "status": "owned-by-reliability-engineering",
+      "owners": [
+        "reliability-engineering",
+        "software-development",
+        "cloudflare-platform",
+        "database-engineering",
+        "agent-engineering"
+      ]
+    },
+    {
+      "id": "infra-iac-tools",
+      "status": "owned-by-infrastructure-engineering",
+      "owners": [
+        "infrastructure-engineering",
+        "cloudflare-platform",
+        "security-engineering",
+        "release-engineering",
+        "reliability-engineering"
+      ]
+    },
+    {
+      "id": "generative-video-providers",
+      "status": "owned-by-video-production",
+      "owners": [
+        "video-production",
+        "visual-direction"
+      ],
+      "sources": [
+        "Google DeepMind Veo current docs",
+        "Runway current docs",
+        "ByteDance Seedance current first-party material"
+      ],
+      "reason": "Provider/model-specific prompting and capability facts are progressive references under Video Production."
+    },
+    {
+      "id": "ffmpeg-remotion-video-tooling",
+      "status": "owned-by-video-production",
+      "owners": [
+        "video-production"
+      ],
+      "sources": [
+        "kajisho5/ffmpeg-skill@a6232b95f595aa35fa8cea0d055f0163baa908e9",
+        "remotion-dev/skills@bd566b65d521b40fe92e1f26766e82de9e291693"
+      ]
+    },
+    {
+      "id": "pptx-rendering-tooling",
+      "status": "owned-by-presentation-engineering",
+      "owners": [
+        "presentation-engineering",
+        "files"
+      ],
+      "sources": [
+        "siril9/presentation-skill@311e29920c7c7ab37a93c12676bab7baecc0f4a6",
+        "anthropics/skills PPTX comparative audit only"
+      ],
+      "reason": "PPTX libraries/native slide tools remain execution surfaces; proprietary Anthropic material is not copied or derived."
+    },
+    {
+      "id": "browser-computer-automation",
+      "owners": [
+        "automations",
+        "research",
+        "quality-engineering"
+      ],
+      "reason": "Browser/computer control is an execution surface; the domain owner keeps task intent."
+    }
   ],
   "later_high_bar": [
-    {"id":"healthcare-clinical-informatics","reason":"High-stakes. Prefer bounded informatics/data/documentation workflows and current evidence over a generic clinical-reasoning skill."}
+    {
+      "id": "healthcare-clinical-informatics",
+      "reason": "High-stakes. Prefer bounded informatics/data/documentation workflows and current evidence over a generic clinical-reasoning skill."
+    }
   ],
   "reject_as_top_level": [
     "FFmpeg, Remotion, Veo, Flow, Runway, Seedance or another provider/tool as standalone faculties when Video Production owns the intent",
@@ -35,6 +153,6 @@
     "generic doctor/medical skills with weak provenance or unclear evidence boundaries",
     "skills that duplicate Cognitive Runtime invariants or existing routing ownership"
   ],
-  "wave_status": "bounded creative-production wave reopened by explicit Creator request and demonstrated workflows; Video Production and Presentation Engineering promoted in v0.25.0",
+  "wave_status": "bounded capability expansion remains evidence-gated; YouTube SEO promoted in v0.30.0 after explicit Creator request, first-party research, external skill audit, and live read-only YouTube evidence",
   "next_deep_audit": null
 }

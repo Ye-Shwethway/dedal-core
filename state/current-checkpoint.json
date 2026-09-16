@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.29.0",
+  "version": "0.30.0",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "Cloudflare Platform remains the single top-level Cloudflare faculty; operational hardening is merged into it rather than creating an overlapping duplicate skill.",
@@ -11,7 +11,9 @@
     "Potentially committed mutations are read back before retry when duplicate/destructive effects are possible; unresolved outcomes keep retry safety explicit.",
     "Cloudflare and aggregation execution surfaces are session capabilities and are verified live rather than assumed from Core.",
     "Optional Library-only private operational overlays may provide Creator/project-specific non-secret context through progressive disclosure while remaining outside public Git synchronization.",
-    "Overlay facts are subordinate to authoritative live-service and GitHub read-back; actual credentials remain outside both Core and the overlay."
+    "Overlay facts are subordinate to authoritative live-service and GitHub read-back; actual credentials remain outside both Core and the overlay.",
+    "YouTube SEO is an independently routable discovery-intelligence faculty; YouTube Publishing remains the authenticated YouTube execution/transport owner.",
+    "YouTube SEO recommendations retain evidence provenance and do not invent unsupported absolute search volume, universal difficulty, guaranteed rank or causal certainty."
   ],
   "evidence": [
     {
@@ -38,22 +40,33 @@
       "id": "private-operational-overlay-boundary-v1",
       "kind": "architecture_contract",
       "status": "passed_local_precommit"
+    },
+    {
+      "id": "youtube-seo-routing-contract-v1",
+      "kind": "contract_validation",
+      "status": "passed_local_precommit"
+    },
+    {
+      "id": "youtube-seo-phase1-phase2-research-2026-09-16",
+      "kind": "first-party-plus-external-skill-audit",
+      "status": "public-safe-synthesis"
     }
   ],
   "unresolved_risks": [
     "Connector and aggregation request serialization behavior can drift independently of Cloudflare APIs and must be verified per session.",
     "Some production source representations may be unavailable through a given execution surface; alternate retrieval or explicit Creator assistance can still be required.",
     "Cloudflare API schemas, Worker upload semantics, limits, and product status remain drift-sensitive and require current authoritative verification when material.",
-    "Private overlay facts can become stale; task execution must prefer live authoritative read-back when current state matters."
+    "Private overlay facts can become stale; task execution must prefer live authoritative read-back when current state matters.",
+    "YouTube SEO quality still needs repeated outcome validation across Search-, Browse-, Suggested- and mixed-discovery videos; contract/live-read validation does not prove universal growth lift."
   ],
   "next_executable_step": {
-    "id": "CLOUDFLARE-OPS-OUTCOME-01",
-    "action": "Exercise the hardened Cloudflare operational workflow in representative Worker/configuration maintenance and record only observed regressions or missing recovery semantics."
+    "id": "YOUTUBE-SEO-MVP-01",
+    "action": "Run the read-only YouTube SEO MVP on representative Creator-owned videos/candidates, validate surface classification and evidence reports, then implement only the typed API/MCP gaps that materially improve the workflow."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "2a9887f6c693fb616ab64bb9793d06c4dda3b769",
-    "relation": "base HEAD verified before v0.29.0 private operational overlay boundary"
+    "sha": "0082fd4c9a7f01b1c74d6ba152545f87de1b8869",
+    "relation": "base HEAD verified before v0.30.0 YouTube SEO promotion"
   }
 }

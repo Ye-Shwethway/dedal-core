@@ -1,5 +1,5 @@
-version: 21
-last_reviewed: "2026-09-15"
+version: 22
+last_reviewed: "2026-09-16"
 
 routing:
   default_policy: smallest_matching_skill_set
@@ -197,6 +197,39 @@ skills:
     evidence:
       promoted_on: "2026-09-15"
       level: "real-oauth-mismatch-resume-playlist-and-remote-readback-proven"
+
+  youtube-seo:
+    aliases: ["youtube-seo"]
+    path: "skills/youtube-seo"
+    entrypoint: "skills/youtube-seo/SKILL.md"
+    status: active
+    independence: specialist_discovery_domain
+    provenance:
+      adaptation: true
+      sources:
+        - source: "YouTube/Google current Search, Data API, Analytics, Reporting, Studio Trends, CTR and experiment documentation"
+          reviewed_on: "2026-09-16"
+        - repo: "deeployCO/youtube-seo-skills"
+          release: "v0.1.0"
+          release_commit: "b853be5"
+          license: "MIT"
+          use: "comparative-pattern-only"
+        - repo: "adityaarsharma/youtube-marketing-skills"
+          reviewed_on: "2026-09-16"
+          license: "MIT"
+          use: "comparative-pattern-only"
+        - repo: "adamgordonbell/youtube-analytics-tool"
+          reviewed_on: "2026-09-16"
+          license: "MIT"
+          use: "comparative-pattern-only"
+        - repo: "m0ntydad0n/pseo-engine-oss"
+          reviewed_on: "2026-09-16"
+          license: "Apache-2.0"
+          use: "pipeline-methodology-only"
+      adapted_on: "2026-09-16"
+    evidence:
+      promoted_on: "2026-09-16"
+      level: "first-party-plus-multi-source-research-and-live-read-only-youtube-evidence"
 
   presentation-engineering:
     aliases: ["presentation-engineering", "pptx", "slides"]

@@ -8,9 +8,9 @@ Production-minded Cloudflare control plane with a separate VPS byte-transfer run
 - Domain: `https://youtube.drthorne.uk`
 - D1: `dedal-youtube-gateway-prod` (`DB`)
 - API family: `v1`
-- Latest external hardening evidence in the 2026-09-16 checkpoint reports deployed Gateway `0.7.43`.
-- Public source version: `0.4.3`.
-- Authorized deployed-reference version used for source sync: Gateway `0.7.43`.
+- Latest external hardening evidence in the 2026-09-16 checkpoint reports deployed Gateway `0.7.44`.
+- Public source version: `0.4.4`.
+- Authorized deployed-reference version used for source sync: Gateway `0.7.44`.
 - Public and deployed version numbers are intentionally independent. `YOUTUBE-SOURCE-SYNC-01` reconciles verified behavior/source deltas; it does **not** claim byte-for-byte identity with the deployed Worker export.
 
 ## Security contract
@@ -52,3 +52,7 @@ See `../references/mutation-hardening-and-recovery.md` and `../CURRENT_CHECKPOIN
 ## Source-sync status
 
 `YOUTUBE-SOURCE-SYNC-01` imports the verified public-safe implementation delta reconstructed from authorized deployed-source inspection. Raw Worker exports, live operational identifiers, credentials, D1 rows, debug assets, and Creator-specific state are intentionally excluded. The public source is behaviorally reconciled for the covered contracts, not asserted to be byte-for-byte deployment parity.
+
+## Video metadata read-back
+
+Video snippet updates use bounded eventual-consistency verification for every requested mutable field. Tag comparison is order-insensitive because YouTube may normalize tag order. A mutation is not reported successful until requested title, description, category, and tags are independently read back.

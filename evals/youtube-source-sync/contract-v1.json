@@ -2,7 +2,7 @@
   "version": 1,
   "checkpoint": "YOUTUBE-SOURCE-SYNC-01",
   "deployed_reference": {
-    "gateway": "0.7.43",
+    "gateway": "0.7.44",
     "mcp": "0.8.3"
   },
   "expected_mcp_tool_count": 52,
@@ -120,6 +120,19 @@
         "page_token",
         "safe_search",
         "public_search_not_forMine"
+      ]
+    },
+    {
+      "id": "YT-SYNC-11",
+      "name": "video metadata eventual readback",
+      "expect": [
+        "title",
+        "description",
+        "category_id",
+        "tags",
+        "order_insensitive_tags",
+        "bounded_retry",
+        "readback_before_success"
       ]
     }
   ]

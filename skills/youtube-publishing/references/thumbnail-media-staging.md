@@ -4,11 +4,27 @@
 
 Provide a repeatable thumbnail execution path without depending on credit-metered third-party "upload to URL" services.
 
-## Preferred architecture
+## Current native architecture
 
-`approved local asset -> DEDAL-owned staging upload -> short-lived HTTPS fetch URL -> Gateway media preflight -> dedicated youtube_thumbnail_set -> YouTube read-back -> staging cleanup`
+`approved local asset -> youtube_media_stage -> DEDAL media-staging Worker -> short-lived signed HTTPS URL -> Gateway media preflight -> youtube_thumbnail_set -> YouTube read-back -> youtube_media_unstage/TTL expiry`
 
-The staging implementation may use Creator-controlled Cloudflare R2/Workers or another owned storage surface. The contract matters more than the vendor: bounded upload authority, short-lived fetchability, explicit content type, cleanup, and no public credential exposure.
+The current production implementation uses a dedicated Cloudflare Worker backed by Workers KV. R2 is not a runtime dependency. The public Core stores only the generic Worker source and binding contract; account identifiers, namespace identifiers, service URLs, and secrets remain deployment-private.
+
+### Staging contract
+
+- accepted content types: PNG and JPEG;
+- bounded raw payload size;
+- TTL defaults to minutes, not days;
+- staged keys are random capability identifiers;
+- fetch URLs are HMAC-signed and time-bounded;
+- responses use `no-store` and `nosniff`;
+- staging upload/delete requires an authenticated server-side token;
+- successful publication should explicitly clean up when practical; TTL expiry is the fallback cleanup;
+- no OAuth/channel secrets are placed in object names, media bytes, or query strings.
+
+## Why KV now
+
+The deployment account did not have R2 enabled when native staging was implemented. Workers KV already provided the needed short-lived bounded object lifecycle for thumbnail-sized media. If R2 is enabled later, storage may be swapped without changing the higher-level staging contract.
 
 ## Media preflight
 
@@ -29,6 +45,7 @@ A URL that works in a browser but fails from the Cloudflare Gateway is not a val
 
 Thumbnail mutation diagnostics should distinguish at least:
 
+- `stage`: DEDAL staging upload or cleanup failed;
 - `media`: external/staged media could not be fetched or validated;
 - `upload`: bytes reached the YouTube thumbnail endpoint but the vendor rejected/failed the request;
 - `readback`: request may have committed but final remote state is not yet proven;
@@ -36,10 +53,6 @@ Thumbnail mutation diagnostics should distinguish at least:
 
 For outcome-unknown cases, read back before retrying.
 
-## Security and lifecycle
+## Operational rule
 
-- Keep staged objects private-by-default except for the bounded fetch mechanism required by the Gateway.
-- Prefer short TTLs or explicit cleanup after success/final failure.
-- Do not store OAuth tokens, API secrets, or channel-private metadata in object names or query strings.
-- If rollback needs the old image, persist a managed baseline intentionally; otherwise staging is ephemeral.
-- External credit-metered media hosts are optional fallbacks, never required infrastructure.
+Use native DEDAL staging first. Credit-metered third-party upload hosts are fallback-only and should require an explicit reason, not silently become a dependency.

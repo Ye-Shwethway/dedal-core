@@ -5,6 +5,7 @@ All meaningful DEDAL Core architectural and behavioral changes should be recorde
 ## 0.30.0 — 2026-09-16
 
 ### Added
+- Native DEDAL thumbnail media staging via a dedicated short-lived Cloudflare Worker/KV service, with HMAC-signed fetch URLs and typed `youtube_media_stage` / `youtube_media_unstage` tools.
 - A layered YouTube thumbnail workflow contract covering content-truth lock, discovery strategy, visual-reference authority, concept planning, edit/generation choice, mobile QA, DEDAL-controlled staging, authenticated mutation, read-back, and experiment measurement.
 - A thumbnail media-staging publishing reference that makes Creator-controlled ephemeral HTTPS staging the preferred path and treats credit-metered third-party upload hosts as fallback-only.
 - A reusable prospective SEO measurement and closeout contract with T0/24h/3d/7d/28d windows, explicit source-availability states, SERP drift handling, anti-churn rules, and feature-complete criteria.
@@ -13,6 +14,7 @@ All meaningful DEDAL Core architectural and behavioral changes should be recorde
 - YouTube SEO routing/eval contract with explicit ownership separation from YouTube Publishing and private-overlay learning.
 
 ### Changed
+- YouTube Publishing no longer depends on a credit-metered third-party upload-to-URL service for the normal thumbnail path; the Gateway now proxies owned ephemeral staging and deployed references advance to Gateway `0.7.47` / MCP `0.8.4` with 54 typed tools.
 - YouTube thumbnail packaging now composes SEO, Visual Direction, and Publishing explicitly; scene/character-specific image generation must not skip strategy/reference locking, and text-only edits must preserve accepted subject anatomy/composition.
 - Public YouTube Gateway source advanced to `0.4.5` and the authorized deployed reference to `0.7.46`; thumbnail failures now distinguish media-fetch/validation from upstream upload failure in bounded private audit diagnostics.
 - YouTube SEO now distinguishes observed zero from unavailable/not-yet-processed/suppressed/error states and treats longitudinal outcome windows as ongoing validation rather than a blocker to closing the implemented skill scope.

@@ -46,7 +46,7 @@ Publishing receives an approved thumbnail asset/brief from the composed SEO + Vi
 
 `approved asset -> DEDAL-controlled ephemeral staging -> Gateway-fetch preflight -> dedicated thumbnail mutation -> stage-aware diagnostics -> authoritative read-back -> staging cleanup -> package-event record`
 
-Prefer Creator-controlled staging (for example a bounded Cloudflare R2/Worker upload/download surface) over credit-metered third-party upload hosts. Third-party "upload to URL" services are fallback-only, not a Core dependency. A URL is valid only when the Gateway can actually fetch and validate it; browser accessibility alone is insufficient. See `references/thumbnail-media-staging.md`.
+Prefer Creator-controlled staging. The current native path is a dedicated Cloudflare Worker backed by Workers KV, exposed to the MCP only through authenticated Gateway stage/unstage routes. R2 may replace KV later without changing the contract. Credit-metered third-party upload hosts remain fallback-only. Third-party "upload to URL" services are fallback-only, not a Core dependency. A URL is valid only when the Gateway can actually fetch and validate it; browser accessibility alone is insufficient. See `references/thumbnail-media-staging.md`.
 
 
 ## Managed replacement rules

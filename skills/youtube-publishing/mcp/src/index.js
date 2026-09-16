@@ -1,4 +1,4 @@
-const VERSION = "0.2.2";
+const VERSION = "0.2.3";
 const ISSUER = "https://mcp.youtube.drthorne.uk";
 const RESOURCE = `${ISSUER}/mcp`;
 const GATEWAY = "https://youtube.drthorne.uk";
@@ -31,6 +31,8 @@ const TOOLS = [
   tool("youtube_live_broadcasts_list", "List live broadcasts for the verified channel.", { profile_alias: str(), broadcast_status: { type: "string", enum: ["all","active","completed","upcoming"] }, max_results: integer(1,50) }, true, ["profile_alias"]),
   tool("youtube_live_streams_list", "List live streams for the verified channel.", { profile_alias: str(), max_results: integer(1,50) }, true, ["profile_alias"]),
   tool("youtube_live_chat_messages_list", "List messages from a live chat.", { profile_alias: str(), live_chat_id: str(), max_results: integer(1,200) }, true, ["profile_alias","live_chat_id"]),
+  tool("youtube_media_stage", "Stage a short-lived image in DEDAL-owned media storage for a later YouTube media mutation.", { content_base64: str(), content_type: { type: "string", enum: ["image/png","image/jpeg"] }, ttl_seconds: integer(60,1800), explicit_action_intent: bool() }, false, ["content_base64","content_type","explicit_action_intent"]),
+  tool("youtube_media_unstage", "Delete a DEDAL-owned staged media object before its TTL expires.", { stage_id: str(), explicit_action_intent: bool() }, false, ["stage_id","explicit_action_intent"]),
   tool("youtube_thumbnail_set", "Upload and set a custom thumbnail for a verified owned video from an HTTPS source URL.", { profile_alias: str(), video_id: str(), source_url: str(), explicit_action_intent: bool() }, false, ["profile_alias","video_id","source_url","explicit_action_intent"]),
   tool("youtube_captions_list", "List caption tracks for a verified owned video.", { profile_alias: str(), video_id: str() }, true, ["profile_alias","video_id"]),
   tool("youtube_caption_insert", "Upload a caption track from an HTTPS source URL.", { profile_alias: str(), video_id: str(), source_url: str(), language: str(), name: str(), is_draft: bool(), explicit_action_intent: bool() }, false, ["profile_alias","video_id","source_url","language","name","explicit_action_intent"]),
@@ -184,6 +186,8 @@ async function callGateway(name, a, env) {
     youtube_live_broadcasts_list: dataApi("liveBroadcasts", "list", { part: "id,snippet,status,contentDetails", broadcastStatus: a.broadcast_status || "all", maxResults: a.max_results || 25 }),
     youtube_live_streams_list: dataApi("liveStreams", "list", { part: "id,snippet,status,cdn,contentDetails", mine: true, maxResults: a.max_results || 25 }),
     youtube_live_chat_messages_list: dataApi("liveChatMessages", "list", { part: "id,snippet,authorDetails", liveChatId: a.live_chat_id, maxResults: a.max_results || 200 }),
+    youtube_media_stage: ["POST", "/v1/media/stage", pick(a, ["content_base64","content_type","ttl_seconds","explicit_action_intent"])],
+    youtube_media_unstage: ["DELETE", "/v1/media/stage/" + enc(a.stage_id), pick(a, ["explicit_action_intent"])],
     youtube_thumbnail_set: ["POST", `/v1/channels/${enc(a.profile_alias)}/videos/${enc(a.video_id)}/thumbnail`, pick(a, ["source_url","explicit_action_intent"])],
     youtube_captions_list: ["GET", `/v1/channels/${enc(a.profile_alias)}/videos/${enc(a.video_id)}/captions`],
     youtube_caption_insert: ["POST", `/v1/channels/${enc(a.profile_alias)}/videos/${enc(a.video_id)}/captions`, pick(a, ["source_url","language","name","is_draft","explicit_action_intent"])],

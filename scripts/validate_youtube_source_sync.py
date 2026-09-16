@@ -41,7 +41,7 @@ if len(tools) != contract["expected_mcp_tool_count"] or len(set(tools)) != len(t
     raise SystemExit(f"unexpected MCP tool surface: count={len(tools)} unique={len(set(tools))}")
 
 required_tools = {
-    "youtube_thumbnail_set", "youtube_captions_list", "youtube_caption_insert",
+    "youtube_media_stage", "youtube_media_unstage", "youtube_thumbnail_set", "youtube_captions_list", "youtube_caption_insert",
     "youtube_caption_update", "youtube_caption_download", "youtube_caption_delete",
     "youtube_playlist_images_list", "youtube_playlist_image_set", "youtube_playlist_image_delete",
     "youtube_channel_banner_set", "youtube_watermark_set", "youtube_watermark_unset",
@@ -65,6 +65,16 @@ for marker in banned_debug:
     if marker in gateway or marker in mcp:
         raise SystemExit(f"deployment-only debug artifact leaked into public source: {marker}")
 
+
+media_staging_markers = [
+    'path === "/v1/media/stage"',
+    "mediaUnstageMatch",
+    "MEDIA_STAGING_URL",
+    "MEDIA_STAGING_TOKEN",
+]
+for marker in media_staging_markers:
+    if marker not in gateway:
+        raise SystemExit(f"missing native media staging bridge: {marker}")
 
 metadata_markers = [
     "verifyVideoMetadataEventually",
@@ -94,4 +104,4 @@ if 'forMine: a.type === "video"' in mcp:
 
 print("youtube source sync contract: PASS")
 print(f"MCP tools: {len(tools)}")
-print("deployed reference: Gateway 0.7.46 / MCP 0.8.3")
+print("deployed reference: Gateway 0.7.47 / MCP 0.8.4")

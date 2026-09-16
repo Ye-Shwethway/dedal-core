@@ -2,10 +2,10 @@
   "version": 1,
   "checkpoint": "YOUTUBE-SOURCE-SYNC-01",
   "deployed_reference": {
-    "gateway": "0.7.46",
-    "mcp": "0.8.3"
+    "gateway": "0.7.47",
+    "mcp": "0.8.4"
   },
-  "expected_mcp_tool_count": 52,
+  "expected_mcp_tool_count": 54,
   "cases": [
     {
       "id": "YT-SYNC-01",

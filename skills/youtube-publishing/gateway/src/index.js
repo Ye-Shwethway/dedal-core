@@ -1,5 +1,5 @@
 
-const VERSION = "0.4.5";
+const VERSION = "0.4.6";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -143,6 +143,35 @@ async function route(request, env, requestId) {
     return reply({ video: publicVideo(verified), google_id: updated.id || videoId });
   }
 
+
+  if (request.method === "POST" && path === "/v1/media/stage") {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const body = await bodyJson(request);
+    if (body.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
+    if (!env.MEDIA_STAGING_URL || !env.MEDIA_STAGING_TOKEN) throw httpError(503, "media_staging_not_configured");
+    const endpoint = String(env.MEDIA_STAGING_URL).replace(/\/+$/, "") + "/v1/stage";
+    const upstream = await fetch(endpoint, { method: "POST", headers: { Authorization: "Bearer " + env.MEDIA_STAGING_TOKEN, "Content-Type": "application/json" }, body: JSON.stringify({ content_base64: body.content_base64, content_type: body.content_type, ttl_seconds: body.ttl_seconds }) });
+    const text = await upstream.text();
+    let data = {};
+    try { data = text ? JSON.parse(text) : {}; } catch { data = { upstream_message: text.slice(0, 500) }; }
+    if (!upstream.ok) throw httpError(upstream.status >= 400 && upstream.status < 500 ? upstream.status : 502, data.error || "media_staging_failed");
+    return reply(data, upstream.status === 201 ? 201 : 200);
+  }
+
+  const mediaUnstageMatch = path.match(/^\/v1\/media\/stage\/([0-9a-f-]{36})$/i);
+  if (request.method === "DELETE" && mediaUnstageMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const body = await bodyJson(request);
+    if (body.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
+    if (!env.MEDIA_STAGING_URL || !env.MEDIA_STAGING_TOKEN) throw httpError(503, "media_staging_not_configured");
+    const endpoint = String(env.MEDIA_STAGING_URL).replace(/\/+$/, "") + "/v1/stage/" + encodeURIComponent(mediaUnstageMatch[1]);
+    const upstream = await fetch(endpoint, { method: "DELETE", headers: { Authorization: "Bearer " + env.MEDIA_STAGING_TOKEN } });
+    const text = await upstream.text();
+    let data = {};
+    try { data = text ? JSON.parse(text) : {}; } catch { data = { upstream_message: text.slice(0, 500) }; }
+    if (!upstream.ok) throw httpError(upstream.status >= 400 && upstream.status < 500 ? upstream.status : 502, data.error || "media_unstage_failed");
+    return reply(data);
+  }
 
   const thumbnailMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos\/([^/]+)\/thumbnail$/);
   if (request.method === "POST" && thumbnailMatch) {

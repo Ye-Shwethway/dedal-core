@@ -31,7 +31,9 @@ Watermark set/unset tools are exposed, but the watermark lifecycle is intentiona
 
 ## Version evidence
 
-Public source version: `0.2.1`. The authorized deployed reference used during source sync identified MCP `0.8.2`. Public and deployed version numbers remain independent; source sync records the verified public-safe implementation delta without claiming byte-for-byte deployment parity.
+Public source version: `0.2.2`. The authorized deployed reference used during source sync identified MCP `0.8.2`. Public and deployed version numbers remain independent; source sync records the verified public-safe implementation delta without claiming byte-for-byte deployment parity.
+
+The public `youtube_search` surface also supports bounded SEO research controls for region, relevance language, publish-date bounds, page token, and safe-search filtering. The deployed reference remains independent until the live Worker is updated and re-synced.
 
 ## Developer-mode registration
 

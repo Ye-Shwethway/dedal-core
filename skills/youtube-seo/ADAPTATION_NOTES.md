@@ -41,3 +41,16 @@ First-party YouTube/Google documentation informed the platform-truth boundary: S
 - sequential metadata changes described as clean A/B tests;
 - bulk auto-optimization without review;
 - copying competitor metadata instead of extracting gaps/patterns.
+
+## Live MVP-01 outcome validation
+
+A read-only live run across multiple Creator-owned videos validated the skill's core diagnosis loop without publishing private resource identifiers into Core. Observed outcomes included:
+
+- high-signal archive examples where first-party traffic-source data was strongly Search-led;
+- materially incomplete visible search-term detail relative to total Search traffic, reinforcing privacy/suppression-aware interpretation;
+- a case where an observed search term had misleading or ambiguous live SERP intent and therefore should not be copied blindly into packaging;
+- a long-form case where search relevance was strong but retention showed a late hotspot, shifting the likely optimization target from metadata toward content structure or editing;
+- no sufficiently strong Browse-heavy owned sample, which was recorded as missing evidence rather than fabricated;
+- intermittent transport failures on broad analytics/reporting paths while smaller bounded per-video analytics queries succeeded in the same session.
+
+The validated engineering response is to prefer bounded typed helpers for per-video traffic sources, search terms, and retention, then repair and validate Reporting Reach before impressions/CTR becomes a hard dependency.

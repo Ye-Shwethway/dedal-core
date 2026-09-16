@@ -13,7 +13,10 @@
     "Optional Library-only private operational overlays may provide Creator/project-specific non-secret context through progressive disclosure while remaining outside public Git synchronization.",
     "Overlay facts are subordinate to authoritative live-service and GitHub read-back; actual credentials remain outside both Core and the overlay.",
     "YouTube SEO is an independently routable discovery-intelligence faculty; YouTube Publishing remains the authenticated YouTube execution/transport owner.",
-    "YouTube SEO recommendations retain evidence provenance and do not invent unsupported absolute search volume, universal difficulty, guaranteed rank or causal certainty."
+    "YouTube SEO recommendations retain evidence provenance and do not invent unsupported absolute search volume, universal difficulty, guaranteed rank or causal certainty.",
+    "YouTube SEO live read-only MVP outcome evidence shows that visible search-term detail can be privacy-suppressed relative to total Search traffic and must be treated as sampled evidence.",
+    "YouTube SEO packaging decisions cross-check owned search-term evidence against live SERP intent and may redirect optimization toward content structure when retention evidence indicates that metadata is not the primary bottleneck.",
+    "When broad analytics/reporting transport is unreliable, bounded typed per-video read helpers are preferred over fabricating missing evidence or overloading generic report calls."
   ],
   "evidence": [
     {
@@ -50,6 +53,11 @@
       "id": "youtube-seo-phase1-phase2-research-2026-09-16",
       "kind": "first-party-plus-external-skill-audit",
       "status": "public-safe-synthesis"
+    },
+    {
+      "id": "youtube-seo-mvp-01-live-read-only-outcome",
+      "kind": "observed_workflow_evidence",
+      "status": "passed_public_safe_synthesis"
     }
   ],
   "unresolved_risks": [
@@ -57,16 +65,17 @@
     "Some production source representations may be unavailable through a given execution surface; alternate retrieval or explicit Creator assistance can still be required.",
     "Cloudflare API schemas, Worker upload semantics, limits, and product status remain drift-sensitive and require current authoritative verification when material.",
     "Private overlay facts can become stale; task execution must prefer live authoritative read-back when current state matters.",
-    "YouTube SEO quality still needs repeated outcome validation across Search-, Browse-, Suggested- and mixed-discovery videos; contract/live-read validation does not prove universal growth lift."
+    "YouTube SEO Browse-heavy and mature Suggested-heavy outcome evidence remains limited and must not be inferred from Search-led samples.",
+    "YouTube Reporting Reach transport for impressions/CTR remains unvalidated in the current execution path and must not be treated as a hard dependency."
   ],
   "next_executable_step": {
-    "id": "YOUTUBE-SEO-MVP-01",
-    "action": "Run the read-only YouTube SEO MVP on representative Creator-owned videos/candidates, validate surface classification and evidence reports, then implement only the typed API/MCP gaps that materially improve the workflow."
+    "id": "YOUTUBE-SEO-HELPERS-01",
+    "action": "Implement and validate bounded typed read-only helpers for per-video traffic sources, per-video search terms, and retention; extend search controls only where materially useful, then repair/validate Reporting Reach before adding impressions/CTR to the core feedback loop."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "0082fd4c9a7f01b1c74d6ba152545f87de1b8869",
-    "relation": "base HEAD verified before v0.30.0 YouTube SEO promotion"
+    "sha": "77d2fafa8ff44398c4588e931128789222244a3b",
+    "relation": "base HEAD verified before sanitized YouTube SEO MVP-01 outcome checkpoint"
   }
 }

@@ -265,3 +265,5 @@ Anthropic and Vercel material was used as pattern-level inspiration where a repo
 ## 0.1.0 — 2026-09-13
 
 Initial DEDAL Core foundation: identity, operating contract, security boundary, capability registry, continuity checkpoint, improvement protocol, foundational architecture, and repository integrity workflow.
+
+- YouTube Publishing: added transport-safe chunked native media staging (`youtube_media_stage_chunk` + `youtube_media_stage_finalize`) so thumbnail assets no longer depend on third-party upload hosts when inline Base64 exceeds connector body limits.

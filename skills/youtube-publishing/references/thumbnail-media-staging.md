@@ -6,7 +6,7 @@ Provide a repeatable thumbnail execution path without depending on credit-metere
 
 ## Current native architecture
 
-`approved local asset -> youtube_media_stage -> DEDAL media-staging Worker -> short-lived signed HTTPS URL -> Gateway media preflight -> youtube_thumbnail_set -> YouTube read-back -> youtube_media_unstage/TTL expiry`
+`approved local asset -> youtube_media_stage (small) OR youtube_media_stage_chunk* + youtube_media_stage_finalize (normal/large) -> DEDAL media-staging Worker -> short-lived signed HTTPS URL -> Gateway media preflight -> youtube_thumbnail_set -> YouTube read-back -> youtube_media_unstage/TTL expiry`
 
 The current production implementation uses a dedicated Cloudflare Worker backed by Workers KV. R2 is not a runtime dependency. The public Core stores only the generic Worker source and binding contract; account identifiers, namespace identifiers, service URLs, and secrets remain deployment-private.
 
@@ -56,3 +56,8 @@ For outcome-unknown cases, read back before retrying.
 ## Operational rule
 
 Use native DEDAL staging first. Credit-metered third-party upload hosts are fallback-only and should require an explicit reason, not silently become a dependency.
+
+
+## MCP transport-safe chunking
+
+The custom MCP/aggregation transport can reject large inline Base64 requests before they reach the Gateway. Assets that do not fit the single-call path must be split into bounded Base64 chunks (raw decoded chunk <= 16 KiB), uploaded with `youtube_media_stage_chunk`, finalized with `youtube_media_stage_finalize`, then published from the returned signed URL. Abandoned chunk sessions expire automatically. This keeps third-party upload hosts out of the required path.

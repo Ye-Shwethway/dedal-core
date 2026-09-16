@@ -54,3 +54,6 @@ Runtime Contracts, YouTube Publishing hardening, the `youtube-source-sync` contr
 ## Next checkpoint
 
 `YOUTUBE-PUBLIC-SOURCE-OUTCOME-01`: exercise the synchronized public source in normal maintenance/deployment work, compare observed runtime behavior, and record only real drift or regressions.
+
+
+- Native staging transport hardening: chunked upload/finalize added for MCP body limits; deployed target Gateway 0.7.48 / MCP 0.8.5 / staging Worker 0.1.1; expected MCP surface 56.

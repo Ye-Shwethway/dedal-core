@@ -5,11 +5,11 @@ worker = (ROOT / "skills/youtube-publishing/media-staging/worker.mjs").read_text
 gateway = (ROOT / "skills/youtube-publishing/gateway/src/index.js").read_text(encoding="utf-8")
 mcp = (ROOT / "skills/youtube-publishing/mcp/src/index.js").read_text(encoding="utf-8")
 missing = []
-for marker in ["expirationTtl", "SIGNING_SECRET", "ADMIN_TOKEN", "getWithMetadata", "no-store", "image/png", "image/jpeg"]:
+for marker in ["expirationTtl", "SIGNING_SECRET", "ADMIN_TOKEN", "getWithMetadata", "no-store", "image/png", "image/jpeg", "MAX_CHUNK_BYTES", "chunkKey", "/v1/stage/chunk", "/v1/stage/finalize"]:
     if marker not in worker: missing.append("worker:" + marker)
 for marker in ['path === "/v1/media/stage"', "mediaUnstageMatch", "MEDIA_STAGING_URL", "MEDIA_STAGING_TOKEN"]:
     if marker not in gateway: missing.append("gateway:" + marker)
-for marker in ["youtube_media_stage", "youtube_media_unstage"]:
+for marker in ["youtube_media_stage", "youtube_media_stage_chunk", "youtube_media_stage_finalize", "youtube_media_unstage"]:
     if marker not in mcp: missing.append("mcp:" + marker)
 if missing: raise SystemExit("missing native media staging markers: " + ", ".join(missing))
 for forbidden in ["workers.dev", "MEDIA_STAGING_TOKEN=", "SIGNING_SECRET=", "ADMIN_TOKEN="]:

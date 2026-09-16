@@ -6,48 +6,28 @@ _Date: 2026-09-16_
 
 - Repository: `Ye-Shwethway/dedal-core`
 - Branch: `main`
-- Release: `0.26.0`
-- User-requested previous baseline HEAD: `390baacd6cad31df58843fc6f206cb7677337cb0`
-- Atomic reconciliation parent: `5bcc01d15b623a19a1755eb7a88b7719d177e118` (tree-equivalent recovery HEAD after removing accidental preflight files)
-- The exact post-commit HEAD is Git-derived and is reported after the atomic transaction; this file does not attempt to self-embed its own commit hash.
+- Release: `0.27.0`
+- Source-sync base HEAD: `59cbfb5736882afa4efd6745cdfb7d72efdc3d2e`
+- The exact post-commit HEAD is Git-derived and is reported after the atomic transaction; this file does not self-embed its own commit hash.
 
 ## Operating phase
 
-DEDAL remains in hardening/consolidation/outcome-validation mode. The Cognitive Runtime and smallest-sufficient skill-composition model are unchanged.
+DEDAL remains in hardening/consolidation/outcome-validation mode. This release closes the public-source drift identified by the YouTube Publishing hardening checkpoint without reopening broad capability expansion.
 
-The current reconciliation promotes additional **YouTube Publishing live evidence** without reopening broad capability expansion.
+## YouTube source-sync status
 
-## YouTube Publishing status
+`YOUTUBE-SOURCE-SYNC-01` reconciles the verified public-safe implementation delta from authorized deployed Gateway/MCP source inspection into the durable repository. Public source now includes the 49-tool MCP surface and the corresponding bounded Gateway implementation for media, caption, playlist-image, branding, Data API, Reporting API, Analytics API, and video-delete routes covered by the source-sync contract.
 
-Live-gated operation families now include:
-- resumable private upload/recovery and playlist membership from the earlier gate;
-- thumbnail upload;
-- full caption lifecycle with final restoration;
-- playlist-image first insert and managed replacement;
-- channel-banner upload/apply/readback and full-resolution restoration.
+Public versions are intentionally independent from deployed patch numbering: Gateway `0.4.0` and MCP `0.2.0`; the authorized deployed references used for reconciliation were Gateway `0.7.35` and MCP `0.8.1`. No byte-for-byte deployment parity claim is made.
 
-Playlist image replacement is explicitly transactional: require a DEDAL-managed baseline, delete the old hero image, insert the replacement, read back, persist managed state, and rollback from the prior managed source if insertion fails. Native `playlistImages.update` is not relied upon.
+## Public-repo boundary
 
-Banner rollback must preserve a recoverable/full-resolution source; the display `bannerExternalUrl` alone is insufficient.
+The synchronized source excludes raw Worker exports, credentials/tokens/cookies, Creator-specific channel/video/playlist/caption identifiers, live D1/audit rows, internal test assets, embedded debug media, and Cloudflare account/database identifiers. Production D1 identity remains private deployment configuration.
 
-Watermark set/unset is **not fully live-gated**. Because prior watermark state cannot be reliably read, unmanaged state fails closed unless the Creator explicitly authorizes destructive handling.
+## Remaining limits
 
-## Verification / diagnostics
-
-The reusable mutation-debugging path is:
-
-`dedicated MCP -> bounded Gateway -> stage-aware D1 audit -> exact vendor error -> minimal patch -> one bounded retry -> readback -> checkpoint`
-
-Audit evidence may include bounded stage/vendor diagnostics but no secrets/tokens.
-
-Contract coverage includes playlist insert/replacement/rollback/fail-closed cases, caption lifecycle, banner rejection and valid apply/readback, watermark unmanaged protection, and secret-free mutation-audit diagnostics.
-
-## Known source-parity risk
-
-Live hardening evidence reported a later deployed Gateway than the public checked-in source snapshot. The repository snapshot still self-identifies as Gateway `0.3.0`, while the latest externally verified deployment evidence in this checkpoint reports `0.7.35`. Exact deployed/source equivalence is not claimed.
-
-The earlier YouTube Analytics upstream-read failure is also still unresolved; this media/caption/branding hardening does not prove Analytics retrieval.
+Banner persistent managed rollback is not yet at playlist-image parity. Watermark prior state is not reliably readable and unmanaged destructive handling therefore remains fail closed. Previously recorded YouTube Analytics upstream-read issues remain unresolved unless later live evidence proves otherwise.
 
 ## Next checkpoint
 
-`YOUTUBE-SOURCE-SYNC-01`: recover and compare deployed Gateway/MCP source with the public repo, import only the verified missing implementation delta, then add managed banner/watermark baseline + rollback before promoting watermark lifecycle.
+`YOUTUBE-PUBLIC-SOURCE-OUTCOME-01`: exercise the synchronized public source in normal maintenance/deployment work and record only observed runtime drift/regressions.

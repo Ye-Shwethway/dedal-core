@@ -1,10 +1,13 @@
 
-const VERSION = "0.3.0";
+const VERSION = "0.4.0";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
   "https://www.googleapis.com/auth/youtube",
+  "https://www.googleapis.com/auth/youtube.force-ssl",
   "https://www.googleapis.com/auth/yt-analytics.readonly",
+  "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+  "https://www.googleapis.com/auth/youtube.channel-memberships.creator",
 ];
 
 export default {
@@ -140,6 +143,255 @@ async function route(request, env, requestId) {
     return reply({ video: publicVideo(verified), google_id: updated.id || videoId });
   }
 
+
+  const thumbnailMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos\/([^/]+)\/thumbnail$/);
+  if (request.method === "POST" && thumbnailMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(thumbnailMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(thumbnailMatch[2]));
+    const body = await bodyJson(request);
+    if (body.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
+    const { profile, accessToken } = await channelContext(env, alias);
+    await ownedVideo(accessToken, profile.channel_id, videoId);
+    const media = await fetchExternalMedia(body.source_url, 50 * 1024 * 1024, ["image/jpeg", "image/png", "application/octet-stream"]);
+    const data = await googleRawMedia("POST", "https://www.googleapis.com/upload/youtube/v3/thumbnails/set?uploadType=media&videoId=" + encodeURIComponent(videoId), accessToken, media, "thumbnail_set_failed");
+    await audit(env, "admin", "video.thumbnail_set", alias, profile.channel_id, null, "success", { video_id: videoId, bytes: media.bytes.byteLength, content_type: media.contentType });
+    return reply({ video_id: videoId, thumbnail_set: true, thumbnails: data.items || [] });
+  }
+
+  const captionListMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos\/([^/]+)\/captions$/);
+  if (request.method === "GET" && captionListMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(captionListMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(captionListMatch[2]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    await ownedVideo(accessToken, profile.channel_id, videoId);
+    const data = await googleJson("https://www.googleapis.com/youtube/v3/captions?part=id,snippet&videoId=" + encodeURIComponent(videoId), accessToken, "captions_list_failed");
+    return reply({ video_id: videoId, captions: data.items || [] });
+  }
+
+  if (request.method === "POST" && captionListMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(captionListMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(captionListMatch[2]));
+    const body = await bodyJson(request);
+    if (body.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
+    const language = String(body.language || "").trim();
+    const name = String(body.name || "").trim();
+    if (!language || !name || language.length > 150 || name.length > 150) throw httpError(400, "invalid_caption_metadata");
+    let profile;
+    try {
+      const context = await channelContext(env, alias);
+      profile = context.profile;
+      await ownedVideo(context.accessToken, profile.channel_id, videoId);
+      const media = await fetchExternalMedia(body.source_url, 100 * 1024 * 1024, ["text/xml", "application/octet-stream", "text/plain", "application/x-subrip", "text/vtt"]);
+      const metadata = { snippet: { videoId, language, name, isDraft: body.is_draft === true } };
+      const data = await googleMultipartUpload("POST", "https://www.googleapis.com/upload/youtube/v3/captions?uploadType=multipart&part=snippet", context.accessToken, metadata, media, "caption_insert_failed");
+      await audit(env, "admin", "caption.insert", alias, profile.channel_id, null, "success", { video_id: videoId, caption_id: data.id || null, language });
+      return reply({ video_id: videoId, caption: data });
+    } catch (error) {
+      const d = error?.diagnostic || {};
+      await audit(env, "admin", "caption.insert", alias, profile?.channel_id || null, null, "failed", { video_id: videoId, language, error_code: error?.code || "caption_insert_failed", google_status: d.google_status || null, google_reason: d.google_reason || null, google_message: d.google_message || null, stage: d.stage || null });
+      throw error;
+    }
+  }
+
+  const captionItemMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos\/([^/]+)\/captions\/([^/]+)$/);
+  if (request.method === "PATCH" && captionItemMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(captionItemMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(captionItemMatch[2]));
+    const captionId = String(decodeURIComponent(captionItemMatch[3]));
+    const body = await bodyJson(request);
+    if (body.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
+    const { profile, accessToken } = await channelContext(env, alias);
+    await ownedVideo(accessToken, profile.channel_id, videoId);
+    await assertCaptionOwned(accessToken, videoId, captionId);
+    const metadata = { id: captionId, snippet: {} };
+    if (body.is_draft !== undefined) metadata.snippet.isDraft = body.is_draft === true;
+    let data;
+    if (body.source_url) {
+      const media = await fetchExternalMedia(body.source_url, 100 * 1024 * 1024, ["text/xml", "application/octet-stream", "text/plain", "application/x-subrip", "text/vtt"]);
+      data = await googleMultipartUpload("PUT", "https://www.googleapis.com/upload/youtube/v3/captions?uploadType=multipart&part=snippet", accessToken, metadata, media, "caption_update_failed");
+    } else {
+      data = await googleJson("https://www.googleapis.com/youtube/v3/captions?part=snippet", accessToken, "caption_update_failed", { method: "PUT", body: metadata });
+    }
+    await audit(env, "admin", "caption.update", alias, profile.channel_id, null, "success", { video_id: videoId, caption_id: captionId, replaced_file: Boolean(body.source_url), is_draft: body.is_draft === undefined ? null : body.is_draft === true });
+    return reply({ video_id: videoId, caption: data });
+  }
+
+  if (request.method === "DELETE" && captionItemMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(captionItemMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(captionItemMatch[2]));
+    const captionId = String(decodeURIComponent(captionItemMatch[3]));
+    const body = await bodyJson(request);
+    if (body.explicit_destructive_intent !== true) throw httpError(409, "explicit_destructive_intent_required");
+    const { profile, accessToken } = await channelContext(env, alias);
+    await ownedVideo(accessToken, profile.channel_id, videoId);
+    await assertCaptionOwned(accessToken, videoId, captionId);
+    await googleJson("https://www.googleapis.com/youtube/v3/captions?id=" + encodeURIComponent(captionId), accessToken, "caption_delete_failed", { method: "DELETE", expectEmpty: true });
+    await audit(env, "admin", "caption.delete", alias, profile.channel_id, null, "success", { video_id: videoId, caption_id: captionId });
+    return reply({ deleted: true, video_id: videoId, caption_id: captionId });
+  }
+
+  const captionDownloadMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos\/([^/]+)\/captions\/([^/]+)\/download$/);
+  if (request.method === "GET" && captionDownloadMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(captionDownloadMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(captionDownloadMatch[2]));
+    const captionId = String(decodeURIComponent(captionDownloadMatch[3]));
+    const { profile, accessToken } = await channelContext(env, alias);
+    await ownedVideo(accessToken, profile.channel_id, videoId);
+    await assertCaptionOwned(accessToken, videoId, captionId);
+    const query = new URLSearchParams();
+    if (url.searchParams.get("tfmt")) query.set("tfmt", url.searchParams.get("tfmt"));
+    if (url.searchParams.get("tlang")) query.set("tlang", url.searchParams.get("tlang"));
+    const response = await fetch("https://www.googleapis.com/youtube/v3/captions/" + encodeURIComponent(captionId) + (query.toString() ? "?" + query.toString() : ""), { headers: { Authorization: "Bearer " + accessToken } });
+    if (!response.ok) throw httpError(response.status === 404 ? 404 : 502, "caption_download_failed", await safeGoogleError(response));
+    const text = await response.text();
+    if (text.length > 5 * 1024 * 1024) throw httpError(413, "caption_download_too_large");
+    return reply({ video_id: videoId, caption_id: captionId, format: url.searchParams.get("tfmt") || null, language: url.searchParams.get("tlang") || null, content: text });
+  }
+
+  const playlistImageMatch = path.match(/^\/v1\/channels\/([^/]+)\/playlists\/([^/]+)\/image$/);
+  if (request.method === "GET" && playlistImageMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(playlistImageMatch[1]));
+    const playlistId = validPlaylistId(decodeURIComponent(playlistImageMatch[2]));
+    let profile;
+    try {
+      const context = await channelContext(env, alias);
+      profile = context.profile;
+      await ownedPlaylist(context.accessToken, profile.channel_id, playlistId);
+      const listed = await playlistImagesList(context.accessToken, playlistId);
+      await audit(env, "admin", "playlist.image_list", alias, profile.channel_id, null, "success", { playlist_id: playlistId, filter_variant: listed.filter });
+      return reply({ playlist_id: playlistId, images: listed.data.items || [], filter_variant: listed.filter });
+    } catch (error) {
+      const d = error?.diagnostic || {};
+      await audit(env, "admin", "playlist.image_list", alias, profile?.channel_id || null, null, "failed", { playlist_id: playlistId, error_code: error?.code || "playlist_images_list_failed", google_status: d.google_status || null, google_reason: d.google_reason || null, google_message: d.google_message || null });
+      throw error;
+    }
+  }
+
+  if (request.method === "POST" && playlistImageMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(playlistImageMatch[1]));
+    const playlistId = validPlaylistId(decodeURIComponent(playlistImageMatch[2]));
+    const body = await bodyJson(request);
+    if (body.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
+    let profile;
+    let stage = "context";
+    try {
+      const context = await channelContext(env, alias);
+      profile = context.profile;
+      const accessToken = context.accessToken;
+      stage = "ownership";
+      await ownedPlaylist(accessToken, profile.channel_id, playlistId);
+      stage = "media";
+      const media = await fetchExternalMedia(body.source_url, 50 * 1024 * 1024, ["image/jpeg", "image/png"]);
+      stage = "list";
+      const listed = await playlistImagesList(accessToken, playlistId);
+      const current = listed.data.items?.[0];
+      stage = "upload";
+      let data;
+      let operation;
+      if (current) {
+        data = await managedPlaylistImageReplace(env, alias, profile, accessToken, playlistId, current, String(body.source_url || ""), media);
+        operation = "replaced";
+      } else {
+        data = await googleMultipartUpload("POST", "https://www.googleapis.com/upload/youtube/v3/playlistImages?uploadType=multipart&part=snippet", accessToken, { snippet: { playlistId, type: "hero" } }, media, "playlist_image_set_failed");
+        operation = "inserted";
+      }
+      stage = "readback";
+      const verifiedList = await playlistImagesList(accessToken, playlistId);
+      const verified = verifiedList.data.items?.[0];
+      if (!verified) throw httpError(409, "playlist_image_readback_missing");
+      await env.DB.prepare("INSERT INTO playlist_image_state(playlist_id,profile_alias,image_id,source_url,updated_at) VALUES(?,?,?,?,?) ON CONFLICT(playlist_id) DO UPDATE SET profile_alias=excluded.profile_alias,image_id=excluded.image_id,source_url=excluded.source_url,updated_at=excluded.updated_at").bind(playlistId, alias, verified.id || data.id || null, String(body.source_url || ""), isoNow()).run();
+      await audit(env, "admin", "playlist.image_set", alias, profile.channel_id, null, "success", { playlist_id: playlistId, image_id: verified.id || data.id || null, operation, filter_variant: verifiedList.filter });
+      return reply({ playlist_id: playlistId, image: verified, operation });
+    } catch (error) {
+      const d = error?.diagnostic || {};
+      await audit(env, "admin", "playlist.image_set", alias, profile?.channel_id || null, null, "failed", { playlist_id: playlistId, stage: d.stage || stage, error_code: error?.code || "playlist_image_set_failed", google_status: d.google_status || null, google_reason: d.google_reason || null, google_message: d.google_message || null, google_location: d.google_location || null, google_location_type: d.google_location_type || null });
+      throw error;
+    }
+  }
+
+  if (request.method === "DELETE" && playlistImageMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(playlistImageMatch[1]));
+    const playlistId = validPlaylistId(decodeURIComponent(playlistImageMatch[2]));
+    const body = await bodyJson(request);
+    if (body.explicit_destructive_intent !== true) throw httpError(409, "explicit_destructive_intent_required");
+    const { profile, accessToken } = await channelContext(env, alias);
+    await ownedPlaylist(accessToken, profile.channel_id, playlistId);
+    const listed = await playlistImagesList(accessToken, playlistId);
+    const id = listed.data.items?.[0]?.id;
+    if (!id) return reply({ playlist_id: playlistId, deleted: false, already_absent: true });
+    await googleJson("https://www.googleapis.com/youtube/v3/playlistImages?id=" + encodeURIComponent(id), accessToken, "playlist_image_delete_failed", { method: "DELETE", expectEmpty: true });
+    await env.DB.prepare("DELETE FROM playlist_image_state WHERE playlist_id=? AND profile_alias=?").bind(playlistId, alias).run();
+    await audit(env, "admin", "playlist.image_delete", alias, profile.channel_id, null, "success", { playlist_id: playlistId, image_id: id });
+    return reply({ playlist_id: playlistId, image_id: id, deleted: true });
+  }
+
+  const bannerMatch = path.match(/^\/v1\/channels\/([^/]+)\/banner$/);
+  if (request.method === "POST" && bannerMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(bannerMatch[1]));
+    const body = await bodyJson(request);
+    if (body.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
+    let profile;
+    let stage = "context";
+    try {
+      const context = await channelContext(env, alias);
+      profile = context.profile;
+      const accessToken = context.accessToken;
+      stage = "media";
+      const media = await fetchExternalMedia(body.source_url, 6 * 1024 * 1024, ["image/jpeg", "image/png", "application/octet-stream"]);
+      stage = "upload";
+      const upload = await googleRawMedia("POST", "https://www.googleapis.com/upload/youtube/v3/channelBanners/insert?uploadType=media&channelId=" + encodeURIComponent(profile.channel_id), accessToken, media, "banner_upload_failed");
+      if (!upload.url) throw httpError(502, "banner_url_missing");
+      stage = "branding_lookup";
+      const current = await googleJson("https://www.googleapis.com/youtube/v3/channels?part=brandingSettings&id=" + encodeURIComponent(profile.channel_id), accessToken, "channel_branding_lookup_failed");
+      const branding = current.items?.[0]?.brandingSettings || {};
+      branding.image = { ...(branding.image || {}), bannerExternalUrl: upload.url };
+      stage = "apply";
+      await googleJson("https://www.googleapis.com/youtube/v3/channels?part=brandingSettings", accessToken, "banner_apply_failed", { method: "PUT", body: { id: profile.channel_id, brandingSettings: branding } });
+      await audit(env, "admin", "channel.banner_set", alias, profile.channel_id, null, "success", { bytes: media.bytes.byteLength });
+      return reply({ channel_id: profile.channel_id, banner_set: true, banner_url: upload.url });
+    } catch (error) {
+      const d = error?.diagnostic || {};
+      await audit(env, "admin", "channel.banner_set", alias, profile?.channel_id || null, null, "failed", { stage: d.stage || stage, error_code: error?.code || "banner_set_failed", google_status: d.google_status || null, google_reason: d.google_reason || null, google_message: d.google_message || null });
+      throw error;
+    }
+  }
+
+  const watermarkMatch = path.match(/^\/v1\/channels\/([^/]+)\/watermark$/);
+  if (request.method === "POST" && watermarkMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(watermarkMatch[1]));
+    const body = await bodyJson(request);
+    if (body.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
+    const { profile, accessToken } = await channelContext(env, alias);
+    const media = await fetchExternalMedia(body.source_url, 10 * 1024 * 1024, ["image/jpeg", "image/png", "application/octet-stream"]);
+    const timingType = ["offsetFromStart", "offsetFromEnd"].includes(body.timing_type) ? body.timing_type : "offsetFromStart";
+    const metadata = { timing: { type: timingType, offsetMs: Number.isSafeInteger(body.offset_ms) ? body.offset_ms : 0, durationMs: Number.isSafeInteger(body.duration_ms) ? body.duration_ms : 315360000000 }, position: { type: "corner", cornerPosition: "topRight" }, targetChannelId: profile.channel_id };
+    await googleMultipartUpload("POST", "https://www.googleapis.com/upload/youtube/v3/watermarks/set?uploadType=multipart&channelId=" + encodeURIComponent(profile.channel_id), accessToken, metadata, media, "watermark_set_failed", true);
+    await audit(env, "admin", "channel.watermark_set", alias, profile.channel_id, null, "success", { bytes: media.bytes.byteLength });
+    return reply({ channel_id: profile.channel_id, watermark_set: true });
+  }
+
+  if (request.method === "DELETE" && watermarkMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(watermarkMatch[1]));
+    const body = await bodyJson(request);
+    if (body.explicit_destructive_intent !== true) throw httpError(409, "explicit_destructive_intent_required");
+    const { profile, accessToken } = await channelContext(env, alias);
+    await googleJson("https://www.googleapis.com/youtube/v3/watermarks/unset?channelId=" + encodeURIComponent(profile.channel_id), accessToken, "watermark_unset_failed", { method: "POST", expectEmpty: true });
+    await audit(env, "admin", "channel.watermark_unset", alias, profile.channel_id, null, "success", {});
+    return reply({ channel_id: profile.channel_id, watermark_unset: true });
+  }
+
   const privacyMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos\/([^/]+)\/privacy$/);
   if (request.method === "POST" && privacyMatch) {
     await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
@@ -252,6 +504,60 @@ async function route(request, env, requestId) {
     const qs = new URLSearchParams({ ids: "channel==MINE", startDate, endDate, dimensions: "insightTrafficSourceDetail", filters: "insightTrafficSourceType==YT_SEARCH", metrics: "views,estimatedMinutesWatched", sort: "-views", maxResults: String(maxResults) });
     const data = await googleJson(`https://youtubeanalytics.googleapis.com/v2/reports?${qs}`, accessToken, "analytics_search_terms_failed");
     return reply({ profile_alias: alias, channel_id: profile.channel_id, start_date: startDate, end_date: endDate, search_terms: analyticsRows(data) });
+  }
+
+
+  const videoDeleteMatch = path.match(/^\/v1\/channels\/([^/]+)\/videos\/([^/]+)\/delete$/);
+  if (request.method === "POST" && videoDeleteMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(videoDeleteMatch[1]));
+    const videoId = validVideoId(decodeURIComponent(videoDeleteMatch[2]));
+    const body = await bodyJson(request);
+    if (body.explicit_delete_intent !== true) throw httpError(409, "explicit_delete_intent_required");
+    const { profile, accessToken } = await channelContext(env, alias);
+    const before = await ownedVideo(accessToken, profile.channel_id, videoId);
+    await googleJson(`https://www.googleapis.com/youtube/v3/videos?id=${encodeURIComponent(videoId)}`, accessToken, "video_delete_failed", { method: "DELETE", expectEmpty: true });
+    await audit(env, "admin", "video.delete", alias, profile.channel_id, null, "success", { video_id: videoId, title: before.snippet?.title || null });
+    return reply({ deleted: true, video_id: videoId, verification: "caller_readback_recommended" });
+  }
+
+  const dataApiMatch = path.match(/^\/v1\/channels\/([^/]+)\/data-api$/);
+  if (request.method === "POST" && dataApiMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(dataApiMatch[1]));
+    const body = await bodyJson(request);
+    const { profile, accessToken } = await channelContext(env, alias);
+    try {
+      const result = await youtubeDataApi(accessToken, profile, body);
+      await audit(env, "admin", "youtube.data_api", alias, profile.channel_id, null, "success", { resource: body.resource, operation: body.operation });
+      return reply({ profile_alias: alias, channel_id: profile.channel_id, resource: body.resource, operation: body.operation, result });
+    } catch (error) {
+      const d = error?.diagnostic || {};
+      await audit(env, "admin", "youtube.data_api", alias, profile.channel_id, null, "failed", { resource: body.resource, operation: body.operation, error_code: error?.code || "youtube_data_api_failed", google_status: d.google_status || null, google_reason: d.google_reason || null, google_message: d.google_message || null });
+      throw error;
+    }
+  }
+
+  const reportingApiMatch = path.match(/^\/v1\/channels\/([^/]+)\/reporting-api$/);
+  if (request.method === "POST" && reportingApiMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(reportingApiMatch[1]));
+    const body = await bodyJson(request);
+    const { profile, accessToken } = await channelContext(env, alias);
+    const result = await youtubeReportingApi(accessToken, body);
+    await audit(env, "admin", "youtube.reporting_api", alias, profile.channel_id, null, "success", { resource: body.resource, operation: body.operation });
+    return reply({ profile_alias: alias, channel_id: profile.channel_id, resource: body.resource, operation: body.operation, result });
+  }
+
+  const analyticsApiMatch = path.match(/^\/v1\/channels\/([^/]+)\/analytics-api$/);
+  if (request.method === "POST" && analyticsApiMatch) {
+    await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
+    const alias = validAlias(decodeURIComponent(analyticsApiMatch[1]));
+    const body = await bodyJson(request);
+    const { profile, accessToken } = await channelContext(env, alias);
+    const result = await youtubeAnalyticsApi(accessToken, profile, body);
+    await audit(env, "admin", "youtube.analytics_api", alias, profile.channel_id, null, "success", { resource: body.resource, operation: body.operation });
+    return reply({ profile_alias: alias, channel_id: profile.channel_id, resource: body.resource, operation: body.operation, result });
   }
 
   const connectMatch = path.match(/^\/oauth\/connect\/([^/]+)$/);
@@ -686,13 +992,143 @@ async function channelContext(env, alias) {
   return { profile, accessToken };
 }
 
+async function googleMultipartUpload(method, endpoint, accessToken, metadata, media, errorCode, expectEmpty = false) {
+  const boundary = "dedal-" + crypto.randomUUID();
+  const enc = new TextEncoder();
+  const prefix = enc.encode(`--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify(metadata)}\r\n--${boundary}\r\nContent-Type: ${media.contentType}\r\n\r\n`);
+  const suffix = enc.encode(`\r\n--${boundary}--\r\n`);
+  const body = new Uint8Array(prefix.byteLength + media.bytes.byteLength + suffix.byteLength);
+  body.set(prefix, 0); body.set(new Uint8Array(media.bytes), prefix.byteLength); body.set(suffix, prefix.byteLength + media.bytes.byteLength);
+  const response = await fetch(endpoint, { method, headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": `multipart/related; boundary=${boundary}` }, body });
+  if (expectEmpty && response.ok) return null;
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw googleHttpError(response.status, errorCode, data);
+  return data;
+}
+
+async function googleRawMedia(method, endpoint, accessToken, media, errorCode) {
+  const response = await fetch(endpoint, { method, headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": media.contentType, "Content-Length": String(media.bytes.byteLength) }, body: media.bytes });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw googleHttpError(response.status, errorCode, data);
+  return data;
+}
+
+async function googleResumableMediaUpload(method, endpoint, accessToken, metadata, media, errorCode) {
+  const init = await fetch(endpoint, { method, headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json; charset=UTF-8", "X-Upload-Content-Type": media.contentType, "X-Upload-Content-Length": String(media.bytes.byteLength) }, body: JSON.stringify(metadata) });
+  if (!init.ok) {
+    const data = await init.json().catch(() => ({}));
+    const error = googleHttpError(init.status, errorCode, data);
+    error.diagnostic = { ...(error.diagnostic || {}), stage: "resumable_init" };
+    throw error;
+  }
+  const location = init.headers.get("Location");
+  if (!location) {
+    const error = httpError(502, errorCode, "Google resumable upload session missing Location header");
+    error.diagnostic = { google_status: init.status, google_reason: "missingUploadLocation", google_message: "Google resumable upload session missing Location header", stage: "resumable_init" };
+    throw error;
+  }
+  const locationUrl = new URL(location);
+  const sessionPart = locationUrl.searchParams.get("part");
+  const sessionQueryKeys = Array.from(locationUrl.searchParams.keys()).sort().join(",");
+  locationUrl.searchParams.delete("part");
+  const upload = await fetch(locationUrl.toString(), { method: "PUT", headers: { "Content-Type": media.contentType, "Content-Length": String(media.bytes.byteLength) }, body: media.bytes });
+  const data = await upload.json().catch(() => ({}));
+  if (!upload.ok) {
+    const error = googleHttpError(upload.status, errorCode, data);
+    error.diagnostic = { ...(error.diagnostic || {}), session_part: sessionPart, session_query_keys: sessionQueryKeys, stage: "resumable_media" };
+    throw error;
+  }
+  return data;
+}
+
+function googleHttpError(status, errorCode, data) {
+  const googleMessage = String(data?.error?.message || `Google API HTTP ${status}`).slice(0, 500);
+  const googleReason = String(data?.error?.errors?.[0]?.reason || data?.error?.status || "unknown").slice(0, 120);
+  const error = httpError(status === 404 ? 404 : 502, errorCode, googleMessage);
+  error.diagnostic = { google_status: status, google_reason: googleReason, google_message: googleMessage, google_location: data?.error?.errors?.[0]?.location || null, google_location_type: data?.error?.errors?.[0]?.locationType || null, google_error_json: JSON.stringify(data?.error || {}).slice(0, 1000) };
+  return error;
+}
+
+async function fetchExternalMedia(sourceUrl, maxBytes, allowedTypes) {
+  let current;
+  try { current = new URL(String(sourceUrl || "")); } catch { throw httpError(400, "invalid_media_url"); }
+  for (let hop = 0; hop < 4; hop++) {
+    validateExternalHttpsUrl(current);
+    const response = await fetch(current.toString(), { redirect: "manual" });
+    if ([301, 302, 303, 307, 308].includes(response.status)) {
+      const location = response.headers.get("Location");
+      if (!location) throw httpError(502, "media_redirect_invalid");
+      current = new URL(location, current);
+      continue;
+    }
+    if (!response.ok) throw httpError(502, "media_fetch_failed");
+    const declared = Number(response.headers.get("Content-Length") || 0);
+    if (declared && declared > maxBytes) throw httpError(413, "media_too_large");
+    const contentType = String(response.headers.get("Content-Type") || "application/octet-stream").split(";")[0].trim().toLowerCase();
+    if (!allowedTypes.includes(contentType)) throw httpError(415, "unsupported_media_type");
+    const bytes = await response.arrayBuffer();
+    if (!bytes.byteLength || bytes.byteLength > maxBytes) throw httpError(413, "media_too_large");
+    return { bytes, contentType, sourceUrl: current.toString() };
+  }
+  throw httpError(400, "too_many_media_redirects");
+}
+
+function validateExternalHttpsUrl(url) {
+  if (url.protocol !== "https:" || url.username || url.password) throw httpError(400, "invalid_media_url");
+  const host = url.hostname.toLowerCase();
+  const naked = host.replace(/^\[|\]$/g, "");
+  if (host === "localhost" || host.endsWith(".localhost") || host.endsWith(".local") || host === "metadata.google.internal") throw httpError(400, "media_host_not_allowed");
+  if (/^(?:127|10|0)\./.test(host) || /^169\.254\./.test(host) || /^192\.168\./.test(host) || /^172\.(?:1[6-9]|2\d|3[01])\./.test(host) || /^(?:fc|fd|fe80):/i.test(naked)) throw httpError(400, "media_host_not_allowed");
+}
+
+async function assertCaptionOwned(accessToken, videoId, captionId) {
+  const data = await googleJson(`https://www.googleapis.com/youtube/v3/captions?part=id,snippet&videoId=${encodeURIComponent(videoId)}&id=${encodeURIComponent(captionId)}`, accessToken, "caption_lookup_failed");
+  const item = data.items?.[0];
+  if (!item || item.id !== captionId || item.snippet?.videoId !== videoId) throw httpError(404, "caption_not_found");
+  return item;
+}
+
+async function playlistImagesList(accessToken, playlistId) {
+  const attempts = [
+    { filter: "playlistId", url: "https://www.googleapis.com/youtube/v3/playlistImages?part=snippet&playlistId=" + encodeURIComponent(playlistId) },
+    { filter: "parent_raw", url: "https://www.googleapis.com/youtube/v3/playlistImages?part=snippet&parent=" + encodeURIComponent(playlistId) },
+    { filter: "parent_resource", url: "https://www.googleapis.com/youtube/v3/playlistImages?part=snippet&parent=" + encodeURIComponent("playlists/" + playlistId) },
+  ];
+  let lastError;
+  for (const attempt of attempts) {
+    try { return { data: await googleJson(attempt.url, accessToken, "playlist_images_list_failed"), filter: attempt.filter }; }
+    catch (error) { lastError = error; if (error?.diagnostic?.google_status !== 400) throw error; }
+  }
+  throw lastError || httpError(502, "playlist_images_list_failed");
+}
+
+async function managedPlaylistImageReplace(env, alias, profile, accessToken, playlistId, current, sourceUrl, media) {
+  const managed = await env.DB.prepare("SELECT source_url FROM playlist_image_state WHERE playlist_id=? AND profile_alias=?").bind(playlistId, alias).first();
+  if (!managed?.source_url) throw httpError(409, "playlist_image_replace_requires_managed_baseline");
+  const oldSourceUrl = String(managed.source_url);
+  const rollbackMedia = oldSourceUrl === sourceUrl ? media : await fetchExternalMedia(oldSourceUrl, 50 * 1024 * 1024, ["image/jpeg", "image/png"]);
+  await googleJson("https://www.googleapis.com/youtube/v3/playlistImages?id=" + encodeURIComponent(current.id), accessToken, "playlist_image_delete_failed", { method: "DELETE", expectEmpty: true });
+  const endpoint = "https://www.googleapis.com/upload/youtube/v3/playlistImages?uploadType=multipart&part=snippet";
+  try {
+    return await googleMultipartUpload("POST", endpoint, accessToken, { snippet: { playlistId, type: "hero" } }, media, "playlist_image_set_failed");
+  } catch (insertError) {
+    try {
+      const restored = await googleMultipartUpload("POST", endpoint, accessToken, { snippet: { playlistId, type: "hero" } }, rollbackMedia, "playlist_image_rollback_failed");
+      await audit(env, "admin", "playlist.image_rollback", alias, profile.channel_id, null, "success", { playlist_id: playlistId, image_id: restored.id || null });
+    } catch (rollbackError) {
+      await audit(env, "admin", "playlist.image_rollback", alias, profile.channel_id, null, "failed", { playlist_id: playlistId, error_code: rollbackError?.code || "playlist_image_rollback_failed", error_message: String(rollbackError?.message || "").slice(0, 500) });
+    }
+    throw insertError;
+  }
+}
+
 async function googleJson(url, accessToken, errorCode, options = {}) {
   const headers = { Authorization: `Bearer ${accessToken}`, ...(options.headers || {}) };
   if (options.body !== undefined) headers["Content-Type"] = "application/json; charset=UTF-8";
   const response = await fetch(url, { method: options.method || "GET", headers, body: options.body === undefined ? undefined : JSON.stringify(options.body) });
   if (options.expectEmpty && response.ok) return null;
   const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw httpError(response.status === 404 ? 404 : 502, errorCode, data?.error?.message || `Google API HTTP ${response.status}`);
+  if (!response.ok) throw googleHttpError(response.status, errorCode, data);
   return data;
 }
 
@@ -900,6 +1336,87 @@ function fromBase64url(value) {
   const padded = base + "=".repeat((4 - base.length % 4) % 4);
   const binary = atob(padded);
   return Uint8Array.from(binary, c => c.charCodeAt(0));
+}
+
+async function youtubeReportingApi(accessToken, input) {
+  const resource = String(input.resource || "reportTypes");
+  const operation = String(input.operation || "list");
+  const params = input.params && typeof input.params === "object" && !Array.isArray(input.params) ? { ...input.params } : {};
+  const body = input.body && typeof input.body === "object" && !Array.isArray(input.body) ? input.body : undefined;
+  let method = "GET", path = "";
+  if (resource === "reportTypes" && operation === "list") path = "/v1/reportTypes";
+  else if (resource === "jobs" && operation === "list") path = "/v1/jobs";
+  else if (resource === "jobs" && operation === "get") { if (!input.job_id) throw httpError(400, "job_id_required"); path = "/v1/jobs/" + encodeURIComponent(String(input.job_id)); }
+  else if (resource === "jobs" && operation === "create") { if (input.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required"); method = "POST"; path = "/v1/jobs"; }
+  else if (resource === "jobs" && operation === "delete") { if (input.explicit_destructive_intent !== true) throw httpError(409, "explicit_destructive_intent_required"); if (!input.job_id) throw httpError(400, "job_id_required"); method = "DELETE"; path = "/v1/jobs/" + encodeURIComponent(String(input.job_id)); }
+  else if (resource === "reports" && operation === "list") { if (!input.job_id) throw httpError(400, "job_id_required"); path = "/v1/jobs/" + encodeURIComponent(String(input.job_id)) + "/reports"; }
+  else if (resource === "reports" && operation === "get") { if (!input.job_id || !input.report_id) throw httpError(400, "report_ids_required"); path = "/v1/jobs/" + encodeURIComponent(String(input.job_id)) + "/reports/" + encodeURIComponent(String(input.report_id)); }
+  else throw httpError(400, "reporting_operation_not_allowed");
+  const query = new URLSearchParams();
+  for (const [key, value] of Object.entries(params)) if (value !== undefined && value !== null) query.set(key, Array.isArray(value) ? value.join(",") : String(value));
+  return googleJson("https://youtubereporting.googleapis.com" + path + (query.toString() ? "?" + query.toString() : ""), accessToken, "youtube_reporting_api_failed", { method, body: method === "POST" ? body : undefined, expectEmpty: method === "DELETE" });
+}
+
+async function youtubeAnalyticsApi(accessToken, profile, input) {
+  const resource = String(input.resource || "reports");
+  const operation = String(input.operation || (resource === "reports" ? "query" : "list"));
+  const params = input.params && typeof input.params === "object" && !Array.isArray(input.params) ? { ...input.params } : {};
+  const body = input.body && typeof input.body === "object" && !Array.isArray(input.body) ? input.body : undefined;
+  if (resource === "reports") {
+    if (operation !== "query") throw httpError(400, "analytics_operation_not_allowed");
+    params.ids = "channel==MINE";
+    if (!params.startDate || !params.endDate || !params.metrics) throw httpError(400, "analytics_query_params_required");
+    const query = new URLSearchParams(Object.entries(params).filter(([,value]) => value !== undefined && value !== null).map(([key,value]) => [key, Array.isArray(value) ? value.join(",") : String(value)]));
+    const data = await googleJson(`https://youtubeanalytics.googleapis.com/v2/reports?${query}`, accessToken, "analytics_query_failed");
+    return { columnHeaders: data.columnHeaders || [], rows: analyticsRows(data) };
+  }
+  if (!["groups", "groupItems"].includes(resource)) throw httpError(400, "analytics_resource_not_allowed");
+  const allowed = resource === "groups" ? ["list", "insert", "update", "delete"] : ["list", "insert", "delete"];
+  if (!allowed.includes(operation)) throw httpError(400, "analytics_operation_not_allowed");
+  if (["insert", "update"].includes(operation) && input.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
+  if (operation === "delete" && input.explicit_destructive_intent !== true) throw httpError(409, "explicit_destructive_intent_required");
+  const method = { list: "GET", insert: "POST", update: "PUT", delete: "DELETE" }[operation];
+  const query = new URLSearchParams();
+  for (const [key,value] of Object.entries(params)) if (value !== undefined && value !== null) query.set(key, Array.isArray(value) ? value.join(",") : String(value));
+  return googleJson(`https://youtubeanalytics.googleapis.com/v2/${resource}${query.toString() ? "?" + query.toString() : ""}`, accessToken, "analytics_group_api_failed", { method, body: ["POST", "PUT"].includes(method) ? body : undefined, expectEmpty: operation === "delete" });
+}
+
+const DATA_API_ALLOW = {
+  activities: ["list"], channels: ["list", "update"], channelSections: ["list", "insert", "update", "delete"],
+  commentThreads: ["list", "insert"], comments: ["list", "insert", "update", "delete", "setModerationStatus"],
+  captions: ["list", "delete"], i18nLanguages: ["list"], i18nRegions: ["list"], members: ["list"], membershipsLevels: ["list"],
+  playlistImages: ["list", "delete"], playlistItems: ["list", "insert", "update", "delete"], playlists: ["list", "insert", "update", "delete"], search: ["list"],
+  subscriptions: ["list", "insert", "delete"], videoCategories: ["list"], videos: ["list", "update", "delete", "getRating", "rate"],
+  liveBroadcasts: ["list", "insert", "update", "delete", "bind", "transition"], liveStreams: ["list", "insert", "update", "delete"],
+  liveChatBans: ["list", "insert", "delete"], liveChatMessages: ["list", "insert", "delete"], liveChatModerators: ["list", "insert", "delete"], superChatEvents: ["list"], videoAbuseReportReasons: ["list"], watermarks: ["unset"]
+};
+
+async function youtubeDataApi(accessToken, profile, input) {
+  const resource = String(input.resource || "");
+  const operation = String(input.operation || "");
+  if (!DATA_API_ALLOW[resource]?.includes(operation)) throw httpError(400, "youtube_api_operation_not_allowed");
+  const params = input.params && typeof input.params === "object" && !Array.isArray(input.params) ? { ...input.params } : {};
+  const body = input.body && typeof input.body === "object" && !Array.isArray(input.body) ? input.body : undefined;
+  const moderationDestructive = resource === "comments" && operation === "setModerationStatus" && (String(params.moderationStatus || "") === "rejected" || params.banAuthor === true || String(params.banAuthor || "") === "true");
+  const destructive = operation === "delete" || operation === "unset" || moderationDestructive;
+  const interactive = ["insert", "update", "rate", "setModerationStatus", "bind", "transition"].includes(operation);
+  const publication = (resource === "liveBroadcasts" && operation === "transition") || (resource === "videos" && operation === "update" && Boolean(body?.status?.publishAt));
+  if (destructive && input.explicit_destructive_intent !== true) throw httpError(409, "explicit_destructive_intent_required");
+  if (interactive && input.explicit_action_intent !== true) throw httpError(409, "explicit_action_intent_required");
+  if (publication && input.explicit_publication_intent !== true) throw httpError(409, "explicit_publication_intent_required");
+  const privacy = body?.status?.privacyStatus;
+  if ((privacy === "public" || privacy === "unlisted") && input.explicit_visibility_intent !== true) throw httpError(409, "explicit_visibility_intent_required");
+  if (resource === "channels" && operation === "update" && body?.id !== profile.channel_id) throw httpError(409, "channel_identity_mismatch");
+  if (resource === "videos" && ["update", "delete"].includes(operation)) { const id = String(body?.id || params.id || ""); if (!id) throw httpError(400, "video_id_required"); await ownedVideo(accessToken, profile.channel_id, validVideoId(id)); }
+  if (resource === "playlists" && ["update", "delete"].includes(operation)) { const id = String(body?.id || params.id || ""); if (!id) throw httpError(400, "playlist_id_required"); await ownedPlaylist(accessToken, profile.channel_id, validPlaylistId(id)); }
+  if (resource === "playlistItems" && operation === "insert") { const playlistId = body?.snippet?.playlistId; if (!playlistId) throw httpError(400, "playlist_id_required"); await ownedPlaylist(accessToken, profile.channel_id, validPlaylistId(playlistId)); }
+  const methodMap = { list: "GET", insert: "POST", update: "PUT", delete: "DELETE", getRating: "GET", rate: "POST", setModerationStatus: "POST", bind: "POST", transition: "POST", unset: "POST" };
+  const suffixMap = { getRating: "getRating", rate: "rate", setModerationStatus: "setModerationStatus", bind: "bind", transition: "transition", unset: "unset" };
+  const suffix = suffixMap[operation] ? "/" + suffixMap[operation] : "";
+  const query = new URLSearchParams();
+  for (const [key,value] of Object.entries(params)) if (value !== undefined && value !== null) query.set(key, Array.isArray(value) ? value.join(",") : String(value));
+  const endpoint = `https://www.googleapis.com/youtube/v3/${resource}${suffix}${query.toString() ? "?" + query.toString() : ""}`;
+  return googleJson(endpoint, accessToken, "youtube_data_api_failed", { method: methodMap[operation], body: ["POST", "PUT"].includes(methodMap[operation]) ? body : undefined, expectEmpty: destructive });
 }
 
 function validAlias(value) {

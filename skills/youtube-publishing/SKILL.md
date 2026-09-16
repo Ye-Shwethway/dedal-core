@@ -1,88 +1,91 @@
 ---
 name: youtube-publishing
-description: Prepare, upload, organize, schedule, and learn from YouTube publishing workflows across multiple Creator-owned channels using direct APIs or another verified execution surface.
+description: Prepare, upload, organize, schedule, brand, caption, and learn from YouTube publishing workflows across multiple Creator-owned channels using the dedicated DEDAL YouTube MCP/Gateway or another verified execution surface.
 status: active
 ---
 
 # YouTube Publishing
 
-Own the channel-operations layer after a media artifact is ready for distribution. The production Gateway, isolated uploader runner, and thin MCP control surface have passed the documented promotion evidence gate.
+Own the channel-operations layer after a media artifact is ready for distribution. The production Gateway, isolated uploader runner, and dedicated MCP control surface have passed representative live gates. Media-replacement operations use managed-state and fail-closed rules where vendor read/update semantics are incomplete.
 
 ## Use when
 
 - uploading an approved video or Short to a Creator-owned YouTube channel;
 - selecting the correct channel among multiple authorized channel profiles;
-- preparing title, description, tags, category, thumbnail, playlist, privacy, or publish timing;
-- performing direct YouTube Data API operations;
+- preparing or changing title, description, tags, category, thumbnail, captions, playlist membership/image, privacy, scheduling, or supported channel branding;
+- performing bounded YouTube Data/Analytics API operations;
 - reviewing channel/video analytics and actual YouTube search terms to improve later publishing choices;
-- researching discoverability without requiring a paid SEO service.
+- diagnosing a failed YouTube mutation through bounded vendor diagnostics.
 
 ## Ownership boundary
 
-YouTube Publishing owns target-channel resolution, YouTube metadata, upload lifecycle, privacy/scheduling, playlist/thumbnail operations, channel-specific defaults, post-publish analytics, and YouTube discoverability feedback.
+YouTube Publishing owns target-channel resolution, YouTube metadata, upload lifecycle, privacy/scheduling, playlist and thumbnail operations, captions, supported channel branding, managed media state, post-publish analytics, and YouTube discoverability feedback.
 
 It does **not** replace:
-- Video Production for edit quality, codecs, captions burned into media, or the final media master;
-- Writing/Editorial for prose quality when substantial copywriting is needed;
+- Video Production for edit quality, codecs, burned-in captions, or the final media master;
+- Writing/Editorial for substantial copywriting;
 - Research for external factual claims or current platform-policy verification;
-- Visual Direction for custom thumbnail image generation/editing;
+- Visual Direction for custom thumbnail/banner image generation or editing;
 - Security Engineering for credential-store architecture or threat modeling;
-- the YouTube API, browser, plugin, local client, gateway, or other execution surface.
+- the YouTube API, MCP, Gateway, browser, runner, or other execution surface.
 
 ## Default workflow
 
-1. **Receive a verified media handoff.** Confirm exact file identity, duration/format where material, and whether this is a master or delivery copy.
-2. **Resolve the target channel.** Never infer a channel from the current ChatGPT/Gmail identity. Resolve an explicit profile and verify the authenticated YouTube channel ID before mutation.
-3. **Prepare a publish manifest.** Include title, description, optional tags/category/playlist/thumbnail, made-for-kids status, privacy, and optional publish time.
-4. **Apply the private-first gate.** Unless the Creator explicitly requests otherwise and the execution surface is eligible, new direct-API uploads default to `private`.
-5. **Upload resumably when supported.** Preserve the returned video ID and enough local state to recover or verify after interruption.
-6. **Verify remote truth.** Read back the uploaded resource and verify channel, title, privacy, processing state where available, and requested metadata before calling the operation successful.
-7. **Apply secondary operations.** Set thumbnail, playlist membership, captions, or scheduling only after video identity is verified.
-8. **Promote visibility deliberately.** Public/unlisted visibility or future publication is an external mutation. Require explicit Creator intent for the specific video/channel unless a later approved policy grants bounded standing authority.
-9. **Learn from outcomes.** When useful, inspect YouTube Analytics traffic sources/search terms and compare them with the pre-publish hypothesis. Treat proprietary third-party SEO scores as optional supplements, not truth.
+1. **Resolve exact ownership.** Select an explicit verified profile and reassert the authenticated YouTube channel before mutation.
+2. **Prefer the dedicated typed tool.** Use the narrow MCP/Gateway operation that expresses the intended YouTube action. Use a generic API bridge only for a missing read surface or bounded diagnostics, never as the normal mutation path when a dedicated tool exists.
+3. **Capture current state.** Read back the target when the API exposes it. For destructive replacement, preserve a recoverable DEDAL-managed baseline before deleting or overwriting.
+4. **Require explicit intent.** Consequential writes require `explicit_action_intent`; deletes/unsets require `explicit_destructive_intent`; public/unlisted/scheduled publication keeps its dedicated visibility/publication intent gate.
+5. **Mutate once, boundedly.** During diagnosis, make one bounded mutation attempt, inspect stage-aware audit evidence, patch minimally, then retry at most once when the evidence supports it.
+6. **Verify remote truth.** Read back the mutated resource whenever the provider exposes readable state. An accepted request alone is not success.
+7. **Recover safely.** For replace-style media, restore the prior DEDAL-managed source if the replacement insert/apply fails and rollback is possible.
+8. **Checkpoint durable lessons.** Record vendor quirks, managed-state requirements, and unresolved readback gaps without committing secrets/private tokens.
 
-## Multi-channel rules
+## Managed replacement rules
 
-- A profile must bind a human-readable alias to a verified `channel_id`; account email alone is not sufficient identity.
-- Keep OAuth tokens isolated per profile. Never reuse a token merely because two channels have similar names or niches.
-- A single Google account may expose multiple YouTube identities/Brand Accounts; verify the returned channel ID after authorization.
-- Before every upload, display or log the resolved profile alias + channel ID + requested privacy.
-- If the authenticated channel ID does not equal the configured channel ID, fail closed before upload.
+- Native vendor `update` semantics are not assumed reliable merely because an endpoint exists.
+- Playlist hero-image replacement is `read existing -> require managed baseline -> delete -> insert -> read back -> persist managed state`; if insert fails, attempt rollback from the previous managed source.
+- An existing unmanaged playlist image must fail closed rather than be destroyed to satisfy a replacement request.
+- Banner restoration requires a recoverable/full-resolution source. A display-oriented `bannerExternalUrl` is not a sufficient rollback artifact.
+- When an API supports mutation but cannot reliably reveal prior state, treat that state as unmanaged and fail closed unless the Creator explicitly authorizes destructive handling.
+- Watermark unset/replacement is therefore not considered fully live-gated until DEDAL has managed-state evidence or explicit authority over an unmanaged watermark.
+
+## Mutation evidence pattern
+
+For hard mutation failures use:
+
+`dedicated MCP call -> bounded Gateway route -> stage-aware D1 mutation audit -> exact vendor error extraction -> minimal patch -> one bounded retry -> read-back verification -> checkpoint`
+
+Audits may retain action/outcome, resource identifiers, stage, bounded vendor status/reason/message/location metadata, and resumable sub-stage diagnostics. They must not retain OAuth tokens, bearer secrets, cookies, raw credential material, or unbounded sensitive payloads.
+
+## Live-gated operation families
+
+Representative live evidence now covers:
+- exact-channel ownership and fail-closed mismatch protection;
+- resumable private upload with interruption/resume and no duplicate video;
+- playlist membership;
+- thumbnail upload;
+- caption insert/list/download/update/delete with original state restored;
+- playlist-image first insert and managed replacement with readback;
+- valid channel-banner upload/apply/readback and restoration from a full-resolution source.
+
+Watermark set/unset tools are exposed but the lifecycle remains **not fully live-gated** because YouTube does not provide a reliable current-watermark read/list baseline.
 
 ## Discoverability / SEO rules
 
-DEDAL can perform useful YouTube optimization without vidIQ or another paid service by combining:
-- current YouTube search-result patterns and related queries when available;
-- Google Trends or other current public trend evidence when appropriate;
-- the channel's own YouTube Analytics traffic-source/search-term data;
-- title/description semantic clarity and audience intent;
-- observed performance from prior videos in the same channel/niche.
-
-Do not invent universal search-volume numbers. Any DEDAL competition/opportunity score must be labeled as a heuristic and explain the evidence behind it.
+DEDAL can optimize from current search patterns, public trend evidence when appropriate, the channel's own Analytics traffic-source/search-term data, semantic clarity, and observed prior performance. Do not invent universal search-volume numbers; label any DEDAL competition/opportunity score as a heuristic.
 
 ## Safety and truth gates
 
-- Credentials, client secrets, refresh tokens, channel-private analytics, and private video metadata do not belong in this public repository.
-- Do not claim an upload succeeded from an HTTP request alone; verify the returned video ID and remote resource state.
-- Do not claim a video is public because it was uploaded successfully.
-- Direct API projects created after 2020-07-28 may be restricted to private uploads until YouTube API compliance review; verify current policy before relying on public publication.
-- OAuth OOB/manual-copy flows are deprecated. The reference client uses the supported desktop loopback flow; mobile-native auth requires an appropriate supported identity flow.
-- API quotas, scopes, upload restrictions, scheduling semantics, and analytics fields are live platform facts; re-verify when material.
-
-## Promotion evidence gate
-
-This skill was promoted only after representative Creator work demonstrated:
-
-1. authorization against one real Creator-owned channel;
-2. channel-ID mismatch protection;
-3. one resumable private upload with read-back verification;
-4. at least one secondary operation (thumbnail or playlist) when relevant;
-5. interruption/error behavior that does not silently duplicate or publish the wrong file;
-6. a documented path for multiple channel profiles.
+- Credentials, client secrets, refresh tokens, cookies, channel-private analytics, and private video metadata do not belong in this public repository.
+- Upload success is not publication success. Read back exact video/channel/privacy state.
+- API quotas, scopes, upload restrictions, scheduling semantics, media requirements, and analytics fields are live platform facts; re-verify when material.
+- A generic API passthrough never expands authority beyond the dedicated surface.
+- If prior state cannot be read or recovered, fail closed rather than guessing.
 
 ## Progressive references
 
 - `references/direct-api-and-auth.md`
+- `references/mutation-hardening-and-recovery.md`
 - `channel-profiles.example.json`
 - `scripts/youtube_channel_ops.py`
 - `gateway/README.md`

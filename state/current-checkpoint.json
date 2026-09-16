@@ -1,43 +1,42 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.25.0",
+  "version": "0.26.0",
   "accepted_state": [
-    "DEDAL remains one coherent persistent intelligence with an always-active Cognitive Runtime and progressively disclosed specialist faculties.",
-    "The Creator explicitly reopened a bounded creative-production capability wave after ordinary work exposed two concrete gaps: professional video production and professional presentation production.",
-    "Video Production is active and owns temporal storytelling, generative-video shot direction, take selection, continuity through time, editing, subtitles/captions, audio finishing, motion-graphics composition and media delivery.",
-    "Visual Direction remains the owner of canonical still-image/reference continuity; video generators, FFmpeg, Remotion and other editing/generation tools remain execution/reference surfaces.",
-    "Presentation Engineering is active and owns audience/objective framing, narrative spine, slide-role architecture, evidence mapping, visual hierarchy, chart/diagram choice, speaker notes, template fidelity, editable-deck strategy and rendered slide QA.",
-    "Research/domain owners remain factual authorities for deck content; Writing/Editorial owns prose; Data Operations owns source-table integrity; Visual Direction owns custom image assets; native slide/PPTX tooling remains execution.",
-    "Anthropic PPTX material was reviewed only as comparative workflow evidence because its license is proprietary; DEDAL does not copy or derive its protected content.",
-    "Source-first/rebuildable presentation workflows and probe-edit-verify video workflows are preferred when iteration or auditability matters.",
-    "A generated clip is a take, not an approved edit; a successful encode is not playback/sync/editorial proof; a valid PPTX package is not rendered visual-quality proof.",
-    "Provider/model/library details such as Veo/Flow/Runway/Seedance capabilities, video duration/reference/audio support, codec/tool behavior, PPTX library limitations and font/render behavior require current verification when material."
+    "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
+    "YouTube Publishing remains active; this release hardens the already-promoted dedicated MCP/Gateway workflow rather than creating a duplicate capability.",
+    "Caption list/insert/readback/VTT-download/update/delete has representative live evidence and the lifecycle test restored the original video state.",
+    "Thumbnail upload has representative end-to-end live evidence on an owned video.",
+    "Playlist image first insert and managed replacement have representative live evidence; production replacement requires a DEDAL-managed baseline, delete -> insert -> readback, managed-state persistence, and rollback on failed insertion.",
+    "Native playlistImages.update is not a production dependency because isolated live attempts produced inconsistent unexpectedPart failures around resumable processing.",
+    "Channel banner upload/apply/readback has representative live evidence; rollback must retain a recoverable full-resolution source rather than depending on a display-oriented bannerExternalUrl.",
+    "Watermark set/unset is exposed but not fully live-gated because current watermark state cannot be reliably discovered; unmanaged watermark state fails closed absent explicit Creator authority.",
+    "YouTube mutation debugging uses dedicated MCP -> bounded Gateway -> stage-aware D1 audit -> exact vendor error -> minimal patch -> one bounded retry -> readback verification -> checkpoint.",
+    "Live hardening evidence reported Gateway 0.7.35, but the public repo Gateway source still identifies itself as 0.3.0; deployed/source equivalence is not claimed until source sync."
   ],
   "evidence": [
-    {"id":"video-production-deep-audit-2026-09-14","kind":"demonstrated-workflow-plus-multi-source-audit","status":"promotion_approved"},
-    {"id":"presentation-engineering-deep-audit-2026-09-14","kind":"demonstrated-workflow-plus-multi-source-audit","status":"promotion_approved"},
-    {"id":"ffmpeg-skill","kind":"mature-open-source-skill","status":"pinned_a6232b95f595aa35fa8cea0d055f0163baa908e9_mit"},
-    {"id":"remotion-agent-skills","kind":"first-party-skill-corpus","status":"pinned_bd566b65d521b40fe92e1f26766e82de9e291693_methodology_only"},
-    {"id":"presentation-skill","kind":"open-source-source-first-pptx-corpus","status":"pinned_311e29920c7c7ab37a93c12676bab7baecc0f4a6_mit"},
-    {"id":"anthropic-pptx","kind":"comparative-proprietary-corpus","status":"reviewed_not_copied_or_derived"},
-    {"id":"creative-production-routing-v1","kind":"contract_validation","status":"video_visual_writing_research_quality_presentation_and_execution_boundaries_ci_enforced"}
+    {"id": "youtube-caption-lifecycle-2026-09-16", "kind": "live-owned-resource-lifecycle", "status": "passed_and_restored"},
+    {"id": "youtube-thumbnail-set-2026-09-16", "kind": "live-owned-resource-mutation", "status": "passed"},
+    {"id": "youtube-playlist-image-managed-replacement-2026-09-16", "kind": "live-owned-resource-replacement", "status": "passed"},
+    {"id": "youtube-banner-upload-restore-2026-09-16", "kind": "live-owned-channel-branding", "status": "passed_and_restored"},
+    {"id": "youtube-watermark-readback-gap-2026-09-16", "kind": "safety-boundary", "status": "fail_closed_not_live_gated"},
+    {"id": "youtube-hardening-contract-v1", "kind": "contract_validation", "status": "passed_local_precommit"}
   ],
   "unresolved_risks": [
-    "Video and Presentation Engineering promotions are architecture- and contract-supported; measurable DEDAL-specific outcome gains still require ordinary Creator projects.",
-    "Generative-video providers change rapidly and can produce stochastic identity/physics/continuity failures even with strong direction.",
-    "Sandbox or host media capabilities can vary by session; FFmpeg/Remotion/native slide availability must be verified before promising execution.",
-    "PPTX rendering can differ across LibreOffice, PowerPoint, Keynote and installed fonts; visual QA evidence remains environment-scoped.",
-    "Creative-production skills can over-activate on simple image or prose tasks; smallest-sufficient routing remains mandatory."
+    "The deployed Gateway advanced beyond the source snapshot committed in this public repository; exact source parity must be recovered before the repo can reproduce the current deployment.",
+    "The exact deployed MCP version was not independently established by this reconciliation; the checked-in source still identifies itself as 0.1.0.",
+    "Channel banner replacement has a proven full-resolution restore technique but does not yet have the same persisted managed-baseline/rollback model as playlist images.",
+    "Watermark lifecycle must remain fail-closed for unmanaged state until a managed-state model or explicit Creator authorization exists.",
+    "YouTube vendor media/upload semantics and documentation can change; current requirements and error behavior need live verification when material."
   ],
   "next_executable_step": {
-    "id": "CREATIVE-PRODUCTION-OUTCOME-01",
-    "action": "Use Video Production and Presentation Engineering naturally in representative Creator work. For video, exercise at least one real generation-to-edit workflow and one uploaded-footage/subtitle or cut workflow when requested. For presentations, exercise a real meeting/CME/annual deck through native slide tooling when requested. Record genuine routing wins, quality misses, tool limitations, context waste or ownership collisions; do not manufacture benchmarks solely to justify the promotion."
+    "id": "YOUTUBE-SOURCE-SYNC-01",
+    "action": "Recover and compare the currently deployed YouTube Gateway/MCP source against the public repository, import only the verified missing implementation delta, then add managed baseline/rollback for banner and watermark before promoting watermark lifecycle."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "c03bb96fabb629026b122783a29b715af0a779cb",
-    "relation": "verified v0.24.0 baseline before the v0.25.0 creative-production promotion transaction"
+    "sha": "5bcc01d15b623a19a1755eb7a88b7719d177e118",
+    "relation": "tree-equivalent recovery HEAD after removing accidental preflight files; original v0.25.0 user baseline was 390baacd6cad31df58843fc6f206cb7677337cb0"
   }
 }

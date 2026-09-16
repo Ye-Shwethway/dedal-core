@@ -1,76 +1,51 @@
 # Current Checkpoint
 
-_Date: 2026-09-14_
+_Date: 2026-09-16_
 
 ## Repository
 
 - Repository: `Ye-Shwethway/dedal-core`
-- Visibility: public
-- Default branch: `main`
-- Current version: `0.18.0`
-- Purpose: durable public operational core for DEDAL
+- Branch: `main`
+- Release: `0.26.0`
+- User-requested previous baseline HEAD: `390baacd6cad31df58843fc6f206cb7677337cb0`
+- Atomic reconciliation parent: `5bcc01d15b623a19a1755eb7a88b7719d177e118` (tree-equivalent recovery HEAD after removing accidental preflight files)
+- The exact post-commit HEAD is Git-derived and is reported after the atomic transaction; this file does not attempt to self-embed its own commit hash.
 
 ## Operating phase
 
-The initial eight-area capability expansion campaign is complete. DEDAL is now in **hardening + consolidation + outcome validation** mode, not default skill-expansion mode.
+DEDAL remains in hardening/consolidation/outcome-validation mode. The Cognitive Runtime and smallest-sufficient skill-composition model are unchanged.
 
-The consolidation efficiency baseline remains valid as preliminary evidence only. Numeric claims must continue to use directly observable counts or be labeled structural proxies.
+The current reconciliation promotes additional **YouTube Publishing live evidence** without reopening broad capability expansion.
 
-## Hardening campaign state
+## YouTube Publishing status
 
-### 1. GitHub mutation guardrails
+Live-gated operation families now include:
+- resumable private upload/recovery and playlist membership from the earlier gate;
+- thumbnail upload;
+- full caption lifecycle with final restoration;
+- playlist-image first insert and managed replacement;
+- channel-banner upload/apply/readback and full-resolution restoration.
 
-Added an executable fail-closed mutation guard under `runtime/` plus positive/negative contract cases under `evals/github-mutation-guard/`.
+Playlist image replacement is explicitly transactional: require a DEDAL-managed baseline, delete the old hero image, insert the replacement, read back, persist managed state, and rollback from the prior managed source if insertion fails. Native `playlistImages.update` is not relied upon.
 
-The guard enforces the locked work-unit mode:
-- direct mode permits one direct contents mutation and rejects atomic Git-data mutation tools;
-- atomic mode permits `create_blob(s) -> create_tree -> create_commit -> update_ref`, rejects direct contents writes, rejects out-of-order transitions, and rejects mutation tools unknown to the current policy when the host marks them as mutations.
+Banner rollback must preserve a recoverable/full-resolution source; the display `bannerExternalUrl` alone is insufficient.
 
-Important residual risk: the public Core repository cannot intercept native provider GitHub tools by itself. Actual platform-level prevention requires a host/tool dispatcher to route mutation calls through the guard. Until then, this is **executable contract enforcement available for integration**, not universal native-tool interception.
+Watermark set/unset is **not fully live-gated**. Because prior watermark state cannot be reliably read, unmanaged state fails closed unless the Creator explicitly authorizes destructive handling.
 
-The v0.15 wrong-tool regression remains preserved as evidence of why instruction-only safeguards are insufficient.
+## Verification / diagnostics
 
-### 2. Skill overlap / routing consolidation
+The reusable mutation-debugging path is:
 
-`state/skill-consolidation.json` now classifies every live skill entrypoint with one of KEEP / TUNE / MERGE / REMOVE / NEEDS_EVIDENCE and records the primary overlap boundary.
+`dedicated MCP -> bounded Gateway -> stage-aware D1 audit -> exact vendor error -> minimal patch -> one bounded retry -> readback -> checkpoint`
 
-Current classification counts:
-- KEEP: 18
-- TUNE: 1 (`skill-acquisition`, because the expansion campaign is complete and acquisition should now be gap-driven)
-- NEEDS_EVIDENCE: 8
-- MERGE: 0
-- REMOVE: 0
+Audit evidence may include bounded stage/vendor diagnostics but no secrets/tokens.
 
-No skill was merged or removed without representative outcome evidence.
+Contract coverage includes playlist insert/replacement/rollback/fail-closed cases, caption lifecycle, banner rejection and valid apply/readback, watermark unmanaged protection, and secret-free mutation-audit diagnostics.
 
-### 3. Executable continuity checkpoint
+## Known source-parity risk
 
-`state/checkpoint.schema.json` and `state/current-checkpoint.json` now provide a machine-readable checkpoint carrying:
-- accepted state;
-- evidence;
-- unresolved risks;
-- next executable step;
-- owner;
-- last verified revision.
+Live hardening evidence reported a later deployed Gateway than the public checked-in source snapshot. The repository snapshot still self-identifies as Gateway `0.3.0`, while the latest externally verified deployment evidence in this checkpoint reports `0.7.35`. Exact deployed/source equivalence is not claimed.
 
-`python3 scripts/validate_runtime_contracts.py` validates this checkpoint shape, skill-classification coverage, and GitHub mutation-guard cases in CI.
+## Next checkpoint
 
-## Consolidation / benchmark evidence
-
-Existing benchmark evidence is preserved rather than normalized away:
-- GH-01: clean atomic milestones exist, while v0.15 remains regression evidence;
-- GH-02: PASS;
-- RS-01: PARTIAL;
-- RS-02: PASS;
-- LH-01 / LH-02: still need representative continuity/recovery work;
-- several expanded skills remain contract-validated but not outcome-validated.
-
-No new universal efficiency percentage is claimed by this hardening release.
-
-## Next executable phase
-
-1. Integrate the mutation guard into any controllable GitHub tool dispatcher / harness surface so a locked mode can actually block disallowed provider calls before execution.
-2. Shadow-score ordinary real work for the eight `NEEDS_EVIDENCE` skills and update classifications only from observed outcomes.
-3. Tune Skill Acquisition routing so it activates for explicit acquisition work or a demonstrated capability gap, not roadmap momentum.
-4. Exercise the machine-readable checkpoint during a real new-chat/resume cycle for LH-01/LH-02 evidence.
-5. Keep MERGE/REMOVE at zero until evidence shows duplicated ownership or context/process cost that exceeds value.
+`YOUTUBE-SOURCE-SYNC-01`: recover and compare deployed Gateway/MCP source with the public repo, import only the verified missing implementation delta, then add managed banner/watermark baseline + rollback before promoting watermark lifecycle.

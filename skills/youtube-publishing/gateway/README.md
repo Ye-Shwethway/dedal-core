@@ -1,131 +1,54 @@
 # DEDAL YouTube Gateway
 
-Production-minded Cloudflare control plane with a separate VPS byte-transfer runner.
-Video bodies go from the runner directly to YouTube and never through the Worker.
+Production-minded Cloudflare control plane with a separate VPS byte-transfer runner. Video bodies go from the runner directly to YouTube and never through the Worker.
 
-## Deployed resources
+## Deployment and source identity
 
 - Worker: `dedal-youtube-gateway`
 - Domain: `https://youtube.drthorne.uk`
-- D1: `dedal-youtube-gateway-prod` (binding `DB`)
-- API: `v1`
+- D1: `dedal-youtube-gateway-prod` (`DB`)
+- API family: `v1`
+- Latest external hardening evidence in the 2026-09-16 checkpoint reports deployed Gateway `0.7.35`.
+- The source snapshot currently committed under `gateway/src/` still identifies itself as `0.3.0`. Treat deployed/source equivalence as **unverified** until `YOUTUBE-SOURCE-SYNC-01` compares the deployed Worker source against this repository.
 
-No KV, R2, Queue, Durable Object, Access application, Pages project, or Tunnel was
-added for this slice.
+Do not “fix” this identity gap by changing a version constant without recovering the corresponding implementation.
 
 ## Security contract
 
 - Pre-register alias + exact `channel_id` before OAuth.
-- OAuth uses 30-minute preview-safe connect tickets, one-use state, browser-bound HttpOnly cookie,
-  PKCE S256, and ten-minute expiration.
-- Callback calls `channels.list(mine=true)`; mismatch stores no credential.
-- Refresh tokens and resumable session URIs are AES-256-GCM ciphertext in dedicated
-  D1 vault tables. The encryption key is a Worker Secret.
-- Runner uses a separate bearer secret and receives no Google token.
-- Every mutation rechecks the authenticated channel.
-- Jobs are idempotent and private-first. Broader visibility/scheduling needs explicit
-  per-job intent. Success requires remote ID/channel/title/privacy read-back.
+- OAuth state is browser-bound, short-lived, and single-use; credentials remain encrypted at rest.
+- Every mutation rechecks authenticated channel ownership.
+- Prefer dedicated typed MCP/Gateway routes over generic passthrough mutation.
+- Consequential writes require explicit action intent; deletes/unsets require explicit destructive intent; visibility/scheduling retain their specific intent gates.
+- Read back mutations whenever YouTube exposes readable state.
+- Replace-style media requires recoverable managed state before destructive replacement.
+- If prior state cannot be read/recovered, fail closed unless the Creator explicitly authorizes unmanaged destructive handling.
+- D1 audit diagnostics must be sufficient for vendor debugging without persisting secrets/tokens.
 
-D1 encryption is the smallest zero-subscription dynamic-token design. Compromise of
-both D1 ciphertext and the Worker KEK exposes tokens; key loss makes them
-unrecoverable. Rotation requires re-encryption or reauthorization. Use an external
-KMS later only if the threat model justifies it.
+## Production-hardened mutation families
 
-## Manual secrets
+Live evidence covers:
+- private resumable upload and recovery;
+- playlist membership;
+- thumbnail upload;
+- caption list/insert/download/update/delete lifecycle;
+- playlist-image insert/readback and managed replacement;
+- channel-banner valid upload/apply/readback plus full-resolution restoration.
 
-In **Cloudflare Dashboard → Workers & Pages → dedal-youtube-gateway → Settings →
-Variables and Secrets**, add each as type **Secret**:
+Playlist-image replacement uses managed state and delete -> insert -> readback rather than relying on `playlistImages.update`. Banner rollback requires a recoverable/full-resolution source; display-oriented `bannerExternalUrl` alone is not sufficient.
 
-- `GOOGLE_CLIENT_ID`
-- `GOOGLE_CLIENT_SECRET`
-- `TOKEN_ENCRYPTION_KEY_B64` — exactly 32 random bytes, base64/base64url encoded
-- `ADMIN_API_TOKEN` — independent random bearer token
-- `RUNNER_API_TOKEN` — a different independent random bearer token
+Watermark set/unset remains exposed but not fully live-gated because prior watermark state cannot be reliably read. Unmanaged watermark state must fail closed.
 
-Do not put values in chat, GitHub, D1, screenshots, or shell history. Local generation:
+## Stage-aware mutation audit
 
-```bash
-openssl rand -base64 32
-openssl rand -hex 32
-openssl rand -hex 32
-```
+For hard failures use:
 
-## First real channel
+`MCP -> bounded Gateway route -> stage-aware D1 audit -> vendor error extraction -> minimal patch -> one bounded retry -> readback`
 
-1. `GET /health` must report `configured: true`.
-2. Copy the exact intended channel ID from YouTube Studio; never infer from email.
-3. Pre-register it:
+Capture bounded fields such as action, outcome, resource identifiers, stage, error code, vendor status/reason/message/location/location type, and safe resumable sub-stage diagnostics. Never capture OAuth tokens, bearer secrets, cookies, or raw credentials.
 
-```bash
-curl https://youtube.drthorne.uk/v1/channels \
-  -H "Authorization: Bearer $ADMIN_API_TOKEN" \
-  -H "Content-Type: application/json" \
-  --data '{"alias":"archive","channel_id":"UC_REPLACE_WITH_EXACT_ID"}'
-```
+See `../references/mutation-hardening-and-recovery.md` and `../CURRENT_CHECKPOINT.md` for current production lessons.
 
-4. Mint a 30-minute URL:
+## Source-sync limitation
 
-```bash
-curl -X POST https://youtube.drthorne.uk/v1/channels/archive/connect-ticket \
-  -H "Authorization: Bearer $ADMIN_API_TOKEN"
-```
-
-5. Open returned `connect_url`, choose the intended YouTube identity, and consent.
-6. `GET /v1/channels/archive` must show the exact ID, connected, and enabled.
-7. Separately test a wrong expected ID: callback must return 409 and store no token.
-8. Create one private job and run the VPS runner.
-9. Accept only `verified` plus matching remote read-back.
-
-## API
-
-Admin bearer: `POST /v1/channels`, `GET /v1/channels`,
-`GET /v1/channels/:alias`, `POST /v1/channels/:alias/connect-ticket`,
-`POST /v1/upload-jobs`, `GET /v1/upload-jobs/:id`.
-
-Browser: `GET /oauth/connect/:alias?ticket=...`,
-`GET /oauth/google/callback`.
-
-Runner bearer: `POST /v1/upload-jobs/:id/claim`,
-`POST /v1/upload-jobs/:id/progress`, `POST /v1/upload-jobs/:id/complete`.
-Runner calls claim with `{"inspect_only":true}` before resolving the source.
-
-Example job:
-
-```json
-{
-  "idempotency_key": "archive:sha256:...",
-  "profile_alias": "archive",
-  "source_type": "local_file",
-  "source_locator": "/srv/videos/example.mp4",
-  "source_fingerprint": "sha256:...",
-  "title": "Example",
-  "made_for_kids": false,
-  "requested_privacy": "private"
-}
-```
-
-Public/unlisted needs `explicit_visibility_intent: true`. `publish_at` also needs
-`explicit_publication_intent: true` and private upload status.
-
-## VPS runner
-
-Requires Python 3.10+ and standard library only. Store the scoped runner token in the
-service environment, then:
-
-```bash
-export DEDAL_YOUTUBE_RUNNER_TOKEN='set-privately'
-python3 runner/dedal_youtube_uploader.py --job-id JOB_UUID
-```
-
-Direct URLs download resumably to the runner state directory. Local paths are read
-in place. A `google_drive` source uses the Drive file ID as its locator and resolves
-through the existing VPS media gateway's authenticated `rclone backend copyid`
-route; no YouTube credential is placed on that host. The runner computes SHA-256
-before claiming the job, and the gateway atomically locks that fingerprint before
-creating a resumable session. It then queries YouTube's confirmed offset, uploads
-8 MiB chunks, reports progress, and asks the gateway for remote verification.
-It never auto-restarts an expired/ambiguous session because a lost final response
-could otherwise silently duplicate a video.
-
-Thumbnail, playlist, video-update, analytics, and replacement-session endpoints are
-deferred until the private-upload slice is proven.
+This public repository is the durable Core, but the deployed Worker advanced during live hardening faster than the checked-in source snapshot. Until the deployed source is recovered and compared, use this repository for contracts/checkpoints and use the live service only as runtime evidence; do not claim repo source parity.

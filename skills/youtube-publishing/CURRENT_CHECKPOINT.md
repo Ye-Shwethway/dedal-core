@@ -18,6 +18,8 @@ Raw deployed Worker exports, credentials, Creator-specific resource identifiers,
 
 Channel-management outcome validation now covers playlist `private -> unlisted -> private`, playlist `private -> public -> private`, video `private -> unlisted -> private`, video `private -> public -> private`, and private-video scheduled publication with independent read-back plus schedule cancellation. Playlist updates preserve required snippet metadata, and video visibility/scheduling read-back tolerates bounded YouTube propagation delay without silently claiming unverified completion.
 
+Aggregation-layer outcome validation also passed with the existing remote MCP preserved as the semantic/tool-schema source. Through the aggregation surface, DEDAL discovered and invoked the dedicated playlist/video visibility tools, independently read back authoritative YouTube status through the bounded Data API bridge, and received Creator-side YouTube Studio confirmation of the resulting public visibility. This validates the tested aggregation path for these operations; availability and fidelity remain `verify_per_session` runtime facts rather than permanent Core assumptions.
+
 ## Version identity
 
 - Public Gateway source: `0.4.1`

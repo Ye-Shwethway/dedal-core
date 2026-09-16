@@ -26,6 +26,8 @@ Potentially committed mutations require read-back before retry when repeating th
 
 Cloudflare and integration aggregation are runtime execution surfaces whose availability and fidelity must be verified per session. Core does not permanently assume a specific connector or broker is installed.
 
+A representative aggregation-layer YouTube write path has now been outcome-validated without replacing the dedicated MCP: dedicated visibility mutations passed through the aggregation layer, authoritative API read-back confirmed the resulting state, and Creator-side YouTube Studio inspection independently confirmed the public visibility outcome. This is evidence for the tested path, not a permanent guarantee that any aggregator or connector will be present or transport-equivalent in future sessions.
+
 ## Next checkpoint
 
 `CLOUDFLARE-OPS-OUTCOME-01`: exercise the hardened workflow in representative Worker/configuration maintenance and record only observed regressions or missing recovery semantics.

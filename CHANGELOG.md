@@ -19,7 +19,8 @@ All meaningful DEDAL Core architectural and behavioral changes should be recorde
 ### Fixed
 - YouTube playlist visibility updates now preserve mandatory snippet metadata and include the required `snippet` part, fixing `400 unexpectedPart` failures on privacy-only changes.
 - Video privacy and scheduling mutations now use bounded eventual-consistency read-back; privacy changes also verify scheduled `publishAt` state is cleared, while accepted schedules can report `accepted_pending_readback` instead of a false failure.
-- Live outcome validation covered private/unlisted/public round-trips and schedule creation/cancellation, with final controlled assets restored to private.
+- Live outcome validation covered private/unlisted/public round-trips and schedule creation/cancellation, with controlled round-trip state restored during the test before any later Creator-directed publication decisions.
+- The existing DEDAL YouTube MCP was also outcome-validated through an aggregation layer for dedicated playlist/video public-visibility mutations, authoritative Data API read-back, and Creator-side YouTube Studio confirmation; the aggregator remains a runtime execution surface rather than the semantic source of truth.
 
 ## 0.11.0 â 2026-09-14
 

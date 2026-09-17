@@ -1,4 +1,4 @@
-# YouTube Publishing checkpoint â 2026-09-16
+# YouTube Publishing checkpoint Ã¢ÂÂ 2026-09-16
 
 ## Phase status
 
@@ -62,7 +62,7 @@ Runtime Contracts, YouTube Publishing hardening, the `youtube-source-sync` contr
 
 - Output-schema compatibility hardening: chunk acknowledgements now retain the existing `youtube_media_stage` required response fields and set `pending: true`; only finalize returns a usable signed URL. Target Gateway 0.7.50.
 
-## Thumbnail Workflow — CLOSED
+## Thumbnail Workflow â CLOSED
 
 Status: CLOSED / production-validated.
 
@@ -74,9 +74,19 @@ Closure criteria met:
 - thumbnail mutation, authoritative read-back, cleanup, and experiment/confounder recording are operational;
 - live Shadow and Bone validation passed end-to-end;
 - future work should reopen this section only for a contract gap, vendor/API change, or materially new thumbnail capability.
-## Video Rating Support — bounded bridge
+## Video Rating Support â bounded bridge
 
 The YouTube Data API allowlist already includes `videos.getRating` and `videos.rate`. A live read-only `getRating` call succeeded for the connected channel identity. A dedicated 56-action MCP alias deployment was tested but caused the existing aggregation OAuth connection to return 401; it was immediately rolled back to the known-good MCP `0.8.4` / 54-action deployment.
 
 Current supported path is therefore the existing allowlisted `youtube_data_api` bridge: `getRating` is read-only; `rate` accepts only `like`, `dislike`, or `none` and remains behind the bridge's explicit-action gate. Dedicated rating aliases are deferred until the production MCP auth source can be reconciled without invalidating existing clients. No live rating write was performed during this extension.
+
+## YouTube Reporting / Measurement Transport — CLOSED
+
+Status: CLOSED / production-validated transport.
+
+The first generated `DEDAL SEO Reach Basic` (`channel_reach_basic_a1`) report was downloaded through the authenticated bounded Reporting bridge. The live CSV schema was verified as `date,channel_id,video_id,video_thumbnail_impressions,video_thumbnail_impressions_ctr`; the payload was complete (`truncated: false`) and demonstrated that scheduled reach files can arrive several days after their measured window.
+
+Gateway `0.7.51` adds bounded `reports.download` support with authenticated vendor fetch, report metadata, a 2,000,000-character response cap, and an explicit truncation flag. User-facing Reach reports must enrich report `video_id` rows with live-resolved video titles whenever readable, retain the ID for traceability, and never treat CTR zero as zero views. Historical pre-publication windows validate the pipeline but are not evidence for a later video experiment.
+
+With metadata/publishing, thumbnail, captions, playlists, comments, ratings, Analytics/Reporting transport, ownership/intent gates, read-back, and source-sync boundaries all covered at the current scope, YouTube Publishing is CLOSED / capability-complete. Reopen only for a contract defect, vendor/API change, production regression, or Creator-requested materially new capability. Longitudinal SEO measurement remains observation work and does not reopen Publishing.
 

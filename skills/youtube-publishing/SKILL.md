@@ -96,12 +96,19 @@ Use YouTube SEO for query/entity research, Search/Browse/Suggested strategy, pac
 - `references/direct-api-and-auth.md`
 - `references/mutation-hardening-and-recovery.md`
 - `references/thumbnail-media-staging.md`
+- `references/reach-reporting.md`
 - `channel-profiles.example.json`
 - `scripts/youtube_channel_ops.py`
 - `gateway/README.md`
 - `references/cloudflare-gateway-architecture.md`
 - `CURRENT_CHECKPOINT.md`
 - `mcp/README.md`
+## Reach-report consumption
+
+For scheduled Reach reports, follow `references/reach-reporting.md`. The validated `channel_reach_basic_a1` schema exposes `video_thumbnail_impressions` and `video_thumbnail_impressions_ctr` keyed by `date`, `channel_id`, and `video_id`. Download payloads only through the bounded Reporting bridge.
+
+Any user-facing report MUST enrich video IDs with live-resolved video titles whenever available: show the video title as the primary label, retain the video ID for traceability, and write `title unavailable` if lookup fails. Never make the Creator identify a row from an opaque video ID when the title can be resolved. CTR `0` is not equivalent to zero video views. Respect Reporting lag and measurement-window availability states; later historical files may backfill a matching window but must not be presented as if they were available earlier.
+
 ## Video rating interaction
 
 YouTube exposes account-level video rating operations even though comment-like writes are not available through the Data API. Until dedicated production-safe aliases are live, route rating requests through the allowlisted Data API bridge only:

@@ -2,7 +2,7 @@
   "version": 1,
   "checkpoint": "YOUTUBE-SOURCE-SYNC-01",
   "deployed_reference": {
-    "gateway": "0.7.50",
+    "gateway": "0.7.51",
     "mcp": "0.8.4"
   },
   "expected_mcp_tool_count": 54,
@@ -92,7 +92,7 @@
       "id": "YT-SYNC-09",
       "name": "mcp surface parity",
       "expect": [
-        "52_unique_tools",
+        "54_unique_tools",
         "dedicated_media_tools",
         "dedicated_seo_analytics_helpers",
         "generic_bridge_boundary"
@@ -110,7 +110,7 @@
       ]
     },
     {
-      "id": "YT-SYNC-10",
+      "id": "YT-SYNC-10B",
       "name": "search research controls",
       "expect": [
         "region_code",
@@ -143,6 +143,18 @@
         "upload_stage",
         "bounded_failure_audit",
         "readback_before_blind_retry"
+      ]
+    },
+    {
+      "id": "YT-SYNC-13",
+      "name": "reach report payload and presentation",
+      "expect": [
+        "reports_download",
+        "bounded_csv_payload",
+        "reach_header_mapping",
+        "video_title_enrichment",
+        "lag_aware_windows",
+        "ctr_not_views"
       ]
     }
   ]

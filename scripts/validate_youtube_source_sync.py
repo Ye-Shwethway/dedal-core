@@ -7,10 +7,14 @@ GATEWAY = ROOT / "skills/youtube-publishing/gateway/src/index.js"
 MCP = ROOT / "skills/youtube-publishing/mcp/src/index.js"
 MIGRATION = ROOT / "skills/youtube-publishing/gateway/migrations/0004_playlist_image_state.sql"
 CONTRACT = ROOT / "evals/youtube-source-sync/contract-v1.json"
+PUBLISHING_SKILL = ROOT / "skills/youtube-publishing/SKILL.md"
+REACH_REFERENCE = ROOT / "skills/youtube-publishing/references/reach-reporting.md"
 
 gateway = GATEWAY.read_text()
 mcp = MCP.read_text()
 contract = json.loads(CONTRACT.read_text())
+publishing_skill = PUBLISHING_SKILL.read_text()
+reach_reference = REACH_REFERENCE.read_text()
 
 required_gateway = [
     "fetchExternalMedia", "validateExternalHttpsUrl", "googleMultipartUpload",
@@ -19,7 +23,7 @@ required_gateway = [
     "playlist_image_replace_requires_managed_baseline", "playlist.image_rollback",
     "caption.insert", "caption.update", "caption.delete",
     "video.thumbnail_set", "stage: \"media\"", "stage: \"upload\"", "channel.banner_set", "channel.watermark_set",
-    "youtubeDataApi", "youtubeReportingApi", "youtubeAnalyticsApi",
+    "youtubeDataApi", "youtubeReportingApi", "youtubeAnalyticsApi", "youtube_reporting_download_url_missing", "youtube_reporting_download_failed",
     "resumable_init", "resumable_media", "google_location_type",
     "verifyVideoStatusEventually", "accepted_pending_readback",
 ]
@@ -104,4 +108,20 @@ if 'forMine: a.type === "video"' in mcp:
 
 print("youtube source sync contract: PASS")
 print(f"MCP tools: {len(tools)}")
-print("deployed reference: Gateway 0.7.50 / MCP 0.8.4")
+print(f"deployed reference: Gateway {contract['deployed_reference']['gateway']} / MCP {contract['deployed_reference']['mcp']}")
+
+reach_markers = [
+    'operation === "download"',
+    'youtube_reporting_download_url_missing',
+    'youtube_reporting_download_failed',
+    'maxChars = 2000000',
+]
+for marker in reach_markers:
+    if marker not in gateway:
+        raise SystemExit(f"missing Reporting download marker: {marker}")
+for marker in [
+    'video_thumbnail_impressions', 'video_thumbnail_impressions_ctr',
+    'title unavailable', 'video title', 'CTR `0`',
+]:
+    if marker not in publishing_skill and marker not in reach_reference:
+        raise SystemExit(f"missing Reach reporting/presentation marker: {marker}")

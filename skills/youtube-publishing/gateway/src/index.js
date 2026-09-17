@@ -1,5 +1,5 @@
 
-const VERSION = "0.4.9";
+const VERSION = "0.4.10";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -790,7 +790,7 @@ async function route(request, env, requestId) {
       ).bind(identity.title, credentialRef, now, alias, identity.id),
     ]);
     await audit(env, "oauth", "channel_profile.bind", alias, identity.id, null, "success", {});
-    return html(`Connected profile “${escapeHtml(alias)}” to verified YouTube channel “${escapeHtml(identity.title)}” (${escapeHtml(identity.id)}). You may close this page.`, 200);
+    return html(`Connected profile â${escapeHtml(alias)}â to verified YouTube channel â${escapeHtml(identity.title)}â (${escapeHtml(identity.id)}). You may close this page.`, 200);
   }
 
   if (request.method === "POST" && path === "/v1/upload-jobs") {
@@ -1508,6 +1508,18 @@ async function youtubeReportingApi(accessToken, input) {
   else if (resource === "jobs" && operation === "delete") { if (input.explicit_destructive_intent !== true) throw httpError(409, "explicit_destructive_intent_required"); if (!input.job_id) throw httpError(400, "job_id_required"); method = "DELETE"; path = "/v1/jobs/" + encodeURIComponent(String(input.job_id)); }
   else if (resource === "reports" && operation === "list") { if (!input.job_id) throw httpError(400, "job_id_required"); path = "/v1/jobs/" + encodeURIComponent(String(input.job_id)) + "/reports"; }
   else if (resource === "reports" && operation === "get") { if (!input.job_id || !input.report_id) throw httpError(400, "report_ids_required"); path = "/v1/jobs/" + encodeURIComponent(String(input.job_id)) + "/reports/" + encodeURIComponent(String(input.report_id)); }
+  else if (resource === "reports" && operation === "download") {
+    if (!input.job_id || !input.report_id) throw httpError(400, "report_ids_required");
+    const metaPath = "/v1/jobs/" + encodeURIComponent(String(input.job_id)) + "/reports/" + encodeURIComponent(String(input.report_id));
+    const meta = await googleJson("https://youtubereporting.googleapis.com" + metaPath, accessToken, "youtube_reporting_api_failed");
+    const downloadUrl = String(meta?.downloadUrl || "");
+    if (!downloadUrl) throw httpError(502, "youtube_reporting_download_url_missing");
+    const response = await fetch(downloadUrl, { headers: { Authorization: `Bearer ${accessToken}` } });
+    if (!response.ok) { const data = await response.json().catch(() => ({})); throw googleHttpError(response.status, "youtube_reporting_download_failed", data); }
+    const text = await response.text();
+    const maxChars = 2000000;
+    return { report: { id: meta.id || String(input.report_id), jobId: meta.jobId || String(input.job_id), startTime: meta.startTime || null, endTime: meta.endTime || null, createTime: meta.createTime || null }, content_type: response.headers.get("content-type") || "text/csv", content: text.slice(0, maxChars), truncated: text.length > maxChars, char_count: text.length };
+  }
   else throw httpError(400, "reporting_operation_not_allowed");
   const query = new URLSearchParams();
   for (const [key, value] of Object.entries(params)) if (value !== undefined && value !== null) query.set(key, Array.isArray(value) ? value.join(",") : String(value));

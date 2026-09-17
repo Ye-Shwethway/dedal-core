@@ -1,4 +1,4 @@
-const VERSION = "0.2.5";
+const VERSION = "0.2.6";
 const ISSUER = "https://mcp.youtube.drthorne.uk";
 const RESOURCE = `${ISSUER}/mcp`;
 const GATEWAY = "https://youtube.drthorne.uk";
@@ -80,8 +80,7 @@ async function route(request, env) {
   if (request.method === "GET" && url.pathname === "/.well-known/oauth-protected-resource") return json({ resource: RESOURCE, authorization_servers: [ISSUER], scopes_supported: [SCOPE] });
   if (request.method === "GET" && url.pathname === "/.well-known/oauth-authorization-server") return json({ issuer: ISSUER, authorization_endpoint: `${ISSUER}/oauth/authorize`, token_endpoint: `${ISSUER}/oauth/token`, registration_endpoint: `${ISSUER}/oauth/register`, response_types_supported: ["code"], grant_types_supported: ["authorization_code", "refresh_token"], code_challenge_methods_supported: ["S256"], token_endpoint_auth_methods_supported: ["none"], scopes_supported: [SCOPE] });
   if (request.method === "POST" && url.pathname === "/oauth/register") return registerClient(request, env);
-  if (request.method === "GET" && url.pathname === "/oauth/authorize") return authorizationForm(url, env);
-  if (request.method === "POST" && url.pathname === "/oauth/authorize") return approveAuthorization(request, env);
+  if (request.method === "GET" && url.pathname === "/oauth/authorize") return authorizeAndRedirect(url, env);
   if (request.method === "POST" && url.pathname === "/oauth/token") return exchangeToken(request, env);
   if (url.pathname === "/mcp" && request.method === "POST") return mcp(request, env);
   throw failure(404, "not_found");
@@ -96,19 +95,14 @@ async function registerClient(request, env) {
   return json({ client_id: clientId, client_id_issued_at: Math.floor(Date.now() / 1000), redirect_uris: redirects, token_endpoint_auth_method: "none", grant_types: ["authorization_code", "refresh_token"], response_types: ["code"] }, 201);
 }
 
-async function authorizationForm(url, env) {
+async function authorizeAndRedirect(url, env) {
   const auth = await validateAuthorization(url.searchParams, env);
-  const hidden = Object.entries(auth).map(([k, v]) => `<input type="hidden" name="${escape(k)}" value="${escape(v)}">`).join("");
-  return html(`<h1>Authorize DEDAL YouTube MCP</h1><p>This grants access only to the bounded DEDAL YouTube Gateway tools. Public/unlisted publication still requires explicit intent.</p><form method="post" action="/oauth/authorize">${hidden}<button type="submit">Authorize</button></form>`);
-}
-
-async function approveAuthorization(request, env) {
-  const form = await request.formData();
-  const auth = await validateAuthorization(form, env);
   const now = new Date().toISOString();
   const code = random(32), codeHash = await sha256(code), expires = new Date(Date.now() + 5 * 60_000).toISOString();
   await env.DB.prepare("INSERT INTO mcp_auth_codes(code_hash,client_id,redirect_uri,code_challenge,resource,scope,expires_at,consumed_at,created_at) VALUES(?,?,?,?,?,?,?,NULL,?)").bind(codeHash, auth.client_id, auth.redirect_uri, auth.code_challenge, auth.resource, auth.scope, expires, now).run();
-  const redirect = new URL(auth.redirect_uri); redirect.searchParams.set("code", code); redirect.searchParams.set("state", auth.state);
+  const redirect = new URL(auth.redirect_uri);
+  redirect.searchParams.set("code", code);
+  redirect.searchParams.set("state", auth.state);
   return new Response(null, { status: 302, headers: { Location: redirect.toString(), "Cache-Control": "no-store" } });
 }
 

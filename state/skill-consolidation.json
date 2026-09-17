@@ -178,6 +178,12 @@
       "overlap": "Scheduled/conditional execution only."
     },
     {
+      "skill": "self-improvement",
+      "decision": "KEEP",
+      "evidence_level": "representative-regression-plus-contract-validation",
+      "overlap": "Owns cross-layer correction/regression learning closure; Agent Engineering owns harness design, Reliability owns incidents, Quality owns independent verification, Skill Acquisition owns external pattern research, and domain owners implement behavior."
+    },
+    {
       "skill": "skill-acquisition",
       "decision": "TUNE",
       "evidence_level": "campaign-proven-explicit-gap-reopened",

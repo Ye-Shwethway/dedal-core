@@ -83,3 +83,22 @@ Examples:
 Periodically remove stale rules, duplicated instructions, obsolete capability claims, and workflow complexity that no longer provides value.
 
 Self-improvement includes simplification.
+## Learning Closure Principle
+
+A material repair is not durably complete merely because the active task works again. For corrections, regressions, production hotfixes, or reusable better procedures, reconcile all applicable sinks before closure:
+
+1. verified runtime/user-path repair;
+2. canonical source capable of reproducing the repair;
+3. regression guard or explicit not-testable rationale;
+4. durable learning at the narrowest correct public/private scope;
+5. continuity/checkpoint state when future work depends on the change;
+6. independent verification and a rollback/recovery path.
+
+When live behavior is changed outside canonical source, create explicit **source-sync debt**. The incident may be mitigated but is not durably closed until that debt is cleared.
+
+Use `skills/self-improvement/` to orchestrate this loop. The skill may automatically detect/capture learning candidates, but it never expands authority or grants itself permission to rewrite governing state.
+
+## Recurrence Principle
+
+If the same failure returns after it was supposedly solved, first inspect whether the previous learning loop failed to reconcile source, tests, lessons, or continuity state. A repeated known failure is evidence of incomplete closure until proven otherwise.
+

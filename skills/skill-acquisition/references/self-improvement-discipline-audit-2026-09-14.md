@@ -42,3 +42,9 @@ DEDAL already separates design rationale, contract validation, and outcome valid
 - Skill Acquisition remains the intake/audit path for external patterns.
 - Add an executable self-improvement contract to CI.
 - Evidence level: external-pattern audit plus contract validation only; real-task DEDAL improvement remains unmeasured.
+## Superseded decision note — 2026-09-18
+
+The 2026-09-14 `New skill: NO` decision was valid for the evidence available then, but it is no longer the current routing decision. A later representative DEDAL regression showed that controlled self-change owned only by Agent Engineering did not enforce cross-layer learning closure: a live repair diverged from canonical source/regression coverage and retired behavior was later reintroduced.
+
+Current decision: a bounded `self-improvement` meta-skill is justified to orchestrate correction/regression closure across domain owners, Agent Engineering, Reliability, Quality, source control, continuity, and private/public learning. This does **not** authorize unbounded autonomous self-rewrite. See `skills/self-improvement/`.
+

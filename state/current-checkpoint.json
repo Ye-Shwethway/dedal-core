@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.31.3",
+  "version": "0.32.0",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -14,7 +14,8 @@
     "Creator selection remains explicit through SELECT/MAYBE/PASS/HOLD/NEVER and channel/Creator-specific candidate learning remains in the private operational overlay.",
     "Copyright/reuse handling is risk triage only; Candidate Video Finder does not claim legal clearance, copyright safety or guaranteed fair use.",
     "Creator Google Drive video masters follow rough/source -> sandbox edit -> Edited Videos -> verified YouTube publication -> Uploaded YT Videos; archive movement occurs only after authoritative publishing verification.",
-    "YouTube upload orchestration uses a persistent isolated outbound-polling runner: normal upload submission auto-picks queued jobs without per-job GitHub Actions, while idempotency, ownership, private-first intent gates, bounded read-back, and verification remain authoritative."
+    "YouTube upload orchestration uses a persistent isolated outbound-polling runner: normal upload submission auto-picks queued jobs without per-job GitHub Actions, while idempotency, ownership, private-first intent gates, bounded read-back, and verification remain authoritative.",
+    "DEDAL Self-Improvement is an independently routable meta-faculty for correction/regression learning closure: durable fixes require applicable runtime repair, canonical-source reconciliation, regression coverage, correctly scoped durable learning, continuity state, and independent verification before full closure."
   ],
   "evidence": [
     {
@@ -46,6 +47,11 @@
       "id": "youtube-upload-orchestration-v2-contract-2026-09-18",
       "kind": "architecture_and_regression_contract",
       "status": "staged_for_validation"
+    },
+    {
+      "id": "self-improvement-learning-closure-v2",
+      "kind": "architecture_and_regression_contract",
+      "status": "staged_for_validation"
     }
   ],
   "unresolved_risks": [
@@ -57,13 +63,13 @@
     "Google Drive folder names and IDs are operational/private state; public Core records only the generic lifecycle and must resolve exact IDs live before moves."
   ],
   "next_executable_step": {
-    "id": "YOUTUBE-UPLOAD-ORCHESTRATION-V2-LIVE",
-    "action": "Validate persistent runner deployment, then exercise one disposable private upload end-to-end without per-job GitHub Actions."
+    "id": "SELF-IMPROVEMENT-V1-VALIDATE",
+    "action": "Validate the Self-Improvement skill and closure contract in CI, then run one representative regression postmortem against the no-page OAuth recurrence incident as outcome evidence."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "1bbc9cc4eb67adab38fbfa6cf81935931f92ae2c",
-    "relation": "base revision inspected before upload-orchestration-v2 implementation; update after validated merge"
+    "sha": "2a74441d22648f557bcba486eef06a7cb7b4f131",
+    "relation": "base revision inspected before self-improvement-hardening-v1 implementation; update after validated merge"
   }
 }

@@ -4,6 +4,22 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.32.0 — 2026-09-18
+
+### Added
+- Dedicated `self-improvement` / `self-correction` meta-skill for corrections, regressions, repeated failures, live/canonical drift, and verified better recurring procedures.
+- Machine-validated learning-closure contract covering runtime repair, canonical-source sync, regression guards, durable learning sinks, continuity state, independent verification, and unresolved debt.
+- Source-sync debt and recurrence rules so production-only hotfixes and repeated known failures cannot be treated as durably closed by memory alone.
+
+### Changed
+- DEDAL Improvement Protocol now distinguishes immediate repair from durable learning closure and explicitly requires canonical-source reconciliation for material fixes.
+- Routing separates Self-Improvement orchestration from Agent Engineering, Reliability, Quality Engineering, Skill Acquisition, Knowledge/Memory, and domain implementation owners.
+- Runtime Contracts now validate both controlled self-improvement experiments and the new learning-closure contract.
+
+### Evidence
+- Change is justified by representative real regression evidence where previously repaired live behavior diverged from canonical source and was later reintroduced during refactoring.
+- OpenClaw/self-improving-agent patterns were adapted for trigger/capture/repair-loop ideas; DEDAL retains stricter authority, source-of-truth, public/private, verification, and promotion boundaries.
+
 ## 0.31.3 — 2026-09-18
 
 ### Added

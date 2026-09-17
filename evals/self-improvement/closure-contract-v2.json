@@ -1,0 +1,22 @@
+{
+  "schema_version": 2,
+  "policy": {
+    "durability_values": ["transient", "durable"],
+    "decisions": ["retain", "revert", "inconclusive", "transient_close"],
+    "durable_required_fields": ["id", "trigger", "durability", "owner", "repair", "canonical_sync", "regression_guard", "learning", "continuity", "verification", "decision", "unresolved_debt"],
+    "require_runtime_repair_verification": true,
+    "require_canonical_sync_for_durable_retain": true,
+    "require_regression_guard_or_not_testable_reason": true,
+    "require_durable_learning_sink": true,
+    "require_independent_verification": true,
+    "require_empty_debt_for_durable_retain": true
+  },
+  "cases": [
+    {"id":"SIC-01","accept":true,"record":{"id":"r1","trigger":"previously fixed behavior regressed","durability":"durable","owner":"domain-owner","repair":{"status":"fixed","verified":true},"canonical_sync":{"status":"synced"},"regression_guard":{"status":"added"},"learning":{"status":"captured","scope":"correct"},"continuity":{"status":"updated"},"verification":{"independent":true},"decision":"retain","unresolved_debt":[]}},
+    {"id":"SIC-02","accept":false,"record":{"id":"r2","trigger":"live hotfix works","durability":"durable","owner":"domain-owner","repair":{"status":"fixed","verified":true},"canonical_sync":{"status":"pending"},"regression_guard":{"status":"added"},"learning":{"status":"captured","scope":"correct"},"continuity":{"status":"updated"},"verification":{"independent":true},"decision":"retain","unresolved_debt":["source-sync"]}},
+    {"id":"SIC-03","accept":false,"record":{"id":"r3","trigger":"regression","durability":"durable","owner":"domain-owner","repair":{"status":"fixed","verified":true},"canonical_sync":{"status":"synced"},"regression_guard":{"status":"missing"},"learning":{"status":"captured","scope":"correct"},"continuity":{"status":"updated"},"verification":{"independent":true},"decision":"retain","unresolved_debt":[]}},
+    {"id":"SIC-04","accept":true,"record":{"id":"r4","trigger":"transient upstream timeout","durability":"transient","owner":"domain-owner","decision":"transient_close","no_promotion_reason":"one-off upstream timeout; no durable procedure changed"}},
+    {"id":"SIC-05","accept":true,"record":{"id":"r5","trigger":"durable behavior not mechanically testable","durability":"durable","owner":"domain-owner","repair":{"status":"fixed","verified":true},"canonical_sync":{"status":"synced"},"regression_guard":{"status":"not_testable","reason":"requires external human-only visual judgment"},"learning":{"status":"captured","scope":"correct"},"continuity":{"status":"not_required"},"verification":{"independent":true},"decision":"retain","unresolved_debt":[]}},
+    {"id":"SIC-06","accept":false,"record":{"id":"r6","trigger":"user correction","durability":"durable","owner":"domain-owner","repair":{"status":"fixed","verified":true},"canonical_sync":{"status":"synced"},"regression_guard":{"status":"existing"},"learning":{"status":"chat_only","scope":"none"},"continuity":{"status":"not_required"},"verification":{"independent":true},"decision":"retain","unresolved_debt":[]}}
+  ]
+}

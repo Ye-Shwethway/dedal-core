@@ -1,4 +1,4 @@
-const VERSION = "0.2.3";
+const VERSION = "0.2.4";
 const ISSUER = "https://mcp.youtube.drthorne.uk";
 const RESOURCE = `${ISSUER}/mcp`;
 const GATEWAY = "https://youtube.drthorne.uk";
@@ -50,7 +50,8 @@ const TOOLS = [
   tool("youtube_playlists_list", "List playlists owned by the verified channel.", { profile_alias: str(), max_results: integer(1,50) }, true, ["profile_alias"]),
   tool("youtube_playlist_add", "Idempotently add an owned video to an owned playlist.", { profile_alias: str(), playlist_id: str(), video_id: str() }, false, ["profile_alias","playlist_id","video_id"], true),
   tool("youtube_playlist_remove", "Idempotently remove a video from an owned playlist.", { profile_alias: str(), playlist_id: str(), video_id: str() }, false, ["profile_alias","playlist_id","video_id"], true),
-  tool("youtube_upload_create", "Create a private-first upload job. Media bytes never pass through MCP or Gateway.", { profile_alias: str(), source_type: { type: "string", enum: ["direct_url","local_file","google_drive"] }, source_locator: str(), source_fingerprint: str(), title: str(), description: str(), tags: array(str()), category_id: str(), made_for_kids: bool(), playlist_id: str(), requested_privacy: { type: "string", enum: ["private","unlisted","public"] }, publish_at: str(), explicit_visibility_intent: bool(), explicit_publication_intent: bool(), idempotency_key: str() }, false, ["profile_alias","source_type","source_locator","title","idempotency_key"], true),
+  tool("youtube_upload_submit", "Submit a private-first upload for automatic execution by the persistent DEDAL runner. Media bytes never pass through MCP or Gateway; use youtube_upload_status for progress and verified result.", { profile_alias: str(), source_type: { type: "string", enum: ["direct_url","local_file","google_drive"] }, source_locator: str(), source_fingerprint: str(), title: str(), description: str(), tags: array(str()), category_id: str(), made_for_kids: bool(), playlist_id: str(), requested_privacy: { type: "string", enum: ["private","unlisted","public"] }, publish_at: str(), explicit_visibility_intent: bool(), explicit_publication_intent: bool(), idempotency_key: str() }, false, ["profile_alias","source_type","source_locator","title","idempotency_key"], true),
+  tool("youtube_upload_create", "Compatibility/low-level alias: create a private-first upload job. Media bytes never pass through MCP or Gateway.", { profile_alias: str(), source_type: { type: "string", enum: ["direct_url","local_file","google_drive"] }, source_locator: str(), source_fingerprint: str(), title: str(), description: str(), tags: array(str()), category_id: str(), made_for_kids: bool(), playlist_id: str(), requested_privacy: { type: "string", enum: ["private","unlisted","public"] }, publish_at: str(), explicit_visibility_intent: bool(), explicit_publication_intent: bool(), idempotency_key: str() }, false, ["profile_alias","source_type","source_locator","title","idempotency_key"], true),
   tool("youtube_upload_status", "Get an upload job status and verified result.", { job_id: str() }, true, ["job_id"]),
   tool("youtube_reporting_api", "YouTube Reporting API bridge for report types, scheduled jobs, and generated report metadata.", { profile_alias: str(), resource: { type: "string", enum: ["reportTypes","jobs","reports"] }, operation: str(), job_id: str(), report_id: str(), params: obj(), body: obj(), explicit_action_intent: bool(), explicit_destructive_intent: bool() }, false, ["profile_alias","resource","operation"]),
   tool("youtube_analytics_api", "Flexible YouTube Analytics API bridge for channel reports and analytics groups.", { profile_alias: str(), resource: { type: "string", enum: ["reports","groups","groupItems"] }, operation: str(), params: obj(), body: obj(), explicit_action_intent: bool(), explicit_destructive_intent: bool() }, false, ["profile_alias","resource","operation"]),
@@ -205,6 +206,7 @@ async function callGateway(name, a, env) {
     youtube_playlists_list: ["GET", `/v1/channels/${enc(a.profile_alias)}/playlists?max_results=${a.max_results || 25}`],
     youtube_playlist_add: ["POST", `/v1/channels/${enc(a.profile_alias)}/playlists/${enc(a.playlist_id)}/videos/${enc(a.video_id)}`],
     youtube_playlist_remove: ["DELETE", `/v1/channels/${enc(a.profile_alias)}/playlists/${enc(a.playlist_id)}/videos/${enc(a.video_id)}`],
+    youtube_upload_submit: ["POST", "/v1/upload-jobs", a],
     youtube_upload_create: ["POST", "/v1/upload-jobs", a],
     youtube_upload_status: ["GET", `/v1/upload-jobs/${enc(a.job_id)}`],
     youtube_reporting_api: ["POST", `/v1/channels/${enc(a.profile_alias)}/reporting-api`, pick(a, ["resource","operation","job_id","report_id","params","body","explicit_action_intent","explicit_destructive_intent"])],

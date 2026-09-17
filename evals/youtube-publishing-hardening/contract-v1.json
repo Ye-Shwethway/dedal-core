@@ -3,15 +3,126 @@
   "skill": "youtube-publishing",
   "purpose": "Contract coverage for production YouTube mutation hardening and fail-closed recovery semantics.",
   "cases": [
-    {"id": "YT-HARD-01", "name": "playlist image first insert", "expect": ["exact_ownership", "single_insert", "readback", "managed_state_after_verification"]},
-    {"id": "YT-HARD-02", "name": "playlist image managed replacement", "expect": ["managed_baseline_required", "delete_then_insert", "readback", "persist_new_baseline"]},
-    {"id": "YT-HARD-03", "name": "playlist image replacement rollback", "expect": ["insert_failure", "rollback_previous_managed_source", "truthful_partial_state_if_rollback_fails"]},
-    {"id": "YT-HARD-04", "name": "unmanaged playlist replacement fails closed", "expect": ["existing_unmanaged_resource", "deny_destructive_replace"]},
-    {"id": "YT-HARD-05", "name": "caption lifecycle", "expect": ["insert", "list_readback", "download_vtt", "update", "delete", "restore_original_state"]},
-    {"id": "YT-HARD-06", "name": "banner invalid source diagnostics", "expect": ["stage_upload", "vendor_error_bounded", "no_secret_material"]},
-    {"id": "YT-HARD-07", "name": "banner valid upload apply readback", "expect": ["valid_media", "upload", "apply", "branding_readback", "recoverable_full_resolution_source"]},
-    {"id": "YT-HARD-08", "name": "watermark unmanaged-state protection", "expect": ["no_reliable_read_baseline", "fail_closed", "explicit_creator_authority_override"]},
-    {"id": "YT-HARD-09", "name": "mutation audit diagnostic safety", "expect": ["stage", "error_code", "google_status", "google_reason", "google_message", "google_location", "google_location_type", "bounded_vendor_json", "no_tokens_or_secrets"]}
+    {
+      "id": "YT-HARD-01",
+      "name": "playlist image first insert",
+      "expect": [
+        "exact_ownership",
+        "single_insert",
+        "readback",
+        "managed_state_after_verification"
+      ]
+    },
+    {
+      "id": "YT-HARD-02",
+      "name": "playlist image managed replacement",
+      "expect": [
+        "managed_baseline_required",
+        "delete_then_insert",
+        "readback",
+        "persist_new_baseline"
+      ]
+    },
+    {
+      "id": "YT-HARD-03",
+      "name": "playlist image replacement rollback",
+      "expect": [
+        "insert_failure",
+        "rollback_previous_managed_source",
+        "truthful_partial_state_if_rollback_fails"
+      ]
+    },
+    {
+      "id": "YT-HARD-04",
+      "name": "unmanaged playlist replacement fails closed",
+      "expect": [
+        "existing_unmanaged_resource",
+        "deny_destructive_replace"
+      ]
+    },
+    {
+      "id": "YT-HARD-05",
+      "name": "caption lifecycle",
+      "expect": [
+        "insert",
+        "list_readback",
+        "download_vtt",
+        "update",
+        "delete",
+        "restore_original_state"
+      ]
+    },
+    {
+      "id": "YT-HARD-06",
+      "name": "banner invalid source diagnostics",
+      "expect": [
+        "stage_upload",
+        "vendor_error_bounded",
+        "no_secret_material"
+      ]
+    },
+    {
+      "id": "YT-HARD-07",
+      "name": "banner valid upload apply readback",
+      "expect": [
+        "valid_media",
+        "upload",
+        "apply",
+        "branding_readback",
+        "recoverable_full_resolution_source"
+      ]
+    },
+    {
+      "id": "YT-HARD-08",
+      "name": "watermark unmanaged-state protection",
+      "expect": [
+        "no_reliable_read_baseline",
+        "fail_closed",
+        "explicit_creator_authority_override"
+      ]
+    },
+    {
+      "id": "YT-HARD-09",
+      "name": "mutation audit diagnostic safety",
+      "expect": [
+        "stage",
+        "error_code",
+        "google_status",
+        "google_reason",
+        "google_message",
+        "google_location",
+        "google_location_type",
+        "bounded_vendor_json",
+        "no_tokens_or_secrets"
+      ]
+    },
+    {
+      "id": "upload-submit-auto-runner-contract",
+      "name": "upload submit auto runner contract",
+      "expect": [
+        "MCP exposes youtube_upload_submit",
+        "submit maps to POST /v1/upload-jobs",
+        "youtube_upload_create remains available"
+      ]
+    },
+    {
+      "id": "runner-queue-discovery-contract",
+      "name": "runner queue discovery contract",
+      "expect": [
+        "Gateway exposes runner-authenticated GET /v1/upload-jobs/next",
+        "queue discovery returns source locator only through runnerJob",
+        "persistent daemon polls queue and invokes uploader by job id"
+      ]
+    },
+    {
+      "id": "eventual-consistency-upload-verification",
+      "name": "eventual consistency upload verification",
+      "expect": [
+        "video verification uses bounded retries",
+        "playlist insert read-back uses bounded retries",
+        "playlist read-back lag can produce inserted_pending_readback without failing the upload"
+      ]
+    }
   ],
   "negative_claims": [
     "tool exposure alone does not prove a live gate",

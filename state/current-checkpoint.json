@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.31.2",
+  "version": "0.31.3",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -13,7 +13,8 @@
     "Candidate Video Finder stops before exact local cutting, SEO packaging, visual production or YouTube mutation; those remain owned by Video Production, YouTube SEO, Visual Direction and YouTube Publishing respectively.",
     "Creator selection remains explicit through SELECT/MAYBE/PASS/HOLD/NEVER and channel/Creator-specific candidate learning remains in the private operational overlay.",
     "Copyright/reuse handling is risk triage only; Candidate Video Finder does not claim legal clearance, copyright safety or guaranteed fair use.",
-    "Creator Google Drive video masters follow rough/source -> sandbox edit -> Edited Videos -> verified YouTube publication -> Uploaded YT Videos; archive movement occurs only after authoritative publishing verification."
+    "Creator Google Drive video masters follow rough/source -> sandbox edit -> Edited Videos -> verified YouTube publication -> Uploaded YT Videos; archive movement occurs only after authoritative publishing verification.",
+    "YouTube upload orchestration uses a persistent isolated outbound-polling runner: normal upload submission auto-picks queued jobs without per-job GitHub Actions, while idempotency, ownership, private-first intent gates, bounded read-back, and verification remain authoritative."
   ],
   "evidence": [
     {
@@ -40,6 +41,11 @@
       "id": "public-repo-privacy-scan",
       "kind": "privacy_validation",
       "status": "passed_local-precommit"
+    },
+    {
+      "id": "youtube-upload-orchestration-v2-contract-2026-09-18",
+      "kind": "architecture_and_regression_contract",
+      "status": "staged_for_validation"
     }
   ],
   "unresolved_risks": [
@@ -51,13 +57,13 @@
     "Google Drive folder names and IDs are operational/private state; public Core records only the generic lifecycle and must resolve exact IDs live before moves."
   ],
   "next_executable_step": {
-    "id": "CVF-MVP-01",
-    "action": "Run Candidate Video Finder read-only against one bounded CHILIVIDS source universe, produce a scene-level shortlist with source truth/evidence/risk provenance, obtain Creator selection, and validate the handoff into Video Production without changing YouTube state."
+    "id": "YOUTUBE-UPLOAD-ORCHESTRATION-V2-LIVE",
+    "action": "Validate persistent runner deployment, then exercise one disposable private upload end-to-end without per-job GitHub Actions."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "49ae63b574dc3cbd1fcced37f616fbbd26b54dab",
-    "relation": "live GitHub main verified before Candidate Video Finder implementation; local Library mirror was older and requires reconciliation"
+    "sha": "1bbc9cc4eb67adab38fbfa6cf81935931f92ae2c",
+    "relation": "base revision inspected before upload-orchestration-v2 implementation; update after validated merge"
   }
 }

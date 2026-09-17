@@ -4,6 +4,17 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.31.3 — 2026-09-18
+
+### Added
+- Persistent outbound-polling YouTube upload runner contract and `youtube_upload_submit` as the normal agent-facing private-first upload surface.
+- Runner-only queued-job discovery plus normalized upload phases without changing the existing D1 status vocabulary.
+
+### Changed
+- Routine YouTube uploads no longer depend conceptually on per-job GitHub Actions dispatch; GitHub Actions is deployment/recovery only.
+- Upload verification now tolerates bounded YouTube read-back propagation delay before failing closed.
+- Playlist post-insert verification uses bounded retries and records `inserted_pending_readback` for eventual-consistency lag instead of treating a successful upload as failed.
+
 ## 0.31.2 — 2026-09-17
 
 ### Added

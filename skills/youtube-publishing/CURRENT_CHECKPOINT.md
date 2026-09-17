@@ -89,4 +89,7 @@ The first generated `DEDAL SEO Reach Basic` (`channel_reach_basic_a1`) report wa
 Gateway `0.7.51` adds bounded `reports.download` support with authenticated vendor fetch, report metadata, a 2,000,000-character response cap, and an explicit truncation flag. User-facing Reach reports must enrich report `video_id` rows with live-resolved video titles whenever readable, retain the ID for traceability, and never treat CTR zero as zero views. Historical pre-publication windows validate the pipeline but are not evidence for a later video experiment.
 
 With metadata/publishing, thumbnail, captions, playlists, comments, ratings, Analytics/Reporting transport, ownership/intent gates, read-back, and source-sync boundaries all covered at the current scope, YouTube Publishing is CLOSED / capability-complete. Reopen only for a contract defect, vendor/API change, production regression, or Creator-requested materially new capability. Longitudinal SEO measurement remains observation work and does not reopen Publishing.
+## Upload orchestration refinement — 2026-09-18
+
+The preferred publishing path is now `youtube_upload_submit -> persistent isolated runner -> bounded Gateway verification`. Routine upload execution is designed to be automatic after job creation and no longer requires a per-job GitHub Actions dispatch. The legacy create/status tools remain compatible. Video and playlist read-back are treated as eventually consistent within bounded retries; authoritative target-state read-back still controls completion.
 

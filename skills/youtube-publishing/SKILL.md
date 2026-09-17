@@ -127,3 +127,16 @@ YouTube exposes account-level video rating operations even though comment-like w
 
 Do not claim comment-like support; YouTube does not expose a comment-like write method.
 
+## Post-publish Drive archive lifecycle
+
+For Creator workflows that use Google Drive staging, publishing owns the archive transition after remote verification:
+
+`Edited Videos -> verified YouTube upload/publication state -> Uploaded YT Videos`
+
+- Treat `Edited Videos` as the pre-publication/ready master queue and `Uploaded YT Videos` as the archive of masters whose intended YouTube state has been verified.
+- Never archive on request acceptance alone. First read back enough YouTube state to establish the intended video identity, channel, and visibility/publication outcome.
+- After successful verification, move the exact Drive master from `Edited Videos` to `Uploaded YT Videos` using a true parent change when supported.
+- If upload verification fails, a duplicate is suspected, a block/claim/takedown state requires review, or publication is otherwise unresolved, leave the master in `Edited Videos` and surface the blocker.
+- Read back Drive placement after the move. The destination must contain the exact file and the source folder must no longer retain it when the intended operation is a true move.
+- Folder/file IDs are private operational state and must not be committed to public Core.
+

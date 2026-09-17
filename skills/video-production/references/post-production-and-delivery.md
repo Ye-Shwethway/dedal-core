@@ -35,3 +35,17 @@ After render/export:
 `kajisho5/ffmpeg-skill@a6232b95f595aa35fa8cea0d055f0163baa908e9` (MIT) provides a mature probe → edit → check → verify discipline and broad FFmpeg operations including captions, loudness, sync, HDR/SDR, multicam and project rendering.
 
 `remotion-dev/skills@bd566b65d521b40fe92e1f26766e82de9e291693` is an actively maintained first-party Remotion skill corpus covering creation, markup, render, captions, multimedia, maps, interactivity and docs lookup. Adapt methodology only; use current upstream/tool documentation for API details.
+
+## Creator Drive media lifecycle
+
+When the Creator uses Google Drive as the handoff surface for YouTube clips, keep production state explicit:
+
+`rough/source upload -> sandbox/local edit -> Edited Videos -> YouTube publish + authoritative verification -> Uploaded YT Videos`
+
+- `Edited Videos` is the ready-for-publishing staging area for approved masters.
+- Do not move a master out of `Edited Videos` merely because an upload was attempted.
+- Move it to `Uploaded YT Videos` only after YouTube Publishing verifies the intended remote video/channel/visibility state.
+- A failed, partial, duplicate, blocked, or otherwise unverified upload stays in `Edited Videos` until the publishing state is resolved.
+- Preserve the same Drive file when practical; prefer a true move/re-parent over copy-plus-delete so identity and revision history stay stable.
+- Drive folder names are operational labels, not authority by themselves; verify exact folder/file IDs before consequential moves.
+

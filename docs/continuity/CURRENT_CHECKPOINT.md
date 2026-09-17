@@ -6,7 +6,7 @@ _Date: 2026-09-17_
 
 - Repository: `Ye-Shwethway/dedal-core`
 - Branch: `main`
-- Release target: `0.31.1`
+- Release target: `0.31.2`
 - Pre-change live base HEAD: `49ae63b574dc3cbd1fcced37f616fbbd26b54dab`
 - The Library mirror observed during this work was older than live main, so synchronization must preserve newer GitHub state rather than overwrite it.
 
@@ -27,6 +27,11 @@ The initial public contract includes source/scene/channel/duplicate/truth/eviden
 ## Private learning boundary
 
 Real CHILIVIDS analytics, candidate ledgers, Creator selection/rejection history, niche weights, learned actor/franchise/scene preferences, candidate-to-outcome history, and private enforcement/risk history remain outside public Core in the private operational overlay.
+
+
+## Drive video lifecycle
+
+Creator video masters now follow an explicit Drive state machine when Drive is the handoff surface: `rough/source -> sandbox edit -> Edited Videos -> verified YouTube publication -> Uploaded YT Videos`. Video Production owns the edited-master handoff into `Edited Videos`; YouTube Publishing owns the post-verification transition into `Uploaded YT Videos`. Attempted or unresolved uploads must not be archived prematurely.
 
 ## Next checkpoint
 

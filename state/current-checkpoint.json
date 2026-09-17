@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.31.1",
+  "version": "0.31.2",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -12,7 +12,8 @@
     "Candidate Video Finder requires source/scene truth, channel relevance, duplicate/truth/evidence/risk hard gates and preserves an evidence vector rather than hiding uncertainty in a magic score.",
     "Candidate Video Finder stops before exact local cutting, SEO packaging, visual production or YouTube mutation; those remain owned by Video Production, YouTube SEO, Visual Direction and YouTube Publishing respectively.",
     "Creator selection remains explicit through SELECT/MAYBE/PASS/HOLD/NEVER and channel/Creator-specific candidate learning remains in the private operational overlay.",
-    "Copyright/reuse handling is risk triage only; Candidate Video Finder does not claim legal clearance, copyright safety or guaranteed fair use."
+    "Copyright/reuse handling is risk triage only; Candidate Video Finder does not claim legal clearance, copyright safety or guaranteed fair use.",
+    "Creator Google Drive video masters follow rough/source -> sandbox edit -> Edited Videos -> verified YouTube publication -> Uploaded YT Videos; archive movement occurs only after authoritative publishing verification."
   ],
   "evidence": [
     {
@@ -46,7 +47,8 @@
     "Composio/GitHub aggregation auth can fail independently of GitHub repository state; a failed broker session must not be treated as repository failure.",
     "Production DEDAL YouTube MCP auth/OAuth behavior differs from sanitized public source in deployment-specific ways; public source must not be blindly deployed over production.",
     "Candidate Video Finder has contract-level validation but still needs representative live candidate-discovery outcome validation before any learned weighting is promoted.",
-    "Copyright/reuse risk remains context- and rights-dependent; observed channel/platform signals are triage evidence, not legal certainty."
+    "Copyright/reuse risk remains context- and rights-dependent; observed channel/platform signals are triage evidence, not legal certainty.",
+    "Google Drive folder names and IDs are operational/private state; public Core records only the generic lifecycle and must resolve exact IDs live before moves."
   ],
   "next_executable_step": {
     "id": "CVF-MVP-01",

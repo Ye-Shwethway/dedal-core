@@ -4,6 +4,17 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.31.2 — 2026-09-17
+
+### Added
+- Explicit Creator Google Drive video lifecycle: `rough/source -> sandbox edit -> Edited Videos -> verified YouTube publication -> Uploaded YT Videos`.
+- Post-publish archive rule requiring authoritative YouTube verification before moving the exact Drive master out of `Edited Videos`.
+
+### Changed
+- Video Production now owns the edited-master staging handoff; YouTube Publishing owns the verified post-publication archive transition and Drive placement read-back.
+- Failed, partial, duplicate, blocked, or otherwise unresolved uploads remain in `Edited Videos` instead of being archived prematurely.
+
+
 ## 0.31.1 — 2026-09-17
 
 ### Added

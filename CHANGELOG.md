@@ -4,6 +4,14 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+
+## 0.32.1 — 2026-09-18
+
+### Changed
+- Re-ran Self-Improvement through the full Skill Acquisition workflow with pinned external repository research plus first-party OpenClaw/OpenAI/Anthropic guidance.
+- Added `discard | improve | merge | create` candidate triage, explicit learning-maturity states, and transfer/recurrence evidence before broad promotion.
+- Recorded external provenance and explicit non-adoption decisions; no third-party hooks, runtimes, or storage layouts were imported.
+
 ## 0.32.0 — 2026-09-18
 
 ### Added

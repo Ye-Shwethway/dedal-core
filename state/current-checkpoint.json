@@ -6,7 +6,7 @@
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
     "Optional Library-only private operational overlays may provide Creator/project-specific non-secret context while remaining outside public Git synchronization and subordinate to live authoritative state.",
-    "YouTube Publishing engineering for the current scope is capability-complete; authenticated YouTube operations remain owned by YouTube Publishing and production auth continuity must not be overwritten by sanitized public source assumptions.",
+    "YouTube Publishing engineering for the current scope is capability-complete; authenticated YouTube operations remain owned by YouTube Publishing, canonical OAuth behavior is source-synchronized, and deployment credentials/config remain private live state that must be verified rather than inferred.",
     "YouTube SEO owns downstream discovery-surface strategy, packaging, analytics diagnosis, experiments and measurement learning; YouTube Reporting Reach has been production-validated and delayed/missing early data is represented with availability states rather than fake zeroes.",
     "Candidate Video Finder is an independently routable upstream discovery faculty whose atomic object is a specific bounded scene/event, not an entire movie, season or episode.",
     "Candidate Video Finder requires source/scene truth, channel relevance, duplicate/truth/evidence/risk hard gates and preserves an evidence vector rather than hiding uncertainty in a magic score.",
@@ -18,58 +18,31 @@
     "DEDAL Self-Improvement is an independently routable meta-faculty for correction/regression learning closure: durable fixes require applicable runtime repair, canonical-source reconciliation, regression coverage, correctly scoped durable learning, continuity state, and independent verification before full closure."
   ],
   "evidence": [
-    {
-      "id": "youtube-publishing-current-scope-closeout-2026-09-17",
-      "kind": "live-production-outcome-and-handoff",
-      "status": "accepted_from_verified-live-work"
-    },
-    {
-      "id": "youtube-reporting-reach-first-production-report-2026-09-17",
-      "kind": "observed_workflow_evidence",
-      "status": "passed_public-safe-synthesis"
-    },
-    {
-      "id": "candidate-video-finder-capability-audit-2026-09-17",
-      "kind": "first-party-plus-public-method-audit",
-      "status": "public-safe-synthesis"
-    },
-    {
-      "id": "candidate-video-finder-routing-contract-v1",
-      "kind": "contract_validation",
-      "status": "passed_local-precommit-12-cases"
-    },
-    {
-      "id": "public-repo-privacy-scan",
-      "kind": "privacy_validation",
-      "status": "passed_local-precommit"
-    },
-    {
-      "id": "youtube-upload-orchestration-v2-contract-2026-09-18",
-      "kind": "architecture_and_regression_contract",
-      "status": "staged_for_validation"
-    },
-    {
-      "id": "self-improvement-learning-closure-v2",
-      "kind": "architecture_and_regression_contract",
-      "status": "staged_for_validation"
-    }
+    {"id":"youtube-publishing-current-scope-closeout-2026-09-17","kind":"live-production-outcome-and-handoff","status":"accepted_from_verified-live-work"},
+    {"id":"youtube-reporting-reach-first-production-report-2026-09-17","kind":"observed_workflow_evidence","status":"passed_public-safe-synthesis"},
+    {"id":"candidate-video-finder-capability-audit-2026-09-17","kind":"first-party-plus-public-method-audit","status":"public-safe-synthesis"},
+    {"id":"candidate-video-finder-routing-contract-v1","kind":"contract_validation","status":"passed_local-precommit-12-cases"},
+    {"id":"public-repo-privacy-scan","kind":"privacy_validation","status":"passed-main-ci"},
+    {"id":"youtube-upload-orchestration-v2-contract-2026-09-18","kind":"architecture_regression_and_live_outcome","status":"passed-main-ci-and-private-e2e-auto-pickup"},
+    {"id":"self-improvement-learning-closure-v2","kind":"architecture_and_regression_contract","status":"passed-main-ci-plus-representative-regression-replay"}
   ],
   "unresolved_risks": [
-    "The local Library mirror was observed stale relative to live GitHub main and must be refreshed after this change; patch application must preserve any live changes newer than the mirror snapshot.",
+    "The local Library mirror may lag live GitHub main and must be refreshed/reconciled before it is used as a mutation base.",
     "Composio/GitHub aggregation auth can fail independently of GitHub repository state; a failed broker session must not be treated as repository failure.",
-    "Production DEDAL YouTube MCP auth/OAuth behavior differs from sanitized public source in deployment-specific ways; public source must not be blindly deployed over production.",
-    "Candidate Video Finder has contract-level validation but still needs representative live candidate-discovery outcome validation before any learned weighting is promoted.",
+    "Production OAuth credentials and deployment configuration remain private live state even though canonical no-page Authorization Code + PKCE behavior is now source-synchronized; consequential auth changes still require live verification.",
+    "Candidate Video Finder has contract-level validation but still needs broader representative live outcome evidence before learned weighting is promoted.",
     "Copyright/reuse risk remains context- and rights-dependent; observed channel/platform signals are triage evidence, not legal certainty.",
-    "Google Drive folder names and IDs are operational/private state; public Core records only the generic lifecycle and must resolve exact IDs live before moves."
+    "Google Drive folder names and IDs are operational/private state; public Core records only the generic lifecycle and must resolve exact IDs live before moves.",
+    "Self-Improvement v1 has representative regression replay plus contract validation, but long-run reduction in recurrence/rework remains future outcome evidence rather than a claimed result."
   ],
   "next_executable_step": {
-    "id": "SELF-IMPROVEMENT-V1-VALIDATE",
-    "action": "Validate the Self-Improvement skill and closure contract in CI, then run one representative regression postmortem against the no-page OAuth recurrence incident as outcome evidence."
+    "id": "SELF-IMPROVEMENT-OUTCOME-VALIDATION",
+    "action": "On the next real material DEDAL correction or regression, apply the learning-closure contract end-to-end and compare recurrence/rework evidence without manufacturing a synthetic incident merely to improve the metric."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "2a74441d22648f557bcba486eef06a7cb7b4f131",
-    "relation": "base revision inspected before self-improvement-hardening-v1 implementation; update after validated merge"
+    "sha": "1c87715a8aa4e8bccbc2d99fd4c10420c7fe719c",
+    "relation": "v0.32.0 Self-Improvement feature merge verified by Repo Integrity and Runtime Contracts on authoritative main before this checkpoint-only alignment commit"
   }
 }

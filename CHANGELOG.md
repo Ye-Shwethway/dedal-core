@@ -8,6 +8,7 @@ All meaningful DEDAL Core architectural and behavioral changes should be recorde
 
 ### Added
 - Persistent outbound-polling YouTube upload runner contract and `youtube_upload_submit` as the normal agent-facing private-first upload surface.
+- Public MCP source now includes the live-proven dedicated `youtube_video_get_rating` and `youtube_video_rate` aliases, bringing the intended post-submit surface to 57 tools.
 - Runner-only queued-job discovery plus normalized upload phases without changing the existing D1 status vocabulary.
 
 ### Changed

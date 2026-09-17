@@ -24,8 +24,8 @@ Aggregation-layer outcome validation also passed with the existing remote MCP pr
 
 - Public Gateway source: `0.4.6`
 - Authorized deployed Gateway reference used for reconciliation: `0.7.47`
-- Public MCP source: `0.2.3`
-- Authorized deployed MCP reference used for reconciliation: `0.8.4`
+- Public MCP source: `0.2.4`
+- Authorized deployed MCP reference used for reconciliation: `0.8.5`
 
 These version lines are intentionally independent. The checkpoint establishes public-safe behavioral/source reconciliation for the covered contracts; it does not claim byte-for-byte parity with deployed exports.
 
@@ -74,4 +74,13 @@ Closure criteria met:
 - thumbnail mutation, authoritative read-back, cleanup, and experiment/confounder recording are operational;
 - live Shadow and Bone validation passed end-to-end;
 - future work should reopen this section only for a contract gap, vendor/API change, or materially new thumbnail capability.
+## Video Rating Actions
+
+Typed video-rating coverage is now part of the dedicated MCP surface:
+
+- `youtube_video_get_rating` reads the connected identity's current rating for a video;
+- `youtube_video_rate` writes exactly one of `like`, `dislike`, or `none`, where `none` clears the existing rating;
+- the write is routed through the bounded Data API bridge and retains the explicit-action gate;
+- rating is an authenticated viewer/account interaction, not an owned-video metadata mutation, so the dedicated action does not impose the owned-video gate used by update/delete;
+- comment likes remain unavailable because the YouTube Data API exposes comment rating state fields but no comment-like write method.
 

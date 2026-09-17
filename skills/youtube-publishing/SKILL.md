@@ -73,6 +73,7 @@ Representative live evidence now covers:
 - resumable private upload with interruption/resume and no duplicate video;
 - playlist membership;
 - thumbnail upload;
+- video rating read/write (`like`, `dislike`, `none`) through dedicated typed actions when the Creator explicitly requests the account-level interaction;
 - caption insert/list/download/update/delete with original state restored;
 - playlist-image first insert and managed replacement with readback;
 - valid channel-banner upload/apply/readback and restoration from a full-resolution source.

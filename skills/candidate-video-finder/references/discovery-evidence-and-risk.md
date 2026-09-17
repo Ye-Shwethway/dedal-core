@@ -1,36 +1,42 @@
-# Discovery, Evidence, Opportunity and Risk
+# Discovery, Evidence, and Risk
 
-## Source roles
+## Discovery source roles
 
-Prefer claim-specific authority rather than one global source ranking.
+Use the narrowest source that actually measures the claim.
 
-| Source | Primary role | Do not overclaim |
-|---|---|---|
-| Owned channel Analytics/Reporting | channel-specific search/traffic/audience evidence | external market size |
-| Official work/episode/cast/release metadata | source identity, canonical facts | YouTube demand |
-| Live YouTube search/result set | current query results, competition, publication age, exact-scene coverage | universal search volume or guaranteed rank |
-| Google Trends or similar current trend evidence | relative freshness/interest with time/region scope | absolute YouTube search volume |
-| Community/fan discussion | candidate surfacing, scene salience hypothesis | canonical source truth |
-| Local source media | final scene existence/boundary verification | external market demand |
+| Source | Best use | Do not infer |
+| --- | --- | --- |
+| Owned YouTube Analytics/Reporting | channel-specific search/referral/performance patterns | total market demand |
+| Public YouTube search/API | current result landscape, exact-scene coverage, freshness, authoritative competitors | universal rank or absolute search volume |
+| Official source metadata | title/episode/entity/source facts | YouTube demand |
+| Google Trends/current web | relative freshness/current interest, regional/time context | YouTube-specific absolute volume |
+| Community discussion | scene salience/discovery leads | canonical scene truth |
+| Local audiovisual source | actual scene existence and exact editorial evidence | public demand |
 
-## Evidence classes
+## Search collection
 
-Use the existing YouTube SEO hierarchy when applicable:
+For public YouTube evidence, record at least the query, observation time, region/language when material, result order/filter, and enough returned items to support the claim. `relevance`, `date`, and `viewCount` answer different questions; treat reduced/incomplete result sets and indexing delays as limitations.
 
-- `A` — owned first-party;
-- `B` — official public;
-- `C` — live search observation;
-- `D` — external method/established tool;
-- `E` — community signal.
+Prefer multiple deliberately different queries over one keyword string repeated. Keep discovery breadth bounded by the decision value and API quota/cost.
 
-Record observed at time, query/geography/language when relevant, what the evidence supports, and confidence.
+## Owned-channel evidence
 
-## Opportunity factors
+Useful signals include:
 
-Preserve a vector rather than collapsing everything to one score:
+- search terms that already referred viewers;
+- videos/channels that referred Suggested traffic;
+- traffic-source mix;
+- actor/franchise/scene-type adjacency;
+- comparable-age outcomes for similar prior uploads.
+
+Privacy thresholds and aggregation can hide low-volume detail. Missing rows mean `unavailable/suppressed/incomplete` when applicable, not zero demand.
+
+## Factor vector
+
+For every decision-worthy candidate, retain observations for:
 
 - scene salience;
-- creator-approved channel fit;
+- channel fit;
 - owned-channel evidence;
 - observed demand;
 - result saturation;
@@ -42,23 +48,14 @@ Preserve a vector rather than collapsing everything to one score:
 - packaging potential;
 - editorial self-containment;
 - source accessibility;
-- reuse risk;
+- reuse-risk signals;
 - evidence confidence.
 
-Each material factor should retain `value, `evidence`, `confidence` and `context/notes`.
+Each important factor should preserve `value | evidence/provenance | confidence | notes` rather than only a scalar.
 
-## Qualitative opportunity bands
+## Optional heuristic
 
-- `STRONG` — multiple independent positive signals, source truth adequate, strong fit, and no unresolved blocker.
-- `PROMISING` — clear reasons to consider, but one or more meaningful uncertainties remain.
-- `UNCERTAIN` — interesting but evidence is weak, conflicting, incomplete or source/truth confidence remains low.
-- `WEAK` — basic validity passes but current evidence does not support prioritization.
-
-These are triage labels, NOT empirical universal ratings.
-
-## Optional internal heuristic
-
-Only when candidate volume becomes numbersome, a transparent convenience score may combine positive opportunity factors and subtract competition/risk penalties. Rules:
+Only when candidate volume makes triage cumbersome, a transparent convenience score may combine positive opportunity factors and subtract competition/risk penalties. Rules:
 
 - hard-gate failures cannot be scored into acceptance;
 - expose components and weights;

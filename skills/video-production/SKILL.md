@@ -66,6 +66,7 @@ It does **not** replace:
 - Slow-motion/interpolation, denoise/sharpen, stabilization, compositing, and heavy effects create artifacts as well as benefits; inspect representative output after application.
 - A clean PTS/DTS timeline does not prove smooth perceived motion. For retimed/effects-heavy regions, separately inspect frame cadence, duplicates/drops, interpolation artifacts, and perceptual hitches around effect boundaries.
 - More effects are not an improvement metric. A stylized candidate is better only when it improves orientation, rhythm, emphasis, comprehension, or delivery without stealing attention from the underlying action/story.
+- For third-party copyrighted footage, optimize for the smallest self-contained editorial unit and genuine editorial treatment, not for automated-detection evasion. Mirroring, arbitrary crop/color/noise changes, pitch/speed shifts, or similar fingerprint-disruption tricks do not create permission or copyright safety. Separate claim, block, takedown/strike, and reuse-policy risk, and carry observed risk forward to Publishing.
 - Before handoff, perform a self A/B review against the nearest clean/proven baseline. Check editorial clarity, action readability, entry/exit, subtitle truth/readability, color integrity, audio loudness/true peak, channel layout, compression quality, duration/stream parity, and timestamp health.
 - Treat timestamp/DTS warnings, unexpected duration drift, silent channel-layout changes, subtitle-source uncertainty, or new clipping as regressions even if the file plays successfully.
 - If a candidate adds style but introduces a technical or editorial regression, do not call it a production master. Keep the cleaner baseline as canonical until the regression is fixed.
@@ -78,3 +79,4 @@ It does **not** replace:
 - `references/post-production-and-delivery.md`
 - `references/scene-and-action-boundary-extraction.md`
 - `references/professional-post-production-effects.md`
+- `references/copyright-reuse-risk-aware-editing.md`

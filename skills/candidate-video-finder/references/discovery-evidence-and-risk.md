@@ -76,4 +76,13 @@ Return `low_observed | moderate | elevated | unknown`. Consider only evidenced s
 - transformative/editorial context;
 - uncertainty about rights/source provenance.
 
-Absence of observed enforcement is not evidence of legal safety. Candidate Finder does not provide legal clearance or fair-use guarantees.
+Distinguish the observed platform-risk class when evidence supports it:
+
+- `claim` — Content ID/rightsholder claim exposure;
+- `block` — territory or global availability restriction exposure;
+- `takedown_strike` — legal-removal/strike exposure;
+- `reuse_policy` — separate reused-content/monetization-policy exposure.
+
+A claim-only history may be acceptable to a Creator while a block or strike history may be a blocker, so do not collapse these outcomes into one generic copyright flag. A non-monetized channel remains exposed to copyright enforcement. Similar clips surviving on YouTube are only observed evidence, never proof of safety.
+
+Absence of observed enforcement is not evidence of legal safety. Candidate Finder does not provide legal clearance or fair-use guarantees. It also does not recommend fingerprint-evasion edits such as arbitrary mirroring, color shifts, pitch/speed changes, or other changes whose primary purpose is defeating automated detection.

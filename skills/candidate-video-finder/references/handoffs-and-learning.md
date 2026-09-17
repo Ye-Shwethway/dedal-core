@@ -28,6 +28,10 @@ desired_resolution:
 estimated_duration:
 truth_confidence:
 known_release_variants:
+risk_signal:
+risk_classes_observed:
+prior_channel_enforcement_evidence:
+risk_notes:
 notes:
 ```
 
@@ -51,6 +55,7 @@ freshness_evidence:
 exact_scene_gap:
 packaging_constraints:
 risk_notes:
+observed_claim_block_strike_history:
 ```
 
 YouTube SEO owns Search/Browse/Suggested hypothesis, query/entity strategy, metadata package, thumbnail strategy brief, experiment hypothesis, and later measurement interpretation.

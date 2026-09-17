@@ -91,6 +91,12 @@ Use YouTube SEO for query/entity research, Search/Browse/Suggested strategy, pac
 - A generic API passthrough never expands authority beyond the dedicated surface.
 - If prior state cannot be read or recovered, fail closed rather than guessing.
 
+### Copyright/enforcement outcome handling
+
+Publishing does not decide legal clearance and does not ask Video Production to disguise copyrighted material from Content ID. For third-party media, distinguish actual platform outcomes: `claim`, `block`, `takedown/strike`, and separate reused-content/monetization-policy issues. A claim that leaves the video available is not equivalent to a strike; a non-monetized channel is still subject to enforcement.
+
+After upload, capture the actual available enforcement state when surfaced by YouTube and return it to the private operational learning loop. Treat blocks, takedowns/strikes, or repeated aggressive enforcement as stronger future risk evidence than claim-only history. Do not automatically dispute claims or takedowns; any dispute is a separate consequential action requiring explicit Creator intent and an appropriate factual/legal basis.
+
 ## Progressive references
 
 - `references/direct-api-and-auth.md`

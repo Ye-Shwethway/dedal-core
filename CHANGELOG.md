@@ -4,6 +4,16 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.31.1 — 2026-09-17
+
+### Added
+- Risk-aware third-party-footage editing guidance under Video Production, separating genuine editorial transformation from automated-detection-evasion tricks.
+
+### Changed
+- Candidate Video Finder now distinguishes claim, block, takedown/strike, and reuse-policy evidence instead of collapsing copyright/platform risk into one generic flag.
+- Candidate-to-Production handoff now carries observed enforcement/risk evidence forward with the selected scene.
+- YouTube Publishing now owns post-upload enforcement-state handling and learning feedback while keeping legal clearance and edit decisions outside the publishing layer.
+
 ## 0.31.0 — 2026-09-17
 
 ### Added

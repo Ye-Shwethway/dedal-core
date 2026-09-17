@@ -51,6 +51,7 @@ required_tools = {
     "youtube_channel_banner_set", "youtube_watermark_set", "youtube_watermark_unset",
     "youtube_data_api", "youtube_reporting_api", "youtube_analytics_api",
     "youtube_video_traffic_sources", "youtube_video_search_terms", "youtube_video_retention",
+    "youtube_upload_submit", "youtube_upload_create", "youtube_upload_status",
 }
 if not required_tools.issubset(tools):
     raise SystemExit(f"missing MCP tools: {sorted(required_tools - set(tools))}")

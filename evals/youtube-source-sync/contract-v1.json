@@ -3,9 +3,9 @@
   "checkpoint": "YOUTUBE-SOURCE-SYNC-01",
   "deployed_reference": {
     "gateway": "0.7.51",
-    "mcp": "0.8.4"
+    "mcp": "0.8.5"
   },
-  "expected_mcp_tool_count": 54,
+  "expected_mcp_tool_count": 55,
   "cases": [
     {
       "id": "YT-SYNC-01",
@@ -92,10 +92,11 @@
       "id": "YT-SYNC-09",
       "name": "mcp surface parity",
       "expect": [
-        "54_unique_tools",
+        "55_unique_tools",
         "dedicated_media_tools",
         "dedicated_seo_analytics_helpers",
-        "generic_bridge_boundary"
+        "generic_bridge_boundary",
+        "upload_submit_plus_legacy_create"
       ]
     },
     {

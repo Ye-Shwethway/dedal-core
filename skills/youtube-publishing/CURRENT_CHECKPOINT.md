@@ -25,7 +25,7 @@ Aggregation-layer outcome validation also passed with the existing remote MCP pr
 - Public Gateway source: `0.4.6`
 - Authorized deployed Gateway reference used for reconciliation: `0.7.47`
 - Public MCP source: `0.2.3`
-- Authorized deployed MCP reference used for reconciliation: `0.8.4`
+- Authorized deployed MCP reference used for reconciliation: `0.8.5`
 
 These version lines are intentionally independent. The checkpoint establishes public-safe behavioral/source reconciliation for the covered contracts; it does not claim byte-for-byte parity with deployed exports.
 

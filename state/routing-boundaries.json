@@ -1,5 +1,5 @@
 {
-  "schema_version": 10,
+  "schema_version": 11,
   "phase": "hardening-consolidation-outcome-validation",
   "composition_model": {
     "architecture": "persistent-cognitive-runtime",
@@ -180,6 +180,19 @@
         "domain-facts": "domain-owner-or-research"
       },
       "rule": "Editorial polish never becomes factual authority."
+    },
+    {
+      "id": "self-improvement-boundary",
+      "primary_owner_by_intent": {
+        "dedal-correction-regression-learning-closure": "self-improvement",
+        "agent-harness-loop-tool-design": "agent-engineering",
+        "production-incident-mitigation-recovery": "reliability-engineering",
+        "independent-regression-readiness-verification": "quality-engineering",
+        "external-skill-pattern-discovery-adaptation": "skill-acquisition",
+        "durable-memory-scope-provenance": "knowledge-memory",
+        "domain-behavior-implementation": "domain-owner"
+      },
+      "rule": "Self-Improvement owns cross-layer learning closure after corrections/regressions; it orchestrates but does not absorb domain implementation, incident command, independent QA, external skill research, or memory governance."
     }
   ],
   "routing_principles": [
@@ -200,6 +213,8 @@
     "no-new-skill-for-already-owned-intent",
     "needs-evidence-before-merge-or-remove",
     "youtube-discovery-intelligence-is-separate-from-authenticated-youtube-mutation",
-    "candidate-scene-discovery-is-separate-from-seo-packaging-editing-and-publishing"
+    "candidate-scene-discovery-is-separate-from-seo-packaging-editing-and-publishing",
+    "material-fix-closure-requires-canonical-source-regression-guard-and-durable-learning",
+    "production-hotfix-source-sync-debt-must-be-cleared-before-durable-close"
   ]
 }

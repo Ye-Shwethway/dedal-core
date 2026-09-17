@@ -10,7 +10,11 @@ CHECKPOINT = ROOT / "skills/youtube-publishing/CURRENT_CHECKPOINT.md"
 MACHINE = ROOT / "state/current-checkpoint.json"
 VERSION = ROOT / "VERSION"
 
-required_cases = {f"YT-HARD-{i:02d}" for i in range(1, 10)}
+required_cases = {f"YT-HARD-{i:02d}" for i in range(1, 10)} | {
+    "upload-submit-auto-runner-contract",
+    "runner-queue-discovery-contract",
+    "eventual-consistency-upload-verification",
+}
 contract = json.loads(CONTRACT.read_text())
 actual_cases = {case["id"] for case in contract["cases"]}
 if actual_cases != required_cases:

@@ -1,5 +1,5 @@
 
-const VERSION = "0.4.10";
+const VERSION = "0.4.11";
 const REDIRECT_URI = "https://youtube.drthorne.uk/oauth/google/callback";
 const GOOGLE_SCOPES = [
   "https://www.googleapis.com/auth/youtube.upload",
@@ -844,6 +844,15 @@ async function route(request, env, requestId) {
     return reply({ job: publicJob(job) }, 201);
   }
 
+  if (request.method === "GET" && path === "/v1/upload-jobs/next") {
+    await requireActor(request, env.RUNNER_API_TOKEN, "runner");
+    const now = isoNow();
+    const job = await env.DB.prepare(
+      "SELECT * FROM upload_jobs WHERE status='queued' OR (status IN ('claimed','uploading') AND lease_expires_at IS NOT NULL AND lease_expires_at < ?) ORDER BY CASE status WHEN 'queued' THEN 0 ELSE 1 END, created_at ASC LIMIT 1"
+    ).bind(now).first();
+    return reply({ job: job ? runnerJob(job) : null, poll_after_seconds: job ? 0 : 5 });
+  }
+
   const jobGet = path.match(/^\/v1\/upload-jobs\/([^/]+)$/);
   if (request.method === "GET" && jobGet) {
     await requireActor(request, env.ADMIN_API_TOKEN, "admin", env.MCP_API_TOKEN);
@@ -961,17 +970,14 @@ async function route(request, env, requestId) {
     ).bind(videoId,isoNow(),job.id).run();
     const accessToken = await profileAccessToken(env, profile);
     await assertChannel(accessToken, job.channel_id);
-    const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=id,snippet,status,processingDetails&id=${encodeURIComponent(videoId)}`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
+    const verification = await readUploadedVideoWithRetry(accessToken, videoId, {
+      channel_id: job.channel_id, title: job.title, privacy: job.requested_privacy,
     });
-    const data = await response.json();
-    const remote = data.items && data.items.length === 1 ? data.items[0] : null;
-    const mismatch = !response.ok || !remote || remote.snippet.channelId !== job.channel_id ||
-      remote.snippet.title !== job.title || remote.status.privacyStatus !== job.requested_privacy;
-    if (mismatch) {
+    const remote = verification.remote;
+    if (verification.mismatch) {
       await failJob(env, job.id, "remote_readback_mismatch");
       await audit(env, "gateway", "upload_job.verify", job.profile_alias, job.channel_id, job.id, "failed", {
-        video_id: videoId, reason: "remote_readback_mismatch",
+        video_id: videoId, reason: "remote_readback_mismatch", attempts: verification.attempt,
       });
       throw httpError(409, "remote_readback_mismatch");
     }
@@ -1000,6 +1006,7 @@ async function route(request, env, requestId) {
       privacy: remote.status.privacyStatus,
       upload_status: remote.status.uploadStatus || null,
       processing_status: remote.processingDetails ? remote.processingDetails.processingStatus : null,
+      verification_attempts: verification.attempt,
       secondary_operation: secondaryOperation,
     });
     await env.DB.prepare(
@@ -1048,6 +1055,27 @@ async function assertChannel(accessToken, expected) {
   return actual;
 }
 
+async function sleepMs(ms) {
+  await new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function readUploadedVideoWithRetry(accessToken, videoId, expected, attempts = 5) {
+  let last = { response_ok: false, remote: null, mismatch: true, attempt: 0 };
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=id,snippet,status,processingDetails&id=${encodeURIComponent(videoId)}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    const data = await response.json().catch(() => ({}));
+    const remote = data.items && data.items.length === 1 ? data.items[0] : null;
+    const mismatch = !response.ok || !remote || remote.snippet?.channelId !== expected.channel_id ||
+      remote.snippet?.title !== expected.title || remote.status?.privacyStatus !== expected.privacy;
+    last = { response_ok: response.ok, remote, mismatch, attempt };
+    if (!mismatch) return last;
+    if (attempt < attempts) await sleepMs(400 * attempt);
+  }
+  return last;
+}
+
 async function ensurePlaylistMembership(accessToken, expectedChannelId, playlistId, videoId) {
   const authHeaders = { Authorization: `Bearer ${accessToken}` };
   const playlistResponse = await fetch(
@@ -1090,21 +1118,32 @@ async function ensurePlaylistMembership(accessToken, expectedChannelId, playlist
     throw httpError(502, "playlist_insert_failed", inserted?.error?.message || `Google API HTTP ${insertResponse.status}`);
   }
 
-  const verifyResponse = await fetch(membershipUrl, { headers: authHeaders });
-  const verifyData = await verifyResponse.json();
-  if (!verifyResponse.ok) {
-    throw httpError(502, "playlist_readback_failed", verifyData?.error?.message || `Google API HTTP ${verifyResponse.status}`);
+  for (let attempt = 1; attempt <= 5; attempt++) {
+    const verifyResponse = await fetch(membershipUrl, { headers: authHeaders });
+    const verifyData = await verifyResponse.json().catch(() => ({}));
+    if (!verifyResponse.ok) {
+      if (attempt === 5) {
+        return { type: "playlist", playlist_id: playlistId, status: "inserted_pending_readback", playlist_item_id: inserted.id || null, membership_count: null, readback_confirmed: false, readback_attempts: attempt };
+      }
+    } else {
+      const verifiedMatches = (verifyData.items || []).filter(item => item.snippet?.resourceId?.videoId === videoId);
+      if (verifiedMatches.length > 1) throw httpError(409, "duplicate_playlist_membership_detected");
+      if (verifiedMatches.length === 1) {
+        const verified = verifiedMatches[0];
+        return {
+          type: "playlist",
+          playlist_id: playlistId,
+          status: "inserted",
+          playlist_item_id: verified.id || inserted.id || null,
+          membership_count: 1,
+          readback_confirmed: true,
+          readback_attempts: attempt,
+        };
+      }
+    }
+    if (attempt < 5) await sleepMs(400 * attempt);
   }
-  const verifiedMatches = (verifyData.items || []).filter(item => item.snippet?.resourceId?.videoId === videoId);
-  if (verifiedMatches.length !== 1) throw httpError(502, "playlist_readback_mismatch");
-  const verified = verifiedMatches[0];
-  return {
-    type: "playlist",
-    playlist_id: playlistId,
-    status: "inserted",
-    playlist_item_id: verified.id || inserted.id || null,
-    membership_count: 1,
-  };
+  return { type: "playlist", playlist_id: playlistId, status: "inserted_pending_readback", playlist_item_id: inserted.id || null, membership_count: null, readback_confirmed: false, readback_attempts: 5 };
 }
 
 async function channelContext(env, alias) {
@@ -1378,6 +1417,13 @@ async function getJob(env, id) {
   return row;
 }
 
+function jobPhase(job) {
+  if (!job) return null;
+  if (job.status === "verified") return job.requested_privacy === "private" ? "ready_private" : "verified_remote";
+  if (job.status === "claimed") return "source_prepared";
+  return job.status;
+}
+
 function publicJob(job) {
   return {
     id: job.id,
@@ -1390,6 +1436,8 @@ function publicJob(job) {
     requested_privacy: job.requested_privacy,
     publish_at: job.publish_at,
     status: job.status,
+    phase: jobPhase(job),
+    auto_pickup: true,
     bytes_total: job.bytes_total == null ? null : Number(job.bytes_total),
     bytes_uploaded: Number(job.bytes_uploaded || 0),
     youtube_video_id: job.youtube_video_id,

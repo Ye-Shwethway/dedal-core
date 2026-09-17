@@ -1,4 +1,4 @@
-const VERSION = "0.2.3";
+const VERSION = "0.2.6";
 const ISSUER = "https://mcp.youtube.drthorne.uk";
 const RESOURCE = `${ISSUER}/mcp`;
 const GATEWAY = "https://youtube.drthorne.uk";
@@ -8,6 +8,8 @@ const TOOLS = [
   tool("youtube_channels", "List verified YouTube channel profiles.", {}, true),
   tool("youtube_videos_list", "List recent videos for a verified profile.", { profile_alias: str(), max_results: integer(1, 50) }, true, ["profile_alias"]),
   tool("youtube_video_get", "Get one video after exact channel ownership verification.", { profile_alias: str(), video_id: str() }, true, ["profile_alias", "video_id"]),
+  tool("youtube_video_get_rating", "Get the connected identity's current rating for a YouTube video.", { profile_alias: str(), video_id: str() }, true, ["profile_alias", "video_id"]),
+  tool("youtube_video_rate", "Set the connected identity's rating for a YouTube video. Use none to clear an existing like/dislike.", { profile_alias: str(), video_id: str(), rating: { type: "string", enum: ["like","dislike","none"] } }, false, ["profile_alias", "video_id", "rating"]),
   tool("youtube_video_update", "Update bounded video metadata on the verified channel.", { profile_alias: str(), video_id: str(), title: str(), description: str(), tags: array(str()), category_id: str() }, false, ["profile_alias", "video_id"]),
   tool("youtube_video_delete", "Permanently delete a verified owned video. Requires explicit delete intent.", { profile_alias: str(), video_id: str(), explicit_delete_intent: bool() }, false, ["profile_alias", "video_id", "explicit_delete_intent"]),
   tool("youtube_data_api", "Advanced allowlisted YouTube Data API bridge for channel management. Mutating and destructive operations require explicit intent flags.", { profile_alias: str(), resource: { type: "string", enum: ["activities","channels","channelSections","commentThreads","comments","captions","i18nLanguages","i18nRegions","members","membershipsLevels","playlistImages","playlistItems","playlists","search","subscriptions","videoCategories","videos","liveBroadcasts","liveStreams","liveChatBans","liveChatMessages","liveChatModerators","superChatEvents","videoAbuseReportReasons","watermarks"] }, operation: str(), params: obj(), body: obj(), explicit_action_intent: bool(), explicit_destructive_intent: bool(), explicit_visibility_intent: bool(), explicit_publication_intent: bool() }, false, ["profile_alias", "resource", "operation"]),
@@ -50,7 +52,8 @@ const TOOLS = [
   tool("youtube_playlists_list", "List playlists owned by the verified channel.", { profile_alias: str(), max_results: integer(1,50) }, true, ["profile_alias"]),
   tool("youtube_playlist_add", "Idempotently add an owned video to an owned playlist.", { profile_alias: str(), playlist_id: str(), video_id: str() }, false, ["profile_alias","playlist_id","video_id"], true),
   tool("youtube_playlist_remove", "Idempotently remove a video from an owned playlist.", { profile_alias: str(), playlist_id: str(), video_id: str() }, false, ["profile_alias","playlist_id","video_id"], true),
-  tool("youtube_upload_create", "Create a private-first upload job. Media bytes never pass through MCP or Gateway.", { profile_alias: str(), source_type: { type: "string", enum: ["direct_url","local_file","google_drive"] }, source_locator: str(), source_fingerprint: str(), title: str(), description: str(), tags: array(str()), category_id: str(), made_for_kids: bool(), playlist_id: str(), requested_privacy: { type: "string", enum: ["private","unlisted","public"] }, publish_at: str(), explicit_visibility_intent: bool(), explicit_publication_intent: bool(), idempotency_key: str() }, false, ["profile_alias","source_type","source_locator","title","idempotency_key"], true),
+  tool("youtube_upload_submit", "Submit a private-first upload for automatic execution by the persistent DEDAL runner. Media bytes never pass through MCP or Gateway; use youtube_upload_status for progress and verified result.", { profile_alias: str(), source_type: { type: "string", enum: ["direct_url","local_file","google_drive"] }, source_locator: str(), source_fingerprint: str(), title: str(), description: str(), tags: array(str()), category_id: str(), made_for_kids: bool(), playlist_id: str(), requested_privacy: { type: "string", enum: ["private","unlisted","public"] }, publish_at: str(), explicit_visibility_intent: bool(), explicit_publication_intent: bool(), idempotency_key: str() }, false, ["profile_alias","source_type","source_locator","title","idempotency_key"], true),
+  tool("youtube_upload_create", "Compatibility/low-level alias: create a private-first upload job. Media bytes never pass through MCP or Gateway.", { profile_alias: str(), source_type: { type: "string", enum: ["direct_url","local_file","google_drive"] }, source_locator: str(), source_fingerprint: str(), title: str(), description: str(), tags: array(str()), category_id: str(), made_for_kids: bool(), playlist_id: str(), requested_privacy: { type: "string", enum: ["private","unlisted","public"] }, publish_at: str(), explicit_visibility_intent: bool(), explicit_publication_intent: bool(), idempotency_key: str() }, false, ["profile_alias","source_type","source_locator","title","idempotency_key"], true),
   tool("youtube_upload_status", "Get an upload job status and verified result.", { job_id: str() }, true, ["job_id"]),
   tool("youtube_reporting_api", "YouTube Reporting API bridge for report types, scheduled jobs, and generated report metadata.", { profile_alias: str(), resource: { type: "string", enum: ["reportTypes","jobs","reports"] }, operation: str(), job_id: str(), report_id: str(), params: obj(), body: obj(), explicit_action_intent: bool(), explicit_destructive_intent: bool() }, false, ["profile_alias","resource","operation"]),
   tool("youtube_analytics_api", "Flexible YouTube Analytics API bridge for channel reports and analytics groups.", { profile_alias: str(), resource: { type: "string", enum: ["reports","groups","groupItems"] }, operation: str(), params: obj(), body: obj(), explicit_action_intent: bool(), explicit_destructive_intent: bool() }, false, ["profile_alias","resource","operation"]),
@@ -77,8 +80,7 @@ async function route(request, env) {
   if (request.method === "GET" && url.pathname === "/.well-known/oauth-protected-resource") return json({ resource: RESOURCE, authorization_servers: [ISSUER], scopes_supported: [SCOPE] });
   if (request.method === "GET" && url.pathname === "/.well-known/oauth-authorization-server") return json({ issuer: ISSUER, authorization_endpoint: `${ISSUER}/oauth/authorize`, token_endpoint: `${ISSUER}/oauth/token`, registration_endpoint: `${ISSUER}/oauth/register`, response_types_supported: ["code"], grant_types_supported: ["authorization_code", "refresh_token"], code_challenge_methods_supported: ["S256"], token_endpoint_auth_methods_supported: ["none"], scopes_supported: [SCOPE] });
   if (request.method === "POST" && url.pathname === "/oauth/register") return registerClient(request, env);
-  if (request.method === "GET" && url.pathname === "/oauth/authorize") return authorizationForm(url, env);
-  if (request.method === "POST" && url.pathname === "/oauth/authorize") return approveAuthorization(request, env);
+  if (request.method === "GET" && url.pathname === "/oauth/authorize") return authorizeAndRedirect(url, env);
   if (request.method === "POST" && url.pathname === "/oauth/token") return exchangeToken(request, env);
   if (url.pathname === "/mcp" && request.method === "POST") return mcp(request, env);
   throw failure(404, "not_found");
@@ -93,21 +95,14 @@ async function registerClient(request, env) {
   return json({ client_id: clientId, client_id_issued_at: Math.floor(Date.now() / 1000), redirect_uris: redirects, token_endpoint_auth_method: "none", grant_types: ["authorization_code", "refresh_token"], response_types: ["code"] }, 201);
 }
 
-async function authorizationForm(url, env) {
+async function authorizeAndRedirect(url, env) {
   const auth = await validateAuthorization(url.searchParams, env);
-  const hidden = Object.entries(auth).map(([k, v]) => `<input type="hidden" name="${escape(k)}" value="${escape(v)}">`).join("");
-  return html(`<h1>Authorize DEDAL YouTube MCP</h1><p>This grants ChatGPT access only to the bounded DEDAL YouTube Gateway tools. Public/unlisted publication still requires explicit intent.</p><form method="post" action="/oauth/authorize">${hidden}<label>One-time approval code <input name="approval_ticket" required autocomplete="one-time-code"></label><button type="submit">Authorize</button></form>`);
-}
-
-async function approveAuthorization(request, env) {
-  const form = await request.formData();
-  const auth = await validateAuthorization(form, env);
-  const ticket = String(form.get("approval_ticket") || ""), ticketHash = await sha256(ticket), now = new Date().toISOString();
-  const consumed = await env.DB.prepare("UPDATE mcp_approval_tickets SET consumed_at=? WHERE ticket_hash=? AND consumed_at IS NULL AND expires_at>?").bind(now, ticketHash, now).run();
-  if (consumed.meta?.changes !== 1) throw failure(401, "invalid_or_expired_approval_ticket");
+  const now = new Date().toISOString();
   const code = random(32), codeHash = await sha256(code), expires = new Date(Date.now() + 5 * 60_000).toISOString();
   await env.DB.prepare("INSERT INTO mcp_auth_codes(code_hash,client_id,redirect_uri,code_challenge,resource,scope,expires_at,consumed_at,created_at) VALUES(?,?,?,?,?,?,?,NULL,?)").bind(codeHash, auth.client_id, auth.redirect_uri, auth.code_challenge, auth.resource, auth.scope, expires, now).run();
-  const redirect = new URL(auth.redirect_uri); redirect.searchParams.set("code", code); redirect.searchParams.set("state", auth.state);
+  const redirect = new URL(auth.redirect_uri);
+  redirect.searchParams.set("code", code);
+  redirect.searchParams.set("state", auth.state);
   return new Response(null, { status: 302, headers: { Location: redirect.toString(), "Cache-Control": "no-store" } });
 }
 
@@ -125,7 +120,11 @@ async function exchangeToken(request, env) {
   if (grant === "refresh_token") {
     const hash = await sha256(String(form.get("refresh_token") || ""));
     const row = await env.DB.prepare("SELECT * FROM mcp_tokens WHERE token_hash=? AND token_type='refresh'").bind(hash).first();
-    if (!row || row.revoked_at || row.expires_at <= now || row.client_id !== form.get("client_id") || row.resource !== form.get("resource")) throw failure(400, "invalid_grant");
+    const suppliedClientId = String(form.get("client_id") || "");
+    const suppliedResource = String(form.get("resource") || "");
+    if (!row || row.revoked_at || row.expires_at <= now ||
+        (suppliedClientId && row.client_id !== suppliedClientId) ||
+        (suppliedResource && row.resource !== suppliedResource)) throw failure(400, "invalid_grant");
     return issueTokens(env, row.client_id, row.resource, row.scope);
   }
   throw failure(400, "unsupported_grant_type");
@@ -163,6 +162,8 @@ async function callGateway(name, a, env) {
     youtube_channels: ["GET", "/v1/channels"],
     youtube_videos_list: ["GET", `/v1/channels/${enc(a.profile_alias)}/videos?max_results=${a.max_results || 10}`],
     youtube_video_get: ["GET", `/v1/channels/${enc(a.profile_alias)}/videos/${enc(a.video_id)}`],
+    youtube_video_get_rating: dataApi("videos", "getRating", { id: a.video_id }),
+    youtube_video_rate: dataApi("videos", "rate", { id: a.video_id, rating: a.rating }, undefined, { explicit_action_intent: true }),
     youtube_video_update: ["PATCH", `/v1/channels/${enc(a.profile_alias)}/videos/${enc(a.video_id)}`, pick(a, ["title", "description", "tags", "category_id"])],
     youtube_video_delete: ["POST", `/v1/channels/${enc(a.profile_alias)}/videos/${enc(a.video_id)}/delete`, pick(a, ["explicit_delete_intent"])],
     youtube_data_api: ["POST", `/v1/channels/${enc(a.profile_alias)}/data-api`, pick(a, ["resource","operation","params","body","explicit_action_intent","explicit_destructive_intent","explicit_visibility_intent","explicit_publication_intent"])],
@@ -205,6 +206,7 @@ async function callGateway(name, a, env) {
     youtube_playlists_list: ["GET", `/v1/channels/${enc(a.profile_alias)}/playlists?max_results=${a.max_results || 25}`],
     youtube_playlist_add: ["POST", `/v1/channels/${enc(a.profile_alias)}/playlists/${enc(a.playlist_id)}/videos/${enc(a.video_id)}`],
     youtube_playlist_remove: ["DELETE", `/v1/channels/${enc(a.profile_alias)}/playlists/${enc(a.playlist_id)}/videos/${enc(a.video_id)}`],
+    youtube_upload_submit: ["POST", "/v1/upload-jobs", a],
     youtube_upload_create: ["POST", "/v1/upload-jobs", a],
     youtube_upload_status: ["GET", `/v1/upload-jobs/${enc(a.job_id)}`],
     youtube_reporting_api: ["POST", `/v1/channels/${enc(a.profile_alias)}/reporting-api`, pick(a, ["resource","operation","job_id","report_id","params","body","explicit_action_intent","explicit_destructive_intent"])],
@@ -236,7 +238,7 @@ async function validateAuthorization(params, env) {
   return auth;
 }
 
-function validRedirect(value) { const u = new URL(String(value)); if (u.protocol !== "https:" || u.hostname !== "chatgpt.com") throw failure(400, "invalid_redirect_uri"); return u.toString(); }
+function validRedirect(value) { const u = new URL(String(value)); const allowedHosts = new Set(["chatgpt.com", "backend.composio.dev"]); if (u.protocol !== "https:" || !allowedHosts.has(u.hostname)) throw failure(400, "invalid_redirect_uri"); return u.toString(); }
 function tool(name, description, properties, readOnly, required = [], idempotent = false) { return { name, title: name.replaceAll("_", " "), description, inputSchema: { type: "object", properties, required, additionalProperties: false }, annotations: { readOnlyHint: readOnly, destructiveHint: !readOnly, idempotentHint: readOnly || idempotent, openWorldHint: true } }; }
 function str() { return { type: "string" }; } function bool() { return { type: "boolean" }; } function obj() { return { type: "object", additionalProperties: true }; } function integer(minimum, maximum) { return { type: "integer", minimum, maximum }; } function array(items) { return { type: "array", items }; }
 function pick(object, keys) { return Object.fromEntries(keys.filter(k => object[k] !== undefined).map(k => [k, object[k]])); }

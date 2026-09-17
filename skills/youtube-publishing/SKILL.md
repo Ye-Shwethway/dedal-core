@@ -40,6 +40,15 @@ It does **not** replace:
 7. **Recover safely.** For replace-style media, restore the prior DEDAL-managed source if the replacement insert/apply fails and rollback is possible.
 8. **Checkpoint durable lessons.** Record vendor quirks, managed-state requirements, and unresolved readback gaps without committing secrets/private tokens.
 
+
+## Upload orchestration
+
+The normal upload surface is `youtube_upload_submit`. It creates an idempotent private-first job and returns immediately; a persistent isolated runner on Creator-controlled infrastructure discovers queued work through an authenticated outbound poll and executes it automatically. Routine uploads must not require a per-job GitHub Actions dispatch. GitHub Actions is reserved for runner deployment, validation, diagnostics, and manual recovery.
+
+Treat upload evidence as a state machine rather than a single success bit: request accepted -> queued -> source prepared -> uploading -> verifying -> ready_private/verified_remote. Preserve the original job/idempotency key across recovery; do not create a replacement job merely because orchestration or verification is delayed. `youtube_upload_create` remains a compatibility/low-level alias.
+
+Verification is bounded and eventual-consistency-aware. Retry authoritative video read-back briefly before declaring a remote mismatch. Playlist insertion is idempotent; after a successful insert, a temporarily empty playlist read-back is recorded as `inserted_pending_readback` rather than converting a successful video upload into a failed upload. Reconcile through authoritative read-back before any retry.
+
 ## Thumbnail execution pipeline
 
 Publishing receives an approved thumbnail asset/brief from the composed SEO + Visual Direction workflow; it does not invent the visual strategy at mutation time. The execution path is:

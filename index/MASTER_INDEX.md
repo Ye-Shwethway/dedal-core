@@ -45,6 +45,7 @@ This is the primary routing index for DEDAL Core.
 | Visual direction | image generation/editing/character/reference/series visual work | `skills/visual-direction/` | active | Reference authority, canonical trait locks, shot/set planning, targeted edits, drift detection, visual QA, and accepted-anchor continuity |
 | Knowledge / memory | memory/state/scope/freshness/contradiction/compaction/governance work | `skills/knowledge-memory/` | active | Memory-layer architecture, state ownership, provenance/freshness, contradiction handling, retrieval/compaction, scope isolation, and poisoning-resistant governance |
 | Automations | reminder/schedule/watch tasks | `skills/automations/` | active | Scheduled, recurring, condition and event-triggered workflows |
+| Self-improvement | `self-improvement`, `self-correction` | `skills/self-improvement/` | active | Failure/correction detection, same-turn repair orchestration, canonical-source reconciliation, regression guards, durable learning, and learning-closure enforcement |
 | Skill acquisition | external skills / skill ecosystem / create or improve a skill | `skills/skill-acquisition/` | active | Discover, audit, author, adapt, baseline-test, evaluate, and promote skill patterns safely |
 
 The machine-readable equivalent is `index/SKILL_REGISTRY.yaml`.
@@ -76,6 +77,8 @@ Use `visual-direction` for still-image generation/editing where subject identity
 Use `candidate-video-finder` when the primary question is which specific scene/event should enter production next: discover, verify source/scene truth, apply eligibility gates, compare evidence, and produce a Creator-selected shortlist. After selection, Video Production owns exact local cut truth; YouTube SEO owns discovery-surface packaging/measurement; Visual Direction owns thumbnail image production; YouTube Publishing owns authenticated YouTube operations.
 
 Use `youtube-seo` when the primary problem is YouTube discovery intelligence: query/entity research, Search/Browse/Suggested surface strategy, packaging hypotheses, analytics diagnosis, experiment design/readout, or channel-specific discovery learning. Use `youtube-publishing` for authenticated YouTube mutations and channel operations; pair them when an SEO recommendation is actually applied.
+
+Use `self-improvement` when the primary problem is DEDAL learning from its own correction, regression, repeated failure, live/canonical drift, or a verified better recurring procedure. It owns learning-loop orchestration and closure, not all implementation: route repair to the domain owner, require canonical-source reconciliation and regression evidence, route private/public lessons correctly, and keep unresolved learning debt explicit.
 
 Use `skill-acquisition` for explicit external skill discovery/comparison/audit, new-skill authoring, or material skill improvement. Expansion is evidence-gated; do not add skills merely because public repositories exist.
 

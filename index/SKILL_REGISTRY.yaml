@@ -1,5 +1,5 @@
-version: 23
-last_reviewed: "2026-09-17"
+version: 24
+last_reviewed: "2026-09-18"
 
 routing:
   default_policy: smallest_matching_skill_set
@@ -458,6 +458,28 @@ skills:
     entrypoint: "skills/automations/SKILL.md"
     status: active
     independence: generic_domain
+
+  self-improvement:
+    aliases: ["self-improvement", "self-correction"]
+    path: "skills/self-improvement"
+    entrypoint: "skills/self-improvement/SKILL.md"
+    status: active
+    independence: meta_domain
+    provenance:
+      adaptation: true
+      sources:
+        - source: "OpenClaw current self-learning documentation"
+          reviewed_on: "2026-09-18"
+        - repo: "pskoett/self-improving-agent"
+          commit: "b889ef0724c27b7181111b8dd1ac3a108d0b5160"
+          use: "trigger-and-learning-capture-patterns"
+        - repo: "X-RayLuan/openclaw-self-improvement"
+          commit: "31602e115385c1cc185eab9f8ec4a8a70b8a99ef"
+          use: "repair-loop-and-guardrail-promotion-patterns"
+      adapted_on: "2026-09-18"
+    evidence:
+      promoted_on: "2026-09-18"
+      level: "real-regression-plus-contract-validation-pending-outcome-followup"
 
   skill-acquisition:
     aliases: []

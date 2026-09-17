@@ -1,4 +1,4 @@
-const VERSION = "0.2.4";
+const VERSION = "0.2.5";
 const ISSUER = "https://mcp.youtube.drthorne.uk";
 const RESOURCE = `${ISSUER}/mcp`;
 const GATEWAY = "https://youtube.drthorne.uk";
@@ -99,15 +99,13 @@ async function registerClient(request, env) {
 async function authorizationForm(url, env) {
   const auth = await validateAuthorization(url.searchParams, env);
   const hidden = Object.entries(auth).map(([k, v]) => `<input type="hidden" name="${escape(k)}" value="${escape(v)}">`).join("");
-  return html(`<h1>Authorize DEDAL YouTube MCP</h1><p>This grants ChatGPT access only to the bounded DEDAL YouTube Gateway tools. Public/unlisted publication still requires explicit intent.</p><form method="post" action="/oauth/authorize">${hidden}<label>One-time approval code <input name="approval_ticket" required autocomplete="one-time-code"></label><button type="submit">Authorize</button></form>`);
+  return html(`<h1>Authorize DEDAL YouTube MCP</h1><p>This grants access only to the bounded DEDAL YouTube Gateway tools. Public/unlisted publication still requires explicit intent.</p><form method="post" action="/oauth/authorize">${hidden}<button type="submit">Authorize</button></form>`);
 }
 
 async function approveAuthorization(request, env) {
   const form = await request.formData();
   const auth = await validateAuthorization(form, env);
-  const ticket = String(form.get("approval_ticket") || ""), ticketHash = await sha256(ticket), now = new Date().toISOString();
-  const consumed = await env.DB.prepare("UPDATE mcp_approval_tickets SET consumed_at=? WHERE ticket_hash=? AND consumed_at IS NULL AND expires_at>?").bind(now, ticketHash, now).run();
-  if (consumed.meta?.changes !== 1) throw failure(401, "invalid_or_expired_approval_ticket");
+  const now = new Date().toISOString();
   const code = random(32), codeHash = await sha256(code), expires = new Date(Date.now() + 5 * 60_000).toISOString();
   await env.DB.prepare("INSERT INTO mcp_auth_codes(code_hash,client_id,redirect_uri,code_challenge,resource,scope,expires_at,consumed_at,created_at) VALUES(?,?,?,?,?,?,?,NULL,?)").bind(codeHash, auth.client_id, auth.redirect_uri, auth.code_challenge, auth.resource, auth.scope, expires, now).run();
   const redirect = new URL(auth.redirect_uri); redirect.searchParams.set("code", code); redirect.searchParams.set("state", auth.state);
@@ -128,7 +126,11 @@ async function exchangeToken(request, env) {
   if (grant === "refresh_token") {
     const hash = await sha256(String(form.get("refresh_token") || ""));
     const row = await env.DB.prepare("SELECT * FROM mcp_tokens WHERE token_hash=? AND token_type='refresh'").bind(hash).first();
-    if (!row || row.revoked_at || row.expires_at <= now || row.client_id !== form.get("client_id") || row.resource !== form.get("resource")) throw failure(400, "invalid_grant");
+    const suppliedClientId = String(form.get("client_id") || "");
+    const suppliedResource = String(form.get("resource") || "");
+    if (!row || row.revoked_at || row.expires_at <= now ||
+        (suppliedClientId && row.client_id !== suppliedClientId) ||
+        (suppliedResource && row.resource !== suppliedResource)) throw failure(400, "invalid_grant");
     return issueTokens(env, row.client_id, row.resource, row.scope);
   }
   throw failure(400, "unsupported_grant_type");
@@ -242,7 +244,7 @@ async function validateAuthorization(params, env) {
   return auth;
 }
 
-function validRedirect(value) { const u = new URL(String(value)); if (u.protocol !== "https:" || u.hostname !== "chatgpt.com") throw failure(400, "invalid_redirect_uri"); return u.toString(); }
+function validRedirect(value) { const u = new URL(String(value)); const allowedHosts = new Set(["chatgpt.com", "backend.composio.dev"]); if (u.protocol !== "https:" || !allowedHosts.has(u.hostname)) throw failure(400, "invalid_redirect_uri"); return u.toString(); }
 function tool(name, description, properties, readOnly, required = [], idempotent = false) { return { name, title: name.replaceAll("_", " "), description, inputSchema: { type: "object", properties, required, additionalProperties: false }, annotations: { readOnlyHint: readOnly, destructiveHint: !readOnly, idempotentHint: readOnly || idempotent, openWorldHint: true } }; }
 function str() { return { type: "string" }; } function bool() { return { type: "boolean" }; } function obj() { return { type: "object", additionalProperties: true }; } function integer(minimum, maximum) { return { type: "integer", minimum, maximum }; } function array(items) { return { type: "array", items }; }
 function pick(object, keys) { return Object.fromEntries(keys.filter(k => object[k] !== undefined).map(k => [k, object[k]])); }

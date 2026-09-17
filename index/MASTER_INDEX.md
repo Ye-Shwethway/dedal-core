@@ -32,6 +32,7 @@ This is the primary routing index for DEDAL Core.
 | Video production | `video-production`, `video-editing` | `skills/video-production/` | active | Temporal storytelling, generative-video shot direction, take selection, editing, subtitles, audio, motion graphics, FFmpeg/Remotion orchestration, and media delivery |
 | YouTube publishing | `youtube-publishing` | `skills/youtube-publishing/` | active | Verified multi-channel YouTube control, private-first resumable uploads, metadata/privacy/scheduling, playlists, analytics, and MCP-to-Gateway orchestration |
 | YouTube SEO | `youtube-seo` | `skills/youtube-seo/` | active | YouTube discovery research, surface-specific packaging, analytics diagnosis, experiments, transparent opportunity evidence, and channel-learning synthesis |
+| Candidate Video Finder | `candidate-video-finder`, `video-candidate-finder` | `skills/candidate-video-finder/` | active | Scene-level candidate discovery, source/scene verification, hard-gate evaluation, evidence-backed shortlisting, Creator selection, and production/SEO handoff |
 | Presentation engineering | `presentation-engineering`, `pptx`, `slides` | `skills/presentation-engineering/` | active | Audience/argument framing, slide architecture, evidence mapping, visual hierarchy, editable PPTX strategy, speaker notes, template fidelity, and rendered deck QA |
 | Decision design | deliberate plan/architecture/product stress-test | `skills/decision-design/` | active | Uncertainty/reversibility-aware decision design with dependency frontier, experiments, thresholds, premortems, and durable learning |
 | Interface design | website/app/dashboard/frontend design or redesign | `skills/interface-design/` | active | Brief-aware UI/UX direction, scoped design-intelligence retrieval, redesign/audit discipline, durable design-system state, and bounded visual verification |
@@ -71,6 +72,8 @@ Use `data-operations` for record/data integrity, reconciliation, staging, determ
 Use `writing-editorial` when the main deliverable is prose and quality depends on semantic fidelity, structure, voice, terminology, translation/localization, or publication QA.
 
 Use `visual-direction` for still-image generation/editing where subject identity, canonical traits, reference hierarchy, composition, series continuity, targeted edits, or rendered visual QA matter. When the task becomes temporal assembly or motion direction, Video Production owns that layer.
+
+Use `candidate-video-finder` when the primary question is which specific scene/event should enter production next: discover, verify source/scene truth, apply eligibility gates, compare evidence, and produce a Creator-selected shortlist. After selection, Video Production owns exact local cut truth; YouTube SEO owns discovery-surface packaging/measurement; Visual Direction owns thumbnail image production; YouTube Publishing owns authenticated YouTube operations.
 
 Use `youtube-seo` when the primary problem is YouTube discovery intelligence: query/entity research, Search/Browse/Suggested surface strategy, packaging hypotheses, analytics diagnosis, experiment design/readout, or channel-specific discovery learning. Use `youtube-publishing` for authenticated YouTube mutations and channel operations; pair them when an SEO recommendation is actually applied.
 

@@ -106,6 +106,12 @@
       "overlap": "Owns discovery/query/entity research, surface-specific packaging strategy, analytics diagnosis, experiment design/readout and discovery learning; YouTube Publishing owns authenticated YouTube operations and API/MCP mutation transport."
     },
     {
+      "skill": "candidate-video-finder",
+      "decision": "KEEP",
+      "evidence_level": "creator-approved-architecture-plus-multi-source-audit-and-contract-validated",
+      "overlap": "Owns upstream scene-level candidate discovery, source/scene verification, hard-gate evaluation and Creator shortlisting; YouTube SEO owns downstream discovery-surface packaging/measurement and Video Production owns exact local cut truth."
+    },
+    {
       "skill": "decision-design",
       "decision": "NEEDS_EVIDENCE",
       "evidence_level": "contract-validated",

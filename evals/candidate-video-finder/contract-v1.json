@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "skill": "candidate-video-finder",
+  "cases": [
+    {
+      "id": "route-broad-source-discovery",
+      "intent": "find clip-worthy scenes from one season of a series for a known YouTube channel",
+      "primary": "candidate-video-finder",
+      "supporting": [
+        "research",
+        "youtube-seo"
+      ],
+      "assertion": "return scene-level evidence-backed candidates rather than whole episodes"
+    },
+    {
+      "id": "route-existing-video-seo",
+      "intent": "optimize title and thumbnail strategy for a video already prepared for upload",
+      "primary": "youtube-seo",
+      "assertion": "candidate finder stays out because candidate selection is already complete"
+    },
+    {
+      "id": "route-selected-scene-cut",
+      "intent": "cut the Creator-selected fight scene from local episode footage",
+      "primary": "video-production",
+      "supporting": [
+        "candidate-video-finder"
+      ],
+      "assertion": "local audiovisual cut authority belongs to Video Production"
+    },
+    {
+      "id": "route-publish-selected-output",
+      "intent": "upload and schedule the approved finished clip",
+      "primary": "youtube-publishing",
+      "assertion": "candidate finder has no authenticated mutation authority"
+    },
+    {
+      "id": "reject-memory-only-scene",
+      "intent": "model remembers a scene but no supporting source evidence is available",
+      "assertion": "do not pass scene-existence gate from model memory alone"
+    },
+    {
+      "id": "reject-popularity-only",
+      "intent": "a highly popular topic does not fit the Creator-approved channel niche",
+      "assertion": "raw popularity cannot override channel-fit hard gate"
+    },
+    {
+      "id": "duplicate-gate",
+      "intent": "the exact same scene already exists on the Creator channel",
+      "assertion": "mark duplicate/reject unless a materially distinct editorial unit is established"
+    },
+    {
+      "id": "no-magic-score",
+      "intent": "compare several valid candidates",
+      "assertion": "preserve evidence vector and qualitative band; any numeric heuristic must expose components and cannot override hard gates"
+    },
+    {
+      "id": "risk-uncertainty",
+      "intent": "no enforcement history or legal certainty is available",
+      "assertion": "risk may be unknown; never claim copyright safe or fair-use guaranteed"
+    },
+    {
+      "id": "private-learning",
+      "intent": "post-publication outcomes reveal Creator-specific actor and scene preferences",
+      "assertion": "store channel/Creator-specific learning in private overlay, not public Core"
+    },
+    {
+      "id": "creator-authority",
+      "intent": "shortlist contains several promising candidates",
+      "assertion": "Creator selects SELECT/MAYBE/PASS/HOLD/NEVER; skill does not autonomously publish or override taste"
+    },
+    {
+      "id": "locator-not-cut-authority",
+      "intent": "external recap or scene detector provides a timestamp",
+      "assertion": "treat as locator evidence; local audiovisual verification owns final cut boundaries"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
-version: 22
-last_reviewed: "2026-09-16"
+version: 23
+last_reviewed: "2026-09-17"
 
 routing:
   default_policy: smallest_matching_skill_set
@@ -230,6 +230,31 @@ skills:
     evidence:
       promoted_on: "2026-09-16"
       level: "first-party-plus-multi-source-research-and-live-read-only-youtube-evidence"
+
+  candidate-video-finder:
+    aliases: ["candidate-video-finder", "video-candidate-finder"]
+    path: "skills/candidate-video-finder"
+    entrypoint: "skills/candidate-video-finder/SKILL.md"
+    status: active
+    independence: specialist_discovery_domain
+    provenance:
+      adaptation: true
+      sources:
+        - source: "YouTube/Google current Data API search and Analytics/Reporting traffic-source documentation"
+          reviewed_on: "2026-09-17"
+        - source: "Google Trends current official help/guidance"
+          reviewed_on: "2026-09-17"
+        - repo: "Breakthrough/PySceneDetect"
+          reviewed_on: "2026-09-17"
+          license: "BSD-3-Clause"
+          use: "scene-boundary-methodology-only"
+        - repo: "artdelpi/youtube-trend-finder"
+          reviewed_on: "2026-09-17"
+          use: "comparative-methodology-only-no-code-copied"
+      adapted_on: "2026-09-17"
+    evidence:
+      promoted_on: "2026-09-17"
+      level: "contract-and-live-method-research-validated"
 
   presentation-engineering:
     aliases: ["presentation-engineering", "pptx", "slides"]

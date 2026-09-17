@@ -1,5 +1,5 @@
 {
-  "schema_version": 9,
+  "schema_version": 10,
   "phase": "hardening-consolidation-outcome-validation",
   "composition_model": {
     "architecture": "persistent-cognitive-runtime",
@@ -138,6 +138,20 @@
       "rule": "Pair design with implementation only when both are actually required; image-production continuity is not UI design."
     },
     {
+      "id": "candidate-video-boundary",
+      "primary_owner_by_intent": {
+        "scene-level-candidate-discovery-verification-shortlisting": "candidate-video-finder",
+        "candidate-source-scene-truth-before-production": "candidate-video-finder",
+        "candidate-hard-gates-channel-fit-duplicate-risk-triage": "candidate-video-finder",
+        "youtube-query-entity-surface-packaging-strategy": "youtube-seo",
+        "local-video-cut-editorial-boundary": "video-production",
+        "thumbnail-image-generation-editing": "visual-direction",
+        "authenticated-youtube-publication-mutation": "youtube-publishing",
+        "external-current-source-trend-fact-research": "research"
+      },
+      "rule": "Candidate Video Finder owns upstream scene-level discovery, verification, hard-gate evaluation and Creator shortlisting; it transfers exact cut authority to Video Production and does not absorb SEO packaging, visual production, authenticated publishing, or factual-source authority."
+    },
+    {
       "id": "youtube-discovery-boundary",
       "primary_owner_by_intent": {
         "youtube-discovery-query-entity-research": "youtube-seo",
@@ -185,6 +199,7 @@
     "recompose-on-material-subgoal-change",
     "no-new-skill-for-already-owned-intent",
     "needs-evidence-before-merge-or-remove",
-    "youtube-discovery-intelligence-is-separate-from-authenticated-youtube-mutation"
+    "youtube-discovery-intelligence-is-separate-from-authenticated-youtube-mutation",
+    "candidate-scene-discovery-is-separate-from-seo-packaging-editing-and-publishing"
   ]
 }

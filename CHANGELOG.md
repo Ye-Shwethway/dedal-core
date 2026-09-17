@@ -4,6 +4,18 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.31.0 — 2026-09-17
+
+### Added
+- `skills/candidate-video-finder/` as the upstream scene-level discovery/verification/shortlisting owner for Creator-owned YouTube workflows.
+- Deterministic source/scene/channel/duplicate/truth/evidence/risk hard gates plus a provenance-preserving candidate record and opportunity-factor vector.
+- Explicit Creator decision states, Video Production/YouTube SEO handoff contracts, private candidate-learning boundary, and a 12-case routing/eval contract.
+- Focused capability audit covering official YouTube Search/Analytics semantics, Google Trends freshness evidence, scene-detection methodology, and comparative trend-finder patterns without importing third-party code.
+
+### Changed
+- Routing now separates upstream candidate discovery from YouTube SEO packaging/measurement, Video Production cut authority, Visual Direction, and YouTube Publishing mutation authority.
+- Runtime contract CI now validates Candidate Video Finder structure, ownership boundaries, Creator authority, risk-certainty guards, and public/private separation.
+
 ## 0.30.0 Ã¢ÂÂ 2026-09-16
 
 ### Added

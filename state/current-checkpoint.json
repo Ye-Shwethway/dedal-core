@@ -1,81 +1,61 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.30.0",
+  "version": "0.31.0",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
-    "Cloudflare Platform remains the single top-level Cloudflare faculty; operational hardening is merged into it rather than creating an overlapping duplicate skill.",
-    "Production Cloudflare work distinguishes repository source, build artifacts, deployed Worker content, and sanitized/public reconstructions until equivalence is proven.",
-    "Connector discovery/read capability does not prove write-transport fidelity; source-upload semantics must be verified and the execution surface may change without changing correct application code.",
-    "Authorized automation is preferred before manual dashboard/source editing, especially for mobile-constrained Creator workflows.",
-    "Potentially committed mutations are read back before retry when duplicate/destructive effects are possible; unresolved outcomes keep retry safety explicit.",
-    "Cloudflare and aggregation execution surfaces are session capabilities and are verified live rather than assumed from Core.",
-    "Optional Library-only private operational overlays may provide Creator/project-specific non-secret context through progressive disclosure while remaining outside public Git synchronization.",
-    "Overlay facts are subordinate to authoritative live-service and GitHub read-back; actual credentials remain outside both Core and the overlay.",
-    "YouTube SEO is an independently routable discovery-intelligence faculty; YouTube Publishing remains the authenticated YouTube execution/transport owner.",
-    "YouTube SEO recommendations retain evidence provenance and do not invent unsupported absolute search volume, universal difficulty, guaranteed rank or causal certainty.",
-    "YouTube SEO live read-only MVP outcome evidence shows that visible search-term detail can be privacy-suppressed relative to total Search traffic and must be treated as sampled evidence.",
-    "YouTube SEO packaging decisions cross-check owned search-term evidence against live SERP intent and may redirect optimization toward content structure when retention evidence indicates that metadata is not the primary bottleneck.",
-    "When broad analytics/reporting transport is unreliable, bounded typed per-video read helpers are preferred over fabricating missing evidence or overloading generic report calls."
+    "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
+    "Optional Library-only private operational overlays may provide Creator/project-specific non-secret context while remaining outside public Git synchronization and subordinate to live authoritative state.",
+    "YouTube Publishing engineering for the current scope is capability-complete; authenticated YouTube operations remain owned by YouTube Publishing and production auth continuity must not be overwritten by sanitized public source assumptions.",
+    "YouTube SEO owns downstream discovery-surface strategy, packaging, analytics diagnosis, experiments and measurement learning; YouTube Reporting Reach has been production-validated and delayed/missing early data is represented with availability states rather than fake zeroes.",
+    "Candidate Video Finder is an independently routable upstream discovery faculty whose atomic object is a specific bounded scene/event, not an entire movie, season or episode.",
+    "Candidate Video Finder requires source/scene truth, channel relevance, duplicate/truth/evidence/risk hard gates and preserves an evidence vector rather than hiding uncertainty in a magic score.",
+    "Candidate Video Finder stops before exact local cutting, SEO packaging, visual production or YouTube mutation; those remain owned by Video Production, YouTube SEO, Visual Direction and YouTube Publishing respectively.",
+    "Creator selection remains explicit through SELECT/MAYBE/PASS/HOLD/NEVER and channel/Creator-specific candidate learning remains in the private operational overlay.",
+    "Copyright/reuse handling is risk triage only; Candidate Video Finder does not claim legal clearance, copyright safety or guaranteed fair use."
   ],
   "evidence": [
     {
-      "id": "cloudflare-platform-routing-contract-v1",
-      "kind": "contract_validation",
-      "status": "passed_local_precommit"
+      "id": "youtube-publishing-current-scope-closeout-2026-09-17",
+      "kind": "live-production-outcome-and-handoff",
+      "status": "accepted_from_verified-live-work"
     },
     {
-      "id": "cloudflare-platform-operations-contract-v1",
-      "kind": "contract_validation",
-      "status": "passed_local_precommit"
-    },
-    {
-      "id": "cloudflare-production-workflow-lessons-2026-09-16",
+      "id": "youtube-reporting-reach-first-production-report-2026-09-17",
       "kind": "observed_workflow_evidence",
-      "status": "encoded_public_safe"
+      "status": "passed_public-safe-synthesis"
+    },
+    {
+      "id": "candidate-video-finder-capability-audit-2026-09-17",
+      "kind": "first-party-plus-public-method-audit",
+      "status": "public-safe-synthesis"
+    },
+    {
+      "id": "candidate-video-finder-routing-contract-v1",
+      "kind": "contract_validation",
+      "status": "passed_local-precommit-12-cases"
     },
     {
       "id": "public-repo-privacy-scan",
       "kind": "privacy_validation",
-      "status": "passed_local_precommit"
-    },
-    {
-      "id": "private-operational-overlay-boundary-v1",
-      "kind": "architecture_contract",
-      "status": "passed_local_precommit"
-    },
-    {
-      "id": "youtube-seo-routing-contract-v1",
-      "kind": "contract_validation",
-      "status": "passed_local_precommit"
-    },
-    {
-      "id": "youtube-seo-phase1-phase2-research-2026-09-16",
-      "kind": "first-party-plus-external-skill-audit",
-      "status": "public-safe-synthesis"
-    },
-    {
-      "id": "youtube-seo-mvp-01-live-read-only-outcome",
-      "kind": "observed_workflow_evidence",
-      "status": "passed_public_safe_synthesis"
+      "status": "passed_local-precommit"
     }
   ],
   "unresolved_risks": [
-    "Connector and aggregation request serialization behavior can drift independently of Cloudflare APIs and must be verified per session.",
-    "Some production source representations may be unavailable through a given execution surface; alternate retrieval or explicit Creator assistance can still be required.",
-    "Cloudflare API schemas, Worker upload semantics, limits, and product status remain drift-sensitive and require current authoritative verification when material.",
-    "Private overlay facts can become stale; task execution must prefer live authoritative read-back when current state matters.",
-    "YouTube SEO Browse-heavy and mature Suggested-heavy outcome evidence remains limited and must not be inferred from Search-led samples.",
-    "YouTube Reporting Reach transport for impressions/CTR remains unvalidated in the current execution path and must not be treated as a hard dependency."
+    "The local Library mirror was observed stale relative to live GitHub main and must be refreshed after this change; patch application must preserve any live changes newer than the mirror snapshot.",
+    "Composio/GitHub aggregation auth can fail independently of GitHub repository state; a failed broker session must not be treated as repository failure.",
+    "Production DEDAL YouTube MCP auth/OAuth behavior differs from sanitized public source in deployment-specific ways; public source must not be blindly deployed over production.",
+    "Candidate Video Finder has contract-level validation but still needs representative live candidate-discovery outcome validation before any learned weighting is promoted.",
+    "Copyright/reuse risk remains context- and rights-dependent; observed channel/platform signals are triage evidence, not legal certainty."
   ],
   "next_executable_step": {
-    "id": "YOUTUBE-SEO-HELPERS-01",
-    "action": "Implement and validate bounded typed read-only helpers for per-video traffic sources, per-video search terms, and retention; extend search controls only where materially useful, then repair/validate Reporting Reach before adding impressions/CTR to the core feedback loop."
+    "id": "CVF-MVP-01",
+    "action": "Run Candidate Video Finder read-only against one bounded CHILIVIDS source universe, produce a scene-level shortlist with source truth/evidence/risk provenance, obtain Creator selection, and validate the handoff into Video Production without changing YouTube state."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "77d2fafa8ff44398c4588e931128789222244a3b",
-    "relation": "base HEAD verified before sanitized YouTube SEO MVP-01 outcome checkpoint"
+    "sha": "49ae63b574dc3cbd1fcced37f616fbbd26b54dab",
+    "relation": "live GitHub main verified before Candidate Video Finder implementation; local Library mirror was older and requires reconciliation"
   }
 }

@@ -1,43 +1,33 @@
 # Current Checkpoint
 
-_Date: 2026-09-16_
+_Date: 2026-09-17_
 
 ## Repository
 
 - Repository: `Ye-Shwethway/dedal-core`
 - Branch: `main`
-- Release: `0.30.0`
-- Change base HEAD: `77d2fafa8ff44398c4588e931128789222244a3b`
-- The exact post-commit HEAD is Git-derived and is reported after the atomic transaction; this file does not self-embed its own commit hash.
+- Release target: `0.31.0`
+- Pre-change live base HEAD: `49ae63b574dc3cbd1fcced37f616fbbd26b54dab`
+- The Library mirror observed during this work was older than live main, so synchronization must preserve newer GitHub state rather than overwrite it.
 
 ## Operating phase
 
-DEDAL remains in hardening/consolidation/outcome-validation mode. Current work has expanded from Cloudflare operational reliability into live outcome validation of the new `youtube-seo` discovery-intelligence faculty.
+DEDAL remains in hardening/consolidation/outcome-validation mode. The current YouTube Publishing/SEO engineering scope is closed for its defined capability surface, and the next bounded capability addition is Candidate Video Finder.
 
-## Cloudflare operational status
+## YouTube closure state
 
-The hardened workflow treats repository source, generated/build artifacts, deployed Worker source, and sanitized public reconstructions as distinct until equivalence is proven. Live Worker state outranks stale repository state for production patching.
+YouTube Publishing remains the authenticated YouTube execution/transport owner. Production auth continuity is deployment-specific and must not be replaced by sanitized public source assumptions. Reach reporting has produced a real delayed/historical report, so missing early report rows are represented as availability/processing states rather than zero.
 
-Connector read/discovery success is not considered evidence that raw/multipart/module source uploads will preserve request semantics. Potentially committed mutations require read-back before retry when repeating the action can duplicate or destructively compound effects.
+## Candidate Video Finder
 
-## YouTube SEO outcome status
+Candidate Video Finder is the upstream owner for `discover -> source/scene verify -> hard-gate -> evaluate -> shortlist -> Creator selection`. Its atomic object is a specific bounded scene/event. It does not absorb exact local cut authority, YouTube SEO packaging, thumbnail production, or authenticated YouTube mutation.
 
-The read-only MVP has now been exercised against multiple Creator-owned videos without changing live metadata. The run validated per-video traffic-source classification, search-detail sampling, live query-landscape comparison, package diagnosis, and retention-curve analysis.
+The initial public contract includes source/scene/channel/duplicate/truth/evidence/risk gates, provenance-preserving factor vectors, qualitative opportunity bands, Creator decision states, Video Production/YouTube SEO handoffs, and strict private-learning separation. Copyright/reuse output is risk triage only, never legal clearance.
 
-Observed generic lessons:
+## Private learning boundary
 
-- Search-detail rows can be materially suppressed relative to total Search traffic; visible terms are samples, not an exhaustive query inventory.
-- An observed owned-channel search term is not automatically a good title target; live SERP intent must be checked before packaging changes.
-- Strong search relevance plus a late retention hotspot can indicate a content-structure/editing problem rather than a metadata problem.
-- No sufficiently strong Browse-heavy owned sample was observed, so Browse-heavy outcome claims remain unvalidated.
-- Smaller bounded per-video analytics calls were more reliable than broad report calls in the tested execution path.
-
-## Capability boundary
-
-YouTube SEO owns discovery research, surface strategy, packaging hypotheses, analytics diagnosis, experiments, and discovery learning. YouTube Publishing remains the authenticated YouTube execution/transport owner; any approved live mutation still passes through its intent, ownership, and read-back gates.
-
-Cloudflare and integration aggregation remain runtime execution surfaces whose availability and fidelity must be verified per session. Core does not permanently assume a specific connector or broker is installed.
+Real CHILIVIDS analytics, candidate ledgers, Creator selection/rejection history, niche weights, learned actor/franchise/scene preferences, candidate-to-outcome history, and private enforcement/risk history remain outside public Core in the private operational overlay.
 
 ## Next checkpoint
 
-`YOUTUBE-SEO-HELPERS-01`: implement and validate bounded typed read-only helpers for per-video traffic sources, per-video search terms, and retention; extend search controls only where they materially improve the workflow, then repair/validate Reporting Reach before impressions/CTR becomes a core dependency.
+`CVF-MVP-01`: run a read-only Candidate Video Finder workflow against one bounded CHILIVIDS source universe, produce an evidence-backed scene shortlist, obtain Creator selection, and validate a clean handoff into Video Production without mutating YouTube.

@@ -189,10 +189,9 @@
         "production-incident-mitigation-recovery": "reliability-engineering",
         "independent-regression-readiness-verification": "quality-engineering",
         "external-skill-pattern-discovery-adaptation": "skill-acquisition",
-        "durable-memory-scope-provenance": "knowledge-memory",
-        "domain-behavior-implementation": "domain-owner"
+        "durable-memory-scope-provenance": "knowledge-memory"
       },
-      "rule": "Self-Improvement owns cross-layer learning closure after corrections/regressions; it orchestrates but does not absorb domain implementation, incident command, independent QA, external skill research, or memory governance."
+      "rule": "Self-Improvement owns cross-layer learning closure after corrections/regressions; it orchestrates but does not absorb domain implementation, which remains with the relevant registered domain owner, nor incident command, independent QA, external skill research, or memory governance."
     }
   ],
   "routing_principles": [

@@ -17,22 +17,22 @@ DEDAL already had YouTube SEO, Video Production, Visual Direction, Publishing, R
 - Atomic candidate is a specific bounded scene/event, not a topic or whole episode.
 - Deterministic hard gates precede opportunity comparison.
 - Factor vectors remain visible; convenience scoring is optional and non-authoritative.
-- Creator selection is explicit and private.
-- Exact cut authority transfers to Video Production once local media is inspected.
-- YouTube SEO remains downstream owner of Search/Browse/Suggested strategy and packaging.
-- Public Core stores generic methodology only; CHILIVIDS-specific learning stays in the private overlay.
+- Source-truth and demand/opportunity are separate axes.
+- Local audiovisual verification is authoritative for final cut boundaries once media is available.
+- Copyright/reuse results are risk signals, not legal clearance.
+- Creator selection remains the decision gate.
+- Channel-specific Analytics, candidate history, preferences, selections and weights remain private operational state.
 
 ## Rejected patterns
 
-- automatic "best video" selection without Creator review;
-- popularity-only ranking;
-- opaque weighted score as the primary output;
-- model-memory scene claims without source evidence;
-- treating community discussion as canonical source truth;
-- treating scene-detection output as an editorial cut decision;
-- automated legal/copyright clearance claims;
-- full-web scraping or third-party downloader dependence as a Core requirement.
+- opaque "overall opportunity score" as the sole decision mechanism;
+- fake/synthetic absolute search volume;
+- ranking without source/scene verification;
+- autonomous publishing;
+- binary copyright-safe claims;
+- automatically treating scene-detection boundaries or recap timestamps as canonical cut boundaries;
+- copying third-party trend-finder code/data into Core;
 
-## Evaluation target
+## Evaluation
 
-Promotion requires routing separation from YouTube SEO/Production/Publishing, hard-gate behavior, source-truth discipline, private-learning isolation, and a useful shortlist handoff without fake precision.
+A focused 12-case contract covers routing boundaries, bad-source rejection, channel-fit gating, duplicates, opaque-score refusal, risk uncertainty, Creator authority, private learning and cut-locator boundaries.

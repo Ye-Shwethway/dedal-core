@@ -6,7 +6,7 @@ _Date: 2026-09-17_
 
 - Repository: `Ye-Shwethway/dedal-core`
 - Branch: `main`
-- Release target: `0.31.0`
+- Release target: `0.31.1`
 - Pre-change live base HEAD: `49ae63b574dc3cbd1fcced37f616fbbd26b54dab`
 - The Library mirror observed during this work was older than live main, so synchronization must preserve newer GitHub state rather than overwrite it.
 

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.32.0",
+  "version": "0.32.1",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -15,16 +15,50 @@
     "Copyright/reuse handling is risk triage only; Candidate Video Finder does not claim legal clearance, copyright safety or guaranteed fair use.",
     "Creator Google Drive video masters follow rough/source -> sandbox edit -> Edited Videos -> verified YouTube publication -> Uploaded YT Videos; archive movement occurs only after authoritative publishing verification.",
     "YouTube upload orchestration uses a persistent isolated outbound-polling runner: normal upload submission auto-picks queued jobs without per-job GitHub Actions, while idempotency, ownership, private-first intent gates, bounded read-back, and verification remain authoritative.",
-    "DEDAL Self-Improvement is an independently routable meta-faculty for correction/regression learning closure: durable fixes require applicable runtime repair, canonical-source reconciliation, regression coverage, correctly scoped durable learning, continuity state, and independent verification before full closure."
+    "DEDAL Self-Improvement is an independently routable meta-faculty for correction/regression learning closure: durable fixes require applicable runtime repair, canonical-source reconciliation, regression coverage, correctly scoped durable learning, continuity state, and independent verification before full closure.",
+    "Self-Improvement durable candidates are triaged as discard/improve/merge/create; captured lessons progress through explicit maturity states and broad promotion requires recurrence, held-out, transfer, or equivalent severity-appropriate evidence rather than one-session intuition."
   ],
   "evidence": [
-    {"id":"youtube-publishing-current-scope-closeout-2026-09-17","kind":"live-production-outcome-and-handoff","status":"accepted_from_verified-live-work"},
-    {"id":"youtube-reporting-reach-first-production-report-2026-09-17","kind":"observed_workflow_evidence","status":"passed_public-safe-synthesis"},
-    {"id":"candidate-video-finder-capability-audit-2026-09-17","kind":"first-party-plus-public-method-audit","status":"public-safe-synthesis"},
-    {"id":"candidate-video-finder-routing-contract-v1","kind":"contract_validation","status":"passed_local-precommit-12-cases"},
-    {"id":"public-repo-privacy-scan","kind":"privacy_validation","status":"passed-main-ci"},
-    {"id":"youtube-upload-orchestration-v2-contract-2026-09-18","kind":"architecture_regression_and_live_outcome","status":"passed-main-ci-and-private-e2e-auto-pickup"},
-    {"id":"self-improvement-learning-closure-v2","kind":"architecture_and_regression_contract","status":"passed-main-ci-plus-representative-regression-replay"}
+    {
+      "id": "youtube-publishing-current-scope-closeout-2026-09-17",
+      "kind": "live-production-outcome-and-handoff",
+      "status": "accepted_from_verified-live-work"
+    },
+    {
+      "id": "youtube-reporting-reach-first-production-report-2026-09-17",
+      "kind": "observed_workflow_evidence",
+      "status": "passed_public-safe-synthesis"
+    },
+    {
+      "id": "candidate-video-finder-capability-audit-2026-09-17",
+      "kind": "first-party-plus-public-method-audit",
+      "status": "public-safe-synthesis"
+    },
+    {
+      "id": "candidate-video-finder-routing-contract-v1",
+      "kind": "contract_validation",
+      "status": "passed_local-precommit-12-cases"
+    },
+    {
+      "id": "public-repo-privacy-scan",
+      "kind": "privacy_validation",
+      "status": "passed-main-ci"
+    },
+    {
+      "id": "youtube-upload-orchestration-v2-contract-2026-09-18",
+      "kind": "architecture_regression_and_live_outcome",
+      "status": "passed-main-ci-and-private-e2e-auto-pickup"
+    },
+    {
+      "id": "self-improvement-learning-closure-v2",
+      "kind": "architecture_and_regression_contract",
+      "status": "passed-main-ci-plus-representative-regression-replay"
+    },
+    {
+      "id": "self-improvement-external-research-audit-2026-09-18",
+      "kind": "multi-source-skill-acquisition-audit",
+      "status": "research-complete-staged-for-ci"
+    }
   ],
   "unresolved_risks": [
     "The local Library mirror may lag live GitHub main and must be refreshed/reconciled before it is used as a mutation base.",
@@ -33,11 +67,11 @@
     "Candidate Video Finder has contract-level validation but still needs broader representative live outcome evidence before learned weighting is promoted.",
     "Copyright/reuse risk remains context- and rights-dependent; observed channel/platform signals are triage evidence, not legal certainty.",
     "Google Drive folder names and IDs are operational/private state; public Core records only the generic lifecycle and must resolve exact IDs live before moves.",
-    "Self-Improvement v1 has representative regression replay plus contract validation, but long-run reduction in recurrence/rework remains future outcome evidence rather than a claimed result."
+    "Self-Improvement v0.32.1 has external-method research plus contract/replay evidence, but long-run reduction in recurrence/rework remains future outcome evidence rather than a claimed result."
   ],
   "next_executable_step": {
     "id": "SELF-IMPROVEMENT-OUTCOME-VALIDATION",
-    "action": "On the next real material DEDAL correction or regression, apply the learning-closure contract end-to-end and compare recurrence/rework evidence without manufacturing a synthetic incident merely to improve the metric."
+    "action": "On the next real material DEDAL correction or regression, apply candidate triage plus learning maturity and closure end-to-end; promote broadly only with severity-appropriate recurrence, held-out, or transfer evidence."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {

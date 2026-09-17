@@ -275,11 +275,11 @@ Initial DEDAL Core foundation: identity, operating contract, security boundary, 
 ### YouTube thumbnail workflow closed
 - Marked the layered thumbnail workflow production-complete after native DEDAL staging, bounded chunk transport, YouTube mutation/read-back, and cleanup passed live validation.
 - Credit-metered third-party upload hosts are fallback-only; native DEDAL staging is the default execution path.
-## 2026-09-17 — Typed YouTube video rating actions
+## 2026-09-17 — YouTube video rating bridge validated
 
-- Added `youtube_video_get_rating` for read-only retrieval of the connected identity's current video rating.
-- Added `youtube_video_rate` with bounded `like` / `dislike` / `none` values; `none` clears an existing rating.
-- Kept rating writes behind the existing explicit-action gate and the allowlisted YouTube Data API bridge.
-- Documented the boundary that video ratings are account-level interactions rather than owned-video metadata mutations; comment-like writes remain unsupported by the YouTube Data API.
-- Public MCP source advanced to `0.2.4`; deployed reconciliation target is MCP `0.8.5` with 56 typed tools.
+- Confirmed the Gateway allowlist supports `videos.getRating` and `videos.rate`.
+- Verified a live read-only `getRating` call through the existing DEDAL YouTube MCP/Data API bridge.
+- A dedicated typed-alias MCP deployment was attempted, detected an authenticated-client 401 regression, and was immediately rolled back; production remains MCP `0.8.4` with 54 actions.
+- Publishing skill now documents the bounded bridge path for `like`, `dislike`, and `none`, with explicit action intent required for writes.
+- No video rating was changed during validation; comment-like writes remain unsupported by the YouTube Data API.
 

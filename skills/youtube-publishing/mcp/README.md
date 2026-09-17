@@ -26,7 +26,7 @@ Current production evidence covers:
 - playlist images: list, set/managed replace, delete;
 - channel banner: set with apply/readback;
 - video thumbnail: set.
-- video rating: get current rating; set `like`, `dislike`, or `none` (clear) through typed actions.
+- video rating: `videos.getRating` (read) and `videos.rate` (`like` / `dislike` / `none`) are available through the allowlisted Data API bridge with the existing explicit-action gate for writes. Dedicated aliases are not yet live.
 
 Watermark set/unset tools are exposed, but the watermark lifecycle is intentionally **not** classified as fully live-gated because YouTube does not expose a reliable current-watermark read/list baseline.
 
@@ -36,7 +36,7 @@ Watermark set/unset tools are exposed, but the watermark lifecycle is intentiona
 
 ## Version evidence
 
-Public source version: `0.2.4`. The authorized deployed reference used during source sync identified MCP `0.8.5`. Public and deployed version numbers remain independent; source sync records the verified public-safe implementation delta without claiming byte-for-byte deployment parity.
+Public source version: `0.2.2`. The authorized deployed reference used during source sync identified MCP `0.8.3`. Public and deployed version numbers remain independent; source sync records the verified public-safe implementation delta without claiming byte-for-byte deployment parity.
 
 ## Developer-mode registration
 

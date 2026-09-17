@@ -73,7 +73,6 @@ Representative live evidence now covers:
 - resumable private upload with interruption/resume and no duplicate video;
 - playlist membership;
 - thumbnail upload;
-- video rating read/write (`like`, `dislike`, `none`) through dedicated typed actions when the Creator explicitly requests the account-level interaction;
 - caption insert/list/download/update/delete with original state restored;
 - playlist-image first insert and managed replacement with readback;
 - valid channel-banner upload/apply/readback and restoration from a full-resolution source.
@@ -103,3 +102,15 @@ Use YouTube SEO for query/entity research, Search/Browse/Suggested strategy, pac
 - `references/cloudflare-gateway-architecture.md`
 - `CURRENT_CHECKPOINT.md`
 - `mcp/README.md`
+## Video rating interaction
+
+YouTube exposes account-level video rating operations even though comment-like writes are not available through the Data API. Until dedicated production-safe aliases are live, route rating requests through the allowlisted Data API bridge only:
+
+- read: `videos.getRating` with the requested video id;
+- write: `videos.rate` with exactly `like`, `dislike`, or `none`;
+- require explicit user intent before any rating write;
+- treat `none` as clearing the connected identity's current like/dislike;
+- do not apply the owned-video mutation gate, because rating is an authenticated viewer/account interaction rather than video metadata ownership mutation.
+
+Do not claim comment-like support; YouTube does not expose a comment-like write method.
+

@@ -41,7 +41,7 @@ if len(tools) != contract["expected_mcp_tool_count"] or len(set(tools)) != len(t
     raise SystemExit(f"unexpected MCP tool surface: count={len(tools)} unique={len(set(tools))}")
 
 required_tools = {
-    "youtube_media_stage", "youtube_media_unstage", "youtube_thumbnail_set", "youtube_video_get_rating", "youtube_video_rate", "youtube_captions_list", "youtube_caption_insert",
+    "youtube_media_stage", "youtube_media_unstage", "youtube_thumbnail_set", "youtube_captions_list", "youtube_caption_insert",
     "youtube_caption_update", "youtube_caption_download", "youtube_caption_delete",
     "youtube_playlist_images_list", "youtube_playlist_image_set", "youtube_playlist_image_delete",
     "youtube_channel_banner_set", "youtube_watermark_set", "youtube_watermark_unset",
@@ -76,17 +76,6 @@ for marker in media_staging_markers:
     if marker not in gateway:
         raise SystemExit(f"missing native media staging bridge: {marker}")
 
-rating_markers = [
-    'youtube_video_get_rating',
-    'youtube_video_rate',
-    'dataApi("videos", "getRating", { id: a.video_id })',
-    'dataApi("videos", "rate", { id: a.video_id, rating: a.rating }',
-    'enum: ["like","dislike","none"]',
-]
-for marker in rating_markers:
-    if marker not in mcp:
-        raise SystemExit(f"missing typed video rating marker: {marker}")
-
 metadata_markers = [
     "verifyVideoMetadataEventually",
     "videoMetadataMatches",
@@ -115,4 +104,4 @@ if 'forMine: a.type === "video"' in mcp:
 
 print("youtube source sync contract: PASS")
 print(f"MCP tools: {len(tools)}")
-print("deployed reference: Gateway 0.7.50 / MCP 0.8.5")
+print("deployed reference: Gateway 0.7.50 / MCP 0.8.4")

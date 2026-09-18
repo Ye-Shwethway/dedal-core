@@ -98,4 +98,4 @@ Generic API passthrough does not expand authority beyond the connected Page or b
 
 - `references/capability-and-verification.md`
 - `references/media-scheduling-and-messaging.md`
-- `Adaptation_NOTES.md`
+- `ADAPTATION_NOTES.md`

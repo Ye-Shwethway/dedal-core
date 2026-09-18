@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.32.1",
+  "version": "0.33.0",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -16,7 +16,8 @@
     "Creator Google Drive video masters follow rough/source -> sandbox edit -> Edited Videos -> verified YouTube publication -> Uploaded YT Videos; archive movement occurs only after authoritative publishing verification.",
     "YouTube upload orchestration uses a persistent isolated outbound-polling runner: normal upload submission auto-picks queued jobs without per-job GitHub Actions, while idempotency, ownership, private-first intent gates, bounded read-back, and verification remain authoritative.",
     "DEDAL Self-Improvement is an independently routable meta-faculty for correction/regression learning closure: durable fixes require applicable runtime repair, canonical-source reconciliation, regression coverage, correctly scoped durable learning, continuity state, and independent verification before full closure.",
-    "Self-Improvement durable candidates are triaged as discard/improve/merge/create; captured lessons progress through explicit maturity states and broad promotion requires recurrence, held-out, transfer, or equivalent severity-appropriate evidence rather than one-session intuition."
+    "Self-Improvement durable candidates are triaged as discard/improve/merge/create; captured lessons progress through explicit maturity states and broad promotion requires recurrence, held-out, transfer, or equivalent severity-appropriate evidence rather than one-session intuition.",
+    "Facebook Page Management is an independently routable specialist for authenticated Page content, media, scheduling, engagement/moderation, analytics and administration; personal-profile automation remains out of scope and Messenger fails closed unless fresh inbound state and compliant sending are live-verified."
   ],
   "evidence": [
     {
@@ -58,6 +59,11 @@
       "id": "self-improvement-external-research-audit-2026-09-18",
       "kind": "multi-source-skill-acquisition-audit",
       "status": "research-complete-staged-for-ci"
+    },
+    {
+      "id": "facebook-page-management-live-gate-2026-09-18",
+      "kind": "representative-live-page-operations-and-contract-validation",
+      "status": "page-crud-media-scheduling-analytics-passed-messenger-degraded"
     }
   ],
   "unresolved_risks": [
@@ -67,11 +73,12 @@
     "Candidate Video Finder has contract-level validation but still needs broader representative live outcome evidence before learned weighting is promoted.",
     "Copyright/reuse risk remains context- and rights-dependent; observed channel/platform signals are triage evidence, not legal certainty.",
     "Google Drive folder names and IDs are operational/private state; public Core records only the generic lifecycle and must resolve exact IDs live before moves.",
-    "Self-Improvement v0.32.1 has external-method research plus contract/replay evidence, but long-run reduction in recurrence/rework remains future outcome evidence rather than a claimed result."
+    "Self-Improvement v0.32.1 has external-method research plus contract/replay evidence, but long-run reduction in recurrence/rework remains future outcome evidence rather than a claimed result.",
+    "Facebook Messenger fresh-inbound synchronization is not currently live-verified on the tested connector: old thread history was readable but fresh inbound state was absent and a send was policy-blocked as outside the allowed window; Page content operations remain independently verified."
   ],
   "next_executable_step": {
-    "id": "SELF-IMPROVEMENT-OUTCOME-VALIDATION",
-    "action": "On the next real material DEDAL correction or regression, apply candidate triage plus learning maturity and closure end-to-end; promote broadly only with severity-appropriate recurrence, held-out, or transfer evidence."
+    "id": "FACEBOOK-PAGE-PRIVATE-OVERLAY",
+    "action": "Add Creator/Page-specific Facebook operating context only to the private overlay after the public facebook-page-management skill is synchronized and verified; keep real Page identifiers, voice, analytics and messaging state out of public Core."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {

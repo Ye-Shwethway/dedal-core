@@ -5,6 +5,21 @@
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
 
+## 0.33.0 — 2026-09-18
+
+### Added
+- `skills/facebook-page-management/` as the authenticated Facebook Page operations owner for Page content, media, scheduling, engagement/moderation, analytics, administration, and conditionally verified Messenger workflows.
+- Capability-state separation between exposed, authorized, read-verified, write-verified, and degraded Page operations.
+- Facebook Page routing/eval contract covering exact Page resolution, low-impact write tests, public/destructive intent gates, media-transport diagnosis, schedule read-back, Messenger fail-closed behavior, and public/private separation.
+
+### Changed
+- Routing now separates Facebook Page operations from personal-profile automation, substantial copywriting, visual/video production, external policy research, automation cadence, and security authority.
+- Public Core records only sanitized Facebook operational rules; real Page/account identifiers, private analytics/messages, content strategy, and credentials remain private state.
+
+### Evidence
+- Representative live Page testing verified text-post CRUD, scheduled text/photo creation and queue read-back, rescheduling, photo publishing, managed-file video scheduling, comments/reactions reads, Page/post insights, and Page role/task reads.
+- Messenger was intentionally not promoted to fully live-verified: fresh inbound state was not visible and a send attempt was provider-blocked as outside the allowed window despite broad messaging authorization, so the skill fails closed on stale messaging state.
+
 ## 0.32.1 — 2026-09-18
 
 ### Changed

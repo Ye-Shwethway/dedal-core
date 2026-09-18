@@ -94,6 +94,12 @@
       "overlap": "Owns deck narrative/slide architecture, visual hierarchy, editability and render QA; Research/domain owners own factual truth; Writing owns prose; slide tools remain execution surfaces."
     },
     {
+      "skill": "facebook-page-management",
+      "decision": "KEEP",
+      "evidence_level": "representative-live-page-crud-media-scheduling-analytics-verified-messenger-degraded",
+      "overlap": "Owns authenticated Facebook Page operations; Writing/Editorial, Visual Direction, Video Production, Research, Automations, and Security Engineering retain their distinct layers; personal profiles are out of scope."
+    },
+    {
       "skill": "youtube-publishing",
       "decision": "KEEP",
       "evidence_level": "real-oauth-mismatch-plus-interrupted-resume-plus-playlist-readback-proven",

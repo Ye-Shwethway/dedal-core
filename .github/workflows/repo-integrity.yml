@@ -49,8 +49,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          required_skills=(medicine-store-assistant patient-report-assistant ika github files research software-development decision-design interface-design agent-engineering security-engineering project-bootstrap release-engineering data-operations writing-editorial visual-direction knowledge-memory automations skill-acquisition)
-          for skill in "${required_skills[@]}"; do test -s "skills/$skill/SKILL.md" || { echo "Missing skill entrypoint: skills/$skill/SKILL.md"; exit 1; }; done
+          ruby -e '
+            require "yaml"
+            registry = YAML.load_file("index/SKILL_REGISTRY.yaml")
+            skills = registry.fetch("skills")
+            active = skills.select { |_name, cfg| cfg["status"] == "active" }
+            active.each do |name, cfg|
+              entrypoint = cfg["entrypoint"] || File.join(cfg.fetch("path"), "SKILL.md")
+              abort "Missing or empty active skill entrypoint: #{name} -> #{entrypoint}" unless File.file?(entrypoint) && File.size?(entrypoint)
+            end
+            puts "Active skill entrypoints: #{active.length} verified"
+          '
 
           test -s skills/medicine-store-assistant/IMPORT_SOURCE.md
           test -s skills/patient-report-assistant/IMPORT_SOURCE.md

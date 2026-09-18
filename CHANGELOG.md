@@ -4,6 +4,17 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.33.1 — 2026-09-18
+
+### Fixed
+- Repo Integrity now derives active skill entrypoints from index/SKILL_REGISTRY.yaml instead of a stale hand-maintained subset.
+- Runtime Contracts now invokes the existing YouTube media-staging and YouTube SEO routing validators.
+- Corrected the Security Engineering path typo in the Master Index.
+- Replaced stale public checkpoint state with a compact current effectiveness-measurement checkpoint.
+
+### Changed
+- The next Core phase is black-box outcome evaluation and state hygiene rather than skill-count expansion. No general intelligence gain is claimed from this maintenance release alone.
+
 
 ## 0.33.0 — 2026-09-18
 

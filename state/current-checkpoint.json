@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.33.0",
+  "version": "0.33.1",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -17,7 +17,8 @@
     "YouTube upload orchestration uses a persistent isolated outbound-polling runner: normal upload submission auto-picks queued jobs without per-job GitHub Actions, while idempotency, ownership, private-first intent gates, bounded read-back, and verification remain authoritative.",
     "DEDAL Self-Improvement is an independently routable meta-faculty for correction/regression learning closure: durable fixes require applicable runtime repair, canonical-source reconciliation, regression coverage, correctly scoped durable learning, continuity state, and independent verification before full closure.",
     "Self-Improvement durable candidates are triaged as discard/improve/merge/create; captured lessons progress through explicit maturity states and broad promotion requires recurrence, held-out, transfer, or equivalent severity-appropriate evidence rather than one-session intuition.",
-    "Facebook Page Management is an independently routable specialist for authenticated Page content, media, scheduling, engagement/moderation, analytics and administration; personal-profile automation remains out of scope and Messenger fails closed unless fresh inbound state and compliant sending are live-verified."
+    "Facebook Page Management is an independently routable specialist for authenticated Page content, media, scheduling, engagement/moderation, analytics and administration; personal-profile automation remains out of scope and Messenger fails closed unless fresh inbound state and compliant sending are live-verified.",
+    "Effectiveness-hygiene maintenance closes registry/CI coverage drift and moves the next Core phase from skill-count expansion to black-box outcome evaluation."
   ],
   "evidence": [
     {
@@ -77,13 +78,13 @@
     "Facebook Messenger fresh-inbound synchronization is not currently live-verified on the tested connector: old thread history was readable but fresh inbound state was absent and a send was policy-blocked as outside the allowed window; Page content operations remain independently verified."
   ],
   "next_executable_step": {
-    "id": "FACEBOOK-PAGE-PRIVATE-OVERLAY",
-    "action": "Add Creator/Page-specific Facebook operating context only to the private overlay after the public facebook-page-management skill is synchronized and verified; keep real Page identifiers, voice, analytics and messaging state out of public Core."
+    "id": "DEDAL-EFFECTIVENESS-BENCHMARK-V1",
+    "action": "Run the frozen non-destructive Creator-tailored black-box benchmark, compare observable outcomes against a meaningful minimal/plain baseline when technically comparable, and use the evidence to decide expand/tune/consolidate/retire."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
-    "ref": "main",
-    "sha": "1c87715a8aa4e8bccbc2d99fd4c10420c7fe719c",
-    "relation": "v0.32.0 Self-Improvement feature merge verified by Repo Integrity and Runtime Contracts on authoritative main before this checkpoint-only alignment commit"
+    "ref": "feat/effectiveness-hygiene-0.33.1",
+    "sha": "be6c6036762b64b246b7ac93152460f5237d2090",
+    "relation": "0.33.1 maintenance candidate created atomically from verified main; PR CI must pass before promotion and live main remains authoritative after merge"
   }
 }

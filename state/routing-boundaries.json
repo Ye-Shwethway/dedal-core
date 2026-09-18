@@ -1,5 +1,5 @@
 {
-  "schema_version": 11,
+  "schema_version": 12,
   "phase": "hardening-consolidation-outcome-validation",
   "composition_model": {
     "architecture": "persistent-cognitive-runtime",
@@ -166,6 +166,21 @@
       "rule": "YouTube SEO owns discovery intelligence and hypotheses; YouTube Publishing owns authenticated YouTube operations and provider read/write transport. SEO proposals do not bypass Publishing intent, ownership, mutation, or read-back gates."
     },
     {
+      "id": "facebook-page-boundary",
+      "primary_owner_by_intent": {
+        "authenticated-facebook-page-content-media-scheduling-mutation": "facebook-page-management",
+        "facebook-page-comments-reactions-moderation": "facebook-page-management",
+        "facebook-page-analytics-roles-settings-messaging-transport": "facebook-page-management",
+        "substantial-post-copywriting": "writing-editorial",
+        "page-image-generation-editing": "visual-direction",
+        "page-video-master-editing": "video-production",
+        "external-current-meta-policy-fact-research": "research",
+        "recurring-page-monitoring-or-delivery": "automations",
+        "credential-trust-security-policy": "security-engineering"
+      },
+      "rule": "Facebook Page Management owns authenticated Page operations and provider transport; personal-profile automation is not implied, and Messenger remains fail-closed unless current inbound state and compliant sending are live-verified."
+    },
+    {
       "id": "evidence-acquisition",
       "primary_owner_by_intent": {
         "current-fact-research-synthesis": "research",
@@ -214,6 +229,7 @@
     "youtube-discovery-intelligence-is-separate-from-authenticated-youtube-mutation",
     "candidate-scene-discovery-is-separate-from-seo-packaging-editing-and-publishing",
     "material-fix-closure-requires-canonical-source-regression-guard-and-durable-learning",
-    "production-hotfix-source-sync-debt-must-be-cleared-before-durable-close"
+    "production-hotfix-source-sync-debt-must-be-cleared-before-durable-close",
+    "facebook-page-operations-are-separate-from-personal-profile-automation-and-content-production"
   ]
 }

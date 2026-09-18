@@ -42,6 +42,8 @@ jobs:
           python3 scripts/validate_creative_production_routing.py
           python3 scripts/validate_youtube_publishing_hardening.py
           python3 scripts/validate_youtube_source_sync.py
+          python3 scripts/validate_youtube_media_staging.py
+          python3 scripts/validate_youtube_seo_routing.py
           python3 scripts/validate_candidate_video_finder_routing.py
           python3 scripts/validate_facebook_page_management.py
           python3 scripts/validate_public_repo_privacy.py

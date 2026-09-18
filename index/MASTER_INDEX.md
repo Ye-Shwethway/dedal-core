@@ -73,7 +73,7 @@ Use `data-operations` for record/data integrity, reconciliation, staging, determ
 
 Use `writing-editorial` when the main deliverable is prose and quality depends on semantic fidelity, structure, voice, terminology, translation/localization, or publication QA.
 
-Use `visual-direction` for still-image generation/editing where subject identity, canonical traits, reference hierarchy, composition, series continuity, targeted edits, drift detection, or nndered visual QA matter. When the task becomes temporal assembly or motion direction, Video Production owns that layer.
+Use `visual-direction` for still-image generation/editing where subject identity, canonical traits, reference hierarchy, composition, series continuity, targeted edits, drift detection, or rendered visual QA matter. When the task becomes temporal assembly or motion direction, Video Production owns that layer.
 
 Use `candidate-video-finder` when the primary question is which specific scene/event should enter production next: discover, verify source/scene truth, apply eligibility gates, compare evidence, and produce a Creator-selected shortlist. After selection, Video Production owns exact local cut truth; YouTube SEO owns discovery-surface packaging/measurement; Visual Direction owns thumbnail image production; YouTube Publishing owns authenticated YouTube operations.
 

@@ -4,7 +4,7 @@
 
 Track Facebook Page capabilities as separate evidence states:
 
-- **exposed** — A tool/action is listed by the execution surface;
+- **exposed** — a tool/action is listed by the execution surface;
 - **authorized** — current scopes/tasks indicate the account/Page should be permitted;
 - **read-verified** — the operation returned current authoritative Page state;
 - **write-verified** — a bounded mutation completed and remote read-back confirmed the intended state;

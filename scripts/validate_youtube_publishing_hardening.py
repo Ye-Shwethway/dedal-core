@@ -10,7 +10,7 @@ CHECKPOINT = ROOT / "skills/youtube-publishing/CURRENT_CHECKPOINT.md"
 MACHINE = ROOT / "state/current-checkpoint.json"
 VERSION = ROOT / "VERSION"
 
-required_cases = {f"YT-HARD-{i:02d}" for i in range(1, 10)} | {
+required_cases = {f"YT-HARD-{i:02d}" for i in range(1, 13)} | {
     "upload-submit-auto-runner-contract",
     "runner-queue-discovery-contract",
     "eventual-consistency-upload-verification",
@@ -32,6 +32,11 @@ required_phrases = [
     "stage-aware D1 mutation audit",
     "one bounded retry",
     "read back",
+    "positive / friendly / playful",
+    "sensitive / controversial / adversarial",
+    "neutral factual tone",
+    "disagreement alone is not abuse",
+    "creator approval",
 ]
 missing = [p for p in required_phrases if p.lower() not in combined.lower()]
 if missing:

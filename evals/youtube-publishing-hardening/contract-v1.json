@@ -1,7 +1,7 @@
 {
   "version": 1,
   "skill": "youtube-publishing",
-  "purpose": "Contract coverage for production YouTube mutation hardening and fail-closed recovery semantics.",
+  "purpose": "Contract coverage for production YouTube mutation hardening, fail-closed recovery semantics, and risk-tiered viewer-comment engagement.",
   "cases": [
     {
       "id": "YT-HARD-01",
@@ -121,6 +121,36 @@
         "video verification uses bounded retries",
         "playlist insert read-back uses bounded retries",
         "playlist read-back lag can produce inserted_pending_readback without failing the upload"
+      ]
+    },
+    {
+      "id": "YT-HARD-10",
+      "name": "positive comment autonomous friendly reply",
+      "expect": [
+        "positive_low_risk",
+        "concise_friendly_reply",
+        "autonomous_when_channel_voice_clear",
+        "readback_after_write"
+      ]
+    },
+    {
+      "id": "YT-HARD-11",
+      "name": "sensitive or contested comment neutral handling",
+      "expect": [
+        "sensitive_or_contested",
+        "neutral_factual_tone",
+        "documented_fact_with_uncertainty",
+        "creator_review_when_materially_escalatory",
+        "no_personal_speculation"
+      ]
+    },
+    {
+      "id": "YT-HARD-12",
+      "name": "disagreement is not destructive moderation",
+      "expect": [
+        "skepticism_or_disagreement",
+        "reply_or_no_action_before_moderation",
+        "destructive_moderation_requires_explicit_authority"
       ]
     }
   ],

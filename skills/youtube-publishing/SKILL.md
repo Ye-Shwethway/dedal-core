@@ -14,12 +14,13 @@ Own the channel-operations layer after a media artifact is ready for distributio
 - selecting the correct channel among multiple authorized channel profiles;
 - preparing or changing title, description, tags, category, thumbnail, captions, playlist membership/image, privacy, scheduling, or supported channel branding;
 - performing bounded YouTube Data/Analytics API operations;
+- reading and replying to viewer comments, or performing authorized comment moderation;
 - reviewing channel/video analytics and actual YouTube search terms to improve later publishing choices;
 - diagnosing a failed YouTube mutation through bounded vendor diagnostics.
 
 ## Ownership boundary
 
-YouTube Publishing owns target-channel resolution, YouTube metadata writes, upload lifecycle, privacy/scheduling, playlist and thumbnail operations, captions, supported channel branding, managed media state, and bounded YouTube Data/Analytics/Reporting transport used by higher-level workflows. YouTube SEO owns discovery research, surface-specific packaging hypotheses, analytics diagnosis, experiments, and discovery-learning synthesis.
+YouTube Publishing owns target-channel resolution, YouTube metadata writes, upload lifecycle, privacy/scheduling, playlist and thumbnail operations, captions, supported channel branding, viewer-comment engagement/moderation, managed media state, and bounded YouTube Data/Analytics/Reporting transport used by higher-level workflows. YouTube SEO owns discovery research, surface-specific packaging hypotheses, analytics diagnosis, experiments, and discovery-learning synthesis.
 
 It does **not** replace:
 - Video Production for edit quality, codecs, burned-in captions, or the final media master;
@@ -88,6 +89,18 @@ Representative live evidence now covers:
 
 Watermark set/unset tools are exposed but the lifecycle remains **not fully live-gated** because YouTube does not provide a reliable current-watermark read/list baseline.
 
+
+## Viewer-comment engagement triage
+
+Classify the interaction before replying or moderating. Use the smallest sufficient action and preserve the channel voice without turning ordinary disagreement into conflict.
+
+- **Positive / friendly / playful:** a concise friendly acknowledgement or agreement may be posted autonomously when the channel voice and context are clear. Do not over-explain a lightweight comment.
+- **Neutral factual question:** answer autonomously only when the factual basis is sufficiently verified and the response does not require personal, medical, legal, or other sensitive speculation. Route material external-fact verification through Research when needed.
+- **Sensitive / controversial / adversarial:** use a neutral factual tone, acknowledge reasonable uncertainty, avoid defensive advocacy, and distinguish documented statements from inference. If the reply could materially escalate, endorse a contested claim, speculate about a person, or create meaningful reputational/legal/policy risk, obtain Creator approval before posting.
+- **Abuse / spam / moderation:** disagreement alone is not abuse. Deletion, rejection, author bans, or other destructive moderation are separate consequential actions and require explicit authority.
+
+For public figures, do not infer health, drug use, private conduct, or other sensitive facts from appearance or rumor. It is acceptable to report a documented public statement with attribution and limits. When a reply or edit is written through the API, read it back when the provider exposes the resulting comment state. See `references/comment-engagement.md`.
+
 ## Discoverability / SEO boundary
 
 Use YouTube SEO for query/entity research, Search/Browse/Suggested strategy, packaging hypotheses, analytics diagnosis, experiments, and channel-learning synthesis. YouTube Publishing remains the execution/transport owner when approved metadata or channel state is actually read or changed. Do not bypass Publishing ownership, intent, mutation, or read-back gates merely because an SEO workflow produced a recommendation.
@@ -112,6 +125,7 @@ After upload, capture the actual available enforcement state when surfaced by Yo
 - `references/mutation-hardening-and-recovery.md`
 - `references/thumbnail-media-staging.md`
 - `references/reach-reporting.md`
+- `references/comment-engagement.md`
 - `channel-profiles.example.json`
 - `scripts/youtube_channel_ops.py`
 - `gateway/README.md`

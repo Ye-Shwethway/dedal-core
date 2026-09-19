@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.33.3 â€” 2026-09-19
+
+### Added
+- Added risk-tiered YouTube viewer-comment engagement guidance covering positive, neutral-factual, sensitive/contested, and abuse/spam interactions.
+- Added `skills/youtube-publishing/references/comment-engagement.md` plus regression cases for autonomous low-risk replies, neutral handling of sensitive claims, and the boundary between disagreement and destructive moderation.
+
+### Changed
+- YouTube Publishing now explicitly owns bounded viewer-comment engagement and moderation on verified Creator-owned channels.
+- Low-risk positive comments may receive concise channel-voice replies autonomously, while sensitive or materially escalatory replies use neutral factual framing, visible uncertainty, and Creator review when needed.
+- Public-figure sensitive claims must be based on documented statements rather than appearance-based or rumor-based inference.
+
 - Confirmed live custom-MCP resync to 54 actions and validated the DEDAL-owned media staging lifecycle through `youtube_media_stage` -> signed HTTPS stage -> `youtube_media_unstage`, with cleanup and no production-thumbnail churn. A malformed/truncated large Base64 client payload was treated as a transport/input failure rather than retried against YouTube.
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
@@ -322,78 +333,4 @@ Anthropic and Vercel material was used as pattern-level inspiration where a repo
 ## 0.4.0 ÃƒÂ¢Ã‚Â€Ã‚Â” 2026-09-14
 
 ### Added
-- DEDAL-native Knowledge Archive skill at `skills/ika/` with `$ika` routing.
-- Public archive, retrieval, relationship/change-impact, and orchestration contracts derived from the earlier IANEO Knowledge Archive experience.
-- `ADAPTATION_NOTES.md` documenting provenance and deliberate differences from the private legacy source.
-
-### Changed
-- `$ika` is now active instead of planned.
-- The legacy IANEO archive design was refined rather than copied verbatim: fixed IANEO destinations, IANEO-only identity wording, and assumed orchestration behavior were removed/generalized.
-- Writing Chamber and Image Visualization Chamber are no longer treated as default knowledge-archive responsibilities; they remain historical/private experiments unless later promoted as separate DEDAL skills.
-- Private archives, registry contents, scripts, fixtures, and project data remain outside the public DEDAL Core repository.
-
-### Adaptation provenance
-- Source repository: private `Ye-Shwethway/ianeo-knowledge-vault`
-- Source commit: `fbed860928c1a93261306f70a47fa700da56ce29`
-- Legacy source path: `skills/ianeo-knowledge-archive/`
-
-## 0.3.0 ÃƒÂ¢Ã‚Â€Ã‚Â” 2026-09-14
-
-### Added
-- Formal Stable Kernel directory with `KERNEL.md`, `BOOT_CONTRACT.md`, and `STATE_BOUNDARY.md`.
-- First native generic DEDAL skill entrypoints for GitHub, Files & Artifacts, Research, Software Development, and Automations.
-- Integrity validation for kernel files, active generic skill entrypoints, and semantic version format.
-
-### Changed
-- `MASTER_INDEX.md` now boots through the formal kernel before routing to skills.
-- `SKILL_REGISTRY.yaml` version 2 registers the five generic skills as active instead of scaffolds.
-- Generic skills are intentionally provider-agnostic and verify current execution surfaces before acting.
-
-## 0.2.0 ÃƒÂ¢Ã‚Â€Ã‚Â” 2026-09-13
-
-### Added
-- Reconstructed BIOS/bootstrap architecture for Custom Instructions -> DEDAL Core -> master index routing.
-- Stable-kernel / growable-skills / operations-layer model.
-- `index/SKILL_REGISTRY.yaml` as a machine-readable routing registry.
-- Full pinned snapshots of Medicine Store Assistant (`$msa`) and Patient Report Assistant (`$pra`).
-- Import provenance records for both migrated skills.
-- Integrity checks for the master index, skill registry, skill entrypoints, provenance files, agent metadata, and minimum reference-package completeness.
-
-### Changed
-- DEDAL Core now has its first real growable skill layer rather than only scaffolding.
-- Skill routing prefers explicit aliases and loads references on demand to reduce prompt/context bloat.
-
-### Migration provenance
-- Source repository: `Ye-Shwethway/medicine-store-assistant`
-- Source commit: `6b8f35e4056f030a1ace2dac137cde1071a00051`
-- Imported packages: `skills/medicine-store-assistant/`, `skills/patient-report-assistant/`
-
-## 0.1.0 ÃƒÂ¢Ã‚Â€Ã‚Â” 2026-09-13
-
-Initial DEDAL Core foundation: identity, operating contract, security boundary, capability registry, continuity checkpoint, improvement protocol, foundational architecture, and repository integrity workflow.
-
-- YouTube Publishing: added transport-safe chunked native media staging (`youtube_media_stage_chunk` + `youtube_media_stage_finalize`) so thumbnail assets no longer depend on third-party upload hosts when inline Base64 exceeds connector body limits.
-
-- YouTube Publishing: retained the stable 54-action MCP surface and moved chunk transport behind the existing `youtube_media_stage` action via a versioned Base64 control envelope; prevents connector body limits without forcing a custom-MCP schema resync.
-
-- YouTube Publishing: made transparent chunk acknowledgements compatible with the existing media-stage output schema; pending chunks can traverse Composio without adding MCP actions.
-
-### YouTube thumbnail workflow closed
-- Marked the layered thumbnail workflow production-complete after native DEDAL staging, bounded chunk transport, YouTube mutation/read-back, and cleanup passed live validation.
-- Credit-metered third-party upload hosts are fallback-only; native DEDAL staging is the default execution path.
-## 2026-09-17 Ã¢Â€Â” YouTube video rating bridge validated
-
-- Confirmed the Gateway allowlist supports `videos.getRating` and `videos.rate`.
-- Verified a live read-only `getRating` call through the existing DEDAL YouTube MCP/Data API bridge.
-- A dedicated typed-alias MCP deployment was attempted, detected an authenticated-client 401 regression, and was immediately rolled back; production remains MCP `0.8.4` with 54 actions.
-- Publishing skill now documents the bounded bridge path for `like`, `dislike`, and `none`, with explicit action intent required for writes.
-- No video rating was changed during validation; comment-like writes remain unsupported by the YouTube Data API.
-
-## 2026-09-17 â€” YouTube Reporting transport and Publishing closeout
-
-- Added bounded `reports.download` support to the public Gateway source and reconciled the deployed Gateway reference to `0.7.51`.
-- Live-validated the first `channel_reach_basic_a1` CSV header: `date,channel_id,video_id,video_thumbnail_impressions,video_thumbnail_impressions_ctr`.
-- Locked Reach semantics: CTR zero is not zero views; delayed historical files preserve measurement availability timing and only backfill matching windows.
-- Added a human-readable reporting requirement: resolve report video IDs to live video titles when possible, show title first, retain the ID for traceability, and label unresolved titles instead of guessing.
-- Marked YouTube Publishing capability-complete for the current scope; ongoing SEO windows are observation work, not a Publishing implementation blocker.
-
+- DEDAL-native Knowledge Archive skill at `skills/ika/` with¢ëiºÛkºwµç_ºYhºÚn¶Æ¯yÛhşiíıø¥zÏÜ¢jh²*?¢ëiºßÛjÈejwlµÚ.¶ÜmFéÜjßæßßŠW¬ıÊ&¦‹"£ú.¶›­ı¶¬†V§vË]¢ëmÆÛh¾'°¶ŸºYhºÚn¶Šî±è^iÙõÓOæßßŠW¬ıÊ&¦‹"£ú.¶›­ı¶¬†V§vË]¢ëmÆßíj)g×M?š{~)^³÷(šš,ŠèºÚn·öÚ²ZÛ-v‹­·m¢øÂ–«¶ÊŠ

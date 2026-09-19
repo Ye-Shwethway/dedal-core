@@ -76,7 +76,7 @@
     {
       "id": "youtube-comment-engagement-refinement-2026-09-19",
       "kind": "real-work-correction-plus-contract-validation",
-      "status": "candidate-pending-ci"
+      "status": "implementation-committed-local-validation-passed"
     }
   ],
   "unresolved_risks": [
@@ -95,8 +95,8 @@
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
-    "ref": "main",
-    "sha": "3a7dd2f96bff4dc52b6d1f4c9d5f19240fbaa9bd",
-    "relation": "0.33.3 YouTube comment-engagement refinement candidate prepared from verified main; feature-branch commit and PR CI are still required before promotion"
+    "ref": "feat/youtube-comment-engagement-0.33.3",
+    "sha": "4509ee053bbb0493a79bf0cb2285271d682e1f43",
+    "relation": "0.33.3 YouTube comment-engagement implementation commit; local hardening/runtime/privacy validators passed before PR promotion"
   }
 }

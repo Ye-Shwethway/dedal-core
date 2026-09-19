@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.33.1",
+  "version": "0.33.2",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -18,7 +18,8 @@
     "DEDAL Self-Improvement is an independently routable meta-faculty for correction/regression learning closure: durable fixes require applicable runtime repair, canonical-source reconciliation, regression coverage, correctly scoped durable learning, continuity state, and independent verification before full closure.",
     "Self-Improvement durable candidates are triaged as discard/improve/merge/create; captured lessons progress through explicit maturity states and broad promotion requires recurrence, held-out, transfer, or equivalent severity-appropriate evidence rather than one-session intuition.",
     "Facebook Page Management is an independently routable specialist for authenticated Page content, media, scheduling, engagement/moderation, analytics and administration; personal-profile automation remains out of scope and Messenger fails closed unless fresh inbound state and compliant sending are live-verified.",
-    "Effectiveness-hygiene maintenance closes registry/CI coverage drift and moves the next Core phase from skill-count expansion to black-box outcome evaluation."
+    "Effectiveness-hygiene maintenance closes registry/CI coverage drift and moves the next Core phase from skill-count expansion to black-box outcome evaluation.",
+    "Video Production now distinguishes Simple / Narrative Edit from Fan / Visual-Montage Edit; both require a structure-first rough before final effects polish, while the selected mode determines whether source meaning/chronology or a target visual motif is primary."
   ],
   "evidence": [
     {
@@ -65,6 +66,11 @@
       "id": "facebook-page-management-live-gate-2026-09-18",
       "kind": "representative-live-page-operations-and-contract-validation",
       "status": "page-crud-media-scheduling-analytics-passed-messenger-degraded"
+    },
+    {
+      "id": "video-production-editing-modes-2026-09-19",
+      "kind": "real-work-refinement-plus-contract-validation",
+      "status": "candidate-passed-local-creative-routing-runtime-contracts-and-public-privacy"
     }
   ],
   "unresolved_risks": [
@@ -83,8 +89,8 @@
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
-    "ref": "feat/effectiveness-hygiene-0.33.1",
-    "sha": "be6c6036762b64b246b7ac93152460f5237d2090",
-    "relation": "0.33.1 maintenance candidate created atomically from verified main; PR CI must pass before promotion and live main remains authoritative after merge"
+    "ref": "feat/video-editing-modes-0.33.2",
+    "sha": "9e883ecb832bcd9532f7f70f6e62a72f61cb2055",
+    "relation": "0.33.2 editing-mode refinement candidate created atomically from verified main; this checkpoint alignment follows the candidate and PR CI must pass before promotion"
   }
 }

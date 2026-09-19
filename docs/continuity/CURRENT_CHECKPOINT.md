@@ -6,7 +6,7 @@ _Date: 2026-09-18_
 
 - Repository: Ye-Shwethway/dedal-core
 - Branch: main after promotion
-- Current version: 0.33.1
+- Current version: 0.33.2
 - Live GitHub state remains authoritative for repository identity, history, and CI.
 
 ## Accepted state
@@ -17,6 +17,7 @@ _Date: 2026-09-18_
 - Runtime Contracts include the existing YouTube media-staging and YouTube SEO routing validators.
 - Self-Improvement requires durable closure across runtime repair, canonical source, regression coverage where mechanically testable, correctly scoped learning, continuity, and independent verification.
 - Current evidence supports specific gains in boot recovery, verification/read-back discipline, continuity, and selected workflow safety, but does not yet support a broad general-intelligence improvement claim.
+- Video Production now has two explicit footage-editing methods: Simple / Narrative Edit and Fan / Visual-Montage Edit. Both use structure-first rough acceptance before final effects polish; they differ in whether source meaning/chronology or a target visual motif is primary.
 
 ## Current evaluation direction
 

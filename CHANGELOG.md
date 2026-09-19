@@ -4,6 +4,17 @@
 
 All meaningful DEDAL Core architectural and behavioral changes should be recorded here.
 
+## 0.33.2 — 2026-09-19
+
+### Added
+- Added explicit **Simple / Narrative Edit** and **Fan / Visual-Montage Edit** methods inside Video Production instead of creating a separate editing skill.
+- Added `skills/video-production/references/editing-modes.md` with structure-first fan-edit guidance, subject-dominant shot selection, crop-through-motion review, music-led assembly, transition discipline, and intentional endings.
+- Added creative-production regression cases for the two editing modes and effect-first failure modes.
+
+### Changed
+- Video Production now separates structural rough acceptance from final effects polish so shot selection, sequence, framing, duration, target coverage, and ending are approved before decorative transitions/effects.
+- Repeated full-frame white flash/strobe transitions are explicitly non-default high-salience effects rather than a generic fan-edit binding technique.
+
 ## 0.33.1 — 2026-09-18
 
 ### Fixed

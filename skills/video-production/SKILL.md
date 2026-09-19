@@ -32,13 +32,14 @@ It does **not** replace:
 
 1. **Frame the deliverable.** Audience, purpose, duration, aspect ratio, platform, language, source assets, and quality bar.
 2. **Build temporal intent.** Define beats, scene order, shot roles, continuity constraints, and audio/caption needs before generating or cutting.
-3. **Choose the execution lane.** Generative-video app, footage edit, image-to-video, Remotion/motion graphics, FFmpeg post-production, or a hybrid.
+3. **Choose the execution lane and editing method.** Generative-video app, footage edit, image-to-video, Remotion/motion graphics, FFmpeg post-production, or a hybrid. For footage editing, explicitly choose **Simple / Narrative Edit** or **Fan / Visual-Montage Edit** before detailed cutting.
 4. **Generate or inspect source media.** Treat generated clips as takes, not canonical truth. Probe real media before editing.
-5. **Assemble for meaning.** Prefer motivated cuts, readable pacing, continuity, and audio-led timing over effect density.
-6. **Polish selectively.** Reframe, stabilize, grade/tone-map, retime, mix, caption, and add transitions/effects only when they improve the piece.
-7. **Verify the render.** Check duration, dimensions, streams, sync, caption readability, clipping/loudness, visual continuity, effect boundaries, timestamps, and final playback.
-8. **Self-review against a baseline.** Before handoff, compare the candidate with the prior clean/proven version or source baseline and identify both improvements and regressions.
-9. **Deliver intentionally.** Preserve masters/intermediates when useful and produce platform-appropriate exports without confusing encode success with editorial quality.
+5. **Assemble for the chosen method.** Narrative edits prioritize source meaning, chronology, dialogue/action continuity, and compact entry/resolution beats. Fan edits prioritize a declared visual subject/motif, subject-dominant shot selection, coherent sequence, and music/rhythm when appropriate.
+6. **Lock the structural rough before decoration.** Validate shot selection, order, framing/crop, duration, target coverage, entry/ending, and audio intent before spending effort on transitions/effects.
+7. **Polish selectively.** Reframe, stabilize, grade/tone-map, retime, mix, caption, and add transitions/effects only when they improve the accepted structure.
+8. **Verify the render.** Check duration, dimensions, streams, sync, caption readability, clipping/loudness, subject framing through motion, visual continuity, effect boundaries, timestamps, and final playback.
+9. **Self-review against a baseline.** Before handoff, compare the candidate with the prior clean/proven version or source baseline and identify both improvements and regressions.
+10. **Deliver intentionally.** Preserve masters/intermediates when useful and produce platform-appropriate exports without confusing encode success with editorial quality.
 
 ## Durable rules
 
@@ -52,6 +53,10 @@ It does **not** replace:
 - External recaps, transcripts, subtitle timing, clip descriptions, or web timestamps may help locate an event, but they are locator evidence only until reconciled with the actual local media timeline.
 - When editing a rough cut/excerpt, maintain an explicit original-to-local timeline mapping and verify anchors if keyframe seeking, timestamp preservation, concat, or multiple source ranges may have shifted the nominal offset.
 - Build the readable edit before decorating it. A straight cut is the default; transitions, speed ramps, flashes, shake, zooms, blur, LUTs, animated captions, and other effects need an editorial job rather than mere availability.
+- Editing mode is an explicit decision, not an accidental style drift. Use **Simple / Narrative Edit** when source meaning, dialogue, chronology, or action completeness is primary; use **Fan / Visual-Montage Edit** when a target subject, aesthetic motif, or visual/emotional hook is primary. See `references/editing-modes.md`.
+- For iterative editing, separate **structure acceptance** from **final effects polish**. A rough cut should make shot selection, sequence, framing, duration, target coverage, and ending easy to judge; only then bind the accepted cuts with transitions, beat-sync, retiming, grade, or other style.
+- In target-centric fan edits, minimize secondary-character coverage unless it serves rhythm/context, verify subject occupancy across moving shots, and end on the target subject/motif unless a different ending is deliberately chosen.
+- Repeated full-frame white flashes/strobes are not a default transition system. High-salience effects should be sparse, purposeful, and reviewed for viewer comfort as well as style.
 - Trim first, transition second. Use J/L cuts and audio continuity when they improve anticipation, dialogue flow, ambience, or scene entry/exit.
 - For stylized action edits, keep emphasis effects sparse and event-driven. Strong effects repeated on every impact quickly reduce readability and feel synthetic.
 - Reframe/geometry operations should usually precede final caption and graphic placement so text stays inside target safe areas.
@@ -76,6 +81,7 @@ It does **not** replace:
 ## Progressive references
 
 - `references/generative-video-direction.md`
+- `references/editing-modes.md`
 - `references/post-production-and-delivery.md`
 - `references/scene-and-action-boundary-extraction.md`
 - `references/professional-post-production-effects.md`

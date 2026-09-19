@@ -1,15 +1,120 @@
 {
   "schema_version": 1,
   "cases": [
-    {"id":"CP-01","expect":"ACCEPT","intent":"direct an image-to-video cinematic shot with continuity constraints","primary":"video-production","supporting":["visual-direction"],"execution":["generative-video-tool"]},
-    {"id":"CP-02","expect":"ACCEPT","intent":"cut uploaded footage, add subtitles, normalize audio, export vertical MP4","primary":"video-production","supporting":[],"execution":["ffmpeg"]},
-    {"id":"CP-03","expect":"ACCEPT","intent":"create a CME PowerPoint from current clinical evidence","primary":"presentation-engineering","supporting":["research","writing-editorial"],"execution":["slides-tool"]},
-    {"id":"CP-04","expect":"ACCEPT","intent":"edit prose for a slide without building or redesigning the deck","primary":"writing-editorial","supporting":[],"execution":[]},
-    {"id":"CP-05","expect":"ACCEPT","intent":"generate canonical still reference images for a character","primary":"visual-direction","supporting":[],"execution":["image-generation"]},
-    {"id":"CP-06","expect":"REJECT","intent":"treat ffmpeg as a top-level faculty merely because it can edit video","reason_contains":"execution"},
-    {"id":"CP-07","expect":"REJECT","intent":"claim a successfully encoded video is editorially verified","reason_contains":"render"},
-    {"id":"CP-08","expect":"REJECT","intent":"copy proprietary Anthropic PPTX skill material into DEDAL","reason_contains":"proprietary"},
-    {"id":"CP-09","expect":"REJECT","intent":"declare a PPTX complete because its XML/package validates without rendered visual QA","reason_contains":"visual"},
-    {"id":"CP-10","expect":"REJECT","intent":"freeze current Veo Seedance or PPTX library limits as permanent Core facts","reason_contains":"current"}
+    {
+      "id": "CP-01",
+      "expect": "ACCEPT",
+      "intent": "direct an image-to-video cinematic shot with continuity constraints",
+      "primary": "video-production",
+      "supporting": [
+        "visual-direction"
+      ],
+      "execution": [
+        "generative-video-tool"
+      ]
+    },
+    {
+      "id": "CP-02",
+      "expect": "ACCEPT",
+      "intent": "cut uploaded footage, add subtitles, normalize audio, export vertical MP4",
+      "primary": "video-production",
+      "supporting": [],
+      "execution": [
+        "ffmpeg"
+      ]
+    },
+    {
+      "id": "CP-03",
+      "expect": "ACCEPT",
+      "intent": "create a CME PowerPoint from current clinical evidence",
+      "primary": "presentation-engineering",
+      "supporting": [
+        "research",
+        "writing-editorial"
+      ],
+      "execution": [
+        "slides-tool"
+      ]
+    },
+    {
+      "id": "CP-04",
+      "expect": "ACCEPT",
+      "intent": "edit prose for a slide without building or redesigning the deck",
+      "primary": "writing-editorial",
+      "supporting": [],
+      "execution": []
+    },
+    {
+      "id": "CP-05",
+      "expect": "ACCEPT",
+      "intent": "generate canonical still reference images for a character",
+      "primary": "visual-direction",
+      "supporting": [],
+      "execution": [
+        "image-generation"
+      ]
+    },
+    {
+      "id": "CP-06",
+      "expect": "REJECT",
+      "intent": "treat ffmpeg as a top-level faculty merely because it can edit video",
+      "reason_contains": "execution"
+    },
+    {
+      "id": "CP-07",
+      "expect": "REJECT",
+      "intent": "claim a successfully encoded video is editorially verified",
+      "reason_contains": "render"
+    },
+    {
+      "id": "CP-08",
+      "expect": "REJECT",
+      "intent": "copy proprietary Anthropic PPTX skill material into DEDAL",
+      "reason_contains": "proprietary"
+    },
+    {
+      "id": "CP-09",
+      "expect": "REJECT",
+      "intent": "declare a PPTX complete because its XML/package validates without rendered visual QA",
+      "reason_contains": "visual"
+    },
+    {
+      "id": "CP-10",
+      "expect": "REJECT",
+      "intent": "freeze current Veo Seedance or PPTX library limits as permanent Core facts",
+      "reason_contains": "current"
+    },
+    {
+      "id": "CP-11",
+      "expect": "ACCEPT",
+      "intent": "preserve a dialogue scene in source order, trim dead air, and make a clean narrative edit before subtle polish",
+      "primary": "video-production",
+      "supporting": [],
+      "execution": [
+        "ffmpeg"
+      ]
+    },
+    {
+      "id": "CP-12",
+      "expect": "ACCEPT",
+      "intent": "build a music-only fan edit from subject-dominant shots, reduce secondary reactions, then add beat-synced transitions after the rough is accepted",
+      "primary": "video-production",
+      "supporting": [],
+      "execution": [
+        "ffmpeg"
+      ]
+    },
+    {
+      "id": "CP-13",
+      "expect": "REJECT",
+      "intent": "treat an effects-heavy pass as final before shot order framing duration and ending are accepted",
+      "reason_contains": "structure"
+    },
+    {
+      "id": "CP-14",
+      "expect": "REJECT",
+      "intent": "use a full-screen white flash on every fan-edit cut by default",
+      "reason_contains": "effect"
+    }
   ]
 }

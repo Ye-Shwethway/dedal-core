@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "id": "msa-master-data-archive-contract-v1",
+  "purpose": "Regression contract for a collective closed-month historical snapshot ledger that stays outside live operations.",
+  "cases": [
+    {"id":"archive-role-not-operational","expect":"Master Data is historical only; live operational sheets own current state."},
+    {"id":"values-only-snapshot","expect":"Closed month is archived as static values/text with no live formulas or cross-sheet dependencies."},
+    {"id":"archive-before-cleanup","expect":"Archive and read-back verification finish before destructive paired cleanup/reset."},
+    {"id":"append-existing-archive","expect":"Append to an established collective archive instead of creating a competing history system."},
+    {"id":"explicit-projection-map","expect":"Archive fields are mapped by verified semantic headers; redundant live columns need not be duplicated automatically."},
+    {"id":"schema-evolution-no-invention","expect":"Older months may be blank for later fields; backfill requires authoritative evidence."},
+    {"id":"duplicate-month-guard","expect":"A complete existing month block blocks a second append; ambiguity fails closed."},
+    {"id":"explicit-amendment","expect":"Closed history is immutable by default; proven repair requires explicit amendment, checkpoint, read-back, and audit."},
+    {"id":"month-boundary-structural","expect":"Established sentinel rows are structural month boundaries and survive operational cleanup."},
+    {"id":"history-no-double-count","expect":"Derived helper history does not count the same Master Data month as independent extra evidence."},
+    {"id":"desktop-gate-only-when-unreconciled","expect":"Legacy Excel existence alone does not force staging; only required newer/unreconciled authoritative evidence does."}
+  ]
+}

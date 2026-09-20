@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "msa-local-code-registry-v1",
+  "cases": [
+    {"id":"not-row-id","expect":"A local code identifies an item identity, not a row or expiry lot."},
+    {"id":"same-identity-multi-lot","expect":"Multiple legitimate lots of one identity share the same local code."},
+    {"id":"different-identity-unique","expect":"Different item identities never share a local code."},
+    {"id":"monotonic-no-reuse","expect":"Issued local codes are never recycled; numbering does not backfill retired gaps."},
+    {"id":"registry-before-new-code","expect":"Registry and sibling evidence are checked before issuing a new local code."},
+    {"id":"not-cms-evidence","expect":"A local code never authorizes CMS Name, CMS Price, or catalogue identity."},
+    {"id":"cms-replacement-lineage","expect":"Verified CMS replacement changes the live code but preserves the local code as historical alias."},
+    {"id":"historical-snapshot-preserved","expect":"Closed snapshots retain the identifier used at close rather than retroactive rewrite."},
+    {"id":"checkpoint-audit-readback","expect":"Assignment/replacement uses checkpoint, grouped audit where appropriate, and read-back verification."}
+  ]
+}

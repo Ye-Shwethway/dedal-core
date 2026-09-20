@@ -19,6 +19,7 @@ Important sheets may include:
 - `Audit_Log`
 - `Master Data` when the workbook retains a collective closed-month snapshot archive
 - `Item_Mapping`
+- a local-code registry support sheet when local fallback identifiers are used
 - hidden reorder/history/lifecycle support sheets
 
 Treat these names as discovery hints, not proof of the current live structure. Inspect the spreadsheet before every operational task.
@@ -279,6 +280,8 @@ Useful fields include:
 - Notes
 
 Treat mappings as dated evidence, not immutable truth. A later catalogue can invalidate an older mapping. On catalogue refresh, revalidate code **and** clinically/operationally meaningful identity before reuse.
+
+When CMS has not supplied a usable code for a stable local item identity, use [local-code-registry.md](local-code-registry.md) instead of leaving ambiguous blank/`Nil` identifiers indefinitely. Local fallback identifiers are not CMS identities and must never be treated as CMS catalogue evidence.
 
 Explicit `EXCLUDED` entries may preserve user decisions that an item should not participate in ordinary CMS matching, such as non-sale/staff-use stock or catalogue-omitted product families. Exclusion prevents repetitive false-positive review; it does not delete the item from Main Stock unless separately authorized.
 

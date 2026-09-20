@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.34.2 — 2026-09-20
+
+### Added
+- Added a Medicine Store Assistant local-code registry contract for stable local identities that do not yet have a usable CMS-issued code.
+- Added regression coverage for one-code-per-identity semantics, same-item multi-lot reuse, monotonic no-reuse issuance, CMS replacement lineage, and checkpoint/audit/read-back.
+
+### Changed
+- Missing or `Nil` Serial Codes may use a persistent local fallback identifier when the local item identity is stable and no safe CMS code is available.
+- Local fallback identifiers are explicitly not CMS evidence and never authorize CMS Name or CMS Price.
+- A later authoritative CMS code replaces the live operational Serial Code while the local code remains permanently preserved as historical alias/lineage.
+- Closed-month snapshots preserve the identifier actually used at close instead of retroactively rewriting older history.
+
+### Evidence
+- Live rollout on 2026-09-20 assigned 13 stable identities across 16 Main Stock rows, with same-identity lots sharing one code, a dedicated registry, verified restore checkpoint, grouped audit evidence, and zero remaining blank/\`Nil\` Serial Codes in the used Main Stock range.
+
 ## 0.34.1 — 2026-09-20
 
 ### Changed

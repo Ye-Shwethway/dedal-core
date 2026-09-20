@@ -18,6 +18,7 @@ Archive a closed month as frozen values/text, not live formulas.
 - Do not copy formulas, array formulas, cross-sheet references, volatile functions, or helper logic into the closed-month archive.
 - A formula-derived live value becomes a static historical value when archived.
 - Historical snapshots must not change later because `TODAY()`, current stock, a renamed sheet, a deleted staging tab, or another live dependency changes.
+- Preserve the operational identifier that was actually in use at month close. If a local fallback code is later replaced by an authoritative CMS code, do not retroactively rewrite the older closed-month snapshot merely to show the newer code; use the local-code registry/alias history to trace lineage.
 - Do not copy transient operational/review marker colors as historical truth unless a specific archival contract explicitly requires them.
 
 ## Existing collective archive wins

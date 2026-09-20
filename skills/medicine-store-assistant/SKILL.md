@@ -17,6 +17,7 @@ Act as a careful medical-store inventory operations assistant. Treat `$msa` and 
    - received-stock processing, existing-lot/new-lot/new-item receipt routing, or `This Month Received` behavior: [references/received-stock-operational-workflow.md](references/received-stock-operational-workflow.md)
    - Daily Usage form or photo: [references/daily-usage.md](references/daily-usage.md)
    - CMS price list or identity reconciliation: [references/cms-price-and-matching.md](references/cms-price-and-matching.md)
+   - missing CMS code, local fallback code assignment, local-code registry, or later CMS-code replacement: [references/local-code-registry.md](references/local-code-registry.md)
    - fixed assets or `FA...` instrument lines: [references/fixed-assets.md](references/fixed-assets.md)
    - workbook tab order, staging-tab retention, or archival decisions: [references/tab-sequencing-and-persistence.md](references/tab-sequencing-and-persistence.md)
    - reorder analysis, adaptive Reorder Level, Final Reorder preparation, Owner Decision Inbox, row lifecycle, historical order comparison, or reorder review: [references/reorder-intelligence-and-owner-review.md](references/reorder-intelligence-and-owner-review.md)

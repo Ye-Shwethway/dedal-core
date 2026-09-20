@@ -24,6 +24,7 @@ def validate_contract() -> None:
         "month-boundary-structural",
         "history-no-double-count",
         "desktop-gate-only-when-unreconciled",
+        "google-sheets-canonical-working-source",
     }
     if not cases or len(ids) != len(set(ids)):
         raise AssertionError("MSA Master Data contract requires non-empty unique case ids")
@@ -45,7 +46,8 @@ def validate_contract() -> None:
         (archive, "values/text, not live formulas"),
         (archive, "Do not treat `Master Data` as a fifth compatibility-locked operational sheet."),
         (archive, "fail closed on ambiguity instead of appending a second copy"),
-        (archive, "The mere existence of a legacy desktop workbook does not automatically block Google-side month close."),
+        (archive, "Google-side month close does not require a legacy Excel round-trip."),
+        (system, "that Google workbook is the canonical working source for current MSA operations."),
         (close, "closing fingerprint"),
         (close, "contains no live formulas/dependencies"),
         (reorder, "Do not double-count one month"),

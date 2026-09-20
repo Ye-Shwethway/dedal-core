@@ -91,7 +91,7 @@ Archived Final Reorder decisions remain a distinct human-decision evidence class
 
 ## Desktop/external Excel gate
 
-The mere existence of a legacy desktop workbook does not automatically block Google-side month close.
+When the Owner has designated the Google workbook as the primary working system, Google-side month close does not require a legacy Excel round-trip. The mere existence of a legacy desktop workbook does not block Google-side month close.
 
 Use the external-sync/staging gate only when there is known newer or otherwise authoritative desktop/external evidence that has not yet been reconciled and is required by the Owner's workflow.
 

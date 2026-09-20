@@ -38,9 +38,11 @@ Until an explicit migration/canonicality decision says otherwise:
 
 ## Legacy Excel workbook interpretation boundary
 
-The original macro-enabled Excel workbook is a valuable **behavioral specification and historical evidence source**, not an implementation template that must be copied literally.
+The original macro-enabled Excel workbook is a valuable **behavioral specification, migration reference, and historical evidence source**, not the routine working system and not an implementation template that must be copied literally.
 
 Preserve business intent where it remains useful, but do not reproduce long formulas, hidden helper mechanics, VBA orchestration, cloud-sync macros, broken named ranges, or workbook-specific UI machinery merely for compatibility. Prefer a simpler explicit rule, agent-assisted review workflow, or future typed backend behavior when it preserves the same or better operational outcome.
+
+When the Owner has migrated routine operations to the authorized Google workbook, that Google workbook is the canonical working source for current MSA operations. The legacy Excel workbook must not be consulted, synchronized, or treated as a gate merely because it exists. Consult it only for migration verification, historical evidence, compatibility reference, explicit export needs, or a specifically identified newer/unreconciled external dataset.
 
 The original workbook's archived `Master Data` and historical Final Reorder records may be used as evidence for usage history and prior Owner decisions. Missing monthly archives are missing evidence, not proof that no order was placed.
 
@@ -97,15 +99,16 @@ Hiding is presentation only. Do not describe a hidden tab as deleted or archived
 
 ## External compatibility boundary
 
-`Main Stock` and `Daily Usage` synchronize with an existing local Excel workbook and macro system. Preserve their established production range as an external compatibility contract while the current Google-first workflow still depends on it:
+The Google workbook is the canonical working system when the Owner has completed migration away from the local Excel workflow. The established `Main Stock` / `Daily Usage` table shapes remain a compatibility and human-workflow contract, not a live synchronization dependency on Excel:
 
-- Do not rename or reorder existing columns.
-- Do not delete production columns.
+- Do not rename or reorder existing columns casually.
+- Do not delete production columns without explicit migration authorization.
 - Do not casually add columns inside the established range.
 - Do not rewrite formulas or calculated fields without explicit authorization.
 - Do not restructure sheets merely to simplify assistant operations.
+- Do not require a desktop Excel round-trip before normal Google-side work unless the Owner identifies newer/unreconciled external evidence for that operation.
 
-This compatibility boundary preserves current workbook behavior; it does **not** require the future standalone MSA system to clone Excel formulas or VBA implementation details.
+Excel-compatible structure may still matter for exports, historical interpretation, or migration continuity, but routine operational authority stays in the verified Google workbook.
 
 ### Approved Daily Usage Google-Sheet extension
 

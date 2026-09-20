@@ -17,6 +17,7 @@ Important sheets may include:
 - `CMS_Price_List_YYYYMM` versioned price-list sheets
 - `CMS_Batch_<TRANSFER>_<DATE>` batch or transfer sheets
 - `Audit_Log`
+- `Master Data` when the workbook retains a collective closed-month snapshot archive
 - `Item_Mapping`
 - hidden reorder/history/lifecycle support sheets
 
@@ -43,6 +44,8 @@ Preserve business intent where it remains useful, but do not reproduce long form
 
 The original workbook's archived `Master Data` and historical Final Reorder records may be used as evidence for usage history and prior Owner decisions. Missing monthly archives are missing evidence, not proof that no order was placed.
 
+When the current workbook retains a `Master Data` archive, treat it as a values-only closed-month historical snapshot ledger, not as an operating layer. Live operational sheets remain authoritative for current stock and current-cycle workflow. Read [master-data-archive-contract.md](master-data-archive-contract.md) before appending, repairing, or structurally evolving that archive.
+
 For the current Google workbook, preserve established production columns and formulas unless the user explicitly authorizes a change. When a legacy rule is intentionally migrated or refined, document the new rule rather than maintaining duplicate old and new logic indefinitely.
 
 ## Mandatory restore checkpoint and audit invariant
@@ -67,7 +70,7 @@ This checkpoint rule is a hard safety invariant. Do not perform an operational m
 
 ## Four operational sheet compatibility surfaces
 
-`Main Stock`, `Daily Usage`, `This Month Received`, and `Final Reorder` are compatibility-locked human-facing operational surfaces. Before changing their structure, rebuilding them, or generating a Final Reorder Excel output, read [operational-sheet-compatibility.md](operational-sheet-compatibility.md).
+`Main Stock`, `Daily Usage`, `This Month Received`, and `Final Reorder` are compatibility-locked human-facing operational surfaces. A `Master Data` historical archive is explicitly **not** a fifth operating surface; it is a frozen history layer governed by [master-data-archive-contract.md](master-data-archive-contract.md). Before changing their structure, rebuilding them, or generating a Final Reorder Excel output, read [operational-sheet-compatibility.md](operational-sheet-compatibility.md).
 
 Preserve those four table interfaces even when MSA replaces legacy formulas/macros with simpler rules, agent reasoning, temporary review workflows, or other MSA-native machinery.
 

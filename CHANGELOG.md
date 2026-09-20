@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.34.1 — 2026-09-20
+
+### Changed
+- Medicine Store Assistant now explicitly treats the authorized Google workbook as the canonical routine working source once the Owner migrates away from desktop Excel.
+- Legacy Excel is retained as behavioral/migration/historical/export evidence, not as a routine synchronization dependency or month-close gate.
+- Existing Main Stock/Daily Usage structure remains protected for human workflow and export compatibility without requiring an Excel round-trip.
+- Added regression coverage for the Google-canonical working-source boundary.
+
 ## 0.34.0 — 2026-09-20
 
 ### Added

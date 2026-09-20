@@ -88,7 +88,7 @@ Do not infer that month close has happened merely because the calendar date chan
 
 Sometimes there is **known newer or otherwise authoritative computer-side Excel/external evidence** that has not yet been pulled or synchronized and is required before the production Google Sheet can be considered fully reconciled.
 
-The mere existence of a legacy desktop workbook, or historical Excel data that has already been migrated and verified in the canonical closed-month archive, does **not** activate this gate.
+When the Owner has designated the Google workbook as the primary working system, the normal month-close path is Google-only. The mere existence of a legacy desktop workbook, or historical Excel data that has already been migrated and verified in the canonical closed-month archive, does **not** activate this gate.
 
 When genuinely unreconciled authoritative external evidence exists, **do not perform an immediate production cutover on the live `Main Stock` / `Daily Usage` pair**.
 

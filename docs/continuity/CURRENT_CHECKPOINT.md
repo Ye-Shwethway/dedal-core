@@ -6,7 +6,7 @@ _Date: 2026-09-20_
 
 - Repository: Ye-Shwethway/dedal-core
 - Branch: main after promotion
-- Current version: 0.34.0
+- Current version: 0.34.1
 - Live GitHub state remains authoritative for repository identity, history, and CI.
 
 ## Accepted state
@@ -20,6 +20,7 @@ _Date: 2026-09-20_
 - Video Production now has two explicit footage-editing methods: Simple / Narrative Edit and Fan / Visual-Montage Edit. Both use structure-first rough acceptance before final effects polish; they differ in whether source meaning/chronology or a target visual motif is primary.
 - YouTube Publishing now uses risk-tiered viewer-comment engagement: low-risk positive replies may be autonomous, while sensitive/contested threads require neutral factual framing, uncertainty discipline, and Creator review when materially escalatory; disagreement alone is not destructive-moderation grounds.
 - Medicine Store Assistant now treats an established `Master Data` ledger as a values-only closed-month historical snapshot layer outside the four live operational surfaces; month-close archive verification happens before destructive cleanup, and derived history must not double-count archived months.
+- Medicine Store Assistant now uses the authorized Google workbook as the canonical routine working source after migration; legacy Excel remains reference/migration/historical/export evidence rather than a routine synchronization dependency.
 
 ## Current evaluation direction
 

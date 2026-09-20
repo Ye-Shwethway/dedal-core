@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.34.0",
+  "version": "0.34.1",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -21,7 +21,8 @@
     "Effectiveness-hygiene maintenance closes registry/CI coverage drift and moves the next Core phase from skill-count expansion to black-box outcome evaluation.",
     "Video Production now distinguishes Simple / Narrative Edit from Fan / Visual-Montage Edit; both require a structure-first rough before final effects polish, while the selected mode determines whether source meaning/chronology or a target visual motif is primary.",
     "YouTube Publishing uses risk-tiered viewer-comment engagement: low-risk positive replies may be autonomous, sensitive or contested replies default to neutral factual framing and uncertainty discipline with Creator review when materially escalatory, and disagreement alone is not grounds for destructive moderation.",
-    "Medicine Store Assistant treats an established Master Data ledger as a values-only closed-month historical snapshot layer outside the four live operational surfaces; archive verification precedes destructive month-close cleanup, and derived history must not double-count archived months."
+    "Medicine Store Assistant treats an established Master Data ledger as a values-only closed-month historical snapshot layer outside the four live operational surfaces; archive verification precedes destructive month-close cleanup, and derived history must not double-count archived months.",
+    "Medicine Store Assistant uses the authorized Google workbook as the canonical routine working source after migration; legacy Excel is reference/migration/historical/export evidence and is not a routine synchronization dependency."
   ],
   "evidence": [
     {
@@ -83,6 +84,11 @@
       "id": "msa-master-data-archive-contract-2026-09-20",
       "kind": "real-work-archive-contract-plus-regression-validation",
       "status": "live-archive-structure-and-no-formula-check-passed-local-contract-runtime-privacy-validators"
+    },
+    {
+      "id": "msa-google-sheets-primary-2026-09-20",
+      "kind": "owner-migration-decision-plus-contract-regression",
+      "status": "implementation-staged-for-ci"
     }
   ],
   "unresolved_risks": [
@@ -101,8 +107,8 @@
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
-    "ref": "feat/msa-master-data-archive-0.34.0",
-    "sha": "afe5dfffa91074ea972adf14bbf60bae92b0c0f3",
-    "relation": "0.34.0 MSA Master Data historical-archive implementation head; local archive-contract, runtime-contract, context/tool-authority, and public-privacy validators passed before PR promotion"
+    "ref": "feat/msa-google-sheets-primary-0.34.1",
+    "sha": "b2863f4e0f5a02951a31513f06d0278a903b8456",
+    "relation": "0.34.1 MSA Google-canonical operational-source implementation commit; pending PR CI"
   }
 }

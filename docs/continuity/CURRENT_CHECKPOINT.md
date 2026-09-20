@@ -1,12 +1,12 @@
 # Current Checkpoint
 
-_Date: 2026-09-18_
+_Date: 2026-09-20_
 
 ## Repository
 
 - Repository: Ye-Shwethway/dedal-core
 - Branch: main after promotion
-- Current version: 0.33.3
+- Current version: 0.34.0
 - Live GitHub state remains authoritative for repository identity, history, and CI.
 
 ## Accepted state
@@ -19,6 +19,7 @@ _Date: 2026-09-18_
 - Current evidence supports specific gains in boot recovery, verification/read-back discipline, continuity, and selected workflow safety, but does not yet support a broad general-intelligence improvement claim.
 - Video Production now has two explicit footage-editing methods: Simple / Narrative Edit and Fan / Visual-Montage Edit. Both use structure-first rough acceptance before final effects polish; they differ in whether source meaning/chronology or a target visual motif is primary.
 - YouTube Publishing now uses risk-tiered viewer-comment engagement: low-risk positive replies may be autonomous, while sensitive/contested threads require neutral factual framing, uncertainty discipline, and Creator review when materially escalatory; disagreement alone is not destructive-moderation grounds.
+- Medicine Store Assistant now treats an established `Master Data` ledger as a values-only closed-month historical snapshot layer outside the four live operational surfaces; month-close archive verification happens before destructive cleanup, and derived history must not double-count archived months.
 
 ## Current evaluation direction
 

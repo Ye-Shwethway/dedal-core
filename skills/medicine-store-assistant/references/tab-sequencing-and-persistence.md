@@ -50,6 +50,18 @@ It should summarize only the context needed for a practical decision, such as:
 
 Do not turn this tab into another raw analytics sheet. Detailed averages, medians, historical peaks, risk flags, lifecycle counts, and other evidence belong in agent/support tabs unless the Owner explicitly asks to see them.
 
+## Historical snapshot surface
+
+A legacy-style collective `Master Data` archive may remain visible when it materially improves Owner review of closed months. It is a historical reference surface, not a current operating tab and not merely an agent-only helper.
+
+When present:
+
+- keep its role visually and semantically distinct from the live operational tabs,
+- do not repoint live formulas or synchronization into it,
+- append only verified closed-month values under `master-data-archive-contract.md`,
+- preserve its month-boundary structure,
+- do not hide it merely because the agent can also use hidden historical helper tables when the Owner relies on the archive directly.
+
 ## Agent/support evidence tabs
 
 Agent/support tabs may be hidden from normal view while remaining available for reasoning, audit, reconciliation, and readback.

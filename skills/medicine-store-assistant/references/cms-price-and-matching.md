@@ -77,7 +77,7 @@ For `Serial Code present + CS Name blank` rows:
 7. If a same-code sibling lot already has a verified CS Name and the normalized product identity is compatible, that sibling history is strong supporting evidence but not permission to ignore a current contradiction.
 8. Mark each successfully written and read-back-verified CS Name cell green according to `visual-marking.md`.
 
-For missing `Serial Code` and/or `CS Name`, use this evidence order when available: **verified adjacent/same-family sibling -> current CMS catalogue/price list -> confirmed Item_Mapping -> verified older local/baseline data or authoritative source document**. Do not invent a mapping when those sources remain insufficient. A deliberate `Nil`, `UNMAPPED`, or `EXCLUDED` state is preferable to a guessed identity.
+For missing `Serial Code` and/or `CS Name`, use this evidence order when available: **verified adjacent/same-family sibling -> current CMS catalogue/price list -> confirmed Item_Mapping -> verified older local/baseline data or authoritative source document**. Do not invent a CMS mapping when those sources remain insufficient. If the local product identity itself is stable but CMS has not issued a usable code, route to [local-code-registry.md](local-code-registry.md) for a persistent local fallback identifier rather than leaving routine operational identity blank/`Nil`. A local fallback code is not evidence of a CMS match and does not authorize CMS Name or CMS Price.
 
 If code-to-catalogue evidence conflicts with the local item, do not populate the dependent identity field. Mark the disputed field red and report the contradiction.
 

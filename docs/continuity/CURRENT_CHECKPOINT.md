@@ -6,7 +6,7 @@ _Date: 2026-09-20_
 
 - Repository: Ye-Shwethway/dedal-core
 - Branch: main after promotion
-- Current version: 0.34.1
+- Current version: 0.34.2
 - Live GitHub state remains authoritative for repository identity, history, and CI.
 
 ## Accepted state
@@ -21,6 +21,7 @@ _Date: 2026-09-20_
 - YouTube Publishing now uses risk-tiered viewer-comment engagement: low-risk positive replies may be autonomous, while sensitive/contested threads require neutral factual framing, uncertainty discipline, and Creator review when materially escalatory; disagreement alone is not destructive-moderation grounds.
 - Medicine Store Assistant now treats an established `Master Data` ledger as a values-only closed-month historical snapshot layer outside the four live operational surfaces; month-close archive verification happens before destructive cleanup, and derived history must not double-count archived months.
 - Medicine Store Assistant now uses the authorized Google workbook as the canonical routine working source after migration; legacy Excel remains reference/migration/historical/export evidence rather than a routine synchronization dependency.
+- Medicine Store Assistant now supports stable local fallback identifiers for known local item identities that do not yet have usable CMS codes; one code is permanently identity-bound, shared by same-identity lots, never reused, and preserved as lineage after CMS replacement.
 
 ## Current evaluation direction
 

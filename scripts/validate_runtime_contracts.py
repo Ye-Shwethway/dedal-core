@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "runtime"))
 
 from github_mutation_guard import GuardViolation, load_policy, validate_trace  # noqa: E402
 from validate_msa_master_data_archive import validate_contract as validate_msa_master_data_archive_contract
+from validate_msa_local_code_registry import validate_contract as validate_msa_local_code_registry_contract
 
 
 def validate_guard_cases() -> None:
@@ -185,6 +186,7 @@ def main() -> int:
     validate_routing_boundaries()
     validate_trajectory_contract()
     validate_msa_master_data_archive_contract()
+    validate_msa_local_code_registry_contract()
     print("runtime contracts: valid")
     return 0
 

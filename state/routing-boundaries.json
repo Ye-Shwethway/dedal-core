@@ -156,14 +156,15 @@
       "primary_owner_by_intent": {
         "youtube-discovery-query-entity-research": "youtube-seo",
         "youtube-search-browse-suggested-packaging-strategy": "youtube-seo",
-        "youtube-analytics-discovery-diagnosis-experiment-learning": "youtube-seo",
+        "youtube-authenticated-analytics-read-reporting-transport": "youtube-publishing",
+        "youtube-analytics-diagnosis-experiment-learning": "youtube-seo",
         "youtube-authenticated-channel-metadata-media-mutation": "youtube-publishing",
         "youtube-upload-privacy-scheduling-playlist-caption-branding": "youtube-publishing",
         "video-media-master-edit-temporal-quality": "video-production",
         "thumbnail-image-generation-editing": "visual-direction",
         "external-current-platform-fact-research": "research"
       },
-      "rule": "YouTube SEO owns discovery intelligence and hypotheses; YouTube Publishing owns authenticated YouTube operations and provider read/write transport. SEO proposals do not bypass Publishing intent, ownership, mutation, or read-back gates."
+      "rule": "YouTube Publishing owns authenticated YouTube analytics reads, reporting, and provider transport; YouTube SEO owns analytics diagnosis, experiments, and learning. When acquisition and diagnosis are both required, YouTube Publishing is PRIMARY and YouTube SEO is SUPPORTING. SEO does not bypass Publishing ownership, intent, mutation, or read-back gates."
     },
     {
       "id": "facebook-page-boundary",

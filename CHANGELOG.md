@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.34.3 — 2026-09-21
+
+### Fixed
+- Resolved the YouTube analytics routing boundary: authenticated Analytics/Reporting acquisition and provider transport route to YouTube Publishing; analytics diagnosis, experiments, and learning route to YouTube SEO.
+- Defined combined authenticated analytics acquisition + diagnosis as YouTube Publishing PRIMARY with YouTube SEO SUPPORTING.
+
+### Evidence
+- Real-work CHILIVIDS smoke regression passed Runtime health, caller-supplied task creation/recovery, transition, checkpoint, independent authenticated analytics reads through Composio and direct YouTube MCP, Runtime-failure isolation, staged Cloudflare promotion, and exact post-promotion read-back.
+
 ## 0.34.2 — 2026-09-20
 
 ### Added

@@ -23,6 +23,22 @@
       "assertion": "SEO proposes; Publishing owns authenticated mutation and read-back"
     },
     {
+      "id": "route-authenticated-analytics-read",
+      "intent": "read authenticated YouTube Analytics or Reporting data for a Creator-owned channel without diagnosing it yet",
+      "primary": "youtube-publishing",
+      "supporting": [],
+      "assertion": "authenticated analytics acquisition and provider transport are owned by YouTube Publishing"
+    },
+    {
+      "id": "route-authenticated-analytics-diagnosis",
+      "intent": "read authenticated YouTube analytics for a Creator-owned channel and diagnose what the performance means",
+      "primary": "youtube-publishing",
+      "supporting": [
+        "youtube-seo"
+      ],
+      "assertion": "Publishing is PRIMARY for authenticated acquisition/transport; SEO is SUPPORTING for diagnosis/experiment/learning"
+    },
+    {
       "id": "no-fake-volume",
       "intent": "estimate keyword demand when no supported absolute volume source exists",
       "assertion": "must not invent absolute YouTube search volume or universal difficulty"

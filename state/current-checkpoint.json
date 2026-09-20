@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.34.2",
+  "version": "0.34.3",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -23,7 +23,8 @@
     "YouTube Publishing uses risk-tiered viewer-comment engagement: low-risk positive replies may be autonomous, sensitive or contested replies default to neutral factual framing and uncertainty discipline with Creator review when materially escalatory, and disagreement alone is not grounds for destructive moderation.",
     "Medicine Store Assistant treats an established Master Data ledger as a values-only closed-month historical snapshot layer outside the four live operational surfaces; archive verification precedes destructive month-close cleanup, and derived history must not double-count archived months.",
     "Medicine Store Assistant uses the authorized Google workbook as the canonical routine working source after migration; legacy Excel is reference/migration/historical/export evidence and is not a routine synchronization dependency.",
-    "Medicine Store Assistant uses stable local fallback identifiers for known local item identities without CMS codes; one local code is permanently bound to one identity, may span that identity's multiple lots, is never reused, and remains historical lineage after later CMS replacement."
+    "Medicine Store Assistant uses stable local fallback identifiers for known local item identities without CMS codes; one local code is permanently bound to one identity, may span that identity's multiple lots, is never reused, and remains historical lineage after later CMS replacement.",
+    "YouTube authenticated analytics/Reporting acquisition and provider transport are owned by YouTube Publishing; analytics diagnosis/experiment/learning are owned by YouTube SEO, and combined acquisition+diagnosis uses Publishing as PRIMARY with SEO as SUPPORTING."
   ],
   "evidence": [
     {
@@ -95,6 +96,11 @@
       "id": "msa-local-code-registry-live-rollout-2026-09-20",
       "kind": "live-google-sheets-identity-migration-plus-regression-contract",
       "status": "13-identities-16-rows-checkpoint-audit-readback-passed"
+    },
+    {
+      "id": "youtube-analytics-routing-runtime-smoke-2026-09-21",
+      "kind": "real-work-runtime-regression-and-live-provider-read",
+      "status": "routing-state-lifecycle-canary-promotion-readback-and-runtime-failure-isolation-passed"
     }
   ],
   "unresolved_risks": [

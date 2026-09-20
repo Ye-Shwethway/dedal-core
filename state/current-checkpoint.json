@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.34.1",
+  "version": "0.34.2",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -22,7 +22,8 @@
     "Video Production now distinguishes Simple / Narrative Edit from Fan / Visual-Montage Edit; both require a structure-first rough before final effects polish, while the selected mode determines whether source meaning/chronology or a target visual motif is primary.",
     "YouTube Publishing uses risk-tiered viewer-comment engagement: low-risk positive replies may be autonomous, sensitive or contested replies default to neutral factual framing and uncertainty discipline with Creator review when materially escalatory, and disagreement alone is not grounds for destructive moderation.",
     "Medicine Store Assistant treats an established Master Data ledger as a values-only closed-month historical snapshot layer outside the four live operational surfaces; archive verification precedes destructive month-close cleanup, and derived history must not double-count archived months.",
-    "Medicine Store Assistant uses the authorized Google workbook as the canonical routine working source after migration; legacy Excel is reference/migration/historical/export evidence and is not a routine synchronization dependency."
+    "Medicine Store Assistant uses the authorized Google workbook as the canonical routine working source after migration; legacy Excel is reference/migration/historical/export evidence and is not a routine synchronization dependency.",
+    "Medicine Store Assistant uses stable local fallback identifiers for known local item identities without CMS codes; one local code is permanently bound to one identity, may span that identity's multiple lots, is never reused, and remains historical lineage after later CMS replacement."
   ],
   "evidence": [
     {
@@ -89,6 +90,11 @@
       "id": "msa-google-sheets-primary-2026-09-20",
       "kind": "owner-migration-decision-plus-contract-regression",
       "status": "implementation-staged-for-ci"
+    },
+    {
+      "id": "msa-local-code-registry-live-rollout-2026-09-20",
+      "kind": "live-google-sheets-identity-migration-plus-regression-contract",
+      "status": "13-identities-16-rows-checkpoint-audit-readback-passed"
     }
   ],
   "unresolved_risks": [
@@ -107,8 +113,8 @@
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
-    "ref": "feat/msa-google-sheets-primary-0.34.1",
-    "sha": "b2863f4e0f5a02951a31513f06d0278a903b8456",
-    "relation": "0.34.1 MSA Google-canonical operational-source implementation commit; pending PR CI"
+    "ref": "feat/msa-local-code-registry-0.34.2",
+    "sha": "61cc31f13ce8de6c7b93e79b69f0b813708be641",
+    "relation": "0.34.2 MSA local-code registry implementation commit; pending PR CI"
   }
 }

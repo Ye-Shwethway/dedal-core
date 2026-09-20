@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.34.0 — 2026-09-20
+
+### Added
+- Added `skills/medicine-store-assistant/references/master-data-archive-contract.md` for collective values-only closed-month snapshot archives.
+- Added regression coverage for archive/live-state separation, no-formula historical snapshots, duplicate-month guards, schema evolution, month-boundary preservation, non-duplication of derived history, and conditional desktop-sync gating.
+
+### Changed
+- Medicine Store Assistant now treats an established `Master Data` ledger as a historical snapshot layer rather than a fifth operating surface.
+- Month close now captures a closing fingerprint, appends and verifies the values-only archive before cleanup, preserves established month-boundary sentinels, and refreshes derived history without double-counting the same month.
+- Legacy desktop Excel no longer activates staging merely by existing; staging is required only when newer or otherwise authoritative external evidence remains unreconciled and is required by the Owner workflow.
+- Historical schema evolution is evidence-preserving: newer archive fields may remain blank for older months, and migrations copy only clearly equivalent fields.
+
+### Evidence
+- Real-work validation on 2026-09-20 confirmed an established collective closed-month archive with explicit month-boundary rows and zero formulas across the checked historical range before contract promotion.
+
 ## 0.33.3 — 2026-09-19
 
 ### Added

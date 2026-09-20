@@ -52,7 +52,15 @@ Useful family-level historical measures include:
 
 Expose coverage count so thin history can lower confidence instead of pretending the statistics are equally reliable for every item.
 
-### Historical Owner order evidence
+### Closed-month history source boundary
+
+When an established values-only `Master Data` ledger is the verified closed-month archive, use it as the primary closed-month historical evidence surface. Hidden reorder/history tables may derive normalized family statistics or cached projections from that ledger, but they are not additional independent months of evidence.
+
+Do not double-count one month because the same usage or Final Reorder record appears in both `Master Data` and a derived helper sheet. If the helper and archive disagree, inspect provenance and freshness; do not silently merge both values.
+
+Current live operational sheets still outrank historical snapshots for current stock/current-cycle state.
+
+## Historical Owner order evidence
 
 Archived Final Reorder records are a separate evidence class from formula-estimated request quantities.
 

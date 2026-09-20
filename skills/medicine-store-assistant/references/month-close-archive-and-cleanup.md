@@ -4,7 +4,7 @@ Use this reference whenever `$msa` closes a month, prepares a new month, archive
 
 For the **family-level decision about whether a zero-stock row is redundant**, read [zero-stock-sibling-cleanup.md](zero-stock-sibling-cleanup.md). That reference is canonical for the rule that a zero-stock row may be deleted when at least one valid same operational item/family representative remains after deletion. This month-close reference controls archive/history timing and new-month preparation.
 
-This workflow preserves the legacy Excel operating intent (`archive to Master Data` then `Prepare Data`) while replacing macro-only assumptions with explicit, checkpointed Google Sheets operations.
+This workflow preserves the legacy Excel operating intent (`archive to Master Data` then `Prepare Data`) while replacing macro-only assumptions with explicit, checkpointed Google Sheets operations. When a collective `Master Data` archive exists, [master-data-archive-contract.md](master-data-archive-contract.md) is canonical for its role, values-only snapshot semantics, schema evolution, duplicate-month guard, and month-boundary behavior.
 
 ## Core rule
 
@@ -86,9 +86,11 @@ Do not infer that month close has happened merely because the calendar date chan
 
 ## Staged transition when the authoritative desktop Excel data is not yet available
 
-Sometimes the Owner cannot immediately access the computer-side Excel workbook or historical dataset that still needs to be pulled/synchronized before the production Google Sheet can be considered fully reconciled.
+Sometimes there is **known newer or otherwise authoritative computer-side Excel/external evidence** that has not yet been pulled or synchronized and is required before the production Google Sheet can be considered fully reconciled.
 
-In that situation, **do not perform an immediate production cutover on the live `Main Stock` / `Daily Usage` pair**.
+The mere existence of a legacy desktop workbook, or historical Excel data that has already been migrated and verified in the canonical closed-month archive, does **not** activate this gate.
+
+When genuinely unreconciled authoritative external evidence exists, **do not perform an immediate production cutover on the live `Main Stock` / `Daily Usage` pair**.
 
 Use this staged workflow instead:
 
@@ -156,6 +158,10 @@ Never reuse an older checkpoint for a new month-close mutation slice.
 
 Create or append durable closed-month evidence before deleting operational rows whose monthly history requires preservation.
 
+When the workbook has an established collective `Master Data` ledger, append the closed month there under [master-data-archive-contract.md](master-data-archive-contract.md). Freeze the archive as values/text only; do not carry live formulas or cross-sheet dependencies into historical rows.
+
+Before appending, capture a compact closing fingerprint and verify that the month key is not already present as a complete archive block.
+
 The archive should preserve enough information to reconstruct what happened during the month. At minimum preserve, where available:
 
 - closed month and year,
@@ -174,13 +180,13 @@ The archive should preserve enough information to reconstruct what happened duri
 
 The archive is evidence. Do not rewrite the historical month to make FIFO/FEFO or another ideal workflow appear cleaner than the actual recorded usage.
 
-If a durable historical archive structure already exists, append to it rather than inventing a second incompatible history system.
+If a durable historical archive structure already exists, append to it rather than inventing a second incompatible history system. Preserve any established month-boundary sentinel and explicit archive projection.
 
-When an authoritative computer-side Excel dataset is still pending, do not claim the month archive is complete until that dataset is pulled/saved and reconciled to the extent required by the Owner's established workflow.
+When an authoritative computer-side Excel dataset is still pending **and contains newer/unreconciled evidence required by the workflow**, do not claim the month archive is complete until that evidence is pulled/saved and reconciled to the required extent.
 
 ### 4. Verify archive completeness
 
-Before cleanup, read the archived month back and confirm:
+Before cleanup, read the archived month back and compare it with the closing fingerprint. Confirm:
 
 - the intended month is present,
 - item/lot identities are preserved,
@@ -188,7 +194,9 @@ Before cleanup, read the archived month back and confirm:
 - zero-stock rows with usage were captured,
 - important receipt/reorder/expiry context was not lost,
 - archive row count / coverage is plausible relative to the live month-close state,
-- any required external/desktop Excel archive evidence has been reconciled when applicable.
+- the month-boundary sentinel exists exactly once when the archive contract uses one,
+- the archived block contains no live formulas/dependencies when the archive is defined as values-only,
+- any required newer/unreconciled external/desktop Excel evidence has been reconciled when applicable.
 
 If verification fails, stop. Preserve the checkpoint and do not delete rows whose evidence is not protected.
 
@@ -297,7 +305,9 @@ Wait until:
 
 Then create a **new checkpoint specifically for production cutover**, update the canonical production pair in a controlled slice, verify downstream summaries, and audit the cutover separately.
 
-### 12. Audit the operation
+### 12. Refresh derived history and audit the operation
+
+If hidden reorder/history support tables derive from the verified closed-month archive, refresh or reconcile them only after the archive is verified. Treat derived history as an analysis/cache projection and do not count the same archived month twice merely because it appears in both `Master Data` and a helper table.
 
 Write an `Audit_Log` entry containing:
 

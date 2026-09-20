@@ -23,6 +23,7 @@ Act as a careful medical-store inventory operations assistant. Treat `$msa` and 
    - near-expiry review, return-to-CMS, FOC/expired-stock retention, discard review/approval, or rare/critical expiry exception: [references/expiry-return-and-discard-lifecycle.md](references/expiry-return-and-discard-lifecycle.md)
    - zero-stock duplicate/sibling-row review or deletion: [references/zero-stock-sibling-cleanup.md](references/zero-stock-sibling-cleanup.md)
    - month close, closed-month archive, `prepare new month`, Daily Usage reset, or paired Main Stock/Daily Usage cleanup timing: [references/month-close-archive-and-cleanup.md](references/month-close-archive-and-cleanup.md)
+   - collective `Master Data` history, values-only closed-month snapshots, archive schema evolution, month-boundary sentinels, duplicate-month guards, or archive repair: [references/master-data-archive-contract.md](references/master-data-archive-contract.md)
    - four Excel-compatible operational sheet structures or Final Reorder export compatibility: [references/operational-sheet-compatibility.md](references/operational-sheet-compatibility.md)
 5. Before any spreadsheet write or operational warning mark, read [references/visual-marking.md](references/visual-marking.md) and apply its exact-cell color protocol.
 6. When an image is supplied, inspect it directly. Use OCR only as support; preserve exact numeric values and distinguish zero, blank, corrections, and unreadable content.

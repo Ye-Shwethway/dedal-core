@@ -15,6 +15,8 @@ The following four sheets are compatibility-locked operational UI surfaces:
 
 Other helper, review, mapping, analytics, reconciliation, and temporary workflow sheets may use MSA-native structures unless another contract explicitly says otherwise.
 
+A collective `Master Data` sheet, when present, is governed by [master-data-archive-contract.md](master-data-archive-contract.md). It is a closed-month values-only historical snapshot surface, **not** a fifth compatibility-locked operating table. Its archive projection may evolve deliberately without changing the four live operational interfaces.
+
 ## Main Stock
 
 Preserve the original production header sequence when the live sheet confirms it:

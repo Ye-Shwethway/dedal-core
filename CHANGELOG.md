@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.34.4 — 2026-09-21
+
+### Fixed
+- Hardened Medicine Store Assistant visual review markers against false alarms from code-only catalogue misses, already-resolved mappings, normal multi-brand/multi-code intake lots, department-specific code namespaces, and unrelated expiry-helper alerts.
+- CMS identity reconciliation now requires code + name/description/specification fallback before escalating a code miss.
+- Marker reports must include the reason inline; red now requires a current concrete contradiction and yellow requires material residual uncertainty after reconciliation.
+
+### Changed
+- Legitimate sibling lots may preserve different valid CMS brand/code identities when each lot independently maps to the same compatible local generic family.
+- Known department-specific code namespaces may be absent from the central CMS catalogue without being treated as errors; authorized local catalogue extensions can support operational lookup while preserving provenance.
+- Existing markers are checked for staleness against current authoritative evidence before being preserved or re-raised.
+
+### Evidence
+- Real-work September 2026 marker review resolved all remaining yellow/red markers as false alarms after code+name catalogue lookup, confirmed mappings, sibling-lot evidence, department-code clarification, and current-state read-back.
+- Added `evals/medicine-store-assistant/marker-false-alarm-v1.json` with regression cases for code-miss fallback, multi-brand lots, departmental namespaces, stale markers, expiry-alert separation, severity gates, and inline marker rationale.
+
 ## 0.34.3 — 2026-09-21
 
 ### Fixed

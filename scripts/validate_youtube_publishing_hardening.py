@@ -37,6 +37,10 @@ required_phrases = [
     "neutral factual tone",
     "disagreement alone is not abuse",
     "creator approval",
+    "rolling drive retention",
+    "default retention is the newest",
+    "retention count alone never overrides",
+    "post-delete read-back",
 ]
 missing = [p for p in required_phrases if p.lower() not in combined.lower()]
 if missing:

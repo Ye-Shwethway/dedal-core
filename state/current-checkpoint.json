@@ -131,8 +131,8 @@
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
-    "ref": "youtube-drive-retention-0345",
-    "sha": "1bbbe678c2310888394b037b1d7d4448fe9fa598",
-    "relation": "0.34.5 YouTube rolling Drive retention candidate; pending PR CI"
+    "ref": "main",
+    "sha": "dcf1dfdf992ea0ac617a469a849e28f00da0cfaf",
+    "relation": "0.34.5 merged to main after PR #12; Runtime Contracts and Repo Integrity passed on the exact PR head before merge"
   }
 }

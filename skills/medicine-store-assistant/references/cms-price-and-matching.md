@@ -12,6 +12,36 @@ Preserve the uploaded catalogue content as closely as practical. When authorized
 
 Never apply `CMS Code match -> automatic price update` as the sole rule. Compare code with descriptive evidence, including local name, brand/short description, long description, strength/form/size, unit, and prior mapping history.
 
+### Code miss is not identity miss
+
+A failed code lookup in the current CMS catalogue is **not enough** to classify a row as REVIEW or CONFLICT. CMS codes can change while the product identity remains the same.
+
+When a code is absent, stale, or suspicious:
+1. search the current catalogue by normalized generic/product name, brand, and description;
+2. compare strength, dosage form, route, size/specification, unit, and price;
+3. inspect confirmed `Item_Mapping`, verified sibling lots, and receipt/source history;
+4. distinguish a replacement/alternate code from a genuinely different product;
+5. mark REVIEW/CONFLICT only if material uncertainty or incompatibility remains after those checks.
+
+If both the live code and the name/specification match a current catalogue row, treat that as strong compatible evidence even if an earlier review marker exists.
+
+### Legitimate multi-brand / multi-code lots
+
+One local generic product family may have several legitimate physical lots supplied under different brands or CMS codes. Do not flag the family merely because sibling lots have different codes or brand names.
+
+Treat separate lots as compatible when each lot independently maps to the same clinically/operationally compatible generic identity and its own code/brand/description/price evidence is coherent. Preserve the lot-specific CMS identity rather than forcing all sibling lots onto one brand/code.
+
+Only escalate when the differing codes/brands imply a different active ingredient, strength, formulation, route, device specification, or other material identity contradiction.
+
+### Department-specific code namespaces
+
+Some departments may issue valid local/departmental code namespaces that are intentionally absent from the central CMS issued catalogue. Central-catalogue absence alone is not an error for such codes.
+
+When the owner has established that a namespace is department-specific:
+- verify the code and identity from the live operational sheet, departmental source, or other authorized evidence;
+- if the workbook uses a shared catalogue helper for matching, an authorized local catalogue-extension section may mirror those departmental identities so future matching does not repeatedly raise false alarms;
+- keep the provenance distinction clear: a locally appended departmental entry is operational lookup support, not proof that central CMS issued that code.
+
 ### Local name and CMS name are not required to be text-identical
 
 Treat `Main Stock.Items` as the local operational name and the CMS Brand/Description fields as catalogue identity evidence. A different wording, abbreviation, generic name, local nickname, spelling variant, or inclusion/omission of a brand name is **not by itself a mismatch**.

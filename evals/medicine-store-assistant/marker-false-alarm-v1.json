@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "msa-marker-false-alarm-v1",
+  "purpose": "Prevent identity-review markers from being raised on normal, already-resolved, or insufficiently-investigated cases.",
+  "cases": [
+    {
+      "id": "code-miss-name-hit",
+      "expect": "A missing/stale code lookup does not by itself create REVIEW/CONFLICT; search catalogue by normalized name/description and clinically meaningful specification before escalation."
+    },
+    {
+      "id": "legitimate-multibrand-sibling-lots",
+      "expect": "Sibling lots of one local generic family may retain different valid CMS brands/codes when each lot independently maps to a compatible product identity."
+    },
+    {
+      "id": "department-code-central-catalogue-absence",
+      "expect": "A known department-specific code namespace absent from the central CMS catalogue is not a warning by itself; use departmental evidence or an authorized local catalogue extension."
+    },
+    {
+      "id": "resolved-marker-staleness",
+      "expect": "Before creating or preserving a yellow/red marker, check whether current authoritative evidence already resolves the original issue; stale MSA markers become cleanup candidates."
+    },
+    {
+      "id": "red-requires-concrete-contradiction",
+      "expect": "Red is reserved for a current concrete incompatible identity, recycled-code contradiction, invalid source-vs-live conflict, or similarly blocked high-risk condition."
+    },
+    {
+      "id": "yellow-requires-residual-uncertainty",
+      "expect": "Yellow is used only when material uncertainty remains after code/name/specification/mapping/sibling/source reconciliation."
+    },
+    {
+      "id": "expiry-alert-not-identity-conflict",
+      "expect": "A near-expiry or expiry-helper ALERT does not justify a red/yellow identity marker when code/name/specification evidence is valid."
+    },
+    {
+      "id": "marker-report-includes-reason",
+      "expect": "Every reported marker includes its reason in the same report item so the user does not need to search prior messages."
+    }
+  ]
+}

@@ -10,6 +10,32 @@ Use direct cell formatting as lightweight operational metadata. Color must compl
 
 When meanings compete on the same cell, use `red > yellow > green`. Never mark a disputed or unverified value green.
 
+## False-alarm prevention gate
+
+A review color is an escalation signal, not a substitute for reconciliation. Before applying **yellow or red**, complete the smallest sufficient identity check that could resolve the issue.
+
+Do **not** create a warning marker merely because:
+- a current CMS code lookup returns no row,
+- two lots of the same generic medicine use different CMS brands/codes,
+- a local name and catalogue brand are textually different,
+- a previously reviewed mapping still has an old marker after the underlying issue was corrected,
+- a valid department-specific code is absent from the central CMS catalogue,
+- a near-expiry helper says `ALERT` while the identity fields themselves are valid.
+
+For CMS-related identity checks, search both **code and product identity**. If the code lookup is absent or stale, search normalized brand/generic/description plus strength/form/size/specification and compare against `Item_Mapping`, sibling lots, source/receipt history, and current price where relevant.
+
+Different brands/codes for the same local generic family are **not a conflict by themselves**. Separate intake lots may legitimately preserve different CMS catalogue identities when each lot has internally compatible code, brand/description, strength/form/specification, price, and receipt history.
+
+Known departmental/local code namespaces may be legitimately absent from a central catalogue. If a workflow owns such a namespace, absence from the central CMS list is not REVIEW/CONFLICT by itself. Use the owning departmental evidence or an authorized local catalogue extension instead.
+
+Before marking an already-existing row, check whether the suspected issue has already been resolved. If current authoritative evidence is compatible and no unresolved contradiction remains, do not create a new yellow/red marker; if an old MSA marker remains, treat it as a stale-marker cleanup candidate and explain the original/resolved reason when available.
+
+Use:
+- **yellow** only when a material uncertainty remains after this reconciliation gate;
+- **red** only when current evidence shows a concrete incompatible identity, recycled-code contradiction, invalid source-vs-live conflict, or similarly blocked high-risk condition.
+
+When a marker is reported to the user, include its **reason in the same report item**. Do not force the user to search earlier messages for the rationale.
+
 ## Mandatory pre-intake marker scan
 
 Before any **new Main Stock batch intake**, inspect the used Main Stock range for existing MSA markers.

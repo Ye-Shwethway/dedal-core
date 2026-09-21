@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.34.4",
+  "version": "0.34.5",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -25,7 +25,8 @@
     "Medicine Store Assistant uses the authorized Google workbook as the canonical routine working source after migration; legacy Excel is reference/migration/historical/export evidence and is not a routine synchronization dependency.",
     "Medicine Store Assistant uses stable local fallback identifiers for known local item identities without CMS codes; one local code is permanently bound to one identity, may span that identity's multiple lots, is never reused, and remains historical lineage after later CMS replacement.",
     "YouTube authenticated analytics/Reporting acquisition and provider transport are owned by YouTube Publishing; analytics diagnosis/experiment/learning are owned by YouTube SEO, and combined acquisition+diagnosis uses Publishing as PRIMARY with SEO as SUPPORTING.",
-    "Medicine Store Assistant warning markers use a false-alarm prevention gate: code misses trigger name/description/specification reconciliation, legitimate multi-brand sibling lots and known departmental namespaces are allowed, stale markers are cleaned instead of re-raised, and yellow/red severity requires residual uncertainty or concrete contradiction."
+    "Medicine Store Assistant warning markers use a false-alarm prevention gate: code misses trigger name/description/specification reconciliation, legitimate multi-brand sibling lots and known departmental namespaces are allowed, stale markers are cleaned instead of re-raised, and yellow/red severity requires residual uncertainty or concrete contradiction.",
+    "YouTube Publishing treats Edited Videos and Uploaded YT Videos as rolling working storage with a default newest-three usable-video window per folder; unresolved publishing/recovery/enforcement states override retention count, and destructive cleanup requires exact target resolution plus post-delete read-back."
   ],
   "evidence": [
     {
@@ -107,6 +108,11 @@
       "id": "msa-marker-false-alarm-review-2026-09-21",
       "kind": "real-work-marker-review-plus-regression-contract",
       "status": "all-remaining-yellow-red-markers-resolved-as-false-alarms-or-stale-residue"
+    },
+    {
+      "id": "youtube-drive-retention-rule-2026-09-21",
+      "kind": "creator-workflow-refinement-plus-regression-hardening",
+      "status": "library-rule-promoted-to-public-core-for-source-convergence"
     }
   ],
   "unresolved_risks": [
@@ -125,8 +131,8 @@
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
-    "ref": "msa-marker-false-alarm-hardening-20260921",
-    "sha": "6842463e435338180c571ca16f7d708f74da851f",
-    "relation": "0.34.4 MSA marker false-alarm hardening candidate; pending PR CI"
+    "ref": "youtube-drive-retention-0345",
+    "sha": "1bbbe678c2310888394b037b1d7d4448fe9fa598",
+    "relation": "0.34.5 YouTube rolling Drive retention candidate; pending PR CI"
   }
 }

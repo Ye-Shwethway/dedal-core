@@ -163,3 +163,14 @@ For Creator workflows that use Google Drive staging, publishing owns the archive
 - Read back Drive placement after the move. The destination must contain the exact file and the source folder must no longer retain it when the intended operation is a true move.
 - Folder/file IDs are private operational state and must not be committed to public Core.
 
+### Rolling Drive retention
+
+Treat both `Edited Videos` and `Uploaded YT Videos` as rolling working storage, not permanent archives. Default retention is the newest **3 usable videos per folder**. When a newly verified video would make a folder exceed that limit, evaluate the oldest eligible item and delete it only after the relevant state is resolved and read back.
+
+- `Uploaded YT Videos`: keep the newest 3 verified published masters. An older master becomes cleanup-eligible only after the intended YouTube upload/publication state is verified and there is no active block, claim, takedown/strike review, re-upload need, or other recovery requirement.
+- `Edited Videos`: keep the newest 3 active/recent outputs. For multiple revisions of the same video, prefer the latest approved/current master and allow superseded drafts to become cleanup-eligible earlier than unrelated current work.
+- Retention count alone never overrides an unresolved publishing or recovery state. Pending uploads, failed verification, duplicate investigation, enforcement review, or any explicit Creator hold must be preserved even when the nominal limit is exceeded.
+- Run retention cleanup after a successful publish/archive transition or other bounded folder-maintenance event; do not rely on manual periodic cleanup as the only control.
+- Destructive Drive cleanup requires exact file/folder resolution before deletion and post-delete read-back. Never infer the target from a fuzzy title match when multiple candidates exist.
+
+The default rolling window is **3**. A smaller or larger window requires explicit Creator intent for that workflow; do not silently change the durable default.

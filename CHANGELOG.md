@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.34.5 — 2026-09-21
+
+### Changed
+- YouTube Publishing now treats `Edited Videos` and `Uploaded YT Videos` as rolling working storage instead of permanent archives.
+- Default retention is the newest three usable videos per folder; unresolved upload, verification, duplicate, enforcement, recovery, or explicit Creator-hold states override the nominal count.
+- Cleanup is tied to successful publish/archive or bounded folder-maintenance events and requires exact target resolution plus post-delete read-back.
+
+### Evidence
+- Promoted the previously Library-only retention refinement into public Core so GitHub and the canonical Library mirror can converge on one durable rule.
+- YouTube Publishing hardening regression now checks the rolling-retention language and deletion-verification guardrails.
+
 ## 0.34.4 — 2026-09-21
 
 ### Fixed

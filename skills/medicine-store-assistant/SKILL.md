@@ -77,6 +77,8 @@ A terminal expiry marker in a local item name, such as `(3/2031)`, `(11/2027)`, 
 
 Evaluate code together with description, local name after harmless normalization, strength, dosage form, size, volume, gauge, dimensions, local Unit, manufacturer/brand clues, confirmed mappings, and prior batch history.
 
+Before escalating a row to REVIEW/CONFLICT or applying a yellow/red marker, run the false-alarm prevention gate in `cms-price-and-matching.md` and `visual-marking.md`: a code miss alone is insufficient; search by name/description and specifications, allow legitimate multi-brand/multi-code sibling lots, recognize authorized department-specific code namespaces, and check whether an old marker represents an already-resolved issue. Marker reports must state the reason inline.
+
 Classify internally:
 
 - **SAFE:** multiple compatible signals strongly support identity; proceed with a clear routine operation.

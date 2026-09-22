@@ -118,7 +118,7 @@
     {
       "id": "candidate-video-finder-visual-aid-contract-2026-09-22",
       "kind": "creator-decision-presentation-regression",
-      "status": "staged-for-pr-ci"
+      "status": "passed-pr-ci-and-merged-main"
     }
   ],
   "unresolved_risks": [
@@ -138,7 +138,8 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "b33384b4e441ee76b3d4598c19119f6fdb556804",
-    "relation": "0.34.6 prepared from exact 0.34.5 main base; merge identity must be recorded after validation"
+    "sha": "d4dd8d04f4e131dc1986ed75fa1bcaa99e4b4542",
+    "tree": "fc61a61fbbb31ef6c9214f511ad18a11f55b5f47",
+    "relation": "0.34.6 merged to main via PR #14 after both validate checks passed on exact PR head 6ef118e880967e5d18f848b043eb4650535f5a06"
   }
 }

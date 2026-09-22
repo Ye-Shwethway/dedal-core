@@ -72,6 +72,11 @@
       "id": "locator-not-cut-authority",
       "intent": "external recap or scene detector provides a timestamp",
       "assertion": "treat as locator evidence; local audiovisual verification owns final cut boundaries"
+    },
+    {
+      "id": "shortlist-visual-aid-link",
+      "intent": "a shortlisted candidate was discovered on a niche scene site that exposes a viewable scene or preview link",
+      "assertion": "resolve and surface the usable scene/preview/media link for Creator decision support; if none is usable, explicitly mark the visual aid unavailable; never treat the link as reuse-rights clearance"
     }
   ]
 }

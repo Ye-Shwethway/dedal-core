@@ -50,7 +50,7 @@ Prefer the smallest self-contained editorial unit that preserves the requested m
 5. **Apply hard gates.** Require source identity, scene existence, bounded editorial viability, channel relevance, duplicate/cannibalization check, truthful packaging viability, minimum evidence, and no unresolved blocker that warrants `RISK_HOLD`.
 6. **Build an evidence vector.** Preserve scene salience, channel fit, owned-channel evidence, observed demand, saturation, exact-scene gap, authoritative competition, freshness, novelty, Suggested adjacency, packaging potential, editorial self-containment, source accessibility, reuse-risk signals, and evidence confidence.
 7. **Do not hide uncertainty in a magic score.** Use qualitative opportunity bands by default. A convenience heuristic is allowed only for large candidate sets and must expose components/provenance; it cannot override a failed hard gate.
-8. **Shortlist for the Creator.** Present a small interpretable set with why it may work, main weakness, evidence confidence, source status, and observed risk. The Creator decides `SELECT | MAYBE | PASS | HOLD | NEVER`.
+8. **Shortlist for the Creator.** Present a small interpretable set with why it may work, main weakness, evidence confidence, source status, observed risk, and a **decision visual aid** when one is available. If the discovery/source page exposes a directly viewable scene page, preview, or media link that can be safely shared, resolve and verify the current URL and surface it with the candidate. Do not hide an available scene/preview link behind prose. If no usable visual aid is available, say so explicitly. The Creator decides `SELECT | MAYBE | PASS | HOLD | NEVER`.
 9. **Handoff cleanly.** Selected candidates go to Video Production with source/scene/locator truth. Verified content then flows to YouTube SEO, Visual Direction, and Publishing through their existing contracts.
 10. **Learn prospectively.** Preserve the pre-publication candidate hypothesis. After 24h/3d/7d/28d or other planned windows, compare outcomes without rewriting history and keep channel/Creator-specific learning private.
 
@@ -87,9 +87,22 @@ Never infer `zero demand` from missing/suppressed analytics detail. Never invent
 
 For each shortlisted item show, in human-readable form:
 
-`Candidate | Source | Scene | Opportunity band | Evidence confidence | Why it may work | Main weakness | Risk signal | Source status`
+`Candidate | Source | Scene | Opportunity band | Evidence confidence | Why it may work | Main weakness | Risk signal | Source status | Visual aid`
 
 Use `STRONG | PROMISING | UNCERTAIN | WEAK` as triage bands, not objective universal ratings. Preserve the underlying factor vector.
+
+### Decision visual-aid rule
+
+For every shortlisted candidate, attempt to surface the strongest currently usable decision aid that already exists in the evidence chain:
+
+1. prefer the exact scene/preview/media URL exposed by the discovery/source page;
+2. otherwise surface the exact scene page or official preview/clip page;
+3. verify that the URL still resolves before presenting it when practical;
+4. label what the link is (`direct scene/preview`, `scene page`, `official clip`, or `locator only`);
+5. if the page exposes a direct media URL, include it in addition to the page URL when it is safe and technically available;
+6. if no usable visual aid exists, state `Visual aid: unavailable` rather than omitting the field.
+
+A visual-aid link is evidence for Creator review only. It is not proof of reuse rights, copyright clearance, source ownership, or final cut suitability. Candidate Finder must not download or republish third-party media merely because a preview URL is available.
 
 ## Risk boundary
 

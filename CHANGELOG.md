@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.34.6 — 2026-09-22
+
+### Fixed
+- Candidate Video Finder shortlist output now requires a decision visual aid whenever the discovery/source evidence exposes a usable scene page, preview, official clip, or direct media URL.
+- Available scene/preview links may no longer be silently omitted from Creator-facing shortlist presentation; unavailable visual aids must be stated explicitly.
+- Decision-aid links remain evidence for review only and never imply reuse rights, copyright clearance, source ownership, or final cut suitability.
+
+### Evidence
+- Added a candidate-record `decision_aids` schema and a dedicated regression case for shortlist visual-aid links.
+- Routing validation now checks the visual-aid presentation rule and direct-media field.
+
 ## 0.34.5 — 2026-09-21
 
 ### Changed

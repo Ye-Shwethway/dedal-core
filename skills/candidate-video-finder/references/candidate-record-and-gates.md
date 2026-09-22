@@ -32,6 +32,13 @@ source_truth:
   approximate_timestamps: []
   local_media_available: true|false|unknown
   verification_notes:
+decision_aids:
+  scene_page_url:
+  preview_url:
+  direct_media_url:
+  aid_kind: direct_scene_preview|scene_page|official_clip|locator_only|unavailable
+  verified_at:
+  accessibility_notes:
 editorial:
   candidate_unit: action_only|contextual_action|mini_scene|performance|dialogue|other
   self_containedness:
@@ -85,6 +92,10 @@ workflow:
   production_handoff_ref:
   seo_handoff_ref:
 ```
+
+## Decision-aid presentation
+
+When a candidate is shortlisted, populate `decision_aids` from evidence already discovered during source/scene verification. A directly viewable scene/preview/media URL should be surfaced to the Creator when available and safe to share; otherwise provide the exact scene page or official clip page. Do not omit an available visual aid. If none is available, set `aid_kind: unavailable`. These links are decision support only and never imply reuse rights or legal clearance.
 
 ## Lifecycle
 

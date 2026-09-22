@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.34.5",
+  "version": "0.34.6",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -13,6 +13,7 @@
     "Candidate Video Finder stops before exact local cutting, SEO packaging, visual production or YouTube mutation; those remain owned by Video Production, YouTube SEO, Visual Direction and YouTube Publishing respectively.",
     "Creator selection remains explicit through SELECT/MAYBE/PASS/HOLD/NEVER and channel/Creator-specific candidate learning remains in the private operational overlay.",
     "Copyright/reuse handling is risk triage only; Candidate Video Finder does not claim legal clearance, copyright safety or guaranteed fair use.",
+    "Candidate Video Finder surfaces a verified decision visual aid for each shortlisted candidate when the evidence chain exposes a usable scene page, preview, official clip, or direct media URL; omission is not allowed when a usable aid exists, and links never imply reuse rights or final cut suitability.",
     "Creator Google Drive video masters follow rough/source -> sandbox edit -> Edited Videos -> verified YouTube publication -> Uploaded YT Videos; archive movement occurs only after authoritative publishing verification.",
     "YouTube upload orchestration uses a persistent isolated outbound-polling runner: normal upload submission auto-picks queued jobs without per-job GitHub Actions, while idempotency, ownership, private-first intent gates, bounded read-back, and verification remain authoritative.",
     "DEDAL Self-Improvement is an independently routable meta-faculty for correction/regression learning closure: durable fixes require applicable runtime repair, canonical-source reconciliation, regression coverage, correctly scoped durable learning, continuity state, and independent verification before full closure.",
@@ -113,6 +114,11 @@
       "id": "youtube-drive-retention-rule-2026-09-21",
       "kind": "creator-workflow-refinement-plus-regression-hardening",
       "status": "library-rule-promoted-to-public-core-for-source-convergence"
+    },
+    {
+      "id": "candidate-video-finder-visual-aid-contract-2026-09-22",
+      "kind": "creator-decision-presentation-regression",
+      "status": "staged-for-pr-ci"
     }
   ],
   "unresolved_risks": [
@@ -132,7 +138,7 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "dcf1dfdf992ea0ac617a469a849e28f00da0cfaf",
-    "relation": "0.34.5 merged to main after PR #12; Runtime Contracts and Repo Integrity passed on the exact PR head before merge"
+    "sha": "b33384b4e441ee76b3d4598c19119f6fdb556804",
+    "relation": "0.34.6 prepared from exact 0.34.5 main base; merge identity must be recorded after validation"
   }
 }

@@ -32,6 +32,10 @@ risk_signal:
 risk_classes_observed:
 prior_channel_enforcement_evidence:
 risk_notes:
+decision_visual_aids:
+  scene_page_url:
+  preview_url:
+  direct_media_url:
 notes:
 ```
 

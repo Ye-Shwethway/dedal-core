@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.34.6",
+  "version": "0.34.7",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -27,7 +27,8 @@
     "Medicine Store Assistant uses stable local fallback identifiers for known local item identities without CMS codes; one local code is permanently bound to one identity, may span that identity's multiple lots, is never reused, and remains historical lineage after later CMS replacement.",
     "YouTube authenticated analytics/Reporting acquisition and provider transport are owned by YouTube Publishing; analytics diagnosis/experiment/learning are owned by YouTube SEO, and combined acquisition+diagnosis uses Publishing as PRIMARY with SEO as SUPPORTING.",
     "Medicine Store Assistant warning markers use a false-alarm prevention gate: code misses trigger name/description/specification reconciliation, legitimate multi-brand sibling lots and known departmental namespaces are allowed, stale markers are cleaned instead of re-raised, and yellow/red severity requires residual uncertainty or concrete contradiction.",
-    "YouTube Publishing treats Edited Videos and Uploaded YT Videos as rolling working storage with a default newest-three usable-video window per folder; unresolved publishing/recovery/enforcement states override retention count, and destructive cleanup requires exact target resolution plus post-delete read-back."
+    "YouTube Publishing treats Edited Videos and Uploaded YT Videos as rolling working storage with a default newest-three usable-video window per folder; unresolved publishing/recovery/enforcement states override retention count, and destructive cleanup requires exact target resolution plus post-delete read-back.",
+    "YouTube new-publication workflow requires a locked viewer-facing launch package before upload transport unless the Creator explicitly supplied the complete final package; YouTube Publishing remains PRIMARY, YouTube SEO becomes SUPPORTING when packaging is unresolved, and Shorts are explicitly not exempt."
   ],
   "evidence": [
     {
@@ -119,6 +120,11 @@
       "id": "candidate-video-finder-visual-aid-contract-2026-09-22",
       "kind": "creator-decision-presentation-regression",
       "status": "passed-pr-ci-and-merged-main"
+    },
+    {
+      "id": "youtube-launch-package-regression-2026-09-24",
+      "kind": "real-work-regression-plus-routing-and-contract-hardening",
+      "status": "local-core-validation-passed-live-runtime-smoke-passed-pending-pr-ci"
     }
   ],
   "unresolved_risks": [
@@ -138,8 +144,8 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "d4dd8d04f4e131dc1986ed75fa1bcaa99e4b4542",
-    "tree": "fc61a61fbbb31ef6c9214f511ad18a11f55b5f47",
-    "relation": "0.34.6 merged to main via PR #14 after both validate checks passed on exact PR head 6ef118e880967e5d18f848b043eb4650535f5a06"
+    "sha": "3e4c5a0c7c2fab7de73d2dd4c5fefa32af40b710",
+    "tree": "083d24a0b0aae2c03d3d17a0327dbb0f918ca16d",
+    "relation": "0.34.7 candidate is based exactly on verified main 3e4c5a0c7c2fab7de73d2dd4c5fefa32af40b710; final merge/checkpoint closeout remains pending"
   }
 }

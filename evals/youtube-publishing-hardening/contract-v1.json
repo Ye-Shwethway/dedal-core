@@ -152,6 +152,18 @@
         "reply_or_no_action_before_moderation",
         "destructive_moderation_requires_explicit_authority"
       ]
+    },
+    {
+      "id": "YT-HARD-13",
+      "name": "new publication requires SEO launch package including Shorts",
+      "expect": [
+        "new_upload_or_short",
+        "youtube_publishing_primary",
+        "youtube_seo_supporting_when_package_unlocked",
+        "content_truth_and_discovery_surface",
+        "title_description_minimal_tags_playlist_thumbnail_promise",
+        "no_transport_time_metadata_invention"
+      ]
     }
   ],
   "negative_claims": [
@@ -159,6 +171,7 @@
     "playlistImages.update is not assumed production-safe",
     "bannerExternalUrl alone is not rollback state",
     "watermark set/unset exposure is not a fully verified lifecycle",
-    "an accepted mutation request is not success without readback when readable state exists"
+    "an accepted mutation request is not success without readback when readable state exists",
+    "a Short is not exempt from launch-package research merely because Shorts-feed discovery differs from long-form search"
   ]
 }

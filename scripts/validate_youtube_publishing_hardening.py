@@ -10,7 +10,7 @@ CHECKPOINT = ROOT / "skills/youtube-publishing/CURRENT_CHECKPOINT.md"
 MACHINE = ROOT / "state/current-checkpoint.json"
 VERSION = ROOT / "VERSION"
 
-required_cases = {f"YT-HARD-{i:02d}" for i in range(1, 13)} | {
+required_cases = {f"YT-HARD-{i:02d}" for i in range(1, 14)} | {
     "upload-submit-auto-runner-contract",
     "runner-queue-discovery-contract",
     "eventual-consistency-upload-verification",
@@ -41,6 +41,9 @@ required_phrases = [
     "default retention is the newest",
     "retention count alone never overrides",
     "post-delete read-back",
+    "Shorts are not exempt",
+    "YouTube SEO as SUPPORTING",
+    "launch package",
 ]
 missing = [p for p in required_phrases if p.lower() not in combined.lower()]
 if missing:

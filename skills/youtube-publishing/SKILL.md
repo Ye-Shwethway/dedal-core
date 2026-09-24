@@ -30,16 +30,30 @@ It does **not** replace:
 - Security Engineering for credential-store architecture or threat modeling;
 - the YouTube API, MCP, Gateway, browser, runner, or other execution surface.
 
+## Launch-package precondition
+
+For any new video or Short publication, YouTube Publishing must not jump directly from a ready media master to upload transport when viewer-facing metadata has not already been prepared and accepted. **Shorts are not exempt.** Before `youtube_upload_submit` or any equivalent new-publication mutation:
+
+1. compose **YouTube Publishing as PRIMARY** with **YouTube SEO as SUPPORTING** whenever title/description/tags/playlist/thumbnail promise are not already locked for this exact asset;
+2. establish a bounded launch package from current evidence: content-truth lock, primary discovery-surface hypothesis, title, concise description, minimal truthful tags/hashtags, playlist, and thumbnail promise/approved asset when used;
+3. record enough package evidence to distinguish researched metadata from improvised transport-time copy;
+4. only then begin the private-first upload lifecycle.
+
+If the Creator supplies a complete final package explicitly, Publishing may treat that package as locked and skip redundant research, but it must still verify factual fit and preserve the supplied copy. If any package field is missing, stale, or obviously provisional, hydrate YouTube SEO instead of inventing metadata during the upload call.
+
+This gate applies equally to long-form videos, vertical Shorts, and clips that are expected to be Shorts-feed-led. Shorts-feed optimization changes the discovery strategy; it does **not** remove the packaging step.
+
 ## Default workflow
 
-1. **Resolve exact ownership.** Select an explicit verified profile and reassert the authenticated YouTube channel before mutation.
-2. **Prefer the dedicated typed tool.** Use the narrow MCP/Gateway operation that expresses the intended YouTube action. Use a generic API bridge only for a missing read surface or bounded diagnostics, never as the normal mutation path when a dedicated tool exists.
-3. **Capture current state.** Read back the target when the API exposes it. For destructive replacement, preserve a recoverable DEDAL-managed baseline before deleting or overwriting.
-4. **Require explicit intent.** Consequential writes require `explicit_action_intent`; deletes/unsets require `explicit_destructive_intent`; public/unlisted/scheduled publication keeps its dedicated visibility/publication intent gate.
-5. **Mutate once, boundedly.** During diagnosis, make one bounded mutation attempt, inspect stage-aware audit evidence, patch minimally, then retry at most once when the evidence supports it.
-6. **Verify remote truth.** Read back the mutated resource whenever the provider exposes readable state. An accepted request alone is not success.
-7. **Recover safely.** For replace-style media, restore the prior DEDAL-managed source if the replacement insert/apply fails and rollback is possible.
-8. **Checkpoint durable lessons.** Record vendor quirks, managed-state requirements, and unresolved readback gaps without committing secrets/private tokens.
+1. **Resolve launch package.** For a new publication, verify that the exact asset has a researched/accepted viewer-facing package. If not, compose YouTube SEO as SUPPORTING and complete the launch-package precondition before upload.
+2. **Resolve exact ownership.** Select an explicit verified profile and reassert the authenticated YouTube channel before mutation.
+3. **Prefer the dedicated typed tool.** Use the narrow MCP/Gateway operation that expresses the intended YouTube action. Use a generic API bridge only for a missing read surface or bounded diagnostics, never as the normal mutation path when a dedicated tool exists.
+4. **Capture current state.** Read back the target when the API exposes it. For destructive replacement, preserve a recoverable DEDAL-managed baseline before deleting or overwriting.
+5. **Require explicit intent.** Consequential writes require `explicit_action_intent`; deletes/unsets require `explicit_destructive_intent`; public/unlisted/scheduled publication keeps its dedicated visibility/publication intent gate.
+6. **Mutate once, boundedly.** During diagnosis, make one bounded mutation attempt, inspect stage-aware audit evidence, patch minimally, then retry at most once when the evidence supports it.
+7. **Verify remote truth.** Read back the mutated resource whenever the provider exposes readable state. An accepted request alone is not success.
+8. **Recover safely.** For replace-style media, restore the prior DEDAL-managed source if the replacement insert/apply fails and rollback is possible.
+9. **Checkpoint durable lessons.** Record vendor quirks, managed-state requirements, and unresolved readback gaps without committing secrets/private tokens.
 
 
 ## Upload orchestration

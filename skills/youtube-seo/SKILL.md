@@ -36,6 +36,10 @@ It does **not** replace:
 
 Never present an absolute YouTube keyword search volume, universal keyword difficulty, guaranteed rank, universal CTR benchmark, or causal claim unless the underlying evidence actually supports it. A DEDAL combined score, if explicitly useful, must be labeled a heuristic and expose its component factors/provenance.
 
+## Publication handoff invariant
+
+A new upload is not ready for YouTube Publishing merely because the media master exists. When a publication request lacks a locked viewer-facing package, YouTube SEO must be composed as SUPPORTING before upload transport begins. This applies to **Shorts as well as long-form**. A Shorts-feed-first hypothesis may reduce emphasis on search-keyword mechanics, but it still requires a truthful title, concise description, minimal entity tags/hashtags, playlist decision, and title-thumbnail promise grounded in the actual clip and current evidence.
+
 ## Default workflow
 
 1. **Define the object and objective.** Resolve the exact video/candidate, audience, content truth, channel/profile context, and whether the task is launch research, existing-video diagnosis, experiment planning, or channel learning.

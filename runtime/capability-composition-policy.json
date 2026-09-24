@@ -42,7 +42,8 @@
     "recompose-on-material-subgoal-change-or-new-dependency",
     "do-not-keep-capabilities-active-because-they-were-useful-earlier",
     "no-load-all-skills-default",
-    "no-new-framework-runtime-dependency-required"
+    "no-new-framework-runtime-dependency-required",
+    "youtube-new-publication-requires-seo-support-when-viewer-facing-package-is-not-locked-including-shorts"
   ],
   "runtime_invariants": [
     "live-authoritative-state-over-memory",

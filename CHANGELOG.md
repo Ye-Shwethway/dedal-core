@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.34.7 — 2026-09-24
+
+### Fixed
+- New YouTube publications may no longer jump directly from a ready media master to upload transport when viewer-facing metadata has not been locked for the exact asset.
+- YouTube Publishing is PRIMARY and YouTube SEO is SUPPORTING for new upload/publication tasks when title, description, tags, playlist, or thumbnail promise still require preparation; Shorts are explicitly included.
+- Shorts-feed-first strategy changes discovery weighting but does not bypass content-truth, discovery-surface, title/description, minimal tag/hashtag, playlist, or thumbnail-promise preparation.
+
+### Evidence
+- Added `YT-HARD-13` and validator coverage for the launch-package precondition.
+- Real-work regression on a CHILIVIDS Short exposed transport-time metadata invention; live Runtime routing was separately corrected and smoke-tested to compose YouTube SEO for equivalent publish/upload prompts.
+
 ## 0.34.6 — 2026-09-22
 
 ### Fixed

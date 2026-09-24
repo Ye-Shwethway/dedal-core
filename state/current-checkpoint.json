@@ -124,7 +124,7 @@
     {
       "id": "youtube-launch-package-regression-2026-09-24",
       "kind": "real-work-regression-plus-routing-and-contract-hardening",
-      "status": "local-core-validation-passed-live-runtime-smoke-passed-pending-pr-ci"
+      "status": "passed-pr-ci-2-of-2-merged-main-live-runtime-smoke-passed"
     }
   ],
   "unresolved_risks": [
@@ -144,8 +144,8 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "3e4c5a0c7c2fab7de73d2dd4c5fefa32af40b710",
-    "tree": "083d24a0b0aae2c03d3d17a0327dbb0f918ca16d",
-    "relation": "0.34.7 candidate is based exactly on verified main 3e4c5a0c7c2fab7de73d2dd4c5fefa32af40b710; final merge/checkpoint closeout remains pending"
+    "sha": "e0f3fa4890380db8e3e5b902c579752f74643e7f",
+    "tree": "c94cd9c77bfda24245bce4c5d5a437bbff12c407",
+    "relation": "Core 0.34.7 feature release merged to main via PR #15 after 2/2 validate checks passed on exact PR head 4b48f06a3dd66877159442cb6aed00402957cf92; this checkpoint closeout records that verified merge identity"
   }
 }

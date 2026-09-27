@@ -164,6 +164,18 @@
         "title_description_minimal_tags_playlist_thumbnail_promise",
         "no_transport_time_metadata_invention"
       ]
+    },
+    {
+      "id": "YT-HARD-14",
+      "name": "queued upload failover remains single-flight",
+      "expect": [
+        "queued_is_orchestration_state_not_failure",
+        "inspect_runner_or_job_health_before_replacement",
+        "no_second_live_auto_pickup_job_for_same_asset",
+        "neutralize_prior_job_before_direct_provider_fallback",
+        "provider_video_id_requires_authoritative_readback",
+        "wait_for_processed_state_before_publication_closure"
+      ]
     }
   ],
   "negative_claims": [
@@ -172,6 +184,7 @@
     "bannerExternalUrl alone is not rollback state",
     "watermark set/unset exposure is not a fully verified lifecycle",
     "an accepted mutation request is not success without readback when readable state exists",
-    "a Short is not exempt from launch-package research merely because Shorts-feed discovery differs from long-form search"
+    "a Short is not exempt from launch-package research merely because Shorts-feed discovery differs from long-form search",
+    "a queued auto-pickup job is not safe to ignore while independently uploading the same asset through another transport"
   ]
 }

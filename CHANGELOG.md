@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.34.8 — 2026-09-27
+
+### Fixed
+- Runtime-assisted workflow binding no longer treats caller self-attestation such as `resources_read` as sufficient mechanical proof of hydration.
+- Candidate Video Finder now defines workflow-integrity semantics for Runtime-bound runs: identity-bound binding evidence when supported, monotonic stage contracts for repeated skip failures, and evidence references on completed stages.
+- Runtime receipts are explicitly scoped as identity-binding evidence rather than claims of model cognition or semantic comprehension.
+
+### Architecture
+- Cognitive Runtime now distinguishes routing from workflow fidelity and specifies observable stage enforcement while preserving Distributed Runtime Assist / fail-open independence for direct MCP, plugin, and native execution surfaces.
+- A reachable, explicitly used Runtime may reject out-of-order guarded workflow transitions without becoming a global authorization or transport gate.
+
+### Evidence
+- Added Candidate Finder regression coverage for self-attestation bypass and out-of-order stage skipping.
+- Python Runtime r6 candidate tests exercise receipt-required binding, resource-identity mismatch rejection, and ordered Candidate Finder stage progression.
+
 ## 0.34.7 — 2026-09-24
 
 ### Fixed
@@ -503,4 +518,3 @@ Initial DEDAL Core foundation: identity, operating contract, security boundary, 
 - Locked Reach semantics: CTR zero is not zero views; delayed historical files preserve measurement availability timing and only backfill matching windows.
 - Added a human-readable reporting requirement: resolve report video IDs to live video titles when possible, show title first, retain the ID for traceability, and label unresolved titles instead of guessing.
 - Marked YouTube Publishing capability-complete for the current scope; ongoing SEO windows are observation work, not a Publishing implementation blocker.
-

@@ -62,6 +62,12 @@ The normal upload surface is `youtube_upload_submit`. It creates an idempotent p
 
 Treat upload evidence as a state machine rather than a single success bit: request accepted -> queued -> source prepared -> uploading -> verifying -> ready_private/verified_remote. Preserve the original job/idempotency key across recovery; do not create a replacement job merely because orchestration or verification is delayed. `youtube_upload_create` remains a compatibility/low-level alias.
 
+**Transport failover is single-flight.** Before submitting, prefer a path whose executor can be observed. If a persistent-runner job remains `queued`, diagnose runner/bridge health and job state before creating any second job or switching `source_type`. A queued auto-pickup job is still live duplicate risk even when zero bytes have moved. If the current execution surface cannot cancel/disable or otherwise prove the queued job terminal, fail closed on an independent direct upload rather than leaving two live transports for the same asset. A direct provider/multipart fallback is allowed only after the prior queued job is cancelled, terminal, non-auto-pickup, or otherwise authoritatively neutralized.
+
+When falling back to an independent provider upload, treat the returned video ID as provisional until authoritative `videos.list`/owned-upload read-back finds that exact ID. A transient `videoNotFound`, empty item list, unavailable/deleted placeholder, or missing ownership evidence is not publication success. Reconcile first; retry the upload only after earlier live jobs/objects cannot later create a duplicate.
+
+After a healthy private upload exists, wait for provider processing to reach the required usable state (`uploadStatus=processed` and, when exposed, `processingStatus=succeeded`) before final thumbnail/playlist/publication closure unless the provider explicitly documents a safe earlier operation. Then apply the approved thumbnail and playlist state, publish with explicit visibility intent, and perform final read-back.
+
 Verification is bounded and eventual-consistency-aware. Retry authoritative video read-back briefly before declaring a remote mismatch. Playlist insertion is idempotent; after a successful insert, a temporarily empty playlist read-back is recorded as `inserted_pending_readback` rather than converting a successful video upload into a failed upload. Reconcile through authoritative read-back before any retry.
 
 ## Thumbnail execution pipeline

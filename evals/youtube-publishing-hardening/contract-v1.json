@@ -176,6 +176,17 @@
         "provider_video_id_requires_authoritative_readback",
         "wait_for_processed_state_before_publication_closure"
       ]
+    },
+    {
+      "id": "YT-HARD-15",
+      "name": "direct multipart is default while runner requires fresh health",
+      "expect": [
+        "direct_multipart_private_first_default",
+        "authoritative_video_readback",
+        "processed_state_before_publication",
+        "runner_requires_fresh_heartbeat",
+        "no_remote_runner_use_of_chat_container_local_file"
+      ]
     }
   ],
   "negative_claims": [
@@ -185,6 +196,7 @@
     "watermark set/unset exposure is not a fully verified lifecycle",
     "an accepted mutation request is not success without readback when readable state exists",
     "a Short is not exempt from launch-package research merely because Shorts-feed discovery differs from long-form search",
-    "a queued auto-pickup job is not safe to ignore while independently uploading the same asset through another transport"
+    "a queued auto-pickup job is not safe to ignore while independently uploading the same asset through another transport",
+    "tool availability alone does not make the persistent runner the default upload path without fresh health evidence"
   ]
 }

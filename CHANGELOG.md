@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.34.11 — 2026-09-27
+
+### Fixed
+- Persistent YouTube runner source-resolution failures can now be acknowledged to the Gateway as terminal failed jobs before upload claim, preventing one invalid queued source from blocking every later job.
+- Runner uploader classifies terminal source-resolution faults separately and advances the queue after marking the job failed.
+
+### Evidence
+- Charlie Cox diagnostics showed the daemon was active and repeatedly rediscovered the same invalid remote `local_file` job every ~15 seconds; the later valid Google Drive job was starved behind it.
+- Added `YT-HARD-16` for poison-job/head-of-line blocking prevention.
+
 ## 0.34.10 — 2026-09-27
 
 ### Fixed

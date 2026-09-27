@@ -54,6 +54,16 @@ Prefer the smallest self-contained editorial unit that preserves the requested m
 9. **Handoff cleanly.** Selected candidates go to Video Production with source/scene/locator truth. Verified content then flows to YouTube SEO, Visual Direction, and Publishing through their existing contracts.
 10. **Learn prospectively.** Preserve the pre-publication candidate hypothesis. After 24h/3d/7d/28d or other planned windows, compare outcomes without rewriting history and keep channel/Creator-specific learning private.
 
+## Runtime-bound workflow integrity
+
+When a Runtime-assisted execution surface exposes a workflow-integrity contract, treat it as an execution guard rather than a decorative routing hint. High-value candidate-discovery runs may require ordered stage completion before a shortlist can be presented.
+
+- Caller-provided path lists such as `resources_read` are audit metadata only; they are not proof that the current resource identity was actually bound or that its semantics were understood.
+- Prefer Runtime-issued, task-scoped resource-binding receipts tied to an observed current identity/version when the surface supports them. A receipt proves the identity-bound hydration step occurred; it does **not** prove cognition or semantic comprehension.
+- For workflows with repeated skip failures, use a monotonic stage contract. A later stage must not be accepted until all earlier required stages have evidence. Domain/private overlays may make the generic workflow stricter, for example by requiring niche-aware external discovery before public-platform competition analysis.
+- Runtime stage state never replaces source evidence. Each completed stage must carry evidence references sufficient for later audit/recovery.
+- Distributed Runtime Assist remains fail-open for independent tools: Runtime unavailability must not become a global transport gate. But when Runtime is reachable and a bound stage contract is active, do not claim the guarded workflow is complete while required stages remain unresolved.
+
 ## Hard gates
 
 A candidate does not enter the normal shortlist unless these are satisfied or explicitly marked as a hold:

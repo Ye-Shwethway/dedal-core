@@ -7,9 +7,10 @@ from pathlib import Path
 
 GATEWAY="https://youtube.drthorne.uk"
 CHUNK=8*1024*1024
-USER_AGENT="dedal-youtube-uploader/0.3.1"
+USER_AGENT="dedal-youtube-uploader/0.3.2"
 
 class RunnerError(RuntimeError): pass
+class SourceResolutionError(RunnerError): pass
 
 def api(base, token, method, path, payload):
     req=urllib.request.Request(
@@ -75,7 +76,7 @@ def resolve(job,state_dir):
     if source["type"]=="google_drive":
         file_id=source["locator"]
         if not re.fullmatch(r"[A-Za-z0-9_-]{10,100}",file_id):
-            raise RunnerError("Invalid Google Drive file ID")
+            raise SourceResolutionError("Invalid Google Drive file ID")
         target=state_dir/"drive"/file_id
         target.mkdir(parents=True,exist_ok=True)
         files=[p for p in target.iterdir() if p.is_file()]
@@ -83,15 +84,15 @@ def resolve(job,state_dir):
             _drive_fetch(file_id,target)
             files=[p for p in target.iterdir() if p.is_file()]
         if len(files)!=1:
-            raise RunnerError(f"Drive source resolution expected one file, found {len(files)}")
+            raise SourceResolutionError(f"Drive source resolution expected one file, found {len(files)}")
         return files[0].resolve()
     if source["type"]=="local_file":
         path=Path(source["locator"]).expanduser().resolve()
-        if not path.is_file(): raise RunnerError(f"Local source not found: {path}")
+        if not path.is_file(): raise SourceResolutionError(f"Local source not found: {path}")
         return path
     if source["type"]=="direct_url":
         return download(source["locator"],state_dir/f"{job['id']}.source")
-    raise RunnerError(f"Unsupported source type: {source['type']}")
+    raise SourceResolutionError(f"Unsupported source type: {source['type']}")
 
 def fingerprint(path):
     digest=hashlib.sha256()
@@ -183,7 +184,12 @@ def main():
         f"/v1/upload-jobs/{args.job_id}/claim",{"inspect_only":True})["job"]
     state_dir=Path(args.state_dir)
     state_dir.mkdir(parents=True,exist_ok=True)
-    source=resolve(inspected,state_dir)
+    try:
+        source=resolve(inspected,state_dir)
+    except SourceResolutionError as exc:
+        api(args.gateway,token,"POST",f"/v1/upload-jobs/{args.job_id}/fail",
+            {"reason_code":"runner_source_resolution_failed"})
+        raise
     actual=fingerprint(source); verify_fingerprint(inspected,actual)
     total=source.stat().st_size
     mime=mimetypes.guess_type(source.name)[0] or "application/octet-stream"

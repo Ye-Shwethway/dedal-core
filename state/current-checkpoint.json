@@ -137,7 +137,7 @@
     {
       "id": "video-production-and-youtube-publish-regression-2026-09-27",
       "kind": "real-work-creator-correction-plus-upload-recovery-hardening",
-      "status": "staged-for-pr-ci"
+      "status": "passed-pr-ci-2-of-2-merged-main"
     }
   ],
   "unresolved_risks": [
@@ -158,8 +158,8 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "a77a1315d7ac65f80fa716cc15fdbb242804fd1e",
-    "tree": "844e84486510c9f430611c3f510b563a29737687",
-    "relation": "Core 0.34.8 workflow-integrity release merged to main via PR #17 after Repo Integrity and Runtime Contracts passed on exact PR head 606ae2d8afffea89d57f8cf66740bebc87ec5720; this checkpoint closeout records that verified merge identity"
+    "sha": "bff86eeda7d5ddd3e7d3fd04442a5a6fa8088e84",
+    "tree": "7eff81f05cd38974916823a8b401bea1bc535b99",
+    "relation": "Core 0.34.9 workflow-hardening release merged to main via PR #18 after Repo Integrity and Runtime Contracts passed on exact PR head b4b959b049d834ebde01fa295dd9914da95f7c41; this checkpoint closeout records that verified merge identity"
   }
 }

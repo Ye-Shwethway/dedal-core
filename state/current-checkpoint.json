@@ -33,7 +33,8 @@
     "Video Production first-pass footage editing uses explicit coverage mapping before a serious rough, treats duration/resolution/audio/ending/thumbnail-source quality as deliberate review decisions, and pilots strong AI enhancement before full rendering to reduce avoidable Creator correction loops.",
     "YouTube upload failover is single-flight: queued auto-pickup work remains live duplicate risk, so runner/job state must be diagnosed and the prior job neutralized before any replacement job or independent direct-provider fallback; provider IDs require authoritative read-back and publication closure waits for processed state.",
     "YouTube Publishing defaults to direct multipart private-first upload with authoritative ID/processing/final read-back; the persistent runner is secondary/recovery and requires fresh heartbeat plus runner-accessible source evidence before job creation.",
-    "Persistent YouTube runner terminal source-resolution errors are acknowledged as failed queued jobs before upload claim so an invalid source cannot head-of-line block later valid work."
+    "Persistent YouTube runner terminal source-resolution errors are acknowledged as failed queued jobs before upload claim so an invalid source cannot head-of-line block later valid work.",
+    "Persistent YouTube runner is a health-gated secondary/recovery path: fresh poll heartbeat, standalone Drive retrieval, terminal source-failure queue advancement, and valid private Drive auto-pickup E2E have been live revalidated; direct multipart remains the default Creator-facing upload path."
   ],
   "evidence": [
     {
@@ -140,6 +141,11 @@
       "id": "video-production-and-youtube-publish-regression-2026-09-27",
       "kind": "real-work-creator-correction-plus-upload-recovery-hardening",
       "status": "passed-pr-ci-2-of-2-merged-main"
+    },
+    {
+      "id": "youtube-runner-poison-job-repair-2026-09-27",
+      "kind": "live-production-diagnostics-plus-private-e2e-regression",
+      "status": "runner-active-root-cause-proven-poison-job-fixed-heartbeat-fresh-invalid-source-terminal-fail-valid-drive-auto-pickup-verified-cleanup-passed"
     }
   ],
   "unresolved_risks": [
@@ -150,8 +156,7 @@
     "Copyright/reuse risk remains context- and rights-dependent; observed channel/platform signals are triage evidence, not legal certainty.",
     "Google Drive folder names and IDs are operational/private state; public Core records only the generic lifecycle and must resolve exact IDs live before moves.",
     "Self-Improvement v0.32.1 has external-method research plus contract/replay evidence, but long-run reduction in recurrence/rework remains future outcome evidence rather than a claimed result.",
-    "Facebook Messenger fresh-inbound synchronization is not currently live-verified on the tested connector: old thread history was readable but fresh inbound state was absent and a send was policy-blocked as outside the allowed window; Page content operations remain independently verified.",
-    "Persistent runner health is now observable through daemon heartbeat, but production E2E revalidation is required after redeployment before runner transport is considered healthy secondary/recovery infrastructure."
+    "Facebook Messenger fresh-inbound synchronization is not currently live-verified on the tested connector: old thread history was readable but fresh inbound state was absent and a send was policy-blocked as outside the allowed window; Page content operations remain independently verified."
   ],
   "next_executable_step": {
     "id": "DEDAL-EFFECTIVENESS-BENCHMARK-V1",
@@ -160,8 +165,8 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "bff86eeda7d5ddd3e7d3fd04442a5a6fa8088e84",
-    "tree": "7eff81f05cd38974916823a8b401bea1bc535b99",
-    "relation": "Core 0.34.9 workflow-hardening release merged to main via PR #18 after Repo Integrity and Runtime Contracts passed on exact PR head b4b959b049d834ebde01fa295dd9914da95f7c41; this checkpoint closeout records that verified merge identity"
+    "sha": "f5cad413c9ec7ad02314a9e06f0303376a417bc7",
+    "tree": "1d8f18e712bdbc86688d8ba682d653b4d0bfc5a0",
+    "relation": "Core 0.34.11 runner poison-job fix merged via PR #20 after Repo Integrity and Runtime Contracts passed on exact PR head d569d86a4195798f11b3d555c511eb7bdfb6351b; live runner deployment then passed fresh-heartbeat, invalid-source terminal-failure, valid Google Drive auto-pickup/verified-private upload, and cleanup read-back."
   }
 }

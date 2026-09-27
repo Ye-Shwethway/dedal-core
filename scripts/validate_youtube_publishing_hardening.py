@@ -10,7 +10,7 @@ CHECKPOINT = ROOT / "skills/youtube-publishing/CURRENT_CHECKPOINT.md"
 MACHINE = ROOT / "state/current-checkpoint.json"
 VERSION = ROOT / "VERSION"
 
-required_cases = {f"YT-HARD-{i:02d}" for i in range(1, 16)} | {
+required_cases = {f"YT-HARD-{i:02d}" for i in range(1, 17)} | {
     "upload-submit-auto-runner-contract",
     "runner-queue-discovery-contract",
     "eventual-consistency-upload-verification",

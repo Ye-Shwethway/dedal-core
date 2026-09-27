@@ -58,11 +58,13 @@ This gate applies equally to long-form videos, vertical Shorts, and clips that a
 
 ## Upload orchestration
 
-The normal upload surface is `youtube_upload_submit`. It creates an idempotent private-first job and returns immediately; a persistent isolated runner on Creator-controlled infrastructure discovers queued work through an authenticated outbound poll and executes it automatically. Routine uploads must not require a per-job GitHub Actions dispatch. GitHub Actions is reserved for runner deployment, validation, diagnostics, and manual recovery.
+**Default upload path:** use the verified direct provider multipart upload path for new publications when the connected execution surface supports it: stage/resolve the approved media into a provider-readable file object, upload **private**, authoritatively read back the exact video ID, wait for processed/succeeded state, then apply thumbnail/playlist metadata, publish with explicit visibility intent, and perform final read-back. This is the normal Creator-facing path until the persistent runner has fresh observable health and live E2E proof.
 
-Treat upload evidence as a state machine rather than a single success bit: request accepted -> queued -> source prepared -> uploading -> verifying -> ready_private/verified_remote. Preserve the original job/idempotency key across recovery; do not create a replacement job merely because orchestration or verification is delayed. `youtube_upload_create` remains a compatibility/low-level alias.
+The persistent isolated runner remains a supported secondary/recovery transport. It may be used only after a fresh health/heartbeat check proves the daemon is polling the Gateway and the source is runner-accessible. Routine uploads must not submit a runner job merely because the action exists. GitHub Actions remains runner deployment/validation/manual-recovery infrastructure, not the default per-upload execution engine.
 
-**Transport failover is single-flight.** Before submitting, prefer a path whose executor can be observed. If a persistent-runner job remains `queued`, diagnose runner/bridge health and job state before creating any second job or switching `source_type`. A queued auto-pickup job is still live duplicate risk even when zero bytes have moved. If the current execution surface cannot cancel/disable or otherwise prove the queued job terminal, fail closed on an independent direct upload rather than leaving two live transports for the same asset. A direct provider/multipart fallback is allowed only after the prior queued job is cancelled, terminal, non-auto-pickup, or otherwise authoritatively neutralized.
+Treat upload evidence as a state machine rather than a single success bit. Direct multipart: media resolved -> private upload accepted -> authoritative video read-back -> processing -> processed/succeeded -> thumbnail/playlist -> explicit publication -> final read-back. Runner path: request accepted -> queued -> claimed -> source prepared -> uploading -> verifying -> ready_private/verified_remote. Preserve the original job/idempotency key across recovery; do not create a replacement job merely because orchestration or verification is delayed. `youtube_upload_create` remains a compatibility/low-level alias.
+
+**Transport failover is single-flight.** Prefer the direct multipart private-first path by default. Before using the runner, require fresh runner-health evidence; before submitting any transport, prefer a path whose executor can be observed. If a persistent-runner job remains `queued`, diagnose runner/bridge health and job state before creating any second job or switching `source_type`. A queued auto-pickup job is still live duplicate risk even when zero bytes have moved. If the current execution surface cannot cancel/disable or otherwise prove the queued job terminal, fail closed on an independent direct upload rather than leaving two live transports for the same asset. A direct provider/multipart fallback is allowed only after the prior queued job is cancelled, terminal, non-auto-pickup, or otherwise authoritatively neutralized.
 
 When falling back to an independent provider upload, treat the returned video ID as provisional until authoritative `videos.list`/owned-upload read-back finds that exact ID. A transient `videoNotFound`, empty item list, unavailable/deleted placeholder, or missing ownership evidence is not publication success. Reconcile first; retry the upload only after earlier live jobs/objects cannot later create a duplicate.
 
@@ -194,3 +196,11 @@ Treat both `Edited Videos` and `Uploaded YT Videos` as rolling working storage, 
 - Destructive Drive cleanup requires exact file/folder resolution before deletion and post-delete read-back. Never infer the target from a fuzzy title match when multiple candidates exist.
 
 The default rolling window is **3**. A smaller or larger window requires explicit Creator intent for that workflow; do not silently change the durable default.
+
+## Runner health guard
+
+- A runner job may be created only when the persistent daemon has a fresh heartbeat/health proof from the same deployment environment.
+- Never pass a ChatGPT/container-local `/mnt/data/...` path or other client-local path as `local_file` to the remote VPS runner. `local_file` is valid only for a file that already exists on the runner host.
+- For normal Creator uploads, prefer Google Drive/provider-backed media or direct multipart media objects over remote `local_file` assumptions.
+- If heartbeat is stale/missing, do not create a queued runner job; use the direct multipart private-first path instead.
+- If a runner job is already queued, neutralize it before changing transport.

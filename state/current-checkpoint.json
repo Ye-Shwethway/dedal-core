@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.34.8",
+  "version": "0.34.9",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -29,7 +29,9 @@
     "Medicine Store Assistant warning markers use a false-alarm prevention gate: code misses trigger name/description/specification reconciliation, legitimate multi-brand sibling lots and known departmental namespaces are allowed, stale markers are cleaned instead of re-raised, and yellow/red severity requires residual uncertainty or concrete contradiction.",
     "YouTube Publishing treats Edited Videos and Uploaded YT Videos as rolling working storage with a default newest-three usable-video window per folder; unresolved publishing/recovery/enforcement states override retention count, and destructive cleanup requires exact target resolution plus post-delete read-back.",
     "YouTube new-publication workflow requires a locked viewer-facing launch package before upload transport unless the Creator explicitly supplied the complete final package; YouTube Publishing remains PRIMARY, YouTube SEO becomes SUPPORTING when packaging is unresolved, and Shorts are explicitly not exempt.",
-    "Runtime workflow integrity distinguishes routing from workflow fidelity: caller-declared resource paths are not sufficient binding evidence, identity-bound hydration receipts are non-cognitive evidence, and repeated high-value workflows may require monotonic evidence-bearing stages while direct specialist transports remain fail-open and independently callable."
+    "Runtime workflow integrity distinguishes routing from workflow fidelity: caller-declared resource paths are not sufficient binding evidence, identity-bound hydration receipts are non-cognitive evidence, and repeated high-value workflows may require monotonic evidence-bearing stages while direct specialist transports remain fail-open and independently callable.",
+    "Video Production first-pass footage editing uses explicit coverage mapping before a serious rough, treats duration/resolution/audio/ending/thumbnail-source quality as deliberate review decisions, and pilots strong AI enhancement before full rendering to reduce avoidable Creator correction loops.",
+    "YouTube upload failover is single-flight: queued auto-pickup work remains live duplicate risk, so runner/job state must be diagnosed and the prior job neutralized before any replacement job or independent direct-provider fallback; provider IDs require authoritative read-back and publication closure waits for processed state."
   ],
   "evidence": [
     {
@@ -131,6 +133,11 @@
       "id": "runtime-workflow-integrity-0.34.8",
       "kind": "architecture-regression-contract-and-python-canary-hardening",
       "status": "passed-pr-ci-2-of-2-merged-main-live-python-r6-negative-self-attestation-regression-passed"
+    },
+    {
+      "id": "video-production-and-youtube-publish-regression-2026-09-27",
+      "kind": "real-work-creator-correction-plus-upload-recovery-hardening",
+      "status": "staged-for-pr-ci"
     }
   ],
   "unresolved_risks": [
@@ -141,7 +148,8 @@
     "Copyright/reuse risk remains context- and rights-dependent; observed channel/platform signals are triage evidence, not legal certainty.",
     "Google Drive folder names and IDs are operational/private state; public Core records only the generic lifecycle and must resolve exact IDs live before moves.",
     "Self-Improvement v0.32.1 has external-method research plus contract/replay evidence, but long-run reduction in recurrence/rework remains future outcome evidence rather than a claimed result.",
-    "Facebook Messenger fresh-inbound synchronization is not currently live-verified on the tested connector: old thread history was readable but fresh inbound state was absent and a send was policy-blocked as outside the allowed window; Page content operations remain independently verified."
+    "Facebook Messenger fresh-inbound synchronization is not currently live-verified on the tested connector: old thread history was readable but fresh inbound state was absent and a send was policy-blocked as outside the allowed window; Page content operations remain independently verified.",
+    "The current DEDAL YouTube MCP exposes upload status but no first-class upload-job cancel/reconcile action; stale queued jobs can be cancelled safely through the authoritative Gateway D1 only with exact guarded state checks until a typed recovery action is added."
   ],
   "next_executable_step": {
     "id": "DEDAL-EFFECTIVENESS-BENCHMARK-V1",

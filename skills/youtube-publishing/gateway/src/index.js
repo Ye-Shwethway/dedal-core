@@ -939,6 +939,20 @@ async function route(request, env, requestId) {
     return reply({ job: runnerJob(await getJob(env, job.id)), upload: { session_url: sessionUrl, content_length: contentLength, content_type: contentType, resumed: false } });
   }
 
+  const fail = path.match(/^\/v1\/upload-jobs\/([^/]+)\/fail$/);
+  if (request.method === "POST" && fail) {
+    await requireActor(request, env.RUNNER_API_TOKEN, "runner");
+    const body = await bodyJson(request);
+    const reason = String(body.reason_code || "runner_source_resolution_failed");
+    if (!/^[a-z0-9_]{3,80}$/.test(reason)) throw httpError(400, "invalid_failure_reason");
+    const job = await getJob(env, fail[1]);
+    if (job.youtube_video_id) throw httpError(409, "video_identity_locked");
+    if (job.status !== "queued") throw httpError(409, "job_not_fail_safe");
+    await failJob(env, job.id, reason);
+    await audit(env, "runner", "upload_job.fail", job.profile_alias, job.channel_id, job.id, "failed", { reason });
+    return reply({ job: runnerJob(await getJob(env, job.id)) });
+  }
+
   const progress = path.match(/^\/v1\/upload-jobs\/([^/]+)\/progress$/);
   if (request.method === "POST" && progress) {
     await requireActor(request, env.RUNNER_API_TOKEN, "runner");

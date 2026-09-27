@@ -187,6 +187,17 @@
         "runner_requires_fresh_heartbeat",
         "no_remote_runner_use_of_chat_container_local_file"
       ]
+    },
+    {
+      "id": "YT-HARD-16",
+      "name": "terminal runner source failure cannot poison the queue",
+      "expect": [
+        "runner_source_resolution_failure_is_terminal",
+        "queued_job_marked_failed",
+        "no_youtube_id_required_for_preclaim_failure",
+        "next_queue_job_can_progress",
+        "failure_is_audited"
+      ]
     }
   ],
   "negative_claims": [

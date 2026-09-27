@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.34.10",
+  "version": "0.34.11",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -32,7 +32,8 @@
     "Runtime workflow integrity distinguishes routing from workflow fidelity: caller-declared resource paths are not sufficient binding evidence, identity-bound hydration receipts are non-cognitive evidence, and repeated high-value workflows may require monotonic evidence-bearing stages while direct specialist transports remain fail-open and independently callable.",
     "Video Production first-pass footage editing uses explicit coverage mapping before a serious rough, treats duration/resolution/audio/ending/thumbnail-source quality as deliberate review decisions, and pilots strong AI enhancement before full rendering to reduce avoidable Creator correction loops.",
     "YouTube upload failover is single-flight: queued auto-pickup work remains live duplicate risk, so runner/job state must be diagnosed and the prior job neutralized before any replacement job or independent direct-provider fallback; provider IDs require authoritative read-back and publication closure waits for processed state.",
-    "YouTube Publishing defaults to direct multipart private-first upload with authoritative ID/processing/final read-back; the persistent runner is secondary/recovery and requires fresh heartbeat plus runner-accessible source evidence before job creation."
+    "YouTube Publishing defaults to direct multipart private-first upload with authoritative ID/processing/final read-back; the persistent runner is secondary/recovery and requires fresh heartbeat plus runner-accessible source evidence before job creation.",
+    "Persistent YouTube runner terminal source-resolution errors are acknowledged as failed queued jobs before upload claim so an invalid source cannot head-of-line block later valid work."
   ],
   "evidence": [
     {

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.34.7",
+  "version": "0.34.8",
   "accepted_state": [
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
     "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
@@ -28,7 +28,8 @@
     "YouTube authenticated analytics/Reporting acquisition and provider transport are owned by YouTube Publishing; analytics diagnosis/experiment/learning are owned by YouTube SEO, and combined acquisition+diagnosis uses Publishing as PRIMARY with SEO as SUPPORTING.",
     "Medicine Store Assistant warning markers use a false-alarm prevention gate: code misses trigger name/description/specification reconciliation, legitimate multi-brand sibling lots and known departmental namespaces are allowed, stale markers are cleaned instead of re-raised, and yellow/red severity requires residual uncertainty or concrete contradiction.",
     "YouTube Publishing treats Edited Videos and Uploaded YT Videos as rolling working storage with a default newest-three usable-video window per folder; unresolved publishing/recovery/enforcement states override retention count, and destructive cleanup requires exact target resolution plus post-delete read-back.",
-    "YouTube new-publication workflow requires a locked viewer-facing launch package before upload transport unless the Creator explicitly supplied the complete final package; YouTube Publishing remains PRIMARY, YouTube SEO becomes SUPPORTING when packaging is unresolved, and Shorts are explicitly not exempt."
+    "YouTube new-publication workflow requires a locked viewer-facing launch package before upload transport unless the Creator explicitly supplied the complete final package; YouTube Publishing remains PRIMARY, YouTube SEO becomes SUPPORTING when packaging is unresolved, and Shorts are explicitly not exempt.",
+    "Runtime workflow integrity distinguishes routing from workflow fidelity: caller-declared resource paths are not sufficient binding evidence, identity-bound hydration receipts are non-cognitive evidence, and repeated high-value workflows may require monotonic evidence-bearing stages while direct specialist transports remain fail-open and independently callable."
   ],
   "evidence": [
     {
@@ -125,6 +126,11 @@
       "id": "youtube-launch-package-regression-2026-09-24",
       "kind": "real-work-regression-plus-routing-and-contract-hardening",
       "status": "passed-pr-ci-2-of-2-merged-main-live-runtime-smoke-passed"
+    },
+    {
+      "id": "runtime-workflow-integrity-0.34.8",
+      "kind": "architecture-regression-contract-and-python-canary-hardening",
+      "status": "local-runtime-17-of-17-core-validators-passed-live-python-r6-negative-self-attestation-regression-passed-pr-ci-pending"
     }
   ],
   "unresolved_risks": [

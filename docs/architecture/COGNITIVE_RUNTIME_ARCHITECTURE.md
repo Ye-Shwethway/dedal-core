@@ -93,6 +93,20 @@ The design adapts several independently convergent patterns without adopting the
 
 These sources support the architectural direction but do not prove DEDAL outcome improvement. DEDAL keeps its own Kernel, authority model, skill ownership, and host-boundary honesty.
 
+## Workflow integrity and binding evidence
+
+Routing is not workflow fidelity. A runtime that only returns a skill path can still be bypassed semantically if the caller skips the selected contract or jumps directly to a later phase. Repeated real-work failures therefore require stronger, observable execution semantics.
+
+For runtime-assisted high-value workflows:
+
+1. **Do not treat caller self-attestation as binding proof.** A caller-supplied list such as `resources_read` may be preserved for diagnostics, but it must not by itself satisfy a mechanical binding guard.
+2. **Use identity-bound receipts where the execution surface supports them.** A task-scoped receipt should bind the requested resource to an observed current identity/version before a state promotion. Receipts prove an explicit binding event, not hidden cognition or comprehension.
+3. **Use monotonic stage contracts for repeated skip failures.** Ordered stages with evidence references make skipped prerequisites observable and rejectable. A stage contract should encode workflow dependencies, not model chain-of-thought.
+4. **Keep evidence and execution separate.** Stage completion records references/provenance; it does not convert weak evidence into truth or replace the domain specialist's hard gates.
+5. **Preserve Distributed Runtime Assist.** Direct MCP/plugin/native execution remains independently callable during Runtime failure. The Runtime is not a global authorization gate. When reachable and explicitly used, however, its receipts/stage state must be reported honestly; a guarded workflow is not "complete" while required stages remain open.
+
+This pattern deliberately avoids claims that a sidecar can verify model-internal understanding. It strengthens what can actually be verified: resource identity binding, ordered workflow state, evidence attachment, replay/idempotency, and transition rejection.
+
 ## Non-goals
 
 - Do not vendor DeepAgents, LangGraph, Agents SDK, or another orchestration runtime into Core merely to mimic the pattern.

@@ -77,6 +77,11 @@
       "id": "shortlist-visual-aid-link",
       "intent": "a shortlisted candidate was discovered on a niche scene site that exposes a viewable scene or preview link",
       "assertion": "resolve and surface the usable scene/preview/media link for Creator decision support; if none is usable, explicitly mark the visual aid unavailable; never treat the link as reuse-rights clearance"
+    },
+    {
+      "id": "runtime-stage-integrity",
+      "intent": "a Runtime-assisted candidate-discovery run has repeated failures where the caller claims resources were read but skips external discovery and jumps to YouTube/shortlist",
+      "assertion": "caller path self-attestation alone is insufficient; require identity-bound binding evidence when supported and reject out-of-order workflow-stage completion until prerequisite stages have evidence"
     }
   ]
 }

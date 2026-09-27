@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.34.10 — 2026-09-27
+
+### Fixed
+- YouTube Publishing now uses the verified direct multipart private-first upload path as the default Creator-facing transport.
+- Persistent runner use now requires fresh heartbeat/health evidence and a runner-accessible source; ChatGPT/container-local paths are explicitly invalid for remote runner `local_file` jobs.
+- The persistent runner daemon now writes an atomic heartbeat record after successful queue polls and records poll/loop errors for deployment-health verification.
+
+### Evidence
+- Charlie Cox publication succeeded through direct multipart -> authoritative ID read-back -> processed/succeeded -> custom thumbnail -> playlist -> public -> final read-back after two runner jobs remained unclaimed at zero bytes.
+- Added `YT-HARD-15` for direct-default transport and runner-health/source-boundary guards.
+
 ## 0.34.9 — 2026-09-27
 
 ### Fixed

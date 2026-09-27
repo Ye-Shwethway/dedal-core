@@ -10,7 +10,7 @@ CHECKPOINT = ROOT / "skills/youtube-publishing/CURRENT_CHECKPOINT.md"
 MACHINE = ROOT / "state/current-checkpoint.json"
 VERSION = ROOT / "VERSION"
 
-required_cases = {f"YT-HARD-{i:02d}" for i in range(1, 15)} | {
+required_cases = {f"YT-HARD-{i:02d}" for i in range(1, 16)} | {
     "upload-submit-auto-runner-contract",
     "runner-queue-discovery-contract",
     "eventual-consistency-upload-verification",
@@ -47,6 +47,9 @@ required_phrases = [
     "transport failover is single-flight",
     "queued auto-pickup job",
     "processingStatus=succeeded",
+    "Default upload path",
+    "Runner health guard",
+    "fresh heartbeat",
 ]
 missing = [p for p in required_phrases if p.lower() not in combined.lower()]
 if missing:

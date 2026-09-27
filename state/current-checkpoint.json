@@ -130,7 +130,7 @@
     {
       "id": "runtime-workflow-integrity-0.34.8",
       "kind": "architecture-regression-contract-and-python-canary-hardening",
-      "status": "local-runtime-17-of-17-core-validators-passed-live-python-r6-negative-self-attestation-regression-passed-pr-ci-pending"
+      "status": "passed-pr-ci-2-of-2-merged-main-live-python-r6-negative-self-attestation-regression-passed"
     }
   ],
   "unresolved_risks": [
@@ -150,8 +150,8 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "e0f3fa4890380db8e3e5b902c579752f74643e7f",
-    "tree": "c94cd9c77bfda24245bce4c5d5a437bbff12c407",
-    "relation": "Core 0.34.7 feature release merged to main via PR #15 after 2/2 validate checks passed on exact PR head 4b48f06a3dd66877159442cb6aed00402957cf92; this checkpoint closeout records that verified merge identity"
+    "sha": "a77a1315d7ac65f80fa716cc15fdbb242804fd1e",
+    "tree": "844e84486510c9f430611c3f510b563a29737687",
+    "relation": "Core 0.34.8 workflow-integrity release merged to main via PR #17 after Repo Integrity and Runtime Contracts passed on exact PR head 606ae2d8afffea89d57f8cf66740bebc87ec5720; this checkpoint closeout records that verified merge identity"
   }
 }

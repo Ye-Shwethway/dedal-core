@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.34.9 — 2026-09-27
+
+### Fixed
+- Video Production now requires a coverage map before the first serious non-trivial footage cut, including target/secondary coverage, continuity bridges, crop risk, strongest showcase moments, and ending candidates; this reduces avoidable Creator correction loops.
+- Subject-focused fan edits no longer inherit an arbitrary short-duration bias, near-final review candidates may not silently downgrade an HD source to a proxy, and music-led edits must audition a perceivable beat rather than accepting hiss/noise as rhythmic completion.
+- Thumbnail handoff now prefers the highest-quality/widest matching source frame, deliberate subject centering, conservative exposure correction, and small numbered comparison sets when Creator selection is part of the workflow.
+- AI-assisted video enhancement now uses representative-segment validation before full render and explicitly checks identity preservation, temporal consistency, flicker, and hallucinated texture.
+- YouTube upload failover is now single-flight: a queued auto-pickup job must be diagnosed and neutralized before another job/source type or independent direct upload can be used for the same asset.
+- Direct provider upload IDs remain provisional until authoritative owned-video read-back succeeds; publication closure waits for processed/succeeded state before final thumbnail, playlist, visibility, and read-back completion.
+
+### Evidence
+- Added creative-production regression cases for structure-first subject coverage/audio/ending review and rejection of proxy-as-master/noise-as-beat/manual-correction-dependent editing.
+- Added `YT-HARD-14` covering queued-job diagnosis, duplicate-risk prevention, single-flight failover, provider-ID read-back, and processed-state closure.
+- Real CHILIVIDS publish recovery exposed two still-live queued auto-pickup jobs after an independent multipart fallback; both were verified at zero bytes/no YouTube ID and explicitly cancelled before runner recovery could create duplicates.
+
 ## 0.34.8 — 2026-09-27
 
 ### Fixed

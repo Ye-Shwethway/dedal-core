@@ -115,6 +115,22 @@
       "expect": "REJECT",
       "intent": "use a full-screen white flash on every fan-edit cut by default",
       "reason_contains": "effect"
+    },
+    {
+      "id": "CP-15",
+      "expect": "ACCEPT",
+      "intent": "map a subject-focused rough cut shot by shot, reduce secondary-only coverage, preserve scene continuity, audition a real beat, and deliberately choose the ending before final polish",
+      "primary": "video-production",
+      "supporting": [],
+      "execution": [
+        "ffmpeg"
+      ]
+    },
+    {
+      "id": "CP-16",
+      "expect": "REJECT",
+      "intent": "use a low-resolution proxy as the final master, call broadband hiss a beat, and rely on Creator feedback to discover obvious subject-coverage and ending problems",
+      "reason_contains": "review"
     }
   ]
 }

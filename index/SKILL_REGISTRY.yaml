@@ -1,5 +1,5 @@
-version: 25
-last_reviewed: "2026-09-18"
+version: 26
+last_reviewed: "2026-09-30"
 
 routing:
   default_policy: smallest_matching_skill_set
@@ -431,24 +431,54 @@ skills:
           commit: "cf649e6e7089804dd1bad745fdcd12aeee7f7aae"
           license: "MIT"
 
-  visual-direction:
-    aliases: []
-    path: "skills/visual-direction"
-    entrypoint: "skills/visual-direction/SKILL.md"
+  story-weaver:
+    aliases: ["story-weaver"]
+    path: "skills/story-weaver"
+    entrypoint: "skills/story-weaver/SKILL.md"
     status: active
-    independence: generic_domain
+    independence: creative_production_domain
     provenance:
       adaptation: true
       sources:
-        - source: "OpenAI Academy image-generation guidance"
-          reviewed_on: "2026-09-14"
-        - source: "Google AI image-generation/reference guidance"
-          reviewed_on: "2026-09-14"
+        - source: "DEDAL narrative/visual production boundary synthesis"
+          reviewed_on: "2026-09-30"
+      adapted_on: "2026-09-30"
+
+  visual-narrative-production:
+    aliases: ["visual-narrative-production", "visual-direction"]
+    path: "skills/visual-narrative-production"
+    entrypoint: "skills/visual-narrative-production/SKILL.md"
+    status: active
+    independence: creative_production_domain
+    provenance:
+      adaptation: true
+      migrated_from: "visual-direction"
+      sources:
+        - source: "OpenAI image prompting guidance"
+          reviewed_on: "2026-09-30"
+        - source: "Blender Storyboarding App Template"
+          reviewed_on: "2026-09-30"
+        - source: "Unreal Engine Sequencer documentation"
+          reviewed_on: "2026-09-30"
         - source: "DreamBooth CVPR 2023 / arXiv:2208.12242"
           use: "conceptual"
         - repo: "tencent-ailab/IP-Adapter"
           commit: "62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2"
           license: "Apache-2.0"
+        - repo: "InstantX/InstantID"
+          use: "identity-anchor methodology"
+        - repo: "ToTheBeginning/PuLID"
+          license: "Apache-2.0"
+          use: "identity-conditioning methodology"
+        - repo: "lllyasviel/ControlNet"
+          use: "pose/geometry conditioning methodology"
+        - repo: "RedAIGC/StoryMaker"
+          use: "story character/body/clothing consistency methodology"
+        - repo: "HVISION-NKU/StoryDiffusion"
+          use: "long-range story consistency methodology"
+        - repo: "NVlabs/consistory"
+          use: "anchor/cached subject consistency methodology"
+      adapted_on: "2026-09-30"
 
   knowledge-memory:
     aliases: []

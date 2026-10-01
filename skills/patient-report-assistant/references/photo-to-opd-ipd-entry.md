@@ -70,6 +70,22 @@ If a source label and workbook label differ slightly in spelling but clearly den
 
 For every nonblank handwritten mark, visually check the printed row label immediately above and below the mark before finalizing the row assignment.
 
+#### Sparse adjacent-row hard gate
+
+When a page contains isolated marks among consecutive mostly-empty rows, treat the candidate row together with its immediate neighbors as a **three-row verification triplet**. This is a hard gate, not an optional confidence check.
+
+Before writing the mark:
+
+1. read the three printed paper labels in order: previous row -> candidate row -> next row;
+2. identify which horizontal paper band actually contains the mark;
+3. resolve those same three labels, in the same order, in the live workbook;
+4. confirm the candidate paper row maps to the candidate workbook row;
+5. confirm the neighboring paper rows do not contain a mark at that day unless they are separately transcribed.
+
+Do not accept a mapping merely because the mark is visually closer to one row centerline. Printed label identity and the horizontal band boundaries are authoritative.
+
+Typical high-risk neighborhoods include sparse service rows such as `Rehabilitation -> Psychiatry -> Dental`, but the rule applies to every similar adjacent-row cluster.
+
 This is mandatory when:
 
 - handwriting touches or approaches a horizontal grid line,
@@ -82,7 +98,7 @@ Do not use a repeated vertical offset across a page as a substitute for reading 
 
 ### Duplicate/omission guard
 
-After the first transcription pass, perform a second independent pass over all visibly marked source cells on that page.
+After the first transcription pass, perform a second independent pass over all visibly marked source cells on that page. The second pass must re-resolve row identity from printed labels rather than reusing the first pass's row coordinates.
 
 For each printed row, compare:
 
@@ -125,7 +141,7 @@ Read the exact written range(s) after the mutation.
 
 Confirm every written value matches the transcription matrix.
 
-Read-back matching is necessary but not sufficient: it only proves that the planned matrix was written correctly. It does **not** prove that the matrix was mapped to the correct paper rows. Therefore, after read-back, repeat the row-anchor check for every written row against the source image.
+Read-back matching is necessary but not sufficient: it only proves that the planned matrix was written correctly. It does **not** prove that the matrix was mapped to the correct paper rows. Therefore, after read-back, repeat the row-anchor check for every written row against the source image. For every sparse-row triplet, read back all three workbook rows at the affected day(s) and confirm the mark is present only on the row supported by the paper source.
 
 ## 7. Continue to final-report verification
 

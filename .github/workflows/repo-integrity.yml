@@ -117,10 +117,16 @@ jobs:
           grep -q 'cf649e6e7089804dd1bad745fdcd12aeee7f7aae' skills/writing-editorial/ADAPTATION_NOTES.md
           test -s evals/writing-editorial/contract-v1.md
 
-          test -s skills/visual-direction/ADAPTATION_NOTES.md
-          test "$(find skills/visual-direction/references -type f | wc -l)" -ge 3
-          grep -q '62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2' skills/visual-direction/ADAPTATION_NOTES.md
-          test -s evals/visual-direction/contract-v1.md
+          test -s skills/story-weaver/ADAPTATION_NOTES.md
+          test "$(find skills/story-weaver/references -type f | wc -l)" -ge 3
+          test -s evals/story-weaver/contract-v1.md
+
+          test -s skills/visual-narrative-production/ADAPTATION_NOTES.md
+          test "$(find skills/visual-narrative-production/references -type f | wc -l)" -ge 9
+          test -s skills/visual-narrative-production/schemas/shot-spec.schema.json
+          test -s skills/visual-narrative-production/schemas/visual-continuity-ledger.schema.json
+          grep -q '62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2' skills/visual-narrative-production/ADAPTATION_NOTES.md
+          test -s evals/visual-narrative-production/contract-v2.md
 
           test -s skills/knowledge-memory/ADAPTATION_NOTES.md
           test "$(find skills/knowledge-memory/references -type f | wc -l)" -ge 3

@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 import json
 from pathlib import Path
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = ROOT / "runtime" / "capability-composition-policy.json"
 CONTRACT = ROOT / "evals" / "capability-composition" / "contract-v1.json"
+REGISTRY = ROOT / "index" / "SKILL_REGISTRY.yaml"
 
 ROLES = {"RUNTIME", "PRIMARY", "SUPPORTING", "EXECUTION", "DORMANT"}
 
@@ -12,6 +14,19 @@ ROLES = {"RUNTIME", "PRIMARY", "SUPPORTING", "EXECUTION", "DORMANT"}
 def load(path: Path):
     with path.open("r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def _alias_owner_map():
+    data = yaml.safe_load(REGISTRY.read_text())
+    out = {}
+    for owner, meta in data.get("skills", {}).items():
+        out[owner] = owner
+        for alias in meta.get("aliases", []) or []:
+            out[alias] = owner
+    return out
+
+
+ALIASES = _alias_owner_map()
 
 
 def evaluate(case):
@@ -37,8 +52,10 @@ def evaluate(case):
         errors.append("dormant capabilities cannot also be active")
 
     explicit = case.get("explicit_skill")
-    if explicit and explicit not in primary:
-        errors.append("explicit skill/alias owner must be primary")
+    if explicit:
+        owner = ALIASES.get(explicit, explicit)
+        if owner not in primary:
+            errors.append("explicit skill/alias owner must be primary")
 
     rationale = case.get("supporting_rationale", {})
     for skill in supporting:

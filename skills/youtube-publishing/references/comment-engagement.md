@@ -28,3 +28,37 @@ Moderation is not a tone-control tool. Do not reject, delete, hide, or ban merel
 ## Learning boundary
 
 Portable engagement rules belong in public Core. Channel-specific voice, recurring audience patterns, private moderation preferences, and exact comment examples belong in private operational state rather than the public repository.
+
+## Execution routing and reply closure
+
+For Creator-owned channel review/comment workflows, engagement is an execution task, not merely a reporting task. When straightforward low-risk comments are discovered and the Creator's standing workflow authorizes autonomous replies, complete the reply attempt during the same run rather than reporting them as pending merely because one execution surface failed.
+
+Use this bounded route ladder:
+
+1. **Fresh thread read on the authoritative channel.** Discover current thread state from live YouTube before composing a reply. Never start a reply pass from remembered parent IDs alone.
+2. **Deduplicate before mutation.** Inspect existing channel replies and follow-ups. If an earlier insert was accepted but visibility is uncertain, read back first; never blind-resend.
+3. **Primary write path.** Prefer the dedicated direct DEDAL YouTube MCP comment-reply action.
+4. **Direct diagnostic fallback.** If the dedicated wrapper fails before a provider outcome is known, test the bounded generic YouTube Data API route when available to distinguish wrapper failure from provider/backend failure.
+5. **Independent execution fallback.** If the direct custom-MCP path is unavailable, test verified Composio YouTube surfaces. Treat Composio custom-MCP passthrough and Composio native YouTube as separate routes with separate auth/transport state. Failure on one is not evidence that the other failed.
+6. **Runtime independence.** DEDAL Runtime/Python Canary health can help isolate infrastructure state, but Runtime is sidecar/assist only. Do not make comment execution depend on Runtime when direct MCP or Composio remains usable.
+7. **Single mutation, then verification.** Once any route returns an accepted YouTube comment object/reply ID, stop failover writes. Read back the parent/thread. A totalReplyCount increment is useful propagation evidence; embedded replies may lag or be a subset, so absence there alone is not a failed write.
+8. **Outcome vocabulary.** Report separately: sent_verified_visible, sent_accepted_pending_readback, not_sent_execution_blocked, not_sent_provider_rejected, and held_for_creator_decision. Never collapse these into generic failed.
+9. **Finish the authorized low-risk queue.** A channel-review run is not complete while discovered positive_low_risk or verified neutral_factual comments remain unreplied solely because the first route failed and an independent verified route is still available.
+10. **No destructive fallback.** Failover never expands authority into delete/hide/ban/reject actions.
+
+For multilingual comments, reply in the commenter's language when meaning is clear and keep the established channel voice concise. Emoji-only friendly reactions may receive a lightweight matching acknowledgement. Questions about titles, cast, music, or episode identity may be answered autonomously only from verified content facts; do not invent details.
+
+## Review-run completeness gate
+
+Before closing a combined analytics + comment-engagement review:
+
+- enumerate the authenticated channel's live uploads first and build the recent cohort dynamically;
+- include every newly published upload plus the current comparison cohort; resolve title, video ID, and publish time before analytics;
+- report public counters for every cohort item and compare only against a clearly identified prior verified snapshot;
+- distinguish Analytics states: observed nonzero, observed zero, unavailable/not processed, suppressed/incomplete, and execution error;
+- scan top-level comments and follow-up replies across the full cohort, not only breakout videos;
+- execute authorized straightforward replies through the route ladder above and read back when available;
+- surface ambiguous/sensitive items with exact comment, translation when needed, and proposed response rather than auto-posting;
+- verify the newest live upload is present, no discovered recent upload was silently omitted, and Short/long-form variants with different IDs remain separate.
+
+A report is part of task completion: do not describe the run as successful if execution occurred but the Creator-facing summary was not delivered.

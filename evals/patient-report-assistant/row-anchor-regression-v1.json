@@ -1,0 +1,30 @@
+{
+  "name": "patient-report-assistant-row-anchor-regression-v1",
+  "version": 1,
+  "purpose": "Prevent adjacent-row transcription shifts in sparse OPD/IPD photo entry.",
+  "cases": [
+    {
+      "id": "sparse-triplet-psychiatry",
+      "paper_rows": ["Rehabilitation", "Psychiatry", "Dental"],
+      "mark": {"row": "Psychiatry", "day": 25, "value": 1},
+      "expected": "write Psychiatry only; keep Rehabilitation and Dental blank for day 25 unless independently marked"
+    },
+    {
+      "id": "sparse-triplet-ipd-psychiatry",
+      "paper_rows": ["Rehabilitation", "Psychiatry", "Dental"],
+      "mark": {"row": "Psychiatry", "day": 9, "value": 1},
+      "expected": "write Psychiatry only; do not shift to Dental"
+    },
+    {
+      "id": "boundary-uncertain",
+      "paper_rows": ["Row A", "Row B", "Row C"],
+      "mark": {"position": "touches horizontal boundary between Row A and Row B"},
+      "expected": "hold for review; do not infer from vertical proximity"
+    },
+    {
+      "id": "readback-is-not-semantic-proof",
+      "scenario": "wrong adjacent workbook row receives the intended value and raw readback matches the planned matrix",
+      "expected": "fail until printed-row identity is re-resolved and the local three-row workbook neighborhood is checked"
+    }
+  ]
+}

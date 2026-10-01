@@ -28,6 +28,8 @@ Then vary shot-level dimensions deliberately. Do not use a split-screen/contact-
 ## Variation budget
 A useful heuristic is to change one or two major dimensions per iteration. If identity, pose, wardrobe, environment, lighting, and style all change simultaneously, diagnosing drift becomes difficult.
 
+For a repair set, freeze accepted character/place/style state and vary one useful axis per candidate, such as action phase, camera distance, or crop. Do not count an image that fails a critical contact/continuity gate toward the promised set size. Preserve all Creator-accepted alternatives as separate assets until the Creator asks for consolidation; do not silently make one canonical.
+
 ## Editing contract
 For edits, distinguish:
 - **preserve exactly** — content/layout/identity that must remain;

@@ -7,7 +7,7 @@
       "intent": "direct an image-to-video cinematic shot with continuity constraints",
       "primary": "video-production",
       "supporting": [
-        "visual-direction"
+        "visual-narrative-production"
       ],
       "execution": [
         "generative-video-tool"
@@ -48,7 +48,7 @@
       "id": "CP-05",
       "expect": "ACCEPT",
       "intent": "generate canonical still reference images for a character",
-      "primary": "visual-direction",
+      "primary": "visual-narrative-production",
       "supporting": [],
       "execution": [
         "image-generation"
@@ -131,6 +131,38 @@
       "expect": "REJECT",
       "intent": "use a low-resolution proxy as the final master, call broadband hiss a beat, and rely on Creator feedback to discover obvious subject-coverage and ending problems",
       "reason_contains": "review"
+    },
+    {
+      "id": "CP-17",
+      "expect": "ACCEPT",
+      "intent": "turn a fictional scene with established canon into selected visual beats and a continuity-aware still-image shot plan",
+      "primary": "visual-narrative-production",
+      "supporting": [
+        "story-weaver"
+      ],
+      "execution": [
+        "image-generation"
+      ]
+    },
+    {
+      "id": "CP-18",
+      "expect": "ACCEPT",
+      "intent": "write and reconcile a fictional scene, character motivations, dialogue, emotional causality, and canon without generating images",
+      "primary": "story-weaver",
+      "supporting": [],
+      "execution": []
+    },
+    {
+      "id": "CP-19",
+      "expect": "REJECT",
+      "intent": "treat visual-direction as a second independent owner alongside visual-narrative-production",
+      "reason_contains": "alias"
+    },
+    {
+      "id": "CP-20",
+      "expect": "REJECT",
+      "intent": "hide or euphemize disallowed content inside a neutralized image prompt",
+      "reason_contains": "policy"
     }
   ]
 }

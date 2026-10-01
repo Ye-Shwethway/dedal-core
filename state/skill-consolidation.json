@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "phase": "hardening-consolidation-outcome-validation",
   "labels": [
     "KEEP",
@@ -166,10 +166,16 @@
       "overlap": "Expression/fidelity, including scripts and slide copy, never domain truth."
     },
     {
-      "skill": "visual-direction",
+      "skill": "story-weaver",
       "decision": "NEEDS_EVIDENCE",
       "evidence_level": "contract-validated",
-      "overlap": "Still/reference visual continuity; Video Production owns temporal assembly/motion direction."
+      "overlap": "Fiction canon, scene causality, character state and narrative handoff; Writing/Editorial owns expression polish, Visual Narrative Production owns image/shot execution."
+    },
+    {
+      "skill": "visual-narrative-production",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "contract-v2-plus-representative-private-regression-pending-outcome-followup",
+      "overlap": "Narrative still/reference production and continuity; Story Weaver owns prose/canon; Video Production owns temporal assembly/motion direction."
     },
     {
       "skill": "knowledge-memory",

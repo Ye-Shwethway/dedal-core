@@ -33,8 +33,8 @@ This skill is independent from Medicine Store Assistant and from the Medicine St
 5. Never overwrite a formula, structural label, merged-layout cell, or manual/manual-hybrid report field merely because it appears blank or unusual.
 6. When the reporting month is confirmed, keep the OPD/IPD source-tab `Month/Year` and month-name fields synchronized to the dataset month/year; do not apply the next-month submission-date rule to them.
 7. Before any new-month OPD/IPD clearing, scan the full used area of each tab and resolve **every** structural row containing the ordered `1..31` day sequence. Protect the complete OPD set and complete IPD set independently from deletion/blanking; never stop at the first match or assume the two tabs share row coordinates.
-8. For photo transcription, resolve every handwritten mark through **paper row identity first, workbook row identity second**. Never translate image vertical position directly into a workbook row number.
-9. After every authorized source-data write, read back the affected OPD/IPD cells and then repeat the paper-row anchor verification before accepting the transcription as correct.
+8. For photo transcription, resolve every handwritten mark through **paper row identity first, workbook row identity second**. Never translate image vertical position directly into a workbook row number. For sparse adjacent rows, the row above, intended row, and row below form a mandatory local verification triplet before writing.
+9. After every authorized source-data write, read back the affected OPD/IPD cells and then repeat the paper-row anchor verification before accepting the transcription as correct. For any sparse-row triplet used in the write, verify the intended row contains the mark and both neighboring rows remain blank unless the source image independently shows marks there.
 10. When the live Monthly Report contains a Specialty `Day Care Pt` row, apply the current day-care separation/reconciliation rules from `workbook-layout.md` and `monthly-report-validation.md`; do not expect raw OPD totals to equal adjusted report OPD totals.
 
 ## Evidence order
@@ -75,6 +75,8 @@ Before and after writing, verify for every marked paper row:
 - resolved workbook row.
 
 If the marks could belong to the adjacent printed row, hold them for review rather than writing.
+
+For sparse neighboring indicators such as Rehabilitation / Psychiatry / Dental, never infer the row from the mark's vertical offset alone. Build a local three-row paper neighborhood (previous / candidate / next), confirm the printed label band that contains the mark, and mirror that exact three-row neighborhood in the live workbook before writing.
 
 ## Write boundary
 

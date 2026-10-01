@@ -1,5 +1,5 @@
 {
-  "schema_version": 12,
+  "schema_version": 13,
   "phase": "hardening-consolidation-outcome-validation",
   "composition_model": {
     "architecture": "persistent-cognitive-runtime",
@@ -19,14 +19,16 @@
     {
       "id": "creative-production",
       "primary_owner_by_intent": {
-        "still-image-reference-continuity": "visual-direction",
+        "fiction-canon-scene-beat-dialogue": "story-weaver",
+        "narrative-still-shot-scene-continuity": "visual-narrative-production",
+        "still-image-reference-continuity": "visual-narrative-production",
         "temporal-video-direction-editing-delivery": "video-production",
         "presentation-deck-architecture-production": "presentation-engineering",
-        "prose-script-expression": "writing-editorial",
+        "prose-expression-translation-editorial": "writing-editorial",
         "independent-output-readiness": "quality-engineering",
         "factual-evidence": "domain-owner-or-research"
       },
-      "rule": "Still visual continuity, temporal media production, deck production, prose, factual authority, and independent QA are distinct layers; generators, editors and slide tools remain execution surfaces."
+      "rule": "Story canon/causality, narrative still production, temporal media, deck production, prose expression, factual authority, and independent QA are distinct layers; generators, editors and slide tools remain execution surfaces."
     },
     {
       "id": "repo-lifecycle",
@@ -133,7 +135,7 @@
       "primary_owner_by_intent": {
         "ux-ui-direction-audit": "interface-design",
         "code-implementation-debugging": "software-development",
-        "visual-reference-image-continuity": "visual-direction"
+        "visual-reference-image-continuity": "visual-narrative-production"
       },
       "rule": "Pair design with implementation only when both are actually required; image-production continuity is not UI design."
     },
@@ -145,7 +147,7 @@
         "candidate-hard-gates-channel-fit-duplicate-risk-triage": "candidate-video-finder",
         "youtube-query-entity-surface-packaging-strategy": "youtube-seo",
         "local-video-cut-editorial-boundary": "video-production",
-        "thumbnail-image-generation-editing": "visual-direction",
+        "thumbnail-image-generation-editing": "visual-narrative-production",
         "authenticated-youtube-publication-mutation": "youtube-publishing",
         "external-current-source-trend-fact-research": "research"
       },
@@ -161,7 +163,7 @@
         "youtube-authenticated-channel-metadata-media-mutation": "youtube-publishing",
         "youtube-upload-privacy-scheduling-playlist-caption-branding": "youtube-publishing",
         "video-media-master-edit-temporal-quality": "video-production",
-        "thumbnail-image-generation-editing": "visual-direction",
+        "thumbnail-image-generation-editing": "visual-narrative-production",
         "external-current-platform-fact-research": "research"
       },
       "rule": "YouTube Publishing owns authenticated YouTube analytics reads, reporting, and provider transport; YouTube SEO owns analytics diagnosis, experiments, and learning. When acquisition and diagnosis are both required, YouTube Publishing is PRIMARY and YouTube SEO is SUPPORTING. SEO does not bypass Publishing ownership, intent, mutation, or read-back gates."
@@ -173,7 +175,7 @@
         "facebook-page-comments-reactions-moderation": "facebook-page-management",
         "facebook-page-analytics-roles-settings-messaging-transport": "facebook-page-management",
         "substantial-post-copywriting": "writing-editorial",
-        "page-image-generation-editing": "visual-direction",
+        "page-image-generation-editing": "visual-narrative-production",
         "page-video-master-editing": "video-production",
         "external-current-meta-policy-fact-research": "research",
         "recurring-page-monitoring-or-delivery": "automations",
@@ -218,7 +220,7 @@
     "primary-owner-first",
     "pair-only-for-distinct-necessary-layer",
     "implementation-infrastructure-verification-release-reliability-are-distinct-layers",
-    "still-visual-temporal-video-and-presentation-production-are-distinct-owners",
+    "story-canon-still-visual-temporal-video-and-presentation-production-are-distinct-owners",
     "iac-config-state-live-reality-are-distinct-evidence-views",
     "database-semantics-are-separate-from-app-code-record-operations-and-infrastructure-resource-lifecycle",
     "execution-surface-selection-is-separate-from-skill-selection",
@@ -231,6 +233,7 @@
     "candidate-scene-discovery-is-separate-from-seo-packaging-editing-and-publishing",
     "material-fix-closure-requires-canonical-source-regression-guard-and-durable-learning",
     "production-hotfix-source-sync-debt-must-be-cleared-before-durable-close",
-    "facebook-page-operations-are-separate-from-personal-profile-automation-and-content-production"
+    "facebook-page-operations-are-separate-from-personal-profile-automation-and-content-production",
+    "visual-direction-is-an-alias-not-a-second-owner"
   ]
 }

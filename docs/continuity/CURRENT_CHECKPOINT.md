@@ -6,7 +6,7 @@ _Date: 2026-10-01_
 
 - Repository: Ye-Shwethway/dedal-core
 - Branch: main after promotion
-- Current version: 0.36.0 Library-first creative-production architecture candidate based on canonical 0.35.7. Recorded GitHub base remains `130ccda`; upstream synchronization remains pending.
+- Current version: 0.36.0. The sanitized Core snapshot is synchronized to GitHub main; live GitHub state remains authoritative for repository identity/history/CI, while the Library mirror is the canonical runtime snapshot.
 - Live GitHub state remains authoritative for repository identity, history, and CI.
 
 ## Accepted state
@@ -42,6 +42,6 @@ The next phase is effectiveness measurement rather than skill-count expansion:
 
 ## Next executable step
 
-Use the 0.36.0 Library candidate for Story->Still->Motion->Edit workflows, run representative provider take-generation outcome evaluation, and synchronize the sanitized patch upstream only after reconciling the pending Library-first chain with Git history.
+Use the synchronized 0.36.0 Story->Still->Motion->Edit architecture in real provider workflows and measure usable-take, retry burden, and continuity outcomes before claiming broad generative-video quality gains.
 
 - 0.35.7 adds physical-state continuity for persistent props/equipment and proficiency-aware form realism for skilled movement.

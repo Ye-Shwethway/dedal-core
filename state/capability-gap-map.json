@@ -1,6 +1,6 @@
 {
-  "schema_version": 9,
-  "reviewed_on": "2026-09-16",
+  "schema_version": 10,
+  "reviewed_on": "2026-10-02",
   "principle": "capability gaps before skill count",
   "promoted": [
     {
@@ -45,6 +45,18 @@
       "version": "0.30.0",
       "status": "active",
       "reason": "Creator YouTube workflows expose a recurring independently routable gap across discovery research, Search/Browse/Suggested packaging, analytics diagnosis, experiments and channel-specific learning that should not overload authenticated publishing/mutation mechanics."
+    },
+    {
+      "id": "generative-video-direction",
+      "version": "0.36.0",
+      "status": "active",
+      "reason": "Sequential-image storytelling now requires a distinct provider-neutral motion-direction layer for temporal shot design, reference-role orchestration, provider adaptation, take QA, and repair before editing."
+    },
+    {
+      "id": "video-post-production",
+      "version": "0.36.0",
+      "status": "active",
+      "reason": "Canonical rename/refocus of the former combined video-production faculty to existing-media editing, assembly, finishing and delivery; legacy video-production/video-editing aliases retained."
     }
   ],
   "top_level_candidates": [],
@@ -94,14 +106,14 @@
       "status": "owned-by-video-production",
       "owners": [
         "video-production",
-        "visual-direction"
+        "visual-narrative-production"
       ],
       "sources": [
         "Google DeepMind Veo current docs",
         "Runway current docs",
         "ByteDance Seedance current first-party material"
       ],
-      "reason": "Provider/model-specific prompting and capability facts are progressive references under Video Production."
+      "reason": "Provider/model-specific generative-video prompting and capability facts are progressive references under Generative Video Direction."
     },
     {
       "id": "ffmpeg-remotion-video-tooling",
@@ -144,7 +156,7 @@
     }
   ],
   "reject_as_top_level": [
-    "FFmpeg, Remotion, Veo, Flow, Runway, Seedance or another provider/tool as standalone faculties when Video Production owns the intent",
+    "FFmpeg/Remotion as standalone faculties when Video Post-Production owns the edit, or Veo/Runway/Seedance/other generators as standalone faculties when Generative Video Direction owns the motion intent",
     "PptxGenJS, python-pptx or a host slide tool as standalone faculties when Presentation Engineering owns the intent",
     "Mobile Engineering solely because a project uses Flutter or Android",
     "monitoring vendor wrappers as standalone faculties",

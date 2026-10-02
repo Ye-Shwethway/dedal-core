@@ -64,7 +64,8 @@ For instruction-heavy skills, default to synthesis: keep the useful idea, rewrit
 Core acquisition references include source evaluation, security audit, adaptation/evals, authoring, freshness, and the historical capability audits in this directory.
 
 Latest creative-production audits:
-- `references/video-production-deep-audit-2026-09-14.md` — generative-video direction, Remotion/FFmpeg, temporal ownership, tool boundary, and promotion decision.
+- `references/generative-video-direction-capability-audit-2026-10-02.md` — current provider controls, public skill-repo patterns, ownership split, and DEDAL-native promotion decision.
+- `references/video-production-deep-audit-2026-09-14.md` — historical combined video-production audit retained as provenance; its generative-direction portion is superseded by the 2026-10-02 audit.
 - `references/video-post-production-hardening-audit-2026-09-14.md` — professional editing/effects, transitions, audio, captions, color, automation patterns, and TUNE/MERGE decision.
 - `references/presentation-engineering-deep-audit-2026-09-14.md` — source-first PPTX, narrative/evidence architecture, editability/render QA, licensing boundary, and promotion decision.
 

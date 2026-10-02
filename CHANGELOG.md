@@ -1,5 +1,107 @@
 # Changelog
 
+## 0.36.0 — Generative Video Direction and post-production split
+
+### Added
+- Added `generative-video-direction` as the provider-neutral owner for temporal shot design, motion/camera/performance choreography, explicit reference roles, provider capability resolution, generation-contract compilation, generated-take QA, and targeted repair.
+- Added Motion Shot Spec, Temporal Continuity Ledger, provider Generation Contract schemas, provider adapter notes, and bidirectional Story/Visual/Motion bridge contracts.
+- Added a current multi-source capability audit covering first-party Veo, Runway, Seedance and Firefly guidance plus comparative public skill-repo patterns; all external material is methodology evidence only and the implementation is DEDAL-native.
+
+### Changed
+- Renamed/refocused canonical `video-production` to `video-post-production`; legacy `video-production` and `video-editing` remain aliases.
+- Moved generative-video direction out of the editing faculty. Video Post-Production now owns existing-media inspection, editorial boundaries, take selection for the cut, assembly, captions/audio/effects, finishing, encoding and delivery.
+- Story Weaver and Visual Narrative Production now expose structured handoffs to Generative Video Direction, including a return path when a missing/corrected keyframe or geometry reference is required.
+- Creative routing now separates story truth, still-state production, generative motion direction, and post-production editing/finishing.
+
+### Evidence
+- Added `evals/generative-video-direction/contract-v1.md` and `scripts/validate_generative_video_direction.py`.
+- Expanded creative-production routing and capability-composition regression cases.
+- Real provider outcome comparison is still pending; current evidence supports architecture/contracts, not a broad quality-gain claim.
+
+## 0.35.7 — Physical-state and proficiency continuity hardening
+
+- Track persistent prop/equipment count, topology/morphology, spatial relation, and contact state across adjacent shots; unexplained teleportation, fusion/splitting, duplication, disappearance, or functional shape drift now fail sequence admission.
+- Add proficiency-aware movement realism: established trained/expert subjects must retain plausible stance, base of support, foot placement, joint organization, torso control, gaze, and load path unless scene state explains a deviation.
+- Extend the continuity ledger and shot spec with optional structured object-state and proficiency-form fields.
+- Add VNP-26 and regression coverage for physical-state continuity and expertise-consistent form.
+
+## 0.35.6 — Mini-arc phase-signature admission
+
+- Add a rendered-phase admission gate for successive mini-arcs.
+- Compare planned phase progression with observed action phases before delivery; camera/crop variation alone no longer qualifies adjacent frames as distinct.
+- Reject or narrowly regenerate duplicate, skipped, or out-of-order action phases.
+- Add VNP-25 and regression validation for semantic duplicate-phase detection.
+
+## 0.35.5 — Mini-arc continuity and instructor-control refinement
+
+- Add a successive mini-arc mode for 3–4 separate full-frame stills that share one local continuity envelope and advance by one micro-action delta per frame.
+- Make collage/contact-sheet/split-screen output a format failure unless explicitly requested.
+- Prioritize natural biomechanics and action-appropriate head/gaze alignment over cosmetic avoidance of camera-facing views.
+- Add equipment-scale/proportion QA for benches, pads, racks, handles, seats, weights, and other load-bearing geometry.
+- Preserve successful local envelopes during retry: regenerate the failed slot narrowly instead of broadly rewriting a sequence that already has strong identity/scene consistency.
+- Add VNP-22 through VNP-24 and validator coverage. Real-world evidence supports this refinement on one representative physical-action mini-arc; broad cross-domain outcome gains remain to be evaluated.
+
+## 0.35.4 — Visual sequence production gates and outcome evaluation
+
+- Preflight equipment actions as a support/contact/joint/load chain with an action phase and crop evidence.
+- Inspect each variation for structural validity before counting it; preserve meaningful phase/framing alternatives and accepted options.
+- Verify individual deliverables at the Creator's requested review destination.
+- Add VNP-19–21 transfer cases and a schema/contract validator. Outcome improvement remains unproven until a distinct scene is evaluated.
+- Give ordinary sequences a compact scene card and four default gates: preflight, render, pixel review, verified delivery. Route repeated failures by type and current tool capability instead of piling on prompt adjectives.
+- Add a representative outcome-evaluation protocol comparing this skill against its previous version on distinct scene classes, with first-pass usable rate, escaped defects, correction burden, continuity, and delivery integrity.
+
+## 0.35.3 — 2026-10-01
+
+### Fixed
+- Visual Narrative Production now treats recurring-character pixel-reference binding as a hard generation precondition when authoritative image anchors exist; Library retrieval/inspection or prose-only traits no longer count as identity conditioning.
+- Environment anchors now preserve place identity and stable geography without freezing camera/background composition; shot-specific visibility may be full, partial, occluded, or offscreen according to scene geometry.
+- Movement/action shots now require a scene-geometry preflight covering start/destination, movement/facing direction, camera axis, visibility, and action-appropriate gaze.
+- Self-review now checks missing reference binding, scene-geometry contradictions, implausible gaze/action relationships, and environment-to-composition leakage before promotion.
+
+### Evidence
+- Added VNP-16 through VNP-18 regression contracts and shot-spec fields for `reference_bindings` and `scene_geometry`.
+- Generalized repeated real-work failures where text descriptions drifted from canonical character pixels and fixed-background prompting contradicted side-view movement logic, without exporting private character data.
+
+## 0.35.2 — 2026-10-01
+
+- Hardened Patient Report Assistant photo transcription against sparse adjacent-row shifts.
+- Added a mandatory three-row verification triplet (previous / candidate / next) before writing isolated marks.
+- Added semantic post-write readback across the whole local triplet so a correct numeric write to the wrong neighboring row cannot pass.
+- Added PRA row-anchor regression cases covering Rehabilitation / Psychiatry / Dental and boundary ambiguity.
+
+## 0.35.1 — 2026-09-30
+
+### Fixed
+- Visual Narrative Production now performs automatic post-render self-review before relying on Creator feedback, classifying shots as pass, usable-with-debt, or fail.
+- Sequential still workflows now run a cross-shot audit every 2–3 accepted frames and immediately after repeated-pattern feedback, detecting redundant stance/silhouette, camera/blocking sameness, invented props/state, pacing compression, and continuity drift.
+- Creator corrections now propagate across recent and future shots so recurring detectable defects are not repeatedly offloaded to the Creator.
+
+### Evidence
+- Forest-ambush private regression exposed repeated action stance/composition across successive beats, unexplained weapon-state introduction, and an injury-turning-point frame that did not clearly establish the planned left-flank injury.
+- Added a dedicated self-review/sequence-audit reference and regression requirements while keeping private character/project data outside public Core.
+
+## 0.35.0 — 2026-09-30
+
+### Added
+- Added `story-weaver` as the fiction-canon/scene/beat/dialogue owner, with explicit downstream visual handoff instead of mixing prose canon and image prompting.
+- Added structured Visual Narrative Production shot specs and Visual Continuity Ledger schemas for sequential stills / visual-novel scenes.
+- Added professional visual references covering narrative-to-shot selection, performance/emotion, cinematography/screen direction, environment/lighting, pose/anatomy/contact/load, prompt compilation/neutralization, and role-specific anchor promotion.
+
+### Changed
+- Renamed and expanded `visual-direction` into canonical `visual-narrative-production`; `visual-direction` remains a backward-compatible alias and is not a second faculty.
+- Creative routing now separates story canon/causality, narrative still production, temporal video, prose expression, factual authority, and independent QA.
+- Still-image prompting is now a compiled execution artifact from structured story/shot/continuity state rather than the continuity source of truth.
+
+### Safety and quality
+- Prompt neutralization is explicitly semantic clarification for legitimate scenes, not safety bypass or obfuscation.
+- Visual QA now treats identity/physique drift, extra limbs, joint errors, object intersection, implausible grip/load mechanics, camera-axis drift, scene-state drift, and narrative mismatch as distinct defect classes.
+- Private character/project anchors remain outside public Core; only generalized workflow lessons are promoted.
+
+### Evidence
+- Added Visual Narrative Production v2 and Story Weaver v1 contracts plus validators.
+- Added routing regressions for fiction->visual handoff, legacy `visual-direction` alias behavior, anti-duplicate ownership, and anti-evasion neutralization.
+- Real-work private character/action reference production supplied representative regression categories without exporting private character data to public Core.
+
 ## 0.34.11 — 2026-09-27
 
 ### Fixed

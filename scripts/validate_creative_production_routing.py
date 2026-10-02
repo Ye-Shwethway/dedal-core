@@ -4,22 +4,31 @@ from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
 contract = json.loads((root / 'evals/creative-production-routing/contract-v1.json').read_text())
-video = (root / 'skills/video-production/SKILL.md').read_text()
-editing_modes = (root / 'skills/video-production/references/editing-modes.md').read_text()
+video = (root / 'skills/video-post-production/SKILL.md').read_text()
+gvd = (root / 'skills/generative-video-direction/SKILL.md').read_text()
+editing_modes = (root / 'skills/video-post-production/references/editing-modes.md').read_text()
 pres = (root / 'skills/presentation-engineering/SKILL.md').read_text()
+visual = (root / 'skills/visual-narrative-production/SKILL.md').read_text()
+story = (root / 'skills/story-weaver/SKILL.md').read_text()
 routing = json.loads((root / 'state/routing-boundaries.json').read_text())
 
 assert len(contract['cases']) >= 14
-assert 'Video Production' in video
+assert 'Video Post-Production' in video
+assert 'Generative Video Direction' in gvd
 assert 'Presentation Engineering' in pres
+assert 'Visual Narrative Production' in visual
+assert 'Story Weaver' in story
 assert 'render success is not playback' in video.lower()
 assert 'rendered visual qa is mandatory' in pres.lower()
-assert 'video-production' in json.dumps(routing)
+assert 'video-post-production' in json.dumps(routing)
+assert 'generative-video-direction' in json.dumps(routing)
 assert 'presentation-engineering' in json.dumps(routing)
+assert 'visual-narrative-production' in json.dumps(routing)
+assert 'story-weaver' in json.dumps(routing)
 assert 'ffmpeg' in video.lower()
 assert 'simple / narrative edit' in video.lower()
 assert 'fan / visual-montage edit' in video.lower()
-assert 'structure acceptance' in video.lower()
+assert 'structural rough' in video.lower() or 'structural acceptance' in video.lower()
 assert 'full-frame white flashes' in video.lower()
 assert 'fan-edit build sequence' in editing_modes.lower()
 assert 'end intentionally' in editing_modes.lower()

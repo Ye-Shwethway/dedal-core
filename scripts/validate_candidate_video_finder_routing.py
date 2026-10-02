@@ -35,7 +35,7 @@ require("skills/candidate-video-finder/SKILL.md", "Decision visual-aid rule", "c
 require("skills/candidate-video-finder/SKILL.md", "Visual aid", "shortlist visual-aid field")
 require("skills/candidate-video-finder/references/candidate-record-and-gates.md", "decision_aids:", "candidate decision-aid schema")
 require("skills/candidate-video-finder/references/candidate-record-and-gates.md", "direct_media_url", "direct media decision aid")
-require("skills/video-production/references/scene-and-action-boundary-extraction.md", "locator evidence, not canonical cut authority", "production cut boundary")
+require("skills/video-post-production/references/scene-and-action-boundary-extraction.md", "locator evidence, not canonical cut authority", "production cut boundary")
 require("skills/youtube-seo/SKILL.md", "YouTube SEO owns discovery research", "seo downstream boundary")
 require("skills/youtube-publishing/SKILL.md", "YouTube SEO owns", "publishing ownership boundary")
 

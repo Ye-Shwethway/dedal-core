@@ -25,7 +25,7 @@ Facebook Page Management owns authenticated Facebook Page identity, Page content
 - personal Facebook profile posting or personal-profile automation;
 - substantial copywriting or editorial voice, which belongs to Writing/Editorial;
 - image generation/editing, which belongs to Visual Direction;
-- video editing/master creation, which belongs to Video Production;
+- video editing/master creation, which belongs to Video Post-Production;
 - external factual research or current Meta policy interpretation, which belongs to Research;
 - credential-store/security architecture, which belongs to Security Engineering;
 - automation cadence/monitoring policy, which belongs to Automations;

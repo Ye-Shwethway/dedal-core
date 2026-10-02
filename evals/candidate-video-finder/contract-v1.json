@@ -21,11 +21,11 @@
     {
       "id": "route-selected-scene-cut",
       "intent": "cut the Creator-selected fight scene from local episode footage",
-      "primary": "video-production",
+      "primary": "video-post-production",
       "supporting": [
         "candidate-video-finder"
       ],
-      "assertion": "local audiovisual cut authority belongs to Video Production"
+      "assertion": "local audiovisual cut authority belongs to Video Post-Production"
     },
     {
       "id": "route-publish-selected-output",

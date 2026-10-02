@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "phase": "hardening-consolidation-outcome-validation",
   "labels": [
     "KEEP",
@@ -82,10 +82,16 @@
       "overlap": "Declarative infrastructure lifecycle."
     },
     {
-      "skill": "video-production",
+      "skill": "generative-video-direction",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "multi-source-first-party-plus-public-skill-audit-and-contract-validated",
+      "overlap": "Owns pre-generation temporal shot direction, provider capability/reference strategy, provider contract compilation and generated-take QA; Visual Narrative Production owns still state and Video Post-Production owns editing/finishing."
+    },
+    {
+      "skill": "video-post-production",
       "decision": "KEEP",
-      "evidence_level": "demonstrated-workflow-plus-multi-source-deep-audit-plus-contract-validated",
-      "overlap": "Owns temporal storytelling, generative-video direction, editing, subtitles/audio/motion composition and media delivery; Visual Direction owns still canonical references; tools remain execution surfaces."
+      "evidence_level": "demonstrated-editing-workflow-plus-contract-validated",
+      "overlap": "Owns existing-media inspection, editorial boundaries, editing/assembly, captions/audio/effects/finishing/delivery; Generative Video Direction owns pre-generation motion direction."
     },
     {
       "skill": "presentation-engineering",
@@ -97,13 +103,13 @@
       "skill": "facebook-page-management",
       "decision": "KEEP",
       "evidence_level": "representative-live-page-crud-media-scheduling-analytics-verified-messenger-degraded",
-      "overlap": "Owns authenticated Facebook Page operations; Writing/Editorial, Visual Direction, Video Production, Research, Automations, and Security Engineering retain their distinct layers; personal profiles are out of scope."
+      "overlap": "Owns authenticated Facebook Page operations; Writing/Editorial, Visual Direction, Video Post-Production, Research, Automations, and Security Engineering retain their distinct layers; personal profiles are out of scope."
     },
     {
       "skill": "youtube-publishing",
       "decision": "KEEP",
       "evidence_level": "real-oauth-mismatch-plus-interrupted-resume-plus-playlist-readback-proven",
-      "overlap": "Owns authenticated YouTube channel binding, upload orchestration, publication state and secondary YouTube mutations; Video Production owns media creation/editing."
+      "overlap": "Owns authenticated YouTube channel binding, upload orchestration, publication state and secondary YouTube mutations; Video Post-Production owns media creation/editing."
     },
     {
       "skill": "youtube-seo",
@@ -115,7 +121,7 @@
       "skill": "candidate-video-finder",
       "decision": "KEEP",
       "evidence_level": "creator-approved-architecture-plus-multi-source-audit-and-contract-validated",
-      "overlap": "Owns upstream scene-level candidate discovery, source/scene verification, hard-gate evaluation and Creator shortlisting; YouTube SEO owns downstream discovery-surface packaging/measurement and Video Production owns exact local cut truth."
+      "overlap": "Owns upstream scene-level candidate discovery, source/scene verification, hard-gate evaluation and Creator shortlisting; YouTube SEO owns downstream discovery-surface packaging/measurement and Video Post-Production owns exact local cut truth."
     },
     {
       "skill": "decision-design",
@@ -166,10 +172,16 @@
       "overlap": "Expression/fidelity, including scripts and slide copy, never domain truth."
     },
     {
-      "skill": "visual-direction",
+      "skill": "story-weaver",
       "decision": "NEEDS_EVIDENCE",
       "evidence_level": "contract-validated",
-      "overlap": "Still/reference visual continuity; Video Production owns temporal assembly/motion direction."
+      "overlap": "Fiction canon, scene causality, character state and narrative handoff; Writing/Editorial owns expression polish, Visual Narrative Production owns image/shot execution."
+    },
+    {
+      "skill": "visual-narrative-production",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "contract-v2-plus-representative-private-regression-pending-outcome-followup",
+      "overlap": "Narrative still/reference production and continuity; Story Weaver owns prose/canon; Generative Video Direction owns generated motion; Video Post-Production owns editing/assembly."
     },
     {
       "skill": "knowledge-memory",

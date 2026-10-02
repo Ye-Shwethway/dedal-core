@@ -50,13 +50,14 @@ This roadmap records eight high-value generic capability areas for DEDAL Core. O
    - multilingual fidelity/localization;
    - publication QA and optional editorial lint.
 
-6. **Visual Direction / Image Production**
-   - canonical identity/trait locks;
-   - per-dimension reference hierarchy;
-   - shot/set planning and composition;
-   - style/character continuity;
-   - targeted edits;
-   - drift detection and rendered visual QA.
+6. **Visual Narrative Production** (expanded from Visual Direction / Image Production in v0.35.0)
+   - narrative beat -> visual beat -> shot planning;
+   - canonical identity/physique/performance locks and per-dimension reference authority;
+   - visual continuity ledgers for sequential scenes and location transitions;
+   - cinematography, screen direction, lighting, environment, pose/anatomy/contact/load reasoning;
+   - provider-agnostic shot specs plus prompt compilation/semantic neutralization;
+   - targeted edits, drift taxonomy, rendered visual QA, and accepted-anchor promotion;
+   - pairs with the independently routable Story Weaver faculty for fiction canon/scene/beat causality.
 
 7. **Decision / Planning Intelligence v2 — merged into Decision Design**
    - uncertainty and option value;

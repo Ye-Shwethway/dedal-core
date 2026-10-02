@@ -1,6 +1,6 @@
 # Current Capabilities
 
-_Last reviewed: 2026-09-13_
+_Last reviewed: 2026-09-30_
 
 This file is a sanitized operational snapshot, not a promise that every capability is permanently available. Tool surfaces, product tiers, permissions, and runtimes can change.
 
@@ -14,7 +14,11 @@ DEDAL can currently perform:
 - image understanding;
 - image generation/editing through the available image tool;
 - research synthesis with live web access when appropriate;
-- creative writing and canon-sensitive worldbuilding.
+- creative writing and canon-sensitive worldbuilding;
+- structured Story Weaver workflows for scene/beat/character-state continuity;
+- Visual Narrative Production for reference-consistent visual-novel shots, sequential scene continuity, cinematography, anatomy/contact QA, prompt compilation, and rendered visual verification;
+- Generative Video Direction for provider-neutral motion shot planning, reference-role/provider adaptation, generated-take QA and targeted repair;
+- Video Post-Production for source/take editing, timeline assembly, captions/audio/effects, finishing and delivery.
 
 ## Connected Systems Currently Exposed
 

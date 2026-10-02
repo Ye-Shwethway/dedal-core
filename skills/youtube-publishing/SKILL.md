@@ -23,7 +23,7 @@ Own the channel-operations layer after a media artifact is ready for distributio
 YouTube Publishing owns target-channel resolution, YouTube metadata writes, upload lifecycle, privacy/scheduling, playlist and thumbnail operations, captions, supported channel branding, viewer-comment engagement/moderation, managed media state, and bounded YouTube Data/Analytics/Reporting transport used by higher-level workflows. YouTube SEO owns discovery research, surface-specific packaging hypotheses, analytics diagnosis, experiments, and discovery-learning synthesis.
 
 It does **not** replace:
-- Video Production for edit quality, codecs, burned-in captions, or the final media master;
+- Video Post-Production for edit quality, codecs, burned-in captions, or the final media master;
 - Writing/Editorial for substantial copywriting;
 - Research for external factual claims or current platform-policy verification;
 - Visual Direction for custom thumbnail/banner image generation or editing;
@@ -137,7 +137,7 @@ Use YouTube SEO for query/entity research, Search/Browse/Suggested strategy, pac
 
 ### Copyright/enforcement outcome handling
 
-Publishing does not decide legal clearance and does not ask Video Production to disguise copyrighted material from Content ID. For third-party media, distinguish actual platform outcomes: `claim`, `block`, `takedown/strike`, and separate reused-content/monetization-policy issues. A claim that leaves the video available is not equivalent to a strike; a non-monetized channel is still subject to enforcement.
+Publishing does not decide legal clearance and does not ask Video Post-Production to disguise copyrighted material from Content ID. For third-party media, distinguish actual platform outcomes: `claim`, `block`, `takedown/strike`, and separate reused-content/monetization-policy issues. A claim that leaves the video available is not equivalent to a strike; a non-monetized channel is still subject to enforcement.
 
 After upload, capture the actual available enforcement state when surfaced by YouTube and return it to the private operational learning loop. Treat blocks, takedowns/strikes, or repeated aggressive enforcement as stronger future risk evidence than claim-only history. Do not automatically dispute claims or takedowns; any dispute is a separate consequential action requiring explicit Creator intent and an appropriate factual/legal basis.
 

@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DEDAL Visual Narrative Shot Spec",
+  "type": "object",
+  "required": [
+    "shot_id",
+    "purpose",
+    "subjects",
+    "continuity"
+  ],
+  "properties": {
+    "shot_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scene_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "shot_role": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "minItems": 1
+    },
+    "action_blocking": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "performance": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "environment": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "camera": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "lighting": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "reference_roles": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "preserve": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "change": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "avoid": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "continuity": {
+      "type": "object",
+      "properties": {
+        "ledger_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "state_delta": {
+          "type": "object"
+        },
+        "previous_anchor_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "acceptance_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "interaction_geometry": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "action_phase": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fixed_support": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contact_points": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "visible_joint_chain": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "head_support_relation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "load_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "crop_evidence": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "scene_geometry": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "subject_start": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "destination_or_action_target": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "movement_vector": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "facing_direction": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gaze_target": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "camera_side_axis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "visibility_plan": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "reference_bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "source_id",
+          "modality",
+          "binding_status"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "modality": {
+            "type": "string",
+            "enum": [
+              "pixel_image",
+              "provider_image_conditioning",
+              "text_only_fallback"
+            ]
+          },
+          "binding_status": {
+            "type": "string",
+            "enum": [
+              "bound",
+              "unbound",
+              "unsupported"
+            ]
+          },
+          "authority": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "proficiency_form": {
+      "type": "object",
+      "properties": {
+        "established_level": {
+          "type": "string"
+        },
+        "expected_form": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authorized_deviations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

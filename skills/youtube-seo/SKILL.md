@@ -26,7 +26,7 @@ It does **not** replace:
 - Research for external factual claims and current platform-policy verification;
 - Visual Direction for creating/editing thumbnail art;
 - Writing/Editorial for substantial prose beyond bounded metadata packaging;
-- Video Production for the media master, opening hook/edit, audio, captions, or temporal quality;
+- Video Post-Production for the media master, opening hook/edit, audio, captions, or temporal quality;
 - Quality Engineering for independent readiness/acceptance when a separate verifier is warranted;
 - the YouTube Data/Analytics/Reporting APIs, Studio UI, MCP, Gateway, browser, or other execution surface.
 

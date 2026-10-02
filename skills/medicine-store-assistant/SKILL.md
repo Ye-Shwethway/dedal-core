@@ -185,6 +185,24 @@ The normal visible daily-use surface should stay small. Preserve the compatibili
 
 Do not rely on remembered sheet indexes. Inspect and read back live sheet metadata after tab visibility/order changes.
 
+
+### App-connected protected tabs — explicit Owner order required
+
+The following live workbook tabs are application-managed surfaces and are **protected by default**:
+
+- `Users`
+- `App_Audit_Log`
+- `Expiry Review`
+
+Rules:
+- Without an explicit current Owner instruction naming or clearly authorizing a change to one of these tabs, treat it as **read-only**. Do not edit values, formulas, formatting, validation, rows, columns, filters, visibility, or structure; do not clear, append, sort, rename, delete, or repurpose it.
+- Do not infer permission from a broader medicine-store cleanup, month-close, archive, reorder, expiry, user-management, or app-maintenance task. Protection is deny-by-default until explicit Owner authorization is present in the active task.
+- `Expiry Review` is distinct from `Expiry_Return_Review`; do not substitute one for the other. Ordinary MSA expiry/return/discard workflows continue to use their own authorized operational/review surfaces and must not mutate `Expiry Review` unless the Owner explicitly orders it.
+- `App_Audit_Log` is distinct from the MSA `Audit_Log`. Routine MSA audit closure must continue to use the canonical MSA `Audit_Log`; never write an MSA operation record into `App_Audit_Log` unless explicitly ordered.
+- `Users` is app account/authentication state. Never use it as an inventory helper surface or alter it during stock work without explicit Owner authorization.
+- These tabs may be hidden for human-UI safety. Hiding/unhiding is itself a mutation and requires explicit Owner authorization; once hidden, preserve that state unless explicitly told otherwise.
+- Before any authorized mutation to one of these protected tabs, fresh-read the exact tab and relevant app contract/schema, apply the smallest bounded change, and read it back before claiming success.
+
 ## Reorder intelligence and Owner review
 
 For any adaptive reorder task, read [references/reorder-intelligence-and-owner-review.md](references/reorder-intelligence-and-owner-review.md) before recommending or mutating quantities.

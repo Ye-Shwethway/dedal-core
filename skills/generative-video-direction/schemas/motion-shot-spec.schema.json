@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DEDAL Motion Shot Spec",
+  "type": "object",
+  "required": [
+    "shot_id",
+    "narrative_function",
+    "start_state",
+    "temporal_change",
+    "end_state",
+    "acceptance_checks"
+  ],
+  "properties": {
+    "shot_id": {
+      "type": "string"
+    },
+    "narrative_function": {
+      "type": "string"
+    },
+    "duration_target": {
+      "type": [
+        "string",
+        "number",
+        "null"
+      ]
+    },
+    "start_state": {
+      "type": "object"
+    },
+    "temporal_change": {
+      "type": "object"
+    },
+    "end_state": {
+      "type": "object"
+    },
+    "performance": {
+      "type": "object"
+    },
+    "subject_motion": {
+      "type": "object"
+    },
+    "object_motion": {
+      "type": "object"
+    },
+    "environment_motion": {
+      "type": "object"
+    },
+    "camera": {
+      "type": "object"
+    },
+    "audio_intent": {
+      "type": "object"
+    },
+    "reference_roles": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "continuity_locks": {
+      "type": "object"
+    },
+    "allowed_change": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provider_requirements": {
+      "type": "object"
+    },
+    "acceptance_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -14,7 +14,7 @@ Use this skill when the Creator wants to:
 - find promising scenes/videos to make next for a known channel or niche;
 - inspect a film/series/episode/franchise for clip-worthy moments;
 - compare candidate scenes using demand, competition, freshness, channel fit, or risk evidence;
-- build or revisit a candidate shortlist before Video Production starts;
+- build or revisit a candidate shortlist before Video Post-Production starts;
 - learn which candidate-selection hypotheses were supported by later channel outcomes.
 
 Do **not** route here merely because an already-prepared video needs SEO, a thumbnail, editing, or publishing.
@@ -29,7 +29,7 @@ It composes with:
 
 - **Research** for current external facts, release/episode verification, trends, and non-YouTube source evidence;
 - **YouTube SEO** for YouTube discovery-surface reasoning, owned analytics interpretation, and later packaging/measurement;
-- **Video Production** only after selection, for local audiovisual verification and exact editorial boundaries;
+- **Video Post-Production** only after selection, for local audiovisual verification and exact editorial boundaries;
 - **Visual Direction** only downstream of a verified content/thumbnail strategy brief;
 - **YouTube Publishing** only after production/packaging approval, for authenticated YouTube operations.
 
@@ -51,7 +51,7 @@ Prefer the smallest self-contained editorial unit that preserves the requested m
 6. **Build an evidence vector.** Preserve scene salience, channel fit, owned-channel evidence, observed demand, saturation, exact-scene gap, authoritative competition, freshness, novelty, Suggested adjacency, packaging potential, editorial self-containment, source accessibility, reuse-risk signals, and evidence confidence.
 7. **Do not hide uncertainty in a magic score.** Use qualitative opportunity bands by default. A convenience heuristic is allowed only for large candidate sets and must expose components/provenance; it cannot override a failed hard gate.
 8. **Shortlist for the Creator.** Present a small interpretable set with why it may work, main weakness, evidence confidence, source status, observed risk, and a **decision visual aid** when one is available. If the discovery/source page exposes a directly viewable scene page, preview, or media link that can be safely shared, resolve and verify the current URL and surface it with the candidate. Do not hide an available scene/preview link behind prose. If no usable visual aid is available, say so explicitly. The Creator decides `SELECT | MAYBE | PASS | HOLD | NEVER`.
-9. **Handoff cleanly.** Selected candidates go to Video Production with source/scene/locator truth. Verified content then flows to YouTube SEO, Visual Direction, and Publishing through their existing contracts.
+9. **Handoff cleanly.** Selected candidates go to Video Post-Production with source/scene/locator truth. Verified content then flows to YouTube SEO, Visual Direction, and Publishing through their existing contracts.
 10. **Learn prospectively.** Preserve the pre-publication candidate hypothesis. After 24h/3d/7d/28d or other planned windows, compare outcomes without rewriting history and keep channel/Creator-specific learning private.
 
 ## Runtime-bound workflow integrity

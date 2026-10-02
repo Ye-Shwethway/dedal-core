@@ -12,7 +12,7 @@ After shortlist review, record one private decision:
 
 These decisions are private operational state, not public Core fixtures.
 
-## Video Production handoff
+## Video Post-Production handoff
 
 ```yaml
 candidate_id:
@@ -39,7 +39,7 @@ decision_visual_aids:
 notes:
 ```
 
-Video Production then owns local audiovisual verification, precise boundary extraction, rendering, and output QA. External timestamps and automatic scene detectors remain locators/aids; verified local cut truth supersedes them.
+Video Post-Production then owns local audiovisual verification, precise boundary extraction, rendering, and output QA. External timestamps and automatic scene detectors remain locators/aids; verified local cut truth supersedes them.
 
 ## YouTube SEO handoff
 

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DEDAL Visual Continuity Ledger",
+  "type": "object",
+  "required": [
+    "ledger_id",
+    "scene_id",
+    "characters",
+    "accepted_anchors"
+  ],
+  "properties": {
+    "ledger_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scene_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location_state": {
+      "type": "object"
+    },
+    "time_weather_state": {
+      "type": "object"
+    },
+    "lighting_state": {
+      "type": "object"
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "morphology": {
+            "type": "string"
+          },
+          "spatial_relation": {
+            "type": "string"
+          },
+          "contact_state": {
+            "type": "string"
+          },
+          "authorized_transition": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "spatial_state": {
+      "type": "object"
+    },
+    "camera_axis": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "emotion_performance_state": {
+      "type": "object"
+    },
+    "damage_dirt_wetness_state": {
+      "type": "object"
+    },
+    "accepted_anchors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "last_shot_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "unresolved_continuity_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DEDAL Temporal Continuity Ledger",
+  "type": "object",
+  "required": [
+    "scene_id",
+    "shots"
+  ],
+  "properties": {
+    "scene_id": {
+      "type": "string"
+    },
+    "shots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "shot_id": {
+            "type": "string"
+          },
+          "start_anchor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "end_anchor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "screen_direction": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "movement_vector": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "action_phase": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "object_state": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "camera_state": {
+            "type": "object"
+          },
+          "performance_state": {
+            "type": "object"
+          },
+          "audio_state": {
+            "type": "object"
+          },
+          "accepted_take_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "known_debt": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "shot_id"
+        ]
+      }
+    }
+  },
+  "additionalProperties": true
+}

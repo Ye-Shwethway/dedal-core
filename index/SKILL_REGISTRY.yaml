@@ -1,5 +1,5 @@
-version: 25
-last_reviewed: "2026-09-18"
+version: 27
+last_reviewed: "2026-10-02"
 
 routing:
   default_policy: smallest_matching_skill_set
@@ -163,14 +163,43 @@ skills:
           reviewed_on: "2026-09-14"
       adapted_on: "2026-09-14"
 
-  video-production:
-    aliases: ["video-production", "video-editing"]
-    path: "skills/video-production"
-    entrypoint: "skills/video-production/SKILL.md"
+  generative-video-direction:
+    aliases: ["generative-video-direction", "video-generation-direction", "ai-video-director", "motion-direction"]
+    path: "skills/generative-video-direction"
+    entrypoint: "skills/generative-video-direction/SKILL.md"
     status: active
     independence: creative_production_domain
     provenance:
       adaptation: true
+      sources:
+        - source: "Google Cloud Veo 3.1 first-party prompting/workflow guidance"
+          reviewed_on: "2026-10-02"
+        - source: "Runway Gen-4.5 first-party image-to-video prompting guidance"
+          reviewed_on: "2026-10-02"
+        - source: "ByteDance Seedance 2.5 first-party multimodal reference/editing material"
+          reviewed_on: "2026-10-02"
+        - source: "Adobe Firefly first-party first/last-frame and motion-reference guidance"
+          reviewed_on: "2026-10-02"
+        - repo: "smixs/visual-skills"
+          use: "methodology-only; no copied text"
+        - repo: "0xhughs/director-skills"
+          use: "methodology-only; no copied text"
+        - repo: "nigo-studio/ai-film-skills"
+          license: "MIT"
+          use: "comparative architecture only; no copied text"
+        - repo: "runwayml/skills"
+          use: "execution-adapter boundary evidence"
+      adapted_on: "2026-10-02"
+
+  video-post-production:
+    aliases: ["video-post-production", "video-production", "video-editing"]
+    path: "skills/video-post-production"
+    entrypoint: "skills/video-post-production/SKILL.md"
+    status: active
+    independence: creative_production_domain
+    provenance:
+      adaptation: true
+      migrated_from: "video-production"
       sources:
         - repo: "kajisho5/ffmpeg-skill"
           commit: "a6232b95f595aa35fa8cea0d055f0163baa908e9"
@@ -178,15 +207,8 @@ skills:
         - repo: "remotion-dev/skills"
           commit: "bd566b65d521b40fe92e1f26766e82de9e291693"
           use: "methodology-only"
-        - source: "Google DeepMind Veo current prompt guide"
-          reviewed_on: "2026-09-14"
-        - source: "Runway current generative-video prompting/reference guidance"
-          reviewed_on: "2026-09-14"
-        - source: "ByteDance Seedance current first-party material"
-          reviewed_on: "2026-09-14"
-        - source: "OpenAI Sora current product-status page"
-          reviewed_on: "2026-09-14"
       adapted_on: "2026-09-14"
+      renamed_on: "2026-10-02"
 
   facebook-page-management:
     aliases: ["facebook-page-management", "facebook-pages"]
@@ -431,24 +453,54 @@ skills:
           commit: "cf649e6e7089804dd1bad745fdcd12aeee7f7aae"
           license: "MIT"
 
-  visual-direction:
-    aliases: []
-    path: "skills/visual-direction"
-    entrypoint: "skills/visual-direction/SKILL.md"
+  story-weaver:
+    aliases: ["story-weaver"]
+    path: "skills/story-weaver"
+    entrypoint: "skills/story-weaver/SKILL.md"
     status: active
-    independence: generic_domain
+    independence: creative_production_domain
     provenance:
       adaptation: true
       sources:
-        - source: "OpenAI Academy image-generation guidance"
-          reviewed_on: "2026-09-14"
-        - source: "Google AI image-generation/reference guidance"
-          reviewed_on: "2026-09-14"
+        - source: "DEDAL narrative/visual production boundary synthesis"
+          reviewed_on: "2026-09-30"
+      adapted_on: "2026-09-30"
+
+  visual-narrative-production:
+    aliases: ["visual-narrative-production", "visual-direction"]
+    path: "skills/visual-narrative-production"
+    entrypoint: "skills/visual-narrative-production/SKILL.md"
+    status: active
+    independence: creative_production_domain
+    provenance:
+      adaptation: true
+      migrated_from: "visual-direction"
+      sources:
+        - source: "OpenAI image prompting guidance"
+          reviewed_on: "2026-09-30"
+        - source: "Blender Storyboarding App Template"
+          reviewed_on: "2026-09-30"
+        - source: "Unreal Engine Sequencer documentation"
+          reviewed_on: "2026-09-30"
         - source: "DreamBooth CVPR 2023 / arXiv:2208.12242"
           use: "conceptual"
         - repo: "tencent-ailab/IP-Adapter"
           commit: "62e4af9d0c1ac7d5f8dd386a0ccf2211346af1a2"
           license: "Apache-2.0"
+        - repo: "InstantX/InstantID"
+          use: "identity-anchor methodology"
+        - repo: "ToTheBeginning/PuLID"
+          license: "Apache-2.0"
+          use: "identity-conditioning methodology"
+        - repo: "lllyasviel/ControlNet"
+          use: "pose/geometry conditioning methodology"
+        - repo: "RedAIGC/StoryMaker"
+          use: "story character/body/clothing consistency methodology"
+        - repo: "HVISION-NKU/StoryDiffusion"
+          use: "long-range story consistency methodology"
+        - repo: "NVlabs/consistory"
+          use: "anchor/cached subject consistency methodology"
+      adapted_on: "2026-09-30"
 
   knowledge-memory:
     aliases: []

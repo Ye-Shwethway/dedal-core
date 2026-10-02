@@ -98,7 +98,7 @@ def validate_routing_boundaries() -> None:
         "github", "software-development", "release-engineering", "agent-engineering",
         "ika", "knowledge-memory", "project-bootstrap", "data-operations",
         "medicine-store-assistant", "patient-report-assistant", "interface-design",
-        "visual-direction", "research", "skill-acquisition", "writing-editorial"
+        "visual-narrative-production", "story-weaver", "generative-video-direction", "video-post-production", "research", "skill-acquisition", "writing-editorial"
     }
     missing = sorted(required_overlap_owners - referenced)
     if missing:

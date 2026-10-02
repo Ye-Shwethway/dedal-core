@@ -52,7 +52,7 @@ and not:
 
 ## Explicit skill requests
 
-A request such as "load visual-direction" or an alias such as `$msa` is a strong routing instruction for the relevant subgoal. It selects the named domain as PRIMARY when appropriate, but it does not:
+A request such as "load visual-narrative-production" (or legacy alias "load visual-direction") or an alias such as `$msa` is a strong routing instruction for the relevant subgoal. It selects the named domain as PRIMARY when appropriate, but it does not:
 
 - disable the Cognitive Runtime;
 - remove Kernel authority/truth rules;
@@ -64,7 +64,7 @@ A request such as "load visual-direction" or an alias such as `$msa` is a strong
 A character-expression generation task can compose as:
 
 - RUNTIME: Cognitive Runtime
-- PRIMARY: Visual Direction
+- PRIMARY: Visual Narrative Production
 - SUPPORTING: Files when canonical references must be retrieved; Knowledge/Memory only if durable anchor/state governance becomes part of the task
 - EXECUTION: current image-generation surface
 - DORMANT: Agent Engineering, Software Development, unrelated domain skills

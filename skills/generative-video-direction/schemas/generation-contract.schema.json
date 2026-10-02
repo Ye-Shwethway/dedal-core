@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DEDAL Generative Video Provider Contract",
+  "type": "object",
+  "required": [
+    "shot_id",
+    "provider",
+    "mode",
+    "capability_state",
+    "prompt_or_instruction",
+    "input_bindings"
+  ],
+  "properties": {
+    "shot_id": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "mode": {
+      "type": "string"
+    },
+    "capability_state": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "capability",
+          "status"
+        ],
+        "properties": {
+          "capability": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "supported",
+              "unsupported",
+              "unknown",
+              "not_checked"
+            ]
+          },
+          "evidence": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "prompt_or_instruction": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "input_bindings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "parameters": {
+      "type": "object"
+    },
+    "take_log_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

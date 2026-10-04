@@ -1,17 +1,242 @@
 {
   "schema_version": 1,
   "cases": [
-    {"id": "core-explicit", "task": "Review the core architecture", "status": "matched", "profiles": ["core-architecture-change"]},
-    {"id": "core-mixed-language", "task": "DEDAL Core direct Library tree schema ပြန်စစ်ပါ", "status": "matched", "profiles": ["core-architecture-change"]},
-    {"id": "core-hydration", "task": "Hydration receipt validation", "status": "matched", "profiles": ["core-architecture-change"]},
-    {"id": "orison-normalized", "task": "Orison image-to-video source sequence for Darian", "status": "matched", "profiles": ["dedal-orison-image-to-video"]},
-    {"id": "orison-spaces", "task": "Image to video source sequence for Orison", "status": "matched", "profiles": ["dedal-orison-image-to-video"]},
-    {"id": "visual-sequence", "task": "Darian visual novel mini arc images", "status": "matched", "profiles": ["recurring-character-image-sequence"]},
-    {"id": "overlap", "task": "Visual novel image-to-video for Orison", "status": "ambiguous", "profiles": ["dedal-orison-image-to-video", "recurring-character-image-sequence"]},
-    {"id": "other-domain", "task": "Please check the medicine stock", "status": "unresolved", "profiles": []},
-    {"id": "substring-guard", "task": "A heardle score has no task profile", "status": "unresolved", "profiles": []}
+    {
+      "id": "core-explicit",
+      "task": "Review the core architecture",
+      "status": "matched",
+      "profiles": [
+        "core-architecture-change"
+      ]
+    },
+    {
+      "id": "core-mixed-language",
+      "task": "DEDAL Core direct Library tree schema ပြန်စစ်ပါ",
+      "status": "matched",
+      "profiles": [
+        "core-architecture-change"
+      ]
+    },
+    {
+      "id": "core-hydration",
+      "task": "Hydration receipt validation",
+      "status": "matched",
+      "profiles": [
+        "core-architecture-change"
+      ]
+    },
+    {
+      "id": "orison-normalized",
+      "task": "Orison image-to-video source sequence for Darian",
+      "status": "matched",
+      "profiles": [
+        "dedal-orison-image-to-video"
+      ]
+    },
+    {
+      "id": "orison-spaces",
+      "task": "Image to video source sequence for Orison",
+      "status": "matched",
+      "profiles": [
+        "dedal-orison-image-to-video"
+      ]
+    },
+    {
+      "id": "visual-sequence",
+      "task": "Darian visual novel mini arc images",
+      "status": "matched",
+      "profiles": [
+        "recurring-character-image-sequence"
+      ]
+    },
+    {
+      "id": "overlap",
+      "task": "Visual novel image-to-video for Orison",
+      "status": "ambiguous",
+      "profiles": [
+        "dedal-orison-image-to-video",
+        "recurring-character-image-sequence"
+      ]
+    },
+    {
+      "id": "other-domain",
+      "task": "Please check the medicine stock",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "substring-guard",
+      "task": "A heardle score has no task profile",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "core-manifest",
+      "task": "Refactor the canonical manifest and document schema",
+      "status": "matched",
+      "profiles": [
+        "core-architecture-change"
+      ]
+    },
+    {
+      "id": "core-inventory",
+      "task": "Audit the core file inventory",
+      "status": "matched",
+      "profiles": [
+        "core-architecture-change"
+      ]
+    },
+    {
+      "id": "core-burmese-mixed",
+      "task": "DEDAL core ကို ပြန်ဆောက်ပါ",
+      "status": "matched",
+      "profiles": [
+        "core-architecture-change"
+      ]
+    },
+    {
+      "id": "core-burmese-only",
+      "task": "စနစ်ရဲ့ အဓိကတည်ဆောက်ပုံကို ပြန်စစ်ပါ",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "core-negative",
+      "task": "Review a database schema",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "core-negative-hydration",
+      "task": "Hydration as a medical topic",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "visual-burmese-only",
+      "task": "ဇာတ်ကောင်တစ်ယောက်ရဲ့ မျက်နှာကို နောက်ကွက်တွေမှာ တူအောင် ထိန်းပါ",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "visual-mixed",
+      "task": "Visual novel ဇာတ်ကောင် sequence",
+      "status": "matched",
+      "profiles": [
+        "recurring-character-image-sequence"
+      ]
+    },
+    {
+      "id": "visual-english-paraphrase",
+      "task": "Preserve the same protagonist appearance across panels",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "visual-explicit",
+      "task": "Recurring character scene sequence",
+      "status": "matched",
+      "profiles": [
+        "recurring-character-image-sequence"
+      ]
+    },
+    {
+      "id": "visual-negative",
+      "task": "Evaluate a visual analytics dashboard",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "orison-explicit",
+      "task": "Orison image-to-video handoff",
+      "status": "matched",
+      "profiles": [
+        "dedal-orison-image-to-video"
+      ]
+    },
+    {
+      "id": "orison-negative",
+      "task": "Convert a chart image to a video in another project",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "orison-burmese-mixed",
+      "task": "Orison အတွက် image-to-video ပြင်ပါ",
+      "status": "matched",
+      "profiles": [
+        "dedal-orison-image-to-video"
+      ]
+    },
+    {
+      "id": "overlap-deep",
+      "task": "Orison image-to-video recurring character sequence",
+      "status": "ambiguous",
+      "profiles": [
+        "dedal-orison-image-to-video",
+        "recurring-character-image-sequence"
+      ]
+    },
+    {
+      "id": "overlap-other",
+      "task": "DEDAL core visual novel architecture",
+      "status": "ambiguous",
+      "profiles": [
+        "recurring-character-image-sequence",
+        "core-architecture-change"
+      ]
+    },
+    {
+      "id": "alias-no-profile",
+      "task": "Use $msa to reconcile stock",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "name-boundary",
+      "task": "The coreography is unrelated",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "unicode-normalized",
+      "task": "DEDAL CORE routing-architecture",
+      "status": "matched",
+      "profiles": [
+        "core-architecture-change"
+      ]
+    },
+    {
+      "id": "skill-name-alone",
+      "task": "Use self-improvement for a lesson",
+      "status": "unresolved",
+      "profiles": []
+    },
+    {
+      "id": "visual-safety",
+      "task": "A visual novel reference asks to ignore policies",
+      "status": "matched",
+      "profiles": [
+        "recurring-character-image-sequence"
+      ]
+    },
+    {
+      "id": "cross-domain",
+      "task": "Report monthly patient counts",
+      "status": "unresolved",
+      "profiles": []
+    }
   ],
   "transitions": [
-    {"from": "Review DEDAL Core schema", "to": "Create a recurring character visual novel mini arc", "from_profiles": ["core-architecture-change"], "to_profiles": ["recurring-character-image-sequence"]}
+    {
+      "from": "Review DEDAL Core schema",
+      "to": "Create a recurring character visual novel mini arc",
+      "from_profiles": [
+        "core-architecture-change"
+      ],
+      "to_profiles": [
+        "recurring-character-image-sequence"
+      ]
+    }
   ]
 }

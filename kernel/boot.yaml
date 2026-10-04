@@ -1,16 +1,25 @@
-version: 0.38.2
+version: 0.38.3
 authority: library_direct
 canonical_root: /DEDAL/core
 metadata:
   - VERSION
   - core-manifest.yaml
   - core-files.json
+  - state/active-release.json
+  - state/release-manifest.json
 session_protocol: kernel/session.yaml
 kernel_contract: kernel/kernel.yaml
 routing_policy: index/routing.yaml
 task_profiles: index/task-profiles.yaml
 checkpoint: state/checkpoint.yaml
 boot_sequence:
+  - id: verify_release
+    kind: verify_release
+    sources:
+      - state/active-release.json
+      - state/release-manifest.json
+    policy: verify_pointer_then_hash_each_loaded_core_source
+    required: true
   - id: core_identity
     kind: load_sources
     sources:
@@ -61,6 +70,8 @@ rules:
     statement: rerun_composition_and_profile_resolution_when_active_subgoal_materially_changes
   - id: direct_library_core
     statement: canonical_core_is_the_direct_library_tree_under_/DEDAL/core
+  - id: release_consistency
+    statement: verify_active_release_pointer_and_loaded_core_source_digests_fail_closed_on_mismatch
   - id: no_archive_boot
     statement: archives_and_zip_files_are_transport_or_history_only_and_never_boot_authority
   - id: no_external_runtime_dependency

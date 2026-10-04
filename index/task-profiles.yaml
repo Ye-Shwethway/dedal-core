@@ -1,4 +1,5 @@
-version: 0.38.2
+schema_version: 2
+version: 0.38.3
 profiles:
 - id: dedal-orison-image-to-video
   match:
@@ -11,8 +12,8 @@ profiles:
     - lateral raise
     - rdl
     - source sequence
-  primary:
-  - generative-video-direction
+  primary: generative-video-direction
+  supporting:
   - visual-narrative-production
   required_core:
   - skills/generative-video-direction/SKILL.md
@@ -50,8 +51,7 @@ profiles:
     - mini arc
     - visual novel
     - scene sequence
-  primary:
-  - visual-narrative-production
+  primary: visual-narrative-production
   required_core:
   - skills/visual-narrative-production/SKILL.md
   - skills/visual-narrative-production/references/reference-hierarchy-and-canonical-locks.md
@@ -72,19 +72,29 @@ profiles:
     - boot system
     - routing architecture
     - skill loading
-    - hydration
+    - canonical manifest
+    - document schema
+    - core file inventory
+    - hydration receipt
     - runtime retire
     - runtime retirement
-  primary:
-  - agent-engineering
+  primary: agent-engineering
+  supporting:
   - self-improvement
   required_core:
+  - skills/agent-engineering/SKILL.md
+  - skills/self-improvement/SKILL.md
   - kernel/boot.yaml
   - kernel/kernel.yaml
   - kernel/session.yaml
   - index/routing.yaml
   - index/task-profiles.yaml
   - state/checkpoint.yaml
+  - core-manifest.yaml
+  - core-files.json
+  - state/active-release.json
+  - state/release-manifest.json
+  - index/document-schema.yaml
   - docs/evolution/IMPROVEMENT_PROTOCOL.md
   execution_gates:
   - validator_green

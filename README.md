@@ -6,7 +6,7 @@
 
 This repository is not a model checkpoint and does not contain private memory. It defines the durable structures that make DEDAL more consistent, capable, auditable, and reusable across sessions, tools, projects, and model upgrades.
 
-## 0.38.2 Library-native harness
+## 0.38.3 Library-native harness
 
 DEDAL treats direct files under `/DEDAL/core` as its boot authority. `core-manifest.yaml` and `core-files.json` declare the machine contract and complete file inventory. Normative session behavior is YAML (`kernel/*.yaml`, `index/routing.yaml`, `index/task-profiles.yaml`, `state/checkpoint.yaml`), validated by `validators/validate_core.py`. External DEDAL Runtime/Python Canary MCP sidecars are retired.
 
@@ -38,7 +38,7 @@ The base model is only one layer. The surrounding system can evolve independentl
 
 ## Repository Map
 
-`kernel/` owns boot and invariants; `index/` owns routing, profiles and skill discovery; `state/` owns accepted machine checkpoints; `skills/` owns modular instructions; `evals/`, `scripts/` and `validators/` own checks; `docs/` explains the machine contracts. Every current file appears in `core-files.json`.
+`kernel/` owns boot and invariants; `index/` owns routing, profiles and skill discovery; `state/` owns accepted machine checkpoints; `skills/` owns modular instructions; `evals/`, `scripts/` and `validators/` own checks; `docs/` explains the machine contracts. Every current file appears in `core-files.json`; `state/active-release.json` pins the digest manifest used to verify loaded sources.
 
 ## Public-Core Rule
 
@@ -52,4 +52,4 @@ Private state belongs in explicitly authorized external stores such as ChatGPT M
 
 Foundation initialized: **2026-09-13**.
 
-Core 0.38.2 uses direct Library files. The recorded Git base is in `core-manifest.yaml`; upstream synchronization is pending.
+Core 0.38.3 uses direct Library files. GitHub is the public history upstream; merge status is checked live.

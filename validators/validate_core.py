@@ -2,6 +2,7 @@
 """Validate the complete direct Library Core tree and its machine contracts."""
 from pathlib import Path
 import json
+import subprocess
 import sys
 import yaml
 
@@ -61,7 +62,9 @@ if manifest.get("hydration_receipt_schema") != "state/hydration-receipt.schema.j
     errors.append("receipt_schema_pointer_drift")
 if manifest.get("document_schema") != "index/document-schema.yaml":
     errors.append("document_schema_pointer_drift")
-allowed = {"load_sources", "load_checkpoint", "load_private_manifest", "resolve_state",
+if manifest.get("active_release") != "state/active-release.json" or manifest.get("release_manifest") != "state/release-manifest.json":
+    errors.append("release_pointer_drift")
+allowed = {"verify_release", "load_sources", "load_checkpoint", "load_private_manifest", "resolve_state",
            "compose", "resolve_profile", "hydrate", "apply_rule"}
 for step in boot.get("boot_sequence", []):
     if not step.get("id") or step.get("kind") not in allowed:
@@ -115,6 +118,10 @@ for path in ("kernel/boot.yaml", "kernel/kernel.yaml", "kernel/session.yaml",
         errors.append(f"external_runtime_dependency:{path}")
     if "/dedal/repo-mirror/dedal-core-current.zip" in text:
         errors.append(f"archive_boot_dependency:{path}")
+if not errors:
+    check = subprocess.run([sys.executable, str(ROOT / "scripts/validate_release_manifest.py")], capture_output=True, text=True)
+    if check.returncode:
+        errors.append("release_consistency:" + check.stdout.strip().replace("\n", "; "))
 if errors:
     print("DEDAL CORE VALIDATION: FAIL")
     for error in errors:

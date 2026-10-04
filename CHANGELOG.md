@@ -1,3 +1,10 @@
+## 0.38.3 — Routing, contract, and direct release integrity
+
+- Resolve each task profile to one primary and bounded supporting skills; ambiguous and unresolved probes defer to semantic review.
+- Expand routing cases to 31 with Burmese/English probes and reject structural contract mutations.
+- Pin the direct Core tree with a digest manifest and last-written active release pointer.
+- Bind hydration receipt v3 coverage to a release digest, source hash/version, task time, and passed gate evidence.
+
 ## 0.38.2 — Document roles and skill metadata
 
 - Classify every Core file by role and format in a machine-readable schema, with fail-closed validation and CI coverage.

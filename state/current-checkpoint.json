@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.38.2",
+  "version": "0.38.3",
   "accepted_state": [
-    "DEDAL 0.38.2 classifies every Core file through index/document-schema.yaml; machine contracts are normative, active SKILL.md instruction bodies retain authority, and explanatory Markdown is supporting context.",
-    "DEDAL 0.38.2 boots from the direct /DEDAL/core Library tree; YAML/JSON contracts and state/checkpoint.yaml are authoritative, chat memory is not.",
-    "DEDAL 0.38.2 separates structural readiness from session-specific profile receipt coverage; receipt references are traceable claims and do not independently prove actual Library reads or pixel binding.",
+    "DEDAL 0.38.3 uses one primary plus bounded supporting skills per task profile, a fail-closed direct-tree release digest manifest, and release-bound receipt v3 coverage; semantic ambiguity remains for judgment.",
+    "DEDAL 0.38.3 classifies every Core file through index/document-schema.yaml; machine contracts are normative, active SKILL.md instruction bodies retain authority, and explanatory Markdown is supporting context.",
+    "DEDAL 0.38.3 boots from the direct /DEDAL/core Library tree; YAML/JSON contracts and state/checkpoint.yaml are authoritative, chat memory is not.",
+    "DEDAL 0.38.3 separates structural readiness from session-specific profile receipt coverage; receipt references are traceable claims and do not independently prove actual Library reads or pixel binding.",
     "A conservative lexical profile probe detects explicit and ambiguous phrase matches; unresolved tasks require semantic routing judgment.",
     "External DEDAL Runtime and Python Canary MCP sidecars are retired and must not be used for boot, routing, hydration, authorization, or continuity; historical artifacts are evidence only.",
     "Execution-critical task profiles declare mandatory dependency hydration and readiness gates; skill entrypoint activation alone is not execution readiness.",

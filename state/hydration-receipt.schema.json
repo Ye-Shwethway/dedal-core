@@ -1,37 +1,133 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DEDAL session hydration receipt v2",
+  "title": "DEDAL session hydration receipt v3",
   "type": "object",
-  "required": ["schema_version", "task_id", "profile_id", "source_reads", "gate_checks", "condition_results"],
+  "required": [
+    "schema_version",
+    "task_id",
+    "profile_id",
+    "source_reads",
+    "gate_checks",
+    "condition_results",
+    "release_sha256",
+    "task_started_at"
+  ],
   "properties": {
-    "schema_version": {"const": 2},
-    "task_id": {"type": "string", "minLength": 1},
-    "profile_id": {"type": "string", "minLength": 1},
+    "schema_version": {
+      "const": 3
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1
+    },
     "source_reads": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["path", "kind", "read_ref", "observed_at"],
+        "required": [
+          "path",
+          "kind",
+          "read_ref",
+          "observed_at"
+        ],
         "properties": {
-          "path": {"type": "string", "minLength": 1},
-          "kind": {"enum": ["library_file_read", "library_directory_list"]},
-          "read_ref": {"type": "string", "minLength": 1},
-          "observed_at": {"type": "string", "format": "date-time"},
-          "library_file_id": {"type": "string", "pattern": "^libfile_"},
-          "version_id": {"type": ["string", "null"]},
-          "item_count": {"type": "integer", "minimum": 1}
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "library_file_read",
+              "library_directory_list"
+            ]
+          },
+          "read_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "library_file_id": {
+            "type": "string",
+            "pattern": "^libfile_"
+          },
+          "version_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "item_count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "content_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "library_file_read"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "required": [
+                "library_file_id",
+                "version_id",
+                "content_sha256"
+              ],
+              "properties": {
+                "version_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        ]
       }
     },
     "gate_checks": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "evidence_ref"],
+        "required": [
+          "id",
+          "evidence_ref",
+          "passed",
+          "observed_at"
+        ],
         "properties": {
-          "id": {"type": "string", "minLength": 1},
-          "evidence_ref": {"type": "string", "minLength": 1}
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "passed": {
+            "const": true
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          }
         },
         "additionalProperties": false
       }
@@ -40,13 +136,29 @@
       "type": "object",
       "additionalProperties": {
         "type": "object",
-        "required": ["applies", "evidence_ref"],
+        "required": [
+          "applies",
+          "evidence_ref"
+        ],
         "properties": {
-          "applies": {"type": "boolean"},
-          "evidence_ref": {"type": "string", "minLength": 1}
+          "applies": {
+            "type": "boolean"
+          },
+          "evidence_ref": {
+            "type": "string",
+            "minLength": 1
+          }
         },
         "additionalProperties": false
       }
+    },
+    "release_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "task_started_at": {
+      "type": "string",
+      "format": "date-time"
     }
   },
   "additionalProperties": false

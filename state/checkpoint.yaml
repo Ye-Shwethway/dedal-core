@@ -1,4 +1,4 @@
-version: 0.38.2
+version: 0.38.3
 date: '2026-10-04'
 authority: library_direct_tree
 accepted:
@@ -11,6 +11,12 @@ accepted:
   execution_readiness: requires_profile_hydration_with_traceable_receipt_and_direct_tool_evidence
   migration_status: direct_tree_verified
 decisions:
+- id: deterministic_profile_composition
+  value: Each matched profile has one primary and at most three supporting skills; ambiguous or unresolved lexical routes require semantic review.
+  date: '2026-10-04'
+- id: direct_release_integrity
+  value: A last-written active pointer identifies a digest manifest; loaded Core files must match it, and receipt coverage is bound to its release id.
+  date: '2026-10-04'
 - id: document_roles
   value: Every inventoried file has one declared role; YAML/JSON contracts are normative, active SKILL.md bodies retain instruction authority, other Markdown is supporting context.
   date: '2026-10-04'

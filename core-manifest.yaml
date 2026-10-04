@@ -1,5 +1,5 @@
 schema_version: 1
-core_version: 0.38.2
+core_version: 0.38.3
 authority: library_direct_tree
 canonical_root: /DEDAL/core
 boot_entry: kernel/boot.yaml
@@ -9,6 +9,8 @@ task_profiles: index/task-profiles.yaml
 skill_registry: index/SKILL_REGISTRY.yaml
 document_schema: index/document-schema.yaml
 file_inventory: core-files.json
+active_release: state/active-release.json
+release_manifest: state/release-manifest.json
 hydration_receipt_schema: state/hydration-receipt.schema.json
 normative_formats:
   boot_routing_state: yaml
@@ -16,8 +18,9 @@ normative_formats:
   executable_checks: python
   skill_instruction_body: markdown_with_machine_registry
   document_roles: index/document-schema.yaml
+  release_integrity: sha256_manifest_and_active_pointer
 archive_boot: forbidden
 external_runtime_mcp: retired
 github_role: public_history_and_sync_upstream_not_runtime_dependency
 recorded_github_base: b34d3b40246f62bb20b41da808ec0b8cb0f67790
-generated_at: '2026-10-04T19:40:48+06:30'
+generated_at: '2026-10-04T20:44:23+06:30'

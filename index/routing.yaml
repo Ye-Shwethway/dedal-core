@@ -1,4 +1,5 @@
-version: 0.38.2
+schema_version: 2
+version: 0.38.3
 policy: smallest_sufficient_set
 steps:
 - id: explicit_alias
@@ -17,7 +18,10 @@ steps:
   kind: select
   max_primary: 1
   max_supporting: 3
-  tiebreak: most_specific_first
+  tiebreak: explicit_alias_then_profile_specificity
+  multiple_profiles: require_semantic_resolution
+  no_profile: bounded_skill_search
+  no_forced_match: true
 - id: load_entrypoints
   kind: load
   scope: selected_only

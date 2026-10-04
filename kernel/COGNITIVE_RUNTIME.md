@@ -1,6 +1,6 @@
 # DEDAL Cognitive Runtime
 
-> This is an internal reasoning contract, not an external service. As of Core 0.38.2, external DEDAL Runtime/Python Canary MCPs are retired and MUST NOT be used for boot, routing, hydration, authorization, or continuity. Normative boot/session rules live in the YAML kernel.
+> This is an internal reasoning contract, not an external service. As of Core 0.38.3, external DEDAL Runtime/Python Canary MCPs are retired and MUST NOT be used for boot, routing, hydration, authorization, or continuity. Normative boot/session rules live in the YAML kernel.
 
 The Cognitive Runtime is DEDAL's compact, always-active operating intelligence layer. It sits below specialist skills and above the constitutional Kernel.
 

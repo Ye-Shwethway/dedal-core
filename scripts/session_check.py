@@ -3,6 +3,7 @@
 import argparse
 from datetime import datetime, timezone, timedelta
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -38,9 +39,27 @@ try:
     receipt = json.loads(args.receipt.read_text())
 except (OSError, ValueError) as exc:
     raise SystemExit(f"EXECUTION PREFLIGHT: FAIL receipt unavailable: {exc}")
-if (receipt.get("schema_version") != 2 or receipt.get("task_id") != args.task_id
+active = json.loads((ROOT / "state/active-release.json").read_text())
+release = json.loads((ROOT / "state/release-manifest.json").read_text())
+if (receipt.get("schema_version") != 3 or receipt.get("task_id") != args.task_id
+        or receipt.get("release_sha256") != active["release_sha256"]
         or receipt.get("profile_id") != args.profile):
-    raise SystemExit("EXECUTION PREFLIGHT: FAIL receipt version or task/profile identity")
+    raise SystemExit("EXECUTION PREFLIGHT: FAIL receipt version, release, or task/profile identity")
+if set(receipt) != {"schema_version", "task_id", "profile_id", "release_sha256", "task_started_at", "source_reads", "gate_checks", "condition_results"}:
+    raise SystemExit("EXECUTION PREFLIGHT: FAIL unknown or missing receipt field")
+
+now = datetime.now(timezone.utc)
+try:
+    started = datetime.fromisoformat(receipt["task_started_at"].replace("Z", "+00:00"))
+    if started.tzinfo is None or not (now - timedelta(hours=4) <= started <= now + timedelta(minutes=5)):
+        raise ValueError("task start outside window")
+except (KeyError, ValueError, AttributeError):
+    raise SystemExit("EXECUTION PREFLIGHT: FAIL task start time")
+
+
+def within_task(value):
+    observed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    return observed.tzinfo is not None and started <= observed <= now + timedelta(minutes=5)
 
 reads = receipt.get("source_reads")
 checks = receipt.get("gate_checks")
@@ -51,6 +70,8 @@ read_paths = set()
 for record in reads:
     if not isinstance(record, dict):
         raise SystemExit("EXECUTION PREFLIGHT: FAIL source record shape")
+    if set(record) - {"path", "kind", "read_ref", "observed_at", "library_file_id", "version_id", "item_count", "content_sha256"}:
+        raise SystemExit("EXECUTION PREFLIGHT: FAIL source record unknown field")
     path, kind = record.get("path"), record.get("kind")
     if not isinstance(path, str) or path in read_paths or not record.get("read_ref"):
         raise SystemExit(f"EXECUTION PREFLIGHT: FAIL duplicate or unreferenced source {path}")
@@ -58,14 +79,15 @@ for record in reads:
     if kind != expected_kind:
         raise SystemExit(f"EXECUTION PREFLIGHT: FAIL source kind {path}")
     if kind == "library_file_read" and (not str(record.get("library_file_id", "")).startswith("libfile_")
-                                        or "version_id" not in record
-                                        or record["version_id"] is not None and not isinstance(record["version_id"], str)):
+                                        or not isinstance(record.get("version_id"), str) or not record["version_id"]
+                                        or not re.fullmatch(r"[0-9a-f]{64}", str(record.get("content_sha256", "")))):
         raise SystemExit(f"EXECUTION PREFLIGHT: FAIL source identity {path}")
+    if path in release["files"] and record.get("content_sha256") != release["files"][path]:
+        raise SystemExit(f"EXECUTION PREFLIGHT: FAIL release source digest {path}")
     if kind == "library_directory_list" and (type(record.get("item_count")) is not int or record["item_count"] < 1):
         raise SystemExit(f"EXECUTION PREFLIGHT: FAIL empty source collection {path}")
     try:
-        observed = datetime.fromisoformat(record["observed_at"].replace("Z", "+00:00"))
-        if observed.tzinfo is None or observed > datetime.now(timezone.utc) + timedelta(minutes=5):
+        if not within_task(record["observed_at"]):
             raise ValueError("timestamp")
     except (KeyError, ValueError, AttributeError):
         raise SystemExit(f"EXECUTION PREFLIGHT: FAIL observation time {path}")
@@ -79,11 +101,20 @@ for branch in profile.get("conditional_private", []):
         raise SystemExit(f"EXECUTION PREFLIGHT: FAIL unevaluated condition {name}")
     if result["applies"]:
         required.update(branch.get("sources", []))
+if set(conditions) != {b["when"] for b in profile.get("conditional_private", [])}:
+    raise SystemExit("EXECUTION PREFLIGHT: FAIL unknown condition")
 missing = required - read_paths
 gate_ids = set()
 for check in checks:
-    if not isinstance(check, dict) or not check.get("id") or not check.get("evidence_ref") or check["id"] in gate_ids:
+    if (not isinstance(check, dict) or not check.get("id") or not check.get("evidence_ref")
+            or check.get("passed") is not True or check["id"] in gate_ids
+            or set(check) != {"id", "evidence_ref", "passed", "observed_at"}):
         raise SystemExit("EXECUTION PREFLIGHT: FAIL gate evidence shape")
+    try:
+        if not within_task(check["observed_at"]):
+            raise ValueError("gate timestamp")
+    except (KeyError, ValueError, AttributeError):
+        raise SystemExit("EXECUTION PREFLIGHT: FAIL gate observation time")
     gate_ids.add(check["id"])
 unsatisfied = set(profile.get("execution_gates", [])) - gate_ids
 if missing or unsatisfied:

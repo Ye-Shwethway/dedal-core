@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.38.3",
+  "version": "0.38.4",
   "accepted_state": [
+    "DEDAL 0.38.4 treats lexical routing as candidates only; a task-bound semantic decision is required for profile activation, and receipt v4 checks route and read-before-gate chronology.",
     "DEDAL 0.38.3 uses one primary plus bounded supporting skills per task profile, a fail-closed direct-tree release digest manifest, and release-bound receipt v3 coverage; semantic ambiguity remains for judgment.",
     "DEDAL 0.38.3 classifies every Core file through index/document-schema.yaml; machine contracts are normative, active SKILL.md instruction bodies retain authority, and explanatory Markdown is supporting context.",
     "DEDAL 0.38.3 boots from the direct /DEDAL/core Library tree; YAML/JSON contracts and state/checkpoint.yaml are authoritative, chat memory is not.",

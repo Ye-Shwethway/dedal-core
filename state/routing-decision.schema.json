@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DEDAL task-bound semantic route decision v1",
+  "type": "object",
+  "required": ["schema_version", "task_id", "task_sha256", "release_sha256", "lexical_candidates", "decision", "selected_profile", "basis", "rationale", "reviewed_at"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "task_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "release_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "lexical_candidates": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "decision": {"enum": ["select_profile", "no_profile", "defer"]},
+    "selected_profile": {"type": ["string", "null"]},
+    "basis": {"enum": ["lexical_confirmation", "semantic_override", "semantic_exclusion", "insufficient_context"]},
+    "rationale": {"type": "string", "minLength": 10},
+    "reviewed_at": {"type": "string", "format": "date-time"}
+  },
+  "additionalProperties": false
+}

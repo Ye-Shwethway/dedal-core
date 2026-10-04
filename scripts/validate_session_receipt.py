@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Regression checks for receipt identity, source coverage, and conditions."""
+"""Regression checks for task-bound route, release, source, and gate chronology."""
 from datetime import datetime, timezone, timedelta
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -9,11 +10,27 @@ import tempfile
 
 import yaml
 
+from profile_probe import probe
+
 ROOT = Path(__file__).resolve().parents[1]
 profiles = {p["id"]: p for p in yaml.safe_load((ROOT / "index/task-profiles.yaml").read_text())["profiles"]}
-now = datetime.now(timezone.utc).isoformat()
 release = json.loads((ROOT / "state/release-manifest.json").read_text())
 active = json.loads((ROOT / "state/active-release.json").read_text())
+expected_hashes = {**release["files"], "state/release-manifest.json": active["release_sha256"],
+                   "state/active-release.json": hashlib.sha256((ROOT / "state/active-release.json").read_bytes()).hexdigest()}
+now = datetime.now(timezone.utc).isoformat()
+core_task = "Review DEDAL Core schema"
+orison_task = "Orison image-to-video source sequence"
+
+
+def route_bytes(profile_id, task, *, decision="select_profile", basis="lexical_confirmation"):
+    obj = {"schema_version": 1, "task_id": "task-case", "task_sha256": hashlib.sha256(task.encode()).hexdigest(),
+           "release_sha256": active["release_sha256"], "lexical_candidates": probe(task, list(profiles.values()))["profiles"],
+           "decision": decision, "selected_profile": profile_id if decision == "select_profile" else None,
+           "basis": basis, "rationale": "The current task intent requires this profile and its resources.",
+           "reviewed_at": now}
+    return json.dumps(obj).encode()
+
 
 def make_read(path):
     record = {"path": path, "read_ref": "tool:read:case", "observed_at": now}
@@ -21,52 +38,63 @@ def make_read(path):
         record.update(kind="library_directory_list", item_count=2)
     else:
         record.update(kind="library_file_read", library_file_id="libfile_case", version_id="1",
-                      content_sha256=release["files"].get(path, "0" * 64))
+                      content_sha256=expected_hashes.get(path, "0" * 64))
     return record
 
-def run(profile_id, receipt):
+
+def base_receipt(profile, task):
+    routes = route_bytes(profile["id"], task)
+    return {"schema_version": 4, "task_id": "task-case", "task_started_at": now,
+            "task_sha256": hashlib.sha256(task.encode()).hexdigest(),
+            "routing_decision_sha256": hashlib.sha256(routes).hexdigest(),
+            "release_sha256": active["release_sha256"], "profile_id": profile["id"],
+            "source_reads": [make_read(p) for p in profile["required_core"] + profile.get("required_private", [])],
+            "gate_checks": [{"id": g, "evidence_ref": "validator:case", "passed": True, "observed_at": now}
+                            for g in profile["execution_gates"]], "condition_results": {}}
+
+
+def run(profile_id, receipt, task, routes=None):
     with tempfile.TemporaryDirectory() as directory:
-        path = Path(directory) / "receipt.json"
-        path.write_text(json.dumps(receipt))
+        root = Path(directory)
+        files = {"receipt.json": json.dumps(receipt), "task.txt": task,
+                 "route.json": (routes or route_bytes(profile_id, task)).decode()}
+        for name, content in files.items():
+            (root / name).write_text(content)
         result = subprocess.run([sys.executable, str(ROOT / "scripts/session_check.py"),
-                                 "--profile", profile_id, "--task-id", "task-case", "--receipt", str(path)],
+                                 "--profile", profile_id, "--task-id", "task-case",
+                                 "--task-file", str(root / "task.txt"),
+                                 "--route-decision", str(root / "route.json"),
+                                 "--receipt", str(root / "receipt.json")],
                                 capture_output=True, text=True)
         return result.returncode, result.stdout + result.stderr
 
+
 core = profiles["core-architecture-change"]
-base = {
-    "schema_version": 3,
-    "task_id": "task-case",
-    "task_started_at": now,
-    "release_sha256": active["release_sha256"],
-    "profile_id": core["id"],
-    "source_reads": [make_read(p) for p in core["required_core"]],
-    "gate_checks": [{"id": g, "evidence_ref": "validator:case", "passed": True, "observed_at": now} for g in core["execution_gates"]],
-    "condition_results": {}
-}
-assert run(core["id"], base)[0] == 0
+base = base_receipt(core, core_task)
+assert run(core["id"], base, core_task)[0] == 0
 for change, expected in [
     ({"task_id": "prior-task"}, "identity"),
     ({"source_reads": base["source_reads"][:-1]}, "missing_sources"),
     ({"gate_checks": base["gate_checks"][:-1]}, "unsupported_gates"),
-    ({"schema_version": 2}, "version"),
+    ({"schema_version": 3}, "version"),
     ({"release_sha256": "0" * 64}, "release"),
+    ({"routing_decision_sha256": "0" * 64}, "identity"),
     ({"gate_checks": [{**base["gate_checks"][0], "passed": False}, *base["gate_checks"][1:]]}, "gate evidence"),
     ({"source_reads": [{**base["source_reads"][0], "content_sha256": "0" * 64}, *base["source_reads"][1:]]}, "digest"),
     ({"source_reads": [{**base["source_reads"][0], "version_id": None}, *base["source_reads"][1:]]}, "source identity"),
+    ({"source_reads": [{**base["source_reads"][0], "observed_at": (datetime.now(timezone.utc) + timedelta(seconds=1)).isoformat()}, *base["source_reads"][1:]]}, "gate observation"),
     ({"task_started_at": (datetime.now(timezone.utc) - timedelta(hours=5)).isoformat()}, "task start time")
 ]:
-    result = run(core["id"], {**base, **change})
+    result = run(core["id"], {**base, **change}, core_task)
     assert result[0] != 0 and expected in result[1], result
+
 orison = profiles["dedal-orison-image-to-video"]
-conditional = {**base, "profile_id": orison["id"],
-               "source_reads": [make_read(p) for p in orison["required_core"] + orison["required_private"]],
-               "gate_checks": [{"id": g, "evidence_ref": "tool:case", "passed": True, "observed_at": now} for g in orison["execution_gates"]]}
-result = run(orison["id"], conditional)
+conditional = base_receipt(orison, orison_task)
+result = run(orison["id"], conditional, orison_task)
 assert result[0] != 0 and "unevaluated condition" in result[1], result
-conditional["condition_results"] = {"character_is_darian": {"applies": True, "evidence_ref": "task:case"}}
-result = run(orison["id"], conditional)
+conditional["condition_results"] = {"character_is_darian": {"applies": True, "evidence_ref": "task:case", "observed_at": now}}
+result = run(orison["id"], conditional, orison_task)
 assert result[0] != 0 and "profiles/Darian" in result[1], result
 conditional["source_reads"] += [make_read(p) for p in orison["conditional_private"][0]["sources"]]
-assert run(orison["id"], conditional)[0] == 0
-print("SESSION RECEIPT: PASS task identity, source/gate coverage, conditional private sources")
+assert run(orison["id"], conditional, orison_task)[0] == 0
+print("SESSION RECEIPT: PASS task/release/route binding, source and gate chronology, conditions")

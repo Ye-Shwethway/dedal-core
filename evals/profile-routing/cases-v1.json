@@ -225,6 +225,22 @@
       "task": "Report monthly patient counts",
       "status": "unresolved",
       "profiles": []
+    },
+    {
+      "id": "negated-visual-candidate",
+      "task": "Do not make a visual novel; reconcile medicine stock",
+      "status": "matched",
+      "profiles": [
+        "recurring-character-image-sequence"
+      ]
+    },
+    {
+      "id": "negated-core-candidate",
+      "task": "Do not edit DEDAL Core; inspect the medicine stock sheet",
+      "status": "matched",
+      "profiles": [
+        "core-architecture-change"
+      ]
     }
   ],
   "transitions": [

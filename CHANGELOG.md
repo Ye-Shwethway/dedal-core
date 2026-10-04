@@ -1,3 +1,9 @@
+## 0.38.4 — Task-bound semantic routing and receipt chronology
+
+- Treat lexical profile hits as candidates only, including negated or quoted task text. A task-bound semantic decision must select, exclude, or defer a profile before execution.
+- Bind receipt v4 to the exact task and routing decision bytes; require all source and condition observations plus the decision before gate checks.
+- Add negative regression cases for negation, candidate drift, route identity, and gate ordering.
+
 ## 0.38.3 — Routing, contract, and direct release integrity
 
 - Resolve each task profile to one primary and bounded supporting skills; ambiguous and unresolved probes defer to semantic review.

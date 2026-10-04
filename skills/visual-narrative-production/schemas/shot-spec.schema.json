@@ -290,6 +290,138 @@
         }
       },
       "additionalProperties": false
+    },
+    "support_alignment": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "body_action_axis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "support_axis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "required_axis_relation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contact_map": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "camera_projection": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "weighted_load_plan": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "movement_family": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "performer_proficiency": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effort_class": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "implement_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "implement_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "load_class_or_label": {
+          "type": [
+            "string",
+            "number",
+            "null"
+          ]
+        },
+        "label_visibility": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "load_transition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "proportion_framing": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "canonical_height_or_proportion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "framing_requirement": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "widen_if_needed": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "video_bridge_role": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ]
     }
   },
   "additionalProperties": true

@@ -1,0 +1,92 @@
+version: 0.38.2
+profiles:
+- id: dedal-orison-image-to-video
+  match:
+    all:
+    - image-to-video
+    any:
+    - orison
+    - dedal-orison
+    - video bridge
+    - lateral raise
+    - rdl
+    - source sequence
+  primary:
+  - generative-video-direction
+  - visual-narrative-production
+  required_core:
+  - skills/generative-video-direction/SKILL.md
+  - skills/generative-video-direction/references/adaptive-keyframe-density-and-transition-bridges.md
+  - skills/generative-video-direction/references/motion-shot-design.md
+  - skills/generative-video-direction/references/bridge-contracts.md
+  - skills/generative-video-direction/references/temporal-continuity-ledger.md
+  - skills/visual-narrative-production/SKILL.md
+  - skills/visual-narrative-production/references/collaborative-source-sequence-handoff.md
+  - skills/visual-narrative-production/references/visual-to-motion-handoff.md
+  - skills/visual-narrative-production/references/reference-hierarchy-and-canonical-locks.md
+  - skills/visual-narrative-production/references/drift-detection-and-visual-qa.md
+  - skills/visual-narrative-production/references/self-review-and-sequence-audit.md
+  - skills/visual-narrative-production/references/weighted-load-and-proportion-realism.md
+  required_private:
+  - /DEDAL/private-overlay/workflows/dedal-orison-bridge/bridge-state.json
+  - /DEDAL/private-overlay/state/workstreams/dedal-orison-bridge.current.md
+  conditional_private:
+  - when: character_is_darian
+    sources:
+    - /DEDAL/private-overlay/profiles/Darian/visual-reference-policy.md
+    - /DEDAL/private-overlay/profiles/Darian/face-references/
+    - /DEDAL/private-overlay/profiles/Darian/physique-references/
+  execution_gates:
+  - accepted_production_pixels_available
+  - canonical_identity_pixels_bindable
+  - pairwise_reachability_plan_complete
+  - manifest_truth_matches_visual_state
+- id: recurring-character-image-sequence
+  match:
+    any:
+    - recurring character
+    - character consistency
+    - successive images
+    - mini arc
+    - visual novel
+    - scene sequence
+  primary:
+  - visual-narrative-production
+  required_core:
+  - skills/visual-narrative-production/SKILL.md
+  - skills/visual-narrative-production/references/reference-hierarchy-and-canonical-locks.md
+  - skills/visual-narrative-production/references/visual-continuity-ledger.md
+  - skills/visual-narrative-production/references/drift-detection-and-visual-qa.md
+  - skills/visual-narrative-production/references/self-review-and-sequence-audit.md
+  execution_gates:
+  - canonical_pixels_bindable
+  - continuity_anchor_available_or_explicit_new_scene
+  - rendered_qa_required
+- id: core-architecture-change
+  match:
+    any:
+    - core architecture
+    - dedal core
+    - core schema
+    - direct library tree
+    - boot system
+    - routing architecture
+    - skill loading
+    - hydration
+    - runtime retire
+    - runtime retirement
+  primary:
+  - agent-engineering
+  - self-improvement
+  required_core:
+  - kernel/boot.yaml
+  - kernel/kernel.yaml
+  - kernel/session.yaml
+  - index/routing.yaml
+  - index/task-profiles.yaml
+  - state/checkpoint.yaml
+  - docs/evolution/IMPROVEMENT_PROTOCOL.md
+  execution_gates:
+  - validator_green
+  - checkpoint_updated
+  - rollback_path_recorded

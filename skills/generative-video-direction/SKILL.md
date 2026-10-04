@@ -27,29 +27,34 @@ It does **not** own fiction canon (`story-weaver`), canonical still/keyframe pro
 
 1. **Direction before prompt.** The canonical object is a structured Motion Shot Spec; provider prose/JSON is compiled from it.
 2. **State transition over restatement.** For image-to-video, the visual input already carries appearance/composition/style; direct the intended temporal change unless a visual change is deliberate.
-3. **Reference roles are explicit.** Identity, environment, start frame, end frame, motion, camera, style, audio, and geometry references are not interchangeable.
-4. **Choose the control surface, not just the model.** Prefer the provider mode that exposes the needed constraint instead of forcing one prompt format onto every shot.
-5. **One shot should be achievable.** Split overloaded action chains when duration, physics, camera, or model reliability make one generation implausible.
-6. **Motion is physical state.** Track direction, velocity/pace, contact, weight transfer, object possession, secondary motion, screen direction, and start/end state.
-7. **Camera is choreography.** Define whether the camera is locked, motivated by subject motion, or independently moving; avoid accidental compound moves.
-8. **Prompts are execution artifacts.** They are not continuity storage and must not become the only record of the scene.
-9. **Generated clips are takes.** Inspect actual frames/time progression; do not infer success from the prompt, job completion, or one attractive frame.
-10. **Repair the failure class.** Change the smallest responsible layer: motion wording, action phase, reference role, start/end keyframe, crop, duration, provider mode, or shot decomposition.
+4. **Reference roles are explicit.** Identity, environment, start frame, end frame, motion, camera, style, audio, and geometry references are not interchangeable.
+5. **Choose the control surface, not just the model.** Prefer the provider mode that exposes the needed constraint instead of forcing one prompt format onto every shot.
+6. **One shot should be achievable.** Split overloaded action chains when duration, physics, camera, or model reliability make one generation implausible.
+7. **Motion is physical state.** Track direction, velocity/pace, contact, weight transfer, object possession, secondary motion, screen direction, and start/end state.
+8. **Camera is choreography.** Define whether the camera is locked, motivated by subject motion, or independently moving; avoid accidental compound moves.
+9. **Prompts are execution artifacts.** They are not continuity storage and must not become the only record of the scene.
+10. **Generated clips are takes.** Inspect actual frames/time progression; do not infer success from the prompt, job completion, or one attractive frame.
+11. **Repair the failure class.** Change the smallest responsible layer: motion wording, action phase, reference role, start/end keyframe, crop, duration, provider mode, or shot decomposition.
+12. **Keyframe density is adaptive.** Source-image density increases with transition complexity. A simple monotonic action may use a sparse mini-arc; a transition that changes body orientation, prop state, support mode, and camera cannot be forced into the same fixed count.
+14. **Compile source sequences to provider capability.** Dense source keyframes are a planning truth; providers may receive them as ordered keyframes, first/last pairs, overlapping short segments, or extension/video-reference controls depending on freshly verified support.
+14. **External-agent handoffs are versioned production contracts.** When a separate specialist agent executes generation, send only validated manifest-pinned assets/messages and require pair-specific feedback for narrow repair.
+15. **Progressive handoff beats end-loaded handoff.** For continuity-sensitive productions, announce `production_started`, then hand off validated source sets incrementally with `images_ready(scope=set)`. Let the specialist validate/spec/risk-test early, incorporate pair-specific feedback while the source context is still warm, and emit `images_ready(scope=production)` only after all sets are ready.
 
 ## Default workflow
 
-1. **Receive authoritative state.** Load the relevant Story Weaver handoff, accepted Visual Narrative Production anchors/keyframes/continuity state, or user-provided media.
-2. **Define the temporal objective.** What changes during this shot? What must be true at the start and end? What story/performance information must land?
-3. **Preflight feasibility.** Check duration, action count, contact/physics, occlusion, camera burden, identity/reference burden, and whether the desired final state is reachable without teleportation or contradictory motion.
-4. **Build a Motion Shot Spec.** Record narrative function, start/end state, subject/object/environment motion, performance, camera, timing, continuity locks, audio intent, and acceptance checks.
-5. **Plan references by role.** Bind the smallest authoritative set. If a missing start/end/pose/environment anchor materially limits control, issue a structured keyframe/reference request back to Visual Narrative Production instead of guessing.
-6. **Resolve provider capabilities fresh.** Current model/provider facts are volatile. Verify only the capabilities material to this shot and mark unsupported/uncertain controls as `unknown` rather than inventing support.
-7. **Choose a generation strategy.** Text-to-video, image-to-video, first+last frame, reference-to-video, camera/motion-reference, multi-shot, extension, or another verified mode.
-8. **Compile the provider contract.** Convert the Motion Shot Spec into concise provider-native prompt/control inputs; do not dump the entire project state into the prompt.
-9. **Generate bounded takes.** Preserve shot ID, provider/model/version when known, inputs, prompt/controls, duration, and take ID so comparisons are attributable.
-10. **Inspect the moving result.** Review start match, identity, motion path, contact/physics, camera behavior, temporal continuity, end state, environment/prop integrity, audio/dialogue when relevant, and artifacts across the whole clip.
-11. **Classify and repair.** `pass | usable_with_debt | fail`; use a targeted repair plan and preserve successful dimensions.
-12. **Hand off accepted takes.** Send accepted take IDs/files plus continuity/end-state notes to Video Post-Production. Do not conflate take acceptance with final edit approval.
+1. **Receive authoritative state.** Load the relevant Story Weaver handoff, accepted Visual Narrative Production anchors/keyframes/continuity state, or user-provided media. For external-agent productions, also load the live manifest and handoff protocol.
+2. **Declare production and sets when collaborating externally.** Create/pin the manifest skeleton, define stable set IDs/arcs/phases, and emit `production_started` before source generation proceeds.
+4. **Define the temporal objective.** What changes during this shot? What must be true at the start and end? What story/performance information must land?
+4. **Preflight feasibility.** Check duration, action count, contact/physics, occlusion, camera burden, identity/reference burden, and whether the desired final state is reachable without teleportation or contradictory motion.
+5. **Build a Motion Shot Spec.** Record narrative function, start/end state, subject/object/environment motion, performance, camera, timing, continuity locks, audio intent, and acceptance checks.
+6. **Plan references by role and density.** Bind the smallest authoritative set, then run a pairwise reachability check across intended temporal anchors. If adjacent states require too many simultaneous body/object/camera changes, request additional bridge keyframes from Visual Narrative Production instead of asking the video model to invent the missing motion.
+7. **Resolve provider capabilities fresh.** Current model/provider facts are volatile. Verify only the capabilities material to this shot and mark unsupported/uncertain controls as `unknown` rather than inventing support.
+8. **Choose a generation strategy.** Text-to-video, image-to-video, first+last frame, reference-to-video, camera/motion-reference, multi-shot, extension, or another verified mode.
+9. **Compile the provider contract.** Convert the Motion Shot Spec into concise provider-native prompt/control inputs; do not dump the entire project state into the prompt.
+10. **Generate bounded takes.** Preserve shot ID, provider/model/version when known, inputs, prompt/controls, duration, and take ID so comparisons are attributable.
+11. **Inspect the moving result.** Review start match, identity, motion path, contact/physics, camera behavior, temporal continuity, end state, environment/prop integrity, audio/dialogue when relevant, and artifacts across the whole clip.
+12. **Classify and repair.** `pass | usable_with_debt | fail`; use a targeted repair plan and preserve successful dimensions.
+14. **Hand off accepted takes.** Send accepted take IDs/files plus continuity/end-state notes to Video Post-Production. Do not conflate take acceptance with final edit approval.
 
 ## Shot decomposition gate
 
@@ -85,6 +90,8 @@ For each shot, produce or persist as needed:
 - `references/prompt-compilation-and-provider-adaptation.md`
 - `references/generated-take-qa-and-repair.md`
 - `references/bridge-contracts.md`
+- `references/adaptive-keyframe-density-and-transition-bridges.md`
+- `references/file-mediated-agent-handoff.md`
 - `providers/README.md`
 - `schemas/motion-shot-spec.schema.json`
 - `schemas/temporal-continuity-ledger.schema.json`

@@ -70,3 +70,5 @@ A representative physical-action sequence showed that a capable image engine can
 
 ## 0.35.7 generalized production lesson
 A later mini-arc exposed two additional instructor-level failure classes: persistent equipment could relocate or fuse across adjacent frames despite otherwise good scene continuity, and a skilled performer could adopt a visually dramatic but proficiency-inconsistent stance. The public skill therefore now treats object count/topology/spatial relation as causal continuity state and treats established proficiency as a movement-quality prior. No private character/project identity or prompt is stored.
+
+- Support-constrained actions require joint camera/body/equipment reasoning: an anatomically correct performer can still be wrong when the support apparatus is skewed relative to the action axis. Keep this generalized and free of private character/project fixtures.

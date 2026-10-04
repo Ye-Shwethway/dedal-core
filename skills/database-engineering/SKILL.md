@@ -1,6 +1,6 @@
 ---
 name: database-engineering
-description: Design, evolve, diagnose, and verify database semantics: schemas, keys/constraints, indexes/access paths, query plans, transactions/isolation/locking, migrations, connection behavior, and engine-specific operational tradeoffs across PostgreSQL, SQLite/D1, and related SQL systems.
+description: "Design, evolve, diagnose, and verify database semantics: schemas, keys/constraints, indexes/access paths, query plans, transactions/isolation/locking, migrations, connection behavior, and engine-specific operational tradeoffs across PostgreSQL, SQLite/D1, and related SQL systems."
 ---
 
 # Database Engineering

@@ -7,3 +7,5 @@ The canonical workflow remains provider-neutral:
 `Motion Shot Spec -> capability resolution -> provider contract -> generated take -> take QA`
 
 Current provider notes are intentionally concise and record only high-value control patterns observed in first-party documentation reviewed 2026-10-02.
+
+- `luma.md` — Luma Dream Machine current adapter notes.

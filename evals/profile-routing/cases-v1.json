@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {"id": "core-explicit", "task": "Review the core architecture", "status": "matched", "profiles": ["core-architecture-change"]},
+    {"id": "core-mixed-language", "task": "DEDAL Core direct Library tree schema ပြန်စစ်ပါ", "status": "matched", "profiles": ["core-architecture-change"]},
+    {"id": "core-hydration", "task": "Hydration receipt validation", "status": "matched", "profiles": ["core-architecture-change"]},
+    {"id": "orison-normalized", "task": "Orison image-to-video source sequence for Darian", "status": "matched", "profiles": ["dedal-orison-image-to-video"]},
+    {"id": "orison-spaces", "task": "Image to video source sequence for Orison", "status": "matched", "profiles": ["dedal-orison-image-to-video"]},
+    {"id": "visual-sequence", "task": "Darian visual novel mini arc images", "status": "matched", "profiles": ["recurring-character-image-sequence"]},
+    {"id": "overlap", "task": "Visual novel image-to-video for Orison", "status": "ambiguous", "profiles": ["dedal-orison-image-to-video", "recurring-character-image-sequence"]},
+    {"id": "other-domain", "task": "Please check the medicine stock", "status": "unresolved", "profiles": []},
+    {"id": "substring-guard", "task": "A heardle score has no task profile", "status": "unresolved", "profiles": []}
+  ],
+  "transitions": [
+    {"from": "Review DEDAL Core schema", "to": "Create a recurring character visual novel mini arc", "from_profiles": ["core-architecture-change"], "to_profiles": ["recurring-character-image-sequence"]}
+  ]
+}

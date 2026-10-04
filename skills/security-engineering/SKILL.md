@@ -1,6 +1,6 @@
 ---
 name: security-engineering
-description: Threat-model and harden software/agent workflows: trust boundaries, prompt injection, tool authority, secrets, identity/privilege, supply chain, memory poisoning, destructive actions, and security verification. Use when security risk is a primary concern or when untrusted input can influence privileged actions.
+description: "Threat-model and harden software/agent workflows: trust boundaries, prompt injection, tool authority, secrets, identity/privilege, supply chain, memory poisoning, destructive actions, and security verification. Use when security risk is a primary concern or when untrusted input can influence privileged actions."
 ---
 
 # Security Engineering

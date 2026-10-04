@@ -68,6 +68,11 @@ Read `references/tool-capability-and-failure-routing.md` when generation repeate
 18. **Promote anchors deliberately.** Only accepted outputs may become identity, physique, expression, wardrobe, environment, pose, composition, or scene-continuity anchors. Rejected experiments never redefine canon.
 19. **Persist durable truth, not prompt debris.** Save approved anchors, trait/state contracts, continuity ledgers, and generalizable lessons; do not store every failed generation as project truth. Preserve proven local production patterns (such as a successful mini-arc envelope) as reusable workflow state rather than rediscovering them through prompt improvisation.
 
+20. **Plan visible load as physical story state.** For weighted actions, define exercise/task, performer proficiency, effort class, implement type/count, intended load class or visible label, and load-transition logic before rendering. Apply this across dumbbells, barbells, kettlebells, machines, carries, weighted calisthenics, and on-body loads. Visible labels/plate counts/stack settings are continuity facts, not decoration.
+21. **Hand off progressively for external motion production.** When an external motion agent is involved, create a stable set plan and emit `production_started` first. Validate and hand off each completed set with `images_ready(scope=set)` so downstream camera/motion/spec feedback can arrive early; emit `images_ready(scope=production)` only after the whole ordered source sequence is validated.
+21. **Protect canonical body proportions in framing.** When height or limb proportion is identity-relevant, widen/reframe rather than allowing tight composition or perspective to make a tall subject read short-legged or otherwise non-canonical.
+22. **Produce video bridge anchors at adaptive density.** When the still sequence is intended for video synthesis, do not limit arc-to-arc transitions to the ordinary 3–4 frame mini-arc. Accept bridge requests from GVD and produce enough intermediate states that each adjacent pair changes only a manageable physical/camera delta.
+
 ## Visual-novel / sequential still mode
 
 For a scene with multiple images:
@@ -98,6 +103,8 @@ Load only what the task needs:
 - `references/visual-to-motion-handoff.md`
 - `references/performance-expression-and-emotion.md`
 - `references/pose-anatomy-contact-and-load.md`
+- `references/weighted-load-and-proportion-realism.md`
+- `references/collaborative-source-sequence-handoff.md`
 - `references/tool-capability-and-failure-routing.md`
 - `references/cinematography-and-screen-direction.md`
 - `references/lighting-atmosphere-and-environment.md`
@@ -113,3 +120,6 @@ Load only what the task needs:
 Pair with `story-weaver` when prose/canon/scene beats must be authored or interpreted, `generative-video-direction` when accepted stills/keyframes become generated motion, `video-post-production` when moving-image takes must be edited/assembled, `research` when factual visual truth matters, `files`/`knowledge-memory` when approved anchors or state must persist, and `quality-engineering` when independent readiness verification is required.
 
 Do not infer a real person's physical traits from memory when an authoritative current reference is required. Do not claim consistency, anatomical correctness, or continuity without inspecting the rendered output.
+
+## Support-axis coherence
+For support-constrained physical actions, load `references/camera-body-equipment-alignment.md` and preflight performer axis, support-equipment axis, contact map, and camera projection as one system. Camera placement solves visibility; do not distort biomechanics or equipment alignment to expose identity.

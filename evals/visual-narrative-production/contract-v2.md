@@ -81,6 +81,25 @@ Before a 3–4 shot mini-arc is delivered, the workflow maps every rendered slot
 ### VNP-26 Physical-state and proficiency continuity
 Across successive stills, persistent props/equipment preserve count, morphology/topology, spatial relation, and contact state unless a visible or intentionally justified transition changes them. Unexplained teleportation, fusion/splitting, duplication, disappearance, or functional topology drift fails admission. When a subject has established training/skill, movement form must remain compatible with that proficiency and current scene state; unexplained novice-like stance, balance, joint organization, or foot placement is a realism failure.
 
+### VNP-27 Support-axis and camera-body-equipment coherence
+When a support apparatus constrains the action, the workflow must preserve a physically coherent relationship among body/action axis, support-equipment axis, contact map, and camera projection. Camera placement should reveal natural performance rather than forcing head/torso turns or rotating/skewing the apparatus. A frame with locally correct anatomy but implausible performer-to-support alignment fails admission.
+
+### VNP-28 Weighted-load and label realism
+Weighted actions plan load logic across dumbbells, barbells, kettlebells, machines, carries, weighted calisthenics, and on-body loads. Visible labels/plate counts/stack settings persist as continuity facts; unexplained strength-inconsistent or randomly changing loads fail realism/continuity review.
+
+### VNP-29 Canonical proportion framing
+When canonical height/proportion matters, camera distance and crop must preserve the intended body read. Tight framing or perspective that makes a tall character read short-legged is a correctable composition failure.
+
+### VNP-30 Video-bridge anchor production
+When GVD requests temporal bridge anchors, VNP may exceed the ordinary 3–4 shot mini-arc and generate a denser sequence of separate full-frame states. Density is determined by pairwise reachability, not a fixed count.
+
+### VNP-31 Collaborative source-sequence handoff
+When accepted stills are prepared for an external motion-generation agent, Visual Narrative Production persists an ordered production manifest, classifies every adjacent pair for reachability, inserts bridges before handoff when needed, and emits `images_ready` only after identity, physical, prop/load, pairwise reachability, and video-readiness checks pass.
+
+
+### VNP-32 Progressive set-scoped source handoff
+For an external motion agent, Visual Narrative Production creates a stable production/set plan and emits `production_started` before full source completion. Each set is independently validated and may be handed off as `images_ready(scope=set)` for early downstream review. A set handoff never implies production completion; `images_ready(scope=production)` is emitted only after the complete ordered source sequence passes validation.
+
 ## Regression failures
 - recurring character becomes narrower/taller/older/etc. because an action/style reference overrides physique/identity;
 - extra limb or fused hand is accepted because the overall image looks attractive;
@@ -106,6 +125,10 @@ Across successive stills, persistent props/equipment preserve count, morphology/
 - one failed slot triggers a broad regeneration that drifts an otherwise accepted character/scene/lighting envelope.
 - persistent props teleport between established locations, merge/split, duplicate, vanish, or change load-bearing topology without an authorized transition.
 - an established trained performer adopts unexplained novice-like stance, foot placement, balance, or joint organization during a routine skilled action.
+- the performer has correct local biomechanics but the support bench/platform/rail is skewed or rotated into a physically incompatible relation with the body/contact map.
+- a visible weight label/plate count changes between adjacent shots without a load-change action or justification.
+- a tall canonical character is framed so tightly that the lower body reads non-canonically short when a wider crop would preserve proportion.
+- a video-bound transition jumps across distant states because the still workflow incorrectly enforces a fixed four-frame cap.
 
 ## Evaluation posture
 Contract validation proves the workflow is encoded. Real outcome validation requires representative multi-shot generation/edit sessions and Creator/project acceptance. Character-specific private regression fixtures stay outside public Core.
@@ -114,3 +137,5 @@ Contract validation proves the workflow is encoded. Real outcome validation requ
 - **Overhead bar action:** given a near-finish close crop with nearly straight arms and offscreen grips, reject or reframe; a visible bar crossing the subject's face is an immediate failure.
 - **Equipment variation set:** given four requested alternatives and one failed grip/contact render, supply four inspected usable alternatives, with purposeful phase/crop distinctions and individual verified links.
 - **Non-equipment transfer:** for a heavy door pull or rope climb, trace support/contact/joint/load geometry and choose a crop that exposes the disputed interaction without copying the overhead-bar wording.
+
+- an external-agent handoff is emitted because files exist even though pairwise reachability or video-readiness has not been validated.

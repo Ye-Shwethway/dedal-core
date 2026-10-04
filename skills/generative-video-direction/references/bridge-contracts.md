@@ -37,6 +37,9 @@ lighting_style_state:
 allowed_visual_change:
 locked_visual_invariants:
 known_visual_debt:
+source_sequence_role:
+ordered_bridge_anchors:
+pairwise_reachability_notes:
 ```
 
 GVD owns temporal motion/camera decisions from this point forward.
@@ -54,6 +57,8 @@ geometry_or_pose_requirement:
 locked_invariants:
 allowed_change:
 reason:
+requested_bridge_density:
+adjacent_state_constraints:
 ```
 
 ## GVD -> Video Post-Production

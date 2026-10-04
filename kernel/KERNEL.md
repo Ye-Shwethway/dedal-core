@@ -1,5 +1,7 @@
 # DEDAL Stable Kernel
 
+> Normative machine contract: `kernel/kernel.yaml`. Markdown is explanatory.
+
 The Stable Kernel is the small, high-impact layer that defines how DEDAL boots, reasons about authority, protects private state, activates its Cognitive Runtime, composes skills, and records durable change.
 
 ## Constitutional sources

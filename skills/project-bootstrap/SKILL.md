@@ -1,6 +1,6 @@
 ---
 name: project-bootstrap
-description: Rapidly onboard to an unfamiliar or resumed project by building a compact authoritative context map: goals, repository rules, architecture, commands, source-of-truth files, current checkpoint, risky areas, release path, and next executable step. Use when entering a new repo/project, resuming after context loss, or creating agent-facing project instructions.
+description: "Rapidly onboard to an unfamiliar or resumed project by building a compact authoritative context map: goals, repository rules, architecture, commands, source-of-truth files, current checkpoint, risky areas, release path, and next executable step. Use when entering a new repo/project, resuming after context loss, or creating agent-facing project instructions."
 ---
 
 # Project Bootstrap / Context Adapter

@@ -2,5 +2,5 @@
   "schema_version": 1,
   "core_version": "0.38.3",
   "release_manifest": "state/release-manifest.json",
-  "release_sha256": "6f7db60b11939bab7450f44da587e7e5926a557cff015d7bad95820257666080"
+  "release_sha256": "17fe4ed8f0c8f337adaa5da32b43c0d05be349ac890d2cfe846a75c0ff07c1a5"
 }

@@ -74,6 +74,32 @@
       "items": {
         "type": "string"
       }
+    },
+    "ordered_keyframes": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "pairwise_reachability": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "transition_complexity": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ]
+    },
+    "compilation_strategy": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ]
     }
   },
   "additionalProperties": true

@@ -28,7 +28,7 @@ jobs:
             docs/architecture/MEMORY_ARCHITECTURE.md
             docs/capabilities/CURRENT_CAPABILITIES.md docs/continuity/CURRENT_CHECKPOINT.md docs/evolution/IMPROVEMENT_PROTOCOL.md
             docs/evolution/CAPABILITY_EXPANSION_ROADMAP.md
-            state/capability-registry.yaml index/MASTER_INDEX.md index/SKILL_REGISTRY.yaml
+            state/capability-registry.yaml index/MASTER_INDEX.md index/SKILL_REGISTRY.yaml index/document-schema.yaml
           )
           for file in "${required[@]}"; do test -s "$file" || { echo "Missing or empty required file: $file"; exit 1; }; done
 

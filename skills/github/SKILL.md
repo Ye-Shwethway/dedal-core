@@ -1,6 +1,6 @@
 ---
 name: github
-description: Inspect and operate GitHub repositories safely: repository state, files, branches, commits, pull requests, issues, Actions, logs, and artifacts. Use for DEDAL work that depends on live GitHub state.
+description: "Inspect and operate GitHub repositories safely: repository state, files, branches, commits, pull requests, issues, Actions, logs, and artifacts. Use for DEDAL work that depends on live GitHub state."
 ---
 
 # GitHub Operations

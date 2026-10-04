@@ -1,0 +1,36 @@
+version: 0.38.3
+contract_rule: yaml_is_contract_markdown_is_view
+invariants:
+- id: live_state_outranks_memory
+  enforce: reasoning
+  spec: prefer_live_authoritative_state_over_memory_or_summary
+- id: creator_authority
+  enforce: reasoning
+  spec: creator_controls_goals_irreversible_permissions_and_canon
+- id: no_claim_without_evidence
+  enforce: validator
+  spec: consequential_completion_requires_tool_or_validator_evidence
+- id: library_boot_authority
+  enforce: validator
+  spec: canonical_boot_points_only_to_direct_library_core_tree
+- id: reconstruct_not_resume
+  enforce: validator
+  spec: session_start_requires_state_checkpoint
+- id: required_hydration_before_execution
+  enforce: validator
+  spec: matched_task_profile_required_resources_must_exist_and_be_declared_before_consequential_execution
+- id: specific_over_general
+  enforce: reasoning
+  spec: task_profile_and_current_reference_override_general_skill_heuristics_and_legacy_guidance
+- id: pixel_binding_truth
+  enforce: reasoning
+  spec: visual_reference_retrieval_does_not_equal_generation_binding
+- id: smallest_sufficient_capability
+  enforce: reasoning
+  spec: load_selected_skills_and_required_dependencies_not_catalog
+- id: external_runtime_retired
+  enforce: validator
+  spec: external_dedal_runtime_mcp_is_not_a_boot_dependency_or_execution_gate
+- id: public_private_boundary
+  enforce: validator
+  spec: ref:kernel/state-boundary.yaml

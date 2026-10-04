@@ -1,0 +1,78 @@
+version: 0.38.3
+authority: library_direct
+canonical_root: /DEDAL/core
+metadata:
+  - VERSION
+  - core-manifest.yaml
+  - core-files.json
+  - state/active-release.json
+  - state/release-manifest.json
+session_protocol: kernel/session.yaml
+kernel_contract: kernel/kernel.yaml
+routing_policy: index/routing.yaml
+task_profiles: index/task-profiles.yaml
+checkpoint: state/checkpoint.yaml
+boot_sequence:
+  - id: verify_release
+    kind: verify_release
+    sources:
+      - state/active-release.json
+      - state/release-manifest.json
+    policy: verify_pointer_then_hash_each_loaded_core_source
+    required: true
+  - id: core_identity
+    kind: load_sources
+    sources:
+      - VERSION
+      - core-manifest.yaml
+      - AGENTS.md
+      - docs/IDENTITY.md
+    required: true
+  - id: operating_contract
+    kind: load_sources
+    sources:
+      - kernel/kernel.yaml
+      - kernel/session.yaml
+    required: true
+  - id: accepted_state
+    kind: load_checkpoint
+    source: state/checkpoint.yaml
+    required: true
+  - id: private_overlay_manifest
+    kind: load_private_manifest
+    source: /DEDAL/private-overlay/overlay-manifest.json
+    load: when_available
+  - id: resolve_workstream
+    kind: resolve_state
+    source: /DEDAL/private-overlay/state/state-registry.json
+    load: task_relevant
+  - id: compose_capabilities
+    kind: compose
+    registry: index/SKILL_REGISTRY.yaml
+    routing_policy: index/routing.yaml
+    policy: smallest_sufficient_set
+  - id: resolve_task_profile
+    kind: resolve_profile
+    registry: index/task-profiles.yaml
+    required: when_profile_matches
+  - id: hydrate_execution_contract
+    kind: hydrate
+    scope: profile_required_plus_selected_skill_entrypoints
+    gate: required_before_consequential_execution
+  - id: verify_authority
+    kind: apply_rule
+    rule: creator_authority_and_live_state
+    required: true
+rules:
+  - id: reconstruct_not_resume
+    statement: every_new_session_rebuilds_from_checkpoint_and_authoritative_files
+  - id: reboot_on_material_subgoal_change
+    statement: rerun_composition_and_profile_resolution_when_active_subgoal_materially_changes
+  - id: direct_library_core
+    statement: canonical_core_is_the_direct_library_tree_under_/DEDAL/core
+  - id: release_consistency
+    statement: verify_active_release_pointer_and_loaded_core_source_digests_fail_closed_on_mismatch
+  - id: no_archive_boot
+    statement: archives_and_zip_files_are_transport_or_history_only_and_never_boot_authority
+  - id: no_external_runtime_dependency
+    statement: dedal_external_runtime_mcp_tools_are_retired_and_must_not_be_used_for_boot_routing_hydration_or_authorization

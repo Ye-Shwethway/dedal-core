@@ -1,0 +1,14 @@
+version: 0.38.3
+budgets:
+  boot_contract_tokens: 1400
+  checkpoint_tokens: 2200
+  routing_metadata_tokens: 4200
+  skill_entrypoint_tokens: 6000
+  profile_required_refs_tokens: 18000
+rules:
+- id: just_in_time
+  statement: load_paths_and_compact_metadata_first_then_required_content
+- id: profile_exception
+  statement: required_task_profile_dependencies_may_exceed_general_progressive_disclosure_budget_when_execution_correctness_depends_on_them
+- id: drop_stale_tool_payloads
+  statement: retain_compact_evidence_identity_not_raw_tool_noise

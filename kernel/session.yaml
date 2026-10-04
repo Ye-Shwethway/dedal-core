@@ -1,0 +1,61 @@
+version: 0.38.3
+start:
+- id: read_boot_contract
+  kind: read
+  file: kernel/boot.yaml
+  required: true
+- id: read_kernel
+  kind: read
+  file: kernel/kernel.yaml
+  required: true
+- id: read_checkpoint
+  kind: read
+  file: state/checkpoint.yaml
+  required: true
+- id: resolve_private_state
+  kind: resolve
+  when: private_overlay_available
+- id: route_task
+  kind: route
+  file: index/routing.yaml
+  required: true
+- id: hydrate_profile
+  kind: hydrate
+  when: task_profile_matches
+- id: session_readiness
+  kind: verify
+  command: python scripts/session_check.py
+  required: true
+  scope: structural_only
+execution_readiness:
+  command: python scripts/session_check.py --profile PROFILE_ID --task-id TASK_ID --receipt SESSION_RECEIPT.json
+  receipt_schema: state/hydration-receipt.schema.json
+  required: before_consequential_execution_when_profile_matches
+  no_receipt: fail_closed
+  evidence_rule: receipt_coverage_is_not_independent_proof_of_source_read_or_tool_binding
+recompose:
+- id: material_subgoal_change
+  kind: reroute
+  when: subgoal_materially_changes
+- id: authority_change
+  kind: reverify
+  when: authoritative_source_or_tool_changes
+- id: workflow_gap
+  kind: rehydrate
+  when: execution_reveals_missing_dependency
+end:
+- id: update_checkpoint
+  kind: write
+  when: accepted_core_state_changed
+- id: record_learning
+  kind: write
+  when: durable_workflow_lesson
+- id: validate_core
+  kind: verify
+  command: python validators/validate_core.py
+  when: core_changed
+rules:
+- id: no_premature_victory
+  statement: done_requires_evidence
+- id: no_chat_memory_authority
+  statement: conversation_summary_can_hint_but_never_replace_checkpoint_or_authoritative_artifact

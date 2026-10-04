@@ -1,12 +1,12 @@
 # Runway — current adapter notes
 
-_Last reviewed: 2026-10-02. Verify Runway first-party documentation at execution time._
+_Last reviewed: 2026-10-04. Verify Runway first-party documentation at execution time._
 
-Current Gen-4.5 guidance emphasizes:
+Current Runway guidance separates several control surfaces:
 
-- image-to-video input establishes composition/subject/lighting/style;
-- text should primarily describe motion, camera work and temporal progression;
-- start simple and add detail strategically;
-- current mode/duration/aspect/resolution support is model/version specific.
+- image-to-video, where the input image establishes the initial composition/subject/light/style and text focuses on motion/camera progression;
+- reusable image/media references for character, object, scene, and style control;
+- keyframe/edit workflows in current Apps/Edit Studio surfaces;
+- video-to-video / modification workflows for preserving or changing existing motion.
 
-DEDAL implication: keep I2V prompts motion-focused and diagnose conflicts between implied motion in the input image and requested motion before adding prompt complexity.
+DEDAL implication: do not assume every Runway video model accepts an arbitrary ordered keyframe stack. Compile the canonical source sequence to the specific verified mode. When I2V is used, keep prompts motion-focused and avoid simultaneously demanding large subject and camera changes from one start image.

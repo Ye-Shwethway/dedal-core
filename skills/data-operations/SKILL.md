@@ -1,6 +1,6 @@
 ---
 name: data-operations
-description: Design and execute safe spreadsheet/data operations: schema inference, validation, reconciliation, deduplication, formula integrity, staging/review/promotion, auditability, and deterministic transforms across spreadsheets, CSVs, tables, and operational datasets.
+description: "Design and execute safe spreadsheet/data operations: schema inference, validation, reconciliation, deduplication, formula integrity, staging/review/promotion, auditability, and deterministic transforms across spreadsheets, CSVs, tables, and operational datasets."
 ---
 
 # Data / Spreadsheet / Operational Workflow Engineering

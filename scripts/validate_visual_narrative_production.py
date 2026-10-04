@@ -44,6 +44,12 @@ assert 'VNP-23 Natural action and equipment realism' in contract
 assert 'VNP-24 Narrow retry preservation' in contract
 assert 'VNP-25 Phase-signature admission' in contract
 assert 'VNP-26 Physical-state and proficiency continuity' in contract
+assert 'VNP-27 Support-axis and camera-body-equipment coherence' in contract
+assert 'VNP-28 Weighted-load and label realism' in contract
+assert 'VNP-29 Canonical proportion framing' in contract
+assert 'VNP-30 Video-bridge anchor production' in contract
+assert 'VNP-31 Collaborative source-sequence handoff' in contract
+assert 'VNP-32 Progressive set-scoped source handoff' in contract
 mini_arc = (root / 'skills/visual-narrative-production/references/mini-arc-continuity-and-instructor-control.md').read_text()
 assert 'Local continuity envelope' in mini_arc
 assert 'separate full-frame' in mini_arc
@@ -56,9 +62,18 @@ assert 'Physical-state continuity gate' in audit
 assert 'object teleportation' in audit
 assert 'proficiency' in audit.lower()
 assert 'proficiency_form' in shot_schema['properties']
+assert 'support_alignment' in shot_schema['properties']
+assert {'body_action_axis', 'support_axis', 'required_axis_relation', 'contact_map', 'camera_projection'} <= set(shot_schema['properties']['support_alignment']['properties'])
 assert {'count', 'morphology', 'spatial_relation', 'contact_state', 'authorized_transition'} <= set(ledger_schema['properties']['props']['items']['properties'])
 physical = (root / 'skills/visual-narrative-production/references/object-state-and-proficiency-continuity.md').read_text()
 assert 'Morphology integrity' in physical and 'Proficiency-aware movement realism' in physical
+align = (root / 'skills/visual-narrative-production/references/camera-body-equipment-alignment.md').read_text()
+assert 'Support-axis preflight' in align and 'Camera solves visibility' in align
+weighted = (root / 'skills/visual-narrative-production/references/weighted-load-and-proportion-realism.md').read_text()
+assert 'Strength realism' in weighted and 'Label continuity' in weighted
+assert 'weighted_load_plan' in shot_schema['properties']
+assert 'proportion_framing' in shot_schema['properties']
+assert {'load_label','load_class','label_visibility'} <= set(ledger_schema['properties']['props']['items']['properties'])
 
 assert 'Equipment interaction preflight' in (root / 'skills/visual-narrative-production/references/pose-anatomy-contact-and-load.md').read_text()
 assert 'Before presenting a comparison set' in (root / 'skills/visual-narrative-production/references/self-review-and-sequence-audit.md').read_text()
@@ -75,3 +90,8 @@ assert any('visual-narrative-production' in json.dumps(c) for c in routing['clus
 assert 'private character identity' in notes.lower()
 
 print(f'visual narrative production: valid ({len(refs)} references)')
+
+collab = (root / 'skills/visual-narrative-production/references/collaborative-source-sequence-handoff.md').read_text()
+assert 'images_ready' in collab and 'needs_bridge' in collab and 'pairwise reachability' in collab
+
+assert 'production_started' in collab and 'scope=set' in collab and 'scope=production' in collab

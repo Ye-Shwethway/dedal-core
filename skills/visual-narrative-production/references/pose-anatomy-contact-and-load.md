@@ -66,3 +66,8 @@ When the subject's experience level is established, use it as a movement-quality
 
 ## Persistent equipment identity
 Across adjacent shots, equipment has state: count, topology, placement, and contact. Two separate dumbbells remain two separate dumbbells; they must not fuse into a multi-headed object, duplicate, vanish, or relocate without a visible/justified transition. Preserve left/right/near/far relations when those relations are established and materially visible.
+
+## Body-support-camera alignment
+Local joint correctness is insufficient when the support apparatus is geometrically misaligned with the performer. For bench-, platform-, rail-, table-, or machine-supported actions, preflight the body/action axis, support longitudinal axis, required axis relation, contact map, and camera projection together. The camera may create perspective convergence, but it must not imply an impossible yaw/rotation of the support relative to the body.
+
+Use camera placement to obtain a natural side/profile view. Do not rotate the head, torso, support limb, or equipment merely to improve face visibility. For unilateral supported pulling patterns, preserve neutral cervical alignment, task-aligned gaze, stable hand/knee/foot support, and a load path close to the torso while the bench/support remains physically aligned with the body.

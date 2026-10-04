@@ -1,6 +1,6 @@
 ---
 name: release-engineering
-description: Safely turn verified source into attributable artifacts and deployed releases: versioning, reproducible builds, artifact provenance, CI/CD, staged rollout, deployment verification, rollback, release notes, and post-release evidence. Use when shipping software, producing APK/AAB/binaries/images/packages, or changing production delivery pipelines.
+description: "Safely turn verified source into attributable artifacts and deployed releases: versioning, reproducible builds, artifact provenance, CI/CD, staged rollout, deployment verification, rollback, release notes, and post-release evidence. Use when shipping software, producing APK/AAB/binaries/images/packages, or changing production delivery pipelines."
 ---
 
 # Release Engineering

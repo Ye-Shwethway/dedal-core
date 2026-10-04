@@ -1,0 +1,61 @@
+schema_version: 1
+purpose: classify_every_core_file_and_preserve_instruction_authority
+classification: first_matching_rule
+default: reject
+roles:
+  machine_contract:
+    authority: normative
+    formats: [.yaml, .yml, .json]
+  instruction_entrypoint:
+    authority: normative_skill_body
+    formats: [.md]
+  executable:
+    authority: implementation
+    formats: [.py, .js, .mjs, .sql]
+  configuration:
+    authority: implementation
+    formats: [.toml, .txt, .yml, .yaml]
+  evaluation:
+    authority: test_or_fixture
+    formats: [.md, .json, .yaml, .py]
+  reference:
+    authority: supporting_context
+    formats: [.md, .json, .yaml]
+  explanation:
+    authority: non_normative
+    formats: [.md, .txt, none]
+rules:
+  - {pattern: core-files.json, role: machine_contract}
+  - {pattern: core-manifest.yaml, role: machine_contract}
+  - {pattern: kernel/*.yaml, role: machine_contract}
+  - {pattern: index/*.yaml, role: machine_contract}
+  - {pattern: state/*.yaml, role: machine_contract}
+  - {pattern: state/*.json, role: machine_contract}
+  - {pattern: context/*.yaml, role: machine_contract}
+  - {pattern: runtime/*.json, role: machine_contract}
+  - {pattern: skills/*/SKILL.md, role: instruction_entrypoint}
+  - {pattern: skills/*/schemas/*.json, role: machine_contract}
+  - {pattern: skills/*/agents/*.yaml, role: configuration}
+  - {pattern: skills/**/*.py, role: executable}
+  - {pattern: skills/**/*.js, role: executable}
+  - {pattern: skills/**/*.mjs, role: executable}
+  - {pattern: skills/**/*.sql, role: executable}
+  - {pattern: skills/**/*.toml, role: configuration}
+  - {pattern: skills/**/*.txt, role: configuration}
+  - {pattern: skills/**/*.json, role: reference}
+  - {pattern: skills/**/*.yaml, role: reference}
+  - {pattern: skills/**/*.md, role: reference}
+  - {pattern: evals/**, role: evaluation}
+  - {pattern: scripts/*.py, role: executable}
+  - {pattern: validators/*.py, role: executable}
+  - {pattern: runtime/*.py, role: executable}
+  - {pattern: .github/workflows/*.yml, role: configuration}
+  - {pattern: '*.md', role: explanation}
+  - {pattern: docs/**/*.md, role: explanation}
+  - {pattern: docs/*.md, role: explanation}
+  - {pattern: skills/*.md, role: reference}
+  - {pattern: kernel/*.md, role: explanation}
+  - {pattern: index/*.md, role: explanation}
+  - {pattern: runtime/*.md, role: explanation}
+  - {pattern: VERSION, role: explanation}
+  - {pattern: .gitignore, role: explanation}

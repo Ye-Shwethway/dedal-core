@@ -74,6 +74,25 @@
             "items": {
               "type": "string"
             }
+          },
+          "bridge_anchors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pairwise_reachability": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "camera_scale_state": {
+            "type": [
+              "string",
+              "object",
+              "null"
+            ]
           }
         },
         "required": [

@@ -1,0 +1,16 @@
+version: 0.38.3
+public:
+- '** except explicitly private overlay and secrets'
+private:
+- /DEDAL/private-overlay/**
+- creator/project operational state
+secret_stores:
+- provider_secret_store
+- oauth_vault
+rules:
+- id: no_secrets_in_public
+  enforce: validator
+- id: private_overlay_never_public_sync
+  enforce: validator
+- id: live_service_owns_volatile_truth
+  enforce: reasoning

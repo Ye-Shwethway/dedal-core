@@ -1,4 +1,41 @@
+## 0.38.3 — Routing, contract, and direct release integrity
+
+- Resolve each task profile to one primary and bounded supporting skills; ambiguous and unresolved probes defer to semantic review.
+- Expand routing cases to 31 with Burmese/English probes and reject structural contract mutations.
+- Pin the direct Core tree with a digest manifest and last-written active release pointer.
+- Bind hydration receipt v3 coverage to a release digest, source hash/version, task time, and passed gate evidence.
+
+## 0.38.2 — Document roles and skill metadata
+
+- Classify every Core file by role and format in a machine-readable schema, with fail-closed validation and CI coverage.
+- Preserve active Markdown skill bodies as instruction authority; repair malformed YAML frontmatter and make the Knowledge Archive frontmatter name explicit in the registry.
+
+## 0.36.2 — Adaptive temporal keyframe density and weighted-load realism
+
+- Added adaptive keyframe density and pairwise reachability for video-bound still sequences.
+- Added provider-aware compilation of dense canonical source sequences into ordered keyframes, first/last pairs, extension, or video-reference workflows.
+- Added transition-bridge production beyond the ordinary 3–4 shot mini-arc when body/object/camera state changes require denser temporal control.
+- Added weighted-load, visible-label, on-body load, and canonical proportion realism across resistance modalities.
+- Refreshed Seedance, Veo, Runway, and Luma provider adapter notes from 2026-10-04 research.
+
 # Changelog
+
+## 0.36.3 — File-mediated creative-agent bridge
+
+- Add a portable file-mediated collaboration architecture for DEDAL source-state production and external specialist generation/review.
+- Make production manifests authoritative, version handoffs, and require stale-manifest rejection plus explicit acknowledgement/lifecycle handling.
+- Add `images_ready` admission semantics: assets are handed off only after identity, physical, prop/load, pairwise reachability, and video-readiness validation.
+- Add pair-specific downstream feedback and narrow bridge-frame repair instead of broad accepted-sequence regeneration.
+- Preserve the public/private boundary: public Core contains the generic bridge contract; live workspace URLs, agent deployment pointers, and private production identifiers remain private overlay state.
+- Add GVD-16 and VNP-31 regression coverage.
+
+## 0.36.1 — Support-axis and camera-body-equipment alignment refinement
+
+- Add explicit support-apparatus alignment QA for skilled physical actions: subject body axis, support-surface longitudinal axis, contact points, and camera projection must remain physically coherent.
+- Require camera choice to reveal a natural profile/three-quarter view without twisting the performer or rotating the support equipment into an implausible relation.
+- Add exercise-form preflight for unilateral supported rows and analogous actions: neutral cervical spine, task-aligned gaze, stable support hand/knee/foot geometry, and load path close to the intended body line.
+- Add `support_alignment` to the shot spec and VNP-27 regression coverage.
+- Preserve prior mini-arc, phase-signature, object-state, morphology, and proficiency-form gates.
 
 ## 0.36.0 — Generative Video Direction and post-production split
 

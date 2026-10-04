@@ -1,0 +1,49 @@
+schema_version: 2
+version: 0.38.3
+policy: smallest_sufficient_set
+steps:
+- id: explicit_alias
+  kind: match
+  source: index/SKILL_REGISTRY.yaml
+  priority: 100
+- id: task_profile
+  kind: profile
+  source: index/task-profiles.yaml
+  priority: 90
+- id: skill_match
+  kind: match
+  source: index/SKILL_REGISTRY.yaml
+  priority: 50
+- id: select
+  kind: select
+  max_primary: 1
+  max_supporting: 3
+  tiebreak: explicit_alias_then_profile_specificity
+  multiple_profiles: require_semantic_resolution
+  no_profile: bounded_skill_search
+  no_forced_match: true
+- id: load_entrypoints
+  kind: load
+  scope: selected_only
+- id: hydrate_profile_dependencies
+  kind: hydrate
+  scope: matched_profile_required
+- id: fallback
+  kind: fallback
+  when: no_match
+  action: bounded_skill_search
+precedence:
+- current_creator_instruction
+- matched_task_profile
+- current_skill_reference
+- skill_entrypoint
+- legacy_or_general_heuristic
+rules:
+- id: discovery_not_activation
+  statement: registry_match_does_not_count_as_skill_read
+- id: activation_not_readiness
+  statement: skill_entrypoint_read_does_not_count_as_execution_ready_when_profile_dependencies_remain
+- id: profile_dependencies_are_mandatory
+  statement: all_required_profile_resources_must_be_read_before_consequential_execution
+- id: never_preload_catalog
+  statement: do_not_bulk_load_all_skills_or_all_references

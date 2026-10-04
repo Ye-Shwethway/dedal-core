@@ -1,10 +1,17 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.36.0",
+  "version": "0.38.3",
   "accepted_state": [
+    "DEDAL 0.38.3 uses one primary plus bounded supporting skills per task profile, a fail-closed direct-tree release digest manifest, and release-bound receipt v3 coverage; semantic ambiguity remains for judgment.",
+    "DEDAL 0.38.3 classifies every Core file through index/document-schema.yaml; machine contracts are normative, active SKILL.md instruction bodies retain authority, and explanatory Markdown is supporting context.",
+    "DEDAL 0.38.3 boots from the direct /DEDAL/core Library tree; YAML/JSON contracts and state/checkpoint.yaml are authoritative, chat memory is not.",
+    "DEDAL 0.38.3 separates structural readiness from session-specific profile receipt coverage; receipt references are traceable claims and do not independently prove actual Library reads or pixel binding.",
+    "A conservative lexical profile probe detects explicit and ambiguous phrase matches; unresolved tasks require semantic routing judgment.",
+    "External DEDAL Runtime and Python Canary MCP sidecars are retired and must not be used for boot, routing, hydration, authorization, or continuity; historical artifacts are evidence only.",
+    "Execution-critical task profiles declare mandatory dependency hydration and readiness gates; skill entrypoint activation alone is not execution readiness.",
     "DEDAL remains one coherent persistent intelligence with the always-active Cognitive Runtime and progressively disclosed specialist faculties.",
-    "GitHub remains authoritative for public Core history; the Library repo mirror is a sanitized working interchange and stale mirrors must be reconciled against live main before mutation.",
+    "GitHub is authoritative for public Core history; /DEDAL/core is the direct Library working and boot tree. Reconcile a sanitized diff against the recorded Git base before upstream sync.",
     "Optional Library-only private operational overlays may provide Creator/project-specific non-secret context while remaining outside public Git synchronization and subordinate to live authoritative state.",
     "YouTube Publishing engineering for the current scope is capability-complete; authenticated YouTube operations remain owned by YouTube Publishing, canonical OAuth behavior is source-synchronized, and deployment credentials/config remain private live state that must be verified rather than inferred.",
     "YouTube SEO owns downstream discovery-surface strategy, packaging, analytics diagnosis, experiments and measurement learning; YouTube Reporting Reach has been production-validated and delayed/missing early data is represented with availability states rather than fake zeroes.",
@@ -29,7 +36,6 @@
     "Medicine Store Assistant warning markers use a false-alarm prevention gate: code misses trigger name/description/specification reconciliation, legitimate multi-brand sibling lots and known departmental namespaces are allowed, stale markers are cleaned instead of re-raised, and yellow/red severity requires residual uncertainty or concrete contradiction.",
     "YouTube Publishing treats Edited Videos and Uploaded YT Videos as rolling working storage with a default newest-three usable-video window per folder; unresolved publishing/recovery/enforcement states override retention count, and destructive cleanup requires exact target resolution plus post-delete read-back.",
     "YouTube new-publication workflow requires a locked viewer-facing launch package before upload transport unless the Creator explicitly supplied the complete final package; YouTube Publishing remains PRIMARY, YouTube SEO becomes SUPPORTING when packaging is unresolved, and Shorts are explicitly not exempt.",
-    "Runtime workflow integrity distinguishes routing from workflow fidelity: caller-declared resource paths are not sufficient binding evidence, identity-bound hydration receipts are non-cognitive evidence, and repeated high-value workflows may require monotonic evidence-bearing stages while direct specialist transports remain fail-open and independently callable.",
     "Video Post-Production first-pass footage editing uses explicit coverage mapping before a serious rough, treats duration/resolution/audio/ending/thumbnail-source quality as deliberate review decisions, and pilots strong AI enhancement before full rendering to reduce avoidable Creator correction loops.",
     "YouTube upload failover is single-flight: queued auto-pickup work remains live duplicate risk, so runner/job state must be diagnosed and the prior job neutralized before any replacement job or independent direct-provider fallback; provider IDs require authoritative read-back and publication closure waits for processed state.",
     "YouTube Publishing defaults to direct multipart private-first upload with authoritative ID/processing/final read-back; the persistent runner is secondary/recovery and requires fresh heartbeat plus runner-accessible source evidence before job creation.",
@@ -44,7 +50,9 @@
     "Visual Narrative Production now enforces persistent object count/morphology/spatial-state continuity and proficiency-aware movement-form realism across successive stills.",
     "Generative Video Direction independently owns provider-neutral temporal shot design, reference-role/provider strategy, generation-contract compilation, generated-take QA and targeted repair.",
     "Canonical video-production is renamed/refocused to video-post-production; video-production and video-editing remain compatibility aliases, and post-production owns existing-media edit/assembly/finish/delivery rather than generative motion prompting.",
-    "The creative moving-image bridge is Story Weaver -> Visual Narrative Production -> Generative Video Direction -> Video Post-Production, with a GVD -> VNP keyframe/reference return path when motion control needs a stronger visual state."
+    "The creative moving-image bridge is Story Weaver -> Visual Narrative Production -> Generative Video Direction -> Video Post-Production, with a GVD -> VNP keyframe/reference return path when motion control needs a stronger visual state.",
+    "Visual Narrative Production now treats performer, support apparatus, and camera as one geometric system: support-axis alignment and contact-map coherence are explicit admission checks, and camera placement must reveal natural biomechanics without twisting the performer or skewing equipment.",
+    "File-mediated creative-agent collaboration uses a manifest-authoritative, version-pinned JSON handoff: DEDAL emits images_ready only after source-sequence validation, external agents reject stale manifests, and downstream failures return pair-specific bridge requests for narrow repair while private workspace details remain outside public Core."
   ],
   "evidence": [
     {

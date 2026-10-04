@@ -40,6 +40,22 @@ When missing/corrected keyframes materially improve control, GVD issues a struct
 ### GVD-12 Post-production handoff
 Accepted takes carry shot/take IDs, boundary/end-state/audio-tail/continuity notes into Video Post-Production; take acceptance is not final edit approval.
 
+### GVD-13 Adaptive keyframe density
+Source-image/keyframe density scales with transition complexity. A bridge that changes body position/facing, support mode, prop/load state, and camera cannot be forced into the same fixed frame count as a simple monotonic action.
+
+### GVD-14 Pairwise reachability
+Every adjacent continuity-critical anchor pair is classified as reachable, needing a bridge, or an intentional cut. Unseen major body/object/camera jumps trigger additional anchors or shot decomposition.
+
+### GVD-15 Provider-aware keyframe compilation
+A dense canonical source sequence is compiled to the provider's freshly verified control surface: ordered keyframes when supported, overlapping first/last pairs when only pairwise interpolation is supported, or extension/video-reference workflows when they preserve motion more reliably.
+
+### GVD-16 Versioned specialist-agent handoff
+When generative-video execution is delegated through a shared file workspace, the handoff pins the production manifest version, treats `images_ready` as a validated state rather than file existence, rejects stale manifests, and returns pair-specific bridge requests for narrow repair.
+
+
+### GVD-17 Progressive production-start and set handoff
+For external specialist collaboration, DEDAL announces `production_started` with planned stable sets before source generation completes. Each validated set may be handed off as `images_ready(scope=set)` for early validation, motion-spec preparation, pair-specific feedback, or an explicitly bounded pilot take. Full production generation waits for `images_ready(scope=production)` unless a pilot is intentionally requested.
+
 ## Regression failures
 
 - model-specific syntax becomes project continuity truth;
@@ -52,3 +68,9 @@ Accepted takes carry shot/take IDs, boundary/end-state/audio-tail/continuity not
 - an end-state-critical shot is repeatedly prompted text-only despite an available verified first/last-frame workflow;
 - GVD performs timeline assembly/finishing that belongs to Post-Production;
 - Post-Production rewrites motion-generation direction instead of returning a take-level issue to GVD.
+- a complex transition is represented by only a few distant still states even though adjacent states visibly jump in body pose, prop state, or camera.
+- a provider that only supports start/end control is given a dense storyboard as if it natively enforces all intermediate keyframes.
+
+- a downstream agent processes a stale manifest, or returns only vague feedback when a specific broken frame pair can be named.
+
+- a continuity-sensitive production is held until the end instead of exposing planned sets and validated set-level handoffs early enough for specialist feedback.

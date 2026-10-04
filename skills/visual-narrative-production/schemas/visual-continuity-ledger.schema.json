@@ -55,6 +55,25 @@
           },
           "authorized_transition": {
             "type": "string"
+          },
+          "load_label": {
+            "type": [
+              "string",
+              "number",
+              "null"
+            ]
+          },
+          "load_class": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "label_visibility": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "additionalProperties": true
@@ -92,6 +111,12 @@
       "items": {
         "type": "string"
       }
+    },
+    "canonical_proportion_state": {
+      "type": [
+        "object",
+        "null"
+      ]
     }
   },
   "additionalProperties": true

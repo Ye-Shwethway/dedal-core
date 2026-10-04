@@ -18,6 +18,7 @@ Before generation, fail the shot preflight if a required recurring-character pix
 - for equipment interaction, can the visible contact chain, joint bend, head/support separation, and load path be traced without inventing hidden anatomy?
 - for exercise/skilled movement, is head-neck posture natural for the phase, or was it awkwardly bowed/turned only to avoid a camera-facing face?
 - is equipment scale and support geometry believable relative to the subject and adjacent accepted frames?
+- do the body/action axis, support-equipment axis, contact map, and camera projection describe one coherent 3D setup rather than individually plausible pieces that conflict?
 
 Classify the shot as:
 - `pass` — fulfills role and continuity cleanly;
@@ -109,3 +110,8 @@ At the end of a scene block, produce a compact internal closure record:
 - workflow changes justified by evidence.
 
 Use Self-Improvement maturity levels for durable lessons rather than immediately globalizing every observation.
+
+## Support-axis admission gate
+When a support apparatus constrains the action, compare the rendered body/action axis with the support longitudinal axis and the planned contact map before promotion. A side-profile subject with a visibly skewed bench/platform is not acceptable merely because the anatomy is correct. Camera perspective may change the 2D projection, but the inferred 3D relationship must remain plausible.
+
+If biomechanics are correct but the apparatus orientation is wrong, repair the support/camera relation narrowly while preserving accepted identity, pose phase, lighting, and environment.

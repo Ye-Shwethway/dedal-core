@@ -1,5 +1,5 @@
 schema_version: 2
-version: 0.38.3
+version: 0.38.4
 profiles:
 - id: dedal-orison-image-to-video
   match:
@@ -94,6 +94,7 @@ profiles:
   - core-files.json
   - state/active-release.json
   - state/release-manifest.json
+  - state/routing-decision.schema.json
   - index/document-schema.yaml
   - docs/evolution/IMPROVEMENT_PROTOCOL.md
   execution_gates:

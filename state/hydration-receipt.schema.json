@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DEDAL session hydration receipt v3",
+  "title": "DEDAL session hydration receipt v4",
   "type": "object",
   "required": [
     "schema_version",
@@ -10,11 +10,13 @@
     "gate_checks",
     "condition_results",
     "release_sha256",
-    "task_started_at"
+    "task_started_at",
+    "task_sha256",
+    "routing_decision_sha256"
   ],
   "properties": {
     "schema_version": {
-      "const": 3
+      "const": 4
     },
     "task_id": {
       "type": "string",
@@ -138,7 +140,8 @@
         "type": "object",
         "required": [
           "applies",
-          "evidence_ref"
+          "evidence_ref",
+          "observed_at"
         ],
         "properties": {
           "applies": {
@@ -147,6 +150,10 @@
           "evidence_ref": {
             "type": "string",
             "minLength": 1
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -159,6 +166,14 @@
     "task_started_at": {
       "type": "string",
       "format": "date-time"
+    },
+    "task_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "routing_decision_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
     }
   },
   "additionalProperties": false

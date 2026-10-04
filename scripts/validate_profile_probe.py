@@ -17,12 +17,9 @@ for case in cases["cases"]:
     if result["status"] != case["status"] or result["profiles"] != case["profiles"]:
         errors.append(f"{case['id']}: {result}")
     resolved = route(case["task"], profiles)
-    if case["status"] == "matched":
-        profile = next(p for p in profiles if p["id"] == case["profiles"][0])
-        if (resolved["primary"] != profile["primary"] or resolved["supporting"] != profile.get("supporting", [])
-                or resolved["next"] != "hydrate_and_verify"):
-            errors.append(f"{case['id']}: composition {resolved}")
-    elif resolved["primary"] is not None or resolved["next"] == "hydrate_and_verify":
+    if (resolved["primary"] is not None or resolved["activation"] != "blocked_until_semantic_decision"
+            or resolved["next"] != "semantic_review"
+            or [x["profile_id"] for x in resolved["candidate_compositions"]] != case["profiles"]):
         errors.append(f"{case['id']}: forced match {resolved}")
 for case in cases["transitions"]:
     before, after = probe(case["from"], profiles), probe(case["to"], profiles)

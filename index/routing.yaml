@@ -1,5 +1,5 @@
 schema_version: 2
-version: 0.38.3
+version: 0.38.4
 policy: smallest_sufficient_set
 steps:
 - id: explicit_alias
@@ -22,6 +22,9 @@ steps:
   multiple_profiles: require_semantic_resolution
   no_profile: bounded_skill_search
   no_forced_match: true
+  lexical_matches: candidates_only
+  semantic_decision: required_before_profile_activation
+  semantic_decision_schema: state/routing-decision.schema.json
 - id: load_entrypoints
   kind: load
   scope: selected_only
@@ -41,6 +44,8 @@ precedence:
 rules:
 - id: discovery_not_activation
   statement: registry_match_does_not_count_as_skill_read
+- id: keyword_not_intent
+  statement: lexical_profile_match_is_candidate_only_and_cannot_authorize_hydration_or_execution
 - id: activation_not_readiness
   statement: skill_entrypoint_read_does_not_count_as_execution_ready_when_profile_dependencies_remain
 - id: profile_dependencies_are_mandatory

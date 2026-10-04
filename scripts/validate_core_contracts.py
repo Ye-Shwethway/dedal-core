@@ -20,7 +20,10 @@ def validate(profiles, routing, registry, document, inventory):
     select = next((s for s in routing.get("steps", []) if s.get("id") == "select"), {})
     if (select.get("max_primary") != 1 or select.get("max_supporting") != 3
             or select.get("multiple_profiles") != "require_semantic_resolution"
-            or select.get("no_forced_match") is not True):
+            or select.get("no_forced_match") is not True
+            or select.get("lexical_matches") != "candidates_only"
+            or select.get("semantic_decision") != "required_before_profile_activation"
+            or select.get("semantic_decision_schema") != "state/routing-decision.schema.json"):
         errors.append("routing_selection_policy")
     known = {"id", "match", "primary", "supporting", "required_core", "required_private", "conditional_private", "execution_gates"}
     ids = set()
@@ -75,7 +78,7 @@ def validate(profiles, routing, registry, document, inventory):
         for name, role in roles.items():
             if set(role) != {"authority", "formats"} or not isinstance(role["authority"], str) or not isinstance(role["formats"], list) or not role["formats"]:
                 errors.append(f"invalid_document_role:{name}")
-    for path in ("state/hydration-receipt.schema.json", "state/checkpoint.schema.json"):
+    for path in ("state/hydration-receipt.schema.json", "state/routing-decision.schema.json", "state/checkpoint.schema.json"):
         schema = json.loads((ROOT / path).read_text())
         if schema.get("$schema") != "https://json-schema.org/draft/2020-12/schema" or schema.get("type") != "object":
             errors.append(f"invalid_json_schema_header:{path}")

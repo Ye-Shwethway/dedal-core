@@ -31,6 +31,7 @@ paths = ["kernel/boot.yaml", "kernel/kernel.yaml", "kernel/session.yaml",
          "index/document-schema.yaml",
          "state/checkpoint.yaml", "state/current-checkpoint.json",
          "context/budgets.yaml", "state/hydration-receipt.schema.json",
+         "state/routing-decision.schema.json",
          "core-files.json"]
 obj = {p: load(p) for p in paths}
 boot, kernel, session = (obj[p] for p in ("kernel/boot.yaml", "kernel/kernel.yaml", "kernel/session.yaml"))
@@ -58,8 +59,12 @@ if not any(x.get("id") == "read_checkpoint" and x.get("required") for x in sessi
     errors.append("session_missing_checkpoint")
 if session.get("execution_readiness", {}).get("no_receipt") != "fail_closed":
     errors.append("execution_receipt_guard_missing")
+if session.get("execution_readiness", {}).get("route_decision_schema") != "state/routing-decision.schema.json":
+    errors.append("session_route_decision_pointer_drift")
 if manifest.get("hydration_receipt_schema") != "state/hydration-receipt.schema.json":
     errors.append("receipt_schema_pointer_drift")
+if manifest.get("routing_decision_schema") != "state/routing-decision.schema.json":
+    errors.append("route_decision_schema_pointer_drift")
 if manifest.get("document_schema") != "index/document-schema.yaml":
     errors.append("document_schema_pointer_drift")
 if manifest.get("active_release") != "state/active-release.json" or manifest.get("release_manifest") != "state/release-manifest.json":

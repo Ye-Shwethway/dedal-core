@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "core_version": "0.38.3",
+  "core_version": "0.38.4",
   "files": [
     ".github/workflows/repo-integrity.yml",
     ".github/workflows/runtime-contracts.yml",
@@ -161,6 +161,8 @@
     "scripts/validate_release_manifest.py",
     "scripts/validate_release_manifest_negative.py",
     "scripts/validate_reliability_engineering_routing.py",
+    "scripts/validate_route_decision.py",
+    "scripts/validate_route_decision_negative.py",
     "scripts/validate_runtime_contracts.py",
     "scripts/validate_self_improvement_closure.py",
     "scripts/validate_self_improvement_contract.py",
@@ -437,6 +439,7 @@
     "state/hydration-receipt.schema.json",
     "state/release-manifest.json",
     "state/routing-boundaries.json",
+    "state/routing-decision.schema.json",
     "state/skill-consolidation.json",
     "validators/validate_core.py"
   ]

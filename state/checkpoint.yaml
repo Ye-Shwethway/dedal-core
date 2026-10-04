@@ -1,5 +1,5 @@
-version: 0.38.3
-date: '2026-10-04'
+version: 0.38.4
+date: '2026-10-05'
 authority: library_direct_tree
 accepted:
   assistant_name: DEDAL
@@ -11,6 +11,9 @@ accepted:
   execution_readiness: requires_profile_hydration_with_traceable_receipt_and_direct_tool_evidence
   migration_status: direct_tree_verified
 decisions:
+- id: task_bound_semantic_route
+  value: Lexical matches are candidates only; profile execution requires a task-bound semantic decision and receipt chronology.
+  date: '2026-10-05'
 - id: deterministic_profile_composition
   value: Each matched profile has one primary and at most three supporting skills; ambiguous or unresolved lexical routes require semantic review.
   date: '2026-10-04'

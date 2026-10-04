@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Resolve an explicit task profile without guessing on ambiguity or semantic gaps."""
+"""Propose lexical candidates; a separate task-bound semantic decision activates one."""
 import argparse
 import json
 from pathlib import Path
@@ -13,16 +13,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def route(task, profiles):
     result = probe(task, profiles)
-    if result["status"] != "matched":
-        return {**result, "primary": None, "supporting": [],
-                "next": "semantic_review" if result["status"] == "ambiguous" else "bounded_skill_search_or_semantic_review"}
-    profile = next(p for p in profiles if p["id"] == result["profiles"][0])
-    return {**result, "primary": profile["primary"],
-            "supporting": profile.get("supporting", []),
-            "required_core": profile.get("required_core", []),
-            "required_private": profile.get("required_private", []),
-            "execution_gates": profile.get("execution_gates", []),
-            "next": "hydrate_and_verify"}
+    candidates = [p for p in profiles if p["id"] in result["profiles"]]
+    return {**result, "candidate_compositions": [
+                {"profile_id": p["id"], "primary": p["primary"], "supporting": p.get("supporting", [])}
+                for p in candidates],
+            "primary": None, "supporting": [], "activation": "blocked_until_semantic_decision",
+            "next": "semantic_review"}
 
 
 if __name__ == "__main__":

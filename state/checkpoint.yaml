@@ -1,4 +1,4 @@
-version: 0.39.0
+version: 0.39.1
 date: '2026-10-05'
 authority: library_direct_tree
 accepted:
@@ -11,6 +11,11 @@ accepted:
   execution_readiness: phase_scoped_receipt_coverage_plus_direct_tool_evidence
   migration_status: direct_tree_verified
 decisions:
+- id: creative_source_production
+  value: Scene-specific causal and physical events, evidence-aware source QA and source-only
+    motion pair decisions; offline planning evidence does not certify rendered realism
+    or video quality.
+  date: '2026-10-05'
 - id: refinement_waves_b_c
   value: Typed local evidence properties, explicit read reuse, seven risk-relevant
     profiles, lifecycle filtering, resumable publication requests and observable context

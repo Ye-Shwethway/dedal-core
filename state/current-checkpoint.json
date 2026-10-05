@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.39.0",
+  "version": "0.39.1",
   "accepted_state": [
+    "DEDAL 0.39.1 retains creative skill ownership while adding causal scene design, event-based source planning, observed evidence and explicit source-only motion handoff; media outcomes remain unmeasured.",
     "DEDAL 0.38.4 treats lexical routing as candidates only; a task-bound semantic decision is required for profile activation, and receipt v4 checks route and read-before-gate chronology.",
     "DEDAL 0.38.3 uses one primary plus bounded supporting skills per task profile, a fail-closed direct-tree release digest manifest, and release-bound receipt v3 coverage; semantic ambiguity remains for judgment.",
     "DEDAL 0.38.3 classifies every Core file through index/document-schema.yaml; machine contracts are normative, active SKILL.md instruction bodies retain authority, and explanatory Markdown is supporting context.",

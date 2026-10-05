@@ -18,3 +18,6 @@ Story Weaver is a DEDAL-native narrative faculty created to keep fictional canon
 - generated motion direction stays with Generative Video Direction; editing/assembly stays with Video Post-Production;
 - factual claims use Research/domain authority;
 - private story canon stays in project/private state, not public Core.
+
+## 2026-10-05 production refinement
+Existing ownership retained; `causal-scene-design.md` converts broad principles into scene-specific causal/physical decisions and evidence-aware source handoffs. Offline fresh-context planning trials support diagnosis only; actual image realism and generated motion remain unmeasured. No private production assets or character canon are included.

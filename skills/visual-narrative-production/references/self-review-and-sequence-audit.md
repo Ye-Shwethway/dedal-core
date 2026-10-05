@@ -4,6 +4,8 @@
 Reduce Creator correction burden by making Visual Narrative Production inspect its own outputs and sequence behavior before asking the Creator to act as the primary QA loop.
 
 ## Local post-render self-review
+
+For interaction sequences and motion sources, use `source-production-design.md` to compare intended versus observed state. Name the visible landmark/relation supporting each material judgment, and use `not_observable` when required evidence is hidden. Do not infer a successful grip/contact from a caption or overlap alone. Missing required evidence needs reframing or another anchor; it cannot be recorded as a pass. In source-only work, rendered still QA never proves motion QA or external acknowledgement.
 Before generation, fail the shot preflight if a required recurring-character pixel reference has not actually been bound to the execution surface. After every generated or edited shot, inspect the rendered image before presenting or promoting it. In addition to ordinary visual QA, ask:
 - were all required identity/physique/grooming pixel references actually bound to the generation call, rather than merely read or described?
 - did this image actually fulfill the planned shot role and beat, or only produce a generally attractive frame?

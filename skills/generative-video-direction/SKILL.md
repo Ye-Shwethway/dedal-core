@@ -42,6 +42,8 @@ It does **not** own fiction canon (`story-weaver`), canonical still/keyframe pro
 
 ## Default workflow
 
+**Scope first:** if DEDAL has no video execution surface or the task ends at source images, load `references/source-only-motion-readiness.md` and use its source-only path instead of steps for generating/accepting takes. Plans without pixels remain planned with QA pending. Source readiness, sent handoff, external acknowledgement, and verified motion are distinct evidence states.
+
 1. **Receive authoritative state.** Load the relevant Story Weaver handoff, accepted Visual Narrative Production anchors/keyframes/continuity state, or user-provided media. For external-agent productions, also load the live manifest and handoff protocol.
 2. **Declare production and sets when collaborating externally.** Create/pin the manifest skeleton, define stable set IDs/arcs/phases, and emit `production_started` before source generation proceeds.
 4. **Define the temporal objective.** What changes during this shot? What must be true at the start and end? What story/performance information must land?
@@ -84,6 +86,7 @@ For each shot, produce or persist as needed:
 
 ## Progressive references
 
+- `references/source-only-motion-readiness.md`
 - `references/motion-shot-design.md`
 - `references/temporal-continuity-ledger.md`
 - `references/reference-role-and-provider-capability.md`

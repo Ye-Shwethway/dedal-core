@@ -15,3 +15,9 @@
 - prop/location/time contradictions passed downstream as if coherent;
 - visual handoff is just a giant image prompt with no narrative-state contract;
 - line-editing or image-generation scope is absorbed as permanent Story Weaver ownership.
+
+## Causal scene design regression cases
+- A courier with a case and lamp in occupied hands must stage concealment/support before knocking; an unexplained third hand fails.
+- A familiar offscreen voice may motivate a choice while its identity remains withheld; a nameplate/portrait or invented character knowledge fails.
+- Ask why the character rejects an easier option and how a chosen action changes the next constraint. Quiet scenes need not acquire artificial reversals.
+- Required source: `skills/story-weaver/references/causal-scene-design.md`.

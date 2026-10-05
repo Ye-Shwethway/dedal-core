@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "scope": "controlled_fixture_outcomes_not_fresh_model_runs",
+  "cases": [
+    {
+      "id": "boot-valid-artifacts",
+      "family": "boot-routing-state",
+      "method": "receipt",
+      "expected": true,
+      "variant": "valid"
+    },
+    {
+      "id": "boot-early-hydration",
+      "family": "boot-routing-state",
+      "method": "receipt",
+      "expected": false,
+      "variant": "early_hydration"
+    },
+    {
+      "id": "boot-compact-plan",
+      "family": "boot-routing-state",
+      "method": "context",
+      "expected": true
+    },
+    {
+      "id": "report-values-roundtrip",
+      "family": "stock-report",
+      "method": "values_export",
+      "expected": true,
+      "input": {
+        "source": {
+          "columns": [
+            "Row",
+            "Count"
+          ],
+          "rows": [
+            [
+              "OPD",
+              3
+            ],
+            [
+              "Psychiatry",
+              1
+            ]
+          ]
+        },
+        "exported": {
+          "columns": [
+            "Row",
+            "Count"
+          ],
+          "rows": [
+            [
+              "OPD",
+              3
+            ],
+            [
+              "Psychiatry",
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "report-formula-rejected",
+      "family": "stock-report",
+      "method": "values_export",
+      "expected": false,
+      "input": {
+        "source": {
+          "columns": [
+            "Total"
+          ],
+          "rows": [
+            [
+              "=SUM(A1:A2)"
+            ]
+          ]
+        },
+        "exported": {
+          "columns": [
+            "Total"
+          ],
+          "rows": [
+            [
+              "=SUM(A1:A2)"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "stock-wrong-lot-rejected",
+      "family": "stock-report",
+      "method": "stock_delta",
+      "expected": false,
+      "input": {
+        "before": {
+          "lot-A": 10,
+          "lot-B": 20
+        },
+        "after": {
+          "lot-A": 10,
+          "lot-B": 18
+        },
+        "operation": {
+          "lot_id": "lot-A",
+          "quantity": 2
+        }
+      }
+    },
+    {
+      "id": "publishing-missing-evidence",
+      "family": "publishing-retry",
+      "method": "receipt",
+      "expected": false,
+      "variant": "missing_evidence"
+    },
+    {
+      "id": "publishing-corrupt-evidence",
+      "family": "publishing-retry",
+      "method": "receipt",
+      "expected": false,
+      "variant": "digest_corruption"
+    },
+    {
+      "id": "publishing-unknown-retry-blocked",
+      "family": "publishing-retry",
+      "method": "retry_allowed",
+      "expected": false,
+      "input": {
+        "journal": [
+          {
+            "operation_key": "reply-1",
+            "status": "unknown"
+          }
+        ],
+        "operation_key": "reply-1"
+      }
+    },
+    {
+      "id": "visual-complete-handoff",
+      "family": "visual-orison",
+      "method": "handoff",
+      "expected": true,
+      "input": {
+        "frames": [
+          {
+            "id": "shot1",
+            "path": "frame.bin",
+            "accepted": true,
+            "sha256": "229b4730aa201e088805fc0760518380d967497f908aad23ca44f23819b85307"
+          }
+        ]
+      }
+    },
+    {
+      "id": "visual-duplicate-frame-rejected",
+      "family": "visual-orison",
+      "method": "handoff",
+      "expected": false,
+      "input": {
+        "frames": [
+          {
+            "id": "shot1",
+            "path": "frame.bin",
+            "accepted": true,
+            "sha256": "229b4730aa201e088805fc0760518380d967497f908aad23ca44f23819b85307"
+          },
+          {
+            "id": "shot2",
+            "path": "frame.bin",
+            "accepted": true,
+            "sha256": "229b4730aa201e088805fc0760518380d967497f908aad23ca44f23819b85307"
+          }
+        ]
+      }
+    },
+    {
+      "id": "visual-missing-frame-rejected",
+      "family": "visual-orison",
+      "method": "handoff",
+      "expected": false,
+      "input": {
+        "frames": [
+          {
+            "id": "shot1",
+            "path": "missing.bin",
+            "accepted": true,
+            "sha256": "229b4730aa201e088805fc0760518380d967497f908aad23ca44f23819b85307"
+          }
+        ]
+      }
+    }
+  ],
+  "artifacts": {
+    "frame.bin": "standalone image-byte fixture; no visual quality inference"
+  },
+  "protected_policy": "Freeze cases and grader outside candidate; do not change expected outcomes to match implementation."
+}

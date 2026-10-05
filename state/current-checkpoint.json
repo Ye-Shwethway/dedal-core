@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.38.4",
+  "version": "0.39.0",
   "accepted_state": [
     "DEDAL 0.38.4 treats lexical routing as candidates only; a task-bound semantic decision is required for profile activation, and receipt v4 checks route and read-before-gate chronology.",
     "DEDAL 0.38.3 uses one primary plus bounded supporting skills per task profile, a fail-closed direct-tree release digest manifest, and release-bound receipt v3 coverage; semantic ambiguity remains for judgment.",
@@ -47,13 +47,15 @@
     "Visual Narrative Production uses role-specific reference authority, structured shot specs and Visual Continuity Ledgers so identity/physique/performance, environment, camera-axis/screen-direction, lighting, props and scene-state deltas are not left to prompt memory.",
     "Visual Narrative Production action/interaction QA treats limb count, joint mechanics, balance, grip, load, object contact/intersection and force direction as explicit defect classes, and prompt neutralization is semantic clarification only, never policy evasion.",
     "Visual Narrative Production now uses a compact scene card and preflight/render/pixel-review/verified-delivery gates; tool capability and repeated-failure routing are explicit, while contract validation remains distinct from outcome evidence.",
-    "Visual Narrative Production successive mini-arcs use a local continuity envelope across 3–4 separate full-frame outputs, prioritize natural biomechanics and equipment geometry, and preserve accepted local state during narrow retries.",
+    "Visual Narrative Production successive mini-arcs use a local continuity envelope across 3\u20134 separate full-frame outputs, prioritize natural biomechanics and equipment geometry, and preserve accepted local state during narrow retries.",
     "Visual Narrative Production now enforces persistent object count/morphology/spatial-state continuity and proficiency-aware movement-form realism across successive stills.",
     "Generative Video Direction independently owns provider-neutral temporal shot design, reference-role/provider strategy, generation-contract compilation, generated-take QA and targeted repair.",
     "Canonical video-production is renamed/refocused to video-post-production; video-production and video-editing remain compatibility aliases, and post-production owns existing-media edit/assembly/finish/delivery rather than generative motion prompting.",
     "The creative moving-image bridge is Story Weaver -> Visual Narrative Production -> Generative Video Direction -> Video Post-Production, with a GVD -> VNP keyframe/reference return path when motion control needs a stronger visual state.",
     "Visual Narrative Production now treats performer, support apparatus, and camera as one geometric system: support-axis alignment and contact-map coherence are explicit admission checks, and camera placement must reveal natural biomechanics without twisting the performer or skewing equipment.",
-    "File-mediated creative-agent collaboration uses a manifest-authoritative, version-pinned JSON handoff: DEDAL emits images_ready only after source-sequence validation, external agents reject stale manifests, and downstream failures return pair-specific bridge requests for narrow repair while private workspace details remain outside public Core."
+    "File-mediated creative-agent collaboration uses a manifest-authoritative, version-pinned JSON handoff: DEDAL emits images_ready only after source-sequence validation, external agents reject stale manifests, and downstream failures return pair-specific bridge requests for narrow repair while private workspace details remain outside public Core.",
+    "Core 0.38.5 unifies essential readiness checks, supports explicit unavailable Library versions, and scopes gates to operation/phase; receipts remain coverage evidence, not independent source or outcome proof.",
+    "Wave B/C: typed evidence properties, phase/read reuse, compact verified loading and publication reconciliation; controlled outcome evaluation with explicit evidence boundaries."
   ],
   "evidence": [
     {
@@ -191,7 +193,9 @@
     "Google Drive folder names and IDs are operational/private state; public Core records only the generic lifecycle and must resolve exact IDs live before moves.",
     "Self-Improvement v0.32.1 has external-method research plus contract/replay evidence, but long-run reduction in recurrence/rework remains future outcome evidence rather than a claimed result.",
     "Facebook Messenger fresh-inbound synchronization is not currently live-verified on the tested connector: old thread history was readable but fresh inbound state was absent and a send was policy-blocked as outside the allowed window; Page content operations remain independently verified.",
-    "Visual Narrative Production 0.35.5 has contract validation plus one representative successful physical-action mini-arc; broader scene classes and lower-model transfer remain unproven."
+    "Visual Narrative Production 0.35.5 has contract validation plus one representative successful physical-action mini-arc; broader scene classes and lower-model transfer remain unproven.",
+    "Host-authenticated event capture/interception is unavailable; external judgments require authoritative tools or Creator acceptance.",
+    "Controlled replay evaluation does not establish general model quality, visual identity gains or live scheduled-service reliability."
   ],
   "next_executable_step": {
     "id": "DEDAL-GVD-OUTCOME-EVAL",

@@ -1,4 +1,4 @@
-version: 0.38.4
+version: 0.39.0
 date: '2026-10-05'
 authority: library_direct_tree
 accepted:
@@ -8,20 +8,35 @@ accepted:
   external_runtime_mcp: retired_not_used
   state_model: reconstruct_from_artifacts_not_chat_memory
   routing: smallest_sufficient_set_plus_task_profile_dependencies
-  execution_readiness: requires_profile_hydration_with_traceable_receipt_and_direct_tool_evidence
+  execution_readiness: phase_scoped_receipt_coverage_plus_direct_tool_evidence
   migration_status: direct_tree_verified
 decisions:
+- id: refinement_waves_b_c
+  value: Typed local evidence properties, explicit read reuse, seven risk-relevant
+    profiles, lifecycle filtering, resumable publication requests and observable context
+    measurement; host authentication and general model outcome gains are not claimed.
+  date: '2026-10-05'
+- id: refinement_wave_a
+  value: Essential boot/session validation includes document and routing contracts;
+    phase receipts support observed null versions without invented identifiers; audit
+    and closure gates are separate.
+  date: '2026-10-05'
 - id: task_bound_semantic_route
-  value: Lexical matches are candidates only; profile execution requires a task-bound semantic decision and receipt chronology.
+  value: Lexical matches are candidates only; profile execution requires a task-bound
+    semantic decision and receipt chronology.
   date: '2026-10-05'
 - id: deterministic_profile_composition
-  value: Each matched profile has one primary and at most three supporting skills; ambiguous or unresolved lexical routes require semantic review.
+  value: Each matched profile has one primary and at most three supporting skills;
+    ambiguous or unresolved lexical routes require semantic review.
   date: '2026-10-04'
 - id: direct_release_integrity
-  value: A last-written active pointer identifies a digest manifest; loaded Core files must match it, and receipt coverage is bound to its release id.
+  value: A last-written active pointer identifies a digest manifest; loaded Core files
+    must match it, and receipt coverage is bound to its release id.
   date: '2026-10-04'
 - id: document_roles
-  value: Every inventoried file has one declared role; YAML/JSON contracts are normative, active SKILL.md bodies retain instruction authority, other Markdown is supporting context.
+  value: Every inventoried file has one declared role; YAML/JSON contracts are normative,
+    active SKILL.md bodies retain instruction authority, other Markdown is supporting
+    context.
   date: '2026-10-04'
 - id: library_only_boot
   value: /DEDAL/core is the sole Core boot authority; archives are historical transport
@@ -34,11 +49,14 @@ decisions:
   value: new sessions rebuild accepted state from checkpoint and authoritative files
   date: '2026-10-04'
 - id: contract_format
-  value: machine-readable YAML and JSON are normative; Markdown is explanatory or skill content
+  value: machine-readable YAML and JSON are normative; Markdown is explanatory or
+    skill content
   date: '2026-10-04'
 - id: traceable_preflight
-  value: profile receipt must identify task, source read references, conditional branches, and gate evidence; direct tool readback remains necessary
+  value: profile receipt must identify task, source read references, conditional branches,
+    and gate evidence; direct tool readback remains necessary
   date: '2026-10-04'
 - id: lexical_probe_boundary
-  value: deterministic profile probe flags explicit matches and ambiguity; unresolved tasks require semantic routing judgment
+  value: deterministic profile probe flags explicit matches and ambiguity; unresolved
+    tasks require semantic routing judgment
   date: '2026-10-04'

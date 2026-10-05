@@ -1,5 +1,5 @@
-schema_version: 2
-version: 0.38.4
+schema_version: 4
+version: 0.39.0
 profiles:
 - id: dedal-orison-image-to-video
   match:
@@ -37,11 +37,21 @@ profiles:
     - /DEDAL/private-overlay/profiles/Darian/visual-reference-policy.md
     - /DEDAL/private-overlay/profiles/Darian/face-references/
     - /DEDAL/private-overlay/profiles/Darian/physique-references/
-  execution_gates:
+  execution_gates: &id001
   - accepted_production_pixels_available
   - canonical_identity_pixels_bindable
   - pairwise_reachability_plan_complete
   - manifest_truth_matches_visual_state
+  operations:
+    audit:
+    - inspect
+    handoff:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute: *id001
+    close: *id001
 - id: recurring-character-image-sequence
   match:
     any:
@@ -58,10 +68,22 @@ profiles:
   - skills/visual-narrative-production/references/visual-continuity-ledger.md
   - skills/visual-narrative-production/references/drift-detection-and-visual-qa.md
   - skills/visual-narrative-production/references/self-review-and-sequence-audit.md
-  execution_gates:
+  execution_gates: &id002
   - canonical_pixels_bindable
   - continuity_anchor_available_or_explicit_new_scene
   - rendered_qa_required
+  operations:
+    audit:
+    - inspect
+    produce:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute:
+    - canonical_pixels_bindable
+    - continuity_anchor_available_or_explicit_new_scene
+    close: *id002
 - id: core-architecture-change
   match:
     any:
@@ -91,13 +113,173 @@ profiles:
   - index/task-profiles.yaml
   - state/checkpoint.yaml
   - core-manifest.yaml
-  - core-files.json
   - state/active-release.json
-  - state/release-manifest.json
-  - state/routing-decision.schema.json
-  - index/document-schema.yaml
   - docs/evolution/IMPROVEMENT_PROTOCOL.md
-  execution_gates:
+  execution_gates: &id003
   - validator_green
   - checkpoint_updated
   - rollback_path_recorded
+  operations:
+    audit:
+    - inspect
+    change:
+    - inspect
+    - execute
+    - close
+  phase_gates:
+    inspect:
+    - validator_green
+    execute:
+    - validator_green
+    - rollback_path_recorded
+    close: *id003
+  required_machine:
+  - core-files.json
+  - state/release-manifest.json
+  - state/hydration-receipt.schema.json
+  - state/routing-decision.schema.json
+  - index/document-schema.yaml
+- id: stock-mutation
+  match:
+    any:
+    - stock deduction
+    - month close
+    - month open
+    - cms supply
+    - stock mutation
+  primary: medicine-store-assistant
+  required_core:
+  - skills/medicine-store-assistant/SKILL.md
+  - skills/medicine-store-assistant/references/daily-usage.md
+  - skills/medicine-store-assistant/references/month-close-archive-and-cleanup.md
+  - skills/medicine-store-assistant/references/received-stock-operational-workflow.md
+  execution_gates:
+  - creator_authority_confirmed
+  - live_stock_state_read
+  - lot_identity_and_quantity_validated
+  - duplicate_operation_excluded
+  - stock_write_readback_confirmed
+  - stock_checkpoint_recorded
+  operations:
+    audit:
+    - inspect
+    apply:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute:
+    - creator_authority_confirmed
+    - live_stock_state_read
+    - lot_identity_and_quantity_validated
+    - duplicate_operation_excluded
+    close:
+    - creator_authority_confirmed
+    - live_stock_state_read
+    - lot_identity_and_quantity_validated
+    - duplicate_operation_excluded
+    - stock_write_readback_confirmed
+    - stock_checkpoint_recorded
+- id: report-export
+  match:
+    any:
+    - patient report export
+    - monthly report export
+    - values only report
+    - spreadsheet export
+  primary: patient-report-assistant
+  required_core:
+  - skills/patient-report-assistant/SKILL.md
+  - skills/patient-report-assistant/references/monthly-report-validation.md
+  - skills/patient-report-assistant/references/workbook-layout.md
+  execution_gates:
+  - row_anchors_and_totals_validated
+  - export_scope_confirmed
+  - values_only_export_verified
+  - rendered_report_reviewed
+  operations:
+    audit:
+    - inspect
+    export:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute:
+    - row_anchors_and_totals_validated
+    - export_scope_confirmed
+    close:
+    - row_anchors_and_totals_validated
+    - export_scope_confirmed
+    - values_only_export_verified
+    - rendered_report_reviewed
+- id: publishing-write
+  match:
+    any:
+    - comment reply
+    - youtube upload
+    - publish video
+    - video publishing
+  primary: youtube-publishing
+  required_core:
+  - skills/youtube-publishing/SKILL.md
+  - skills/youtube-publishing/references/mutation-hardening-and-recovery.md
+  - skills/youtube-publishing/references/comment-engagement.md
+  execution_gates:
+  - creator_publishing_authority_confirmed
+  - target_identity_verified
+  - existing_result_or_idempotency_checked
+  - published_result_readback_confirmed
+  operations:
+    audit:
+    - inspect
+    publish:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute:
+    - creator_publishing_authority_confirmed
+    - target_identity_verified
+    - existing_result_or_idempotency_checked
+    close:
+    - creator_publishing_authority_confirmed
+    - target_identity_verified
+    - existing_result_or_idempotency_checked
+    - published_result_readback_confirmed
+- id: service-deployment
+  match:
+    any:
+    - deploy service
+    - production deployment
+    - worker deployment
+    - app release
+  primary: software-development
+  required_core:
+  - skills/software-development/SKILL.md
+  - skills/software-development/references/testing-and-seams.md
+  - skills/software-development/references/multi-session-delivery.md
+  execution_gates:
+  - creator_deployment_authority_confirmed
+  - candidate_tests_pass
+  - rollback_target_recorded
+  - live_deployment_readback_confirmed
+  - source_revision_reconciled
+  operations:
+    audit:
+    - inspect
+    deploy:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute:
+    - creator_deployment_authority_confirmed
+    - candidate_tests_pass
+    - rollback_target_recorded
+    close:
+    - creator_deployment_authority_confirmed
+    - candidate_tests_pass
+    - rollback_target_recorded
+    - live_deployment_readback_confirmed
+    - source_revision_reconciled

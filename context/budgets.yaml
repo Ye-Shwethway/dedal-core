@@ -1,4 +1,4 @@
-version: 0.38.4
+version: 0.39.0
 budgets:
   boot_contract_tokens: 1400
   checkpoint_tokens: 2200
@@ -12,3 +12,13 @@ rules:
   statement: required_task_profile_dependencies_may_exceed_general_progressive_disclosure_budget_when_execution_correctness_depends_on_them
 - id: drop_stale_tool_payloads
   statement: retain_compact_evidence_identity_not_raw_tool_noise
+observable_limits:
+  profile_content_bytes: 70000
+  measurement: full_UTF8_content_bytes_plus_serialized_compact_plan_bytes
+  token_count: unavailable_without_host_tokenizer
+  cost: unavailable_without_host_usage
+reuse:
+  scope: same_task_and_active_release
+  required: explicit_reused_read_activation_after_route_and_digest_identity_match
+  volatile_private_state: refresh_from_owner_before_side_effects
+  cross_chat_cache: not_claimed

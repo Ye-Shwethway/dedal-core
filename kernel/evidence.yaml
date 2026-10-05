@@ -1,0 +1,22 @@
+version: 0.39.0
+schema_version: 1
+levels: [declared, observed, local_property_verified, externally_accepted]
+receipt_schema: state/hydration-receipt.schema.json
+local_verifier: scripts/evidence.py
+methods:
+  command: rerun_allowlisted_pure_validator_and_require_exit_zero
+  artifact: resolve_within_artifact_root_verify_complete_bytes_then_check_owned_property
+  authoritative_readback: requires_live_owner_result_and_reasoning_acceptance
+  visual_review: requires_rendered_pixels_and_calibrated_reviewer
+  creator_acceptance: requires_actual_creator_instruction_never_self_authored_json
+rules:
+  - nonempty_reference_is_coverage_only
+  - local_artifacts_do_not_authenticate_tool_origin_or_prove_model_content_use
+  - incomplete_or_missing_or_escaped_artifacts_fail_closed
+  - external_judgment_cannot_be_promoted_by_local_json
+  - boot_and_discovery_reads_may_precede_routing
+  - profile_hydration_follows_semantic_route_or_explicit_current_read_reactivation
+  - same_task_release_digest_and_identity_required_for_reuse
+  - volatile_private_service_state_requires_fresh_owner_readback
+host_event_adapter: unavailable
+host_dispatch_interception: unavailable

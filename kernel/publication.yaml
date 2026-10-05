@@ -1,0 +1,22 @@
+version: 0.39.0
+schema_version: 1
+authority: single_direct_library_core_tree
+coordinator: scripts/publication.py
+private_journal: task_scoped_under_private_overlay_research
+states: [update_in_progress, readback_required, readback_required_after_failure, conflict, bytes_complete, accepted]
+stage_order: [source, manifest, pointer]
+rules:
+  - freeze_candidate_bytes_and_prior_identities_before_mutation
+  - persist_private_journal_before_first_write_and_after_each_transport_result
+  - obtain_fresh_unique_path_identity_version_and_full_content_digest_snapshot
+  - reconcile_actual_bytes_not_only_recorded_success
+  - emit_pointer_request_only_after_all_prior_stage_bytes_match_target
+  - stop_on_per_item_failure_or_unknown_outcome_never_blind_retry
+  - unknown_success_create_requires_unique_identity_reconciliation_before_adoption
+  - guard_concrete_versions_never_invent_or_remove_guard
+  - accepted_requires_full_inventory_readback_essential_validation_and_checkpoint_reconciliation
+  - rollback_prior_sources_then_manifest_then_pointer_archive_new_nodes_by_identity
+atomic_remote_transaction: false
+continuous_boot_availability_during_update: not_guaranteed_fail_closed
+transport_adapter: current_library_skill_ordered_upload_helper
+snapshot_adapter: authoritative_library_metadata_plus_materialized_complete_bytes

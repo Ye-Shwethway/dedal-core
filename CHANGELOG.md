@@ -1,3 +1,19 @@
+# 0.39.0 — Evidence, recovery and compact disclosure
+
+- Receipt v6 classifies boot, discovery, hydration and explicitly reactivated reads; local artifact verification is distinct from coverage and external judgment.
+- Profiles v4 adds stock mutation, report export, publishing write and deployment operation gates; complete machine metadata stays deterministic while mandatory instruction bodies remain full reads.
+- Adds resumable publication reconciliation, conservative lifecycle selection, observable context plans and controlled outcome comparison checks.
+- Does not claim host event authentication, remote atomic publication, cross-chat caching or general model performance gains.
+
+# 0.38.5 — Refinement Wave A
+
+- Essential boot/session validation now runs document/schema and routing/profile checks as well as release integrity.
+- Receipt v5 uses explicit operation and phase, and supports unavailable Library version metadata without fabricated versions.
+- Audit, execution and closure gates are separated; checkpoints are closure postconditions for Core changes.
+- Completion evidence remains reasoning enforced in ordinary Chat; receipt coverage is not independent proof.
+- Private current composition guidance marks retired Runtime procedures as historical.
+- Outcome improvement, evidence resolution and publication recovery remain separate follow-up work.
+
 ## 0.38.4 — Task-bound semantic routing and receipt chronology
 
 - Treat lexical profile hits as candidates only, including negated or quoted task text. A task-bound semantic decision must select, exclude, or defer a profile before execution.

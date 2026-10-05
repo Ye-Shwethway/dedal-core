@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DEDAL session hydration receipt v4",
+  "title": "DEDAL phase hydration receipt v6",
   "type": "object",
   "required": [
     "schema_version",
@@ -12,11 +12,15 @@
     "release_sha256",
     "task_started_at",
     "task_sha256",
-    "routing_decision_sha256"
+    "routing_decision_sha256",
+    "operation",
+    "phase",
+    "evidence_mode",
+    "evidence_bundle_sha256"
   ],
   "properties": {
     "schema_version": {
-      "const": 4
+      "const": 6
     },
     "task_id": {
       "type": "string",
@@ -34,7 +38,8 @@
           "path",
           "kind",
           "read_ref",
-          "observed_at"
+          "observed_at",
+          "read_class"
         ],
         "properties": {
           "path": {
@@ -72,6 +77,28 @@
           "content_sha256": {
             "type": "string",
             "pattern": "^[0-9a-f]{64}$"
+          },
+          "version_status": {
+            "enum": [
+              "available",
+              "unavailable"
+            ]
+          },
+          "read_class": {
+            "enum": [
+              "boot",
+              "discovery",
+              "hydration",
+              "reused"
+            ]
+          },
+          "activated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reuse_reason": {
+            "type": "string",
+            "minLength": 1
           }
         },
         "additionalProperties": false,
@@ -91,14 +118,50 @@
               "required": [
                 "library_file_id",
                 "version_id",
+                "version_status",
                 "content_sha256"
               ],
-              "properties": {
-                "version_id": {
-                  "type": "string",
-                  "minLength": 1
+              "oneOf": [
+                {
+                  "properties": {
+                    "version_status": {
+                      "const": "available"
+                    },
+                    "version_id": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "version_status": {
+                      "const": "unavailable"
+                    },
+                    "version_id": {
+                      "type": "null"
+                    }
+                  }
                 }
-              }
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "read_class": {
+                  "const": "reused"
+                }
+              },
+              "required": [
+                "read_class"
+              ]
+            },
+            "then": {
+              "required": [
+                "activated_at",
+                "reuse_reason"
+              ]
             }
           }
         ]
@@ -174,7 +237,57 @@
     "routing_decision_sha256": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$"
+    },
+    "operation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase": {
+      "enum": [
+        "inspect",
+        "execute",
+        "close"
+      ]
+    },
+    "evidence_mode": {
+      "enum": [
+        "coverage",
+        "local_artifacts"
+      ]
+    },
+    "evidence_bundle_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evidence_mode": {
+            "const": "coverage"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence_bundle_sha256": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "evidence_bundle_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
+  ]
 }

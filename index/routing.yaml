@@ -1,5 +1,5 @@
 schema_version: 2
-version: 0.38.4
+version: 0.39.0
 policy: smallest_sufficient_set
 steps:
 - id: explicit_alias

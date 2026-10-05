@@ -1,3 +1,10 @@
+# 0.39.0 — Evidence, recovery and compact disclosure
+
+- Receipt v6 classifies boot, discovery, hydration and explicitly reactivated reads; local artifact verification is distinct from coverage and external judgment.
+- Profiles v4 adds stock mutation, report export, publishing write and deployment operation gates; complete machine metadata stays deterministic while mandatory instruction bodies remain full reads.
+- Adds resumable publication reconciliation, conservative lifecycle selection, observable context plans and controlled outcome comparison checks.
+- Does not claim host event authentication, remote atomic publication, cross-chat caching or general model performance gains.
+
 # 0.38.5 — Refinement Wave A
 
 - Essential boot/session validation now runs document/schema and routing/profile checks as well as release integrity.

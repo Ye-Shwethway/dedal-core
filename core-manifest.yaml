@@ -1,5 +1,5 @@
 schema_version: 1
-core_version: 0.38.5
+core_version: 0.39.0
 authority: library_direct_tree
 canonical_root: /DEDAL/core
 boot_entry: kernel/boot.yaml
@@ -24,4 +24,7 @@ archive_boot: forbidden
 external_runtime_mcp: retired
 github_role: public_history_and_sync_upstream_not_runtime_dependency
 recorded_github_base: b34d3b40246f62bb20b41da808ec0b8cb0f67790
-generated_at: '2026-10-05T00:33:48+06:30'
+generated_at: '2026-10-05T16:30:00+06:30'
+evidence_contract: kernel/evidence.yaml
+publication_contract: kernel/publication.yaml
+compact_loader: scripts/context_plan.py

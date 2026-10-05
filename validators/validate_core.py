@@ -25,7 +25,7 @@ version = version_file.read_text().strip() if version_file.is_file() else None
 if not version:
     errors.append("missing:VERSION")
 manifest = load("core-manifest.yaml")
-paths = ["kernel/boot.yaml", "kernel/kernel.yaml", "kernel/session.yaml",
+paths = ["kernel/evidence.yaml", "kernel/publication.yaml", "kernel/boot.yaml", "kernel/kernel.yaml", "kernel/session.yaml",
          "kernel/state-boundary.yaml", "index/routing.yaml",
          "index/task-profiles.yaml", "index/SKILL_REGISTRY.yaml",
          "index/document-schema.yaml",
@@ -69,6 +69,12 @@ if manifest.get("document_schema") != "index/document-schema.yaml":
     errors.append("document_schema_pointer_drift")
 if manifest.get("active_release") != "state/active-release.json" or manifest.get("release_manifest") != "state/release-manifest.json":
     errors.append("release_pointer_drift")
+if manifest.get("evidence_contract") != "kernel/evidence.yaml" or manifest.get("publication_contract") != "kernel/publication.yaml":
+    errors.append("refinement_contract_pointer_drift")
+if obj["kernel/evidence.yaml"].get("host_event_adapter") != "unavailable" or obj["kernel/evidence.yaml"].get("host_dispatch_interception") != "unavailable":
+    errors.append("unimplemented_host_enforcement_claim")
+if obj["kernel/publication.yaml"].get("atomic_remote_transaction") is not False or obj["kernel/publication.yaml"].get("stage_order") != ["source", "manifest", "pointer"]:
+    errors.append("invalid_publication_boundary")
 allowed = {"verify_release", "load_sources", "load_checkpoint", "load_private_manifest", "resolve_state",
            "compose", "resolve_profile", "hydrate", "apply_rule"}
 for step in boot.get("boot_sequence", []):

@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def validate(profiles, routing, registry, document, inventory):
     errors = []
     active = {name for name, skill in registry.get("skills", {}).items() if skill.get("status") == "active"}
-    if profiles.get("schema_version") != 3 or routing.get("schema_version") != 2:
+    if profiles.get("schema_version") != 4 or routing.get("schema_version") != 2:
         errors.append("routing_schema_version")
     if set(profiles) != {"schema_version", "version", "profiles"} or not isinstance(profiles.get("profiles"), list):
         errors.append("profile_root_shape")
@@ -25,7 +25,7 @@ def validate(profiles, routing, registry, document, inventory):
             or select.get("semantic_decision") != "required_before_profile_activation"
             or select.get("semantic_decision_schema") != "state/routing-decision.schema.json"):
         errors.append("routing_selection_policy")
-    known = {"id", "match", "primary", "supporting", "required_core", "required_private", "conditional_private", "execution_gates", "operations", "phase_gates"}
+    known = {"id", "match", "primary", "supporting", "required_core", "required_private", "conditional_private", "execution_gates", "operations", "phase_gates", "required_machine"}
     ids = set()
     for p in profiles.get("profiles", []):
         if not isinstance(p, dict) or set(p) - known or not isinstance(p.get("id"), str) or p["id"] in ids:
@@ -50,6 +50,10 @@ def validate(profiles, routing, registry, document, inventory):
             errors.append(f"invalid_required_core:{p['id']}")
         if any(registry["skills"][s]["entrypoint"] not in required for s in [primary, *supporting] if isinstance(s, str) and s in active):
             errors.append(f"missing_skill_entrypoint_dependency:{p['id']}")
+        machine = p.get("required_machine", [])
+        if (not isinstance(machine, list) or any(not isinstance(x, str) or x not in inventory or x in required for x in machine)
+                or len(machine) != len(set(machine)) or any(x.startswith("skills/") for x in machine)):
+            errors.append(f"invalid_machine_dependency:{p['id']}")
         private = p.get("required_private", [])
         if not isinstance(private, list) or any(not isinstance(x, str) or not x.startswith("/DEDAL/private-overlay/") for x in private):
             errors.append(f"invalid_private_boundary:{p['id']}")

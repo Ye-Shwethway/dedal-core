@@ -33,11 +33,11 @@ def route_bytes(profile_id, task, *, decision="select_profile", basis="lexical_c
 
 
 def make_read(path):
-    record = {"path": path, "read_ref": "tool:read:case", "observed_at": now}
+    record = {"path": path, "read_ref": "tool:read:case", "observed_at": now, "read_class": "hydration"}
     if path.endswith("/"):
         record.update(kind="library_directory_list", item_count=2)
     else:
-        record.update(kind="library_file_read", library_file_id="libfile_case", version_id="1", version_status="available",
+        record.update(kind="library_file_read", library_file_id="libfile_case", version_id="1", version_status="available", read_class="hydration",
                       content_sha256=expected_hashes.get(path, "0" * 64))
     return record
 
@@ -45,11 +45,12 @@ def make_read(path):
 def base_receipt(profile, task):
     routes = route_bytes(profile["id"], task)
     operation = "change" if profile["id"] == "core-architecture-change" else "handoff"
-    return {"schema_version": 5, "task_id": "task-case", "task_started_at": now,
+    return {"schema_version": 6, "task_id": "task-case", "task_started_at": now,
             "operation": operation, "phase": "execute",
             "task_sha256": hashlib.sha256(task.encode()).hexdigest(),
             "routing_decision_sha256": hashlib.sha256(routes).hexdigest(),
             "release_sha256": active["release_sha256"], "profile_id": profile["id"],
+            "evidence_mode": "coverage", "evidence_bundle_sha256": None,
             "source_reads": [make_read(p) for p in profile["required_core"] + profile.get("required_private", [])],
             "gate_checks": [{"id": g, "evidence_ref": "validator:case", "passed": True, "observed_at": now}
                             for g in profile["phase_gates"]["execute"]], "condition_results": {}}
@@ -80,6 +81,7 @@ for change, expected in [
     ({"source_reads": base["source_reads"][:-1]}, "missing_sources"),
     ({"gate_checks": base["gate_checks"][:-1]}, "unsupported_gates"),
     ({"schema_version": 4}, "version"),
+    ({"schema_version": 5}, "version"),
     ({"release_sha256": "0" * 64}, "release"),
     ({"routing_decision_sha256": "0" * 64}, "identity"),
     ({"gate_checks": [{**base["gate_checks"][0], "passed": False}, *base["gate_checks"][1:]]}, "gate evidence"),
@@ -114,4 +116,13 @@ result = run(orison["id"], conditional, orison_task)
 assert result[0] != 0 and "profiles/Darian" in result[1], result
 conditional["source_reads"] += [make_read(p) for p in orison["conditional_private"][0]["sources"]]
 assert run(orison["id"], conditional, orison_task)[0] == 0
+early = (datetime.fromisoformat(now) - timedelta(seconds=2)).isoformat()
+prior_start = (datetime.fromisoformat(now) - timedelta(seconds=3)).isoformat()
+before_route = {**base, "task_started_at": prior_start, "source_reads": [{**base["source_reads"][0], "observed_at": early}, *base["source_reads"][1:]]}
+assert run(core["id"], before_route, core_task)[0] != 0
+boot = {**before_route, "source_reads": [{**before_route["source_reads"][0], "read_class": "boot"}, *base["source_reads"][1:]]}
+assert run(core["id"], boot, core_task)[0] == 0
+reuse = {**before_route, "source_reads": [{**before_route["source_reads"][0], "read_class": "reused", "activated_at": now, "reuse_reason": "Current same-release bytes reactivated after semantic routing"}, *base["source_reads"][1:]]}
+assert run(core["id"], reuse, core_task)[0] == 0
+assert run(core["id"], {**reuse, "source_reads": [{**reuse["source_reads"][0], "activated_at": early}, *base["source_reads"][1:]]}, core_task)[0] != 0
 print("SESSION RECEIPT: PASS task/release/route binding, phase gates, observed unavailable versions, conditions")

@@ -1,6 +1,6 @@
 # DEDAL Agent Operating Contract
 
-> Core 0.38.5: normative boot/kernel/session/routing state is machine-readable YAML. Always reconstruct from Library checkpoint/state, resolve a task profile, and hydrate its required dependencies before consequential execution. External DEDAL Runtime/Python Canary MCPs are retired.
+> Core 0.39.0: normative boot/kernel/session/routing state is machine-readable YAML. Always reconstruct from Library checkpoint/state, resolve a task profile, and hydrate its required dependencies before consequential execution. External DEDAL Runtime/Python Canary MCPs are retired.
 
 
 This file is the first operational instruction surface for any DEDAL-capable agent working in this repository.

@@ -1,4 +1,4 @@
-version: 0.38.5
+version: 0.39.0
 date: '2026-10-05'
 authority: library_direct_tree
 accepted:
@@ -11,6 +11,11 @@ accepted:
   execution_readiness: phase_scoped_receipt_coverage_plus_direct_tool_evidence
   migration_status: direct_tree_verified
 decisions:
+- id: refinement_waves_b_c
+  value: Typed local evidence properties, explicit read reuse, seven risk-relevant
+    profiles, lifecycle filtering, resumable publication requests and observable context
+    measurement; host authentication and general model outcome gains are not claimed.
+  date: '2026-10-05'
 - id: refinement_wave_a
   value: Essential boot/session validation includes document and routing contracts;
     phase receipts support observed null versions without invented identifiers; audit

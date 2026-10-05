@@ -12,6 +12,7 @@ import sys
 import yaml
 
 from validate_route_decision import validate as validate_route_decision
+from evidence import verify as verify_evidence, digest
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
@@ -22,6 +23,8 @@ parser.add_argument("--task-file", type=Path, help="Exact UTF-8 task text bound 
 parser.add_argument("--route-decision", type=Path, help="Task-bound semantic route claim")
 parser.add_argument("--operation", help="Profile operation, such as audit or change")
 parser.add_argument("--phase", choices=("inspect", "execute", "close"), help="Current phase; closure never authorizes execution")
+parser.add_argument("--evidence-bundle", type=Path, help="Bound local source/gate event artifacts")
+parser.add_argument("--artifact-root", type=Path, help="Root of full source and evidence artifacts")
 args = parser.parse_args()
 
 result = subprocess.run([sys.executable, str(ROOT / "validators/validate_core.py")],
@@ -56,16 +59,20 @@ release = json.loads((ROOT / "state/release-manifest.json").read_text())
 expected_hashes = {**release["files"],
                    "state/release-manifest.json": active["release_sha256"],
                    "state/active-release.json": hashlib.sha256((ROOT / "state/active-release.json").read_bytes()).hexdigest()}
-if (not isinstance(receipt, dict) or receipt.get("schema_version") != 5 or receipt.get("task_id") != args.task_id
+if (not isinstance(receipt, dict) or receipt.get("schema_version") != 6 or receipt.get("task_id") != args.task_id
         or receipt.get("release_sha256") != active["release_sha256"]
         or receipt.get("task_sha256") != hashlib.sha256(task_bytes).hexdigest()
         or receipt.get("routing_decision_sha256") != hashlib.sha256(decision_bytes).hexdigest()
         or receipt.get("profile_id") != args.profile
         or receipt.get("operation") != args.operation or receipt.get("phase") != args.phase):
     raise SystemExit("EXECUTION PREFLIGHT: FAIL receipt version, release, or task/profile identity")
-if set(receipt) != {"schema_version", "task_id", "profile_id", "operation", "phase", "release_sha256", "task_sha256", "routing_decision_sha256", "task_started_at", "source_reads", "gate_checks", "condition_results"}:
+if set(receipt) != {"schema_version", "task_id", "profile_id", "operation", "phase", "release_sha256", "task_sha256", "routing_decision_sha256", "task_started_at", "source_reads", "gate_checks", "condition_results", "evidence_mode", "evidence_bundle_sha256"}:
     raise SystemExit("EXECUTION PREFLIGHT: FAIL unknown or missing receipt field")
 
+if receipt["evidence_mode"] not in {"coverage", "local_artifacts"}:
+    raise SystemExit("EXECUTION PREFLIGHT: FAIL evidence mode")
+if receipt["evidence_mode"] == "coverage" and (receipt["evidence_bundle_sha256"] is not None or args.evidence_bundle or args.artifact_root):
+    raise SystemExit("EXECUTION PREFLIGHT: FAIL coverage cannot imply verified evidence")
 now = datetime.now(timezone.utc)
 try:
     started = datetime.fromisoformat(receipt["task_started_at"].replace("Z", "+00:00"))
@@ -93,9 +100,11 @@ read_times = []
 for record in reads:
     if not isinstance(record, dict):
         raise SystemExit("EXECUTION PREFLIGHT: FAIL source record shape")
-    if set(record) - {"path", "kind", "read_ref", "observed_at", "library_file_id", "version_id", "version_status", "item_count", "content_sha256"}:
+    if set(record) - {"path", "kind", "read_ref", "observed_at", "library_file_id", "version_id", "version_status", "item_count", "content_sha256", "read_class", "activated_at", "reuse_reason"}:
         raise SystemExit("EXECUTION PREFLIGHT: FAIL source record unknown field")
     path, kind = record.get("path"), record.get("kind")
+    if record.get("read_class") not in {"boot", "discovery", "hydration", "reused"}:
+        raise SystemExit("EXECUTION PREFLIGHT: FAIL read class")
     if not isinstance(path, str) or path in read_paths or not record.get("read_ref"):
         raise SystemExit(f"EXECUTION PREFLIGHT: FAIL duplicate or unreferenced source {path}")
     expected_kind = "library_directory_list" if path.endswith("/") else "library_file_read"
@@ -115,6 +124,16 @@ for record in reads:
         if not within_task(record["observed_at"]):
             raise ValueError("timestamp")
         read_times.append(datetime.fromisoformat(record["observed_at"].replace("Z", "+00:00")))
+        route_time = datetime.fromisoformat(decision["reviewed_at"].replace("Z", "+00:00"))
+        if record["read_class"] == "hydration" and read_times[-1] < route_time:
+            raise ValueError("hydration before route")
+        if record["read_class"] == "reused":
+            activated = datetime.fromisoformat(record["activated_at"].replace("Z", "+00:00"))
+            if not record.get("reuse_reason") or not within_task(record["activated_at"]) or activated < max(route_time, read_times[-1]):
+                raise ValueError("reuse activation")
+            read_times.append(activated)
+        elif "activated_at" in record or "reuse_reason" in record:
+            raise ValueError("reuse metadata belongs only to reused reads")
     except (KeyError, ValueError, AttributeError):
         raise SystemExit(f"EXECUTION PREFLIGHT: FAIL observation time {path}")
     read_paths.add(path)
@@ -158,5 +177,19 @@ if gate_ids - expected_gates:
     raise SystemExit("EXECUTION PREFLIGHT: FAIL gate belongs to another phase")
 if missing or unsatisfied:
     raise SystemExit(f"EXECUTION PREFLIGHT: FAIL missing_sources={sorted(missing)} unsupported_gates={sorted(unsatisfied)}")
+verification = None
+if receipt["evidence_mode"] == "local_artifacts":
+    if not args.evidence_bundle or not args.artifact_root:
+        raise SystemExit("EXECUTION PREFLIGHT: FAIL evidence bundle/root required")
+    try:
+        bundle_bytes = args.evidence_bundle.read_bytes()
+        if digest(bundle_bytes) != receipt["evidence_bundle_sha256"]:
+            raise ValueError("evidence bundle digest")
+        verification = verify_evidence(json.loads(bundle_bytes), receipt, args.artifact_root, ROOT)
+    except (OSError, ValueError, KeyError, TypeError, subprocess.TimeoutExpired) as exc:
+        raise SystemExit(f"EXECUTION PREFLIGHT: FAIL local evidence {exc}")
+    if verification["unresolved_gates"]:
+        raise SystemExit("LOCAL EVIDENCE: INCOMPLETE judgment/readback acceptance required " + str(verification["unresolved_gates"]))
+    print("LOCAL ARTIFACT PROPERTIES: PASS; host authentication unavailable; model content use unproven")
 print(f"STRUCTURAL READINESS: PASS\nPHASE RECEIPT: COVERAGE PASS profile={args.profile} operation={args.operation} phase={args.phase} task={args.task_id}")
 print("SOURCE TRUTH: references require direct tool readback; receipt fields alone are not proof of content use")

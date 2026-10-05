@@ -1,5 +1,5 @@
 schema_version: 4
-version: 0.39.0
+version: 0.39.1
 profiles:
 - id: dedal-orison-image-to-video
   match:
@@ -28,6 +28,8 @@ profiles:
   - skills/visual-narrative-production/references/drift-detection-and-visual-qa.md
   - skills/visual-narrative-production/references/self-review-and-sequence-audit.md
   - skills/visual-narrative-production/references/weighted-load-and-proportion-realism.md
+  - skills/generative-video-direction/references/source-only-motion-readiness.md
+  - skills/visual-narrative-production/references/source-production-design.md
   required_private:
   - /DEDAL/private-overlay/workflows/dedal-orison-bridge/bridge-state.json
   - /DEDAL/private-overlay/state/workstreams/dedal-orison-bridge.current.md
@@ -68,6 +70,7 @@ profiles:
   - skills/visual-narrative-production/references/visual-continuity-ledger.md
   - skills/visual-narrative-production/references/drift-detection-and-visual-qa.md
   - skills/visual-narrative-production/references/self-review-and-sequence-audit.md
+  - skills/visual-narrative-production/references/source-production-design.md
   execution_gates: &id002
   - canonical_pixels_bindable
   - continuity_anchor_available_or_explicit_new_scene

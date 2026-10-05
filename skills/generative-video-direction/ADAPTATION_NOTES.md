@@ -40,3 +40,6 @@ Public skill/repository patterns reviewed comparatively:
 - generated clips are inspected as takes before post-production handoff;
 - repeated structural failure changes control strategy/shot decomposition rather than accumulating adjectives;
 - `video-production` is migrated to canonical `video-post-production`, with legacy aliases retained.
+
+## 2026-10-05 production refinement
+Existing ownership retained; `source-only-motion-readiness.md` converts broad principles into scene-specific causal/physical decisions and evidence-aware source handoffs. Offline fresh-context planning trials support diagnosis only; actual image realism and generated motion remain unmeasured. No private production assets or character canon are included.

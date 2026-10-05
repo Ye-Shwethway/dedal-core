@@ -139,3 +139,11 @@ Contract validation proves the workflow is encoded. Real outcome validation requ
 - **Non-equipment transfer:** for a heavy door pull or rope climb, trace support/contact/joint/load geometry and choose a crop that exposes the disputed interaction without copying the overhead-bar wording.
 
 - an external-agent handoff is emitted because files exist even though pairwise reachability or video-readiness has not been validated.
+
+## VNP-33 Source production design and observed evidence
+- Use the shared beat/world/object event plan before rendering interaction sequences.
+- Stable object identity, hand occupancy, supported load transfer and release must survive camera projection.
+- Progressive supination rotates hand and rigid implement together; label readability cannot override geometry or grip.
+- Hidden required contact evidence is `not_observable`, not a pass inferred from metadata.
+- Two repeated structural repairs require a changed staging/view/reference/decomposition strategy.
+- Ordinary shot specs remain valid; optional production_design carries typed event/evidence fields. Schema validity is not pixel proof.

@@ -100,6 +100,157 @@
         "object",
         "null"
       ]
+    },
+    "source_only_plan": {
+      "type": "object",
+      "required": [
+        "stage",
+        "pixel_qa_status",
+        "pairs"
+      ],
+      "properties": {
+        "stage": {
+          "enum": [
+            "planned",
+            "source_ready",
+            "sent",
+            "acknowledged"
+          ]
+        },
+        "pixel_qa_status": {
+          "enum": [
+            "pending",
+            "passed",
+            "failed",
+            "unknown"
+          ]
+        },
+        "pairs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "from_asset",
+              "to_asset",
+              "relation",
+              "mechanism",
+              "timing_assumptions",
+              "camera_relation",
+              "decision"
+            ],
+            "properties": {
+              "from_asset": {
+                "type": "string",
+                "minLength": 1
+              },
+              "to_asset": {
+                "type": "string",
+                "minLength": 1
+              },
+              "from_version": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "to_version": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "relation": {
+                "enum": [
+                  "continuous",
+                  "cut",
+                  "hold",
+                  "loop"
+                ]
+              },
+              "mechanism": {
+                "type": "string",
+                "minLength": 1
+              },
+              "timing_assumptions": {
+                "type": "string",
+                "minLength": 1
+              },
+              "camera_relation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "risk": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "decision": {
+                "enum": [
+                  "ready",
+                  "needs_bridge",
+                  "split",
+                  "cut",
+                  "repair_source",
+                  "unresolved"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "known_debt": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "provider_unknowns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "stage": {
+                "enum": [
+                  "source_ready",
+                  "sent",
+                  "acknowledged"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "pixel_qa_status": {
+                "const": "passed"
+              },
+              "pairs": {
+                "items": {
+                  "properties": {
+                    "decision": {
+                      "enum": [
+                        "ready",
+                        "cut"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   },
   "additionalProperties": true

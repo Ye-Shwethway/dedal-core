@@ -1,5 +1,11 @@
 # 0.39.0 — Evidence, recovery and compact disclosure
 
+## 0.39.1 — creative source production
+
+- Causal scene design, physical event/occlusion planning and source-only pair handoff.
+- Optional typed planning fields and schema regression checks; fresh-context offline planning trials, with media outcomes unmeasured.
+
+
 - Receipt v6 classifies boot, discovery, hydration and explicitly reactivated reads; local artifact verification is distinct from coverage and external judgment.
 - Profiles v4 adds stock mutation, report export, publishing write and deployment operation gates; complete machine metadata stays deterministic while mandatory instruction bodies remain full reads.
 - Adds resumable publication reconciliation, conservative lifecycle selection, observable context plans and controlled outcome comparison checks.

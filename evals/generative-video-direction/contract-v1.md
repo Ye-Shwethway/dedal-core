@@ -74,3 +74,6 @@ For external specialist collaboration, DEDAL announces `production_started` with
 - a downstream agent processes a stale manifest, or returns only vague feedback when a specific broken frame pair can be named.
 
 - a continuity-sensitive production is held until the end instead of exposing planned sets and validated set-level handoffs early enough for specialist feedback.
+
+## Source-only motion readiness
+DEDAL stops at source-image planning/production when video execution is unavailable. Plans without actual pixels remain planned. Each pair needs a mechanism and timing assumption; decide bridge, split, cut, endpoint repair, or unresolved. Source-ready is distinct from sent, acknowledged and video-verified. Optional source_only_plan declarations require structural consistency but never authenticate external evidence. Required reference: `skills/generative-video-direction/references/source-only-motion-readiness.md`.

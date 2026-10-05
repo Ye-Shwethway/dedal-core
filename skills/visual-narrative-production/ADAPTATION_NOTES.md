@@ -72,3 +72,6 @@ A representative physical-action sequence showed that a capable image engine can
 A later mini-arc exposed two additional instructor-level failure classes: persistent equipment could relocate or fuse across adjacent frames despite otherwise good scene continuity, and a skilled performer could adopt a visually dramatic but proficiency-inconsistent stance. The public skill therefore now treats object count/topology/spatial relation as causal continuity state and treats established proficiency as a movement-quality prior. No private character/project identity or prompt is stored.
 
 - Support-constrained actions require joint camera/body/equipment reasoning: an anatomically correct performer can still be wrong when the support apparatus is skewed relative to the action axis. Keep this generalized and free of private character/project fixtures.
+
+## 2026-10-05 production refinement
+Existing ownership retained; `source-production-design.md` converts broad principles into scene-specific causal/physical decisions and evidence-aware source handoffs. Offline fresh-context planning trials support diagnosis only; actual image realism and generated motion remain unmeasured. No private production assets or character canon are included.

@@ -15,6 +15,8 @@ Story Weaver owns **narrative truth and dramatic structure**. It does not own im
 
 `load canon -> define scene function -> establish character wants/constraints -> map beats and reversals -> draft/shape scene -> verify causality/continuity -> expose visualizable beat state -> persist accepted canon`
 
+For scene design or a visual story, load `references/causal-scene-design.md`. Work from trigger, character knowledge, choice, observable action, and consequence. Test the obvious alternative choice and track free hands/physical affordances. Keep deliberate withheld meaning separate from unexplained mechanics; pass beat IDs, state deltas and reveal locks downstream. Label provisional staging instead of silently extending canon.
+
 ## Rules
 
 1. **Canon before invention.** Load authoritative project/character/world state before adding facts that could conflict with established canon.
@@ -30,6 +32,7 @@ Story Weaver owns **narrative truth and dramatic structure**. It does not own im
 
 ## Progressive references
 
+- `references/causal-scene-design.md`
 - `references/scene-beat-and-causality.md`
 - `references/character-state-and-emotional-continuity.md`
 - `references/visual-handoff-contract.md`

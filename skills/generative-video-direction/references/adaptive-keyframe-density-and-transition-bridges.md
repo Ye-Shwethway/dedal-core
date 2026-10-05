@@ -43,6 +43,8 @@ The intermediate frames may look visually boring. That is acceptable; their job 
 
 ## Pairwise reachability gate
 
+Use the pair ledger in `source-only-motion-readiness.md` for source-only productions. Record the actual event path, timing assumptions, and remedy for each pair. Bridges address missing intermediate states; they do not repair a physically invalid endpoint. A deliberate cut can economize unnecessary continuous coverage while preserving exit/entry facts.
+
 Each adjacent anchor pair must pass:
 
 1. **Physical reachability** — can body, contact, and props move from A to B naturally in the intended duration?

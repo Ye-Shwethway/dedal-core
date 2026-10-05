@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DEDAL session hydration receipt v4",
+  "title": "DEDAL phase hydration receipt v5",
   "type": "object",
   "required": [
     "schema_version",
@@ -12,11 +12,13 @@
     "release_sha256",
     "task_started_at",
     "task_sha256",
-    "routing_decision_sha256"
+    "routing_decision_sha256",
+    "operation",
+    "phase"
   ],
   "properties": {
     "schema_version": {
-      "const": 4
+      "const": 5
     },
     "task_id": {
       "type": "string",
@@ -72,6 +74,12 @@
           "content_sha256": {
             "type": "string",
             "pattern": "^[0-9a-f]{64}$"
+          },
+          "version_status": {
+            "enum": [
+              "available",
+              "unavailable"
+            ]
           }
         },
         "additionalProperties": false,
@@ -91,14 +99,32 @@
               "required": [
                 "library_file_id",
                 "version_id",
+                "version_status",
                 "content_sha256"
               ],
-              "properties": {
-                "version_id": {
-                  "type": "string",
-                  "minLength": 1
+              "oneOf": [
+                {
+                  "properties": {
+                    "version_status": {
+                      "const": "available"
+                    },
+                    "version_id": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "version_status": {
+                      "const": "unavailable"
+                    },
+                    "version_id": {
+                      "type": "null"
+                    }
+                  }
                 }
-              }
+              ]
             }
           }
         ]
@@ -174,6 +200,17 @@
     "routing_decision_sha256": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$"
+    },
+    "operation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase": {
+      "enum": [
+        "inspect",
+        "execute",
+        "close"
+      ]
     }
   },
   "additionalProperties": false

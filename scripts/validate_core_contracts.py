@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def validate(profiles, routing, registry, document, inventory):
     errors = []
     active = {name for name, skill in registry.get("skills", {}).items() if skill.get("status") == "active"}
-    if profiles.get("schema_version") != 2 or routing.get("schema_version") != 2:
+    if profiles.get("schema_version") != 3 or routing.get("schema_version") != 2:
         errors.append("routing_schema_version")
     if set(profiles) != {"schema_version", "version", "profiles"} or not isinstance(profiles.get("profiles"), list):
         errors.append("profile_root_shape")
@@ -25,7 +25,7 @@ def validate(profiles, routing, registry, document, inventory):
             or select.get("semantic_decision") != "required_before_profile_activation"
             or select.get("semantic_decision_schema") != "state/routing-decision.schema.json"):
         errors.append("routing_selection_policy")
-    known = {"id", "match", "primary", "supporting", "required_core", "required_private", "conditional_private", "execution_gates"}
+    known = {"id", "match", "primary", "supporting", "required_core", "required_private", "conditional_private", "execution_gates", "operations", "phase_gates"}
     ids = set()
     for p in profiles.get("profiles", []):
         if not isinstance(p, dict) or set(p) - known or not isinstance(p.get("id"), str) or p["id"] in ids:
@@ -61,6 +61,19 @@ def validate(profiles, routing, registry, document, inventory):
         gates = p.get("execution_gates", [])
         if not isinstance(gates, list) or not gates or len(gates) != len(set(gates)) or any(not isinstance(x, str) or not re.fullmatch(r"[a-z][a-z0-9_]*", x) for x in gates):
             errors.append(f"invalid_gates:{p['id']}")
+        phases = p.get("phase_gates")
+        operations = p.get("operations")
+        phase_names = {"inspect", "execute", "close"}
+        if (not isinstance(phases, dict) or set(phases) != phase_names
+                or any(not isinstance(v, list) or any(not isinstance(g, str) or g not in gates for g in v)
+                       or len(v) != len(set(v)) for v in phases.values())
+                or set(gates) != {g for v in phases.values() for g in v}):
+            errors.append(f"invalid_phase_gates:{p['id']}")
+        if (not isinstance(operations, dict) or not operations
+                or any(not isinstance(k, str) or not re.fullmatch(r"[a-z][a-z0-9_]*", k)
+                       or not isinstance(v, list) or not v or any(s not in phase_names for s in v)
+                       or len(v) != len(set(v)) for k, v in operations.items())):
+            errors.append(f"invalid_operations:{p['id']}")
     if document.get("schema_version") != 1 or document.get("default") != "reject" or document.get("classification") != "first_matching_rule":
         errors.append("document_policy")
     roles, rules = document.get("roles", {}), document.get("rules", [])

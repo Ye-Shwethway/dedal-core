@@ -1,5 +1,5 @@
-schema_version: 2
-version: 0.38.4
+schema_version: 3
+version: 0.38.5
 profiles:
 - id: dedal-orison-image-to-video
   match:
@@ -37,11 +37,21 @@ profiles:
     - /DEDAL/private-overlay/profiles/Darian/visual-reference-policy.md
     - /DEDAL/private-overlay/profiles/Darian/face-references/
     - /DEDAL/private-overlay/profiles/Darian/physique-references/
-  execution_gates:
+  execution_gates: &id001
   - accepted_production_pixels_available
   - canonical_identity_pixels_bindable
   - pairwise_reachability_plan_complete
   - manifest_truth_matches_visual_state
+  operations:
+    audit:
+    - inspect
+    handoff:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute: *id001
+    close: *id001
 - id: recurring-character-image-sequence
   match:
     any:
@@ -58,10 +68,22 @@ profiles:
   - skills/visual-narrative-production/references/visual-continuity-ledger.md
   - skills/visual-narrative-production/references/drift-detection-and-visual-qa.md
   - skills/visual-narrative-production/references/self-review-and-sequence-audit.md
-  execution_gates:
+  execution_gates: &id002
   - canonical_pixels_bindable
   - continuity_anchor_available_or_explicit_new_scene
   - rendered_qa_required
+  operations:
+    audit:
+    - inspect
+    produce:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute:
+    - canonical_pixels_bindable
+    - continuity_anchor_available_or_explicit_new_scene
+    close: *id002
 - id: core-architecture-change
   match:
     any:
@@ -97,7 +119,21 @@ profiles:
   - state/routing-decision.schema.json
   - index/document-schema.yaml
   - docs/evolution/IMPROVEMENT_PROTOCOL.md
-  execution_gates:
+  execution_gates: &id003
   - validator_green
   - checkpoint_updated
   - rollback_path_recorded
+  operations:
+    audit:
+    - inspect
+    change:
+    - inspect
+    - execute
+    - close
+  phase_gates:
+    inspect:
+    - validator_green
+    execute:
+    - validator_green
+    - rollback_path_recorded
+    close: *id003

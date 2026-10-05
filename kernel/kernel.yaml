@@ -1,4 +1,4 @@
-version: 0.38.4
+version: 0.38.5
 contract_rule: yaml_is_contract_markdown_is_view
 invariants:
 - id: live_state_outranks_memory
@@ -8,8 +8,8 @@ invariants:
   enforce: reasoning
   spec: creator_controls_goals_irreversible_permissions_and_canon
 - id: no_claim_without_evidence
-  enforce: validator
-  spec: consequential_completion_requires_tool_or_validator_evidence
+  enforce: reasoning
+  spec: completion_requires_direct_tool_or_validator_evidence_receipt_coverage_alone_is_not_proof
 - id: library_boot_authority
   enforce: validator
   spec: canonical_boot_points_only_to_direct_library_core_tree

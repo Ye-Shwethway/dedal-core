@@ -1,4 +1,4 @@
-version: 0.39.1
+version: 0.39.2
 contract_rule: yaml_is_contract_markdown_is_view
 invariants:
 - id: live_state_outranks_memory
@@ -18,7 +18,7 @@ invariants:
   spec: session_start_requires_state_checkpoint
 - id: required_hydration_before_execution
   enforce: validator
-  spec: matched_task_profile_required_resources_must_exist_and_be_declared_before_consequential_execution
+  spec: matched_task_profile_requires_actual_phase_check_and_direct_evidence_before_execution_no_host_interception_claim
 - id: specific_over_general
   enforce: reasoning
   spec: task_profile_and_current_reference_override_general_skill_heuristics_and_legacy_guidance

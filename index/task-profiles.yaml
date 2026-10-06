@@ -1,5 +1,5 @@
 schema_version: 4
-version: 0.39.1
+version: 0.39.2
 profiles:
 - id: dedal-orison-image-to-video
   match:
@@ -220,9 +220,8 @@ profiles:
   match:
     any:
     - comment reply
-    - youtube upload
-    - publish video
-    - video publishing
+    - channel branding
+    - playlist mutation
   primary: youtube-publishing
   required_core:
   - skills/youtube-publishing/SKILL.md
@@ -286,3 +285,84 @@ profiles:
     - rollback_target_recorded
     - live_deployment_readback_confirmed
     - source_revision_reconciled
+- id: video-review-delivery
+  match:
+    any:
+    - review cut
+    - review video
+    - rough cut delivery
+  primary: video-post-production
+  supporting: []
+  required_core:
+  - skills/video-post-production/SKILL.md
+  - skills/video-post-production/references/post-production-and-delivery.md
+  execution_gates:
+  - media_workflow_ready
+  - review_link_delivered
+  operations:
+    audit:
+    - inspect
+    deliver:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute:
+    - media_workflow_ready
+    close:
+    - media_workflow_ready
+    - review_link_delivered
+  media_workflow:
+    execute:
+      deliver: render_review
+    close:
+      deliver: deliver_review
+- id: video-publication
+  match:
+    any:
+    - youtube upload
+    - publish video
+    - video publishing
+  primary: youtube-publishing
+  supporting:
+  - youtube-seo
+  required_core:
+  - skills/youtube-publishing/SKILL.md
+  - skills/youtube-publishing/references/mutation-hardening-and-recovery.md
+  - skills/youtube-publishing/references/thumbnail-media-staging.md
+  - skills/youtube-seo/SKILL.md
+  execution_gates:
+  - creator_publishing_authority_confirmed
+  - target_identity_verified
+  - existing_result_or_idempotency_checked
+  - media_workflow_ready
+  - published_result_readback_confirmed
+  - checkpoint_updated
+  operations:
+    audit:
+    - inspect
+    prepare:
+    - execute
+    thumbnail:
+    - execute
+    publish:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute:
+    - creator_publishing_authority_confirmed
+    - target_identity_verified
+    - existing_result_or_idempotency_checked
+    - media_workflow_ready
+    close:
+    - media_workflow_ready
+    - published_result_readback_confirmed
+    - checkpoint_updated
+  media_workflow:
+    execute:
+      prepare: private_upload
+      thumbnail: thumbnail
+      publish: publish
+    close:
+      publish: close

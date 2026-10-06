@@ -49,3 +49,7 @@ When the Creator uses Google Drive as the handoff surface for YouTube clips, kee
 - Preserve the same Drive file when practical; prefer a true move/re-parent over copy-plus-delete so identity and revision history stay stable.
 - Drive folder names are operational labels, not authority by themselves; verify exact folder/file IDs before consequential moves.
 
+
+## Review handoff and final-record truth
+
+Upload/readback and Creator-facing link delivery are separate completion facts. Preserve review-master identity and the final measured media properties. A stale rough-plan duration must remain intermediate history; write a final successor record from the actual probe. Media acceptance and cover selection are separate Creator decisions. Never promote a cover chosen by the agent into Creator-approved state.

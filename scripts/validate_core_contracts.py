@@ -25,7 +25,7 @@ def validate(profiles, routing, registry, document, inventory):
             or select.get("semantic_decision") != "required_before_profile_activation"
             or select.get("semantic_decision_schema") != "state/routing-decision.schema.json"):
         errors.append("routing_selection_policy")
-    known = {"id", "match", "primary", "supporting", "required_core", "required_private", "conditional_private", "execution_gates", "operations", "phase_gates", "required_machine"}
+    known = {"id", "match", "primary", "supporting", "required_core", "required_private", "conditional_private", "execution_gates", "operations", "phase_gates", "required_machine", "media_workflow"}
     ids = set()
     for p in profiles.get("profiles", []):
         if not isinstance(p, dict) or set(p) - known or not isinstance(p.get("id"), str) or p["id"] in ids:
@@ -78,6 +78,14 @@ def validate(profiles, routing, registry, document, inventory):
                        or not isinstance(v, list) or not v or any(s not in phase_names for s in v)
                        or len(v) != len(set(v)) for k, v in operations.items())):
             errors.append(f"invalid_operations:{p['id']}")
+        media = p.get("media_workflow")
+        if media is not None:
+            from media_workflow import ACTIONS
+            if (not isinstance(media, dict) or set(media) - {"execute", "close"}
+                    or any(not isinstance(v, dict) or any(op not in operations or phase not in operations[op]
+                           or action not in ACTIONS for op, action in v.items()) for phase, v in media.items())
+                    or any("media_workflow_ready" not in phases[phase] for phase in media)):
+                errors.append(f"invalid_media_workflow:{p['id']}")
     if document.get("schema_version") != 1 or document.get("default") != "reject" or document.get("classification") != "first_matching_rule":
         errors.append("document_policy")
     roles, rules = document.get("roles", {}), document.get("rules", [])

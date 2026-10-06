@@ -75,3 +75,7 @@ It does **not** own generative-video motion direction or provider prompt compila
 ## Pairing
 
 Pair with `generative-video-direction` when accepted generated takes need editing/assembly, `visual-narrative-production` when high-quality still/keyframe/thumbnail assets are needed, `story-weaver` for narrative truth, `writing-editorial` for substantial caption/script language, `research` for factual claims, and `quality-engineering` for independent readiness when distinct from self-review.
+
+## Review delivery gate
+
+For a review cut, activate `video-review-delivery`. Probe the actual final master, preserve its hash/size/duration/dimensions and rendered QA evidence. Upload the exact master to the requested review destination, verify identity/parent/bytes and provide the viewable link in the Creator-facing response. Render success or a local preview alone does not complete a requested Drive handoff. Close only after link delivery; the media approval is a later separate observation. Use the operation-specific media-state check in `scripts/session_check.py`; draft edit plans are not final probe truth.

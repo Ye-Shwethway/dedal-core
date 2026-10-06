@@ -11,7 +11,7 @@
     },
     {
       "id": "core-mixed-language",
-      "task": "DEDAL Core direct Library tree schema ပြန်စစ်ပါ",
+      "task": "DEDAL Core direct Library tree schema \u1015\u103c\u1014\u103a\u1005\u1005\u103a\u1015\u102b",
       "status": "matched",
       "profiles": [
         "core-architecture-change"
@@ -88,7 +88,7 @@
     },
     {
       "id": "core-burmese-mixed",
-      "task": "DEDAL core ကို ပြန်ဆောက်ပါ",
+      "task": "DEDAL core \u1000\u102d\u102f \u1015\u103c\u1014\u103a\u1006\u1031\u102c\u1000\u103a\u1015\u102b",
       "status": "matched",
       "profiles": [
         "core-architecture-change"
@@ -96,7 +96,7 @@
     },
     {
       "id": "core-burmese-only",
-      "task": "စနစ်ရဲ့ အဓိကတည်ဆောက်ပုံကို ပြန်စစ်ပါ",
+      "task": "\u1005\u1014\u1005\u103a\u101b\u1032\u1037 \u1021\u1013\u102d\u1000\u1010\u100a\u103a\u1006\u1031\u102c\u1000\u103a\u1015\u102f\u1036\u1000\u102d\u102f \u1015\u103c\u1014\u103a\u1005\u1005\u103a\u1015\u102b",
       "status": "unresolved",
       "profiles": []
     },
@@ -114,13 +114,13 @@
     },
     {
       "id": "visual-burmese-only",
-      "task": "ဇာတ်ကောင်တစ်ယောက်ရဲ့ မျက်နှာကို နောက်ကွက်တွေမှာ တူအောင် ထိန်းပါ",
+      "task": "\u1007\u102c\u1010\u103a\u1000\u1031\u102c\u1004\u103a\u1010\u1005\u103a\u101a\u1031\u102c\u1000\u103a\u101b\u1032\u1037 \u1019\u103b\u1000\u103a\u1014\u103e\u102c\u1000\u102d\u102f \u1014\u1031\u102c\u1000\u103a\u1000\u103d\u1000\u103a\u1010\u103d\u1031\u1019\u103e\u102c \u1010\u1030\u1021\u1031\u102c\u1004\u103a \u1011\u102d\u1014\u103a\u1038\u1015\u102b",
       "status": "unresolved",
       "profiles": []
     },
     {
       "id": "visual-mixed",
-      "task": "Visual novel ဇာတ်ကောင် sequence",
+      "task": "Visual novel \u1007\u102c\u1010\u103a\u1000\u1031\u102c\u1004\u103a sequence",
       "status": "matched",
       "profiles": [
         "recurring-character-image-sequence"
@@ -162,7 +162,7 @@
     },
     {
       "id": "orison-burmese-mixed",
-      "task": "Orison အတွက် image-to-video ပြင်ပါ",
+      "task": "Orison \u1021\u1010\u103d\u1000\u103a image-to-video \u1015\u103c\u1004\u103a\u1015\u102b",
       "status": "matched",
       "profiles": [
         "dedal-orison-image-to-video"
@@ -240,6 +240,30 @@
       "status": "matched",
       "profiles": [
         "core-architecture-change"
+      ]
+    },
+    {
+      "id": "review-handoff",
+      "task": "Deliver the review cut",
+      "status": "matched",
+      "profiles": [
+        "video-review-delivery"
+      ]
+    },
+    {
+      "id": "release-seo",
+      "task": "Publish video to YouTube",
+      "status": "matched",
+      "profiles": [
+        "video-publication"
+      ]
+    },
+    {
+      "id": "comment-no-seo",
+      "task": "Write a comment reply",
+      "status": "matched",
+      "profiles": [
+        "publishing-write"
       ]
     }
   ],

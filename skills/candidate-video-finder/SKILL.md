@@ -54,15 +54,14 @@ Prefer the smallest self-contained editorial unit that preserves the requested m
 9. **Handoff cleanly.** Selected candidates go to Video Post-Production with source/scene/locator truth. Verified content then flows to YouTube SEO, Visual Direction, and Publishing through their existing contracts.
 10. **Learn prospectively.** Preserve the pre-publication candidate hypothesis. After 24h/3d/7d/28d or other planned windows, compare outcomes without rewriting history and keep channel/Creator-specific learning private.
 
-## Runtime-bound workflow integrity
+## Direct-Core workflow integrity
 
-When a Runtime-assisted execution surface exposes a workflow-integrity contract, treat it as an execution guard rather than a decorative routing hint. High-value candidate-discovery runs may require ordered stage completion before a shortlist can be presented.
+Use the direct Core semantic route, current skill-body reads and phase receipts. External DEDAL Runtime/Python Canary MCPs are retired and never provide current authorization or stage enforcement.
 
-- Caller-provided path lists such as `resources_read` are audit metadata only; they are not proof that the current resource identity was actually bound or that its semantics were understood.
-- Prefer Runtime-issued, task-scoped resource-binding receipts tied to an observed current identity/version when the surface supports them. A receipt proves the identity-bound hydration step occurred; it does **not** prove cognition or semantic comprehension.
-- For workflows with repeated skip failures, use a monotonic stage contract. A later stage must not be accepted until all earlier required stages have evidence. Domain/private overlays may make the generic workflow stricter, for example by requiring niche-aware external discovery before public-platform competition analysis.
-- Runtime stage state never replaces source evidence. Each completed stage must carry evidence references sufficient for later audit/recovery.
-- Distributed Runtime Assist remains fail-open for independent tools: Runtime unavailability must not become a global transport gate. But when Runtime is reachable and a bound stage contract is active, do not claim the guarded workflow is complete while required stages remain unresolved.
+- Source path declarations and receipt coverage alone do not prove actual reads or understanding; retain observable source identity/version-or-unavailable/digest and direct evidence.
+- Complete ordered discovery, verification, hard-gating and presentation before requesting Creator selection. Private channel rules may require niche-specific discovery sources and decision visuals.
+- On a material transition to editing or publishing, recompose and read the new owner; do not carry Candidate Finder mutation authority downstream.
+- Record actual source reads, stage outcomes and deficiencies prospectively. Never manufacture retrospective hydration receipts from a successful final artifact.
 
 ## Hard gates
 

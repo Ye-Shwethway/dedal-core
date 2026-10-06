@@ -1,5 +1,5 @@
-version: 0.39.1
-date: '2026-10-05'
+version: 0.39.2
+date: '2026-10-06'
 authority: library_direct_tree
 accepted:
   assistant_name: DEDAL
@@ -11,6 +11,11 @@ accepted:
   execution_readiness: phase_scoped_receipt_coverage_plus_direct_tool_evidence
   migration_status: direct_tree_verified
 decisions:
+- id: asset_bound_media_release
+  value: Separate review delivery, media acceptance and Creator cover choice; operation-specific
+    local media checks bind final bytes and block inconsistent closure. Actual tool/Creator
+    evidence and prospective phase checks remain required; host interception is unavailable.
+  date: '2026-10-06'
 - id: creative_source_production
   value: Scene-specific causal and physical events, evidence-aware source QA and source-only
     motion pair decisions; offline planning evidence does not certify rendered realism

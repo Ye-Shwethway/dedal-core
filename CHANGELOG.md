@@ -1,3 +1,9 @@
+## 0.39.2 — Review handoff and asset-bound release
+
+- Add operation-specific review-delivery and video-release checks, separate media/cover authority, final probe/hash consistency, and prospective phase evidence.
+- Compose SEO for video publication while keeping comment replies narrow; remove active Candidate Finder references to retired Runtime enforcement.
+- Negative tests reject missing review links, pending/wrong-master cover approval and stale final records; no host interception or broad outcome gain is claimed.
+
 # 0.39.0 — Evidence, recovery and compact disclosure
 
 ## 0.39.1 — creative source production

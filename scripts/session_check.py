@@ -25,6 +25,7 @@ parser.add_argument("--operation", help="Profile operation, such as audit or cha
 parser.add_argument("--phase", choices=("inspect", "execute", "close"), help="Current phase; closure never authorizes execution")
 parser.add_argument("--evidence-bundle", type=Path, help="Bound local source/gate event artifacts")
 parser.add_argument("--artifact-root", type=Path, help="Root of full source and evidence artifacts")
+parser.add_argument("--media-state", type=Path, help="Exact asset-bound review/approval/publication record")
 args = parser.parse_args()
 
 result = subprocess.run([sys.executable, str(ROOT / "validators/validate_core.py")],
@@ -34,7 +35,7 @@ if result.returncode:
     print(result.stdout, end="")
     print(result.stderr, end="", file=sys.stderr)
     sys.exit(result.returncode)
-if not any((args.profile, args.receipt, args.task_id, args.task_file, args.route_decision, args.operation, args.phase)):
+if not any((args.profile, args.receipt, args.task_id, args.task_file, args.route_decision, args.operation, args.phase, args.media_state)):
     print("STRUCTURAL READINESS: PASS")
     print("EXECUTION PREFLIGHT: UNVERIFIED (profile receipt not supplied)")
     sys.exit(0)
@@ -177,6 +178,22 @@ if gate_ids - expected_gates:
     raise SystemExit("EXECUTION PREFLIGHT: FAIL gate belongs to another phase")
 if missing or unsatisfied:
     raise SystemExit(f"EXECUTION PREFLIGHT: FAIL missing_sources={sorted(missing)} unsupported_gates={sorted(unsatisfied)}")
+media_action = profile.get("media_workflow", {}).get(args.phase, {}).get(args.operation)
+if media_action:
+    if not args.media_state:
+        raise SystemExit("MEDIA WORKFLOW: FAIL --media-state required")
+    try:
+        from media_workflow import validate as validate_media
+        media_bytes = args.media_state.read_bytes()
+        check = next(c for c in checks if c["id"] == "media_workflow_ready")
+        if check["evidence_ref"] != "sha256:" + hashlib.sha256(media_bytes).hexdigest():
+            raise ValueError("receipt is not bound to current media state")
+        validate_media(json.loads(media_bytes), media_action, args.task_id)
+    except (OSError, ValueError, KeyError, TypeError, StopIteration, subprocess.SubprocessError) as exc:
+        raise SystemExit("MEDIA WORKFLOW: FAIL " + str(exc))
+    print("MEDIA WORKFLOW: LOCAL PROPERTIES PASS; external refs require authoritative evidence")
+elif args.media_state:
+    raise SystemExit("MEDIA WORKFLOW: FAIL state supplied to a non-media operation")
 verification = None
 if receipt["evidence_mode"] == "local_artifacts":
     if not args.evidence_bundle or not args.artifact_root:

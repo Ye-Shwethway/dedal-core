@@ -204,3 +204,18 @@ The default rolling window is **3**. A smaller or larger window requires explici
 - For normal Creator uploads, prefer Google Drive/provider-backed media or direct multipart media objects over remote `local_file` assumptions.
 - If heartbeat is stale/missing, do not create a queued runner job; use the direct multipart private-first path instead.
 - If a runner job is already queued, neutralize it before changing transport.
+
+## Asset-bound video release gates
+
+New video/Short release uses `video-publication`, with Publishing PRIMARY and SEO SUPPORTING; comment replies remain `publishing-write`. Read the current channel profile and exact workstream checkpoint, propagate Creator-specific cover count and selection preferences, and record actual hydration/source reads before mutation. Supplied final metadata avoids redundant research, not ownership/approval checks.
+
+Maintain one task-bound media-state record for the final master: asset path/hash/size/probe/QC; review upload/readback/view URL/link delivery; media approval; locked package; verified channel; single-flight check; cover options and presentation; Creator choice or explicit delegation; upload/processing; applied cover; public readback; archive and checkpoint. Unknown approvals stay absent.
+
+- `prepare/execute`: private upload may proceed with cover choice pending after media/package/target authority is verified.
+- `thumbnail/execute`: require separately recorded Creator cover choice or explicit delegation for the exact presented option and master. Broad publishing authorization and media approval do not substitute for cover authority.
+- `publish/execute`: require processed/succeeded upload and readback of the selected thumbnail before public mutation.
+- `publish/close`: require final public readback, archive verification and continuity reconciliation.
+
+Run `scripts/session_check.py` with the current route/phase receipt and `--media-state`; bind the `media_workflow_ready` gate reference to `sha256:` plus the state-file digest. Recheck after any master/option/state change. Local JSON checks enforce consistency only when invoked; actual Creator instructions and live owner readbacks remain necessary. Tool-only images do not prove Creator presentation. No host-level tool interception is claimed.
+
+For an already-approved master supplied by the Creator, a redundant review handoff is not required: record `review_required: false` with `review_not_required_ref` pointing to that actual instruction. Agent-produced cuts awaiting review use the review delivery path; never infer an exemption merely from render completion.

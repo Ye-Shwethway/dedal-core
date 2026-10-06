@@ -1,4 +1,4 @@
-version: 0.39.1
+version: 0.39.2
 start:
 - id: read_boot_contract
   kind: read
@@ -42,6 +42,8 @@ execution_readiness:
   verification_rule: coverage_does_not_verify_local_artifacts_or_external_judgment
   local_evidence_command: append --evidence-bundle EVENTS.json --artifact-root ARTIFACT_ROOT
     for receipt evidence_mode local_artifacts
+  media_workflow_command: For a profile media_workflow operation append --media-state
+    STATE.json; media_workflow_ready must reference sha256 of those exact bytes.
 recompose:
 - id: material_subgoal_change
   kind: reroute
@@ -63,6 +65,10 @@ end:
   kind: verify
   command: python validators/validate_core.py
   when: core_changed
+- id: persist_phase_trace
+  kind: write
+  when: nontrivial_composition_or_material_subgoal_change
+  requirement: preserve_route_source_reads_checker_result_and_direct_evidence_before_completion_never_backdate
 rules:
 - id: no_premature_victory
   statement: done_requires_evidence

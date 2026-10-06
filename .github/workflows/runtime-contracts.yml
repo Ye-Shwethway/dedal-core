@@ -57,6 +57,7 @@ jobs:
           python3 scripts/validate_creative_production_routing.py
           python3 scripts/validate_visual_narrative_production.py
           python3 scripts/validate_story_weaver.py
+          python3 scripts/validate_media_workflow.py
           python3 scripts/validate_youtube_publishing_hardening.py
           python3 scripts/validate_youtube_source_sync.py
           python3 scripts/validate_youtube_media_staging.py

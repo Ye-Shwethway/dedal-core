@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "core_version": "0.39.1",
+  "core_version": "0.39.2",
   "files": [
     ".github/workflows/repo-integrity.yml",
     ".github/workflows/runtime-contracts.yml",
@@ -141,6 +141,7 @@
     "scripts/context_plan.py",
     "scripts/controlled_comparison.py",
     "scripts/evidence.py",
+    "scripts/media_workflow.py",
     "scripts/outcome_properties.py",
     "scripts/profile_probe.py",
     "scripts/publication.py",
@@ -163,6 +164,7 @@
     "scripts/validate_generative_video_direction.py",
     "scripts/validate_infrastructure_engineering_routing.py",
     "scripts/validate_library_authority.py",
+    "scripts/validate_media_workflow.py",
     "scripts/validate_mobile_reference_pack_routing.py",
     "scripts/validate_msa_local_code_registry.py",
     "scripts/validate_msa_master_data_archive.py",

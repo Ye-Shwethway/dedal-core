@@ -1,5 +1,5 @@
 schema_version: 4
-version: 0.40.0
+version: 0.40.1
 profiles:
 - id: dedal-orison-image-to-video
   match:
@@ -391,7 +391,9 @@ profiles:
   - skills/resource-intelligence/references/storage-privacy-and-consumer-handoffs.md
   - skills/resource-intelligence/schemas/resource-profile.schema.json
   - skills/resource-intelligence/schemas/resource-record.schema.json
+  - scripts/resource_review.py
   execution_gates:
+  - review_policy_and_scoped_acceptance_resolved
   - tracking_intent_and_resource_scope_resolved
   - canonical_identity_and_duplicate_policy_applied
   - evidence_provenance_and_freshness_recorded
@@ -409,9 +411,11 @@ profiles:
   phase_gates:
     inspect: []
     execute:
+    - review_policy_and_scoped_acceptance_resolved
     - tracking_intent_and_resource_scope_resolved
     - canonical_identity_and_duplicate_policy_applied
     close:
+    - review_policy_and_scoped_acceptance_resolved
     - tracking_intent_and_resource_scope_resolved
     - canonical_identity_and_duplicate_policy_applied
     - evidence_provenance_and_freshness_recorded

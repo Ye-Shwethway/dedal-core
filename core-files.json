@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "core_version": "0.40.0",
+  "core_version": "0.40.1",
   "files": [
     ".github/workflows/repo-integrity.yml",
     ".github/workflows/runtime-contracts.yml",
@@ -146,6 +146,7 @@
     "scripts/outcome_properties.py",
     "scripts/profile_probe.py",
     "scripts/publication.py",
+    "scripts/resource_review.py",
     "scripts/route_task.py",
     "scripts/session_check.py",
     "scripts/validate_candidate_video_finder_routing.py",

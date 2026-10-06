@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.40.0",
+  "version": "0.40.1",
   "accepted_state": [
+    "DEDAL 0.40.1 requires profile-scoped proof retrieval, direct visual screening, retained displayed evidence and explicit resource/opportunity review; callable declaration/byte checks do not certify pixels or consent.",
     "DEDAL 0.40.0 adds Resource Intelligence as a global, resource-type-agnostic faculty for persistent discovery, canonical entity resolution, qualification, refresh/change detection, provenance-aware tracking, and downstream opportunity handoff; actual tracked targets remain private state and outcome gains remain prospective.",
     "DEDAL 0.39.2 adds review-delivery and video-publication profiles with SEO ownership, separate cover authority and final-master consistency checks; real-run reliability gains remain prospective.",
     "DEDAL 0.39.1 retains creative skill ownership while adding causal scene design, event-based source planning, observed evidence and explicit source-only motion handoff; media outcomes remain unmeasured.",

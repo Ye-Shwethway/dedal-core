@@ -1,4 +1,4 @@
-version: 0.40.0
+version: 0.40.1
 date: '2026-10-06'
 authority: library_direct_tree
 accepted:
@@ -11,6 +11,13 @@ accepted:
   execution_readiness: phase_scoped_receipt_coverage_plus_direct_tool_evidence
   migration_status: direct_tree_verified
 decisions:
+- id: resource_visual_review
+  value: Visual resource profiles require retained attributable image proof, DEDAL
+    direct inspection before recommendation, and explicit scoped Creator acceptance.
+    Resource photos do not verify opportunities; rejections suppress rediscovery.
+    Nonvisual policies remain supported. Validators check declarations/bytes, not
+    host events or visual taste.
+  date: '2026-10-06'
 - id: resource_intelligence_global_skill
   value: Resource Intelligence is a resource-type-agnostic persistent discovery and
     tracking faculty. Public Core owns generic profiles, record schemas, discovery/refresh/delta/provenance

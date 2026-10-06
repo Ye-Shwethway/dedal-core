@@ -11,7 +11,8 @@
     "desired_values",
     "freshness_policy",
     "discovery_policy",
-    "evidence_floor"
+    "evidence_floor",
+    "review_policy"
   ],
   "properties": {
     "schema_version": {
@@ -149,6 +150,52 @@
       "items": {
         "type": "string"
       }
+    },
+    "review_policy": {
+      "type": "object",
+      "required": [
+        "visual_required",
+        "creator_acceptance_required",
+        "visual_dimensions",
+        "allowed_resource_evidence",
+        "allowed_opportunity_evidence"
+      ],
+      "properties": {
+        "visual_required": {
+          "type": "boolean"
+        },
+        "creator_acceptance_required": {
+          "type": "boolean"
+        },
+        "visual_dimensions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowed_resource_evidence": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "resource_image",
+              "opportunity_image"
+            ]
+          }
+        },
+        "allowed_opportunity_evidence": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "opportunity_image"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false

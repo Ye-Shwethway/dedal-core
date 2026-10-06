@@ -59,5 +59,137 @@
       "id": "RI-09",
       "assertion": "Actual Creator/project-specific tracked targets and learned preferences remain outside public Core."
     }
+  ],
+  "review_cases": [
+    {
+      "id": "VR-01",
+      "variant": "valid",
+      "stage": "accept",
+      "expected_pass": true
+    },
+    {
+      "id": "VR-02",
+      "variant": "missing_policy",
+      "expected_error": "review_policy_unresolved"
+    },
+    {
+      "id": "VR-03",
+      "variant": "tags_only",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-04",
+      "variant": "no_inspection",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-05",
+      "variant": "dimension_fail",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-06",
+      "variant": "dimension_unknown",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-07",
+      "variant": "unsaved_preview",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-08",
+      "variant": "no_display",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-09",
+      "variant": "no_creator",
+      "expected_error": "explicit_scoped_creator_acceptance_missing"
+    },
+    {
+      "id": "VR-10",
+      "variant": "early_acceptance",
+      "expected_error": "acceptance_precedes_display"
+    },
+    {
+      "id": "VR-11",
+      "variant": "actor_photo_scene",
+      "scope": "opportunity",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-12",
+      "variant": "actor_approval_scene",
+      "scope": "opportunity",
+      "expected_error": "explicit_scoped_creator_acceptance_missing"
+    },
+    {
+      "id": "VR-13",
+      "variant": "rejected",
+      "expected_error": "creator_rejected"
+    },
+    {
+      "id": "VR-14",
+      "variant": "automatic_repromotion",
+      "expected_error": "rejection_requires_new_evidence_and_explicit_reconsideration"
+    },
+    {
+      "id": "VR-15",
+      "variant": "generated",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-16",
+      "variant": "html_error",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-17",
+      "variant": "changed_bytes",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-18",
+      "variant": "nonvisual_package",
+      "expected_pass": true
+    },
+    {
+      "id": "VR-19",
+      "variant": "present_only",
+      "stage": "present",
+      "expected_pass": true
+    },
+    {
+      "id": "VR-20",
+      "variant": "new_scoped_scene",
+      "scope": "opportunity",
+      "expected_pass": true
+    },
+    {
+      "id": "VR-21",
+      "variant": "reconsidered",
+      "expected_pass": true
+    },
+    {
+      "id": "VR-22",
+      "variant": "missing_dimension_reason",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-23",
+      "variant": "wrong_profile_acceptance",
+      "expected_error": "explicit_scoped_creator_acceptance_missing"
+    },
+    {
+      "id": "VR-24",
+      "variant": "wrong_profile_inspection",
+      "expected_error": "saved_inspected_displayed_visual_proof_missing"
+    },
+    {
+      "id": "VR-25",
+      "variant": "invalid_policy",
+      "expected_error": "review_policy_invalid"
+    }
   ]
 }

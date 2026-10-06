@@ -1,5 +1,11 @@
 ## 0.40.0 — Resource Intelligence
 
+## 0.40.1 — Resource review hardening
+
+- Require profile-scoped direct visual screening and retained displayed proof before visual acceptance.
+- Separate resource and opportunity decisions; preserve rejection and require explicit reconsideration.
+- Add declared-evidence and optional byte/hash checks with negative regression coverage.
+
 - Add `resource-intelligence` as a global, resource-type-agnostic persistent discovery and tracking faculty.
 - Define tracking profiles, canonical resource records, provenance/freshness, entity resolution, tracked-focus plus unseen-exploration discovery, refresh/delta semantics, and downstream consumer handoffs.
 - Keep actual tracked targets, Creator preferences and accumulated catalogues private; public Core carries generic contracts and schemas only.

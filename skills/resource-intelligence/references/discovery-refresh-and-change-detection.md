@@ -41,3 +41,7 @@ Use aliases, relationships, source families, changed fields, and consumer needs 
 ## Freshness
 
 Facts have different half-lives. Package versions, prices, availability, schedules, releases, and current roles may decay quickly. Stable identity, historical publication data, and immutable identifiers decay slowly. Refresh fields based on volatility rather than refreshing every record equally.
+
+## Review-aware refresh
+
+Read current scoped rejections before search. Exclude rejected resources from recommendation queues and ordinary repeat discovery. New profile/physique evidence may create a labelled reconsideration lead, but cannot erase rejection or restore accepted status. On visual tasks, finish your own direct pixel screening before recommending; when the scene source is unavailable, retrieve an attributable resource photo through image search for resource review. Use a bounded alternate source and declare access/retention failures. Do not spend an entire run on one inaccessible preview or promote a tag-only lead.

@@ -465,7 +465,7 @@
     "state/hydration-receipt.schema.json": "e0a59133693961f61509bf9c0b2465e9f1a0fa863d4a59a83f8d92e4cbac97ea",
     "state/routing-boundaries.json": "4174bf3e26e33dbb178bb3bf3935207b9069d23a6e468aeb43298e44513c8e22",
     "state/routing-decision.schema.json": "a16ce15e19c15e39c067478fe2276fbda27d133a6bdcef7fd12b3fd3cf7f22dd",
-    "state/skill-consolidation.json": "624a6e812925ca66ea7349dd7752fa7e3c3347ec4f8490ee0191ee0529cbaad7",
+    "state/skill-consolidation.json": "916c6c956198d9816a72355becc1f0ab5eaa70df7c0d96177656da4952cbbd01",
     "validators/validate_core.py": "cc11422879bc36e8d488d667efb5e3a606cc901faacd939b42436aa832e3a798"
   }
 }

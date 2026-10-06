@@ -46,6 +46,12 @@
       "overlap": "Evidence retrieval/synthesis; Skill Acquisition specializes external-skill study."
     },
     {
+      "skill": "resource-intelligence",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "creator-approved-architecture-plus-contract-validated",
+      "overlap": "Owns persistent cross-domain resource discovery/tracking, canonical identity, refresh and change intelligence; Research owns one-off evidence retrieval and downstream domain skills retain their own decision/mutation gates."
+    },
+    {
       "skill": "software-development",
       "decision": "KEEP",
       "evidence_level": "architecturally-distinct",

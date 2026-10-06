@@ -1,3 +1,10 @@
+## 0.40.3 — Discovery depth and calibration
+
+- Distinguish market/source breadth from depth: a broad run does not count a dense or high-opportunity lane as covered after one shallow query or one candidate.
+- Allocate adaptive follow-up effort using observed yield, profile-relative priors and Creator feedback while preserving planned-vs-executed coverage receipts and explicit budget limits.
+- Use accepted/rejected exemplars only as private profile calibration; never promote Creator-relative fit or market-specific observations into universal public facts.
+- Require materially different source-family, local-language, editorial/specialist or adjacency expansion before declaring a weak-yield broad lane exhausted.
+
 ## 0.40.0 — Resource Intelligence
 
 ## 0.40.2 — Broader resource discovery

@@ -34,6 +34,7 @@ This is the primary routing index for DEDAL Core.
 | Facebook Page management | `facebook-page-management` | `skills/facebook-page-management/` | active | Authenticated Facebook Page content, media, scheduling, engagement, analytics, administration, and policy-gated Messenger operations |
 | YouTube publishing | `youtube-publishing` | `skills/youtube-publishing/` | active | Verified multi-channel YouTube control, private-first resumable uploads, metadata/privacy/scheduling, playlists, analytics, and MCP-to-Gateway orchestration |
 | YouTube SEO | `youtube-seo` | `skills/youtube-seo/` | active | YouTube discovery research, surface-specific packaging, analytics diagnosis, experiments, transparent opportunity evidence, and channel-learning synthesis |
+| Resource Intelligence | `resource-intelligence`, `resource-tracking`, `resource-finder`, `resource-watchlist` | `skills/resource-intelligence/` | active | Persistent resource-type-agnostic discovery, canonical identity resolution, qualification, refresh/change detection, provenance-aware tracking, and downstream handoff |
 | Candidate Video Finder | `candidate-video-finder`, `video-candidate-finder` | `skills/candidate-video-finder/` | active | Scene-level candidate discovery, source/scene verification, hard-gate evaluation, evidence-backed shortlisting, Creator selection, and production/SEO handoff |
 | Presentation engineering | `presentation-engineering`, `pptx`, `slides` | `skills/presentation-engineering/` | active | Audience/argument framing, slide architecture, evidence mapping, visual hierarchy, editable PPTX strategy, speaker notes, template fidelity, and rendered deck QA |
 | Decision design | deliberate plan/architecture/product stress-test | `skills/decision-design/` | active | Uncertainty/reversibility-aware decision design with dependency frontier, experiments, thresholds, premortems, and durable learning |
@@ -74,6 +75,8 @@ Use `quality-engineering` when the task is primarily to decide what evidence is 
 Use `cloudflare-platform` for Cloudflare product/platform semantics; `database-engineering` for database-engine semantics; `security-engineering` for trust/authority/security policy; `software-development` for application implementation.
 
 Use `data-operations` for record/data integrity, reconciliation, staging, deterministic transforms, formulas/tables, and audit trails.
+
+Use `resource-intelligence` when the task requires a persistent catalogue/watchlist, repeated refresh, change detection, or accumulated qualified resources across runs. Use ordinary `research` for one-off resource finding with no persistence intent. Actual tracked targets and Creator/project-specific catalogue state remain private.
 
 Use `writing-editorial` when the main deliverable is prose and quality depends on semantic fidelity, structure, voice, terminology, translation/localization, or publication QA.
 

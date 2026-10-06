@@ -1,5 +1,5 @@
-version: 27
-last_reviewed: "2026-10-02"
+version: 28
+last_reviewed: "2026-10-06"
 
 routing:
   default_policy: smallest_matching_skill_set
@@ -606,3 +606,21 @@ skills:
         - {repo: "kajisho5/ffmpeg-skill", commit: "a6232b95f595aa35fa8cea0d055f0163baa908e9"}
         - {repo: "remotion-dev/skills", commit: "bd566b65d521b40fe92e1f26766e82de9e291693"}
         - {repo: "siril9/presentation-skill", commit: "311e29920c7c7ab37a93c12676bab7baecc0f4a6"}
+
+  resource-intelligence:
+    aliases: ["resource-intelligence", "resource-tracking", "resource-finder", "resource-watchlist"]
+    path: "skills/resource-intelligence"
+    entrypoint: "skills/resource-intelligence/SKILL.md"
+    status: active
+    independence: generic_discovery_domain
+    provenance:
+      adaptation: true
+      sources:
+        - source: "DEDAL persistent-state, evidence, and candidate-discovery architecture synthesis"
+          reviewed_on: "2026-10-06"
+        - source: "Contemporary persistent-agent memory, entity-resolution, provenance, and change-detection patterns reviewed during capability design"
+          reviewed_on: "2026-10-06"
+      adapted_on: "2026-10-06"
+    evidence:
+      promoted_on: "2026-10-06"
+      level: "architecture-contract-and-transfer-eval-validated; real outcome improvement prospective"

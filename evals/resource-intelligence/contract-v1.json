@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "skill": "resource-intelligence",
+  "cases": [
+    {
+      "id": "RI-01",
+      "task": "Build a persistent catalogue of Flutter packages matching offline-first sync requirements and refresh it later.",
+      "expect_profile": true,
+      "resource_type": "software_package",
+      "must": [
+        "persistent_tracking",
+        "unseen_exploration",
+        "provenance"
+      ]
+    },
+    {
+      "id": "RI-02",
+      "task": "Track new papers about long-horizon agent memory and tell me what changed since last run.",
+      "expect_profile": true,
+      "resource_type": "research_paper",
+      "must": [
+        "delta_detection",
+        "freshness"
+      ]
+    },
+    {
+      "id": "RI-03",
+      "task": "Find one explanation of SQLite WAL; do not save or track anything.",
+      "expect_profile": false,
+      "owner": "research"
+    },
+    {
+      "id": "RI-04",
+      "task": "Maintain an actor/work/scene opportunity catalogue for a channel niche.",
+      "expect_profile": true,
+      "resource_type": "mixed_domain_resource",
+      "must": [
+        "private_target_state",
+        "consumer_boundary"
+      ]
+    },
+    {
+      "id": "RI-05",
+      "assertion": "Subjective desired values are profile-relative and never promoted as universal facts."
+    },
+    {
+      "id": "RI-06",
+      "assertion": "Refresh begins from canonical tracked state and performs targeted delta checks plus bounded unseen exploration rather than blind full-universe search."
+    },
+    {
+      "id": "RI-07",
+      "assertion": "Ambiguous same-name resources are not force-merged without positive identity evidence."
+    },
+    {
+      "id": "RI-08",
+      "assertion": "A downstream handoff cannot authorize the consumer's domain mutation or approval gate."
+    },
+    {
+      "id": "RI-09",
+      "assertion": "Actual Creator/project-specific tracked targets and learned preferences remain outside public Core."
+    }
+  ]
+}

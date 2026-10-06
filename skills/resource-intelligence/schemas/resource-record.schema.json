@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DEDAL Resource Intelligence canonical resource record v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "resource_id",
+    "resource_type",
+    "canonical_name",
+    "lifecycle",
+    "observations",
+    "profile_fits",
+    "refresh_state",
+    "delta_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "resource_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resource_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canonical_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "aliases": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "external_ids": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "lifecycle": {
+      "enum": [
+        "candidate",
+        "tracked",
+        "watch",
+        "hold",
+        "retired",
+        "unavailable"
+      ]
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "claim",
+          "value",
+          "source_ref",
+          "observed_at",
+          "confidence"
+        ],
+        "properties": {
+          "claim": {
+            "type": "string"
+          },
+          "value": {},
+          "source_ref": {
+            "type": "string"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "valid_from": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "valid_until": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "confidence": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "authoritative"
+            ]
+          },
+          "evidence_class": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "profile_fits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "profile_id",
+          "band",
+          "rationale",
+          "evidence_refs"
+        ],
+        "properties": {
+          "profile_id": {
+            "type": "string"
+          },
+          "band": {
+            "enum": [
+              "core_target",
+              "high_potential",
+              "watch",
+              "exploratory",
+              "low_priority",
+              "disqualified"
+            ]
+          },
+          "rationale": {
+            "type": "string"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "opportunities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "description",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "open",
+              "verified",
+              "consumed",
+              "rejected",
+              "stale"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "refresh_state": {
+      "type": "object",
+      "required": [
+        "last_checked",
+        "freshness_class"
+      ],
+      "properties": {
+        "last_checked": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "freshness_class": {
+          "enum": [
+            "volatile",
+            "moderate",
+            "stable"
+          ]
+        },
+        "next_check_hint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "delta_state": {
+      "enum": [
+        "NEW",
+        "CHANGED",
+        "CONFIRMED",
+        "STALE",
+        "NO_CHANGE",
+        "REMOVED_OR_UNAVAILABLE",
+        "CONFLICT"
+      ]
+    },
+    "supersedes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "possible_matches": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

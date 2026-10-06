@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.39.2",
+  "version": "0.40.0",
   "accepted_state": [
+    "DEDAL 0.40.0 adds Resource Intelligence as a global, resource-type-agnostic faculty for persistent discovery, canonical entity resolution, qualification, refresh/change detection, provenance-aware tracking, and downstream opportunity handoff; actual tracked targets remain private state and outcome gains remain prospective.",
     "DEDAL 0.39.2 adds review-delivery and video-publication profiles with SEO ownership, separate cover authority and final-master consistency checks; real-run reliability gains remain prospective.",
     "DEDAL 0.39.1 retains creative skill ownership while adding causal scene design, event-based source planning, observed evidence and explicit source-only motion handoff; media outcomes remain unmeasured.",
     "DEDAL 0.38.4 treats lexical routing as candidates only; a task-bound semantic decision is required for profile activation, and receipt v4 checks route and read-before-gate chronology.",
@@ -49,7 +50,7 @@
     "Visual Narrative Production uses role-specific reference authority, structured shot specs and Visual Continuity Ledgers so identity/physique/performance, environment, camera-axis/screen-direction, lighting, props and scene-state deltas are not left to prompt memory.",
     "Visual Narrative Production action/interaction QA treats limb count, joint mechanics, balance, grip, load, object contact/intersection and force direction as explicit defect classes, and prompt neutralization is semantic clarification only, never policy evasion.",
     "Visual Narrative Production now uses a compact scene card and preflight/render/pixel-review/verified-delivery gates; tool capability and repeated-failure routing are explicit, while contract validation remains distinct from outcome evidence.",
-    "Visual Narrative Production successive mini-arcs use a local continuity envelope across 3\u20134 separate full-frame outputs, prioritize natural biomechanics and equipment geometry, and preserve accepted local state during narrow retries.",
+    "Visual Narrative Production successive mini-arcs use a local continuity envelope across 3–4 separate full-frame outputs, prioritize natural biomechanics and equipment geometry, and preserve accepted local state during narrow retries.",
     "Visual Narrative Production now enforces persistent object count/morphology/spatial-state continuity and proficiency-aware movement-form realism across successive stills.",
     "Generative Video Direction independently owns provider-neutral temporal shot design, reference-role/provider strategy, generation-contract compilation, generated-take QA and targeted repair.",
     "Canonical video-production is renamed/refocused to video-post-production; video-production and video-editing remain compatibility aliases, and post-production owns existing-media edit/assembly/finish/delivery rather than generative motion prompting.",

@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DEDAL Resource Intelligence tracking profile v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "profile_id",
+    "resource_type",
+    "purpose",
+    "hard_requirements",
+    "desired_values",
+    "freshness_policy",
+    "discovery_policy",
+    "evidence_floor"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resource_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "hard_requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "rule"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rule": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "desired_values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "exclusions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "freshness_policy": {
+      "type": "object",
+      "required": [
+        "default_class"
+      ],
+      "properties": {
+        "default_class": {
+          "enum": [
+            "volatile",
+            "moderate",
+            "stable"
+          ]
+        },
+        "field_overrides": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "volatile",
+              "moderate",
+              "stable"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "discovery_policy": {
+      "type": "object",
+      "required": [
+        "tracked_focus",
+        "unseen_exploration"
+      ],
+      "properties": {
+        "tracked_focus": {
+          "const": true
+        },
+        "unseen_exploration": {
+          "const": true
+        },
+        "source_hints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "time_window": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence_floor": {
+      "enum": [
+        "lead",
+        "single_source",
+        "corroborated",
+        "authoritative"
+      ]
+    },
+    "consumer_contracts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

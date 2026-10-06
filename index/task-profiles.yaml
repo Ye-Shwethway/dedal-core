@@ -1,5 +1,5 @@
 schema_version: 4
-version: 0.39.2
+version: 0.40.0
 profiles:
 - id: dedal-orison-image-to-video
   match:
@@ -366,3 +366,54 @@ profiles:
       publish: publish
     close:
       publish: close
+
+- id: resource-intelligence-tracking
+  match:
+    any:
+    - resource intelligence
+    - resource tracking
+    - track resources
+    - tracked resources
+    - resource watchlist
+    - persistent resource catalogue
+    - persistent resource catalog
+    - find and track resources
+    - refresh tracked resources
+    - what changed in tracked resources
+  primary: resource-intelligence
+  supporting:
+  - research
+  required_core:
+  - skills/resource-intelligence/SKILL.md
+  - skills/research/SKILL.md
+  - skills/resource-intelligence/references/resource-profile-and-record-model.md
+  - skills/resource-intelligence/references/discovery-refresh-and-change-detection.md
+  - skills/resource-intelligence/references/storage-privacy-and-consumer-handoffs.md
+  - skills/resource-intelligence/schemas/resource-profile.schema.json
+  - skills/resource-intelligence/schemas/resource-record.schema.json
+  execution_gates:
+  - tracking_intent_and_resource_scope_resolved
+  - canonical_identity_and_duplicate_policy_applied
+  - evidence_provenance_and_freshness_recorded
+  - change_state_classified
+  - private_target_state_kept_out_of_public_core
+  operations:
+    audit:
+    - inspect
+    build:
+    - execute
+    - close
+    refresh:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute:
+    - tracking_intent_and_resource_scope_resolved
+    - canonical_identity_and_duplicate_policy_applied
+    close:
+    - tracking_intent_and_resource_scope_resolved
+    - canonical_identity_and_duplicate_policy_applied
+    - evidence_provenance_and_freshness_recorded
+    - change_state_classified
+    - private_target_state_kept_out_of_public_core

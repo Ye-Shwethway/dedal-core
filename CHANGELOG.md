@@ -1,3 +1,10 @@
+## 0.40.0 — Resource Intelligence
+
+- Add `resource-intelligence` as a global, resource-type-agnostic persistent discovery and tracking faculty.
+- Define tracking profiles, canonical resource records, provenance/freshness, entity resolution, tracked-focus plus unseen-exploration discovery, refresh/delta semantics, and downstream consumer handoffs.
+- Keep actual tracked targets, Creator preferences and accumulated catalogues private; public Core carries generic contracts and schemas only.
+- Add transfer evals across software packages, research papers and media-resource catalogues; current evidence is contract/schema/routing validation, not yet measured workflow-speed or outcome improvement.
+
 ## 0.39.2 — Review handoff and asset-bound release
 
 - Add operation-specific review-delivery and video-release checks, separate media/cover authority, final probe/hash consistency, and prospective phase evidence.

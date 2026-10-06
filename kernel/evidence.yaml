@@ -1,4 +1,4 @@
-version: 0.39.2
+version: 0.40.0
 schema_version: 1
 levels: [declared, observed, local_property_verified, externally_accepted]
 receipt_schema: state/hydration-receipt.schema.json

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "core_version": "0.40.2",
+  "core_version": "0.40.3",
   "files": [
     ".github/workflows/repo-integrity.yml",
     ".github/workflows/runtime-contracts.yml",

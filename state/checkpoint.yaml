@@ -1,4 +1,4 @@
-version: 0.40.2
+version: 0.40.3
 date: '2026-10-06'
 authority: library_direct_tree
 accepted:
@@ -11,6 +11,13 @@ accepted:
   execution_readiness: phase_scoped_receipt_coverage_plus_direct_tool_evidence
   migration_status: direct_tree_verified
 decisions:
+- id: resource_discovery_depth_calibration
+  value: Broad resource discovery distinguishes breadth from depth. Dense or high-opportunity
+    lanes require bounded follow-up beyond a token query/candidate; executed coverage records
+    shallow versus expanded lanes. Creator accepted/rejected exemplars may calibrate private
+    profile thresholds and search allocation but never become universal public facts or replace
+    evidence for a new resource.
+  date: '2026-10-06'
 - id: resource_discovery_breadth
   value: Use source-family/market/angle coverage for broad resource discovery; reconcile
     Creator decisions and relevant owned outcomes before screening; adapt low-yield

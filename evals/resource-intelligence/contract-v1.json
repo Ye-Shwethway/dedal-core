@@ -58,6 +58,14 @@
     {
       "id": "RI-09",
       "assertion": "Actual Creator/project-specific tracked targets and learned preferences remain outside public Core."
+    },
+    {
+      "id": "RI-10",
+      "assertion": "Broad discovery distinguishes breadth from depth; one query, article, or candidate does not by itself establish adequate coverage of a dense or high-opportunity lane."
+    },
+    {
+      "id": "RI-11",
+      "assertion": "Creator accepted/rejected exemplars may calibrate a private profile and search allocation, but subjective fit and market observations are not promoted into universal public facts or substituted for new-resource evidence."
     }
   ],
   "review_cases": [

@@ -2,7 +2,7 @@
 
 > Machine authority: `state/checkpoint.yaml` and `state/current-checkpoint.json`.
 
-- Core version: `0.40.1`.
+- Core version: `0.40.2`.
 - Direct Library Core root: `/DEDAL/core`.
 - GitHub is the public history upstream. `core-manifest.yaml` records the migration base, while the current main HEAD must be read live.
 - External DEDAL Runtime MCPs are retired.
@@ -13,3 +13,5 @@
 Domain-specific accepted state remains in the machine checkpoint, registered skills, and task-relevant private overlay. Older checkpoints and release notes are historical evidence.
 
 - Resource Intelligence visual review separates discovery, direct screening, retained displayed proof and scoped Creator acceptance; nonvisual policy remains explicit.
+
+- Resource discovery expands through editorial, specialist and regional sources with actual coverage/yield receipts; reconcile accepted resources and consumed outcomes before screening.

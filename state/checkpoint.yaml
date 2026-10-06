@@ -1,4 +1,4 @@
-version: 0.40.1
+version: 0.40.2
 date: '2026-10-06'
 authority: library_direct_tree
 accepted:
@@ -11,6 +11,12 @@ accepted:
   execution_readiness: phase_scoped_receipt_coverage_plus_direct_tool_evidence
   migration_status: direct_tree_verified
 decisions:
+- id: resource_discovery_breadth
+  value: Use source-family/market/angle coverage for broad resource discovery; reconcile
+    Creator decisions and relevant owned outcomes before screening; adapt low-yield
+    searches and report real coverage. Consumer-specific locators do not define upstream
+    resource discovery.
+  date: '2026-10-06'
 - id: resource_visual_review
   value: Visual resource profiles require retained attributable image proof, DEDAL
     direct inspection before recommendation, and explicit scoped Creator acceptance.

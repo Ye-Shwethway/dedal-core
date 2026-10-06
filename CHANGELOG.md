@@ -1,5 +1,11 @@
 ## 0.40.0 — Resource Intelligence
 
+## 0.40.2 — Broader resource discovery
+
+- Plan upstream source-family, market/language and discovery-angle coverage instead of consumer-locator-only search.
+- Reconcile accepted resources and consumed owned outcomes before screening; report actual discovery coverage/yield and adapt low-yield runs.
+- Separate broad actor/resource pool expansion from downstream exact-opportunity selection.
+
 ## 0.40.1 — Resource review hardening
 
 - Require profile-scoped direct visual screening and retained displayed proof before visual acceptance.

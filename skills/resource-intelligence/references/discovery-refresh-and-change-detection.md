@@ -48,6 +48,19 @@ Read this section for catalogue expansion or poor discovery yield. Resource Inte
 4. Follow promising cross-links: interviews → credits → co-stars → regional editorial profiles → attributable visual evidence. Include working actors, supporting cast and emerging talent, not only famous leads. Independence is about originating evidence, not multiple syndicated copies of the same story.
 5. When initial yield is low, try at least one materially different family, market or angle. Do not count repeated variations on the same actor or franchise as broad exploration. Stop at the declared budget or after measured low marginal yield across diverse lanes; report which lanes were attempted and unresolved leads rather than silently delivering one actor as a complete broad run.
 
+### Breadth, depth, and calibration
+
+Broad discovery has two independent dimensions:
+
+- **breadth** — how many independent source families, markets/languages and discovery angles were actually attempted;
+- **depth** — how far each promising lane was explored using materially different queries/sources, local-language variants, adjacent entities and follow-on evidence.
+
+Do not mark a lane `covered` merely because one search was run, one article was opened, or one candidate was found. Record `planned`, `touched`, `expanded`, or an equivalent executed-depth state in the run receipt. A market/source segment that has high observed yield, many adjacent entities, or a profile-relative prior of dense qualified resources deserves additional bounded depth before closure. Conversely, repeated low-yield searches from substantially different families/angles can justify reducing effort.
+
+Creator feedback can calibrate a private tracking profile. Explicit accepted/rejected exemplars may tighten or relax subjective screening thresholds, help choose discovery vocabulary, and reallocate effort toward productive segments. Keep the calibration scoped to that profile: do not turn a Creator-relative physique, aesthetic, quality, price, or suitability judgment into a universal public fact. Calibration changes future prioritization; it does not rewrite the evidence or decision history of earlier records.
+
+A broad run may stop at the declared budget, but the report must identify shallow high-potential lanes separately from genuinely low-yield exhausted lanes. `Budget reached` is a valid stopping reason; pretending shallow coverage is exhaustive is not.
+
 ### Media-person example
 
 Use the following as a query planning matrix, not a hard-coded source allowlist. Verify that each publication/source and retrieved article actually exists; example domains are search hints, not evidence.

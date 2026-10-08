@@ -2,7 +2,7 @@
 
 > Machine authority: `state/checkpoint.yaml` and `state/current-checkpoint.json`.
 
-- Core version: `0.40.3`.
+- Core version: `0.40.7`.
 - Direct Library Core root: `/DEDAL/core`.
 - GitHub is the public history upstream. `core-manifest.yaml` records the migration base, while the current main HEAD must be read live.
 - External DEDAL Runtime MCPs are retired.
@@ -17,3 +17,7 @@ Domain-specific accepted state remains in the machine checkpoint, registered ski
 - Resource discovery expands through editorial, specialist and regional sources with actual coverage/yield receipts; reconcile accepted resources and consumed outcomes before screening.
 
 - Resource Intelligence now distinguishes broad coverage from lane depth; dense/high-yield lanes get bounded adaptive expansion, while Creator exemplars calibrate only private profile-relative screening.
+
+
+- Release recovery retains MSA CMS price history and the complete workbook visual baseline, including dark teal/white fallback headers and independent border mutations.
+- Release acceptance requires canonical byte readback, current private publication pointers and sanitized Git synchronization; interrupted metadata writes are not accepted state.

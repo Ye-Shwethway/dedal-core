@@ -1,3 +1,9 @@
+## 0.40.7 - 2026-10-08
+
+- Recovered interrupted publication: synchronize all normative release version fields, inventory, machine checkpoints and digest pointer.
+- Preserve Library MSA 0.40.4–0.40.6 formatting and CMS price-history changes while restoring previously published Resource Intelligence depth/calibration contracts.
+- Reconcile private continuity and public history only after full-byte release verification; UI policy remains staged for a separate change.
+
 ## 0.40.3 — Discovery depth and calibration
 
 - Distinguish market/source breadth from depth: a broad run does not count a dense or high-opportunity lane as covered after one shallow query or one candidate.
@@ -5,7 +11,34 @@
 - Use accepted/rejected exemplars only as private profile calibration; never promote Creator-relative fit or market-specific observations into universal public facts.
 - Require materially different source-family, local-language, editorial/specialist or adjacency expansion before declaring a weak-yield broad lane exhausted.
 
+
+## 0.40.6 - 2026-10-07
+
+- Fixed Medicine Store Assistant header-formatting drift exposed by live workbook normalization.
+- Ordinary human-facing tables no longer accept transparent/white + default-black headers as the generic fallback merely because that is the current state; when no deliberate approved style exists, the canonical MSA fallback is dark teal `#155F82` with white bold centered/middle/wrapped text.
+- Added header-style classification before formatting (approved/special vs unstyled) and separated border-only mutations from header-style mutations so borders cannot silently reset fills or font colors.
+- Live Medicine Store Cloud repair restored the standard filled header style on Final Reorder, Owner_Decision_Inbox, Expiry_Return_Review, Fixed Assets, and Indent_2M_Review_202609 while preserving special styles on Main Stock, Daily Usage, Price Change History, Stock Update, and Master Data.
+
+## 0.40.5 - 2026-10-07
+
+- Expanded Medicine Store Assistant `workbook-formatting.md` into a complete human-facing workbook visual baseline.
+- Added header readability defaults (bold, centered, middle, wrapped while preserving approved fills/font colors), freeze-pane guidance, body readability rules, number/date-format preservation, semantic-color/conditional-format protection, optional filter/banding policy, narrow width/height adjustment rules, and explicit template/special-layout precedence.
+- Kept thin solid black all-borders as the mandatory ordinary table baseline and made border-only operations preferred to avoid disturbing fills or formulas.
+- Explicit formatting-cleanup requests may normalize existing visible human-facing tables; hidden/helper/app-internal tabs remain out of blanket-restyle scope unless requested.
+
 ## 0.40.0 — Resource Intelligence
+
+## 0.40.4 - 2026-10-07
+
+- Promoted Medicine Store Assistant table-border presentation from private operational lessons into a canonical global workbook-formatting contract.
+- Added `skills/medicine-store-assistant/references/workbook-formatting.md`: human-facing MSA tables default to thin solid black all-borders across the actual table range, including headers and internal boundaries.
+- Border formatting is explicitly additive and must preserve semantic fills/font colors, conditional formatting, formulas, validation, number/date formats, and stronger template-specific styles.
+- MSA now loads the workbook-formatting contract before table-creating/populating/extending/material-rewrite spreadsheet mutations.
+
+
+## 0.40.3 - 2026-10-07
+
+- Medicine Store Assistant: integrated `Price Change History` into the canonical CMS price-list update workflow. Future price-list runs must snapshot per-lot old/new CMS prices and stock-at-update, write only `CMS Price`, preserve derived `Price`, append signed `Changed Price` history with red increases / green decreases, enforce idempotent retry/recovery, audit, and verify by readback.
 
 ## 0.40.2 — Broader resource discovery
 

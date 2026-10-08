@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "core_version": "0.40.3",
+  "core_version": "0.40.7",
   "files": [
     ".github/workflows/repo-integrity.yml",
     ".github/workflows/runtime-contracts.yml",
@@ -292,6 +292,7 @@
     "skills/medicine-store-assistant/references/system-contract.md",
     "skills/medicine-store-assistant/references/tab-sequencing-and-persistence.md",
     "skills/medicine-store-assistant/references/visual-marking.md",
+    "skills/medicine-store-assistant/references/workbook-formatting.md",
     "skills/medicine-store-assistant/references/zero-stock-sibling-cleanup.md",
     "skills/patient-report-assistant/IMPORT_SOURCE.md",
     "skills/patient-report-assistant/SKILL.md",

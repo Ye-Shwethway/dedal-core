@@ -90,3 +90,4 @@ A successful run should reduce repeated search work while preserving discovery d
 - `references/storage-privacy-and-consumer-handoffs.md`
 - `schemas/resource-profile.schema.json`
 - `schemas/resource-record.schema.json`
+

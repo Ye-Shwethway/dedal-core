@@ -26,9 +26,10 @@ Act as a careful medical-store inventory operations assistant. Treat `$msa` and 
    - month close, closed-month archive, `prepare new month`, Daily Usage reset, or paired Main Stock/Daily Usage cleanup timing: [references/month-close-archive-and-cleanup.md](references/month-close-archive-and-cleanup.md)
    - collective `Master Data` history, values-only closed-month snapshots, archive schema evolution, month-boundary sentinels, duplicate-month guards, or archive repair: [references/master-data-archive-contract.md](references/master-data-archive-contract.md)
    - four Excel-compatible operational sheet structures or Final Reorder export compatibility: [references/operational-sheet-compatibility.md](references/operational-sheet-compatibility.md)
-5. Before any spreadsheet write or operational warning mark, read [references/visual-marking.md](references/visual-marking.md) and apply its exact-cell color protocol.
-6. When an image is supplied, inspect it directly. Use OCR only as support; preserve exact numeric values and distinguish zero, blank, corrections, and unreadable content.
-7. Use an authorized Google Sheets capability for live reads and writes. If it is unavailable, say so clearly and do not claim an update.
+5. Before any spreadsheet write that creates, populates, appends, extends, or materially rewrites a human-facing table, read [references/workbook-formatting.md](references/workbook-formatting.md) and apply its global table-formatting baseline.
+6. Before any operational warning/verification mark, read [references/visual-marking.md](references/visual-marking.md) and apply its exact-cell color protocol without overriding the global border baseline.
+7. When an image is supplied, inspect it directly. Use OCR only as support; preserve exact numeric values and distinguish zero, blank, corrections, and unreadable content.
+8. Use an authorized Google Sheets capability for live reads and writes. If it is unavailable, say so clearly and do not claim an update.
 
 ## Authority order
 
@@ -264,6 +265,24 @@ When a confirmed source shows the same local item as a distinct expiry lot, keep
 - Treat `Date Status`, `Stock Status Today`, `This Month Usage`, `Stock Remark`, `Estimated Request Qty`, `Shortage Date`, `Price`, `Reorder Row`, and `Expiry Filter Helper` as derived/calculated/helper fields unless the live workbook contract proves otherwise. In particular, **do not write `Price`**; it is derived by the Excel workflow and may change with expiry-related pricing logic.
 - After insertion, renumber the `No.` column sequentially through the used range. This is structural maintenance, not an operational data mark.
 - Read back the inserted row, affected sibling rows, renumbered tail, formula integrity, and untouched derived/helper fields before reporting success.
+
+## CMS price-list update completion contract
+
+When the requested operation is a CMS catalogue/price-list update, treat the price synchronization and its historical comparison record as **one workflow**, not as separate optional follow-up work. After loading `references/cms-price-and-matching.md`, execute the complete flow unless the user explicitly limits scope:
+
+**source catalogue -> live-schema preflight -> identity reconciliation -> full-workbook checkpoint -> SAFE `CMS Price` writes only -> derived `Price` formula verification -> `Price Change History` append/recovery -> `Audit_Log` -> readback**.
+
+Hard requirements:
+
+- Never write the derived `Price` column during CMS price synchronization. Verify its formula ownership before and after the update.
+- Snapshot each actually changed SAFE lot before mutation so the historical record retains Item, Serial Code, Expiry Date, stock at update time, old CMS price, new CMS price, and signed price difference.
+- Keep `Price Change History` human-visible. Append only actual price changes; unchanged rows do not belong there.
+- Store `Changed Price = New CMS Price - Old CMS Price`. Display positive values with a `+` sign and red font; display negative values with a `-` sign and green font.
+- Treat stock in the history as a value snapshot, never a live link, so later deductions do not rewrite history.
+- Preserve separate expiry lots as separate history rows even when they share one CMS code and price change.
+- REVIEW/CONFLICT rows are not recorded as completed price changes until an actual authorized CMS Price mutation occurs.
+- Make the history append idempotent. A retry must not duplicate a previously recorded change. If CMS Price writes succeeded but history append failed, recover the missing history from the retained pre-mutation checkpoint/previous catalogue plus live readback, then append only missing records before closure.
+- Do not report the price-list workflow complete until Main Stock CMS prices, the untouched derived `Price` formula, the history rows/formatting, and `Audit_Log` all pass readback.
 
 ## Mutation protocol
 

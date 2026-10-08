@@ -1,9 +1,11 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.40.3",
+  "version": "0.40.7",
   "accepted_state": [
-    "Resource Intelligence broad discovery distinguishes source/market breadth from execution depth, deepens dense or high-yield lanes within budget, records shallow versus expanded coverage, and uses Creator exemplars only as private profile calibration rather than universal facts.",
+    "Core 0.40.7 reconciles release metadata and preserves Library MSA price history/workbook formatting together with previously published Resource Intelligence breadth/depth/calibration contracts. Full closure is owned by the private publication evidence; version labels alone do not prove acceptance.",
+    "DEDAL 0.40.6 hardens the Medicine Store Assistant workbook-formatting contract against header-style drift: deliberate/special header styles are preserved, unstyled ordinary human-facing headers fall back to dark teal #155F82 with white bold centered/middle/wrapped text, and border-only mutations are separated from header-style mutations so background/font colors are not silently reset.",
+    "DEDAL 0.40.3 integrates Price Change History into Medicine Store Assistant CMS price-list synchronization: per-lot pre-write snapshots, CMS Price-only mutation, derived Price preservation, signed red/green price-diff history, idempotent recovery, audit and readback are one closure workflow.",
     "Resource Intelligence broad discovery plans multiple source families, permitted markets and entity-generating editorial/specialist research; reconciles accepted resources and consumed outcomes before search; reports actual coverage/yield and separates resource pool expansion from consumer scene selection.",
     "DEDAL 0.40.1 requires profile-scoped proof retrieval, direct visual screening, retained displayed evidence and explicit resource/opportunity review; callable declaration/byte checks do not certify pixels or consent.",
     "DEDAL 0.40.0 adds Resource Intelligence as a global, resource-type-agnostic faculty for persistent discovery, canonical entity resolution, qualification, refresh/change detection, provenance-aware tracking, and downstream opportunity handoff; actual tracked targets remain private state and outcome gains remain prospective.",
@@ -61,7 +63,8 @@
     "Visual Narrative Production now treats performer, support apparatus, and camera as one geometric system: support-axis alignment and contact-map coherence are explicit admission checks, and camera placement must reveal natural biomechanics without twisting the performer or skewing equipment.",
     "File-mediated creative-agent collaboration uses a manifest-authoritative, version-pinned JSON handoff: DEDAL emits images_ready only after source-sequence validation, external agents reject stale manifests, and downstream failures return pair-specific bridge requests for narrow repair while private workspace details remain outside public Core.",
     "Core 0.38.5 unifies essential readiness checks, supports explicit unavailable Library versions, and scopes gates to operation/phase; receipts remain coverage evidence, not independent source or outcome proof.",
-    "Wave B/C: typed evidence properties, phase/read reuse, compact verified loading and publication reconciliation; controlled outcome evaluation with explicit evidence boundaries."
+    "Wave B/C: typed evidence properties, phase/read reuse, compact verified loading and publication reconciliation; controlled outcome evaluation with explicit evidence boundaries.",
+    "Resource Intelligence broad discovery distinguishes source/market breadth from execution depth, deepens dense or high-yield lanes within budget, records shallow versus expanded coverage, and uses Creator exemplars only as private profile calibration rather than universal facts."
   ],
   "evidence": [
     {
@@ -210,8 +213,8 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "130ccda8821a280dadfddc743b774fd6085eb84f",
-    "tree": "aa37a29a46e24f384bb189646d57c76c880ba6e8",
-    "relation": "Live GitHub main inspected before the 0.35.4 candidate sync; its only content delta from the recorded b702b9a base was YouTube comment-engagement, preserved in the merged candidate."
+    "sha": "5cc435b9f2b3b118aa5aca7a245c8b1bbea66f5c",
+    "tree": "19568279f605877234d96d4114af44c5bf01581a",
+    "relation": "Live public history base inspected for recovery; current publication commit is recorded in the private workstream checkpoint to avoid a self-referential commit hash."
   }
 }

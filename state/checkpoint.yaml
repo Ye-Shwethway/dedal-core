@@ -1,5 +1,5 @@
-version: 0.40.3
-date: '2026-10-06'
+version: 0.40.7
+date: '2026-10-08'
 authority: library_direct_tree
 accepted:
   assistant_name: DEDAL
@@ -11,13 +11,32 @@ accepted:
   execution_readiness: phase_scoped_receipt_coverage_plus_direct_tool_evidence
   migration_status: direct_tree_verified
 decisions:
-- id: resource_discovery_depth_calibration
-  value: Broad resource discovery distinguishes breadth from depth. Dense or high-opportunity
-    lanes require bounded follow-up beyond a token query/candidate; executed coverage records
-    shallow versus expanded lanes. Creator accepted/rejected exemplars may calibrate private
-    profile thresholds and search allocation but never become universal public facts or replace
-    evidence for a new resource.
-  date: '2026-10-06'
+- id: release_sync_recovery
+  value: Release closure requires all normative release-version fields, full inventory
+    digests, direct canonical readback, private current pointers and sanitized Git
+    history to reconcile. Finish-forward recovery preserved later Library domain changes
+    and restored previously published discovery-depth contracts; partial version writes
+    are not accepted releases.
+  date: '2026-10-08'
+- id: msa_global_table_formatting
+  value: 'Medicine Store Assistant uses a global human-facing workbook formatting
+    baseline: thin solid black all-borders; deliberate/special header styles are preserved,
+    while otherwise unstyled ordinary headers use the canonical dark-teal #155F82
+    fill with white bold centered/middle/wrapped text; border mutations and header-style
+    mutations are separated so fills/font colors are not silently reset; freeze panes,
+    number/date formats, semantic colors, conditional formatting, formulas, validation
+    and template-specific styles remain preserved. Explicit formatting cleanup may
+    normalize existing visible human-facing tables while hidden/helper/app-internal
+    tabs stay out of blanket-restyle scope.'
+  date: '2026-10-07'
+- id: cms_price_change_history
+  value: 'CMS price-list synchronization is one operational workflow: preserve/version
+    the catalogue, identity-gate changes, checkpoint, update only Main Stock CMS Price,
+    verify derived Price formulas remain untouched, append idempotent per-lot snapshots
+    to visible Price Change History with signed red/green Changed Price, audit, and
+    read back. Interrupted runs recover missing history from checkpoint/previous catalogue
+    plus live state.'
+  date: '2026-10-07'
 - id: resource_discovery_breadth
   value: Use source-family/market/angle coverage for broad resource discovery; reconcile
     Creator decisions and relevant owned outcomes before screening; adapt low-yield
@@ -96,3 +115,10 @@ decisions:
   value: deterministic profile probe flags explicit matches and ambiguity; unresolved
     tasks require semantic routing judgment
   date: '2026-10-04'
+- id: resource_discovery_depth_calibration
+  value: Broad resource discovery distinguishes breadth from depth. Dense or high-opportunity
+    lanes require bounded follow-up beyond a token query/candidate; executed coverage
+    records shallow versus expanded lanes. Creator accepted/rejected exemplars may
+    calibrate private profile thresholds and search allocation but never become universal
+    public facts or replace evidence for a new resource.
+  date: '2026-10-06'

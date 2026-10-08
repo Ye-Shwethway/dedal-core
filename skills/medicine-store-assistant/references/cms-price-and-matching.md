@@ -132,6 +132,69 @@ When identity is compatible, update only the appropriate current CMS price field
 
 Preserve the local operational item name unless the user explicitly authorizes reconciling the local identity/specification to authoritative catalogue evidence. Model the relationship as `Local Name <-> CMS catalogue identity/history`, allowing CMS brand or code to change over time.
 
+## Price-change history is part of the price-list workflow
+
+A successful CMS price-list update must also maintain the workbook's human-facing `Price Change History` tab. This history is a durable snapshot of **actual SAFE CMS price mutations**, not a live analytical view.
+
+### Canonical columns
+
+Keep the compact visible schema in this order unless the live workbook already contains an explicitly approved compatible extension:
+
+1. `Update Date`
+2. `Item`
+3. `Serial Code`
+4. `Expiry Date`
+5. `Stock at Update`
+6. `Old CMS Price`
+7. `New CMS Price`
+8. `Changed Price`
+
+`Changed Price = New CMS Price - Old CMS Price`. Store the numeric signed difference rounded/displayed to the catalogue's operational price precision. Use a number format that visibly shows `+` for positive values and `-` for negative values. Apply conditional formatting to the `Changed Price` cells: positive/increased price = **red font**, negative/decreased price = **green font**. Zero-difference rows are not appended.
+
+### Snapshot semantics
+
+Before mutating `Main Stock.CMS Price`, capture for every SAFE row whose price will actually change:
+
+- local Item,
+- Serial Code,
+- structured Expiry Date,
+- current stock at that moment (prefer the workbook's current-stock/stock-status value required by the live contract),
+- old CMS Price,
+- intended new CMS Price.
+
+The historical stock field must be a literal snapshot value, **not a formula or live reference**. Later stock deductions, receipts, expiry changes, or row lifecycle operations must not rewrite the historical record. When the same item/code exists in multiple expiry lots, append one history row per changed lot because expiry and stock-at-update can differ.
+
+### Ordering and mutation boundary
+
+The canonical execution order is:
+
+1. ingest/preserve the new versioned CMS catalogue;
+2. inspect live Main Stock schema and verify which column is `CMS Price` and which column is derived `Price`;
+3. compare previous/current catalogue evidence and classify SAFE / REVIEW / CONFLICT / NEW-UNMAPPED;
+4. create and verify the mandatory full-workbook pre-mutation checkpoint;
+5. snapshot the fields above for SAFE rows with a real price difference;
+6. update **only** the permitted `CMS Price` cells for SAFE rows; do not directly write `Price`;
+7. read back all written CMS Price cells and verify the derived `Price` formula anchor/range remains intact;
+8. create `Price Change History` if absent, or append to the existing compatible visible tab;
+9. append only the verified actual changes and apply/verify signed number formatting plus red/green conditional font rules;
+10. write one logically grouped `Audit_Log` record with checkpoint ID, changed/unchanged/review/conflict counts, history count, and recovery notes if any;
+11. read back the history rows, formatting rules, audit row, and representative/complete Main Stock price writes before closure.
+
+Do not append REVIEW/CONFLICT candidates merely because the new catalogue differs. A history row represents a completed CMS Price mutation. If a held identity is later confirmed and its CMS Price is actually updated, append it at that later update time.
+
+### Idempotency and interrupted-run recovery
+
+Price-list workflow closure must survive retries. Use a deterministic history identity at least as strong as `update/batch identity + local lot identity (item/code/expiry) + old CMS price + new CMS price`. Before appending, check whether the same completed change is already represented. Never duplicate history rows on rerun.
+
+If the CMS Price mutation succeeded but the history append or audit failed:
+
+- do **not** revert or rewrite the derived `Price` merely to recreate the diff;
+- use the retained pre-mutation checkpoint, previous versioned CMS catalogue, and live post-write readback to reconstruct old/new values;
+- append only missing history rows;
+- finish audit/readback before claiming completion.
+
+If history was appended but a CMS Price write did not verify, do not treat the history record as proof of a completed stock mutation; repair/reconcile against the checkpoint and authoritative live state before closure.
+
 ## Audit
 
 For each reconciled item, retain enough evidence to explain SAFE, REVIEW, CONFLICT, or NEW / UNMAPPED classification. Use `Audit_Log` for significant price synchronization, recycled-code findings, multi-row propagation, historical-source corrections, confirmed mapping changes, broad CS Name recovery passes, or global expiry-suffix normalization.

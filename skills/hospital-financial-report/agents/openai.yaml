@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hospital Financial Report"
+  short_description: "Audit monthly hospital cash flow and reports"
+  default_prompt: "Use $hospital-financial-report (hfr) to reconcile this month’s hospital cash flow and prepare a review."

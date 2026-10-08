@@ -1,5 +1,5 @@
-version: 28
-last_reviewed: "2026-10-06"
+version: 29
+last_reviewed: "2026-10-08"
 
 routing:
   default_policy: smallest_matching_skill_set
@@ -624,3 +624,14 @@ skills:
     evidence:
       promoted_on: "2026-10-06"
       level: "architecture-contract-and-transfer-eval-validated; real outcome improvement prospective"
+
+  hospital-financial-report:
+    aliases: ["$hfr", "hfr", "Hospital Financial Report", "hospital-financial-report"]
+    path: "skills/hospital-financial-report"
+    entrypoint: "skills/hospital-financial-report/SKILL.md"
+    status: active
+    independence: standalone_domain
+    provenance:
+      adaptation: true
+      source: "Creator-authorized cash-flow workflow; public generic procedure, private operational profile"
+      adapted_on: "2026-10-08"

@@ -1,3 +1,9 @@
+## 0.40.9 - 2026-10-08
+
+- Materialize Hospital Financial Report (hfr), source-grounded monthly reconciliation, immutable historical revisions, audit/checkpoints and private rule ownership.
+- Separate Creator approval and explicit export request, bound to the reviewed snapshot; verify four formula-free typed-value report files and exclude COA/helpers/external links.
+- Add synthetic review/export boundary regressions and Core routing; local validators do not authenticate Creator authority or replace live source/readback/render evidence.
+
 ## 0.40.8 - 2026-10-08
 
 - Integrate optional task-aware Interactive Response UI into existing global orchestration, boot/session contracts and continuity without creating a mandatory skill or task profile.

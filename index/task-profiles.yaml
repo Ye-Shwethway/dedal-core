@@ -1,5 +1,5 @@
 schema_version: 4
-version: 0.40.8
+version: 0.40.9
 profiles:
 - id: dedal-orison-image-to-video
   match:
@@ -367,7 +367,6 @@ profiles:
       publish: publish
     close:
       publish: close
-
 - id: resource-intelligence-tracking
   match:
     any:
@@ -422,3 +421,86 @@ profiles:
     - evidence_provenance_and_freshness_recorded
     - change_state_classified
     - private_target_state_kept_out_of_public_core
+- id: hospital-financial-report
+  match:
+    any:
+    - hospital financial report
+    - hospital cash flow
+    - monthly hospital cash flow
+    - hfr
+  primary: hospital-financial-report
+  supporting:
+  - data-operations
+  required_core:
+  - skills/hospital-financial-report/SKILL.md
+  - skills/hospital-financial-report/references/workflow.md
+  - skills/hospital-financial-report/scripts/validate_review.py
+  - skills/hospital-financial-report/scripts/verify_exports.py
+  - skills/data-operations/SKILL.md
+  required_private:
+  - /DEDAL/private-overlay/profiles/hospital-finance/default.json
+  - /DEDAL/private-overlay/state/workstreams/hospital-finance.current.md
+  execution_gates: &id004
+  - live_workbook_and_source_scope_read
+  - private_financial_rules_loaded
+  - no_unresolved_financial_inputs
+  - reconciliation_and_native_formulas_verified
+  - revision_snapshot_and_checkpoint_recorded
+  operations:
+    audit:
+    - inspect
+    reconcile:
+    - execute
+    - close
+    history:
+    - inspect
+  phase_gates:
+    inspect: []
+    execute:
+    - live_workbook_and_source_scope_read
+    - private_financial_rules_loaded
+    close: *id004
+- id: hospital-financial-report-export
+  match:
+    any:
+    - hfr export
+    - hospital financial report export
+    - hospital cash flow export
+  primary: hospital-financial-report
+  supporting:
+  - data-operations
+  required_core:
+  - skills/hospital-financial-report/SKILL.md
+  - skills/hospital-financial-report/references/workflow.md
+  - skills/hospital-financial-report/scripts/validate_review.py
+  - skills/hospital-financial-report/scripts/verify_exports.py
+  - skills/data-operations/SKILL.md
+  required_private:
+  - /DEDAL/private-overlay/profiles/hospital-finance/default.json
+  - /DEDAL/private-overlay/state/workstreams/hospital-finance.current.md
+  execution_gates: &id005
+  - live_workbook_and_source_scope_read
+  - private_financial_rules_loaded
+  - no_unresolved_financial_inputs
+  - reconciliation_and_native_formulas_verified
+  - revision_snapshot_and_checkpoint_recorded
+  - creator_approval_bound_to_revision
+  - explicit_export_request_bound_to_revision
+  - four_formula_free_exports_verified
+  operations:
+    audit:
+    - inspect
+    export:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute:
+    - live_workbook_and_source_scope_read
+    - private_financial_rules_loaded
+    - no_unresolved_financial_inputs
+    - reconciliation_and_native_formulas_verified
+    - revision_snapshot_and_checkpoint_recorded
+    - creator_approval_bound_to_revision
+    - explicit_export_request_bound_to_revision
+    close: *id005

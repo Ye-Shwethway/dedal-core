@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.40.8",
+  "version": "0.40.9",
   "accepted_state": [
+    "Hospital Financial Report (hfr) portable workflow and declaration/byte validators added; month history, revisions, audit/checkpoints, approval and export request are separate. Actual financial data is excluded from public Core.",
     "Core 0.40.8 integrates optional task-aware Interactive Response UI as a global response contract; prose-first, native supported controls, text/mobile fallback, explicit state labels and domain-authority boundaries are boot/session-loaded. Local planner tests are not host enforcement, UI rendering or service-persistence proof.",
     "Core 0.40.7 reconciles release metadata and preserves Library MSA price history/workbook formatting together with previously published Resource Intelligence breadth/depth/calibration contracts. Full closure is owned by the private publication evidence; version labels alone do not prove acceptance.",
     "DEDAL 0.40.6 hardens the Medicine Store Assistant workbook-formatting contract against header-style drift: deliberate/special header styles are preserved, unstyled ordinary human-facing headers fall back to dark teal #155F82 with white bold centered/middle/wrapped text, and border-only mutations are separated from header-style mutations so background/font colors are not silently reset.",
@@ -214,8 +215,8 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "71c7c0c96c7ea8bfc491a732c5c147444c91e780",
-    "tree": "298f35dab2df2b075a35d2b8b20defbe5fac28ac",
-    "relation": "Verified 0.40.7 history base; new publication identity is recorded in private current state to avoid self-referential source hashes."
+    "sha": "31688860ad5c969e723094a7f60908571cccf4dc",
+    "tree": "f92b95f0c4cec84bb8a4c451d4cbec5ccdf9091b",
+    "relation": "Previous accepted history base; this release Git identity is recorded privately after publication."
   }
 }

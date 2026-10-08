@@ -1,4 +1,4 @@
-version: 0.40.8
+version: 0.40.9
 date: '2026-10-08'
 authority: library_direct_tree
 accepted:
@@ -11,6 +11,15 @@ accepted:
   execution_readiness: phase_scoped_receipt_coverage_plus_direct_tool_evidence
   migration_status: direct_tree_verified
 decisions:
+- id: hospital_financial_report
+  date: '2026-10-08'
+  value: Hospital Financial Report (hfr) owns source-grounded monthly cash-flow reconciliation,
+    revision-bound Creator review and separate explicit export request, four independent
+    formula-free typed-value reports, append-only audit, immutable month snapshots
+    and recovery checkpoints. Public Core contains generic procedures/validators;
+    private overlay contains operational rules and references; real transactions remain
+    in hospital-owned systems. Superseding a reviewed revision invalidates approval.
+    Validators are not host enforcement or authenticated authority.
 - id: interactive_response_ui
   value: Optional task-aware global response presentation uses useful supported native
     controls with text/mobile fallback, explicit demo/calculated/live/persisted labels

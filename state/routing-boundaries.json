@@ -211,6 +211,15 @@
         "durable-memory-scope-provenance": "knowledge-memory"
       },
       "rule": "Self-Improvement owns cross-layer learning closure after corrections/regressions; it orchestrates but does not absorb domain implementation, which remains with the relevant registered domain owner, nor incident command, independent QA, external skill research, or memory governance."
+    },
+    {
+      "id": "hospital-finance",
+      "primary_owner_by_intent": {
+        "monthly_cash_flow": "hospital-financial-report",
+        "patient_counts": "patient-report-assistant",
+        "stock_mutation": "medicine-store-assistant"
+      },
+      "rule": "Hospital financial reporting owns cash-flow source reconciliation, audited revisions and values-only financial exports; patient counts and stock mutations retain their domain owners."
     }
   ],
   "routing_principles": [

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "core_version": "0.40.8",
+  "core_version": "0.40.9",
   "files": [
     ".github/workflows/repo-integrity.yml",
     ".github/workflows/runtime-contracts.yml",
@@ -167,6 +167,7 @@
     "scripts/validate_facebook_page_management.py",
     "scripts/validate_failure_recovery_contract.py",
     "scripts/validate_generative_video_direction.py",
+    "scripts/validate_hfr.py",
     "scripts/validate_infrastructure_engineering_routing.py",
     "scripts/validate_library_authority.py",
     "scripts/validate_media_workflow.py",
@@ -255,6 +256,12 @@
     "skills/generative-video-direction/schemas/temporal-continuity-ledger.schema.json",
     "skills/github/SKILL.md",
     "skills/github/references/mutation-preflight.md",
+    "skills/hospital-financial-report/SKILL.md",
+    "skills/hospital-financial-report/agents/openai.yaml",
+    "skills/hospital-financial-report/references/workflow.md",
+    "skills/hospital-financial-report/scripts/test_hfr.py",
+    "skills/hospital-financial-report/scripts/validate_review.py",
+    "skills/hospital-financial-report/scripts/verify_exports.py",
     "skills/ika/ADAPTATION_NOTES.md",
     "skills/ika/SKILL.md",
     "skills/ika/references/archive-contract.md",

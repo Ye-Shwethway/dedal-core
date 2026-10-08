@@ -212,6 +212,12 @@
       "decision": "TUNE",
       "evidence_level": "campaign-proven-explicit-gap-reopened",
       "overlap": "Use only for explicit acquisition, demonstrated gaps, underperformance or due freshness review."
+    },
+    {
+      "skill": "hospital-financial-report",
+      "decision": "KEEP",
+      "evidence_level": "Creator-authorized workflow and synthetic contract/byte tests; live report compilation not yet requested",
+      "overlap": "Owns hospital cash-flow reporting, not patient/service-count reporting or stock mutation"
     }
   ]
 }

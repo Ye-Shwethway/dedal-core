@@ -1,4 +1,4 @@
-version: 0.40.8
+version: 0.40.9
 schema_version: 1
 scope: global_response_orchestration
 default: prose

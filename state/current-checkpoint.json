@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.40.7",
+  "version": "0.40.8",
   "accepted_state": [
+    "Core 0.40.8 integrates optional task-aware Interactive Response UI as a global response contract; prose-first, native supported controls, text/mobile fallback, explicit state labels and domain-authority boundaries are boot/session-loaded. Local planner tests are not host enforcement, UI rendering or service-persistence proof.",
     "Core 0.40.7 reconciles release metadata and preserves Library MSA price history/workbook formatting together with previously published Resource Intelligence breadth/depth/calibration contracts. Full closure is owned by the private publication evidence; version labels alone do not prove acceptance.",
     "DEDAL 0.40.6 hardens the Medicine Store Assistant workbook-formatting contract against header-style drift: deliberate/special header styles are preserved, unstyled ordinary human-facing headers fall back to dark teal #155F82 with white bold centered/middle/wrapped text, and border-only mutations are separated from header-style mutations so background/font colors are not silently reset.",
     "DEDAL 0.40.3 integrates Price Change History into Medicine Store Assistant CMS price-list synchronization: per-lot pre-write snapshots, CMS Price-only mutation, derived Price preservation, signed red/green price-diff history, idempotent recovery, audit and readback are one closure workflow.",
@@ -55,7 +56,7 @@
     "Visual Narrative Production uses role-specific reference authority, structured shot specs and Visual Continuity Ledgers so identity/physique/performance, environment, camera-axis/screen-direction, lighting, props and scene-state deltas are not left to prompt memory.",
     "Visual Narrative Production action/interaction QA treats limb count, joint mechanics, balance, grip, load, object contact/intersection and force direction as explicit defect classes, and prompt neutralization is semantic clarification only, never policy evasion.",
     "Visual Narrative Production now uses a compact scene card and preflight/render/pixel-review/verified-delivery gates; tool capability and repeated-failure routing are explicit, while contract validation remains distinct from outcome evidence.",
-    "Visual Narrative Production successive mini-arcs use a local continuity envelope across 3–4 separate full-frame outputs, prioritize natural biomechanics and equipment geometry, and preserve accepted local state during narrow retries.",
+    "Visual Narrative Production successive mini-arcs use a local continuity envelope across 3\u20134 separate full-frame outputs, prioritize natural biomechanics and equipment geometry, and preserve accepted local state during narrow retries.",
     "Visual Narrative Production now enforces persistent object count/morphology/spatial-state continuity and proficiency-aware movement-form realism across successive stills.",
     "Generative Video Direction independently owns provider-neutral temporal shot design, reference-role/provider strategy, generation-contract compilation, generated-take QA and targeted repair.",
     "Canonical video-production is renamed/refocused to video-post-production; video-production and video-editing remain compatibility aliases, and post-production owns existing-media edit/assembly/finish/delivery rather than generative motion prompting.",
@@ -213,8 +214,8 @@
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "5cc435b9f2b3b118aa5aca7a245c8b1bbea66f5c",
-    "tree": "19568279f605877234d96d4114af44c5bf01581a",
-    "relation": "Live public history base inspected for recovery; current publication commit is recorded in the private workstream checkpoint to avoid a self-referential commit hash."
+    "sha": "71c7c0c96c7ea8bfc491a732c5c147444c91e780",
+    "tree": "298f35dab2df2b075a35d2b8b20defbe5fac28ac",
+    "relation": "Verified 0.40.7 history base; new publication identity is recorded in private current state to avoid self-referential source hashes."
   }
 }

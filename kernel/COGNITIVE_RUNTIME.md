@@ -83,3 +83,7 @@ Add the smallest missing capability. Remove or stop consulting capabilities that
 ## Boundary
 
 The Cognitive Runtime specifies DEDAL behavior. Some host platforms do not expose a programmable dispatcher capable of mechanically enforcing composition, tool visibility, or context injection. Where enforcement hooks exist, prefer deterministic host/runtime controls; where they do not, apply this contract as an explicit operating rule and report the limitation truthfully.
+
+## Response presentation
+
+Apply the compact normative `kernel/response.yaml` after resolving intent and domain authority. Prose is the default. Use the smallest supported interaction only when it helps the user compare, explore, adjust, preview or act; preserve essential text and mobile accessibility. Load current host rendering guidance only when creating a visual. Local controls are presentation/session intent, never evidence of persistence, live service state or canon mutation. Label demo, calculated, verified live and persisted states separately; unavailable UI falls back to plain content. Narrative stays primary and Universe modes retain their domain semantics. `scripts/response_plan.py` checks declared selection properties without rendering or executing actions.

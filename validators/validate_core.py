@@ -131,7 +131,7 @@ for path in ("kernel/boot.yaml", "kernel/kernel.yaml", "kernel/session.yaml",
         errors.append(f"archive_boot_dependency:{path}")
 if not errors:
     # The same essential entrypoint is used by boot, session readiness and CI.
-    for script in ("validate_document_schema.py", "validate_core_contracts.py", "validate_release_manifest.py", "validate_media_workflow.py", "validate_resource_intelligence.py"):
+    for script in ("validate_document_schema.py", "validate_core_contracts.py", "validate_release_manifest.py", "validate_media_workflow.py", "validate_resource_intelligence.py", "validate_response_policy.py"):
         check = subprocess.run([sys.executable, str(ROOT / "scripts" / script)], capture_output=True, text=True)
         if check.returncode:
             errors.append(script + ":" + (check.stdout + check.stderr).strip().replace("\n", "; "))

@@ -62,5 +62,14 @@
     "mechanical_enforcement_required_for_claim_of_enforcement": true,
     "instruction_level_application_allowed_when_host_has_no_dispatcher": true,
     "universal_host_interception_claim_forbidden": true
+  },
+  "response_presentation": {
+    "contract": "kernel/response.yaml",
+    "default": "prose",
+    "mandatory_ui": false,
+    "skill_loading": "host_rendering_guidance_only_when_creating_ui",
+    "selection_owner": "current_domain_intent_then_global_response_policy",
+    "local_controls": "presentation_or_session_intent_only",
+    "host_enforcement": "not_claimed"
   }
 }

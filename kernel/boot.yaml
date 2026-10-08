@@ -1,4 +1,4 @@
-version: 0.40.7
+version: 0.40.8
 authority: library_direct
 canonical_root: /DEDAL/core
 metadata:
@@ -33,6 +33,7 @@ boot_sequence:
     sources:
       - kernel/kernel.yaml
       - kernel/session.yaml
+      - kernel/response.yaml
     required: true
   - id: accepted_state
     kind: load_checkpoint

@@ -1,5 +1,5 @@
 schema_version: 4
-version: 0.40.7
+version: 0.40.8
 profiles:
 - id: dedal-orison-image-to-video
   match:
@@ -116,6 +116,7 @@ profiles:
   - index/task-profiles.yaml
   - state/checkpoint.yaml
   - core-manifest.yaml
+  - kernel/response.yaml
   - state/active-release.json
   - docs/evolution/IMPROVEMENT_PROTOCOL.md
   execution_gates: &id003

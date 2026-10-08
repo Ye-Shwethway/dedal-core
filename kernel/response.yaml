@@ -1,0 +1,52 @@
+version: 0.40.8
+schema_version: 1
+scope: global_response_orchestration
+default: prose
+selection: semantic_intent_then_smallest_useful_supported_surface
+mandatory_ui: false
+mandatory_specialist_skill: false
+planner: scripts/response_plan.py
+planner_boundary: declared_inputs_only_no_rendering_no_host_enforcement_no_external_actions
+eligible_functions:
+  - parameter_exploration
+  - bounded_decision
+  - report_view
+  - workflow_configuration
+  - multi_attribute_comparison
+  - narrative_navigation
+  - ouie_snapshot
+  - role_mode_control
+controls: native_supported_buttons_selectors_sliders_checkboxes_inputs_charts_tables
+rules:
+  - resolve_current_intent_and_domain_profile_before_presentation
+  - use_prose_unless_interaction_materially_helps_understand_compare_adjust_preview_or_act
+  - keep_simple_questions_explanations_and_immersive_writing_text_first
+  - never_create_dashboards_forms_or_controls_as_decoration
+  - use_forms_only_for_simultaneous_collection_of_multiple_essential_details
+  - keep_essential_content_available_as_text_and_comprehensible_on_mobile
+  - use_semantic_controls_labels_keyboard_focus_and_touch_accessible_actions
+  - synchronize_dependent_values_when_local_inputs_change
+  - unavailable_or_uncertain_host_capability_falls_back_to_plain_content
+  - never_invent_widgets_callbacks_network_background_work_or_followup_submission
+  - local_controls_change_presentation_or_session_intent_only
+  - consequential_actions_require_creator_authority_domain_gates_real_tools_and_readback
+  - followup_turn_submission_is_not_persistence_or_service_mutation
+  - high_stakes_information_prioritizes_verified_values_clarity_and_required_review
+state_labels:
+  illustrative_demo: invented_or_staged_example_not_current_truth
+  calculated_from_entered_data: local_computation_not_live_or_persisted
+  verified_live: authoritative_current_readback_with_source_and_observed_time
+  persisted: authorized_owner_write_plus_readback_with_identity_and_observed_time
+universe:
+  modes: [Observing, Guided, Autonomous]
+  mode_semantics: preserve_established_domain_semantics
+  mode_selection: presentation_or_session_intent_until_domain_owner_verifies
+  canon_mutation_from_local_controls: forbidden
+  snapshots: cite_verified_checkpoint_or_context_and_label_stale_or_unknown
+  story_choices: followup_turn_only_when_host_support_is_verified
+  automatic_simulation_or_realtime_world_claim: requires_actual_external_mechanism
+  narrative: prose_first_controls_secondary_when_requested_or_useful
+verification:
+  declarations_and_local_planner_properties: scripts/validate_response_policy.py
+  rendered_layout_and_interaction: require_actual_host_or_browser_evidence
+  service_truth_and_persistence: require_authoritative_tool_evidence

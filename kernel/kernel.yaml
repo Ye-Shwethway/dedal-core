@@ -1,4 +1,4 @@
-version: 0.40.7
+version: 0.40.8
 contract_rule: yaml_is_contract_markdown_is_view
 invariants:
 - id: live_state_outranks_memory
@@ -34,3 +34,6 @@ invariants:
 - id: public_private_boundary
   enforce: validator
   spec: ref:kernel/state-boundary.yaml
+- id: response_presentation
+  enforce: reasoning
+  spec: ref:kernel/response.yaml

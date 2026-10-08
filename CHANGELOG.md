@@ -1,3 +1,9 @@
+## 0.40.8 - 2026-10-08
+
+- Integrate optional task-aware Interactive Response UI into existing global orchestration, boot/session contracts and continuity without creating a mandatory skill or task profile.
+- Preserve prose/text/mobile fallback, supported native controls, demo/calculated/live/persisted labels, domain-authorized write/readback boundaries and Universe mode/canon semantics.
+- Add a declaration-only response planner and 20 positive/negative contract cases; no host renderer, callback, background processing or universal enforcement is claimed.
+
 ## 0.40.7 - 2026-10-08
 
 - Recovered interrupted publication: synchronize all normative release version fields, inventory, machine checkpoints and digest pointer.

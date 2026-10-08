@@ -1,4 +1,4 @@
-version: 0.40.7
+version: 0.40.8
 start:
 - id: read_boot_contract
   kind: read
@@ -7,6 +7,10 @@ start:
 - id: read_kernel
   kind: read
   file: kernel/kernel.yaml
+  required: true
+- id: read_response_contract
+  kind: read
+  file: kernel/response.yaml
   required: true
 - id: read_checkpoint
   kind: read

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "scope": "local_policy_and_planner_properties_not_rendered_UI_or_external_truth",
+  "cases": [
+    {"id":"plain-answer","request":{},"surface":"prose"},
+    {"id":"no-benefit","request":{"function":"report_view","host_ui_supported":true},"surface":"prose"},
+    {"id":"unavailable-host","request":{"function":"parameter_exploration","interaction_benefit":true},"surface":"prose"},
+    {"id":"adjustable-values","request":{"function":"parameter_exploration","interaction_benefit":true,"host_ui_supported":true,"data_state":"calculated_from_entered_data"},"surface":"compact_ui_with_text","label":"calculated_from_entered_data"},
+    {"id":"demo-scenario","request":{"function":"bounded_decision","interaction_benefit":true,"host_ui_supported":true},"surface":"compact_ui_with_text","label":"illustrative_demo"},
+    {"id":"immersive-prose","request":{"function":"ouie_snapshot","narrative":true,"interaction_benefit":true,"host_ui_supported":true},"surface":"prose"},
+    {"id":"requested-ouie","request":{"function":"ouie_snapshot","narrative":true,"ui_requested":true,"interaction_benefit":true,"host_ui_supported":true},"surface":"prose_with_secondary_ui"},
+    {"id":"role-mode-no-canon-write","request":{"function":"role_mode_control","interaction_benefit":true,"host_ui_supported":true},"surface":"compact_ui_with_text"},
+    {"id":"consequential-preview","request":{"function":"workflow_configuration","interaction_benefit":true,"host_ui_supported":true,"consequential":true},"surface":"compact_ui_with_text","action":"authorized_domain_tools_and_readback_required"},
+    {"id":"single-field-no-form","request":{"function":"workflow_configuration","interaction_benefit":true,"host_ui_supported":true,"essential_fields":1},"surface":"compact_ui_with_text","form":false},
+    {"id":"essential-multi-field-form","request":{"function":"workflow_configuration","interaction_benefit":true,"host_ui_supported":true,"essential_fields":3},"surface":"compact_ui_with_text","form":true},
+    {"id":"comparison-not-form","request":{"function":"multi_attribute_comparison","interaction_benefit":true,"host_ui_supported":true,"essential_fields":3},"surface":"compact_ui_with_text","form":false},
+    {"id":"missing-live-proof","request":{"data_state":"verified_live"},"reject":true},
+    {"id":"attributed-live","request":{"data_state":"verified_live","source_ref":"fixture:owner","observed_at":"2026-10-08T04:00:00Z","readback_ref":"fixture:read"},"surface":"prose","label":"verified_live"},
+    {"id":"unverified-persistence","request":{"data_state":"persisted","source_ref":"fixture:owner","observed_at":"2026-10-08T04:00:00Z","readback_ref":"fixture:read"},"reject":true},
+    {"id":"declared-persistence","request":{"data_state":"persisted","source_ref":"fixture:owner","observed_at":"2026-10-08T04:00:00Z","readback_ref":"fixture:read","authorized_write":true},"surface":"prose","label":"persisted"},
+    {"id":"stale-cannot-be-live","request":{"data_state":"verified_live","source_ref":"fixture:owner","observed_at":"2026-10-08T04:00:00Z","readback_ref":"fixture:read","stale":true},"reject":true},
+    {"id":"unknown-widget","request":{"function":"invented_widget"},"reject":true},
+    {"id":"unknown-callback","request":{"callback":"background-submit"},"reject":true},
+    {"id":"false-string-not-boolean","request":{"host_ui_supported":"false"},"reject":true}
+  ]
+}

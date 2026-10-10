@@ -1,4 +1,4 @@
-version: 0.40.11
+version: 0.40.12
 schema_version: 1
 authority: single_direct_library_core_tree
 coordinator: scripts/publication.py

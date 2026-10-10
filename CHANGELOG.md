@@ -1,10 +1,16 @@
+## 0.40.12 - 2026-10-10
+
+- Validate creative registry aliases as parsed YAML data, preserving active ownership and legacy alias requirements across equivalent formatting.
+- Add semantic positive/negative registry regressions and include Generative Video Direction checks in Runtime Contracts CI.
+- Correct the duplicated 0.40.11 changelog heading to retain distinct 0.40.10 history.
+
 ## 0.40.11 - 2026-10-10
 
 - Repair active CV skill consolidation coverage exposed by GitHub Runtime Contracts CI after 0.40.10 publication.
 - Add CV Resume Engineering NEEDS_EVIDENCE classification with non-overlapping responsibility boundaries.
 - Rebuild canonical release hashes and pointer; preserve v0.40.10 history as a distinct prior release.
 
-## 0.40.11 - 2026-10-10
+## 0.40.10 - 2026-10-10
 
 - Introduce CV / Resume Engineering with evidence-bound chronology, no invented qualifications, human-facing premium and ATS-safe formats, and visual/readability safeguards.
 - Gate completion on editable/PDF parity, full-page raster review, no unintended text overlap, typography and zero unapproved authoring labels.

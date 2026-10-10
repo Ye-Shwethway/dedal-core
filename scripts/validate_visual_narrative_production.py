@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 from pathlib import Path
+import yaml
 
 root = Path(__file__).resolve().parents[1]
 skill = (root / 'skills/visual-narrative-production/SKILL.md').read_text()
@@ -8,7 +9,7 @@ notes = (root / 'skills/visual-narrative-production/ADAPTATION_NOTES.md').read_t
 contract = (root / 'evals/visual-narrative-production/contract-v2.md').read_text()
 shot_schema = json.loads((root / 'skills/visual-narrative-production/schemas/shot-spec.schema.json').read_text())
 ledger_schema = json.loads((root / 'skills/visual-narrative-production/schemas/visual-continuity-ledger.schema.json').read_text())
-registry = (root / 'index/SKILL_REGISTRY.yaml').read_text()
+registry = yaml.safe_load((root / 'index/SKILL_REGISTRY.yaml').read_text())['skills']
 routing = json.loads((root / 'state/routing-boundaries.json').read_text())
 refs = list((root / 'skills/visual-narrative-production/references').glob('*.md'))
 
@@ -83,9 +84,28 @@ outcome_eval = (root / 'evals/visual-narrative-production/outcome-evaluation-v1.
 assert 'First-pass usable rate' in outcome_eval and 'Escaped material defects' in outcome_eval
 assert 'previous skill version' in outcome_eval
 assert 'Repetition detector' in (root / 'skills/visual-narrative-production/references/self-review-and-sequence-audit.md').read_text()
-assert 'visual-narrative-production' in registry
-assert 'aliases: ["visual-narrative-production", "visual-direction"]' in registry
-assert 'skills/visual-direction' not in registry
+def valid_visual_registration(skills):
+    entry = skills.get('visual-narrative-production', {})
+    return (entry.get('status') == 'active'
+            and entry.get('entrypoint') == 'skills/visual-narrative-production/SKILL.md'
+            and {'visual-narrative-production', 'visual-direction'} <= set(entry.get('aliases', []))
+            and all(not str(value.get('entrypoint', '')).startswith('skills/visual-direction/')
+                    for value in skills.values()))
+
+assert valid_visual_registration(registry), 'visual registration identity, aliases or active status drift'
+# Accept equivalent YAML representations; reject real semantic loss and stale ownership.
+for aliases in ['["visual-narrative-production", "visual-direction"]',
+                '[visual-direction, visual-narrative-production]',
+                '\n  - visual-narrative-production\n  - visual-direction']:
+    entry = dict(registry['visual-narrative-production'])
+    entry['aliases'] = yaml.safe_load('aliases: ' + aliases)['aliases']
+    assert valid_visual_registration({'visual-narrative-production': entry})
+for field, value in [('aliases', ['visual-narrative-production']), ('status', 'retired'),
+                     ('entrypoint', 'skills/visual-direction/SKILL.md')]:
+    entry = dict(registry['visual-narrative-production'])
+    entry[field] = value
+    assert not valid_visual_registration({'visual-narrative-production': entry})
+assert not valid_visual_registration({**registry, 'stale': {'entrypoint': 'skills/visual-direction/SKILL.md'}})
 assert any('visual-narrative-production' in json.dumps(c) for c in routing['clusters'])
 assert 'private character identity' in notes.lower()
 

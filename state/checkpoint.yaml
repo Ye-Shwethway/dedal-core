@@ -1,5 +1,5 @@
-version: 0.40.11
-date: '2026-10-08'
+version: 0.40.12
+date: '2026-10-10'
 authority: library_direct_tree
 accepted:
   assistant_name: DEDAL
@@ -143,3 +143,7 @@ decisions:
 - id: cv_resume_engineering
   date: '2026-10-10'
   value: CV and resume authoring has a dedicated domain skill, source-of-truth claim ledger, explicit visual-versus-ATS variants, page geometry and render inspection gates; no unapproved notes, truncation or text overlap. Machine validation alone does not certify PDF visual quality. Personal CVs and portraits remain outside public Core.
+
+- id: semantic_registry_validation
+  date: '2026-10-10'
+  value: Creative registry checks validate parsed alias membership, active status and canonical entrypoints; equivalent YAML formatting must pass while missing aliases and stale ownership fail. CI contract success remains separate from representative task quality and host stability.

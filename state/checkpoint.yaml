@@ -1,4 +1,4 @@
-version: 0.41.0
+version: 0.41.1
 date: '2026-10-10'
 authority: library_direct_tree
 accepted:
@@ -155,3 +155,7 @@ decisions:
 - id: interruption_reconciliation
   date: '2026-10-10'
   value: Continue from the exact current private workstream and task-bound pending operation evidence. Reconcile actual owner state before replay; expected results are adopted, unknown/conflicting outcomes remain pending, and confirmed absence does not itself grant retry authority.
+
+- id: native_creative_handoff_validator
+  date: '2026-10-10'
+  value: Optional standard-library creative handoff validator and 24 regression cases verify scene shot declarations, EDL bounds and claim-reference structure without implying rendered media validation, Creator approval or extra runtime services.

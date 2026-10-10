@@ -35,6 +35,8 @@ jobs:
           python3 scripts/validate_session_receipt.py
           python3 scripts/validate_refinement.py
           python3 scripts/validate_lightweight_runtime.py
+          python3 -m unittest discover -s evals/creative-handoff -p "test_*.py" -q
+          python3 -m py_compile scripts/validate_creative_handoff.py
           python3 scripts/validate_creative_source_plan.py
           python3 scripts/validate_resource_intelligence.py
           python3 scripts/validate_response_policy.py

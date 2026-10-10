@@ -1,3 +1,8 @@
+## 0.41.1 - 2026-10-10
+
+- Add optional, native, dependency-free creative handoff validation with 24 targeted regressions, preserving existing skill ownership and on-demand loading.
+- Static checks do not certify rendered visuals, playback, provenance, or Creator approval.
+
 ## 0.41.0 - 2026-10-10
 
 - Separate selected-source task readiness from full distribution/release audits; ordinary tasks no longer require a complete local Core.

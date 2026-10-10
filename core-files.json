@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "core_version": "0.41.0",
+  "core_version": "0.41.1",
   "files": [
     ".github/workflows/repo-integrity.yml",
     ".github/workflows/runtime-contracts.yml",
@@ -24,6 +24,7 @@
     "docs/architecture/VISUAL_NARRATIVE_PRODUCTION_ARCHITECTURE.md",
     "docs/capabilities/CURRENT_CAPABILITIES.md",
     "docs/continuity/CURRENT_CHECKPOINT.md",
+    "docs/creative-handoff-contract.md",
     "docs/evolution/CAPABILITY_EXPANSION_ROADMAP.md",
     "docs/evolution/IMPROVEMENT_PROTOCOL.md",
     "docs/releases/0.12.0.md",
@@ -77,6 +78,7 @@
     "evals/consolidation/cases-v1.yaml",
     "evals/consolidation/efficiency-baseline-2026-09-14.md",
     "evals/context-engineering/contract-v1.json",
+    "evals/creative-handoff/test_creative_handoff.py",
     "evals/creative-production-routing/contract-v1.json",
     "evals/data-operations/contract-v1.md",
     "evals/database-engineering-routing/contract-v1.json",
@@ -162,6 +164,7 @@
     "scripts/validate_context_contract.py",
     "scripts/validate_core_contracts.py",
     "scripts/validate_core_contracts_negative.py",
+    "scripts/validate_creative_handoff.py",
     "scripts/validate_creative_production_routing.py",
     "scripts/validate_creative_source_plan.py",
     "scripts/validate_database_engineering_routing.py",

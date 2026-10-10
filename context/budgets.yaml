@@ -1,4 +1,4 @@
-version: 0.40.10
+version: 0.40.11
 budgets:
   boot_contract_tokens: 1400
   checkpoint_tokens: 2200

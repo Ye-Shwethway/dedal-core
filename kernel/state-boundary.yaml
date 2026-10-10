@@ -1,4 +1,4 @@
-version: 0.40.10
+version: 0.40.11
 public:
 - '** except explicitly private overlay and secrets'
 private:

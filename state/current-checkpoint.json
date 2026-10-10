@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.40.10",
+  "version": "0.40.11",
   "accepted_state": [
     "Hospital Financial Report (hfr) portable workflow and declaration/byte validators added; month history, revisions, audit/checkpoints, approval and export request are separate. Actual financial data is excluded from public Core.",
     "Core 0.40.8 integrates optional task-aware Interactive Response UI as a global response contract; prose-first, native supported controls, text/mobile fallback, explicit state labels and domain-authority boundaries are boot/session-loaded. Local planner tests are not host enforcement, UI rendering or service-persistence proof.",

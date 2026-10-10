@@ -218,6 +218,12 @@
       "decision": "KEEP",
       "evidence_level": "Creator-authorized workflow and synthetic contract/byte tests; live report compilation not yet requested",
       "overlap": "Owns hospital cash-flow reporting, not patient/service-count reporting or stock mutation"
+    },
+    {
+      "skill": "cv-resume-engineering",
+      "decision": "NEEDS_EVIDENCE",
+      "evidence_level": "creator-approved-workflow-contract-and-structural-validator; representative design outcome pending",
+      "overlap": "Owns CV/resume-specific evidence, human-facing/ATS variants and print QA; presentation-engineering covers slide decks, quality-engineering covers independent acceptance, writing-editorial covers prose."
     }
   ]
 }

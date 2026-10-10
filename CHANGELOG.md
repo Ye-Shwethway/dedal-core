@@ -1,4 +1,10 @@
-## 0.40.10 - 2026-10-10
+## 0.40.11 - 2026-10-10
+
+- Repair active CV skill consolidation coverage exposed by GitHub Runtime Contracts CI after 0.40.10 publication.
+- Add CV Resume Engineering NEEDS_EVIDENCE classification with non-overlapping responsibility boundaries.
+- Rebuild canonical release hashes and pointer; preserve v0.40.10 history as a distinct prior release.
+
+## 0.40.11 - 2026-10-10
 
 - Introduce CV / Resume Engineering with evidence-bound chronology, no invented qualifications, human-facing premium and ATS-safe formats, and visual/readability safeguards.
 - Gate completion on editable/PDF parity, full-page raster review, no unintended text overlap, typography and zero unapproved authoring labels.

@@ -34,6 +34,7 @@ jobs:
           python3 scripts/validate_profile_probe.py
           python3 scripts/validate_session_receipt.py
           python3 scripts/validate_refinement.py
+          python3 scripts/validate_lightweight_runtime.py
           python3 scripts/validate_creative_source_plan.py
           python3 scripts/validate_resource_intelligence.py
           python3 scripts/validate_response_policy.py

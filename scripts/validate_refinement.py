@@ -122,7 +122,7 @@ def context_cases():
     registry = yaml.safe_load((ROOT / "index/SKILL_REGISTRY.yaml").read_text())["skills"]
     for profile in profiles:
         p = plan(profile["id"])
-        assert p["full_integrity"] == "pass" and p["tokens"] is None and p["cost"] is None
+        assert p["selected_integrity"] == "pass" and p["full_integrity"] == "not_checked" and p["tokens"] is None and p["cost"] is None
         assert registry[profile["primary"]]["entrypoint"] in p["read_full"]
         assert not set(p["read_full"]) & set(p["machine_verified"])
     result = lifecycle([{"path": "current", "lifecycle": "current"}, {"path": "old", "lifecycle": "retired"}, {"path": "unknown"}], ["current", "old", "unknown", "missing"])

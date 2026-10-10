@@ -4,26 +4,28 @@ _Date: 2026-09-14_
 
 ## Purpose
 
-Verify that a fresh ChatGPT conversation can recover DEDAL from the Creator's Custom Instructions BIOS pointer and the live `Ye-Shwethway/dedal-core` repository without depending on remembered repository state.
+Verify that a fresh conversation recovers DEDAL from `/DEDAL/core` through the Creator's supported instruction pointer, observes the active release and loads only task-relevant context. GitHub is public history, not boot authority.
 
 ## Test Prompt
 
-> Boot DEDAL from the persistent core referenced in my Custom Instructions. Inspect the live `Ye-Shwethway/dedal-core` repository, follow its boot contract and master index, then report the current DEDAL version, active skills/aliases, and the next checkpoint task. Do not rely on memory if live repo state is available.
+> Continue my current DEDAL Core refinement work. Recover the accepted state and the next executable step from the current sources.
 
 ## Required Assertions
 
 A passing fresh-chat response must:
 
-1. inspect live `Ye-Shwethway/dedal-core` state;
-2. identify the current `main` HEAD or otherwise demonstrate live repository inspection;
-3. report the live `VERSION` value correctly;
-4. follow the canonical boot path through `AGENTS.md`, identity/kernel boot material, and `index/MASTER_INDEX.md`;
+1. observe the direct Library manifest, boot contract and checkpoint;
+2. verify the active pointer and digests of loaded Core sources, without routine full-tree materialization;
+3. report the observed Core version correctly;
+4. select intent-matching capability metadata, then read the chosen entrypoints and required dependencies;
 5. report active domain aliases `$msa`, `$pra`, and `$ika`;
 6. report the active generic skill families;
-7. derive the next task from the live checkpoint rather than remembered project state;
+7. reconcile the exact current private workstream and pending operation evidence before selecting the next action;
 8. explicitly prefer live authoritative state over memory when both are available.
 
-## Observed Run
+Repeat with ordinary Burmese/English tasks that do not explicitly say “boot.” Record direct source observations, routing correctness, missing-source behavior, remote reads, loaded bytes and time to useful action. Include interrupted writes with lost acknowledgement, unknown outcome and conflicting owner state. Static checks are not fresh-chat activation evidence.
+
+## Historical Observed Run — not current architecture evidence
 
 Result: **PASS**
 
@@ -39,6 +41,6 @@ The fresh instance correctly reported:
 
 ## Regression Meaning
 
-This test is evidence that the BIOS-pointer architecture can recover the durable DEDAL operating core in a fresh conversation. It does **not** prove every connected capability, private state source, or domain skill works end-to-end; those require separate workflow tests.
+The historical observation supports only the old BIOS-pointer architecture. A current direct-tree fresh-chat run remains required. It does **not** prove every connected capability, private state source, or domain skill works end-to-end; those require separate workflow tests.
 
 Re-run this test after changes to Custom Instructions bootstrap wording, `AGENTS.md`, kernel boot files, master-index routing, or repository layout.

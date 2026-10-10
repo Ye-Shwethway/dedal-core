@@ -2,11 +2,11 @@
 
 > Machine authority: `state/checkpoint.yaml` and `state/current-checkpoint.json`.
 
-- Core version: `0.40.12`.
+- Core version: `0.41.0`.
 - Direct Library Core root: `/DEDAL/core`.
 - GitHub is the public history upstream. `core-manifest.yaml` records the migration base, while the current main HEAD must be read live.
 - External DEDAL Runtime MCPs are retired.
-- Lexical routing is candidate discovery; task-bound semantic decision and receipt v4 chronology are required before profile execution.
+- Lexical routing is candidate discovery; task-bound semantic decision and receipt v6 chronology are required before profile execution.
 - Active skill entrypoints and task-profile required references must exist in the complete `core-files.json` inventory.
 - Run `validators/validate_core.py`, `scripts/validate_profile_probe.py`, `scripts/validate_route_decision_negative.py`, `scripts/validate_session_receipt.py`, `scripts/validate_release_manifest.py`, and `scripts/session_check.py` after Core changes. The latter reports structural readiness without a task receipt; receipt coverage is not independent proof of source use.
 
@@ -25,3 +25,6 @@ Domain-specific accepted state remains in the machine checkpoint, registered ski
 - Interactive Response UI is optional global orchestration, boot/session-loaded from `kernel/response.yaml`; prose-first with text/mobile fallback, explicit state labels and preserved domain/canon authority. Planner tests do not prove actual host rendering or external actions.
 
 - Hospital Financial Report (`hfr`) adds source-grounded monthly reconciliation, private hospital rules, immutable history, checkpoint recovery and revision-bound approval plus separate formula-free export request. Public Core excludes real financial data.
+
+- Ordinary tasks verify selected sources only; full distribution audit remains for Core changes/publication or explicit audit. The catalog is generated metadata, not proof of available tools or loaded instructions.
+- Interrupted work resumes from exact current private workstream and authoritative pending-result readback, never from wholesale Core/history copying. Host freeze prevention and fresh-chat activation reliability remain unproven.

@@ -1,4 +1,4 @@
-version: 0.40.12
+version: 0.41.0
 contract_rule: yaml_is_contract_markdown_is_view
 invariants:
 - id: live_state_outranks_memory

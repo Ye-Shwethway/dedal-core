@@ -13,9 +13,12 @@ import yaml
 
 from validate_route_decision import validate as validate_route_decision
 from evidence import verify as verify_evidence, digest
+from selected_sources import verify_selected
+from validate_core_contracts import validate_selection
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
+parser.add_argument("--full", action="store_true", help="Explicit development/release audit of the complete Core")
 parser.add_argument("--profile", help="Matched task profile id")
 parser.add_argument("--receipt", type=Path, help="Session-specific source and gate evidence")
 parser.add_argument("--task-id", help="Current work unit id; prevents receipt reuse across tasks")
@@ -28,13 +31,29 @@ parser.add_argument("--artifact-root", type=Path, help="Root of full source and 
 parser.add_argument("--media-state", type=Path, help="Exact asset-bound review/approval/publication record")
 args = parser.parse_args()
 
-result = subprocess.run([sys.executable, str(ROOT / "validators/validate_core.py")],
-                        capture_output=True, text=True)
-if result.returncode:
-    print("STRUCTURAL READINESS: FAIL")
-    print(result.stdout, end="")
-    print(result.stderr, end="", file=sys.stderr)
-    sys.exit(result.returncode)
+try:
+    boot_sources = ["core-manifest.yaml", "kernel/boot.yaml", "kernel/kernel.yaml", "kernel/session.yaml",
+                    "kernel/response.yaml", "index/routing.yaml", "state/checkpoint.yaml",
+                    "scripts/session_check.py", "scripts/selected_sources.py", "scripts/validate_core_contracts.py",
+                    "scripts/validate_route_decision.py", "scripts/profile_probe.py", "scripts/evidence.py"]
+    verify_selected(ROOT, boot_sources)
+    routing_errors = validate_selection(yaml.safe_load((ROOT / "index/routing.yaml").read_text()))
+    if routing_errors:
+        raise ValueError(str(routing_errors))
+except (OSError, ValueError, KeyError, TypeError) as exc:
+    print("STRUCTURAL READINESS: FAIL " + str(exc))
+    sys.exit(1)
+if args.full:
+    result = subprocess.run([sys.executable, str(ROOT / "validators/validate_core.py")],
+                            capture_output=True, text=True)
+    if result.returncode:
+        print("STRUCTURAL READINESS: FAIL")
+        print(result.stdout, end="")
+        print(result.stderr, end="", file=sys.stderr)
+        sys.exit(result.returncode)
+    print("FULL INVENTORY INTEGRITY: PASS")
+else:
+    print("SELECTED SOURCE INTEGRITY: PASS; full inventory not checked")
 if not any((args.profile, args.receipt, args.task_id, args.task_file, args.route_decision, args.operation, args.phase, args.media_state)):
     print("STRUCTURAL READINESS: PASS")
     print("EXECUTION PREFLIGHT: UNVERIFIED (profile receipt not supplied)")
@@ -42,12 +61,20 @@ if not any((args.profile, args.receipt, args.task_id, args.task_file, args.route
 if not all((args.profile, args.receipt, args.task_id, args.task_file, args.route_decision, args.operation, args.phase)):
     parser.error("--profile, --receipt, --task-id, --task-file, --route-decision, --operation and --phase must be supplied together")
 
-profiles = yaml.safe_load((ROOT / "index/task-profiles.yaml").read_text())["profiles"]
+try:
+    verify_selected(ROOT, ["index/task-profiles.yaml"])
+    profiles = yaml.safe_load((ROOT / "index/task-profiles.yaml").read_text())["profiles"]
+except (OSError, ValueError, KeyError, TypeError) as exc:
+    raise SystemExit("EXECUTION PREFLIGHT: FAIL " + str(exc))
 profile = next((p for p in profiles if p["id"] == args.profile), None)
 if profile is None:
     raise SystemExit(f"EXECUTION PREFLIGHT: FAIL unknown profile {args.profile}")
 if args.phase not in profile.get("operations", {}).get(args.operation, []):
     raise SystemExit("EXECUTION PREFLIGHT: FAIL operation/phase not allowed")
+try:
+    verify_selected(ROOT, [*profile.get("required_core", []), *profile.get("required_machine", [])])
+except (OSError, ValueError, KeyError, TypeError) as exc:
+    raise SystemExit("EXECUTION PREFLIGHT: FAIL " + str(exc))
 try:
     receipt = json.loads(args.receipt.read_text())
     task_bytes = args.task_file.read_bytes()

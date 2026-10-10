@@ -22,6 +22,8 @@ Do not turn this into ceremony for trivial work.
 3. Do not repeatedly reread stable documents unless state may have changed or a conflict appears.
 4. Prefer live project/repository/service state over remembered summaries.
 5. Keep transient tool output out of durable context unless it changes a decision or proves completion.
+6. Use the direct selected-source working set for ordinary tasks. Full repository materialization and full inventory validators belong to Core development, publication or an explicit integrity audit. Runtime planning must not require irrelevant files to exist locally.
+7. Discover from `index/skill-catalog.yaml`; load activated entrypoints and required references. Registered, available, loaded and execution-ready are separate states. Unknown required sources are explicit blockers, never silent skips.
 
 ## Verified-state promotion
 
@@ -133,6 +135,10 @@ When work spans sessions or risks context loss, leave a compact truthful handoff
 - evidence completed;
 - unresolved risks/failures;
 - next executable step.
+
+Update the existing current workstream at meaningful work boundaries and before a risky multi-step write, not after every trivial read. Keep accepted release/state separate from candidate work. Record exact operation ID, target/owner, known result, unknown outcome, evidence reference and next action. Update the same file identity with its observed version; do not make another “current” copy.
+
+After interruption, start with that exact current record and its linked in-progress journal, then read only the authoritative owner state needed to reconcile pending operations. A lost acknowledgement is not a failed write. Adopt the expected observed result without replay; confirm absence and retry safety before retry; keep unknown/conflicting results pending. Refresh permission and volatile state before consequential continuation. `scripts/workstream_recovery.py` classifies task-bound observations; it neither authenticates them nor grants authority. No bulk history replay or full-tree download is a recovery prerequisite.
 
 Do not persist hidden chain-of-thought or private data merely for continuity.
 

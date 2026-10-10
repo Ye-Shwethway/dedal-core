@@ -1,4 +1,4 @@
-version: 0.40.12
+version: 0.41.0
 date: '2026-10-10'
 authority: library_direct_tree
 accepted:
@@ -147,3 +147,11 @@ decisions:
 - id: semantic_registry_validation
   date: '2026-10-10'
   value: Creative registry checks validate parsed alias membership, active status and canonical entrypoints; equivalent YAML formatting must pass while missing aliases and stale ownership fail. CI contract success remains separate from representative task quality and host stability.
+
+- id: lightweight_selected_runtime
+  date: '2026-10-10'
+  value: Routine task readiness verifies the active release pointer and selected sources without complete local materialization. Full inventory validation remains required for Core development and publication. Compact catalog registration is not tool availability, content activation or execution readiness.
+
+- id: interruption_reconciliation
+  date: '2026-10-10'
+  value: Continue from the exact current private workstream and task-bound pending operation evidence. Reconcile actual owner state before replay; expected results are adopted, unknown/conflicting outcomes remain pending, and confirmed absence does not itself grant retry authority.

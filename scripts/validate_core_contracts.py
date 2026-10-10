@@ -10,13 +10,8 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def validate(profiles, routing, registry, document, inventory):
+def validate_selection(routing):
     errors = []
-    active = {name for name, skill in registry.get("skills", {}).items() if skill.get("status") == "active"}
-    if profiles.get("schema_version") != 4 or routing.get("schema_version") != 2:
-        errors.append("routing_schema_version")
-    if set(profiles) != {"schema_version", "version", "profiles"} or not isinstance(profiles.get("profiles"), list):
-        errors.append("profile_root_shape")
     select = next((s for s in routing.get("steps", []) if s.get("id") == "select"), {})
     if (select.get("max_primary") != 1 or select.get("max_supporting") != 3
             or select.get("multiple_profiles") != "require_semantic_resolution"
@@ -25,6 +20,16 @@ def validate(profiles, routing, registry, document, inventory):
             or select.get("semantic_decision") != "required_before_profile_activation"
             or select.get("semantic_decision_schema") != "state/routing-decision.schema.json"):
         errors.append("routing_selection_policy")
+    return errors
+
+
+def validate(profiles, routing, registry, document, inventory):
+    errors = validate_selection(routing)
+    active = {name for name, skill in registry.get("skills", {}).items() if skill.get("status") == "active"}
+    if profiles.get("schema_version") != 4 or routing.get("schema_version") != 2:
+        errors.append("routing_schema_version")
+    if set(profiles) != {"schema_version", "version", "profiles"} or not isinstance(profiles.get("profiles"), list):
+        errors.append("profile_root_shape")
     known = {"id", "match", "primary", "supporting", "required_core", "required_private", "conditional_private", "execution_gates", "operations", "phase_gates", "required_machine", "media_workflow"}
     ids = set()
     for p in profiles.get("profiles", []):
@@ -115,6 +120,9 @@ if __name__ == "__main__":
     errors = validate(load("index/task-profiles.yaml"), load("index/routing.yaml"),
                       load("index/SKILL_REGISTRY.yaml"), load("index/document-schema.yaml"),
                       set(json.loads((ROOT / "core-files.json").read_text())["files"]))
+    from build_skill_catalog import build
+    if load("index/skill-catalog.yaml") != build(ROOT):
+        errors.append("skill_catalog_source_drift")
     if errors:
         print("CORE CONTRACTS: FAIL", *errors, sep="\n- ")
         sys.exit(1)

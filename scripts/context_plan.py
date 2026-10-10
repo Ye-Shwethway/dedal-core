@@ -1,21 +1,28 @@
 #!/usr/bin/env python3
-"""Build a small disclosure plan after full local release verification."""
+"""Plan disclosure after verifying only metadata and the selected source closure."""
 import argparse
 import json
 from pathlib import Path
 import time
 import yaml
-from validate_release_manifest import validate
+from selected_sources import verify_selected
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED = {"retired", "retired_historical", "historical", "historical_closed", "archived", "superseded", "duplicate", "trash", "legacy_unclassified"}
 
 
 def lifecycle(resources, selected):
-    by_path = {r["path"]: r for r in resources}
+    def normalize(path):
+        return path.removeprefix("/DEDAL/private-overlay/")
+    by_path = {}
+    for record in resources:
+        path = normalize(record["path"])
+        if path in by_path:
+            raise ValueError("duplicate private resource identity: " + path)
+        by_path[path] = record
     active, blocked, review = [], [], []
     for path in selected:
-        record = by_path.get(path)
+        record = by_path.get(normalize(path))
         status = record.get("lifecycle") if record else None
         if status in EXCLUDED:
             blocked.append(path)
@@ -29,15 +36,19 @@ def lifecycle(resources, selected):
 def plan(profile_id, root=ROOT, phase="execute"):
     started = time.perf_counter()
     root = Path(root)
-    errors = validate(root)
-    if errors:
-        raise ValueError("release verification failed: " + repr(errors))
+    verify_selected(root, ["index/task-profiles.yaml", "context/budgets.yaml", "index/skill-catalog.yaml",
+                           "scripts/context_plan.py", "scripts/selected_sources.py"])
     profiles = yaml.safe_load((root / "index/task-profiles.yaml").read_text())["profiles"]
     profile = next(p for p in profiles if p["id"] == profile_id)
     if phase not in profile["phase_gates"]:
         raise ValueError("unknown phase")
     read_paths = profile["required_core"]
     machine_paths = profile.get("required_machine", [])
+    catalog = yaml.safe_load((root / "index/skill-catalog.yaml").read_text())["skills"]
+    for skill in [profile["primary"], *profile.get("supporting", [])]:
+        if skill not in catalog or catalog[skill]["entrypoint"] not in read_paths:
+            raise ValueError("selected skill missing from catalog/dependency closure: " + skill)
+    integrity = verify_selected(root, [*read_paths, *machine_paths])
     active = json.loads((root / "state/active-release.json").read_text())
     sizes = {p: (root / p).stat().st_size for p in read_paths}
     budget = yaml.safe_load((root / "context/budgets.yaml").read_text())["observable_limits"]["profile_content_bytes"]
@@ -49,7 +60,8 @@ def plan(profile_id, root=ROOT, phase="execute"):
             "machine_file_bytes": sum((root / p).stat().st_size for p in machine_paths),
             "byte_budget": budget, "budget_status": "within" if sum(sizes.values()) <= budget else "exception_reason_required",
             "elapsed_ms": round((time.perf_counter() - started) * 1000, 3),
-            "tokens": None, "cost": None, "full_integrity": "pass",
+            "tokens": None, "cost": None, "full_integrity": "not_checked",
+            "integrity_scope": integrity["integrity_scope"], "selected_integrity": "pass",
             "boundary": "read_full remains mandatory; machine verification is not a content-read claim"}
 
 

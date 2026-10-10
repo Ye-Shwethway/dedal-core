@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.40.12",
+  "version": "0.41.0",
   "accepted_state": [
     "Hospital Financial Report (hfr) portable workflow and declaration/byte validators added; month history, revisions, audit/checkpoints, approval and export request are separate. Actual financial data is excluded from public Core.",
     "Core 0.40.8 integrates optional task-aware Interactive Response UI as a global response contract; prose-first, native supported controls, text/mobile fallback, explicit state labels and domain-authority boundaries are boot/session-loaded. Local planner tests are not host enforcement, UI rendering or service-persistence proof.",
@@ -66,7 +66,8 @@
     "File-mediated creative-agent collaboration uses a manifest-authoritative, version-pinned JSON handoff: DEDAL emits images_ready only after source-sequence validation, external agents reject stale manifests, and downstream failures return pair-specific bridge requests for narrow repair while private workspace details remain outside public Core.",
     "Core 0.38.5 unifies essential readiness checks, supports explicit unavailable Library versions, and scopes gates to operation/phase; receipts remain coverage evidence, not independent source or outcome proof.",
     "Wave B/C: typed evidence properties, phase/read reuse, compact verified loading and publication reconciliation; controlled outcome evaluation with explicit evidence boundaries.",
-    "Resource Intelligence broad discovery distinguishes source/market breadth from execution depth, deepens dense or high-yield lanes within budget, records shallow versus expanded coverage, and uses Creator exemplars only as private profile calibration rather than universal facts."
+    "Resource Intelligence broad discovery distinguishes source/market breadth from execution depth, deepens dense or high-yield lanes within budget, records shallow versus expanded coverage, and uses Creator exemplars only as private profile calibration rather than universal facts.",
+    "Selected-source runtime planning/readiness is separate from full development/publication audit; compact catalog and task-bound interrupted-operation reconciliation preserve existing consequential gates."
   ],
   "evidence": [
     {
@@ -209,14 +210,14 @@
     "Controlled replay evaluation does not establish general model quality, visual identity gains or live scheduled-service reliability."
   ],
   "next_executable_step": {
-    "id": "DEDAL-GVD-OUTCOME-EVAL",
-    "action": "Run representative Story->Still->Motion->Edit provider workflows and measure usable-take, retry burden, and continuity outcomes before broad generative-video quality claims."
+    "id": "DEDAL-LIGHTWEIGHT-REAL-TASK-EVAL",
+    "action": "Collect fresh-chat Burmese/English activation, routing, hydration, reconciliation and latency outcomes without claiming host freeze resolution."
   },
   "owner": "DEDAL Core",
   "last_verified_revision": {
     "ref": "main",
-    "sha": "31688860ad5c969e723094a7f60908571cccf4dc",
-    "tree": "f92b95f0c4cec84bb8a4c451d4cbec5ccdf9091b",
-    "relation": "Previous accepted history base; this release Git identity is recorded privately after publication."
+    "sha": "5e3012f5ef4260ab41fe90d7b6c52054f3725a62",
+    "tree": "9d2747ca77ce94a1a060631d7452b5668f69aa20",
+    "relation": "Verified prior accepted baseline; new release Git identity is recorded privately after publication."
   }
 }

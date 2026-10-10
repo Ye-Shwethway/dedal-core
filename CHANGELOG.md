@@ -1,3 +1,10 @@
+## 0.41.0 - 2026-10-10
+
+- Separate selected-source task readiness from full distribution/release audits; ordinary tasks no longer require a complete local Core.
+- Generate an intent catalog from active skill instruction metadata and keep capability availability distinct from registration.
+- Reconcile interrupted operations from exact workstream state and current owner evidence; unknown writes are never blindly replayed.
+- Update direct-tree bootstrap evaluation and preserve consequential profile gates.
+
 ## 0.40.12 - 2026-10-10
 
 - Validate creative registry aliases as parsed YAML data, preserving active ownership and legacy alias requirements across equivalent formatting.

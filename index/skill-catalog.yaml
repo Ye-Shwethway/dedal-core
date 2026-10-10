@@ -1,0 +1,297 @@
+schema_version: 1
+availability: resolve_current_tools_and_dependencies_per_task
+activation: metadata_is_not_content_read_or_execution_readiness
+skills:
+  medicine-store-assistant:
+    use_when: Operate and reconcile a medical-store inventory through authorized Google Sheets while preserving
+      the existing Excel/macro contract, exact source-document truth, expiry-separated lots, safe local-to-CMS identity
+      matching, separate fixed-asset handling, adaptive reorder reasoning, received-stock processing, expiry/return/discard
+      lifecycle management, and a human-first workbook lifecycle. Use for CMS supply intake, Daily Usage entry from
+      paper forms or photos, CMS price-list imports and updates, Main Stock reconciliation, received-stock processing,
+      fixed-asset transfer routing, reorder/Final Reorder review, near-expiry return-to-CMS review, expired-stock
+      retention/discard review, row-lifecycle cleanup review, workbook tab organization, expiry-lot handling, suspicious
+      recycled CMS IDs, inventory audits, or whenever the user invokes $msa or medicine-store-assistant.
+    aliases:
+    - $msa
+    - medicine-store-assistant
+    entrypoint: skills/medicine-store-assistant/SKILL.md
+    status: registered
+  patient-report-assistant:
+    use_when: Transcribe monthly hospital OPD/IPD paper forms or photos into an authorized Google Sheet, preserve
+      the workbook formula/manual-hybrid contract, verify the Monthly Report, and surface manual-only report fields
+      for review. Use when the user invokes patient-report-assistant or $pra for monthly patient-report data entry
+      or validation.
+    aliases:
+    - $pra
+    - patient-report-assistant
+    entrypoint: skills/patient-report-assistant/SKILL.md
+    status: registered
+  knowledge-archive:
+    use_when: Create, load, refresh, audit, and inspect durable evidence-linked project knowledge. Invoke with $ika
+      or knowledge-archive tasks.
+    aliases:
+    - $ika
+    - knowledge-archive
+    entrypoint: skills/ika/SKILL.md
+    status: registered
+  github:
+    use_when: 'Inspect and operate GitHub repositories safely: repository state, files, branches, commits, pull
+      requests, issues, Actions, logs, and artifacts. Use for DEDAL work that depends on live GitHub state.'
+    aliases: []
+    entrypoint: skills/github/SKILL.md
+    status: registered
+  files:
+    use_when: Work with uploaded, generated, Library, Project, and artifact files; retrieve the correct version,
+      inspect content, create/edit outputs, and preserve exact file/source identity.
+    aliases: []
+    entrypoint: skills/files/SKILL.md
+    status: registered
+  research:
+    use_when: Perform current, source-grounded research using live public sources when freshness, niche facts, comparison,
+      verification, evidence synthesis, or governed exploration matters.
+    aliases: []
+    entrypoint: skills/research/SKILL.md
+    status: registered
+  software-development:
+    use_when: Architect, implement, debug, test, review, and evolve software with repository-aware, production-minded
+      engineering discipline and evidence-backed completion.
+    aliases: []
+    entrypoint: skills/software-development/SKILL.md
+    status: registered
+  quality-engineering:
+    use_when: Independently evaluate whether software behavior is trustworthy through acceptance criteria, risk-based
+      test design, exploratory and automated verification, regression analysis, defect evidence, and readiness verdicts.
+      Use when the task is about proving quality rather than implementing the product or shipping it.
+    aliases: []
+    entrypoint: skills/quality-engineering/SKILL.md
+    status: registered
+  cloudflare-platform:
+    use_when: Design, build, configure, troubleshoot, and evolve systems on Cloudflare by selecting and composing
+      the right platform products while keeping drift-sensitive facts live-verified.
+    aliases: []
+    entrypoint: skills/cloudflare-platform/SKILL.md
+    status: registered
+  database-engineering:
+    use_when: 'Design, evolve, diagnose, and verify database semantics: schemas, keys/constraints, indexes/access
+      paths, query plans, transactions/isolation/locking, migrations, connection behavior, and engine-specific operational
+      tradeoffs across PostgreSQL, SQLite/D1, and related SQL systems.'
+    aliases: []
+    entrypoint: skills/database-engineering/SKILL.md
+    status: registered
+  reliability-engineering:
+    use_when: Keep production systems reliably useful through service-level thinking, observability strategy, actionable
+      alerting, incident response, production diagnosis, resilience, and post-incident learning.
+    aliases:
+    - sre
+    - reliability-engineering
+    entrypoint: skills/reliability-engineering/SKILL.md
+    status: registered
+  infrastructure-engineering:
+    use_when: Design, review, evolve, and reconcile declarative infrastructure safely across configuration, state,
+      live resources, plans, applies, imports, drift, modules, providers, and machine-image workflows.
+    aliases:
+    - iac
+    - infrastructure-engineering
+    entrypoint: skills/infrastructure-engineering/SKILL.md
+    status: registered
+  generative-video-direction:
+    use_when: Convert accepted story and visual state into model-feasible generative-video shots, motion/camera/performance
+      choreography, provider-neutral motion specs, provider-specific generation contracts, generated-take QA, and
+      targeted repair plans across video-generation providers.
+    aliases:
+    - generative-video-direction
+    - video-generation-direction
+    - ai-video-director
+    - motion-direction
+    entrypoint: skills/generative-video-direction/SKILL.md
+    status: registered
+  video-post-production:
+    use_when: Select, assemble, edit, subtitle, mix, finish, verify, and deliver existing video/audio media or generated
+      takes. Use for footage editing, rough cuts, pacing, reframing, retiming, captions, audio, effects, color,
+      encoding, and final media delivery; not for generative-video shot prompting or model direction.
+    aliases:
+    - video-post-production
+    - video-production
+    - video-editing
+    entrypoint: skills/video-post-production/SKILL.md
+    status: registered
+  facebook-page-management:
+    use_when: Read, publish, schedule, edit, moderate, analyze, and manage authorized Facebook Pages through a verified
+      execution surface while preserving Page identity, explicit mutation intent, read-back verification, and public/private
+      separation.
+    aliases:
+    - facebook-page-management
+    - facebook-pages
+    entrypoint: skills/facebook-page-management/SKILL.md
+    status: registered
+  youtube-publishing:
+    use_when: Prepare, upload, organize, schedule, brand, caption, and learn from YouTube publishing workflows across
+      multiple Creator-owned channels using the dedicated DEDAL YouTube MCP/Gateway or another verified execution
+      surface.
+    aliases:
+    - youtube-publishing
+    entrypoint: skills/youtube-publishing/SKILL.md
+    status: registered
+  youtube-seo:
+    use_when: Research, package, diagnose, experiment, and learn from YouTube discovery performance using first-party
+      channel analytics, public search evidence, transparent heuristics, and the existing YouTube Publishing execution
+      surface.
+    aliases:
+    - youtube-seo
+    entrypoint: skills/youtube-seo/SKILL.md
+    status: registered
+  candidate-video-finder:
+    use_when: Discover, verify, evaluate, and shortlist scene-level video candidates for a Creator-owned YouTube
+      channel before production, using source truth, channel evidence, bounded public demand/competition observations,
+      risk signals, and explicit Creator selection.
+    aliases:
+    - candidate-video-finder
+    - video-candidate-finder
+    entrypoint: skills/candidate-video-finder/SKILL.md
+    status: registered
+  presentation-engineering:
+    use_when: Design, build, edit, and verify professional slide decks and PPTX artifacts with strong narrative,
+      evidence, visual hierarchy, editability, and presentation-specific QA.
+    aliases:
+    - presentation-engineering
+    - pptx
+    - slides
+    entrypoint: skills/presentation-engineering/SKILL.md
+    status: registered
+  decision-design:
+    use_when: Stress-test plans, architectures, product decisions, and high-impact choices using process sizing,
+      dependency frontiers, reversibility, uncertainty, option value, commit/stop thresholds, and decision learning.
+      Use deliberately, not for routine fully specified work.
+    aliases: []
+    entrypoint: skills/decision-design/SKILL.md
+    status: registered
+  interface-design:
+    use_when: Design, redesign, audit, and refine user-facing software interfaces with brief-aware visual direction,
+      incumbent-state respect, evidence-backed design intelligence, accessibility, responsiveness, and bounded visual
+      verification. Use for websites, app UI, dashboards, product surfaces, and frontend UX; not backend-only work.
+    aliases: []
+    entrypoint: skills/interface-design/SKILL.md
+    status: registered
+  agent-engineering:
+    use_when: Design, improve, and evaluate AI-agent systems by engineering instructions, context, tools, harnesses,
+      loops, orchestration, observability, and long-horizon state. Use when agent output quality, reliability, efficiency,
+      or autonomy depends on more than the base model.
+    aliases: []
+    entrypoint: skills/agent-engineering/SKILL.md
+    status: registered
+  security-engineering:
+    use_when: 'Threat-model and harden software/agent workflows: trust boundaries, prompt injection, tool authority,
+      secrets, identity/privilege, supply chain, memory poisoning, destructive actions, and security verification.
+      Use when security risk is a primary concern or when untrusted input can influence privileged actions.'
+    aliases: []
+    entrypoint: skills/security-engineering/SKILL.md
+    status: registered
+  project-bootstrap:
+    use_when: 'Rapidly onboard to an unfamiliar or resumed project by building a compact authoritative context map:
+      goals, repository rules, architecture, commands, source-of-truth files, current checkpoint, risky areas, release
+      path, and next executable step. Use when entering a new repo/project, resuming after context loss, or creating
+      agent-facing project instructions.'
+    aliases: []
+    entrypoint: skills/project-bootstrap/SKILL.md
+    status: registered
+  release-engineering:
+    use_when: 'Safely turn verified source into attributable artifacts and deployed releases: versioning, reproducible
+      builds, artifact provenance, CI/CD, staged rollout, deployment verification, rollback, release notes, and
+      post-release evidence. Use when shipping software, producing APK/AAB/binaries/images/packages, or changing
+      production delivery pipelines.'
+    aliases: []
+    entrypoint: skills/release-engineering/SKILL.md
+    status: registered
+  data-operations:
+    use_when: 'Design and execute safe spreadsheet/data operations: schema inference, validation, reconciliation,
+      deduplication, formula integrity, staging/review/promotion, auditability, and deterministic transforms across
+      spreadsheets, CSVs, tables, and operational datasets.'
+    aliases: []
+    entrypoint: skills/data-operations/SKILL.md
+    status: registered
+  writing-editorial:
+    use_when: Design, draft, rewrite, translate, edit, and quality-check user-facing prose while preserving intent,
+      factual grounding, audience fit, terminology, voice, and multilingual fidelity.
+    aliases: []
+    entrypoint: skills/writing-editorial/SKILL.md
+    status: registered
+  story-weaver:
+    use_when: Develop fiction canon, scenes, beats, dialogue, character arcs, emotional causality, and narrative
+      continuity, and hand visualizable story truth to downstream visual or video production without conflating
+      prose with shot generation.
+    aliases:
+    - story-weaver
+    entrypoint: skills/story-weaver/SKILL.md
+    status: registered
+  visual-narrative-production:
+    use_when: Plan, generate, inspect, and deliver coherent successive scene shots or visual-novel stills. Use for
+      recurring-character image sequences, scene coverage, action/contact realism, reference consistency, camera
+      and environment continuity, visual QA, variation sets, and accepted visual anchors.
+    aliases:
+    - visual-narrative-production
+    - visual-direction
+    entrypoint: skills/visual-narrative-production/SKILL.md
+    status: registered
+  knowledge-memory:
+    use_when: Design and operate durable knowledge and memory across scopes with provenance, freshness, contradiction
+      handling, retrieval/compaction, promotion rules, and poisoning-resistant governance.
+    aliases: []
+    entrypoint: skills/knowledge-memory/SKILL.md
+    status: registered
+  automations:
+    use_when: Design and manage reminders, recurring jobs, scheduled summaries, and condition/event watches with
+      explicit trigger, cadence, action, and notification semantics.
+    aliases: []
+    entrypoint: skills/automations/SKILL.md
+    status: registered
+  self-improvement:
+    use_when: Detect, repair, learn from, and close durable DEDAL failures or corrections by reconciling runtime
+      truth, canonical source, regression guards, durable learning, and continuity state. Use for repeated mistakes,
+      user corrections, regressions of previously fixed behavior, live/source drift, successful workarounds that
+      should become canonical, or explicit DEDAL self-improvement work.
+    aliases:
+    - self-improvement
+    - self-correction
+    entrypoint: skills/self-improvement/SKILL.md
+    status: registered
+  skill-acquisition:
+    use_when: Discover, audit, compare, author, adapt, evaluate, and promote external Agent Skills patterns into
+      DEDAL when a concrete capability gap justifies acquisition work.
+    aliases: []
+    entrypoint: skills/skill-acquisition/SKILL.md
+    status: registered
+  resource-intelligence:
+    use_when: 'Build and operate persistent, resource-type-agnostic discovery and tracking systems: define what
+      qualifies, discover broadly, resolve canonical identities, preserve provenance, refresh tracked resources,
+      detect changes, surface unseen opportunities, and hand high-value records to downstream skills.'
+    aliases:
+    - resource-intelligence
+    - resource-tracking
+    - resource-finder
+    - resource-watchlist
+    entrypoint: skills/resource-intelligence/SKILL.md
+    status: registered
+  hospital-financial-report:
+    use_when: Reconcile monthly hospital cash flow from income forms and expense vouchers, maintain audited monthly
+      history, repair report formulas, and compile approved values-only Excel reports. Use for Hospital Financial
+      Report, hfr, $hfr, hospital cash-flow review, voucher reconciliation, financial month close, or historical
+      financial analysis.
+    aliases:
+    - $hfr
+    - hfr
+    - Hospital Financial Report
+    - hospital-financial-report
+    entrypoint: skills/hospital-financial-report/SKILL.md
+    status: registered
+  cv-resume-engineering:
+    use_when: Build accurate, visually compelling and accessible CVs/resumes, with render-verified editable outputs
+      and ATS-safe variants; use when creating, revising or diagnosing professional CVs, résumés and fellowship
+      profiles.
+    aliases:
+    - cv-resume-engineering
+    - cv-authoring
+    - medical-cv
+    - resume-design
+    - curriculum-vitae
+    entrypoint: skills/cv-resume-engineering/SKILL.md
+    status: registered

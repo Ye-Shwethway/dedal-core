@@ -2,7 +2,7 @@
 
 > Machine authority: `state/checkpoint.yaml` and `state/current-checkpoint.json`.
 
-- Core version: `0.41.0`.
+- Core version: `0.41.1`.
 - Direct Library Core root: `/DEDAL/core`.
 - GitHub is the public history upstream. `core-manifest.yaml` records the migration base, while the current main HEAD must be read live.
 - External DEDAL Runtime MCPs are retired.

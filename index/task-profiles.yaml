@@ -1,5 +1,5 @@
 schema_version: 4
-version: 0.40.9
+version: 0.40.10
 profiles:
 - id: dedal-orison-image-to-video
   match:
@@ -504,3 +504,48 @@ profiles:
     - creator_approval_bound_to_revision
     - explicit_export_request_bound_to_revision
     close: *id005
+- id: professional-cv-design
+  match:
+    any:
+    - create a CV
+    - resume design
+    - curriculum vitae
+    - medical CV
+    - professional CV
+    - CV refinement
+  primary: cv-resume-engineering
+  supporting:
+  - writing-editorial
+  - presentation-engineering
+  - quality-engineering
+  required_core:
+  - skills/cv-resume-engineering/SKILL.md
+  - skills/cv-resume-engineering/references/qa-contract.md
+  - skills/writing-editorial/SKILL.md
+  - skills/presentation-engineering/SKILL.md
+  - skills/quality-engineering/SKILL.md
+  execution_gates:
+  - evidence_ledger_complete
+  - output_mode_defined
+  - original_facts_reconciled
+  - rendered_pages_inspected
+  - geometry_and_text_qa_passed
+  - no_unapproved_labels
+  - editable_pdf_parity_verified
+  operations:
+    review:
+    - inspect
+    produce:
+    - execute
+    - close
+  phase_gates:
+    inspect: []
+    execute:
+    - evidence_ledger_complete
+    - output_mode_defined
+    - original_facts_reconciled
+    close:
+    - rendered_pages_inspected
+    - geometry_and_text_qa_passed
+    - no_unapproved_labels
+    - editable_pdf_parity_verified

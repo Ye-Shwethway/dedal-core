@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "core_version": "0.40.9",
+  "core_version": "0.40.10",
   "files": [
     ".github/workflows/repo-integrity.yml",
     ".github/workflows/runtime-contracts.yml",
@@ -216,6 +216,9 @@
     "skills/cloudflare-platform/references/operations-and-verification.md",
     "skills/cloudflare-platform/references/platform-composition-and-freshness.md",
     "skills/cloudflare-platform/references/worker-deployment-and-connector-recovery.md",
+    "skills/cv-resume-engineering/SKILL.md",
+    "skills/cv-resume-engineering/references/qa-contract.md",
+    "skills/cv-resume-engineering/scripts/validate_cv_layout.py",
     "skills/data-operations/ADAPTATION_NOTES.md",
     "skills/data-operations/SKILL.md",
     "skills/data-operations/references/record-identity-and-reconciliation.md",

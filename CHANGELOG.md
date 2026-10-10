@@ -1,3 +1,9 @@
+## 0.40.10 - 2026-10-10
+
+- Introduce CV / Resume Engineering with evidence-bound chronology, no invented qualifications, human-facing premium and ATS-safe formats, and visual/readability safeguards.
+- Gate completion on editable/PDF parity, full-page raster review, no unintended text overlap, typography and zero unapproved authoring labels.
+- Add dedicated CV task profile, regression-oriented structural preflight and sanitized QA reference. Personal photos, CVs and private records remain outside public Core.
+
 ## 0.40.9 - 2026-10-08
 
 - Materialize Hospital Financial Report (hfr), source-grounded monthly reconciliation, immutable historical revisions, audit/checkpoints and private rule ownership.

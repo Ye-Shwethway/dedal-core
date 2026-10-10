@@ -1,4 +1,4 @@
-version: 0.40.9
+version: 0.40.10
 start:
 - id: read_boot_contract
   kind: read

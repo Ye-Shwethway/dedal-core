@@ -1,4 +1,4 @@
-version: 0.40.9
+version: 0.40.10
 date: '2026-10-08'
 authority: library_direct_tree
 accepted:
@@ -139,3 +139,7 @@ decisions:
     calibrate private profile thresholds and search allocation but never become universal
     public facts or replace evidence for a new resource.
   date: '2026-10-06'
+
+- id: cv_resume_engineering
+  date: '2026-10-10'
+  value: CV and resume authoring has a dedicated domain skill, source-of-truth claim ledger, explicit visual-versus-ATS variants, page geometry and render inspection gates; no unapproved notes, truncation or text overlap. Machine validation alone does not certify PDF visual quality. Personal CVs and portraits remain outside public Core.

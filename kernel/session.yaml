@@ -1,4 +1,4 @@
-version: 0.40.12
+version: 0.41.0
 start:
 - id: read_boot_contract
   kind: read
@@ -29,8 +29,8 @@ start:
 - id: session_readiness
   kind: verify
   command: python scripts/session_check.py
-  required: true
-  scope: structural_only
+  required: when_local_preflight_or_core_development_needs_a_checker
+  scope: selected_source_structure_only_not_full_distribution
 execution_readiness:
   command: python scripts/session_check.py --profile PROFILE_ID --task-id TASK_ID
     --task-file TASK.txt --route-decision ROUTE.json --receipt SESSION_RECEIPT.json
@@ -79,4 +79,4 @@ rules:
 - id: no_chat_memory_authority
   statement: conversation_summary_can_hint_but_never_replace_checkpoint_or_authoritative_artifact
 - id: compact_integrity
-  statement: required_machine_files_are_verified_by_essential_checks_required_core_bodies_are_read_in_full_use_context_plan_for_compact_disclosure
+  statement: verify_release_pointer_and_selected_required_core_and_machine_sources_only_required_core_bodies_are_read_in_full_full_inventory_validation_is_for_core_development_publication_or_explicit_integrity_audit

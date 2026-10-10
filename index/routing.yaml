@@ -1,10 +1,10 @@
 schema_version: 2
-version: 0.40.12
+version: 0.41.0
 policy: smallest_sufficient_set
 steps:
 - id: explicit_alias
   kind: match
-  source: index/SKILL_REGISTRY.yaml
+  source: index/skill-catalog.yaml
   priority: 100
 - id: task_profile
   kind: profile
@@ -12,7 +12,7 @@ steps:
   priority: 90
 - id: skill_match
   kind: match
-  source: index/SKILL_REGISTRY.yaml
+  source: index/skill-catalog.yaml
   priority: 50
 - id: select
   kind: select
@@ -42,6 +42,10 @@ precedence:
 - skill_entrypoint
 - legacy_or_general_heuristic
 rules:
+- id: discovery_status
+  statement: catalog_registered_does_not_mean_tools_available_loaded_or_execution_ready_resolve_current_dependencies_for_the_selected_task
+- id: missing_dependency
+  statement: report_each_required_source_as_read_pending_or_blocked_with_reason_never_silently_skip_unknown_or_unavailable_required_context
 - id: discovery_not_activation
   statement: registry_match_does_not_count_as_skill_read
 - id: keyword_not_intent

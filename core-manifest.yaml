@@ -1,5 +1,5 @@
 schema_version: 1
-core_version: 0.40.12
+core_version: 0.41.0
 authority: library_direct_tree
 canonical_root: /DEDAL/core
 boot_entry: kernel/boot.yaml
@@ -23,9 +23,13 @@ normative_formats:
 archive_boot: forbidden
 external_runtime_mcp: retired
 github_role: public_history_and_sync_upstream_not_runtime_dependency
-recorded_github_base: 31688860ad5c969e723094a7f60908571cccf4dc
+recorded_github_base: 5e3012f5ef4260ab41fe90d7b6c52054f3725a62
 generated_at: '2026-10-08T06:10:33.625243+00:00'
 evidence_contract: kernel/evidence.yaml
 publication_contract: kernel/publication.yaml
 compact_loader: scripts/context_plan.py
+discovery_catalog: index/skill-catalog.yaml
+runtime_integrity: scripts/selected_sources.py
+full_audit: validators/validate_core.py
+interruption_reconciliation: scripts/workstream_recovery.py
 response_contract: kernel/response.yaml

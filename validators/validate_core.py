@@ -130,7 +130,7 @@ for path in ("kernel/boot.yaml", "kernel/kernel.yaml", "kernel/session.yaml",
     if "/dedal/repo-mirror/dedal-core-current.zip" in text:
         errors.append(f"archive_boot_dependency:{path}")
 if not errors:
-    # The same essential entrypoint is used by boot, session readiness and CI.
+    # Full distribution validation is for development/publication; routine readiness is selected-source scoped.
     for script in ("validate_document_schema.py", "validate_core_contracts.py", "validate_release_manifest.py", "validate_media_workflow.py", "validate_resource_intelligence.py", "validate_response_policy.py", "validate_hfr.py"):
         check = subprocess.run([sys.executable, str(ROOT / "scripts" / script)], capture_output=True, text=True)
         if check.returncode:

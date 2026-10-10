@@ -51,7 +51,7 @@ def validate_checkpoint() -> None:
         raise AssertionError("checkpoint last_verified_revision must contain ref and sha")
     if len(rev["sha"]) != 40 or any(c not in "0123456789abcdef" for c in rev["sha"]):
         raise AssertionError("checkpoint last_verified_revision.sha must be a lowercase 40-char git SHA")
-    version_parts = cp["version"].split(".")
+    version_parts = cp["recorded_core_version"].split(".")
     if len(version_parts) != 3 or not all(part.isdigit() for part in version_parts):
         raise AssertionError("checkpoint version must be semantic X.Y.Z")
 

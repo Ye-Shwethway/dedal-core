@@ -19,7 +19,8 @@ checkpoint = yaml.safe_load((ROOT / "state/checkpoint.yaml").read_text())
 inventory = json.loads((ROOT / "core-files.json").read_text())
 version = (ROOT / "VERSION").read_text().strip()
 if (manifest.get("canonical_root") != "/DEDAL/core" or checkpoint.get("accepted", {}).get("canonical_core") != "/DEDAL/core"
-        or manifest.get("core_version") != version or inventory.get("core_version") != version):
+        or manifest.get("release_identity_authority") != "state/release-manifest.json"
+        or "core_version" in inventory):
     errors.append("core authority/version drift")
 if checkpoint.get("accepted", {}).get("migration_status") != "direct_tree_verified":
     errors.append("migration status not verified")

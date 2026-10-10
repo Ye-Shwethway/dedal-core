@@ -1,3 +1,7 @@
+# 0.42.0 — Independent release identity and bounded publication audit
+
+Release manifest owns version; VERSION and active pointer are checked projections. Contracts and inventory no longer carry release stamps; checkpoint provenance is explicit. Publication audit reuses only unchanged bytes with a release-bound baseline and matching concrete revisions, reads unknown revisions, rejects identity/metadata races and retains explicit full audits. Architecture migration requires full canonical readback. Tests measure transfer selection and release fanout, not real-work latency.
+
 ## 0.41.1 - 2026-10-10
 
 - Add optional, native, dependency-free creative handoff validation with 24 targeted regressions, preserving existing skill ownership and on-demand loading.

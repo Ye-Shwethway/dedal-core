@@ -1,8 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "project": "Ye-Shwethway/dedal-core",
-  "version": "0.41.1",
   "accepted_state": [
+    "Release identity is manifest-owned with VERSION/active-pointer projections; contract schema versions and checkpoint provenance do not cascade on ordinary releases. Incremental publication is revision-gated with unknown revision fallback and explicit full audit.",
     "Optional native creative handoff validator checks scene, EDL and evidence declarations; no new skill, service, or boot dependency; validation never replaces media QA or Creator acceptance.",
     "Hospital Financial Report (hfr) portable workflow and declaration/byte validators added; month history, revisions, audit/checkpoints, approval and export request are separate. Actual financial data is excluded from public Core.",
     "Core 0.40.8 integrates optional task-aware Interactive Response UI as a global response contract; prose-first, native supported controls, text/mobile fallback, explicit state labels and domain-authority boundaries are boot/session-loaded. Local planner tests are not host enforcement, UI rendering or service-persistence proof.",
@@ -58,7 +58,7 @@
     "Visual Narrative Production uses role-specific reference authority, structured shot specs and Visual Continuity Ledgers so identity/physique/performance, environment, camera-axis/screen-direction, lighting, props and scene-state deltas are not left to prompt memory.",
     "Visual Narrative Production action/interaction QA treats limb count, joint mechanics, balance, grip, load, object contact/intersection and force direction as explicit defect classes, and prompt neutralization is semantic clarification only, never policy evasion.",
     "Visual Narrative Production now uses a compact scene card and preflight/render/pixel-review/verified-delivery gates; tool capability and repeated-failure routing are explicit, while contract validation remains distinct from outcome evidence.",
-    "Visual Narrative Production successive mini-arcs use a local continuity envelope across 3–4 separate full-frame outputs, prioritize natural biomechanics and equipment geometry, and preserve accepted local state during narrow retries.",
+    "Visual Narrative Production successive mini-arcs use a local continuity envelope across 3\u20134 separate full-frame outputs, prioritize natural biomechanics and equipment geometry, and preserve accepted local state during narrow retries.",
     "Visual Narrative Production now enforces persistent object count/morphology/spatial-state continuity and proficiency-aware movement-form realism across successive stills.",
     "Generative Video Direction independently owns provider-neutral temporal shot design, reference-role/provider strategy, generation-contract compilation, generated-take QA and targeted repair.",
     "Canonical video-production is renamed/refocused to video-post-production; video-production and video-editing remain compatibility aliases, and post-production owns existing-media edit/assembly/finish/delivery rather than generative motion prompting.",
@@ -220,5 +220,6 @@
     "sha": "5e3012f5ef4260ab41fe90d7b6c52054f3725a62",
     "tree": "9d2747ca77ce94a1a060631d7452b5668f69aa20",
     "relation": "Verified prior accepted baseline; new release Git identity is recorded privately after publication."
-  }
+  },
+  "recorded_core_version": "0.42.0"
 }

@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def validate(root=ROOT):
     root = Path(root)
     p = yaml.safe_load((root / 'kernel/response.yaml').read_text())
-    assert p['version'] == (root / 'VERSION').read_text().strip()
+    assert p['schema_version'] == 1 and 'version' not in p
     assert p['default'] == 'prose' and p['mandatory_ui'] is False and p['mandatory_specialist_skill'] is False
     assert p['scope'] == 'global_response_orchestration'
     assert p['universe']['modes'] == ['Observing', 'Guided', 'Autonomous']

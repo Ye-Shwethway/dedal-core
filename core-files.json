@@ -1,6 +1,5 @@
 {
   "schema_version": 1,
-  "core_version": "0.41.1",
   "files": [
     ".github/workflows/repo-integrity.yml",
     ".github/workflows/runtime-contracts.yml",
@@ -27,6 +26,7 @@
     "docs/creative-handoff-contract.md",
     "docs/evolution/CAPABILITY_EXPANSION_ROADMAP.md",
     "docs/evolution/IMPROVEMENT_PROTOCOL.md",
+    "docs/release-architecture.md",
     "docs/releases/0.12.0.md",
     "docs/releases/0.13.0.md",
     "docs/releases/0.14.0.md",
@@ -152,6 +152,7 @@
     "scripts/outcome_properties.py",
     "scripts/profile_probe.py",
     "scripts/publication.py",
+    "scripts/publication_audit.py",
     "scripts/resource_review.py",
     "scripts/response_plan.py",
     "scripts/route_task.py",
@@ -185,6 +186,7 @@
     "scripts/validate_public_repo_privacy.py",
     "scripts/validate_quality_engineering_routing.py",
     "scripts/validate_refinement.py",
+    "scripts/validate_release_architecture.py",
     "scripts/validate_release_manifest.py",
     "scripts/validate_release_manifest_negative.py",
     "scripts/validate_reliability_engineering_routing.py",

@@ -28,3 +28,5 @@ Domain-specific accepted state remains in the machine checkpoint, registered ski
 
 - Ordinary tasks verify selected sources only; full distribution audit remains for Core changes/publication or explicit audit. The catalog is generated metadata, not proof of available tools or loaded instructions.
 - Interrupted work resumes from exact current private workstream and authoritative pending-result readback, never from wholesale Core/history copying. Host freeze prevention and fresh-chat activation reliability remain unproven.
+
+Release architecture separates manifest-owned version, contract schema compatibility and file digests. Checkpoint release labels are provenance; consult the active pointer for current identity. See `docs/release-architecture.md`. Real-work timing remains to be measured.

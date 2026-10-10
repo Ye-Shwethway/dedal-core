@@ -28,7 +28,7 @@ def validate(profiles, routing, registry, document, inventory):
     active = {name for name, skill in registry.get("skills", {}).items() if skill.get("status") == "active"}
     if profiles.get("schema_version") != 4 or routing.get("schema_version") != 2:
         errors.append("routing_schema_version")
-    if set(profiles) != {"schema_version", "version", "profiles"} or not isinstance(profiles.get("profiles"), list):
+    if set(profiles) != {"schema_version", "profiles"} or not isinstance(profiles.get("profiles"), list):
         errors.append("profile_root_shape")
     known = {"id", "match", "primary", "supporting", "required_core", "required_private", "conditional_private", "execution_gates", "operations", "phase_gates", "required_machine", "media_workflow"}
     ids = set()

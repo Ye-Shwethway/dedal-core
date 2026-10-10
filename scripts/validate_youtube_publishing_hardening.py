@@ -57,8 +57,8 @@ if missing:
 
 machine = json.loads(MACHINE.read_text())
 version = VERSION.read_text().strip()
-if machine.get("version") != version:
-    raise SystemExit(f"checkpoint version {machine.get('version')} != VERSION {version}")
+if machine.get("schema_version") != 2 or not re.fullmatch(r"\d+\.\d+\.\d+", str(machine.get("recorded_core_version", ""))):
+    raise SystemExit("checkpoint requires valid recorded release provenance")
 
 next_step = machine.get("next_executable_step", {})
 if not isinstance(next_step, dict) or not next_step.get("id") or not next_step.get("action"):

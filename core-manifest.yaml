@@ -1,5 +1,4 @@
 schema_version: 1
-core_version: 0.41.1
 authority: library_direct_tree
 canonical_root: /DEDAL/core
 boot_entry: kernel/boot.yaml
@@ -33,3 +32,7 @@ runtime_integrity: scripts/selected_sources.py
 full_audit: validators/validate_core.py
 interruption_reconciliation: scripts/workstream_recovery.py
 response_contract: kernel/response.yaml
+release_architecture: 2
+release_identity_authority: state/release-manifest.json
+release_version_projections: [VERSION, state/active-release.json]
+publication_audit: scripts/publication_audit.py

@@ -53,7 +53,7 @@ def prepare(before, after, metadata):
                         "candidate_sha256": candidate, "candidate_path": str(after / p),
                         "prior_path": str(before / p) if prior else None})
     entries.sort(key=lambda e: (e["path"] == "state/active-release.json", e["path"] == "state/release-manifest.json", e["path"]))
-    return {"schema_version": 1, "status": "update_in_progress", "from_version": (before / "VERSION").read_text().strip(),
+    return {"schema_version": 2 if (after / "core-manifest.yaml").is_file() and "release_architecture: 2" in (after / "core-manifest.yaml").read_text() else 1, "status": "update_in_progress", "from_version": (before / "VERSION").read_text().strip(),
             "to_version": (after / "VERSION").read_text().strip(), "ordered_write_set": entries,
             "outcomes": [], "rollback_rule": "Fresh snapshot, prior source bytes, prior manifest, prior pointer last; archive newly created canonical nodes by their observed identities before accepting rollback.",
             "authority": "single_direct_core_tree", "atomic": False}
@@ -100,6 +100,16 @@ def request(journal, snapshot, stage, direction="forward", directory_ids=None):
     previous = [e["path"] for s in order[:order.index(stage)] for e in groups[s]]
     if set(previous) - set(state["done"]):
         raise ValueError("earlier stage requires fresh verified readback")
+    if stage == "pointer" and direction == "forward" and journal.get("schema_version") == 2:
+        audit = journal.get("source_audit", {})
+        manifest = next(e for e in groups["manifest"])
+        if audit.get("status") != "sources_verified_pointer_pending" or audit.get("release_sha256") != manifest["candidate_sha256"]:
+            raise ValueError("pointer activation requires candidate-bound source audit")
+        from publication_audit import release
+        expected = release(Path(manifest["candidate_path"]).read_bytes())["files"]
+        entries = audit.get("entries", {})
+        if set(entries) != set(expected) | {"state/release-manifest.json"} or any(entries[p].get("sha256") != h for p, h in expected.items()) or entries["state/release-manifest.json"].get("sha256") != manifest["candidate_sha256"]:
+            raise ValueError("source audit inventory/digests incomplete")
     uploads, archives = [], []
     for e in groups[stage]:
         if e["path"] not in state["pending"]:
@@ -158,12 +168,13 @@ def adopt_created(journal, snapshot, path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("action", choices=("prepare", "reconcile", "request", "record", "adopt"))
+    parser.add_argument("action", choices=("prepare", "reconcile", "request", "record", "adopt", "audit"))
     parser.add_argument("--journal", type=Path, required=True)
     parser.add_argument("--before", type=Path)
     parser.add_argument("--after", type=Path)
     parser.add_argument("--metadata", type=Path)
     parser.add_argument("--snapshot", type=Path)
+    parser.add_argument("--audit-report", type=Path)
     parser.add_argument("--results", type=Path)
     parser.add_argument("--directories", type=Path)
     parser.add_argument("--stage", choices=("source", "manifest", "pointer"))
@@ -176,7 +187,10 @@ if __name__ == "__main__":
             save(args.journal, prepare(args.before, args.after, load(args.metadata)))
         else:
             journal = load(args.journal)
-            if args.action == "adopt":
+            if args.action == "audit":
+                journal["source_audit"] = load(args.audit_report)
+                save(args.journal, journal)
+            elif args.action == "adopt":
                 adopt_created(journal, load(args.snapshot), args.path)
                 save(args.journal, journal)
             elif args.action == "record":

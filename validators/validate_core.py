@@ -40,11 +40,16 @@ registry = obj["index/SKILL_REGISTRY.yaml"]
 checkpoint = obj["state/checkpoint.yaml"]
 inventory = obj["core-files.json"]
 
+# Release identity belongs to the digest manifest; contracts evolve independently.
 for path, data in [("core-manifest.yaml", manifest), *obj.items()]:
-    if path in ("core-files.json", "index/SKILL_REGISTRY.yaml"):
-        continue
-    if data.get("version", data.get("core_version")) not in (None, version):
-        errors.append(f"version_drift:{path}")
+    if path == "index/SKILL_REGISTRY.yaml":
+        continue  # Independent catalogue revision, not a Core release version.
+    if "version" in data or "core_version" in data:
+        errors.append(f"duplicated_release_version:{path}")
+    if path.endswith(".yaml") and (type(data.get("schema_version")) is not int or data["schema_version"] < 1):
+        errors.append(f"contract_schema_missing:{path}")
+if manifest.get("release_architecture") != 2 or manifest.get("release_identity_authority") != "state/release-manifest.json":
+    errors.append("release_architecture_drift")
 if manifest.get("canonical_root") != "/DEDAL/core" or boot.get("canonical_root") != "/DEDAL/core":
     errors.append("canonical_root_drift")
 if manifest.get("archive_boot") != "forbidden" or manifest.get("external_runtime_mcp") != "retired":
@@ -53,8 +58,8 @@ if checkpoint.get("accepted", {}).get("canonical_core") != "/DEDAL/core":
     errors.append("checkpoint_boot_drift")
 if checkpoint.get("accepted", {}).get("boot_surface") != "ChatGPT Library direct tree":
     errors.append("checkpoint_surface_drift")
-if obj["state/current-checkpoint.json"].get("version") != version:
-    errors.append("machine_checkpoint_version_drift")
+if obj["state/current-checkpoint.json"].get("schema_version") != 2:
+    errors.append("machine_checkpoint_schema_drift")
 if not any(x.get("id") == "read_checkpoint" and x.get("required") for x in session.get("start", [])):
     errors.append("session_missing_checkpoint")
 if session.get("execution_readiness", {}).get("no_receipt") != "fail_closed":
@@ -113,8 +118,8 @@ for name, skill in registry.get("skills", {}).items():
 files = inventory.get("files", [])
 if inventory.get("schema_version") != 1 or not files or len(files) != len(set(files)):
     errors.append("inventory_invalid")
-if inventory.get("core_version") != version:
-    errors.append("inventory_version_drift")
+if "core_version" in inventory:
+    errors.append("duplicated_inventory_release_version")
 for path in files:
     if path.startswith("/") or ".." in Path(path).parts or not (ROOT / path).is_file():
         errors.append(f"inventory_missing:{path}")

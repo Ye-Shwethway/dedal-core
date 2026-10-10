@@ -1,4 +1,5 @@
-version: 0.41.1
+schema_version: 1
+recorded_core_version: 0.42.0
 date: '2026-10-10'
 authority: library_direct_tree
 accepted:
@@ -29,8 +30,8 @@ decisions:
     only; actual rendering, host callbacks and external truth require direct evidence.
   date: '2026-10-08'
 - id: release_sync_recovery
-  value: Release closure requires all normative release-version fields, full inventory
-    digests, direct canonical readback, private current pointers and sanitized Git
+  value: Release closure requires authoritative release identity, complete inventory
+    digests, publication audit evidence, private current pointers and sanitized Git
     history to reconcile. Finish-forward recovery preserved later Library domain changes
     and restored previously published discovery-depth contracts; partial version writes
     are not accepted releases.
@@ -159,3 +160,7 @@ decisions:
 - id: native_creative_handoff_validator
   date: '2026-10-10'
   value: Optional standard-library creative handoff validator and 24 regression cases verify scene shot declarations, EDL bounds and claim-reference structure without implying rendered media validation, Creator approval or extra runtime services.
+
+- id: independent_release_identity
+  date: '2026-10-10'
+  value: Release manifest owns Core version; VERSION and active pointer are checked projections. Contracts use independent schema versions; checkpoints record provenance, not the current release. Ordinary publication reuses unchanged digests only with release-bound baseline and matching concrete Library revisions, otherwise reads bytes. Architecture changes and explicit audits require full readback. Metadata races fail closed; no remote atomicity or measured real-work latency gain is claimed.

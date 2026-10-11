@@ -123,7 +123,9 @@ class ReleaseFanoutTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d)/'core';shutil.copytree(ROOT,root,ignore=shutil.ignore_patterns('.git','__pycache__'))
             files=json.loads((root/'core-files.json').read_text())['files'];before={p:digest((root/p).read_bytes()) for p in files}
-            (root/'VERSION').write_text('0.42.1\n')
+            version=(root/'VERSION').read_text().strip().split('.')
+            version[-1]=str(int(version[-1])+1)
+            (root/'VERSION').write_text('.'.join(version)+'\n')
             subprocess.run([sys.executable,str(root/'scripts/build_release_manifest.py')],check=True,capture_output=True)
             changed={p for p in files if digest((root/p).read_bytes())!=before[p]}
             self.assertEqual(changed,{'VERSION',MANIFEST,POINTER})

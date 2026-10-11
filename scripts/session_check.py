@@ -168,7 +168,7 @@ for record in reads:
 
 required = set(profile.get("required_core", [])) | set(profile.get("required_private", []))
 condition_times = []
-for branch in profile.get("conditional_private", []):
+for branch in [*profile.get("conditional_private", []), *profile.get("conditional_core", [])]:
     name = branch["when"]
     result = conditions.get(name)
     if not isinstance(result, dict) or type(result.get("applies")) is not bool or not result.get("evidence_ref"):
@@ -181,7 +181,7 @@ for branch in profile.get("conditional_private", []):
         raise SystemExit(f"EXECUTION PREFLIGHT: FAIL condition observation time {name}")
     if result["applies"]:
         required.update(branch.get("sources", []))
-if set(conditions) != {b["when"] for b in profile.get("conditional_private", [])}:
+if set(conditions) != {b["when"] for b in [*profile.get("conditional_private", []), *profile.get("conditional_core", [])]}:
     raise SystemExit("EXECUTION PREFLIGHT: FAIL unknown condition")
 missing = required - read_paths
 gate_ids = set()

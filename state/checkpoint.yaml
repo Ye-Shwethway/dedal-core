@@ -1,6 +1,6 @@
 schema_version: 1
-recorded_core_version: 0.42.0
-date: '2026-10-10'
+recorded_core_version: 0.42.1
+date: '2026-10-11'
 authority: library_direct_tree
 accepted:
   assistant_name: DEDAL
@@ -140,27 +140,49 @@ decisions:
     calibrate private profile thresholds and search allocation but never become universal
     public facts or replace evidence for a new resource.
   date: '2026-10-06'
-
 - id: cv_resume_engineering
   date: '2026-10-10'
-  value: CV and resume authoring has a dedicated domain skill, source-of-truth claim ledger, explicit visual-versus-ATS variants, page geometry and render inspection gates; no unapproved notes, truncation or text overlap. Machine validation alone does not certify PDF visual quality. Personal CVs and portraits remain outside public Core.
-
+  value: CV and resume authoring has a dedicated domain skill, source-of-truth claim
+    ledger, explicit visual-versus-ATS variants, page geometry and render inspection
+    gates; no unapproved notes, truncation or text overlap. Machine validation alone
+    does not certify PDF visual quality. Personal CVs and portraits remain outside
+    public Core.
 - id: semantic_registry_validation
   date: '2026-10-10'
-  value: Creative registry checks validate parsed alias membership, active status and canonical entrypoints; equivalent YAML formatting must pass while missing aliases and stale ownership fail. CI contract success remains separate from representative task quality and host stability.
-
+  value: Creative registry checks validate parsed alias membership, active status
+    and canonical entrypoints; equivalent YAML formatting must pass while missing
+    aliases and stale ownership fail. CI contract success remains separate from representative
+    task quality and host stability.
 - id: lightweight_selected_runtime
   date: '2026-10-10'
-  value: Routine task readiness verifies the active release pointer and selected sources without complete local materialization. Full inventory validation remains required for Core development and publication. Compact catalog registration is not tool availability, content activation or execution readiness.
-
+  value: Routine task readiness verifies the active release pointer and selected sources
+    without complete local materialization. Full inventory validation remains required
+    for Core development and publication. Compact catalog registration is not tool
+    availability, content activation or execution readiness.
 - id: interruption_reconciliation
   date: '2026-10-10'
-  value: Continue from the exact current private workstream and task-bound pending operation evidence. Reconcile actual owner state before replay; expected results are adopted, unknown/conflicting outcomes remain pending, and confirmed absence does not itself grant retry authority.
-
+  value: Continue from the exact current private workstream and task-bound pending
+    operation evidence. Reconcile actual owner state before replay; expected results
+    are adopted, unknown/conflicting outcomes remain pending, and confirmed absence
+    does not itself grant retry authority.
 - id: native_creative_handoff_validator
   date: '2026-10-10'
-  value: Optional standard-library creative handoff validator and 24 regression cases verify scene shot declarations, EDL bounds and claim-reference structure without implying rendered media validation, Creator approval or extra runtime services.
-
+  value: Optional standard-library creative handoff validator and 24 regression cases
+    verify scene shot declarations, EDL bounds and claim-reference structure without
+    implying rendered media validation, Creator approval or extra runtime services.
 - id: independent_release_identity
   date: '2026-10-10'
-  value: Release manifest owns Core version; VERSION and active pointer are checked projections. Contracts use independent schema versions; checkpoints record provenance, not the current release. Ordinary publication reuses unchanged digests only with release-bound baseline and matching concrete Library revisions, otherwise reads bytes. Architecture changes and explicit audits require full readback. Metadata races fail closed; no remote atomicity or measured real-work latency gain is claimed.
+  value: Release manifest owns Core version; VERSION and active pointer are checked
+    projections. Contracts use independent schema versions; checkpoints record provenance,
+    not the current release. Ordinary publication reuses unchanged digests only with
+    release-bound baseline and matching concrete Library revisions, otherwise reads
+    bytes. Architecture changes and explicit audits require full readback. Metadata
+    races fail closed; no remote atomicity or measured real-work latency gain is claimed.
+- id: bounded_cross_domain_execution
+  date: '2026-10-11'
+  value: One compact nontrivial work-unit contract preserves owner/operation and pending
+    effects across continuations; per-result verification prevents partial or unknown
+    outcomes from becoming done. Conditional Core sources and no-profile skill planning
+    preserve progressive loading. Visual mode/roster/current private canonical owner
+    precede generation; local checks validate declarations, not host binding or pixel
+    truth. Representative task gains and latency remain unproven.

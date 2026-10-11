@@ -53,5 +53,7 @@ rules:
   statement: skill_entrypoint_read_does_not_count_as_execution_ready_when_profile_dependencies_remain
 - id: profile_dependencies_are_mandatory
   statement: all_required_profile_resources_must_be_read_before_consequential_execution
+- id: continuation_context
+  statement: short_or_multilingual_followups_keep_current_task_owner_operation_and_pending_effects_unresolved_lexical_matches_require_semantic_review_recompose_on_material_change
 - id: never_preload_catalog
   statement: do_not_bulk_load_all_skills_or_all_references

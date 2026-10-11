@@ -29,6 +29,7 @@ profiles:
   - skills/visual-narrative-production/references/weighted-load-and-proportion-realism.md
   - skills/generative-video-direction/references/source-only-motion-readiness.md
   - skills/visual-narrative-production/references/source-production-design.md
+  - kernel/execution.yaml
   required_private:
   - /DEDAL/private-overlay/workflows/dedal-orison-bridge/bridge-state.json
   - /DEDAL/private-overlay/state/workstreams/dedal-orison-bridge.current.md
@@ -62,18 +63,22 @@ profiles:
     - mini arc
     - visual novel
     - scene sequence
+    - character image
+    - group photo
+    - physique comparison
+    - image edit
+    - canonical anchor
   primary: visual-narrative-production
   required_core:
   - skills/visual-narrative-production/SKILL.md
-  - skills/visual-narrative-production/references/reference-hierarchy-and-canonical-locks.md
-  - skills/visual-narrative-production/references/visual-continuity-ledger.md
-  - skills/visual-narrative-production/references/drift-detection-and-visual-qa.md
-  - skills/visual-narrative-production/references/self-review-and-sequence-audit.md
-  - skills/visual-narrative-production/references/source-production-design.md
-  execution_gates: &id002
+  - skills/visual-narrative-production/references/execution-modes.md
+  - kernel/execution.yaml
+  execution_gates:
   - canonical_pixels_bindable
   - continuity_anchor_available_or_explicit_new_scene
   - rendered_qa_required
+  - canonical_source_owner_resolved
+  - visual_mode_and_subject_roster_resolved
   operations:
     audit:
     - inspect
@@ -85,7 +90,48 @@ profiles:
     execute:
     - canonical_pixels_bindable
     - continuity_anchor_available_or_explicit_new_scene
-    close: *id002
+    - canonical_source_owner_resolved
+    - visual_mode_and_subject_roster_resolved
+    close:
+    - canonical_pixels_bindable
+    - continuity_anchor_available_or_explicit_new_scene
+    - rendered_qa_required
+    - canonical_source_owner_resolved
+    - visual_mode_and_subject_roster_resolved
+  conditional_core:
+  - when: canonical_subject
+    sources:
+    - skills/visual-narrative-production/references/reference-hierarchy-and-canonical-locks.md
+  - when: multiple_subjects
+    sources:
+    - skills/visual-narrative-production/references/reference-hierarchy-and-canonical-locks.md
+  - when: local_edit
+    sources:
+    - skills/visual-narrative-production/references/generation-edit-and-anchor-promotion.md
+  - when: sequence
+    sources:
+    - skills/visual-narrative-production/references/production-detail.md
+    - skills/visual-narrative-production/references/visual-continuity-ledger.md
+    - skills/visual-narrative-production/references/self-review-and-sequence-audit.md
+    - skills/visual-narrative-production/references/source-production-design.md
+  - when: physical_interaction
+    sources:
+    - skills/visual-narrative-production/references/source-production-design.md
+    - skills/visual-narrative-production/references/pose-anatomy-contact-and-load.md
+    - skills/visual-narrative-production/references/camera-body-equipment-alignment.md
+  - when: weighted_action
+    sources:
+    - skills/visual-narrative-production/references/weighted-load-and-proportion-realism.md
+  - when: repeated_failure
+    sources:
+    - skills/visual-narrative-production/references/tool-capability-and-failure-routing.md
+    - skills/visual-narrative-production/references/drift-detection-and-visual-qa.md
+  - when: motion_handoff
+    sources:
+    - skills/visual-narrative-production/references/visual-to-motion-handoff.md
+  - when: collaborative_handoff
+    sources:
+    - skills/visual-narrative-production/references/collaborative-source-sequence-handoff.md
 - id: core-architecture-change
   match:
     any:
@@ -118,7 +164,8 @@ profiles:
   - kernel/response.yaml
   - state/active-release.json
   - docs/evolution/IMPROVEMENT_PROTOCOL.md
-  execution_gates: &id003
+  - kernel/execution.yaml
+  execution_gates: &id002
   - validator_green
   - checkpoint_updated
   - rollback_path_recorded
@@ -135,7 +182,7 @@ profiles:
     execute:
     - validator_green
     - rollback_path_recorded
-    close: *id003
+    close: *id002
   required_machine:
   - core-files.json
   - state/release-manifest.json
@@ -156,6 +203,7 @@ profiles:
   - skills/medicine-store-assistant/references/daily-usage.md
   - skills/medicine-store-assistant/references/month-close-archive-and-cleanup.md
   - skills/medicine-store-assistant/references/received-stock-operational-workflow.md
+  - kernel/execution.yaml
   execution_gates:
   - creator_authority_confirmed
   - live_stock_state_read
@@ -183,6 +231,10 @@ profiles:
     - duplicate_operation_excluded
     - stock_write_readback_confirmed
     - stock_checkpoint_recorded
+  conditional_core:
+  - when: supply_intake
+    sources:
+    - skills/medicine-store-assistant/references/generic-first-intake-reconciliation-2026-10-11.md
 - id: report-export
   match:
     any:
@@ -195,6 +247,7 @@ profiles:
   - skills/patient-report-assistant/SKILL.md
   - skills/patient-report-assistant/references/monthly-report-validation.md
   - skills/patient-report-assistant/references/workbook-layout.md
+  - kernel/execution.yaml
   execution_gates:
   - row_anchors_and_totals_validated
   - export_scope_confirmed
@@ -227,6 +280,7 @@ profiles:
   - skills/youtube-publishing/SKILL.md
   - skills/youtube-publishing/references/mutation-hardening-and-recovery.md
   - skills/youtube-publishing/references/comment-engagement.md
+  - kernel/execution.yaml
   execution_gates:
   - creator_publishing_authority_confirmed
   - target_identity_verified
@@ -261,6 +315,7 @@ profiles:
   - skills/software-development/SKILL.md
   - skills/software-development/references/testing-and-seams.md
   - skills/software-development/references/multi-session-delivery.md
+  - kernel/execution.yaml
   execution_gates:
   - creator_deployment_authority_confirmed
   - candidate_tests_pass
@@ -296,6 +351,7 @@ profiles:
   required_core:
   - skills/video-post-production/SKILL.md
   - skills/video-post-production/references/post-production-and-delivery.md
+  - kernel/execution.yaml
   execution_gates:
   - media_workflow_ready
   - review_link_delivered
@@ -331,6 +387,7 @@ profiles:
   - skills/youtube-publishing/references/mutation-hardening-and-recovery.md
   - skills/youtube-publishing/references/thumbnail-media-staging.md
   - skills/youtube-seo/SKILL.md
+  - kernel/execution.yaml
   execution_gates:
   - creator_publishing_authority_confirmed
   - target_identity_verified
@@ -391,6 +448,7 @@ profiles:
   - skills/resource-intelligence/schemas/resource-profile.schema.json
   - skills/resource-intelligence/schemas/resource-record.schema.json
   - scripts/resource_review.py
+  - kernel/execution.yaml
   execution_gates:
   - review_policy_and_scoped_acceptance_resolved
   - tracking_intent_and_resource_scope_resolved
@@ -436,10 +494,11 @@ profiles:
   - skills/hospital-financial-report/scripts/validate_review.py
   - skills/hospital-financial-report/scripts/verify_exports.py
   - skills/data-operations/SKILL.md
+  - kernel/execution.yaml
   required_private:
   - /DEDAL/private-overlay/profiles/hospital-finance/default.json
   - /DEDAL/private-overlay/state/workstreams/hospital-finance.current.md
-  execution_gates: &id004
+  execution_gates: &id003
   - live_workbook_and_source_scope_read
   - private_financial_rules_loaded
   - no_unresolved_financial_inputs
@@ -458,7 +517,7 @@ profiles:
     execute:
     - live_workbook_and_source_scope_read
     - private_financial_rules_loaded
-    close: *id004
+    close: *id003
 - id: hospital-financial-report-export
   match:
     any:
@@ -474,10 +533,11 @@ profiles:
   - skills/hospital-financial-report/scripts/validate_review.py
   - skills/hospital-financial-report/scripts/verify_exports.py
   - skills/data-operations/SKILL.md
+  - kernel/execution.yaml
   required_private:
   - /DEDAL/private-overlay/profiles/hospital-finance/default.json
   - /DEDAL/private-overlay/state/workstreams/hospital-finance.current.md
-  execution_gates: &id005
+  execution_gates: &id004
   - live_workbook_and_source_scope_read
   - private_financial_rules_loaded
   - no_unresolved_financial_inputs
@@ -502,7 +562,7 @@ profiles:
     - revision_snapshot_and_checkpoint_recorded
     - creator_approval_bound_to_revision
     - explicit_export_request_bound_to_revision
-    close: *id005
+    close: *id004
 - id: professional-cv-design
   match:
     any:
@@ -523,6 +583,7 @@ profiles:
   - skills/writing-editorial/SKILL.md
   - skills/presentation-engineering/SKILL.md
   - skills/quality-engineering/SKILL.md
+  - kernel/execution.yaml
   execution_gates:
   - evidence_ledger_complete
   - output_mode_defined

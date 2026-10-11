@@ -33,7 +33,7 @@ def lifecycle(resources, selected):
     return {"active": active, "blocked": blocked, "review_required": review}
 
 
-def plan(profile_id, root=ROOT, phase="execute"):
+def plan(profile_id, root=ROOT, phase="execute", conditions=None):
     started = time.perf_counter()
     root = Path(root)
     verify_selected(root, ["index/task-profiles.yaml", "context/budgets.yaml", "index/skill-catalog.yaml",
@@ -42,7 +42,14 @@ def plan(profile_id, root=ROOT, phase="execute"):
     profile = next(p for p in profiles if p["id"] == profile_id)
     if phase not in profile["phase_gates"]:
         raise ValueError("unknown phase")
-    read_paths = profile["required_core"]
+    branches = profile.get("conditional_core", [])
+    names = {b["when"] for b in branches}
+    if conditions is not None and (set(conditions) != names or any(type(v) is not bool for v in conditions.values())):
+        raise ValueError("all conditional Core branches require explicit boolean decisions")
+    read_paths = list(profile["required_core"])
+    if conditions is not None:
+        read_paths += [s for b in branches if conditions[b["when"]] for s in b["sources"]]
+    read_paths = list(dict.fromkeys(read_paths))
     machine_paths = profile.get("required_machine", [])
     catalog = yaml.safe_load((root / "index/skill-catalog.yaml").read_text())["skills"]
     for skill in [profile["primary"], *profile.get("supporting", [])]:
@@ -56,6 +63,8 @@ def plan(profile_id, root=ROOT, phase="execute"):
             "release_sha256": active["release_sha256"], "read_full": sizes,
             "machine_verified": machine_paths, "required_private": profile.get("required_private", []),
             "conditional_private": profile.get("conditional_private", []),
+            "conditional_core": profile.get("conditional_core", []),
+            "conditional_resolution": "pending" if names and conditions is None else "resolved_declarations",
             "phase_gates": profile["phase_gates"][phase], "content_bytes": sum(sizes.values()),
             "machine_file_bytes": sum((root / p).stat().st_size for p in machine_paths),
             "byte_budget": budget, "budget_status": "within" if sum(sizes.values()) <= budget else "exception_reason_required",
@@ -65,16 +74,37 @@ def plan(profile_id, root=ROOT, phase="execute"):
             "boundary": "read_full remains mandatory; machine verification is not a content-read claim"}
 
 
+def skill_plan(skill_id, root=ROOT):
+    root = Path(root)
+    verify_selected(root, ["index/skill-catalog.yaml", "scripts/context_plan.py", "scripts/selected_sources.py"])
+    catalog = yaml.safe_load((root / "index/skill-catalog.yaml").read_text())["skills"]
+    if skill_id not in catalog:
+        raise ValueError("unknown registered skill")
+    paths = [catalog[skill_id]["entrypoint"], "kernel/execution.yaml"]
+    result = verify_selected(root, paths)
+    return {"skill_id": skill_id, "read_full": result["verified"], "selected_integrity": "pass",
+            "execution_readiness": "unverified_resolve_task_references_and_domain_gates",
+            "full_integrity": "not_checked"}
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--profile", required=True)
+    choice = parser.add_mutually_exclusive_group(required=True)
+    choice.add_argument("--profile")
+    choice.add_argument("--skill")
     parser.add_argument("--phase", choices=("inspect", "execute", "close"), default="execute")
     parser.add_argument("--output", type=Path)
     parser.add_argument("--budget-reason", help="Concrete correctness reason when mandatory full reads exceed observable byte limit")
     parser.add_argument("--private-manifest", type=Path)
     parser.add_argument("--private-path", action="append", default=[])
+    parser.add_argument("--conditions", type=Path, help="JSON boolean decisions for every conditional Core branch")
     args = parser.parse_args()
-    result = plan(args.profile, phase=args.phase)
+    if args.skill:
+        if args.private_path:
+            parser.error("resolve skill-private context through the current owner")
+        print(json.dumps(skill_plan(args.skill), indent=2))
+        raise SystemExit(0)
+    result = plan(args.profile, phase=args.phase, conditions=json.loads(args.conditions.read_text()) if args.conditions else None)
     if result["budget_status"] == "exception_reason_required":
         if not args.budget_reason or not args.budget_reason.strip():
             parser.exit(1, "Mandatory read budget exceeded; provide a correctness reason without omitting sources\n")

@@ -159,6 +159,15 @@ Release manifest owns version; VERSION and active pointer are checked projection
 
 # Changelog
 
+## 0.42.1 — bounded cross-domain execution and conditional context
+
+- Add compact task/owner/result coverage, explicit partial/unknown outcomes and continuation boundaries across domains.
+- Add no-profile selected-skill planning and conditional Core dependency coverage; preserve selected-source boot.
+- Split visual entrypoint from advanced production detail; require mode/roster/current canonical owner and declare actual pixel bindings.
+- Reconcile and sanitize generic-first CMS intake reference without posting inventory.
+- Keep contract validation separate from authenticated execution and measured task quality.
+
+
 ## 0.36.3 — File-mediated creative-agent bridge
 
 - Add a portable file-mediated collaboration architecture for DEDAL source-state production and external specialist generation/review.

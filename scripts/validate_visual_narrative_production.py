@@ -4,7 +4,10 @@ from pathlib import Path
 import yaml
 
 root = Path(__file__).resolve().parents[1]
-skill = (root / 'skills/visual-narrative-production/SKILL.md').read_text()
+entrypoint = (root / 'skills/visual-narrative-production/SKILL.md').read_text()
+assert len(entrypoint.encode()) <= 6000
+assert 'references/execution-modes.md' in entrypoint
+skill = entrypoint + (root / 'skills/visual-narrative-production/references/production-detail.md').read_text()
 notes = (root / 'skills/visual-narrative-production/ADAPTATION_NOTES.md').read_text()
 contract = (root / 'evals/visual-narrative-production/contract-v2.md').read_text()
 shot_schema = json.loads((root / 'skills/visual-narrative-production/schemas/shot-spec.schema.json').read_text())

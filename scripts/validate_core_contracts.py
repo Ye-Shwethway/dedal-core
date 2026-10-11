@@ -30,7 +30,7 @@ def validate(profiles, routing, registry, document, inventory):
         errors.append("routing_schema_version")
     if set(profiles) != {"schema_version", "profiles"} or not isinstance(profiles.get("profiles"), list):
         errors.append("profile_root_shape")
-    known = {"id", "match", "primary", "supporting", "required_core", "required_private", "conditional_private", "execution_gates", "operations", "phase_gates", "required_machine", "media_workflow"}
+    known = {"id", "match", "primary", "supporting", "required_core", "required_private", "conditional_private", "conditional_core", "execution_gates", "operations", "phase_gates", "required_machine", "media_workflow"}
     ids = set()
     for p in profiles.get("profiles", []):
         if not isinstance(p, dict) or set(p) - known or not isinstance(p.get("id"), str) or p["id"] in ids:
@@ -66,6 +66,14 @@ def validate(profiles, routing, registry, document, inventory):
         if not isinstance(branches, list) or any(not isinstance(b, dict) or set(b) != {"when", "sources"} or not isinstance(b.get("when"), str) or not isinstance(b.get("sources"), list) or any(not isinstance(x, str) or not x.startswith("/DEDAL/private-overlay/") for x in b["sources"]) for b in branches):
             errors.append(f"invalid_conditional_private:{p['id']}")
         elif len({b["when"] for b in branches}) != len(branches):
+            errors.append(f"duplicate_condition:{p['id']}")
+        core_branches = p.get("conditional_core", [])
+        if (not isinstance(core_branches, list) or any(not isinstance(b, dict) or set(b) != {"when", "sources"}
+                or not isinstance(b.get("when"), str) or not b["when"] or not isinstance(b.get("sources"), list)
+                or not b["sources"] or len(b["sources"]) != len(set(b["sources"]))
+                or any(not isinstance(s, str) or s not in inventory for s in b["sources"]) for b in core_branches)):
+            errors.append(f"invalid_conditional_core:{p['id']}")
+        elif len({b["when"] for b in [*branches, *core_branches]}) != len(branches) + len(core_branches):
             errors.append(f"duplicate_condition:{p['id']}")
         gates = p.get("execution_gates", [])
         if not isinstance(gates, list) or not gates or len(gates) != len(set(gates)) or any(not isinstance(x, str) or not re.fullmatch(r"[a-z][a-z0-9_]*", x) for x in gates):

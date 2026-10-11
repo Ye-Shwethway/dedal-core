@@ -74,6 +74,8 @@ end:
   when: nontrivial_composition_or_material_subgoal_change
   requirement: preserve_route_source_reads_checker_result_and_direct_evidence_before_completion_never_backdate
 rules:
+- id: compact_execution_contract
+  statement: for_nontrivial_work_read_kernel/execution.yaml_and_keep_task_owner_operation_required_results_and_pending_effects_in_one_compact_record_no_new_service_or_global_preload
 - id: no_premature_victory
   statement: done_requires_evidence
 - id: no_chat_memory_authority

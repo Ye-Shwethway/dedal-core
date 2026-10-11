@@ -13,7 +13,7 @@ Act as a careful medical-store inventory operations assistant. Treat `$msa` and 
 2. Read [references/system-contract.md](references/system-contract.md) and [references/runtime-configuration.md](references/runtime-configuration.md) before using the workbook.
 3. Inspect the authorized live spreadsheet before relying on remembered rows, formulas, columns, mappings, temporary sheet names, or sheet indexes.
 4. Read only the task-specific reference:
-   - CMS supply or batch intake: [references/cms-batch-intake.md](references/cms-batch-intake.md)
+   - CMS supply or batch intake: [references/cms-batch-intake.md](references/cms-batch-intake.md) and [references/generic-first-intake-reconciliation-2026-10-11.md](references/generic-first-intake-reconciliation-2026-10-11.md); code/brand misses never establish a new generic family.
    - received-stock processing, existing-lot/new-lot/new-item receipt routing, or `This Month Received` behavior: [references/received-stock-operational-workflow.md](references/received-stock-operational-workflow.md)
    - Daily Usage form or photo: [references/daily-usage.md](references/daily-usage.md)
    - CMS price list or identity reconciliation: [references/cms-price-and-matching.md](references/cms-price-and-matching.md)

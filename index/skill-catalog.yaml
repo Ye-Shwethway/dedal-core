@@ -224,9 +224,9 @@ skills:
     entrypoint: skills/story-weaver/SKILL.md
     status: registered
   visual-narrative-production:
-    use_when: Plan, generate, inspect, and deliver coherent successive scene shots or visual-novel stills. Use for
-      recurring-character image sequences, scene coverage, action/contact realism, reference consistency, camera
-      and environment continuity, visual QA, variation sets, and accepted visual anchors.
+    use_when: Plan, generate, edit, inspect and deliver character stills, canonical anchors, local image edits,
+      group/physique comparisons, action images and coherent sequences. Use for identity/reference consistency,
+      scene coverage, anatomy/contact realism, rendered QA and accepted visual anchors.
     aliases:
     - visual-narrative-production
     - visual-direction

@@ -116,6 +116,17 @@ result = run(orison["id"], conditional, orison_task)
 assert result[0] != 0 and "profiles/Darian" in result[1], result
 conditional["source_reads"] += [make_read(p) for p in orison["conditional_private"][0]["sources"]]
 assert run(orison["id"], conditional, orison_task)[0] == 0
+visual = profiles["recurring-character-image-sequence"]
+visual_task = "Create one canonical character image group photo"
+visual_receipt = base_receipt(visual, visual_task)
+visual_receipt["operation"] = "produce"
+visual_receipt["condition_results"] = {b["when"]: {"applies": b["when"] == "canonical_subject", "evidence_ref": "task:case", "observed_at": now} for b in visual["conditional_core"]}
+missing = run(visual["id"], visual_receipt, visual_task)
+assert missing[0] != 0 and "reference-hierarchy" in missing[1], missing
+visual_receipt["source_reads"] += [make_read(p) for p in visual["conditional_core"][0]["sources"]]
+assert run(visual["id"], visual_receipt, visual_task)[0] == 0
+bad = {**visual_receipt, "condition_results": {**visual_receipt["condition_results"], "sequence": {"applies": "false", "evidence_ref": "task:case", "observed_at": now}}}
+assert run(visual["id"], bad, visual_task)[0] != 0
 early = (datetime.fromisoformat(now) - timedelta(seconds=2)).isoformat()
 prior_start = (datetime.fromisoformat(now) - timedelta(seconds=3)).isoformat()
 before_route = {**base, "task_started_at": prior_start, "source_reads": [{**base["source_reads"][0], "observed_at": early}, *base["source_reads"][1:]]}

@@ -99,7 +99,7 @@ for change, expected in [
 unavailable = {**base, "source_reads": [{**base["source_reads"][0], "version_id": None, "version_status": "unavailable"}, *base["source_reads"][1:]]}
 assert run(core["id"], unavailable, core_task)[0] == 0
 assert base["gate_checks"] and "checkpoint_updated" not in {x["id"] for x in base["gate_checks"]}
-audit = {**base, "operation": "audit", "phase": "inspect", "gate_checks": [base["gate_checks"][0]]}
+audit = {**base, "operation": "audit", "phase": "inspect", "gate_checks": [{**base["gate_checks"][0], "id": "validator_executed_with_recorded_outcome"}]}
 assert run(core["id"], audit, core_task)[0] == 0
 closing = {**base, "phase": "close", "gate_checks": [{"id": g, "evidence_ref": "validator:case", "passed": True, "observed_at": now} for g in core["phase_gates"]["close"]]}
 assert run(core["id"], closing, core_task)[0] == 0
@@ -125,6 +125,16 @@ missing = run(visual["id"], visual_receipt, visual_task)
 assert missing[0] != 0 and "reference-hierarchy" in missing[1], missing
 visual_receipt["source_reads"] += [make_read(p) for p in visual["conditional_core"][0]["sources"]]
 assert run(visual["id"], visual_receipt, visual_task)[0] == 0
+# Hold the accepted receipt fixed while corrupting conditional bytes in this local fixture.
+conditional_source = ROOT / visual["conditional_core"][0]["sources"][0]
+original_bytes = conditional_source.read_bytes()
+try:
+    conditional_source.write_bytes(original_bytes + b"\nconditional integrity regression\n")
+    result = run(visual["id"], visual_receipt, visual_task)
+    assert result[0] != 0 and "conditional source integrity" in result[1], result
+finally:
+    conditional_source.write_bytes(original_bytes)
+
 bad = {**visual_receipt, "condition_results": {**visual_receipt["condition_results"], "sequence": {"applies": "false", "evidence_ref": "task:case", "observed_at": now}}}
 assert run(visual["id"], bad, visual_task)[0] != 0
 early = (datetime.fromisoformat(now) - timedelta(seconds=2)).isoformat()

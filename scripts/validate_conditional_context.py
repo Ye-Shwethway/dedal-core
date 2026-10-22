@@ -50,3 +50,31 @@ for mutation in [lambda p:p['conditional_core'][0].update(sources=['missing.md']
     fixture=deepcopy(base);p=next(p for p in fixture[0]['profiles'] if p['id']==profile);mutation(p)
     assert validate(*fixture)
 print('CONDITIONAL CONTEXT: PASS simple/sequence closures, pending resolution, partial tree, tamper and unknown owners')
+
+# A publication change between metadata and dependency verification must abort.
+from unittest.mock import patch
+from selected_sources import ReleaseSnapshot
+from context_plan import measure_disclosure
+original_verify = ReleaseSnapshot.verify
+calls = []
+def moved_release(self, paths):
+    result = original_verify(self, paths)
+    calls.append(1)
+    if len(calls) == 1:
+        self.active = {**self.active, 'release_sha256': '0' * 64}
+    return result
+with patch.object(ReleaseSnapshot, 'verify', moved_release):
+    try: plan(profile, conditions=decisions)
+    except ValueError as exc: assert 'release changed' in str(exc)
+    else: raise AssertionError('mixed release plan accepted')
+# Byte accounting includes its own envelope and respects a near-threshold limit.
+boundary = measure_disclosure({'content_bytes': 100, 'byte_budget': 150, 'budget_status': 'within', 'label': 'မြန်မာ'})
+assert boundary['budget_status'] == 'exception_reason_required'
+encoded = json.dumps(boundary, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode('utf-8')
+assert boundary['plan_bytes'] == len(encoded)
+assert boundary['disclosure_bytes'] == 100 + len(encoded)
+assert measure_disclosure({**boundary, 'byte_budget': 10000})['budget_status'] == 'within'
+try: plan('unknown-profile')
+except ValueError: pass
+else: raise AssertionError('unknown profile accepted')
+print('SNAPSHOT/BUDGET: PASS changed release rejected; UTF-8 envelope and boundary accounting verified')

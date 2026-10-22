@@ -51,21 +51,40 @@ def release_identity(root):
     return active, expected
 
 
+class ReleaseSnapshot:
+    """One operation only; verified bytes are not a cross-task or persistent cache."""
+    def __init__(self, root):
+        self.root = Path(root)
+        self.active, self.expected = release_identity(self.root)
+        self.contents = {}
+
+    def verify(self, paths):
+        verified = {}
+        for name in dict.fromkeys(paths):
+            path = safe_path(self.root, name)
+            if name not in self.expected:
+                raise ValueError("source outside accepted release: " + name)
+            try:
+                data = path.read_bytes()
+            except OSError as exc:
+                raise ValueError("required source unavailable: " + name) from exc
+            if hashlib.sha256(data).hexdigest() != self.expected[name]:
+                raise ValueError("selected source digest mismatch: " + name)
+            self.contents[name] = data
+            verified[name] = len(data)
+        return {"release_sha256": self.active["release_sha256"],
+                "core_version": self.active["core_version"], "verified": verified,
+                "integrity_scope": "selected_sources", "full_integrity": "not_checked"}
+
+    def assert_current(self):
+        active, expected = release_identity(self.root)
+        if active != self.active or expected != self.expected:
+            raise ValueError("release changed during selected-source operation")
+
+
 def verify_selected(root, paths):
     """Hash only selected files; absent/unrelated development sources are irrelevant."""
-    root = Path(root)
-    active, expected = release_identity(root)
-    verified = {}
-    for name in dict.fromkeys(paths):
-        path = safe_path(root, name)
-        if name not in expected:
-            raise ValueError("source outside accepted release: " + name)
-        try:
-            data = path.read_bytes()
-        except OSError as exc:
-            raise ValueError("required source unavailable: " + name) from exc
-        if hashlib.sha256(data).hexdigest() != expected[name]:
-            raise ValueError("selected source digest mismatch: " + name)
-        verified[name] = len(data)
-    return {"release_sha256": active["release_sha256"], "core_version": active["core_version"],
-            "verified": verified, "integrity_scope": "selected_sources", "full_integrity": "not_checked"}
+    snapshot = ReleaseSnapshot(root)
+    result = snapshot.verify(paths)
+    snapshot.assert_current()
+    return result

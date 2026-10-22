@@ -13,7 +13,7 @@ import yaml
 
 from validate_route_decision import validate as validate_route_decision
 from evidence import verify as verify_evidence, digest
-from selected_sources import verify_selected
+from selected_sources import ReleaseSnapshot
 from validate_core_contracts import validate_selection
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,8 +36,9 @@ try:
                     "kernel/response.yaml", "index/routing.yaml", "state/checkpoint.yaml",
                     "scripts/session_check.py", "scripts/selected_sources.py", "scripts/validate_core_contracts.py",
                     "scripts/validate_route_decision.py", "scripts/profile_probe.py", "scripts/evidence.py"]
-    verify_selected(ROOT, boot_sources)
-    routing_errors = validate_selection(yaml.safe_load((ROOT / "index/routing.yaml").read_text()))
+    session_snapshot = ReleaseSnapshot(ROOT)
+    session_snapshot.verify(boot_sources)
+    routing_errors = validate_selection(yaml.safe_load(session_snapshot.contents["index/routing.yaml"]))
     if routing_errors:
         raise ValueError(str(routing_errors))
 except (OSError, ValueError, KeyError, TypeError) as exc:
@@ -55,6 +56,7 @@ if args.full:
 else:
     print("SELECTED SOURCE INTEGRITY: PASS; full inventory not checked")
 if not any((args.profile, args.receipt, args.task_id, args.task_file, args.route_decision, args.operation, args.phase, args.media_state)):
+    session_snapshot.assert_current()
     print("STRUCTURAL READINESS: PASS")
     print("EXECUTION PREFLIGHT: UNVERIFIED (profile receipt not supplied)")
     sys.exit(0)
@@ -62,8 +64,8 @@ if not all((args.profile, args.receipt, args.task_id, args.task_file, args.route
     parser.error("--profile, --receipt, --task-id, --task-file, --route-decision, --operation and --phase must be supplied together")
 
 try:
-    verify_selected(ROOT, ["index/task-profiles.yaml"])
-    profiles = yaml.safe_load((ROOT / "index/task-profiles.yaml").read_text())["profiles"]
+    session_snapshot.verify( ["index/task-profiles.yaml"])
+    profiles = yaml.safe_load(session_snapshot.contents["index/task-profiles.yaml"])["profiles"]
 except (OSError, ValueError, KeyError, TypeError) as exc:
     raise SystemExit("EXECUTION PREFLIGHT: FAIL " + str(exc))
 profile = next((p for p in profiles if p["id"] == args.profile), None)
@@ -72,7 +74,7 @@ if profile is None:
 if args.phase not in profile.get("operations", {}).get(args.operation, []):
     raise SystemExit("EXECUTION PREFLIGHT: FAIL operation/phase not allowed")
 try:
-    verify_selected(ROOT, [*profile.get("required_core", []), *profile.get("required_machine", [])])
+    session_snapshot.verify( [*profile.get("required_core", []), *profile.get("required_machine", [])])
 except (OSError, ValueError, KeyError, TypeError) as exc:
     raise SystemExit("EXECUTION PREFLIGHT: FAIL " + str(exc))
 try:
@@ -82,11 +84,8 @@ try:
     decision = json.loads(decision_bytes)
 except (OSError, ValueError) as exc:
     raise SystemExit(f"EXECUTION PREFLIGHT: FAIL receipt or routing input unavailable: {exc}")
-active = json.loads((ROOT / "state/active-release.json").read_text())
-release = json.loads((ROOT / "state/release-manifest.json").read_text())
-expected_hashes = {**release["files"],
-                   "state/release-manifest.json": active["release_sha256"],
-                   "state/active-release.json": hashlib.sha256((ROOT / "state/active-release.json").read_bytes()).hexdigest()}
+active = session_snapshot.active
+expected_hashes = session_snapshot.expected
 if (not isinstance(receipt, dict) or receipt.get("schema_version") != 6 or receipt.get("task_id") != args.task_id
         or receipt.get("release_sha256") != active["release_sha256"]
         or receipt.get("task_sha256") != hashlib.sha256(task_bytes).hexdigest()
@@ -183,6 +182,16 @@ for branch in [*profile.get("conditional_private", []), *profile.get("conditiona
         required.update(branch.get("sources", []))
 if set(conditions) != {b["when"] for b in [*profile.get("conditional_private", []), *profile.get("conditional_core", [])]}:
     raise SystemExit("EXECUTION PREFLIGHT: FAIL unknown condition")
+# Verify the resolved conditional Core bytes, not only their receipt declarations.
+conditional_core = [source for branch in profile.get("conditional_core", [])
+                    if conditions[branch["when"]]["applies"]
+                    for source in branch.get("sources", [])]
+try:
+    conditional_integrity = session_snapshot.verify( conditional_core)
+    if conditional_integrity["release_sha256"] != receipt["release_sha256"]:
+        raise ValueError("release changed during preflight")
+except (OSError, ValueError, KeyError, TypeError) as exc:
+    raise SystemExit("EXECUTION PREFLIGHT: FAIL conditional source integrity " + str(exc))
 missing = required - read_paths
 gate_ids = set()
 latest_dependency = max([started, datetime.fromisoformat(decision["reviewed_at"].replace("Z", "+00:00")),
@@ -235,5 +244,9 @@ if receipt["evidence_mode"] == "local_artifacts":
     if verification["unresolved_gates"]:
         raise SystemExit("LOCAL EVIDENCE: INCOMPLETE judgment/readback acceptance required " + str(verification["unresolved_gates"]))
     print("LOCAL ARTIFACT PROPERTIES: PASS; host authentication unavailable; model content use unproven")
+try:
+    session_snapshot.assert_current()
+except (OSError, ValueError, KeyError, TypeError) as exc:
+    raise SystemExit("EXECUTION PREFLIGHT: FAIL release snapshot " + str(exc))
 print(f"STRUCTURAL READINESS: PASS\nPHASE RECEIPT: COVERAGE PASS profile={args.profile} operation={args.operation} phase={args.phase} task={args.task_id}")
 print("SOURCE TRUTH: references require direct tool readback; receipt fields alone are not proof of content use")

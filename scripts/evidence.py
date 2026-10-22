@@ -57,13 +57,23 @@ def verify(bundle, receipt, artifact_root, core_root):
             # Only pure validation commands. No shell, arbitrary argv, or mutators.
             name = event.get("command")
             allowed = {"validators/validate_core.py", "scripts/validate_release_manifest.py", "scripts/validate_core_contracts.py"}
-            if name not in allowed or check["id"] != "validator_green":
+            if name not in allowed or check["id"] not in {"validator_green", "validator_executed_with_recorded_outcome"}:
                 raise ValueError("command does not verify this gate")
             result = subprocess.run([sys.executable, str(Path(core_root) / name)], cwd=core_root,
                                     capture_output=True, timeout=60)
-            if result.returncode:
-                raise ValueError("validator command failed")
-            properties.append({"id": event["id"], "property": "current_validator_exit_zero", "output_sha256": digest(result.stdout + result.stderr)})
+            output_hash = digest(result.stdout + result.stderr)
+            if check["id"] == "validator_green":
+                if result.returncode:
+                    raise ValueError("validator command failed")
+                property_name = "current_validator_exit_zero"
+            else:
+                if (receipt.get("phase") != "inspect" or type(event.get("expected_exit_code")) is not int
+                        or event["expected_exit_code"] != result.returncode
+                        or event.get("output_sha256") != output_hash):
+                    raise ValueError("inspection validator outcome mismatch")
+                property_name = "current_validator_outcome_recorded"
+            properties.append({"id": event["id"], "property": property_name,
+                               "exit_code": result.returncode, "output_sha256": output_hash})
         elif method == "artifact":
             raw = resolve(artifact_root, event.get("artifact")).read_bytes()
             if digest(raw) != event.get("sha256"):

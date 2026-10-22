@@ -135,3 +135,23 @@ if __name__ == "__main__":
     publication_cases()
     context_cases()
     print("REFINEMENT: PASS")
+
+
+# Inspection records an unhealthy baseline without treating it as execution readiness.
+from unittest.mock import patch
+import subprocess
+with tempfile.TemporaryDirectory() as directory:
+    event = {"id": "baseline", "kind": "gate", "gate_id": "validator_executed_with_recorded_outcome",
+             "method": "command", "command": "validators/validate_core.py", "observed_at": "now",
+             "expected_exit_code": 1, "output_sha256": digest(b"baseline failed")}
+    check = {"id": event["gate_id"], "evidence_ref": "baseline", "observed_at": "now", "passed": True}
+    receipt = {"task_id": "baseline-audit", "release_sha256": "a" * 64, "phase": "inspect",
+               "source_reads": [], "gate_checks": [check], "condition_results": {}}
+    bundle = {"schema_version": 1, "task_id": receipt["task_id"], "release_sha256": receipt["release_sha256"], "events": [event]}
+    completed = subprocess.CompletedProcess([], 1, b"baseline failed", b"")
+    with patch("evidence.subprocess.run", return_value=completed):
+        assert verify(bundle, receipt, directory, ROOT)["properties"][0]["exit_code"] == 1
+        rejects(lambda: verify(bundle, {**receipt, "phase": "execute"}, directory, ROOT))
+        rejects(lambda: verify({**bundle, "events": [{**event, "expected_exit_code": 0}]}, receipt, directory, ROOT))
+        rejects(lambda: verify({**bundle, "events": [{**event, "output_sha256": "0" * 64}]}, receipt, directory, ROOT))
+print("AUDIT OUTCOME: PASS failing baseline recorded; wrong phase/exit/output rejected")

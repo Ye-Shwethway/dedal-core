@@ -1,5 +1,5 @@
 schema_version: 1
-recorded_core_version: 0.42.1
+recorded_core_version: 0.43.0
 date: '2026-10-11'
 authority: library_direct_tree
 accepted:
@@ -186,3 +186,7 @@ decisions:
     preserve progressive loading. Visual mode/roster/current private canonical owner
     precede generation; local checks validate declarations, not host binding or pixel
     truth. Representative task gains and latency remain unproven.
+
+- id: balanced_integrity_and_disclosure
+  date: '2026-10-22'
+  value: Conditional Core bytes are verified at execution preflight; operation-local release snapshots bind planning to verified bytes and reject observed pointer changes. Disclosure budgets count canonical compact plan bytes separately from machine I/O. Inspection records validator outcomes even for unhealthy baselines; execution and closure retain green validation. Preserve all 36 skill identities. Operational hospital case evidence remains private. These checks do not prove host enforcement or real-task speed gains.

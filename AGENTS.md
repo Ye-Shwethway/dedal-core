@@ -1,6 +1,6 @@
 # DEDAL Agent Operating Contract
 
-> Core 0.39.2: normative boot/kernel/session/routing state is machine-readable YAML. Always reconstruct from Library checkpoint/state, resolve a task profile, and hydrate its required dependencies before consequential execution. External DEDAL Runtime/Python Canary MCPs are retired.
+> Normative boot/kernel/session/routing state is machine-readable YAML. Always reconstruct from Library checkpoint/state, resolve a task profile, and hydrate its required dependencies before consequential execution. External DEDAL Runtime/Python Canary MCPs are retired.
 
 
 This file is the first operational instruction surface for any DEDAL-capable agent working in this repository.
@@ -22,14 +22,14 @@ Optimize for:
 
 When facts conflict, prefer authoritative external state over remembered summaries.
 
-Typical order:
+Separate factual truth from instruction authority.
 
-1. live repository / database / connected-service state;
-2. explicit current user instruction;
-3. canonical project documents;
-4. continuity/checkpoint documents;
-5. remembered context;
-6. inference.
+For facts about what currently exists, prefer live repository/database/service evidence,
+then current canonical documents, checkpoints, remembered context and inference.
+For authorized goals and desired changes, current Creator instructions govern within
+platform permissions; task profiles and current domain contracts guide execution.
+An instruction to change a value does not prove that the change already happened.
+Live data does not override an authorized request to change it. Verify the result.
 
 Never silently replace authoritative state with memory.
 

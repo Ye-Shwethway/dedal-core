@@ -165,7 +165,8 @@ profiles:
   - state/active-release.json
   - docs/evolution/IMPROVEMENT_PROTOCOL.md
   - kernel/execution.yaml
-  execution_gates: &id002
+  execution_gates:
+  - validator_executed_with_recorded_outcome
   - validator_green
   - checkpoint_updated
   - rollback_path_recorded
@@ -178,11 +179,14 @@ profiles:
     - close
   phase_gates:
     inspect:
-    - validator_green
+    - validator_executed_with_recorded_outcome
     execute:
     - validator_green
     - rollback_path_recorded
-    close: *id002
+    close:
+    - validator_green
+    - checkpoint_updated
+    - rollback_path_recorded
   required_machine:
   - core-files.json
   - state/release-manifest.json
@@ -235,6 +239,11 @@ profiles:
   - when: supply_intake
     sources:
     - skills/medicine-store-assistant/references/generic-first-intake-reconciliation-2026-10-11.md
+    - skills/medicine-store-assistant/OCTOBER_2026_INTAKE_ROUTING.md
+    - skills/medicine-store-assistant/references/october-2026-intake-lessons-and-posting-contract.md
+  - when: public_health_voucher
+    sources:
+    - skills/medicine-store-assistant/references/public-health-monthly-receipt-reporting.md
 - id: report-export
   match:
     any:

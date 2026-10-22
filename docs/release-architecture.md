@@ -21,3 +21,20 @@ Keep local full inventory/structural validation and CI regression checks for rel
 Preserve Library identities and concrete version guards. Existing source → manifest → pointer rollback remains; the frozen 0.41.1 tree and public parent commit retain prior architecture. Do not delete/recreate canonical nodes to obtain revisions. Save journals before mutation and after outcomes; reconcile actual owner bytes before replay.
 
 Measure changed source count, byte read count, reused count, unknown-revision count and actual elapsed transfer time. The regression suite verifies bounded read selection and release-only fanout, not host interception, remote atomicity, boot speed or real-work latency. A null-heavy adapter can limit transfer savings even though version fanout is removed.
+
+## Selected-operation integrity and disclosure
+
+Context plans and execution preflights retain one operation-local release snapshot.
+Parse task metadata from the bytes just verified; verify the resolved conditional
+Core source closure, then compare current release identity before returning success.
+Discard the operation on observed release change; this is not a remote lock or a
+persistent cache. Required bodies remain full reads. Budget `content_bytes` plus
+`plan_bytes`, the complete compact UTF-8 JSON envelope with sorted keys, Unicode
+preserved and compact separators. Report machine I/O separately. CLI additions
+must be remeasured. Do not omit dependencies merely to pass the byte budget.
+
+Core inspection requires a validator execution with recorded exit code and output
+digest, including a failing baseline. The local command evidence adapter compares
+those observations to a fresh execution; it proves inspection, not health. Candidate
+execution and release closure still require `validator_green`. Keep baseline defects
+separate from candidate regressions and never weaken validation to hide drift.

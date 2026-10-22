@@ -14,7 +14,9 @@ rules:
   statement: retain_compact_evidence_identity_not_raw_tool_noise
 observable_limits:
   profile_content_bytes: 70000
-  measurement: full_UTF8_content_bytes_plus_serialized_compact_plan_bytes
+  measurement: full_UTF8_content_bytes_plus_canonical_compact_plan_bytes
+  plan_serialization: JSON_sorted_keys_ensure_ascii_false_compact_separators_UTF8
+  machine_io: reported_separately_not_model_disclosure
   token_count: unavailable_without_host_tokenizer
   cost: unavailable_without_host_usage
 reuse:

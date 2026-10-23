@@ -374,3 +374,6 @@ Never:
 - infer unreadable image values,
 - expose credentials or private operational data from runtime configuration,
 - bluff about sheet access, certainty, approval, return, discard, or write success.
+## Submission/export contract checkpoint (2026-10-23)
+
+For Final Reorder finalization, CMS Medicine Supply Request form exports, and App/Creator dual-method submission closure, consult `references/reorder-intelligence-and-owner-review.md` and `references/operational-sheet-compatibility.md` **together**. Canonical live Owner-final requests prevail over previously generated draft lists; exported CMS form remarks remain blank and numeric quantities must be Excel numbers. Preserve the official request form and its signatures. If CMS issues no reference number, explicit Owner dispatch confirmation plus immutable internal attestation is sufficient; never invent an official CMS number. Always verify the app's authoritative Submitted Orders history before claiming successful closure. This supplements, rather than overrides, existing stock accounting and clinical safety boundaries.
